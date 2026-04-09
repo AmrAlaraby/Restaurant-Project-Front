@@ -8,6 +8,7 @@ import { RegisterationRequestInterface } from '../../Models/AuthModels/registera
 import { UserInterface } from '../../Models/AuthModels/user-interface';
 import { RefreshTokenRequestInterface } from '../../Models/AuthModels/refresh-token-request-interface';
 import { UpdateCurrentUserInterface } from '../../Models/AuthModels/update-current-user-interface';
+import { ApiResponse } from '../../Models/AuthModels/api-response';
 
 @Injectable({
   providedIn: 'root',
@@ -18,30 +19,29 @@ export class AuthService {
   // =========================
   // Login
   // =========================
-  login(data: LoginRequestInterface): Observable<TokenInterface> {
-    return this.http.post<TokenInterface>(Auth.login, data).pipe(
-      tap(token => this.setSession(token))
+  login(data: LoginRequestInterface): Observable<ApiResponse<TokenInterface>> {
+    return this.http.post<ApiResponse<TokenInterface>>(Auth.login, data).pipe(
+      tap(res => this.setSession(res.data))
     );
   }
 
   // =========================
   // Register
   // =========================
-  register(data: RegisterationRequestInterface): Observable<UserInterface> {
-    return this.http.post<UserInterface>(Auth.register, data);
+  register(data: RegisterationRequestInterface): Observable<ApiResponse<UserInterface>> {
+    return this.http.post<ApiResponse<UserInterface>>(Auth.register, data);
   }
 
   // =========================
   // Refresh Token
   // =========================
-  refreshToken(): Observable<TokenInterface> {
-
+  refreshToken(): Observable<ApiResponse<TokenInterface>> {
     const body: RefreshTokenRequestInterface = {
       refreshToken: localStorage.getItem('refreshToken')
     };
 
-    return this.http.post<TokenInterface>(Auth.refresh, body).pipe(
-      tap(token => this.setSession(token))
+    return this.http.post<ApiResponse<TokenInterface>>(Auth.refresh, body).pipe(
+      tap(res => this.setSession(res.data))
     );
   }
 
@@ -76,7 +76,6 @@ export class AuthService {
   // Helpers
   // =========================
   private setSession(token: TokenInterface) {
-
     if (token.accessToken)
       localStorage.setItem('accessToken', token.accessToken);
 
