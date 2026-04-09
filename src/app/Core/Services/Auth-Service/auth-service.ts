@@ -28,7 +28,9 @@ export class AuthService {
   // =========================
   // Register
   // =========================
+  
   register(data: RegisterationRequestInterface): Observable<ApiResponse<UserInterface>> {
+    
     return this.http.post<ApiResponse<UserInterface>>(Auth.register, data);
   }
 
