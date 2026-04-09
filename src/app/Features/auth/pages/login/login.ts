@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { LoginRequestInterface } from '../../../../Core/Models/AuthModels/login-request-interface';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
@@ -14,6 +14,7 @@ export class Login {
   isSubmitting = false;
   serverError: string | null = null;
   loginForm!: FormGroup;
+  showPassword: boolean = false;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -63,4 +64,7 @@ ngOnInit(): void {
       }
     });
   }
+  togglePassword() {
+  this.showPassword = !this.showPassword;
+}
 }
