@@ -1,0 +1,58 @@
+<div class="modal-backdrop" (click)="onClose()">
+  <div class="modal-panel" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title">
+        <span class="label">TICKET</span>
+        <span class="id">#{{ ticket.id }}</span>
+      </div>
+      <button class="btn-close" (click)="onClose()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">ORDER</span>
+          <span class="info-value">#{{ ticket.orderId }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">STATION</span>
+          <span class="info-value highlight">{{ ticket.station }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">STATUS</span>
+          <span class="info-value status-val" [class]="'s-' + ticket.status">{{ statusLabel }}</span>
+        </div>
+        <div class="info-item" *ngIf="ticket.startedAt">
+          <span class="info-label">STARTED AT</span>
+          <span class="info-value">{{ ticket.startedAt | date: 'dd MMM, HH:mm' }}</span>
+        </div>
+        <div class="info-item" *ngIf="ticket.completedAt">
+          <span class="info-label">COMPLETED AT</span>
+          <span class="info-value">{{ ticket.completedAt | date: 'dd MMM, HH:mm' }}</span>
+        </div>
+      </div>
+
+      <div class="items-section">
+        <div class="section-label">ORDER ITEMS</div>
+        <div class="items-list">
+          <div class="item-row" *ngFor="let item of ticket.items; let i = index">
+            <span class="item-num">{{ i + 1 }}</span>
+            <span class="item-name">{{ item }}</span>
+          </div>
+          <div class="no-items" *ngIf="ticket.items.length === 0">No items found.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="onClose()">Close</button>
+      <button
+        *ngIf="nextStatus !== null"
+        class="btn-advance"
+        (click)="onAdvance()"
+      >
+        {{ nextStatusLabel }}
+      </button>
+    </div>
+  </div>
+</div>

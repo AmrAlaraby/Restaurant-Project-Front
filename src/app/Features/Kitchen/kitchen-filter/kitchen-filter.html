@@ -1,0 +1,52 @@
+<div class="filter-bar">
+  <div class="filter-title">
+    <span class="filter-icon">⚙</span>
+    <span>FILTERS</span>
+  </div>
+
+  <div class="filter-fields">
+    <div class="field-group">
+      <label>Branch ID</label>
+      <input
+        type="number"
+        [(ngModel)]="params.branchId"
+        placeholder="e.g. 1"
+        class="field-input"
+      />
+    </div>
+
+    <div class="field-group">
+      <label>Order ID</label>
+      <input
+        type="number"
+        [(ngModel)]="params.orderId"
+        placeholder="e.g. 101"
+        class="field-input"
+      />
+    </div>
+
+    <div class="field-group">
+      <label>Station</label>
+      <select [(ngModel)]="params.station" class="field-input">
+        <option [ngValue]="null">All Stations</option>
+        <option *ngFor="let s of stations" [value]="s.station">
+          {{ s.station }} ({{ s.pendingCount }} pending)
+        </option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label>Status</label>
+      <select [(ngModel)]="params.status" class="field-input">
+        <option *ngFor="let opt of statusOptions" [ngValue]="opt.value">
+          {{ opt.label }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="filter-actions">
+    <button class="btn-reset" (click)="onReset()">Reset</button>
+    <button class="btn-apply" (click)="onApply()">Apply</button>
+  </div>
+</div>

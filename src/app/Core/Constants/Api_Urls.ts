@@ -53,7 +53,64 @@ export const Categories = {
 
 // hossam 54 75
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // mustafa 76 96
+export const Kitchen = {
+  board: `${apiUrl}/Kitchen/KitchenTickets`,
+  ticket: (id: number) => `${apiUrl}/Kitchen/${id}`,
+  activeStations: `${apiUrl}/Kitchen/ActiveStations`,
+  updateStatus: (id: number) => `${apiUrl}/Kitchen/${id}`,
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Arwa 97 117
 
