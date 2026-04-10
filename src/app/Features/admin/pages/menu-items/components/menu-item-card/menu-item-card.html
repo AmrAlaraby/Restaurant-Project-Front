@@ -1,0 +1,55 @@
+<div class="menu-item-card">
+
+  <div class="image-wrapper">
+    <img
+      [src]="item.imageUrl"
+      [alt]="item.name"
+    />
+  </div>
+
+  <div class="content">
+
+    <div class="top-section">
+      <div>
+        <h5>{{ item.name }}</h5>
+        <p class="category">{{ item.category }}</p>
+      </div>
+
+      <span
+        *ngIf="showAvailability"
+        class="badge"
+        [ngClass]="item.isAvailable ? 'available' : 'unavailable'"
+      >
+        {{ item.isAvailable ? 'Available' : 'Unavailable' }}
+      </span>
+    </div>
+
+    <div class="details">
+      <span class="price">${{ item.price }}</span>
+      <span class="prep-time">{{ item.prepTimeMinutes }} min</span>
+    </div>
+
+    <div
+      *ngIf="showAdminActions"
+      class="actions"
+    >
+      <button class="btn btn-view" (click)="onView()">
+        View
+      </button>
+
+      <button class="btn btn-edit" (click)="onEdit()">
+        Edit
+      </button>
+
+      <button class="btn btn-toggle" (click)="onToggleAvailability()">
+        Toggle
+      </button>
+
+      <button class="btn btn-delete" (click)="onDelete()">
+        Delete
+      </button>
+    </div>
+
+  </div>
+
+</div>

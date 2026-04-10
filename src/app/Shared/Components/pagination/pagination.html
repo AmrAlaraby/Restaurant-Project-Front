@@ -1,0 +1,40 @@
+<div
+  *ngIf="totalPages > 1"
+  class="pagination-wrapper"
+>
+
+  <div class="pagination-info">
+    Showing Page {{ pageIndex }} of {{ totalPages }}
+    ({{ totalCount }} Items)
+  </div>
+
+  <div class="pagination-controls">
+
+    <button
+      class="btn-page"
+      [disabled]="pageIndex === 1"
+      (click)="changePage(pageIndex - 1)"
+    >
+      Prev
+    </button>
+
+    <button
+      *ngFor="let page of pages"
+      class="btn-page"
+      [class.active]="page === pageIndex"
+      (click)="changePage(page)"
+    >
+      {{ page }}
+    </button>
+
+    <button
+      class="btn-page"
+      [disabled]="pageIndex === totalPages"
+      (click)="changePage(pageIndex + 1)"
+    >
+      Next
+    </button>
+
+  </div>
+
+</div>

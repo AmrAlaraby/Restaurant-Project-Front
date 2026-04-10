@@ -1,0 +1,25 @@
+<div *ngIf="loading" class="loading-state">
+  Loading menu items...
+</div>
+
+<div
+  *ngIf="!loading && items.length === 0"
+  class="empty-state"
+>
+  <h5>No Menu Items Found</h5>
+  <p>Try adjusting filters or add a new menu item.</p>
+</div>
+
+<div
+  *ngIf="!loading && items.length > 0"
+  class="grid-wrapper"
+>
+  <app-menu-item-card
+    *ngFor="let item of items"
+    [item]="item"
+    (view)="onView($event)"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+    (toggleAvailability)="onToggle($event)"
+  />
+</div>

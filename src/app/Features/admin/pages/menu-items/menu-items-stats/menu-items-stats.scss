@@ -1,0 +1,46 @@
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    padding: 1.25rem;
+    border-radius: 16px;
+    color: white;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transition: 0.3s ease;
+
+    h6 {
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+
+    h3 {
+        margin: 0;
+        font-weight: 700;
+        font-size: 1.8rem;
+    }
+
+    &:hover {
+        transform: translateY(-4px);
+    }
+}
+
+.total {
+    background: linear-gradient(135deg, #c62828, #e53935);
+}
+
+.available {
+    background: linear-gradient(135deg, #2e7d32, #43a047);
+}
+
+.unavailable {
+    background: linear-gradient(135deg, #616161, #757575);
+}
+
+.average {
+    background: linear-gradient(135deg, #f9a825, #ffb300);
+}
