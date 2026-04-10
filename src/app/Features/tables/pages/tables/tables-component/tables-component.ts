@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableInterface } from '../../../../../Core/Models/TableModules/table-interface';
 import { TableService } from '../../../../../Core/Services/Table-Service/table-service';
+import { Pagination } from '../../../../../Shared/Components/pagination/pagination';
 
 
 @Component({
   selector: 'app-tables',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Pagination],
   templateUrl: './tables-component.html',
-  styleUrls: ['./tables-component.scss']
+  styleUrls: ['./tables-component.scss'],
 })
 export class TablesComponent implements OnInit {
   tables: TableInterface[] = [];
@@ -32,29 +33,27 @@ export class TablesComponent implements OnInit {
       error: (err) => {
         this.errorMessage = 'Failed to load tables';
         this.isLoading = false;
-        console.log(err)
-
-
-      }
+        console.log(err);
+      },
     });
   }
 
   updateStatus(id: number, isOccupied: boolean): void {
     this.tableService.updateTableStatus(id, { isOccupied }).subscribe({
       next: () => this.loadTables(),
-      error: (err) => this.errorMessage = 'Failed to update status'
+      error: (err) => (this.errorMessage = 'Failed to update status'),
     });
   }
 
   deleteTable(id: number): void {
     this.tableService.deleteTable(id).subscribe({
       next: () => this.loadTables(),
-      error: (err) => this.errorMessage = 'Failed to delete table'
+      error: (err) => (this.errorMessage = 'Failed to delete table'),
     });
   }
   get occupiedCount(): number {
-  return this.tables.filter(t => t.isOccupied).length;
-}
+    return this.tables.filter((t) => t.isOccupied).length;
+  }
 
 get availableCount(): number {
   return this.tables.filter(t => !t.isOccupied).length;

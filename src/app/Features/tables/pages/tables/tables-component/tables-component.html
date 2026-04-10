@@ -69,5 +69,10 @@
       }
     </div>
   }
-
 </div>
+<app-pagination
+  [pageIndex]="pageIndex"
+  [pageSize]="pageSize"
+  [totalCount]="totalCount"
+  (pageChanged)="handlePageChange($event)"
+/>
