@@ -1,0 +1,164 @@
+.ticket-card {
+  background: #fff;
+
+  border-radius: 10px;
+
+  padding: 1rem;
+
+  border-left: 4px solid transparent;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  font-family: 'DM Sans', sans-serif;
+
+  cursor: default;
+
+  border: 1px solid rgba(192, 57, 43, 0.12);
+
+  box-shadow: 0 2px 8px rgba(192,57,43,0.05);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(192,57,43,0.12);
+  }
+
+  /* =====================
+     STATUS BORDER
+  ===================== */
+  &.status-0 { border-left-color: #C0392B; }  // Pending
+  &.status-1 { border-left-color: #E64A19; }  // Preparing
+  &.status-2 { border-left-color: #2E7D32; opacity: 0.85; } // Done
+
+  /* =====================
+     HEADER
+  ===================== */
+  .ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+
+    .ticket-id {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2D0A08;
+      letter-spacing: 0.04em;
+    }
+
+    .status-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+
+      &.badge-0 {
+        background: rgba(192, 57, 43, 0.12);
+        color: #C0392B;
+      }
+
+      &.badge-1 {
+        background: rgba(230, 74, 25, 0.12);
+        color: #E64A19;
+      }
+
+      &.badge-2 {
+        background: rgba(46, 125, 50, 0.12);
+        color: #2E7D32;
+      }
+    }
+  }
+
+  /* =====================
+     META
+  ===================== */
+  .ticket-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin-bottom: 1rem;
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .meta-label {
+        font-size: 0.65rem;
+        color: #9B4437;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .meta-value {
+        font-size: 0.85rem;
+        color: #2D0A08;
+
+        &.station-name {
+          color: #C0392B;
+          font-weight: 700;
+        }
+
+        &.time-warn {
+          color: #E64A19;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  /* =====================
+     ACTIONS
+  ===================== */
+  .ticket-actions {
+    display: flex;
+    gap: 0.5rem;
+
+    button {
+      flex: 1;
+
+      padding: 0.5rem;
+
+      border: none;
+      border-radius: 8px;
+
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+
+      cursor: pointer;
+
+      transition: all 0.2s ease;
+
+      &:active {
+        transform: scale(0.97);
+      }
+    }
+
+    .btn-details {
+      background: #FDF5F5;
+      color: #9B4437;
+
+      border: 1px solid rgba(192, 57, 43, 0.15);
+
+      &:hover {
+        background: #FDECEA;
+        color: #C0392B;
+        border-color: rgba(192, 57, 43, 0.3);
+      }
+    }
+
+    .btn-advance {
+      background: #C0392B;
+      color: #fff;
+
+      box-shadow: 0 2px 8px rgba(192,57,43,0.15);
+
+      &:hover {
+        background: #96281B;
+        box-shadow: 0 4px 14px rgba(192,57,43,0.25);
+      }
+    }
+  }
+}

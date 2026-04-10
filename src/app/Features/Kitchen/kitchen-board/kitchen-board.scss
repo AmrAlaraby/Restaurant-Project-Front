@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@600&display=swap');
+
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+/* =====================
+   THEME (RMS STYLE)
+===================== */
+.kds-root {
+  min-height: 100vh;
+  font-family: 'DM Sans', sans-serif;
+  background: #FDF5F5;
+  color: #2D0A08;
+
+  --R: #C0392B;
+  --RD: #96281B;
+  --RL: #FDECEA;
+  --TB: rgba(192, 57, 43, 0.13);
+  --SHADOW: 0 2px 10px rgba(192,57,43,0.08);
+}
+
+/* =====================
+   HEADER
+===================== */
+.kds-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--R);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(150,40,27,0.25);
+
+  .logo-mark {
+    width: 44px;
+    height: 44px;
+    background: #fff;
+    color: var(--R);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+  }
+
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+  .header-sub {
+    font-size: 0.75rem;
+    opacity: 0.8;
+  }
+}
+
+/* =====================
+   FILTER
+===================== */
+.filter-section {
+  padding: 0.8rem 2rem;
+  background: #fff;
+  border-bottom: 1px solid var(--TB);
+}
+
+/* =====================
+   ERROR
+===================== */
+.error-banner {
+  margin: 1rem 2rem;
+  background: var(--RL);
+  border: 1px solid var(--TB);
+  color: var(--R);
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+/* =====================
+   STATS
+===================== */
+.stats-row {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 2rem;
+
+  .stat-chip {
+    background: #fff;
+    border: 1px solid var(--TB);
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    box-shadow: var(--SHADOW);
+
+    .stat-num {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: #9B4437;
+    }
+
+    &.pending .stat-num { color: var(--R); }
+    &.preparing .stat-num { color: #E64A19; }
+    &.done .stat-num { color: #2E7D32; }
+  }
+}
+
+/* =====================
+   BOARD
+===================== */
+.kds-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 0 2rem 2rem;
+}
+
+/* =====================
+   COLUMN
+===================== */
+.board-column {
+  background: #fff;
+  border: 1px solid var(--TB);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--SHADOW);
+
+  .col-header {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--TB);
+    background: var(--RL);
+
+    .col-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    .dot-pending { background: var(--R); }
+    .dot-preparing { background: #E64A19; }
+    .dot-done { background: #2E7D32; }
+
+    .col-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #2D0A08;
+    }
+
+    .col-count {
+      margin-left: auto;
+      background: var(--R);
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+    }
+  }
+
+  .col-cards {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    max-height: 65vh;
+    overflow-y: auto;
+
+    .empty-col {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #9B4437;
+      padding: 2rem 0;
+    }
+  }
+}
+
+/* =====================
+   LOADING
+===================== */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+  color: #9B4437;
+
+  .spinner {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 3px solid #FDECEA;
+    border-top: 3px solid var(--R);
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+}
+
+/* =====================
+   SCROLLBAR
+===================== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(192,57,43,0.25);
+  border-radius: 10px;
+}
