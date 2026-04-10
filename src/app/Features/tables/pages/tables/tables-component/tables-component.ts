@@ -9,7 +9,7 @@ import { TableService } from '../../../../../Core/Services/Table-Service/table-s
   standalone: true,
   imports: [CommonModule],
   templateUrl: './tables-component.html',
-  styleUrls: ['./tables-component.scss']
+  styleUrls: ['./tables-component.scss'],
 })
 export class TablesComponent implements OnInit {
   tables: TableInterface[] = [];
@@ -32,31 +32,29 @@ export class TablesComponent implements OnInit {
       error: (err) => {
         this.errorMessage = 'Failed to load tables';
         this.isLoading = false;
-        console.log(err)
-
-
-      }
+        console.log(err);
+      },
     });
   }
 
   updateStatus(id: number, isOccupied: boolean): void {
     this.tableService.updateTableStatus(id, { isOccupied }).subscribe({
       next: () => this.loadTables(),
-      error: (err) => this.errorMessage = 'Failed to update status'
+      error: (err) => (this.errorMessage = 'Failed to update status'),
     });
   }
 
   deleteTable(id: number): void {
     this.tableService.deleteTable(id).subscribe({
       next: () => this.loadTables(),
-      error: (err) => this.errorMessage = 'Failed to delete table'
+      error: (err) => (this.errorMessage = 'Failed to delete table'),
     });
   }
   get occupiedCount(): number {
-  return this.tables.filter(t => t.isOccupied).length;
-}
+    return this.tables.filter((t) => t.isOccupied).length;
+  }
 
-get availableCount(): number {
-  return this.tables.filter(t => !t.isOccupied).length;
-}
+  get availableCount(): number {
+    return this.tables.filter((t) => !t.isOccupied).length;
+  }
 }
