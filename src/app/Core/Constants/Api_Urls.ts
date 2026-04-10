@@ -114,6 +114,25 @@ export const Kitchen = {
 
 // Arwa 97 117
 
+
 // Amr 118 138
+export const Order = {
+  create: `${apiUrl}/Order`,
+  getAll: `${apiUrl}/Order`,
+  getById: (id: number) => `${apiUrl}/Order/${id}`,
+  myOrders: `${apiUrl}/Order/my`,
+  updateStatus: (orderId: number) => `${apiUrl}/Order/${orderId}/status`,
+  addItems: (orderId: number) => `${apiUrl}/Order/${orderId}/items`,
+  removeItem: (orderId: number, itemId: number) =>
+    `${apiUrl}/Order/${orderId}/items/${itemId}`,
+  cancel: (orderId: number) => `${apiUrl}/Order/${orderId}/cancel`
+};
+
+
+
+
+
+
+
 
 // end of file
