@@ -5,9 +5,10 @@
       <div class="logo-mark">KDS</div>
       <div class="header-info">
         <h1 class="header-title">Kitchen Display System</h1>
-        <p class="header-sub">Live Order Board · Auto-refresh every 30s</p>
+        <p class="header-sub">Live Order Board</p>
       </div>
     </div>
+
     <div class="header-right">
       <app-active-stations-bar
         [stations]="stations"
@@ -19,10 +20,16 @@
   <!-- Filter Bar -->
   <div class="filter-section">
     <app-kitchen-filter
-      [stations]="stations"
       (filterChanged)="onFilterChanged($event)"
     ></app-kitchen-filter>
   </div>
+
+  <!-- ✅ Refresh Button
+  <div class="refresh-bar">
+    <button class="btn-refresh" (click)="loadBoard(currentParams)">
+      🔄 Refresh
+    </button>
+  </div> -->
 
   <!-- Error Banner -->
   <div class="error-banner" *ngIf="error">
@@ -36,18 +43,21 @@
       <span class="stat-num">{{ totalPending }}</span>
       <span class="stat-label">PENDING</span>
     </div>
+
     <div class="stat-chip preparing">
       <span class="stat-num">{{ totalPreparing }}</span>
       <span class="stat-label">PREPARING</span>
     </div>
+
     <div class="stat-chip done">
       <span class="stat-num">{{ totalDone }}</span>
       <span class="stat-label">DONE</span>
     </div>
   </div>
 
-  <!-- Board Columns -->
+  <!-- Board -->
   <div class="kds-board" *ngIf="!loading; else loadingTpl">
+
     <!-- PENDING -->
     <div class="board-column col-pending">
       <div class="col-header">
@@ -55,6 +65,7 @@
         <span class="col-title">PENDING</span>
         <span class="col-count">{{ board.pending.length }}</span>
       </div>
+
       <div class="col-cards">
         <app-ticket-card
           *ngFor="let ticket of board.pending"
@@ -62,7 +73,10 @@
           (statusUpdate)="onStatusUpdate($event)"
           (viewDetails)="onViewDetails($event)"
         ></app-ticket-card>
-        <div class="empty-col" *ngIf="board.pending.length === 0">No pending tickets</div>
+
+        <div class="empty-col" *ngIf="board.pending.length === 0">
+          No pending tickets
+        </div>
       </div>
     </div>
 
@@ -73,6 +87,7 @@
         <span class="col-title">PREPARING</span>
         <span class="col-count">{{ board.preparing.length }}</span>
       </div>
+
       <div class="col-cards">
         <app-ticket-card
           *ngFor="let ticket of board.preparing"
@@ -80,7 +95,10 @@
           (statusUpdate)="onStatusUpdate($event)"
           (viewDetails)="onViewDetails($event)"
         ></app-ticket-card>
-        <div class="empty-col" *ngIf="board.preparing.length === 0">No tickets in progress</div>
+
+        <div class="empty-col" *ngIf="board.preparing.length === 0">
+          No tickets in progress
+        </div>
       </div>
     </div>
 
@@ -91,6 +109,7 @@
         <span class="col-title">DONE</span>
         <span class="col-count">{{ board.done.length }}</span>
       </div>
+
       <div class="col-cards">
         <app-ticket-card
           *ngFor="let ticket of board.done"
@@ -98,11 +117,15 @@
           (statusUpdate)="onStatusUpdate($event)"
           (viewDetails)="onViewDetails($event)"
         ></app-ticket-card>
-        <div class="empty-col" *ngIf="board.done.length === 0">No completed tickets</div>
+
+        <div class="empty-col" *ngIf="board.done.length === 0">
+          No completed tickets
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- Loading -->
   <ng-template #loadingTpl>
     <div class="loading-state">
       <div class="spinner"></div>
@@ -110,7 +133,7 @@
     </div>
   </ng-template>
 
-  <!-- Details Modal -->
+  <!-- Modal -->
   <app-ticket-details-modal
     *ngIf="selectedTicket"
     [ticket]="selectedTicket"

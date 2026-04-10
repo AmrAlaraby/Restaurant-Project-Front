@@ -87,7 +87,9 @@ export const Kitchen = {
   updateStatus: (id: number) => `${apiUrl}/Kitchen/${id}`,
 };
 
-
+export const Branch = {
+  getAll: `${apiUrl}/Branch`,
+};
 
 
 
