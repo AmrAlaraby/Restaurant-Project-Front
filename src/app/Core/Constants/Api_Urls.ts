@@ -30,20 +30,26 @@ export const TableOrders = {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 // mahmoud 33 53
+export const MenuItems = {
+  getAll: `${apiUrl}/MenuItems`,
+  create: `${apiUrl}/MenuItems`,
+  getById: (id: number) => `${apiUrl}/MenuItems/${id}`,
+  update: (id: number) => `${apiUrl}/MenuItems/${id}`,
+  delete: (id: number) => `${apiUrl}/MenuItems/${id}`,
+  toggleAvailability: (id: number) => `${apiUrl}/MenuItems/${id}/toggle-availability`,
+};
+
+export const Ingredients = {
+  getAll: `${apiUrl}/Ingredients`,
+};
+
+export const Categories = {
+  getAll: `${apiUrl}/Categories`,
+};
+
+
+
 
 // hossam 54 75
 
