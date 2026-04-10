@@ -1,0 +1,73 @@
+<div class="tables-page">
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Table Management</h1>
+    <button class="btn-primary">+ Add Table</button>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <span class="stat-number">{{ tables.length ? tables.length : 0 }}</span>
+      <span class="stat-label">Total Tables</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">{{ occupiedCount ? occupiedCount : 0 }}</span>
+      <span class="stat-label">Occupied</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">{{ availableCount ? availableCount : 0 }}</span>
+      <span class="stat-label">Available</span>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  @if (isLoading) {
+    <div class="loading">Loading...</div>
+  }
+
+  <!-- Error -->
+  @if (errorMessage) {
+    <div class="error-msg">{{ errorMessage }}</div>
+  }
+
+  <!-- Tables Grid -->
+  @if (!isLoading) {
+    <div class="tables-grid">
+      @for (table of tables; track table.id) {
+        <div
+          class="table-card"
+          [class.occupied]="table.isOccupied"
+          [class.available]="!table.isOccupied"
+        >
+          <div class="table-header">
+            <span class="table-number">T{{ table.tableNumber }}</span>
+            <span class="status-badge"
+              [class.badge-occupied]="table.isOccupied"
+              [class.badge-available]="!table.isOccupied">
+              {{ table.isOccupied ? 'Occupied' : 'Available' }}
+            </span>
+          </div>
+
+          <div class="table-info">
+            <span>👥 {{ table.capacity }} seats</span>
+          </div>
+
+          <div class="table-actions">
+            <button
+              class="btn-status"
+              [class.btn-free]="table.isOccupied"
+              [class.btn-occupy]="!table.isOccupied"
+              (click)="updateStatus(table.id, !table.isOccupied)"
+            >
+              {{ table.isOccupied ? 'Free Table' : 'Occupy' }}
+            </button>
+            <button class="btn-delete" (click)="deleteTable(table.id)">🗑</button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+</div>
