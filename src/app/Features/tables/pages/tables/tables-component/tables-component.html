@@ -3,25 +3,33 @@
   <!-- Header -->
   <div class="page-header">
     <h1>Table Management</h1>
-    <button class="btn-primary">+ Add Table</button>
+    <button class="btn-primary" (click)="openAddModal()">+ Add Table</button>
   </div>
 
   <!-- Stats -->
   <div class="stats-row">
     <div class="stat-card">
-      <span class="stat-number">{{ tables.length ? tables.length : 0 }}</span>
+      <span class="stat-number">{{ tables.length }}</span>
       <span class="stat-label">Total Tables</span>
     </div>
     <div class="stat-card">
-      <span class="stat-number">{{ occupiedCount ? occupiedCount : 0 }}</span>
+      <span class="stat-number">{{ occupiedCount }}</span>
       <span class="stat-label">Occupied</span>
     </div>
     <div class="stat-card">
-      <span class="stat-number">{{ availableCount ? availableCount : 0 }}</span>
+      <span class="stat-number">{{ availableCount }}</span>
       <span class="stat-label">Available</span>
     </div>
   </div>
+<!-- Filters -->
+<div class="filters-row">
+  <div class="filter-group">
+    <button class="filter-btn" [class.active]="selectedStatus === null" (click)="filterByStatus(null)">All</button>
+    <button class="filter-btn" [class.active]="selectedStatus === true" (click)="filterByStatus(true)">Occupied</button>
+    <button class="filter-btn" [class.active]="selectedStatus === false" (click)="filterByStatus(false)">Available</button>
+  </div>
 
+</div>
   <!-- Loading -->
   @if (isLoading) {
     <div class="loading">Loading...</div>
@@ -70,4 +78,41 @@
     </div>
   }
 
-</div>
+  <!-- Add Table Modal -->
+  @if (showAddModal) {
+    <div class="modal-overlay" (click)="closeAddModal()">
+      <div class="table-modal" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h2>Add New Table</h2>
+          <button class="close-btn" (click)="closeAddModal()">✕</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="tableNumber">Table Number</label>
+            <input
+              id="tableNumber"
+              name="tableNumber"
+              type="text"
+              [(ngModel)]="newTable.tableNumber"
+              placeholder="e.g. T01"/>
+          </div>
+          <div class="form-group">
+            <label for="capacity">Capacity</label>
+            <input
+              id="capacity"
+              name="capacity"
+              type="number"
+              [(ngModel)]="newTable.capacity"
+              min="1"
+              max="20"/>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn-cancel" (click)="closeAddModal()">Cancel</button>
+          <button class="btn-primary" (click)="submitAddTable()">Add Table</button>
+        </div>
+      </div>
+    </div>
+  }
