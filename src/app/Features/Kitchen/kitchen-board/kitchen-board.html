@@ -1,0 +1,120 @@
+<div class="kds-root">
+  <!-- Header -->
+  <header class="kds-header">
+    <div class="header-left">
+      <div class="logo-mark">KDS</div>
+      <div class="header-info">
+        <h1 class="header-title">Kitchen Display System</h1>
+        <p class="header-sub">Live Order Board · Auto-refresh every 30s</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <app-active-stations-bar
+        [stations]="stations"
+        [loading]="stationsLoading"
+      ></app-active-stations-bar>
+    </div>
+  </header>
+
+  <!-- Filter Bar -->
+  <div class="filter-section">
+    <app-kitchen-filter
+      [stations]="stations"
+      (filterChanged)="onFilterChanged($event)"
+    ></app-kitchen-filter>
+  </div>
+
+  <!-- Error Banner -->
+  <div class="error-banner" *ngIf="error">
+    <span>⚠ {{ error }}</span>
+    <button (click)="error = null">✕</button>
+  </div>
+
+  <!-- Stats Row -->
+  <div class="stats-row">
+    <div class="stat-chip pending">
+      <span class="stat-num">{{ totalPending }}</span>
+      <span class="stat-label">PENDING</span>
+    </div>
+    <div class="stat-chip preparing">
+      <span class="stat-num">{{ totalPreparing }}</span>
+      <span class="stat-label">PREPARING</span>
+    </div>
+    <div class="stat-chip done">
+      <span class="stat-num">{{ totalDone }}</span>
+      <span class="stat-label">DONE</span>
+    </div>
+  </div>
+
+  <!-- Board Columns -->
+  <div class="kds-board" *ngIf="!loading; else loadingTpl">
+    <!-- PENDING -->
+    <div class="board-column col-pending">
+      <div class="col-header">
+        <span class="col-dot dot-pending"></span>
+        <span class="col-title">PENDING</span>
+        <span class="col-count">{{ board.pending.length }}</span>
+      </div>
+      <div class="col-cards">
+        <app-ticket-card
+          *ngFor="let ticket of board.pending"
+          [ticket]="ticket"
+          (statusUpdate)="onStatusUpdate($event)"
+          (viewDetails)="onViewDetails($event)"
+        ></app-ticket-card>
+        <div class="empty-col" *ngIf="board.pending.length === 0">No pending tickets</div>
+      </div>
+    </div>
+
+    <!-- PREPARING -->
+    <div class="board-column col-preparing">
+      <div class="col-header">
+        <span class="col-dot dot-preparing"></span>
+        <span class="col-title">PREPARING</span>
+        <span class="col-count">{{ board.preparing.length }}</span>
+      </div>
+      <div class="col-cards">
+        <app-ticket-card
+          *ngFor="let ticket of board.preparing"
+          [ticket]="ticket"
+          (statusUpdate)="onStatusUpdate($event)"
+          (viewDetails)="onViewDetails($event)"
+        ></app-ticket-card>
+        <div class="empty-col" *ngIf="board.preparing.length === 0">No tickets in progress</div>
+      </div>
+    </div>
+
+    <!-- DONE -->
+    <div class="board-column col-done">
+      <div class="col-header">
+        <span class="col-dot dot-done"></span>
+        <span class="col-title">DONE</span>
+        <span class="col-count">{{ board.done.length }}</span>
+      </div>
+      <div class="col-cards">
+        <app-ticket-card
+          *ngFor="let ticket of board.done"
+          [ticket]="ticket"
+          (statusUpdate)="onStatusUpdate($event)"
+          (viewDetails)="onViewDetails($event)"
+        ></app-ticket-card>
+        <div class="empty-col" *ngIf="board.done.length === 0">No completed tickets</div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loadingTpl>
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading kitchen board…</p>
+    </div>
+  </ng-template>
+
+  <!-- Details Modal -->
+  <app-ticket-details-modal
+    *ngIf="selectedTicket"
+    [ticket]="selectedTicket"
+    (close)="onCloseModal()"
+    (statusUpdate)="onStatusUpdate($event)"
+  ></app-ticket-details-modal>
+</div>

@@ -14,6 +14,11 @@ export const routes: Routes = [
   loadComponent: () => import('./Features/tables/pages/tables/tables-component/tables-component').then(m => m.TablesComponent)
 },
   {
+    path: "kitchen",
+    loadComponent: () => import('./Features/Kitchen/kitchen-board/kitchen-board').then(m => m.KitchenBoardComponent)
+  },
+
+  {
     path: "",
     redirectTo: "tables",
     pathMatch: "full"

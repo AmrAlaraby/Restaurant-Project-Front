@@ -1,0 +1,75 @@
+.stations-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  .bar-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    color: #555;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .stations-loading {
+    .pulse {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: #555;
+      animation: blink 1.2s infinite;
+    }
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .stations-list {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+
+    .station-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #1a1d24;
+      border: 1px solid #2a2d35;
+      border-radius: 20px;
+      padding: 0.25rem 0.75rem;
+      font-family: 'Courier New', monospace;
+      transition: border-color 0.2s;
+
+      &.has-pending {
+        border-color: #f59e0b;
+        background: rgba(245,158,11,0.06);
+      }
+
+      .station-name {
+        font-size: 0.72rem;
+        color: #c0c0c0;
+        font-weight: 600;
+      }
+
+      .pending-badge {
+        background: #f59e0b;
+        color: #000;
+        font-size: 0.6rem;
+        font-weight: 700;
+        padding: 0.05rem 0.4rem;
+        border-radius: 10px;
+        min-width: 1.2rem;
+        text-align: center;
+      }
+    }
+
+    .no-stations {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: #444;
+    }
+  }
+}
