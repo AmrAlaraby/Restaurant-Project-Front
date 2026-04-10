@@ -10,6 +10,38 @@ export const Auth = {
 };
 
 // areej 12 32
+export const Tables = {
+  getAll: `${apiUrl}/Table`,
+  getById: (id: number) => `${apiUrl}/Table/${id}`,
+  create: `${apiUrl}/Table`,
+  update: (id: number) => `${apiUrl}/Table/${id}`,
+  updateStatus: (id: number) => `${apiUrl}/Table/${id}/status`,
+  delete: (id: number) => `${apiUrl}/Table/${id}`,
+};
+
+export const TableOrders = {
+  getAll: `${apiUrl}/TableOrders`,
+  create: `${apiUrl}/TableOrders`,
+  complete: (id: number) => `${apiUrl}/TableOrders/${id}/complete`,
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // mahmoud 33 53
 
