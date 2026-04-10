@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableInterface } from '../../../../../Core/Models/TableModules/table-interface';
 import { TableService } from '../../../../../Core/Services/Table-Service/table-service';
+import { Pagination } from '../../../../../Shared/Components/pagination/pagination';
 
 
 @Component({
   selector: 'app-tables',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Pagination],
   templateUrl: './tables-component.html',
   styleUrls: ['./tables-component.scss'],
 })
@@ -54,7 +55,7 @@ export class TablesComponent implements OnInit {
     return this.tables.filter((t) => t.isOccupied).length;
   }
 
-  get availableCount(): number {
-    return this.tables.filter((t) => !t.isOccupied).length;
-  }
+get availableCount(): number {
+  return this.tables.filter(t => !t.isOccupied).length;
+}
 }
