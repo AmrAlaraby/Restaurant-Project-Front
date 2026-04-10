@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableInterface } from '../../../../../Core/Models/TableModules/table-interface';
 import { TableService } from '../../../../../Core/Services/Table-Service/table-service';
-import { Pagination } from '../../../../../Shared/Components/pagination/pagination';
 
 
 @Component({
   selector: 'app-tables',
   standalone: true,
-  imports: [CommonModule, Pagination],
+  imports: [CommonModule],
   templateUrl: './tables-component.html',
   styleUrls: ['./tables-component.scss'],
 })
