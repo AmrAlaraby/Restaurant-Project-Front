@@ -21,12 +21,12 @@ export class TableService {
     return this.http.get<TableInterface[]>(Tables.getAll, { params });
   }
 
-  getTableById(id: number): Observable<ApiResponse<TableInterface>> {
-    return this.http.get<ApiResponse<TableInterface>>(Tables.getById(id));
+  getTableById(id: number): Observable<TableInterface> {
+    return this.http.get<TableInterface>(Tables.getById(id));
   }
 
-  createTable(dto: CreateTableInterface): Observable<ApiResponse<TableInterface>> {
-    return this.http.post<ApiResponse<TableInterface>>(Tables.create, dto);
+  createTable(dto: CreateTableInterface): Observable<TableInterface> {
+    return this.http.post<TableInterface>(Tables.create, dto);
   }
 
   updateTableStatus(id: number, dto: UpdateTableStatusInterface): Observable<TableInterface> {
@@ -37,14 +37,14 @@ export class TableService {
     return this.http.delete<void>(Tables.delete(id));
   }
 
-  getAllTableOrders(tableId?: number, active?: boolean): Observable<ApiResponse<TableOrderInterface[]>> {
+  getAllTableOrders(tableId?: number, active?: boolean): Observable<TableOrderInterface[]> {
     let params: any = {};
     if (tableId) params['tableId'] = tableId;
     if (active !== undefined) params['active'] = active;
-    return this.http.get<ApiResponse<TableOrderInterface[]>>(TableOrders.getAll, { params });
+    return this.http.get<TableOrderInterface[]>(TableOrders.getAll, { params });
   }
 
-  completeTableOrder(id: number): Observable<ApiResponse<TableOrderInterface>> {
-    return this.http.patch<ApiResponse<TableOrderInterface>>(TableOrders.complete(id), {});
+  completeTableOrder(id: number): Observable<TableOrderInterface> {
+    return this.http.patch<TableOrderInterface>(TableOrders.complete(id), {});
   }
 }
