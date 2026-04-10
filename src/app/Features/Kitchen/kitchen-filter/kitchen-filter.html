@@ -5,15 +5,23 @@
   </div>
 
   <div class="filter-fields">
-    <div class="field-group">
-      <label>Branch ID</label>
-      <input
-        type="number"
-        [(ngModel)]="params.branchId"
-        placeholder="e.g. 1"
-        class="field-input"
-      />
-    </div>
+
+  <!-- Branch Dropdown --->
+<div class="field-group">
+  <label>Branch</label>
+
+  <select
+    [(ngModel)]="params.branchId"
+    (ngModelChange)="onBranchChange()"
+    class="field-input"
+  >
+    <option [ngValue]="null">All Branches</option>
+
+    <option *ngFor="let branch of branches" [ngValue]="branch.id">
+      {{ branch.name }}
+    </option>
+  </select>
+</div>
 
     <div class="field-group">
       <label>Order ID</label>
@@ -25,6 +33,7 @@
       />
     </div>
 
+    <!-- Station Dropdown -->
     <div class="field-group">
       <label>Station</label>
       <select [(ngModel)]="params.station" class="field-input">
@@ -43,6 +52,7 @@
         </option>
       </select>
     </div>
+
   </div>
 
   <div class="filter-actions">
