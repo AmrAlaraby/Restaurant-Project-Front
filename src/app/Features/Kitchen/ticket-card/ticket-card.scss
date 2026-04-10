@@ -1,51 +1,81 @@
 .ticket-card {
-  background: #13161c;
-  border-radius: 8px;
+  background: #fff;
+
+  border-radius: 10px;
+
   padding: 1rem;
+
   border-left: 4px solid transparent;
-  transition: transform 0.2s, box-shadow 0.2s;
-  font-family: 'Courier New', monospace;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  font-family: 'DM Sans', sans-serif;
+
   cursor: default;
+
+  border: 1px solid rgba(192, 57, 43, 0.12);
+
+  box-shadow: 0 2px 8px rgba(192,57,43,0.05);
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    box-shadow: 0 8px 18px rgba(192,57,43,0.12);
   }
 
-  &.status-0 { border-left-color: #f59e0b; }  // Pending - amber
-  &.status-1 { border-left-color: #3b82f6; }  // Preparing - blue
-  &.status-2 { border-left-color: #22c55e; opacity: 0.75; } // Done - green
+  /* =====================
+     STATUS BORDER
+  ===================== */
+  &.status-0 { border-left-color: #C0392B; }  // Pending
+  &.status-1 { border-left-color: #E64A19; }  // Preparing
+  &.status-2 { border-left-color: #2E7D32; opacity: 0.85; } // Done
 
+  /* =====================
+     HEADER
+  ===================== */
   .ticket-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.85rem;
+    margin-bottom: 0.8rem;
 
     .ticket-id {
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 700;
-      color: #e0e0e0;
-      letter-spacing: 0.05em;
+      color: #2D0A08;
+      letter-spacing: 0.04em;
     }
 
     .status-badge {
-      font-size: 0.6rem;
+      font-size: 0.65rem;
       font-weight: 700;
-      letter-spacing: 0.12em;
-      padding: 0.2rem 0.55rem;
-      border-radius: 3px;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
 
-      &.badge-0 { background: rgba(245,158,11,0.15); color: #f59e0b; }
-      &.badge-1 { background: rgba(59,130,246,0.15); color: #60a5fa; }
-      &.badge-2 { background: rgba(34,197,94,0.15); color: #4ade80; }
+      &.badge-0 {
+        background: rgba(192, 57, 43, 0.12);
+        color: #C0392B;
+      }
+
+      &.badge-1 {
+        background: rgba(230, 74, 25, 0.12);
+        color: #E64A19;
+      }
+
+      &.badge-2 {
+        background: rgba(46, 125, 50, 0.12);
+        color: #2E7D32;
+      }
     }
   }
 
+  /* =====================
+     META
+  ===================== */
   .ticket-meta {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.45rem;
     margin-bottom: 1rem;
 
     .meta-row {
@@ -54,53 +84,81 @@
       align-items: center;
 
       .meta-label {
-        font-size: 0.6rem;
-        color: #555;
-        letter-spacing: 0.1em;
+        font-size: 0.65rem;
+        color: #9B4437;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
 
       .meta-value {
-        font-size: 0.78rem;
-        color: #c0c0c0;
+        font-size: 0.85rem;
+        color: #2D0A08;
 
-        &.station-name { color: #ff6b35; font-weight: 700; }
-        &.time-warn { color: #ef4444; font-weight: 700; }
+        &.station-name {
+          color: #C0392B;
+          font-weight: 700;
+        }
+
+        &.time-warn {
+          color: #E64A19;
+          font-weight: 700;
+        }
       }
     }
   }
 
+  /* =====================
+     ACTIONS
+  ===================== */
   .ticket-actions {
     display: flex;
     gap: 0.5rem;
 
     button {
       flex: 1;
-      padding: 0.45rem 0.5rem;
-      border: none;
-      border-radius: 4px;
-      font-family: 'Courier New', monospace;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      cursor: pointer;
-      transition: opacity 0.2s, transform 0.1s;
 
-      &:active { transform: scale(0.97); }
+      padding: 0.5rem;
+
+      border: none;
+      border-radius: 8px;
+
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+
+      cursor: pointer;
+
+      transition: all 0.2s ease;
+
+      &:active {
+        transform: scale(0.97);
+      }
     }
 
     .btn-details {
-      background: #1e2128;
-      color: #888;
-      border: 1px solid #2a2d35;
+      background: #FDF5F5;
+      color: #9B4437;
 
-      &:hover { color: #ccc; border-color: #444; }
+      border: 1px solid rgba(192, 57, 43, 0.15);
+
+      &:hover {
+        background: #FDECEA;
+        color: #C0392B;
+        border-color: rgba(192, 57, 43, 0.3);
+      }
     }
 
     .btn-advance {
-      background: #ff6b35;
+      background: #C0392B;
       color: #fff;
 
-      &:hover { opacity: 0.85; }
+      box-shadow: 0 2px 8px rgba(192,57,43,0.15);
+
+      &:hover {
+        background: #96281B;
+        box-shadow: 0 4px 14px rgba(192,57,43,0.25);
+      }
     }
   }
 }
