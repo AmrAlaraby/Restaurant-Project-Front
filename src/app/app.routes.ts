@@ -48,4 +48,11 @@ export const routes: Routes = [
         (m) => m.MenuItemForm,
       ),
   },
+    {
+    path: 'admin/orders',
+    loadComponent: () =>
+      import('./Features/admin/pages/orders-page/orders-page').then(
+        (m) => m.OrdersPage,
+      ),
+  },
 ];

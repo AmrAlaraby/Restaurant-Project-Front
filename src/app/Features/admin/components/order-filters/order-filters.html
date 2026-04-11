@@ -1,0 +1,27 @@
+ <div class="filters">
+
+    <select (change)="emit()"
+            [(ngModel)]="filters.Ordertype">
+      <option selected value="">All Types</option>
+      <option value="DineIn">DineIn</option>
+      <option value="PickUp">PickUp</option>
+      <option value="Delivery">Delivery</option>
+    </select>
+
+<select (change)="emit()" [(ngModel)]="filters.status">
+  <option value="">All Status</option>
+  <option value="Received">Received</option>
+  <option value="Preparing">Preparing</option>
+  <option value="Ready">Ready</option>
+  <option value="Delivered">Delivered</option>
+  <option value="Cancelled">Cancelled</option>
+</select>
+
+    <select (change)="emit()"
+            [(ngModel)]="filters.branchId">
+      <option selected value="">All Branches</option>
+      <option value="1">Branch 1</option>
+      <option value="2">Branch 2</option>
+    </select>
+
+  </div>
