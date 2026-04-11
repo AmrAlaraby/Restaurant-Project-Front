@@ -1,6 +1,6 @@
-import { MenuItemsStatsInterface } from './../../../../../Core/Models/MenuItemModels/menu-items-stats-interface';
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { MenuItemsStatsInterface } from '../../../../../../Core/Models/MenuItemModels/menu-items-stats-interface';
 
 @Component({
   selector: 'app-menu-items-stats',

@@ -14,6 +14,7 @@ export interface MenuItemDetailsInterface {
   isAvailable: boolean;
   prepTimeMinutes: number;
   categoryName: string;
+  categoryId: number;
   imageUrl: string;
   recipes: RecipesListInterface[];
 }

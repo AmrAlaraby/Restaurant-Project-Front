@@ -1,0 +1,60 @@
+<div class="image-upload">
+
+  <label class="form-label">Menu Item Image</label>
+
+  <input
+    #fileInput
+    type="file"
+    hidden
+    accept="image/*"
+    (change)="onFileSelected($event)"
+  />
+
+  <ng-container *ngIf="displayedImage; else uploadZone">
+
+    <div class="image-preview-wrapper">
+
+      <img
+        [src]="displayedImage"
+        alt="Preview"
+        class="preview-image"
+      />
+
+      <button
+        type="button"
+        class="edit-image-btn"
+        (click)="fileInput.click()"
+      >
+        ✏️
+      </button>
+
+    </div>
+
+  </ng-container>
+
+  <ng-template #uploadZone>
+
+    <div
+      class="upload-zone"
+      [class.dragging]="isDragging"
+      (drop)="onDrop($event)"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave()"
+    >
+      <div class="placeholder-content">
+        <h6>Drag & Drop Image Here</h6>
+        <p>or click below to browse</p>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="browse-btn"
+      (click)="fileInput.click()"
+    >
+      Browse Image
+    </button>
+
+  </ng-template>
+
+</div>
