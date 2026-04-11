@@ -1,0 +1,118 @@
+<div class="modal-overlay" (click)="close.emit()">
+  <div class="form-modal" (click)="$event.stopPropagation()">
+
+    <div class="modal-header">
+      <h2>New <span>Order</span></h2>
+      <button class="close-btn" (click)="close.emit()">×</button>
+    </div>
+
+    <form [formGroup]="form">
+
+      <!-- Branch -->
+      <div class="input-group">
+        <label>Branch</label>
+        <select formControlName="branchId">
+          <option selected value="">Select Branch</option>
+          <option value="1">Branch 1</option>
+          <option value="2">Branch 2</option>
+        </select>
+      </div>
+
+      <!-- Type -->
+      <div class="input-group">
+        <label>Order Type</label>
+        <select formControlName="orderType" (change)="onTypeChange()">
+          <option selected value="">Select Type</option>
+          <option value="DineIn">DineIn</option>
+          <option value="PickUp">PickUp</option>
+          <option value="Delivery">Delivery</option>
+        </select>
+      </div>
+
+      <!-- Table -->
+      @if (form.value.orderType === 'DineIn') {
+        <div class="input-group">
+          <label>Table</label>
+          <select formControlName="tableId">
+            <option selected value="">Select Table</option>
+            @for (t of tables(); track t.id) {
+              <option [value]="t.id">{{ t.tableNumber }}</option>
+            }
+          </select>
+        </div>
+      }
+
+      <!-- Delivery -->
+      @if (form.value.orderType === 'Delivery') {
+        <div formGroupName="deliveryAddress" class="grid">
+
+          <input formControlName="buildingNumber" placeholder="Building Number">
+          <input formControlName="street" placeholder="Street">
+          <input formControlName="city" placeholder="City">
+          <input formControlName="note" placeholder="Note">
+          <input formControlName="specialMark" placeholder="Special Mark">
+
+        </div>
+      }
+
+      <!-- Customer -->
+      <div class="input-group">
+        <label>Customer ID</label>
+        <input formControlName="customerId" placeholder="Enter Customer ID">
+      </div>
+
+      <!-- Items -->
+      <div formArrayName="items" class="items-box">
+
+        @for (item of items.controls; track $index; let i = $index) {
+
+          <div class="item-row" [formGroupName]="i">
+
+            <select formControlName="menuItemId" (change)="onMenuChange(i)">
+              <option selected value="">Select Item</option>
+              @for (m of menuItems(); track m.id) {
+                <option [value]="m.id">
+                  {{ m.name }} - {{ m.price }} EGP
+                </option>
+              }
+            </select>
+
+            <input type="number" formControlName="quantity">
+
+            <span class="price">
+              {{ item.value.unitPrice * item.value.quantity }} EGP
+            </span>
+
+            <button type="button" class="remove-btn" (click)="removeItem(i)">✕</button>
+
+          </div>
+        }
+
+        <button type="button" class="add-btn" (click)="addItem()">+ Add Item</button>
+
+      </div>
+
+      <!-- Payment -->
+      <div class="input-group">
+        <label>Payment Method</label>
+        <select formControlName="paymentMethod">
+          <option selected>Cash</option>
+          <option>Card</option>
+          <option>InstaPay</option>
+          <option>Wallet</option>
+        </select>
+      </div>
+
+      <!-- TOTAL -->
+      <div class="total-box">
+        Total: {{total }} EGP
+      </div>
+
+      <button type="button" class="submit-btn" (click)="submit()">
+        Place Order
+      </button>
+
+    </form>
+
+  </div>
+</div>

@@ -1,0 +1,187 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  display: grid;
+  place-items: center;
+  animation: fade .2s;
+  z-index: 1000;
+}
+
+.form-modal {
+  background: #fff;
+  width: 70%;
+  border-radius: 20px;
+  padding: 24px;
+  animation: scale .25s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* HEADER */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h2 span {
+  color: #C41E1E;
+}
+
+.close-btn {
+  border: none;
+  background: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* INPUT GROUP */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.input-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #444;
+}
+
+/* INPUTS + SELECTS */
+input,
+select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  outline: none;
+  background: #fff;
+  font-size: 14px;
+  transition: .2s;
+}
+
+input:focus,
+select:focus {
+  border-color: #C41E1E;
+  box-shadow: 0 0 0 3px rgba(196,30,30,.15);
+}
+
+/* CUSTOM SELECT ARROW */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='%23666'%3E%3Cpath d='M5 7l5 5 5-5H5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14px;
+  padding-right: 40px;
+}
+
+/* DELIVERY GRID */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* ITEMS */
+.items-box {
+  border: 1px solid #eee;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  background: #fafafa;
+}
+
+.item-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.item-row select {
+  flex: 2;
+}
+
+.item-row input {
+  width: 70px;
+  text-align: center;
+}
+
+.price {
+  min-width: 90px;
+  font-weight: bold;
+  color: #111;
+}
+
+/* BUTTONS */
+.add-btn {
+  width: 100%;
+  border: 1px dashed #aaa;
+  padding: 10px;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.add-btn:hover {
+  border-color: #C41E1E;
+  color: #C41E1E;
+}
+
+.remove-btn {
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  cursor: pointer;
+  color: #999;
+}
+
+.remove-btn:hover {
+  color: #C41E1E;
+}
+
+/* TOTAL */
+.total-box {
+  background: #fffbea;
+  border: 2px solid #f5c518;
+  padding: 14px;
+  font-weight: bold;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+/* SUBMIT */
+.submit-btn {
+  background: #C41E1E;
+  color: white;
+  width: 100%;
+  padding: 14px;
+  border-radius: 30px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.submit-btn:hover {
+  background: #a01818;
+  transform: translateY(-1px);
+}
+
+/* ANIMATIONS */
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale {
+  from { transform: scale(.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

@@ -1,0 +1,77 @@
+:host {
+  --red: #C41E1E;
+  --red-dark: #a01818;
+  --yellow-light: #fffbea;
+  --yellow-dark: #d4a800;
+  --gray-100: #f7f7f7;
+  --gray-200: #e9e9e9;
+  --gray-600: #666;
+  --black: #111;
+  --radius: 14px;
+}
+
+.table-wrap {
+  background: white;
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-200);
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: linear-gradient(135deg, var(--red), var(--red-dark));
+}
+
+th {
+  padding: 14px;
+  font-size: .75rem;
+  color: white;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 14px;
+  font-size: .85rem;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--gray-100);
+  transition: .2s;
+}
+
+tbody tr:hover {
+  background: #FFF8F0;
+}
+
+/* badges */
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: .7rem;
+  font-weight: bold;
+}
+
+.st-preparing {
+  background: var(--yellow-light);
+  color: var(--yellow-dark);
+}
+
+.st-ready {
+  background: #e6f9ee;
+  color: green;
+}
+
+.st-delivered {
+  background: #e6f0ff;
+  color: blue;
+}
+
+.st-cancelled {
+  background: var(--gray-100);
+  color: var(--gray-600);
+}

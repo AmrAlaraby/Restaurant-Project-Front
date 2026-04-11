@@ -1,0 +1,44 @@
+<div class="page">
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">Home / Orders</div>
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Order Management</h1>
+
+    <button class="btn-new" (click)="openModal()">
+      + New Order
+    </button>
+  </div>
+
+  <!-- Stats -->
+  <app-order-stats [orders]="orders"></app-order-stats>
+
+  <!-- Filters -->
+  <app-order-filters (filterChange)="onFilterChange($event)"></app-order-filters>
+
+  <!-- Table -->
+  <app-order-table [orders]="orders" (view)="openOrder($event)"></app-order-table>
+
+  <!-- Pagination -->
+  <app-order-pagination
+    [total]="totalCount"
+    [pageIndex]="filters.pageIndex"
+    [pageSize]="filters.pageSize"
+    (pageChange)="onPageChange($event)">
+  </app-order-pagination>
+
+</div>
+
+<!-- Modal -->
+ @if (showDetailsModal) {
+ <app-order-details
+  [orderId]="selectedOrderId"
+  (close)="closeOrderModal()">
+</app-order-details>}
+ @if (showModal) {
+<app-order-modal
+  (close)="closeModal()">
+</app-order-modal>
+}
