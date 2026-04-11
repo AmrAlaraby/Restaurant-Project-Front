@@ -1,110 +1,208 @@
 <div class="dashboard">
 
+  <!-- ── HERO BANNER ──
   <div class="hero">
     <div class="hero-text">
-      <span class="eyebrow">Restaurant Intelligence</span>
-      <h1>Reports Dashboard</h1>
-      <p>Live insights for orders, revenue, inventory, and top-selling menu items — all updated automatically.</p>
+      <div class="hero-eyebrow">Restaurant Intelligence</div>
+      <div class="hero-title">Reports Dashboard</div>
+      <div class="hero-sub">
+        Live insights for orders, revenue, inventory, and top-selling
+        menu items — updated automatically.
+      </div>
     </div>
-
-    <div class="hero-summary">
-      <div class="meta-card">
+    <div class="hero-stats">
+      <div class="hero-stat">
         <span>Orders Today</span>
-        <strong>{{dashboard?.ordersToday || 0}}</strong>
+        <strong>{{ dashboard?.ordersToday ?? 0 }}</strong>
       </div>
-      <div class="meta-card">
+      <div class="hero-stat">
         <span>Total Revenue</span>
-        <strong>{{dashboard?.totalRevenueToday | currency:'EGP':'symbol'}}</strong>
+        <strong>{{ dashboard?.totalRevenueToday | currency:'EGP':'symbol':'1.0-0' }}</strong>
       </div>
-      <div class="meta-card">
-        <span>Average Order</span>
-        <strong>{{dashboard?.avgOrderValueToday | currency:'EGP':'symbol'}}</strong>
+      <div class="hero-stat">
+        <span>Avg Order</span>
+        <strong>{{ dashboard?.avgOrderValueToday | currency:'EGP':'symbol':'1.0-0' }}</strong>
       </div>
-      <div class="meta-card warning">
-        <span>Low Stock Alerts</span>
-        <strong>{{dashboard?.lowStockIngredientsCount || 0}}</strong>
+      <div class="hero-stat warn">
+        <span>Low Stock</span>
+        <strong>{{ dashboard?.lowStockIngredientsCount ?? 0 }}</strong>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- ── STAT CARDS ── -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-icon red"><i class="fas fa-chart-line"></i></div>
+      <div>
+        <div class="stat-label">Today Sale</div>
+        <div class="stat-value">{{ dashboard?.totalRevenueToday | currency:'EGP':'symbol':'1.0-0' }}</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon yellow"><i class="fas fa-chart-bar"></i></div>
+      <div>
+        <div class="stat-label">Orders Today</div>
+        <div class="stat-value">{{ dashboard?.ordersToday ?? 0 }}</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green"><i class="fas fa-chart-area"></i></div>
+      <div>
+        <div class="stat-label">Avg Order Value</div>
+        <div class="stat-value">{{ dashboard?.avgOrderValueToday | currency:'EGP':'symbol':'1.0-0' }}</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon blue"><i class="fas fa-exclamation-triangle"></i></div>
+      <div>
+        <div class="stat-label">Low Stock Alerts</div>
+        <div class="stat-value">{{ dashboard?.lowStockIngredientsCount ?? 0 }}</div>
       </div>
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-header">
-      <div>
-        <h2>Revenue Trends</h2>
-        <p>Track daily income and measure your restaurant’s revenue performance.</p>
-      </div>
-    </div>
+  <!-- ── CHARTS ROW ── -->
+  <div class="charts-row">
 
-    <div class="list">
-      <div class="item" *ngFor="let r of revenue">
-        <span>{{r.date | date:'mediumDate'}}</span>
-        <span>{{r.totalRevenue | currency:'EGP':'symbol'}}</span>
+    <!-- Revenue List -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Revenue Trends</div>
+          <div class="card-sub">Track daily income and performance</div>
+        </div>
+        <a class="show-all" href="#">Show All</a>
       </div>
       <div class="empty-state" *ngIf="revenue.length === 0">
-        No revenue data available yet.
+        <i class="fas fa-chart-line"></i>
+        <p>No revenue data available yet.</p>
+      </div>
+      <div class="rev-list" *ngIf="revenue.length > 0">
+        <div class="rev-item" *ngFor="let r of revenue">
+          <div class="rev-date">
+            <i class="fas fa-calendar-day"></i>
+            {{ r.date | date:'mediumDate' }}
+          </div>
+          <div class="rev-amount">{{ r.totalRevenue | currency:'EGP':'symbol':'1.0-0' }}</div>
+        </div>
       </div>
     </div>
+
+    <!-- Orders Breakdown -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Order Breakdown</div>
+          <div class="card-sub">Dine-in vs Pickup vs Delivery</div>
+        </div>
+        <a class="show-all" href="#">Show All</a>
+      </div>
+      <div class="orders-grid">
+        <div class="order-card dine">
+          <div class="oc-icon"><i class="fas fa-concierge-bell"></i></div>
+          <div class="oc-label">Dine In</div>
+          <div class="oc-val">{{ orders?.dineInCount ?? 0 }}</div>
+        </div>
+        <div class="order-card pick">
+          <div class="oc-icon"><i class="fas fa-shopping-bag"></i></div>
+          <div class="oc-label">Pickup</div>
+          <div class="oc-val">{{ orders?.pickupCount ?? 0 }}</div>
+        </div>
+        <div class="order-card del">
+          <div class="oc-icon"><i class="fas fa-motorcycle"></i></div>
+          <div class="oc-label">Delivery</div>
+          <div class="oc-val">{{ orders?.deliveryCount ?? 0 }}</div>
+        </div>
+      </div>
+      <div class="order-bars" *ngIf="orders">
+        <ng-container *ngIf="(orders.dineInCount + orders.pickupCount + orders.deliveryCount) as total">
+          <div class="order-bar-row">
+            <span class="bar-label">Dine In</span>
+            <div class="bar-track"><div class="bar-fill dine" [style.width.%]="(orders.dineInCount / total) * 100"></div></div>
+            <span class="bar-pct">{{ ((orders.dineInCount / total) * 100) | number:'1.0-0' }}%</span>
+          </div>
+          <div class="order-bar-row">
+            <span class="bar-label">Pickup</span>
+            <div class="bar-track"><div class="bar-fill pick" [style.width.%]="(orders.pickupCount / total) * 100"></div></div>
+            <span class="bar-pct">{{ ((orders.pickupCount / total) * 100) | number:'1.0-0' }}%</span>
+          </div>
+          <div class="order-bar-row">
+            <span class="bar-label">Delivery</span>
+            <div class="bar-track"><div class="bar-fill del" [style.width.%]="(orders.deliveryCount / total) * 100"></div></div>
+            <span class="bar-pct">{{ ((orders.deliveryCount / total) * 100) | number:'1.0-0' }}%</span>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
   </div>
 
-  <div class="section">
-    <div class="section-header">
-      <div>
-        <h2>Order Breakdown</h2>
-        <p>See how dine-in, pickup, and delivery channels are performing.</p>
-      </div>
-    </div>
+  <!-- ── BOTTOM ROW ── -->
+  <div class="bottom-row">
 
-    <div class="orders">
-      <div class="order-card">
-        <span>Dine In</span>
-        <strong>{{orders?.dineInCount || 0}}</strong>
-      </div>
-      <div class="order-card">
-        <span>Pickup</span>
-        <strong>{{orders?.pickupCount || 0}}</strong>
-      </div>
-      <div class="order-card">
-        <span>Delivery</span>
-        <strong>{{orders?.deliveryCount || 0}}</strong>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-header">
-      <div>
-        <h2>Top Selling Items</h2>
-        <p>The menu items generating the most orders this period.</p>
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="food-card" *ngFor="let item of topItems">
-        <h4>{{item.name}}</h4>
-        <p>{{item.orderCount}} orders</p>
+    <!-- Top Selling Items -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Top Selling Items</div>
+          <div class="card-sub">Most ordered menu items</div>
+        </div>
+        <a class="show-all" href="#">Show All</a>
       </div>
       <div class="empty-state" *ngIf="topItems.length === 0">
-        No top selling items found.
+        <i class="fas fa-hamburger"></i>
+        <p>No items found.</p>
+      </div>
+      <div class="food-list" *ngIf="topItems.length > 0">
+        <div class="food-item" *ngFor="let item of topItems; let i = index">
+          <div class="food-rank" [class.gold]="i === 0" [class.silver]="i === 1">{{ i + 1 }}</div>
+          <div class="food-info">
+            <div class="food-name">{{ item.name }}</div>
+            <div class="food-bar-wrap">
+              <div class="food-bar" [style.width.%]="(item.orderCount / topItems[0].orderCount) * 100"></div>
+            </div>
+          </div>
+          <div class="food-count">{{ item.orderCount }} orders</div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="section">
-    <div class="section-header">
-      <div>
-        <h2>Inventory Usage</h2>
-        <p>Monitor ingredient consumption and identify items running low.</p>
-      </div>
-    </div>
-
-    <div class="list">
-      <div class="item" *ngFor="let i of inventory">
-        <span>{{i.ingredientName}}</span>
-        <span>{{i.quantityUsed}} {{i.unit}}</span>
+    <!-- Inventory Usage -->
+    <div class="card span-2">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Inventory Usage</div>
+          <div class="card-sub">Track ingredient consumption</div>
+        </div>
+        <a class="show-all" href="#">Show All</a>
       </div>
       <div class="empty-state" *ngIf="inventory.length === 0">
-        Inventory usage data is not available.
+        <i class="fas fa-box-open"></i>
+        <p>No inventory data.</p>
+      </div>
+      <div class="table-wrap" *ngIf="inventory.length > 0">
+        <table class="inv-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Ingredient</th>
+              <th>Used</th>
+              <th>Unit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of inventory; let i = index">
+              <td class="row-num">{{ i + 1 }}</td>
+              <td class="ing-name">{{ item.ingredientName }}</td>
+              <td class="ing-qty">{{ item.quantityUsed }}</td>
+              <td><span class="unit-badge">{{ item.unit }}</span></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+
   </div>
+
 </div>
