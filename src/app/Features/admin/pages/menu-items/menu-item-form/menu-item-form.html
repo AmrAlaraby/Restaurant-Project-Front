@@ -1,0 +1,91 @@
+<!------------------------------- Menu Item Form ---------------------------->
+<div class="menu-item-form-page">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="menu-item-form">
+    <div class="row g-4">
+      <div class="col-md-6">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" formControlName="name" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Price</label>
+        <input type="number" class="form-control" formControlName="price" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Prep Time (Minutes)</label>
+        <input type="number" class="form-control" formControlName="prepTimeMinutes" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Category</label>
+        <select class="form-select" formControlName="categoryId">
+          <option [ngValue]="null">Select Category</option>
+
+          <option *ngFor="let category of categories" [ngValue]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-md-6" *ngIf="isEditMode">
+        <label class="form-label">Availability</label>
+
+        <select class="form-select" formControlName="isAvailable">
+          <option [ngValue]="true">Available</option>
+          <option [ngValue]="false">Unavailable</option>
+        </select>
+      </div>
+    </div>
+
+<!----------------------------- Recipes Section ----------------------->
+    <div class="recipes-section mt-4">
+      <div class="recipes-header">
+        <h5>Recipes</h5>
+
+        <button type="button" class="btn-add-recipe" (click)="addRecipe()">+ Add Recipe</button>
+      </div>
+
+      <div formArrayName="recipes">
+        <div
+          class="recipe-row"
+          *ngFor="let recipe of recipes.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <select class="form-select" formControlName="ingredientId">
+            <option [ngValue]="null">Select Ingredient</option>
+
+            <option *ngFor="let ingredient of ingredients" [ngValue]="ingredient.id">
+              {{ ingredient.name }} ({{ ingredient.unit }})
+            </option>
+          </select>
+
+          <input
+            type="number"
+            class="form-control"
+            formControlName="quantityRequired"
+            placeholder="Quantity"
+          />
+
+          <button type="button" class="btn-remove-recipe" (click)="removeRecipe(i)">Remove</button>
+        </div>
+      </div>
+    </div>
+<!------------------------- Image Upload Section ---------------------------->
+
+    <div class="mt-4">
+      <app-image-upload
+        [currentImageUrl]="currentImageUrl"
+        (imageSelected)="onImageSelected($event)"
+      />
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn-cancel" (click)="onCancel()">Cancel</button>
+
+      <button type="submit" class="btn-submit">
+        {{ isEditMode ? 'Update Item' : 'Create Item' }}
+      </button>
+    </div>
+  </form>
+</div>

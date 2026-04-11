@@ -1,0 +1,72 @@
+<div class="details-wrapper">
+  <div class="image-wrapper">
+    <img [src]="menuItem.imageUrl" [alt]="menuItem.name" class="details-image" />
+  </div>
+
+  <div class="details-grid">
+    <div class="detail-card">
+      <span>Name</span>
+      <strong>{{ menuItem.name }}</strong>
+    </div>
+
+    <div class="detail-card">
+      <span>Price</span>
+      <strong>${{ menuItem.price }}</strong>
+    </div>
+
+    <div class="detail-card">
+      <span>Category</span>
+      <strong>{{ menuItem.categoryName }}</strong>
+    </div>
+
+    <div class="detail-card">
+      <span>Prep Time</span>
+      <strong>{{ menuItem.prepTimeMinutes }} min</strong>
+    </div>
+
+    <div class="detail-card">
+      <span>Status</span>
+      <strong>
+        {{ menuItem.isAvailable ? 'Available' : 'Unavailable' }}
+      </strong>
+    </div>
+  </div>
+
+
+  <!-------------------------- Recipes Section ---------------------------------------->
+  <div
+  class="recipes-section"
+  *ngIf="menuItem.recipes?.length"
+>
+
+  <button
+    type="button"
+    class="recipes-toggle"
+    (click)="toggleRecipes()"
+  >
+    <span>Recipes / Ingredients</span>
+
+    <span class="arrow">
+      {{ showRecipes ? '▲' : '▼' }}
+    </span>
+  </button>
+
+  <div
+    class="recipes-table"
+    *ngIf="showRecipes"
+  >
+    <div
+      class="recipe-item"
+      *ngFor="let recipe of menuItem.recipes"
+    >
+      <span>{{ recipe.ingredientName }}</span>
+
+      <strong>
+        {{ recipe.quantityRequired }}
+        {{ recipe.unit }}
+      </strong>
+    </div>
+  </div>
+
+</div>
+</div>

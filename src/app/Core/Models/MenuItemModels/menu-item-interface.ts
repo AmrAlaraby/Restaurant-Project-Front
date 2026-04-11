@@ -3,6 +3,7 @@ export interface MenuItemInterface {
   name: string;
   price: number;
   isAvailable: boolean;
+  categoryId: number;
   prepTimeMinutes: number;
   category: string;
   imageUrl: string;
