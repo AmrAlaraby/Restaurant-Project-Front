@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CategoryInterface } from '../../../../../../Core/Models/MenuItemModels/category-interface';
-import { MenuItemQueryParamsInterface } from '../../../../../../Core/Models/MenuItemModels/menu-item-query-params-interface';
+import { CategoryInterface } from '../../../../Core/Models/MenuItemModels/category-interface';
+import { MenuItemQueryParamsInterface } from '../../../../Core/Models/MenuItemModels/menu-item-query-params-interface';
 
 
 @Component({

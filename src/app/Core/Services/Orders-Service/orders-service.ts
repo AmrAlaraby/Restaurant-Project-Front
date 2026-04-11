@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Order } from '../../Constants/Api_Urls';
 import { Observable } from 'rxjs';
-import { PaginatedResultInterface } from '../../Models/MenuItemModels/paginated-result-interface';
+import { PaginatedResultInterface } from '../../../Shared/Models/paginated-result-interface';
 import { AddedItemsInterface } from '../../Models/OrderModels/added-items-interface';
 import { CreateOrderInterface } from '../../Models/OrderModels/create-order-interface';
 import { CreateOrderItemInterface } from '../../Models/OrderModels/create-order-item-interface';

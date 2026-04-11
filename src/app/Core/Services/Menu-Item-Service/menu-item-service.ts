@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { MenuItems } from '../../Constants/Api_Urls';
 import { MenuItemInterface } from '../../Models/MenuItemModels/menu-item-interface';
 import { MenuItemDetailsInterface } from '../../Models/MenuItemModels/menu-item-details-interface';;
-import { PaginatedResultInterface } from '../../Models/MenuItemModels/paginated-result-interface';
+import { PaginatedResultInterface } from '../../../Shared/Models/paginated-result-interface';
 import { MenuItemQueryParamsInterface } from '../../Models/MenuItemModels/menu-item-query-params-interface';
 import { CreateMenuItemInterface } from '../../Models/MenuItemModels/create-menu-item-interface';
 import { UpdateMenuItemInterface } from '../../Models/MenuItemModels/update-menu-item-interface';

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
-import { MenuItemInterface } from '../../../../../../Core/Models/MenuItemModels/menu-item-interface';
+import { MenuItemInterface } from '../../../../Core/Models/MenuItemModels/menu-item-interface';
 
 
 
