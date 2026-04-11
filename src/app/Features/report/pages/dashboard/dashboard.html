@@ -1,0 +1,110 @@
+<div class="dashboard">
+
+  <div class="hero">
+    <div class="hero-text">
+      <span class="eyebrow">Restaurant Intelligence</span>
+      <h1>Reports Dashboard</h1>
+      <p>Live insights for orders, revenue, inventory, and top-selling menu items — all updated automatically.</p>
+    </div>
+
+    <div class="hero-summary">
+      <div class="meta-card">
+        <span>Orders Today</span>
+        <strong>{{dashboard?.ordersToday || 0}}</strong>
+      </div>
+      <div class="meta-card">
+        <span>Total Revenue</span>
+        <strong>{{dashboard?.totalRevenueToday | currency:'EGP':'symbol'}}</strong>
+      </div>
+      <div class="meta-card">
+        <span>Average Order</span>
+        <strong>{{dashboard?.avgOrderValueToday | currency:'EGP':'symbol'}}</strong>
+      </div>
+      <div class="meta-card warning">
+        <span>Low Stock Alerts</span>
+        <strong>{{dashboard?.lowStockIngredientsCount || 0}}</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <h2>Revenue Trends</h2>
+        <p>Track daily income and measure your restaurant’s revenue performance.</p>
+      </div>
+    </div>
+
+    <div class="list">
+      <div class="item" *ngFor="let r of revenue">
+        <span>{{r.date | date:'mediumDate'}}</span>
+        <span>{{r.totalRevenue | currency:'EGP':'symbol'}}</span>
+      </div>
+      <div class="empty-state" *ngIf="revenue.length === 0">
+        No revenue data available yet.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <h2>Order Breakdown</h2>
+        <p>See how dine-in, pickup, and delivery channels are performing.</p>
+      </div>
+    </div>
+
+    <div class="orders">
+      <div class="order-card">
+        <span>Dine In</span>
+        <strong>{{orders?.dineInCount || 0}}</strong>
+      </div>
+      <div class="order-card">
+        <span>Pickup</span>
+        <strong>{{orders?.pickupCount || 0}}</strong>
+      </div>
+      <div class="order-card">
+        <span>Delivery</span>
+        <strong>{{orders?.deliveryCount || 0}}</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <h2>Top Selling Items</h2>
+        <p>The menu items generating the most orders this period.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="food-card" *ngFor="let item of topItems">
+        <h4>{{item.name}}</h4>
+        <p>{{item.orderCount}} orders</p>
+      </div>
+      <div class="empty-state" *ngIf="topItems.length === 0">
+        No top selling items found.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <h2>Inventory Usage</h2>
+        <p>Monitor ingredient consumption and identify items running low.</p>
+      </div>
+    </div>
+
+    <div class="list">
+      <div class="item" *ngFor="let i of inventory">
+        <span>{{i.ingredientName}}</span>
+        <span>{{i.quantityUsed}} {{i.unit}}</span>
+      </div>
+      <div class="empty-state" *ngIf="inventory.length === 0">
+        Inventory usage data is not available.
+      </div>
+    </div>
+  </div>
+</div>

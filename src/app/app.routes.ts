@@ -23,6 +23,15 @@ export const routes: Routes = [
   },
 
   {
+    path: "register",
+    loadComponent: () => import('./Features/auth/pages/register/register').then(m => m.Register)
+  },
+  {
+    path: "dashboard",
+    loadComponent: () => import('./Features/report/pages/dashboard/dashboard').then(m => m.DashboardComponent)
+  }
+
+];
     path: '',
     redirectTo: 'tables',
     pathMatch: 'full',
