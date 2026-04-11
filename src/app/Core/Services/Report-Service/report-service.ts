@@ -14,7 +14,6 @@ import { InventoryUsageDTO } from '../../Models/ReportModels/inventory-usage-mod
 export class ReportService {
 
   private baseUrl = 'https://localhost:44360/api/Reports';
-
   constructor(private http: HttpClient) {}
 
   // Dashboard

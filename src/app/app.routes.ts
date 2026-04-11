@@ -29,9 +29,10 @@ export const routes: Routes = [
   {
     path: "dashboard",
     loadComponent: () => import('./Features/report/pages/dashboard/dashboard').then(m => m.DashboardComponent)
-  }
+  },
 
-];
+
+  {
     path: '',
     redirectTo: 'tables',
     pathMatch: 'full',

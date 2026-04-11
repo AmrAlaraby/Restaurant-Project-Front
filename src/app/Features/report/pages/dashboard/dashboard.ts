@@ -29,14 +29,66 @@ export class DashboardComponent implements OnInit {
   }
 
   loadData() {
-    this.reportService.getDashboard().subscribe(res => this.dashboard = res);
+    console.log('Loading dashboard data...');
 
-    this.reportService.getRevenue().subscribe(res => this.revenue = res);
+    this.reportService.getDashboard().subscribe({
+      next: res => {
+        console.log('Dashboard data received:', res);
+        this.dashboard = res;
+      },
+      error: (err: any) => {
+        console.error('Dashboard error:', err.status, err.statusText);
+        console.error('Error message:', err.message);
+        console.error('Response body:', err.error);
+      }
+    });
 
-    this.reportService.getOrdersByType().subscribe(res => this.orders = res);
+    this.reportService.getRevenue().subscribe({
+      next: res => {
+        console.log('Revenue data received:', res);
+        this.revenue = res;
+      },
+      error: (err: any) => {
+        console.error('Revenue error:', err.status, err.statusText);
+        console.error('Error message:', err.message);
+        console.error('Response body:', err.error);
+      }
+    });
 
-    this.reportService.getTopItems().subscribe(res => this.topItems = res);
+    this.reportService.getOrdersByType().subscribe({
+      next: res => {
+        console.log('Orders data received:', res);
+        this.orders = res;
+      },
+      error: (err: any) => {
+        console.error('Orders error:', err.status, err.statusText);
+        console.error('Error message:', err.message);
+        console.error('Response body:', err.error);
+      }
+    });
 
-    this.reportService.getInventoryUsage().subscribe(res => this.inventory = res);
+    this.reportService.getTopItems().subscribe({
+      next: res => {
+        console.log('Top items data received:', res);
+        this.topItems = res;
+      },
+      error: (err: any) => {
+        console.error('Top items error:', err.status, err.statusText);
+        console.error('Error message:', err.message);
+        console.error('Response body:', err.error);
+      }
+    });
+
+    this.reportService.getInventoryUsage().subscribe({
+      next: res => {
+        console.log('Inventory data received:', res);
+        this.inventory = res;
+      },
+      error: (err: any) => {
+        console.error('Inventory error:', err.status, err.statusText);
+        console.error('Error message:', err.message);
+        console.error('Response body:', err.error);
+      }
+    });
   }
 }
