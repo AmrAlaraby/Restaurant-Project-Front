@@ -1,0 +1,122 @@
+<div class="overlay" *ngIf="order">
+
+  <div class="panel">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div>
+        <h2>Order #{{order.id}}</h2>
+
+        <span class="status" [class]="order.status">
+          {{order.status}}
+        </span>
+      </div>
+
+      <button class="close" (click)="close.emit()">×</button>
+    </div>
+
+    <!-- INFO -->
+    <div class="info">
+      <div>Customer: {{order.customerName}}</div>
+      <div>Type: {{order.orderType}}</div>
+      <div>Total: {{order.totalAmount}} EGP</div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- EXISTING ITEMS -->
+    <!-- ========================= -->
+    <div class="items">
+
+      <div class="item" *ngFor="let item of order.orderItems">
+
+        <div class="left">
+          <div class="name">{{item.menuItemName}}</div>
+          <div class="qty">Qty: {{item.quantity}}</div>
+        </div>
+
+        <div class="price">
+          {{item.unitPrice * item.quantity}} EGP
+        </div>
+
+        <button
+          class="remove-btn"
+          *ngIf="isReceived()"
+          (click)="removeItem(item.orderItemId)">
+          ✕
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- ADD ITEMS -->
+    <!-- ========================= -->
+    <div class="add-section" *ngIf="isReceived()">
+
+      <h3>Add New Items</h3>
+
+      <form [formGroup]="form">
+
+        <div class="items" formArrayName="items">
+
+          @for (item of items.controls; track $index; let i = $index) {
+
+            <div class="item-row" [formGroupName]="i">
+
+              <select formControlName="menuItemId" (change)="onMenuChange(i)">
+
+                <option value="">Select Item</option>
+
+                @for (m of availableMenuItems; track m.id) {
+                  <option [value]="m.id">
+                    {{m.name}} - {{m.price}} EGP
+                  </option>
+                }
+
+              </select>
+
+              <input type="number" formControlName="quantity">
+
+              <span class="price">
+                {{item.value.quantity * item.value.unitPrice}} EGP
+              </span>
+
+            </div>
+
+          }
+
+        </div>
+
+      </form>
+
+      <button
+        class="add-btn"
+        *ngIf="availableMenuItems.length > 0"
+        (click)="addItem()">
+
+        + Add Item
+      </button>
+
+      <button class="save-btn" (click)="saveNewItems()">
+        Save Items
+      </button>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="actions">
+
+      <button
+        class="cancel-btn"
+        *ngIf="isReceived()"
+        (click)="cancelOrder()">
+
+        Cancel Order
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

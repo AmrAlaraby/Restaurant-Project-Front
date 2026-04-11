@@ -31,8 +31,7 @@ export const routes: Routes = [
     loadComponent: () => import('./Features/report/pages/dashboard/dashboard').then(m => m.DashboardComponent)
   },
 
-
-  {
+{
     path: '',
     redirectTo: 'tables',
     pathMatch: 'full',
@@ -58,4 +57,12 @@ export const routes: Routes = [
         (m) => m.MenuItemForm,
       ),
   },
+    {
+    path: 'admin/orders',
+    loadComponent: () =>
+      import('./Features/admin/pages/orders-page/orders-page').then(
+        (m) => m.OrdersPage,
+      ),
+  },
 ];
+
