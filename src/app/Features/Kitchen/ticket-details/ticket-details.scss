@@ -1,0 +1,293 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(45, 10, 8, 0.55);
+  backdrop-filter: blur(4px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 999;
+}
+
+/* =====================
+   MODAL PANEL
+===================== */
+.modal-panel {
+  width: min(520px, 92vw);
+
+  background: #fff;
+
+  border-radius: 14px;
+
+  box-shadow: 0 12px 40px rgba(192, 57, 43, 0.18);
+
+  border: 1px solid rgba(192, 57, 43, 0.15);
+
+  overflow: hidden;
+
+  animation: popIn 0.2s ease;
+
+  font-family: 'DM Sans', sans-serif;
+}
+
+@keyframes popIn {
+  from {
+    transform: translateY(10px) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* =====================
+   HEADER
+===================== */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1rem 1.2rem;
+
+  background: #FDF5F5;
+
+  border-bottom: 1px solid rgba(192, 57, 43, 0.12);
+}
+
+.modal-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+
+  .label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+
+    color: #9B4437;
+  }
+
+  .id {
+    font-size: 1rem;
+    font-weight: 700;
+
+    color: #C0392B;
+  }
+}
+
+.btn-close {
+  background: transparent;
+
+  border: 1px solid rgba(192, 57, 43, 0.2);
+
+  color: #9B4437;
+
+  width: 32px;
+  height: 32px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #FDECEA;
+    color: #C0392B;
+    border-color: rgba(192, 57, 43, 0.35);
+  }
+}
+
+/* =====================
+   BODY
+===================== */
+.modal-body {
+  padding: 1.2rem;
+}
+
+/* INFO GRID */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+
+  margin-bottom: 1.2rem;
+}
+
+.info-item {
+  background: #FDF5F5;
+
+  border: 1px solid rgba(192, 57, 43, 0.1);
+
+  border-radius: 10px;
+
+  padding: 0.7rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.info-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: #9B4437;
+  text-transform: uppercase;
+}
+
+.info-value {
+  font-size: 0.85rem;
+  color: #2D0A08;
+
+  &.highlight {
+    color: #C0392B;
+    font-weight: 700;
+  }
+
+  &.status-val {
+    font-weight: 700;
+  }
+
+  &.s-0 { color: #C0392B; }
+  &.s-1 { color: #E64A19; }
+  &.s-2 { color: #2E7D32; }
+}
+
+/* =====================
+   ITEMS
+===================== */
+.items-section {
+  margin-top: 0.5rem;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+
+  color: #C0392B;
+
+  margin-bottom: 0.6rem;
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.item-row {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+
+  padding: 0.6rem 0.7rem;
+
+  border-radius: 8px;
+
+  background: #FDF5F5;
+
+  border: 1px solid rgba(192, 57, 43, 0.1);
+}
+
+.item-num {
+  width: 22px;
+  height: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
+
+  background: #C0392B;
+  color: #fff;
+
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.item-name {
+  font-size: 0.85rem;
+  color: #2D0A08;
+}
+
+/* =====================
+   EMPTY STATE
+===================== */
+.no-items {
+  text-align: center;
+  font-size: 0.8rem;
+
+  color: #9B4437;
+
+  padding: 1rem;
+}
+
+/* =====================
+   FOOTER
+===================== */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+
+  padding: 1rem 1.2rem;
+
+  border-top: 1px solid rgba(192, 57, 43, 0.12);
+
+  background: #fff;
+}
+
+.btn-cancel {
+  background: transparent;
+
+  border: 1px solid rgba(192, 57, 43, 0.25);
+
+  color: #9B4437;
+
+  padding: 0.5rem 1rem;
+
+  border-radius: 8px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #FDECEA;
+    color: #C0392B;
+  }
+}
+
+.btn-advance {
+  background: #C0392B;
+
+  color: #fff;
+
+  padding: 0.5rem 1rem;
+
+  border-radius: 8px;
+
+  font-weight: 600;
+
+  border: none;
+
+  cursor: pointer;
+
+  box-shadow: 0 3px 10px rgba(192, 57, 43, 0.2);
+
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #96281B;
+    box-shadow: 0 5px 14px rgba(192, 57, 43, 0.28);
+  }
+}

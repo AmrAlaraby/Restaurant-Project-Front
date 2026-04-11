@@ -1,0 +1,54 @@
+<div class="filters-wrapper">
+  <div class="row g-3 align-items-end">
+    <div class="col-lg-4 col-md-6">
+      <label class="form-label">Search</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search menu items..."
+        [(ngModel)]="filters.search"
+        (ngModelChange)="onFilterChange('search')"
+      />
+    </div>
+
+    <div class="col-lg-2 col-md-6">
+      <label class="form-label">Category</label>
+      <select
+        class="form-select"
+        [(ngModel)]="filters.categoryId"
+        (ngModelChange)="onFilterChange()"
+      >
+        <option [ngValue]="undefined">All</option>
+        <option *ngFor="let category of categories" [ngValue]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-lg-2 col-md-6">
+      <label class="form-label">Availability</label>
+      <select
+        class="form-select"
+        [(ngModel)]="filters.isAvailable"
+        (ngModelChange)="onFilterChange()"
+      >
+        <option [ngValue]="undefined">All</option>
+        <option [ngValue]="true">Available</option>
+        <option [ngValue]="false">Unavailable</option>
+      </select>
+    </div>
+
+    <div class="col-lg-2 col-md-6">
+      <label class="form-label">Sort</label>
+      <select class="form-select" [(ngModel)]="filters.sort" (ngModelChange)="onFilterChange()">
+        <option [ngValue]="undefined">Default</option>
+        <option [ngValue]="1">Price Asc</option>
+        <option [ngValue]="2">Price Desc</option>
+      </select>
+    </div>
+
+    <div class="col-lg-2 col-md-12">
+      <button class="btn btn-reset w-100" (click)="onReset()">Reset Filters</button>
+    </div>
+  </div>
+</div>

@@ -5,7 +5,7 @@ import { Register } from "./Features/auth/pages/register/register";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Login, Register],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

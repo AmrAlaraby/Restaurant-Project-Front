@@ -1,0 +1,157 @@
+<div class="menu-items-page">
+  <div class="page-header">
+    <div>
+      <h2>Menu Items Management</h2>
+      <p>Manage your restaurant menu items efficiently.</p>
+    </div>
+
+    <button class="btn-add " (click)="onAddNew()">+ Add New Item</button>
+  </div>
+
+  <app-menu-items-stats [stats]="stats" />
+
+  <app-menu-items-filters
+    [categories]="categories"
+    [filters]="filters"
+    (filtersChanged)="onFiltersChanged($event)"
+    (resetClicked)="resetFilters()"
+  />
+
+  <app-menu-items-grid
+    [items]="menuItems"
+    [loading]="loading"
+    (view)="onView($event)"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+    (toggleAvailability)="onToggleAvailability($event)"
+  />
+
+  <app-pagination
+    [pageIndex]="filters.pageIndex!"
+    [pageSize]="filters.pageSize!"
+    [totalCount]="totalCount"
+    (pageChanged)="onPageChanged($event)"
+  />
+</div>
+
+<!-------------------------------- Form Modal ---------------------------------->
+<div
+  class="modal fade show"
+  tabindex="-1"
+  [style.display]="showFormModal ? 'block' : 'none'"
+  [class.d-block]="showFormModal"
+  *ngIf="showFormModal"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header custom-modal-header">
+        <div>
+          <h5 class="modal-title mb-1">
+            {{ isEditMode ? 'Edit Menu Item' : 'Create Menu Item' }}
+          </h5>
+
+          <small class="text-muted">
+            {{ isEditMode ? 'Update menu item information' : 'Add a new item to your menu' }}
+          </small>
+        </div>
+
+        <button type="button" class="btn-close" (click)="closeFormModal()"></button>
+      </div>
+
+      <div class="modal-body">
+        <app-menu-item-form
+          [isEditMode]="isEditMode"
+          [menuItemId]="selectedMenuItemId"
+          (cancelled)="closeFormModal()"
+          (formSubmitted)="handleFormSubmitted()"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!------------------------------ Delete Confirmation Modal ------------------------------>
+
+<div
+  class="modal fade show"
+  tabindex="-1"
+  [style.display]="showDeleteModal ? 'block' : 'none'"
+  [class.d-block]="showDeleteModal"
+  *ngIf="showDeleteModal"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title text-danger">
+          Delete Menu Item
+        </h5>
+
+        <button
+          type="button"
+          class="btn-close"
+          (click)="closeDeleteModal()"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <p class="mb-0">
+          Are you sure you want to delete this menu item?
+          This action cannot be undone.
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          class="btn btn-light"
+          (click)="closeDeleteModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="btn btn-danger"
+          (click)="confirmDelete()"
+        >
+          Delete
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!----------------------------------- Details Modal ------------------------------------->
+<div
+  class="modal fade show"
+  tabindex="-1"
+  [style.display]="showDetailsModal ? 'block' : 'none'"
+  [class.d-block]="showDetailsModal"
+  *ngIf="showDetailsModal && selectedMenuItemDetails"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Menu Item Details
+        </h5>
+
+        <button
+          type="button"
+          class="btn-close"
+          (click)="closeDetailsModal()"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <app-menu-item-details
+          [menuItem]="selectedMenuItemDetails"
+        />
+      </div>
+
+    </div>
+  </div>
+</div>
