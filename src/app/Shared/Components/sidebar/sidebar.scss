@@ -347,6 +347,30 @@ button { cursor: pointer; font-family: var(--font); }
 }
 .sb-user-menu:hover { background: #C41E1E; color: var(--white); }
 
+  .sb-logout {
+  margin-left: auto;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #C41E1E;
+  background: #C41E1E;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+/* hover */
+.sb-logout:hover {
+  background: #a01818;
+  border-color: #a01818;
+}
+
+/* active click */
+.sb-logout:active {
+  transform: scale(0.95);
+}
+
 /* ══════════════════════════════════════════════════
    APP SHELL  (wraps topbar + content)
 ══════════════════════════════════════════════════ */
