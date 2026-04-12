@@ -1,118 +1,173 @@
 <div class="tables-page">
 
   <!-- Header -->
-  <div class="page-header">
-    <h1>Table Management</h1>
-    <button class="btn-primary" (click)="openAddModal()">+ Add Table</button>
-  </div>
+  <div class="header">
+    <div class="header-left">
+      <h2>🍽️ Table Management</h2>
+      <p class="subtitle">
+        {{ selectedBranchId ? ('Branch ' + selectedBranchId) : 'All Branches' }}
+        <span class="dot-sep">•</span>
+        Floor Plan Overview
+      </p>
+    </div>
 
-  <!-- Stats -->
-  <div class="stats-row">
-    <div class="stat-card">
-      <span class="stat-number">{{ tables.length }}</span>
-      <span class="stat-label">Total Tables</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-number">{{ occupiedCount }}</span>
-      <span class="stat-label">Occupied</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-number">{{ availableCount }}</span>
-      <span class="stat-label">Available</span>
-    </div>
-  </div>
-<!-- Filters -->
-<div class="filters-row">
-  <div class="filter-group">
-    <button class="filter-btn" [class.active]="selectedStatus === null" (click)="filterByStatus(null)">All</button>
-    <button class="filter-btn" [class.active]="selectedStatus === true" (click)="filterByStatus(true)">Occupied</button>
-    <button class="filter-btn" [class.active]="selectedStatus === false" (click)="filterByStatus(false)">Available</button>
-  </div>
+    <div class="legend">
+      <div class="legend-item">
+        <div class="dot dot-available"></div>
+        <span class="count">{{ availableCount }}</span>
+        <span class="label">Available</span>
+      </div>
 
-</div>
-  <!-- Loading -->
-  @if (isLoading) {
-    <div class="loading">Loading...</div>
-  }
+      <div class="legend-item">
+        <div class="dot dot-occupied"></div>
+        <span class="count">{{ occupiedCount }}</span>
+        <span class="label">Occupied</span>
+      </div>
+    </div>
+  </div>
 
   <!-- Error -->
   @if (errorMessage) {
-    <div class="error-msg">{{ errorMessage }}</div>
+    <div class="error-msg">
+       {{ errorMessage }}
+    </div>
   }
 
-  <!-- Tables Grid -->
+  <!-- Filters -->
+  <div class="filters-card">
+
+    <div class="filters-left">
+      <select [(ngModel)]="selectedBranchId" (ngModelChange)="filterByBranch($event)">
+        <option [ngValue]="null"> All branches</option>
+        <option [ngValue]="1">Branch 1</option>
+        <option [ngValue]="2">Branch 2</option>
+        <option [ngValue]="3">Branch 3</option>
+      </select>
+
+      <select [(ngModel)]="selectedStatus" (ngModelChange)="applyFilters()">
+        <option value=""> All statuses</option>
+        <option value="available">🟢 Available</option>
+        <option value="occupied">🔴 Occupied</option>
+      </select>
+
+      <div class="search-box">
+        <input
+          type="text"
+          placeholder="🔍 Search table number..."
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="applyFilters()" />
+      </div>
+    </div>
+
+    <button class="btn-primary add-btn" (click)="openAddModal()">
+      + Add Table
+    </button>
+
+  </div>
+
+  <!-- Loading -->
+  @if (isLoading) {
+    <div class="empty loading">
+      <div class="spinner"></div>
+      <p>Loading tables...</p>
+    </div>
+  }
+
+  <!-- Grid -->
   @if (!isLoading) {
-    <div class="tables-grid">
-      @for (table of tables; track table.id) {
-        <div
-          class="table-card"
-          [class.occupied]="table.isOccupied"
-          [class.available]="!table.isOccupied"
-        >
-          <div class="table-header">
-            <span class="table-number">T{{ table.tableNumber }}</span>
-            <span class="status-badge"
-              [class.badge-occupied]="table.isOccupied"
-              [class.badge-available]="!table.isOccupied">
+    <div class="grid">
+
+      @if (filteredTables.length === 0) {
+        <div class="empty">
+          📭 No tables found
+        </div>
+      }
+
+      @for (table of filteredTables; track table.id) {
+        <div class="table-card"
+             [class.available]="!table.isOccupied"
+             [class.occupied]="table.isOccupied">
+
+          <!-- Top -->
+          <div class="card-top">
+            <div class="table-num">
+              {{ table.tableNumber }}
+            </div>
+
+            <span class="badge"
+                  [class.badge-available]="!table.isOccupied"
+                  [class.badge-occupied]="table.isOccupied">
               {{ table.isOccupied ? 'Occupied' : 'Available' }}
             </span>
           </div>
 
+          <!-- Info -->
           <div class="table-info">
-            <span>👥 {{ table.capacity }} seats</span>
+            <div class="info-item">
+              👥 <span>Capacity:</span> {{ table.capacity }}
+            </div>
           </div>
 
-          <div class="table-actions">
-            <button
-              class="btn-status"
-              [class.btn-free]="table.isOccupied"
-              [class.btn-occupy]="!table.isOccupied"
-              (click)="updateStatus(table.id, !table.isOccupied)"
-            >
-              {{ table.isOccupied ? 'Free Table' : 'Occupy' }}
+          <!-- Actions -->
+          <div class="actions">
+            <button class="btn-sm"
+                    (click)="toggleStatus(table)">
+              🔄 Change
             </button>
-            <button class="btn-delete" (click)="deleteTable(table.id)">🗑</button>
+
+            <button class="btn-sm btn-delete"
+                    (click)="deleteTable(table.id)">
+              🗑 Delete
+            </button>
           </div>
+
         </div>
       }
+
     </div>
   }
 
-  <!-- Add Table Modal -->
-  @if (showAddModal) {
-    <div class="modal-overlay" (click)="closeAddModal()">
-      <div class="table-modal" (click)="$event.stopPropagation()">
-        <div class="modal-header">
-          <h2>Add New Table</h2>
-          <button class="close-btn" (click)="closeAddModal()">✕</button>
-        </div>
+</div>
 
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="tableNumber">Table Number</label>
-            <input
-              id="tableNumber"
-              name="tableNumber"
-              type="text"
-              [(ngModel)]="newTable.tableNumber"
-              placeholder="e.g. T01"/>
-          </div>
-          <div class="form-group">
-            <label for="capacity">Capacity</label>
-            <input
-              id="capacity"
-              name="capacity"
-              type="number"
-              [(ngModel)]="newTable.capacity"
-              min="1"
-              max="20"/>
-          </div>
-        </div>
+<!-- Add Table Modal -->
+@if (showAddModal) {
+  <div class="modal-overlay" (click)="closeAddModal()">
 
-        <div class="modal-footer">
-          <button class="btn-cancel" (click)="closeAddModal()">Cancel</button>
-          <button class="btn-primary" (click)="submitAddTable()">Add Table</button>
-        </div>
+    <div class="modal-table" (click)="$event.stopPropagation()">
+
+      <div class="modal-header">
+        <div class="modal-title">➕ Add New Table</div>
+        <button class="close-btn" (click)="closeAddModal()">✕</button>
       </div>
+
+      <div class="form-group">
+        <label>Table Number</label>
+        <input type="text"
+               [(ngModel)]="newTable.tableNumber"
+               placeholder="e.g. T01"/>
+      </div>
+
+      <div class="form-group">
+        <label>Capacity</label>
+        <input type="number"
+               [(ngModel)]="newTable.capacity"
+               min="1" max="20"/>
+      </div>
+
+      <div class="form-group">
+        <label>Branch</label>
+        <select [(ngModel)]="newTable.branchId">
+          <option [ngValue]="1">Branch 1</option>
+          <option [ngValue]="2">Branch 2</option>
+          <option [ngValue]="3">Branch 3</option>
+        </select>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-cancel" (click)="closeAddModal()">Cancel</button>
+        <button class="btn-primary" (click)="submitAddTable()">Add Table</button>
+      </div>
+
     </div>
-  }
+  </div>
+}
