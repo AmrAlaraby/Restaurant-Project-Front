@@ -1,0 +1,52 @@
+<div class="page">
+  <div class="breadcrumb">Home / <span>Categories</span></div>
+
+  <div class="header">
+    <h1 class="title">Menu Categories</h1>
+    <button class="add-btn" (click)="onAddCategory()">+ Add Category</button>
+  </div>
+
+  <!-- 🔥 Loading -->
+  <div *ngIf="loading" class="loading">Loading categories...</div>
+
+  <!-- 🔥 Error -->
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+
+  <!-- 🔥 Table -->
+  <div class="table-card" *ngIf="!loading && !error">
+    <div class="table-head">
+      <span>CATEGORY</span>
+      <span>ITEMS</span>
+      <span>STATUS</span>
+      <span>ACTIONS</span>
+    </div>
+
+    <div class="table-row" *ngFor="let cat of categories">
+      <!-- CATEGORY -->
+      <div class="cat-name">
+        <span class="cat-icon">
+          {{ getCategoryIcon(cat.name) }}
+        </span>
+        {{ cat.name }}
+      </div>
+
+      <!-- ITEMS -->
+      <div class="items-count">
+        {{ cat.menuItemsCount }}
+      </div>
+
+      <!-- STATUS (بدل activeItems) -->
+      <div class="active-count" [ngClass]="getActiveClass(cat)">
+        {{ cat.menuItemsCount }}
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="actions">
+        <button class="edit-btn" (click)="onEdit(cat)">Edit</button>
+        <button class="delete-btn" (click)="onDelete(cat.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
