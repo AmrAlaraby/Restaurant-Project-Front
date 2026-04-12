@@ -39,11 +39,20 @@ export const Ingredients = {
   getAll: `${apiUrl}/Ingredients`,
 };
 
-export const Categories = {
-  getAll: `${apiUrl}/Categories`,
-};
+// export const Categories = {
+//   getAll: `${apiUrl}/Categories`,
+// };
 
 // hossam 54 75
+
+export const Categories = {
+  base: `${apiUrl}/Categories`,
+  getAll: `${apiUrl}/Categories`,
+  getById: (id: number) => `${apiUrl}/Categories/${id}`,
+  create: `${apiUrl}/Categories`,
+  update: (id: number) => `${apiUrl}/Categories/${id}`,
+  delete: (id: number) => `${apiUrl}/Categories/${id}`,
+};
 
 // mustafa 76 96
 export const Kitchen = {
