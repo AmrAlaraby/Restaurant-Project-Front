@@ -1,28 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { Category } from '../../../../Core/Models/CategoryModels/Category ';
-import { CategoryService } from '../../../../Core/Services/Categories-Service/categories-service';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectorRef } from '@angular/core';
+import { CategoryService } from '../../../../Core/Services/Categories-Service/categories-service';
+import { Category } from '../../../../Core/Models/CategoryModels/Category ';
 
 @Component({
   selector: 'app-categories-page',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './categories-page.html',
   styleUrl: './categories-page.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class CategoriesPage implements OnInit {
   categories: Category[] = [];
   loading = false;
   error: string | null = null;
 
-  constructor(private categoryService: CategoryService) {}
+  successMessage: string | null = null;
+  errorMessage: string | null = null;
+
+  showAddModal = false;
+  addForm!: FormGroup;
+
+  constructor(
+    private categoryService: CategoryService,
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
+    this.initForm();
     this.loadCategories();
   }
 
-  // 🔥 GET ALL FROM API
+  // ✅ INIT FORM (FIX)
+  private initForm(): void {
+    this.addForm = this.fb.group({
+      name: [''],
+    });
+  }
+
+  // 🔥 GET ALL
   loadCategories(): void {
     this.loading = true;
+
     this.categoryService.getAll().subscribe({
       next: (res) => {
         this.categories = res;
@@ -36,20 +59,7 @@ export class CategoriesPage implements OnInit {
     });
   }
 
-  // 🔥 بدل items و activeItems هنستخدم MenuItemsCount
-  getItemsCount(category: Category): number {
-    return category.menuItemsCount;
-  }
-
-  // لو عايز تفضل فكرة اللون (optional)
-  getActiveClass(category: Category): string {
-    const count = category.menuItemsCount;
-
-    if (count >= 10) return 'active-green';
-    if (count >= 5) return 'active-blue';
-    return 'active-orange';
-  }
-
+  // ICON
   getCategoryIcon(name: string): string {
     switch (name.toLowerCase()) {
       case 'pizza':
@@ -63,27 +73,78 @@ export class CategoriesPage implements OnInit {
     }
   }
 
+  // CLASS
+  getActiveClass(category: Category): string {
+    const count = category.menuItemsCount;
+
+    if (count >= 10) return 'active-green';
+    if (count >= 5) return 'active-blue';
+    return 'active-orange';
+  }
+
   // EDIT
   onEdit(category: Category): void {
-    console.log('Edit category:', category);
+    const updated = {
+      name: category.name + ' Updated',
+    };
+
+    this.categoryService.update(category.id, updated).subscribe({
+      next: () => {
+        this.successMessage = 'Category updated successfully ✔';
+        this.errorMessage = null;
+        this.loadCategories();
+
+        setTimeout(() => (this.successMessage = null), 3000);
+      },
+      error: () => {
+        this.errorMessage = 'Failed to update category ❌';
+      },
+    });
   }
 
   // ADD
-  onAddCategory(): void {
-    console.log('Add new category');
+  submitAdd(): void {
+    if (this.addForm.invalid) return;
+
+    this.categoryService.create(this.addForm.value).subscribe({
+      next: () => {
+        this.successMessage = 'Category added successfully ✔';
+        this.loadCategories();
+        this.closeAddModal();
+
+        setTimeout(() => (this.successMessage = null), 3000);
+      },
+      error: () => {
+        this.errorMessage = 'Failed to add category ❌';
+      },
+    });
   }
 
   // DELETE
   onDelete(id: number): void {
-    if (!confirm('Are you sure?')) return;
+    if (!confirm('Are you sure you want to delete this category?')) return;
 
     this.categoryService.delete(id).subscribe({
       next: () => {
-        this.loadCategories(); // refresh
+        this.successMessage = 'Category deleted successfully ✔';
+        this.loadCategories();
+
+        setTimeout(() => (this.successMessage = null), 3000);
       },
-      error: (err) => {
-        console.error(err);
+      error: () => {
+        this.errorMessage = 'Failed to delete category ❌';
       },
     });
+  }
+
+  // MODAL
+  openAddModal(): void {
+    this.showAddModal = true;
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeAddModal(): void {
+    this.showAddModal = false;
+    document.body.style.overflow = '';
   }
 }

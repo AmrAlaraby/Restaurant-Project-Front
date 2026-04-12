@@ -1,21 +1,49 @@
+<!-- 🔥 MODAL (لا يظهر أثناء loading) -->
+<!-- MODAL فوق كل حاجة -->
+<div class="modal-backdrop" *ngIf="showAddModal">
+  <div class="modal">
+    <h3>Add Category</h3>
+    <form [formGroup]="addForm" (ngSubmit)="submitAdd()">
+      <input type="text" formControlName="name" placeholder="Category name" />
+      <div class="modal-actions">
+        <button type="submit">Add</button>
+        <button type="button" (click)="closeAddModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <div class="page">
   <div class="breadcrumb">Home / <span>Categories</span></div>
 
+  <!-- HEADER -->
   <div class="header">
     <h1 class="title">Menu Categories</h1>
-    <button class="add-btn" (click)="onAddCategory()">+ Add Category</button>
+    <button class="add-btn" type="button" (click)="openAddModal()">+ Add Category</button>
+  </div>
+
+  <!-- 🔥 SUCCESS / ERROR -->
+  <div *ngIf="successMessage" class="success-msg">
+    {{ successMessage }}
+  </div>
+
+  <div *ngIf="errorMessage" class="error-msg">
+    {{ errorMessage }}
   </div>
 
   <!-- 🔥 Loading -->
   <div *ngIf="loading" class="loading">Loading categories...</div>
 
-  <!-- 🔥 Error -->
-  <div *ngIf="error" class="error">
+  <!-- 🔥 Error from API -->
+  <div *ngIf="error && !loading" class="error">
     {{ error }}
   </div>
 
-  <!-- 🔥 Table -->
-  <div class="table-card" *ngIf="!loading && !error">
+  <!-- 🔥 Empty State -->
+  <div *ngIf="!loading && !error && categories.length === 0" class="empty">No categories found</div>
+
+  <!-- 🔥 TABLE -->
+  <div class="table-card" *ngIf="!loading && !error && categories.length > 0">
     <div class="table-head">
       <span>CATEGORY</span>
       <span>ITEMS</span>
@@ -37,7 +65,7 @@
         {{ cat.menuItemsCount }}
       </div>
 
-      <!-- STATUS (بدل activeItems) -->
+      <!-- STATUS -->
       <div class="active-count" [ngClass]="getActiveClass(cat)">
         {{ cat.menuItemsCount }}
       </div>
@@ -45,6 +73,7 @@
       <!-- ACTIONS -->
       <div class="actions">
         <button class="edit-btn" (click)="onEdit(cat)">Edit</button>
+
         <button class="delete-btn" (click)="onDelete(cat.id)">Delete</button>
       </div>
     </div>
