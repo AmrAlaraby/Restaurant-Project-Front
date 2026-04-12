@@ -16,7 +16,7 @@
   <app-order-stats [orders]="orders"></app-order-stats>
 
   <!-- Filters -->
-  <app-order-filters (filterChange)="onFilterChange($event)"></app-order-filters>
+  <app-order-filters [branches]="branches" (filterChange)="onFilterChange($event)"></app-order-filters>
 
   <!-- Table -->
   <app-order-table [orders]="orders" (view)="openOrder($event)"></app-order-table>
@@ -39,6 +39,7 @@
 </app-order-details>}
  @if (showModal) {
 <app-order-modal
+  [branches]="branches"
   (close)="closeModal()">
 </app-order-modal>
 }

@@ -13,8 +13,9 @@
         <label>Branch</label>
         <select formControlName="branchId">
           <option selected value="">Select Branch</option>
-          <option value="1">Branch 1</option>
-          <option value="2">Branch 2</option>
+          @for (Branch of branches; track $index) {
+            <option value="{{Branch.id}}">{{Branch.name}}</option>
+          }
         </select>
       </div>
 

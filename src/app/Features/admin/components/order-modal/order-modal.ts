@@ -1,9 +1,10 @@
-import { Component, EventEmitter, OnInit, Output, computed, signal } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, computed, signal } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MenuItemsService } from '../../../../Core/Services/Menu-Item-Service/menu-item-service';
 import { OrdersService } from '../../../../Core/Services/Orders-Service/orders-service';
 import { TableService } from '../../../../Core/Services/Table-Service/table-service';
 import { CreateOrderInterface } from '../../../../Core/Models/OrderModels/create-order-interface';
+import { BranchDto } from '../../../../Core/Models/BranchModels/Branch-dto';
 
 @Component({
   selector: 'app-order-modal',
@@ -13,7 +14,7 @@ import { CreateOrderInterface } from '../../../../Core/Models/OrderModels/create
   styleUrl: './order-modal.scss',
 })
 export class OrderModal implements OnInit {
-
+  @Input() branches : BranchDto[] = [];
   @Output() close = new EventEmitter();
 
   form!: FormGroup;
