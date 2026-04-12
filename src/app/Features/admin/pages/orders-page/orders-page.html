@@ -22,12 +22,17 @@
   <app-order-table [orders]="orders" (view)="openOrder($event)"></app-order-table>
 
   <!-- Pagination -->
-  <app-order-pagination
+   <app-pagination
+    [pageSize]="filters.pageSize"
+    [pageIndex]="filters.pageIndex"
+    [totalCount]="totalCount"
+    (pageChanged)="onPageChange($event)"></app-pagination>
+  <!-- <app-order-pagination
     [total]="totalCount"
     [pageIndex]="filters.pageIndex"
     [pageSize]="filters.pageSize"
     (pageChange)="onPageChange($event)">
-  </app-order-pagination>
+  </app-order-pagination> -->
 
 </div>
 
