@@ -8,9 +8,12 @@ import { RouterModule } from '@angular/router';
   styleUrl: './sidebar.scss',
 })
 export class Sidebar {
- @Input() prefix: string = ''; // admin / cashier / etc
+  @Input() prefix: string = ''; // admin / cashier / etc
   @Input() isOpen = false;
-   @Output() close = new EventEmitter<void>();
+  @Input() UserName:string ='';
+  @Input() AvatarLetters:string ='';
+  @Input() UserRole:string ='';
+  @Output() close = new EventEmitter<void>();
 
   onClose() {
     this.close.emit();
