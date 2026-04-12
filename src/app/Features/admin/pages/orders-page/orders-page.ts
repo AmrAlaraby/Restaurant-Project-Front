@@ -10,10 +10,11 @@ import { OrderPagination } from '../../components/order-pagination/order-paginat
 import { OrderDetails } from '../../components/order-details/order-details';
 import { KitchenService } from '../../../../Core/Services/Kitchen-Service/kitchen-service';
 import { BranchDto } from '../../../../Core/Models/BranchModels/Branch-dto';
+import { Pagination } from "../../../../Shared/Components/pagination/pagination";
 
 @Component({
   selector: 'app-orders-page',
-  imports: [OrderStats,OrderFilters,OrderTable,OrderModal,OrderPagination,OrderDetails],
+  imports: [OrderStats, OrderFilters, OrderTable, OrderModal, OrderPagination, OrderDetails, Pagination],
   templateUrl: './orders-page.html',
   styleUrl: './orders-page.scss',
 })
