@@ -1,0 +1,70 @@
+<div class="ingredients-container">
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <h2>Ingredients</h2>
+      <p class="subtitle">Manage your ingredients easily</p>
+    </div>
+
+    <div class="count" *ngIf="!loading">
+      {{ totalCount }} Items
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading ingredients...</p>
+  </div>
+
+  <!-- Empty -->
+  <div *ngIf="!loading && ingredients.length === 0" class="empty">
+    <p>No ingredients found 🍃</p>
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrapper" *ngIf="!loading && ingredients.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Unit</th>
+          <th class="actions">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of ingredients; let i = index">
+          <td>{{ (pageIndex - 1) * pageSize + i + 1 }}</td>
+
+          <td class="name">
+            <span class="avatar">{{ item.name[0] }}</span>
+            {{ item.name }}
+          </td>
+
+          <td>
+            <span class="badge">{{ item.unit }}</span>
+          </td>
+
+          <td class="actions">
+            <button class="btn delete" (click)="delete(item.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <app-pagination
+    *ngIf="!loading && totalCount > pageSize"
+    [pageIndex]="pageIndex"
+    [pageSize]="pageSize"
+    [totalCount]="totalCount"
+    (pageChanged)="onPageChange($event)">
+  </app-pagination>
+
+</div>

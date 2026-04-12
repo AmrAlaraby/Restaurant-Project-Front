@@ -40,9 +40,9 @@ export const MenuItems = {
   toggleAvailability: (id: number) => `${apiUrl}/MenuItems/${id}/toggle-availability`,
 };
 
-export const Ingredients = {
-  getAll: `${apiUrl}/Ingredients`,
-};
+// export const Ingredients = {
+//   getAll: `${apiUrl}/Ingredients`,
+// };
 
 export const Categories = {
   getAll: `${apiUrl}/Categories`,
@@ -52,12 +52,6 @@ export const Categories = {
 
 
 // hossam 54 75
-
-
-
-
-
-
 
 
 
@@ -94,18 +88,22 @@ export const Branch = {
 
 
 
+
+
+
+
+
+
+
 // Arwa 97 117
 
-
-
-
-
-
-
-
-
-
-
+export const Ingredients = {
+  getAll: `${apiUrl}/Ingredients`,
+  getById: (id: number) => `${apiUrl}/Ingredients/${id}`,
+  create: `${apiUrl}/Ingredients`,
+  update: (id: number) => `${apiUrl}/Ingredients/${id}`,
+  delete: (id: number) => `${apiUrl}/Ingredients/${id}`,
+};
 
 
 

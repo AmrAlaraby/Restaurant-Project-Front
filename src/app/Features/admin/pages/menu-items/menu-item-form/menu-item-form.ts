@@ -77,10 +77,10 @@ export class MenuItemForm implements OnInit, OnChanges {
   }
 
   loadIngredients(): void {
-    this.ingredientService.getAll().subscribe({
-      next: (ingredients) => {
-        this.ingredients = ingredients;
-      },
+    this.ingredientService.getAll(1, 1000).subscribe({
+      next: (response) => {
+        this.ingredients = response.data;
+      }
     });
   }
 
