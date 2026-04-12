@@ -2,7 +2,7 @@
  @if (isOpen) {
 <div 
   class="sb-overlay"
-  (click)="closeSidebar()">
+  (click)="onClose()">
 </div>}
 
 <!-- SIDEBAR -->
@@ -15,7 +15,7 @@
       <span class="sb-brand-sub">PLATFORM</span>
     </div>
 
-    <button class="sb-close-btn" (click)="closeSidebar()">✕</button>
+    <button class="sb-close-btn" (click)="onClose()">✕</button>
   </div>
 
   <!-- NAV -->

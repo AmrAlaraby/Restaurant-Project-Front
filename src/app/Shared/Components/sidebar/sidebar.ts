@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -10,5 +10,9 @@ import { RouterModule } from '@angular/router';
 export class Sidebar {
  @Input() prefix: string = ''; // admin / cashier / etc
   @Input() isOpen = false;
-  @Input() closeSidebar!: () => void;
+   @Output() close = new EventEmitter<void>();
+
+  onClose() {
+    this.close.emit();
+  }
 }
