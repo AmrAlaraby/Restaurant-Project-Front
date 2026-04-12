@@ -57,12 +57,23 @@ export const routes: Routes = [
         (m) => m.MenuItemForm,
       ),
   },
-    {
-    path: 'admin/orders',
+  //   {
+  //   path: 'admin/orders',
+  //   loadComponent: () =>
+  //     import('./Features/admin/pages/orders-page/orders-page').then(
+  //       (m) => m.OrdersPage,
+  //     ),
+  // },
+   {
+    path: 'admin',
     loadComponent: () =>
-      import('./Features/admin/pages/orders-page/orders-page').then(
-        (m) => m.OrdersPage,
-      ),
-  },
+      import('./Features/admin/pages/layout/layout')
+        .then(m => m.Layout),
+
+    children: [
+      { path: '', redirectTo: 'orders', pathMatch: 'full' },
+      { path: 'orders', loadComponent: () => import('./Features/admin/pages/orders-page/orders-page').then(m => m.OrdersPage) },
+    ]
+  }
 ];
 

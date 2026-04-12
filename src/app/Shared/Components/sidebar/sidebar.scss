@@ -5,7 +5,7 @@
 ═══════════════════════════════════════════════════ */
 
 /* ── CSS VARIABLES ── */
-:root {
+:host  {
   --red:          #C41E1E;
   --red-dark:     #a01818;
   --red-light:    #f9e6e6;
@@ -469,10 +469,12 @@ button { cursor: pointer; font-family: var(--font); }
   /* Sidebar slides off-screen */
   .sidebar {
     transform: translateX(-100%);
+      pointer-events: none;   
     box-shadow: none;
   }
   .sidebar.open {
     transform: translateX(0);
+    pointer-events: auto;
     box-shadow: 8px 0 40px rgba(0,0,0,.35);
   }
 
