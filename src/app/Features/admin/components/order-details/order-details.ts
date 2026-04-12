@@ -20,6 +20,7 @@ export class OrderDetails implements OnInit {
   menuItems: any[] = [];
 
   form!: FormGroup;
+  error:string|null =null;
 
   constructor(
     private ordersService: OrdersService,
@@ -64,10 +65,12 @@ export class OrderDetails implements OnInit {
           this.order = res;
 
           this.items.clear();
+          this.error = null;
 
         },
         error: (err) => {
           console.error('❌ Load order error:', err);
+          this.error = err.error ||'Failed to load order details. Please try again later.';
         }
       });
   }
@@ -136,9 +139,11 @@ export class OrderDetails implements OnInit {
         next: () => {
           console.log('✅ Items added');
           this.loadOrder();
+          this.error = null;
         },
         error: (err) => {
           console.error('❌ Add items error:', err);
+          this.error = err.error || 'Failed to add items. Please try again.';
         }
       });
   }
@@ -155,9 +160,11 @@ export class OrderDetails implements OnInit {
         next: () => {
           console.log('✅ Removed');
           this.loadOrder();
+          this.error = null;
         },
         error: (err) => {
           console.error('❌ Remove error:', err);
+          this.error = err.error || 'Failed to remove item. Please try again.';
         }
       });
   }
@@ -174,9 +181,11 @@ export class OrderDetails implements OnInit {
         next: () => {
           console.log('✅ Cancelled');
           this.loadOrder();
+          this.error = null;
         },
         error: (err) => {
           console.error('❌ Cancel error:', err);
+          this.error = err.error || 'Failed to cancel order. Please try again.';
         }
       });
   }

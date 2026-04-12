@@ -20,6 +20,7 @@ export class OrderModal implements OnInit {
 
   tables = signal<any[]>([]);
   menuItems = signal<any[]>([]);
+  error:string|null =null;
 
 
   constructor(
@@ -127,6 +128,7 @@ onMenuChange(i: number) {
   if (this.form.invalid) {
     console.log('❌ FORM INVALID');
     this.form.markAllAsTouched();
+    this.error = 'Please fill in all required fields and ensure the form is valid.';
     return;
   }
 
@@ -153,9 +155,11 @@ onMenuChange(i: number) {
       next: (res) => {
         console.log('✅ ORDER CREATED:', res);
         this.close.emit();
+        this.error = null;
       },
       error: (err) => {
         console.error('❌ API ERROR:', err);
+        this.error = err.error || 'An error occurred while creating the order.';
       }
     });
 }
