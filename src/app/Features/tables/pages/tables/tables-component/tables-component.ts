@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-
-
 import { TableService } from '../../../../../Core/Services/Table-Service/table-service';
 import { TableInterface } from '../../../../../Core/Models/TableModules/table-interface';
 import { CreateTableInterface } from '../../../../../Core/Models/TableModules/create-table-interface';
