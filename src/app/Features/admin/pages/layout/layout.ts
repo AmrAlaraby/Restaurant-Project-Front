@@ -1,7 +1,8 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { Sidebar } from "../../../../Shared/Components/sidebar/sidebar";
+import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 
 @Component({
   selector: 'app-layout',
@@ -9,8 +10,11 @@ import { Sidebar } from "../../../../Shared/Components/sidebar/sidebar";
   templateUrl: './layout.html',
   styleUrl: './layout.scss',
 })
-export class Layout {
-    isOpen = false;
+export class Layout implements OnInit {
+    isOpen:boolean = false;
+    UserName:string ='';
+    AvatarLetters:string ='';
+    UserRole:string ='';
 
 
   pageTitles: any = {
@@ -31,7 +35,7 @@ export class Layout {
 
   topbarTitle = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router,private authService: AuthService) {
 
     /* 🔥 أهم جزء */
     this.router.events
@@ -40,6 +44,9 @@ export class Layout {
         const url = this.router.url.split('/').pop() || '';
         this.topbarTitle = this.pageTitles[url]  || 'Dashboard';
       });
+  }
+  ngOnInit(): void {
+    this.GetCurrentUser();
   }
 
   /* SIDEBAR CONTROL */
@@ -68,5 +75,19 @@ export class Layout {
       this.isOpen = false;
       document.body.style.overflow = '';
     }
+  }
+
+  GetCurrentUser(){
+    this.authService.getCurrentUser().subscribe({
+      next:(res)=>{
+        console.log(res);
+        this.UserName = res.name
+        this.UserRole = res.role
+        this.AvatarLetters = res.name.split(' ').map((n) => n[0]).join('').toUpperCase();
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
   }
 }

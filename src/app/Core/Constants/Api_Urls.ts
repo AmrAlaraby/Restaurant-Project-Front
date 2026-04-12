@@ -5,7 +5,7 @@ export const Auth = {
   login: `${apiUrl}/Auth/login`,
   register: `${apiUrl}/Auth/register`,
   refresh: `${apiUrl}/Auth/refresh-token`,
-  currentUser: `${apiUrl}/Auth/current-user`,
+  currentUser: `${apiUrl}/Auth/CurrentUser`,
   UpdatecurrentUser: `${apiUrl}/Auth`,
 };
 

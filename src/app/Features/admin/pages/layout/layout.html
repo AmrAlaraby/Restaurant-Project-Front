@@ -6,6 +6,9 @@
     [class.open]="isOpen"
     prefix="admin"
     [isOpen]="isOpen"
+    [AvatarLetters]="AvatarLetters"
+    [UserName]="UserName"
+    [UserRole]="UserRole"
     (close)="closeSidebar()">
   </app-sidebar>
 
@@ -23,7 +26,7 @@
         {{topbarTitle}}
       </div>
 
-      <div class="avatar">AH</div>
+      <div class="avatar">{{AvatarLetters}}</div>
 
     </header>
 
