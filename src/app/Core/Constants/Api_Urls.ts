@@ -25,11 +25,6 @@ export const TableOrders = {
   complete: (id: number) => `${apiUrl}/TableOrders/${id}/complete`,
 };
 
-
-
-
-
-
 // mahmoud 33 53
 export const MenuItems = {
   getAll: `${apiUrl}/MenuItems`,
@@ -48,36 +43,7 @@ export const Categories = {
   getAll: `${apiUrl}/Categories`,
 };
 
-
-
-
 // hossam 54 75
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // mustafa 76 96
 export const Kitchen = {
@@ -91,31 +57,7 @@ export const Branch = {
   getAll: `${apiUrl}/Branch`,
 };
 
-
-
-
 // Arwa 97 117
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Amr 118 138
 export const Order = {
@@ -125,16 +67,8 @@ export const Order = {
   myOrders: `${apiUrl}/Order/my`,
   updateStatus: (orderId: number) => `${apiUrl}/Order/${orderId}/status`,
   addItems: (orderId: number) => `${apiUrl}/Order/${orderId}/items`,
-  removeItem: (orderId: number, itemId: number) =>
-    `${apiUrl}/Order/${orderId}/items/${itemId}`,
-  cancel: (orderId: number) => `${apiUrl}/Order/${orderId}/cancel`
+  removeItem: (orderId: number, itemId: number) => `${apiUrl}/Order/${orderId}/items/${itemId}`,
+  cancel: (orderId: number) => `${apiUrl}/Order/${orderId}/cancel`,
 };
-
-
-
-
-
-
-
 
 // end of file
