@@ -10,7 +10,7 @@ import { CategoryInterface } from '../../../../../Core/Models/MenuItemModels/cat
 import { MenuItemQueryParamsInterface } from '../../../../../Core/Models/MenuItemModels/menu-item-query-params-interface';
 import { MenuItemsStatsInterface } from '../../../../../Core/Models/MenuItemModels/menu-items-stats-interface';
 import { MenuItemsService } from '../../../../../Core/Services/Menu-Item-Service/menu-item-service';
-import { CategoriesService } from '../../../../../Core/Services/Categories-Service/categories-service';
+import { CategoryService } from '../../../../../Core/Services/Categories-Service/categories-service';
 
 import { MenuItemForm } from '../menu-item-form/menu-item-form';
 import { compileNgModule } from '@angular/compiler';
@@ -64,7 +64,7 @@ export class MenuItemsPage implements OnInit {
 
   constructor(
     private menuItemsService: MenuItemsService,
-    private categoriesService: CategoriesService,
+    private categoriesService: CategoryService,
     private router: Router,
   ) {}
 

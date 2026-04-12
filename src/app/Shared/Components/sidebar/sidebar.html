@@ -1,0 +1,174 @@
+<!-- OVERLAY -->
+ @if (isOpen) {
+<div 
+  class="sb-overlay"
+  (click)="onClose()">
+</div>}
+
+<!-- SIDEBAR -->
+<aside class="sidebar" [class.open]="isOpen">
+
+  <!-- BRAND -->
+  <div class="sb-brand">
+    <div class="sb-brand-text">
+      <span class="sb-brand-name">RMS</span>
+      <span class="sb-brand-sub">PLATFORM</span>
+    </div>
+
+    <button class="sb-close-btn" (click)="onClose()">✕</button>
+  </div>
+
+  <!-- NAV -->
+  <nav class="sb-nav">
+
+    <!-- OVERVIEW -->
+    <div class="sb-section">
+      <span class="sb-section-label">Overview</span>
+      <ul>
+        <li>
+          <a class="sb-link"
+             [routerLink]="['/', prefix, 'dashboard']"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: true }">
+            Dashboard
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- OPERATIONS -->
+    <div class="sb-section">
+      <span class="sb-section-label">Operations</span>
+      <ul>
+
+        <li>
+          <a class="sb-link"
+             [routerLink]="['/', prefix, 'orders']"
+             routerLinkActive="active">
+            Orders
+          </a>
+        </li>
+
+        <li>
+          <a class="sb-link"
+             [routerLink]="['/', prefix, 'kitchen']"
+             routerLinkActive="active">
+            Kitchen
+          </a>
+        </li>
+
+        <li>
+          <a class="sb-link"
+             [routerLink]="['/', prefix, 'tables']"
+             routerLinkActive="active">
+            Tables
+          </a>
+        </li>
+
+        <li>
+          <a class="sb-link"
+             [routerLink]="['/', prefix, 'deliveries']"
+             routerLinkActive="active">
+            Deliveries
+          </a>
+        </li>
+
+        <li>
+          <a class="sb-link"
+             [routerLink]="['/', prefix, 'payments']"
+             routerLinkActive="active">
+            Payments
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+    <!-- CATALOGUE -->
+    <div class="sb-section">
+      <span class="sb-section-label">Catalogue</span>
+      <ul>
+
+        <li>
+          <a class="sb-link"
+             [routerLink]="['/', prefix, 'menu']"
+             routerLinkActive="active">
+            Menu Items
+          </a>
+        </li>
+
+        <li>
+          <a class="sb-link"
+             [routerLink]="['/', prefix, 'stock']"
+             routerLinkActive="active">
+            Stock
+          </a>
+        </li>
+
+        <li>
+          <a class="sb-link"
+             [routerLink]="['/', prefix, 'categories']"
+             routerLinkActive="active">
+            Categories
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+    <!-- MANAGEMENT -->
+    <div class="sb-section">
+      <span class="sb-section-label">Management</span>
+      <ul>
+
+        <li>
+          <a class="sb-link"
+             [routerLink]="['/', prefix, 'users']"
+             routerLinkActive="active">
+            Users
+          </a>
+        </li>
+
+        <li>
+          <a class="sb-link"
+             [routerLink]="['/', prefix, 'branches']"
+             routerLinkActive="active">
+            Branches
+          </a>
+        </li>
+
+        <li>
+          <a class="sb-link"
+             [routerLink]="['/', prefix, 'reports']"
+             routerLinkActive="active">
+            Reports
+          </a>
+        </li>
+
+        <li>
+          <a class="sb-link"
+             [routerLink]="['/', prefix, 'settings']"
+             routerLinkActive="active">
+            Settings
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+  </nav>
+
+  <!-- USER -->
+  <div class="sb-user">
+    <div class="sb-user-avatar">{{AvatarLetters}}</div>
+
+    <div class="sb-user-info">
+      <span class="sb-user-name">{{UserName}}</span>
+      <span class="sb-user-role">{{UserRole}}</span>
+    </div>
+    <button class="sb-logout" (click)="logout()">
+      Logout
+    </button>
+  </div>
+
+</aside>

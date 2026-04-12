@@ -1,0 +1,40 @@
+<div class="layout">
+
+  <!-- SIDEBAR -->
+
+  <app-sidebar
+    [class.open]="isOpen"
+    prefix="admin"
+    [isOpen]="isOpen"
+    [AvatarLetters]="AvatarLetters"
+    [UserName]="UserName"
+    [UserRole]="UserRole"
+    (close)="closeSidebar()">
+  </app-sidebar>
+
+  <!-- CONTENT -->
+  <div class="app-shell">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+
+      <button class="hamburger" (click)="openSidebar()">
+        ☰
+      </button>
+
+      <div class="title">
+        {{topbarTitle}}
+      </div>
+
+      <div class="avatar">{{AvatarLetters}}</div>
+
+    </header>
+
+    <!-- PAGE -->
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+
+</div>

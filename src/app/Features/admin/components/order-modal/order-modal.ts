@@ -1,9 +1,10 @@
-import { Component, EventEmitter, OnInit, Output, computed, signal } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, computed, signal } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MenuItemsService } from '../../../../Core/Services/Menu-Item-Service/menu-item-service';
 import { OrdersService } from '../../../../Core/Services/Orders-Service/orders-service';
 import { TableService } from '../../../../Core/Services/Table-Service/table-service';
 import { CreateOrderInterface } from '../../../../Core/Models/OrderModels/create-order-interface';
+import { BranchDto } from '../../../../Core/Models/BranchModels/Branch-dto';
 
 @Component({
   selector: 'app-order-modal',
@@ -13,13 +14,14 @@ import { CreateOrderInterface } from '../../../../Core/Models/OrderModels/create
   styleUrl: './order-modal.scss',
 })
 export class OrderModal implements OnInit {
-
+  @Input() branches : BranchDto[] = [];
   @Output() close = new EventEmitter();
 
   form!: FormGroup;
 
   tables = signal<any[]>([]);
   menuItems = signal<any[]>([]);
+  error:string|null =null;
 
 
   constructor(
@@ -127,6 +129,7 @@ onMenuChange(i: number) {
   if (this.form.invalid) {
     console.log('❌ FORM INVALID');
     this.form.markAllAsTouched();
+    this.error = 'Please fill in all required fields and ensure the form is valid.';
     return;
   }
 
@@ -153,9 +156,11 @@ onMenuChange(i: number) {
       next: (res) => {
         console.log('✅ ORDER CREATED:', res);
         this.close.emit();
+        this.error = null;
       },
       error: (err) => {
         console.error('❌ API ERROR:', err);
+        this.error = err.error || 'An error occurred while creating the order.';
       }
     });
 }

@@ -8,10 +8,13 @@ import { OrderTable } from '../../components/order-table/order-table';
 import { OrderModal } from '../../components/order-modal/order-modal';
 import { OrderPagination } from '../../components/order-pagination/order-pagination';
 import { OrderDetails } from '../../components/order-details/order-details';
+import { KitchenService } from '../../../../Core/Services/Kitchen-Service/kitchen-service';
+import { BranchDto } from '../../../../Core/Models/BranchModels/Branch-dto';
+import { Pagination } from "../../../../Shared/Components/pagination/pagination";
 
 @Component({
   selector: 'app-orders-page',
-  imports: [OrderStats,OrderFilters,OrderTable,OrderModal,OrderPagination,OrderDetails],
+  imports: [OrderStats, OrderFilters, OrderTable, OrderModal, OrderPagination, OrderDetails, Pagination],
   templateUrl: './orders-page.html',
   styleUrl: './orders-page.scss',
 })
@@ -30,8 +33,10 @@ export class OrdersPage implements OnInit {
   selectedOrderId: number | null = null;
   showDetailsModal = false;
   showModal = false;
+  branches: BranchDto[] = [];
 
-  constructor(private ordersService: OrdersService) {}
+  constructor(private ordersService: OrdersService,
+    private KitchenService: KitchenService) {}
 
   ngOnInit(): void {
     this.loadOrders();
@@ -41,6 +46,9 @@ export class OrdersPage implements OnInit {
     this.ordersService.getAllOrders(this.filters).subscribe(res => {
       this.orders = res.data;
       this.totalCount = res.count;
+    });
+    this.KitchenService.getBranches().subscribe(res => {
+      this.branches = res;
     });
   }
 
