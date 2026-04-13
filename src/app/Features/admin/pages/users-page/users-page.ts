@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../../../../Core/Services/users-service';
+
 import { User } from '../../../../Core/Models/UserModels/user';
 import { Pagination } from '../../../../Shared/Components/pagination/pagination';
 import { UsersHeader } from '../../components/User/users-header/users-header';
 import { UsersFilters } from '../../components/User/users-filters/users-filters';
 import { UserModal } from '../../components/User/user-modal/user-modal';
 import { UsersList } from '../../components/User/users-list/users-list';
+import { UsersService } from '../../../../Core/Services/User-Service/users-service';
 
 
 @Component({
