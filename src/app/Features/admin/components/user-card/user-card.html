@@ -1,0 +1,36 @@
+<div class="user-card">
+  <!-- Avatar -->
+  <div class="avatar">
+    {{ initials }}
+  </div>
+
+  <!-- Info -->
+  <div class="info">
+    <h4>{{ user.name }}</h4>
+
+    <p>
+      <span class="email">{{ user.email }}</span>
+      <span *ngIf="user.branchName"> • {{ user.branchName }}</span>
+    </p>
+  </div>
+
+  <!-- Role -->
+  <div class="role">
+    {{ user.roleId }}
+  </div>
+
+  <!-- Actions -->
+  <div class="actions">
+    <button class="btn-outline" (click)="onEdit()">Edit</button>
+
+    <div class="status-toggle" (click)="onToggle()">
+      <div class="switch" [class.active]="!user.isDeleted" [class.inactive]="user.isDeleted">
+        <div class="circle"></div>
+      </div>
+
+      <span class="label">
+        {{ user.isDeleted ? 'Inactive' : 'Active' }}
+      </span>
+    </div>
+  </div>
+</div>

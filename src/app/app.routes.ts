@@ -33,10 +33,10 @@ export const routes: Routes = [
       import('./Features/report/pages/dashboard/dashboard').then((m) => m.DashboardComponent),
   },
   {
-    path: "ingredients",
-    loadComponent: () => import('./Features/Ingredient/ingredients/ingredients').then(m => m.IngredientsComponent)
+    path: 'ingredients',
+    loadComponent: () =>
+      import('./Features/Ingredient/ingredients/ingredients').then((m) => m.IngredientsComponent),
   },
-
 
   {
     path: '',
@@ -90,5 +90,10 @@ export const routes: Routes = [
       import('./Features/admin/pages/categories-page/categories-page').then(
         (m) => m.CategoriesPage,
       ),
+  },
+  {
+    path: 'admin/users',
+    loadComponent: () =>
+      import('./Features/admin/pages/users-page/users-page').then((m) => m.UsersPage),
   },
 ];
