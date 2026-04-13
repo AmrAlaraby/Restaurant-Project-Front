@@ -1,19 +1,18 @@
 :host {
-  --red: #C41E1E;
-  --red-dark: #a01818;
-  --yellow-light: #fffbea;
-  --yellow-dark: #d4a800;
-  --gray-100: #f7f7f7;
-  --gray-200: #e9e9e9;
-  --gray-600: #666;
-  --black: #111;
+  --red: #C0392B;
+  --red-dark: #96281B;
+  --gray-100: #FFF5F5;
+  --gray-200: rgba(192, 57, 43, 0.13);
+  --gray-600: #9B4437;
+  --black: #2D0A08;
   --radius: 14px;
 }
 
 .table-wrap {
-  background: white;
+  background: #FFFFFF;
   border-radius: var(--radius);
   border: 1px solid var(--gray-200);
+  box-shadow: 0 2px 8px rgba(192, 57, 43, 0.08);
   overflow: hidden;
 }
 
@@ -23,55 +22,69 @@ table {
 }
 
 thead {
-  background: linear-gradient(135deg, var(--red), var(--red-dark));
+  background: #FFF5F5;
+  border-bottom: 1px solid var(--gray-200);
 }
 
 th {
-  padding: 14px;
+  padding: 12px 14px;
   font-size: .75rem;
-  color: white;
+  font-weight: 500;
+  color: #9B4437;
   text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: left;
 }
 
 td {
   padding: 14px;
   font-size: .85rem;
+  color: #2D0A08;
 }
 
 tbody tr {
-  border-bottom: 1px solid var(--gray-100);
+  border-bottom: 1px solid var(--gray-200);
   transition: .2s;
-}
 
-tbody tr:hover {
-  background: #FFF8F0;
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: #FFF5F5;
+  }
 }
 
 /* badges */
-
 .status-badge {
-  padding: 6px 12px;
+  padding: 4px 10px;
   border-radius: 20px;
   font-size: .7rem;
-  font-weight: bold;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
 }
 
 .st-preparing {
-  background: var(--yellow-light);
-  color: var(--yellow-dark);
+  background: #FFF3E0;
+  color: #E65100;
+  border: 1px solid rgba(230, 81, 0, 0.2);
 }
 
 .st-ready {
-  background: #e6f9ee;
-  color: green;
+  background: #E8F5E9;
+  color: #2E7D32;
+  border: 1px solid rgba(46, 125, 50, 0.2);
 }
 
 .st-delivered {
-  background: #e6f0ff;
-  color: blue;
+  background: #E3F2FD;
+  color: #1565C0;
+  border: 1px solid rgba(21, 101, 192, 0.2);
 }
 
 .st-cancelled {
-  background: var(--gray-100);
-  color: var(--gray-600);
+  background: #F5F5F5;
+  color: #757575;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
