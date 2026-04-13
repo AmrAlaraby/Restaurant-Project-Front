@@ -77,6 +77,32 @@ export const routes: Routes = [
   },
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 {
   path: 'admin/deliveries',
   loadComponent: () =>
