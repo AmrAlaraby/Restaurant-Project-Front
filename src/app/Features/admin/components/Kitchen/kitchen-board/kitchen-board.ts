@@ -2,18 +2,16 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
-import { KitchenBoardDto } from '../../../Core/Models/KitchenModels/kitchen-board-dto';
-import { ActivePendingStationsDTO } from '../../../Core/Models/KitchenModels/active-pending-stations-dto';
-import { KitchenTicketDetailsDto } from '../../../Core/Models/KitchenModels/kitchen-ticket-details-dto';
-import { KitchenTicketQueryParams } from '../../../Core/Models/KitchenModels/kitchen-ticket-query-params';
-import { KitchenService } from '../../../Core/Services/Kitchen-Service/kitchen-service';
-import { TicketStatus } from '../../../Core/Models/KitchenModels/ticket-status';
-
 import { KitchenFilterComponent } from '../kitchen-filter/kitchen-filter';
 import { TicketCardComponent } from '../ticket-card/ticket-card';
 import { TicketDetailsModalComponent } from '../ticket-details/ticket-details';
 import { ActiveStationsBarComponent } from '../active-stations-bar/active-stations-bar';
+import { KitchenBoardDto } from '../../../../../Core/Models/KitchenModels/kitchen-board-dto';
+import { ActivePendingStationsDTO } from '../../../../../Core/Models/KitchenModels/active-pending-stations-dto';
+import { KitchenTicketDetailsDto } from '../../../../../Core/Models/KitchenModels/kitchen-ticket-details-dto';
+import { KitchenTicketQueryParams } from '../../../../../Core/Models/KitchenModels/kitchen-ticket-query-params';
+import { KitchenService } from '../../../../../Core/Services/Kitchen-Service/kitchen-service';
+import { TicketStatus } from '../../../../../Core/Models/KitchenModels/ticket-status';
 
 @Component({
   selector: 'app-kitchen-board',

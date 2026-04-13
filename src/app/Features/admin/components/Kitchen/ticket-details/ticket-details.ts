@@ -1,14 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { KitchenTicketDetailsDto } from '../../../Core/Models/KitchenModels/kitchen-ticket-details-dto';
-import { TicketStatus } from '../../../Core/Models/KitchenModels/ticket-status';
-
+import { KitchenTicketDetailsDto } from '../../../../../Core/Models/KitchenModels/kitchen-ticket-details-dto';
+import { TicketStatus } from '../../../../../Core/Models/KitchenModels/ticket-status';
 
 @Component({
   selector: 'app-ticket-details-modal',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './ticket-details.html',           
+  templateUrl: './ticket-details.html',
   styleUrls: ['./ticket-details.scss'],
 })
 export class TicketDetailsModalComponent {

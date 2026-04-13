@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OrderKitchenTicketDTO } from '../../../Core/Models/KitchenModels/order-kitchen-ticket-dto';
-import { TicketStatus } from '../../../Core/Models/KitchenModels/ticket-status';
+import { OrderKitchenTicketDTO } from '../../../../../Core/Models/KitchenModels/order-kitchen-ticket-dto';
+import { TicketStatus } from '../../../../../Core/Models/KitchenModels/ticket-status';
+
 
 
 @Component({

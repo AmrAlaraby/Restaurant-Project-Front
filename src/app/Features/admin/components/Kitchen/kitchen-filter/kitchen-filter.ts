@@ -1,12 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-import { KitchenService } from '../../../Core/Services/Kitchen-Service/kitchen-service';
-import { KitchenTicketQueryParams } from '../../../Core/Models/KitchenModels/kitchen-ticket-query-params';
-import { TicketStatus } from '../../../Core/Models/KitchenModels/ticket-status';
-import { ActivePendingStationsDTO } from '../../../Core/Models/KitchenModels/active-pending-stations-dto';
-import { BranchDto } from '../../../Core/Models/BranchModels/Branch-dto';
+import { KitchenTicketQueryParams } from '../../../../../Core/Models/KitchenModels/kitchen-ticket-query-params';
+import { BranchDto } from '../../../../../Core/Models/BranchModels/Branch-dto';
+import { ActivePendingStationsDTO } from '../../../../../Core/Models/KitchenModels/active-pending-stations-dto';
+import { TicketStatus } from '../../../../../Core/Models/KitchenModels/ticket-status';
+import { KitchenService } from '../../../../../Core/Services/Kitchen-Service/kitchen-service';
 
 @Component({
   selector: 'app-kitchen-filter',
@@ -19,7 +18,7 @@ export class KitchenFilterComponent implements OnInit {
 
   @Output() filterChanged = new EventEmitter<KitchenTicketQueryParams>();
 
-  
+
   branches: BranchDto[] = [];
 
   stations: ActivePendingStationsDTO[] = [];

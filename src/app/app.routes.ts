@@ -10,7 +10,7 @@ export const routes: Routes = [
     path: 'register',
     loadComponent: () => import('./Features/auth/pages/register/register').then((m) => m.Register),
   },
- 
+
 
   {
     path: '',
@@ -47,7 +47,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'orders', loadComponent: () => import('./Features/admin/pages/orders-page/orders-page').then(m => m.OrdersPage) },
       {path: 'dashboard',loadComponent: () =>import('./Features/report/pages/dashboard/dashboard').then((m) => m.DashboardComponent),},
-      {path: 'kitchen',loadComponent: () =>import('./Features/Kitchen/kitchen-board/kitchen-board').then((m) => m.KitchenBoardComponent),},
+      {path: 'kitchen',loadComponent: () =>import('./Features/admin/components/Kitchen/kitchen-board/kitchen-board').then((m) => m.KitchenBoardComponent),},
         {path: 'tables',loadComponent: () =>import('./Features/tables/pages/tables/tables-component/tables-component').then((m) => m.TablesComponent),},
         {path: 'deliveries',loadComponent: () =>import('./Features/admin/pages/delivery-page/delivery-page/delivery-page').then(m => m.DeliveryPage)},
 {path: 'deliveries/:id',loadComponent: () =>import('./Features/admin/components/Delivery/delivery-details/delivery-details').then(m => m.DeliveryDetails)},
