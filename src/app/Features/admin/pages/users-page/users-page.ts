@@ -1,18 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { UsersHeader } from '../../components/users-header/users-header';
-import { UsersFilters } from '../../components/users-filters/users-filters';
-import { UserCard } from '../../components/user-card/user-card';
-import { UsersList } from '../../components/users-list/users-list';
 import { UsersService } from '../../../../Core/Services/users-service';
 import { User } from '../../../../Core/Models/UserModels/user';
 import { Pagination } from '../../../../Shared/Components/pagination/pagination';
-import { UserModal } from '../../components/user-modal/user-modal';
+import { UsersHeader } from '../../components/User/users-header/users-header';
+import { UsersFilters } from '../../components/User/users-filters/users-filters';
+import { UserModal } from '../../components/User/user-modal/user-modal';
+import { UsersList } from '../../components/User/users-list/users-list';
+
 
 @Component({
   selector: 'app-users-page',
   standalone: true,
-  imports: [CommonModule, UsersHeader, UsersFilters, UserCard, UsersList, Pagination, UserModal],
+  imports: [CommonModule, UsersHeader, UsersFilters, UsersList, Pagination, UserModal],
   templateUrl: './users-page.html',
   styleUrl: './users-page.scss',
 })
