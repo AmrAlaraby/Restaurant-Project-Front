@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReportService } from '../../../../Core/Services/Report-Service/report-service';
-import { DashboardDTO } from '../../../../Core/Models/ReportModels/dashboard-model';
-import { RevenueDTO } from '../../../../Core/Models/ReportModels/revenue-model';
-import { OrdersByTypeDTO } from '../../../../Core/Models/ReportModels/orders-by-type-model';
-import { TopItemsDTO } from '../../../../Core/Models/ReportModels/top-items-model';
-import { InventoryUsageDTO } from '../../../../Core/Models/ReportModels/inventory-usage-model';
+import { DashboardDTO } from '../../../../../Core/Models/ReportModels/dashboard-model';
+import { RevenueDTO } from '../../../../../Core/Models/ReportModels/revenue-model';
+import { OrdersByTypeDTO } from '../../../../../Core/Models/ReportModels/orders-by-type-model';
+import { TopItemsDTO } from '../../../../../Core/Models/ReportModels/top-items-model';
+import { InventoryUsageDTO } from '../../../../../Core/Models/ReportModels/inventory-usage-model';
+import { ReportService } from '../../../../../Core/Services/Report-Service/report-service';
+
 
 @Component({
   standalone: true,
