@@ -1,0 +1,31 @@
+<div class="filters">
+
+  <!-- Roles -->
+  <div class="roles">
+    <button
+      *ngFor="let role of roles"
+      (click)="selectRole(role)"
+      [class.active]="role === selectedRole"
+    >
+      {{ role }}
+    </button>
+  </div>
+
+  <!-- Status -->
+  <div class="status">
+    <button
+      (click)="selectStatus(true)"
+      [class.active]="isActive"
+    >
+      Active
+    </button>
+
+    <button
+      (click)="selectStatus(false)"
+      [class.active]="!isActive"
+    >
+      Inactive
+    </button>
+  </div>
+
+</div>

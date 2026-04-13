@@ -1,0 +1,103 @@
+<!-- 🔥 MODAL (لا يظهر أثناء loading) -->
+<!-- MODAL فوق كل حاجة -->
+<div class="modal-backdrop" *ngIf="showAddModal">
+  <div class="custom-category-modal">
+    <h3>Add Category</h3>
+    <form [formGroup]="addForm" (ngSubmit)="submitAdd()">
+      <input type="text" formControlName="name" placeholder="Category name" />
+      <div class="modal-actions">
+        <button type="submit">Add</button>
+        <button type="button" (click)="closeAddModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- DELETE MODAL -->
+<div class="modal-backdrop" *ngIf="showDeleteModal">
+  <div class="custom-category-modal">
+    <h3>Delete Category</h3>
+    <p style="color: #a0a0b0; margin-top: 8px; font-size: 14px">
+      Are you sure you want to delete this category? This action cannot be undone.
+    </p>
+    <div class="modal-actions">
+      <button type="button" (click)="closeDeleteModal()">Cancel</button>
+      <button type="button" class="confirm-delete-btn" (click)="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal-backdrop" *ngIf="showEditModal">
+  <div class="custom-category-modal">
+    <h3>Edit Category</h3>
+    <form [formGroup]="editForm" (ngSubmit)="submitEdit()">
+      <input type="text" formControlName="name" placeholder="Category name" />
+      <div class="modal-actions">
+        <button type="button" (click)="closeEditModal()">Cancel</button>
+        <button type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="page">
+  <div class="breadcrumb">Home / <span>Categories</span></div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1 class="title">Menu Categories</h1>
+    <button class="add-btn" type="button" (click)="openAddModal()">+ Add Category</button>
+  </div>
+
+  <!-- 🔥 SUCCESS / ERROR -->
+  <div *ngIf="successMessage" class="success-msg">
+    {{ successMessage }}
+  </div>
+
+  <div *ngIf="errorMessage" class="error-msg">
+    {{ errorMessage }}
+  </div>
+
+  <!-- 🔥 Loading -->
+  <div *ngIf="loading" class="loading">Loading categories...</div>
+
+  <!-- 🔥 Error from API -->
+  <div *ngIf="error && !loading" class="error">
+    {{ error }}
+  </div>
+
+  <!-- 🔥 Empty State -->
+  <div *ngIf="!loading && !error && categories.length === 0" class="empty">No categories found</div>
+
+  <!-- 🔥 TABLE -->
+  <div class="table-card" *ngIf="!loading && !error && categories.length > 0">
+    <div class="table-head">
+      <span>CATEGORY</span>
+      <span>ITEMS</span>
+      <span>ACTIONS</span>
+    </div>
+
+    <div class="table-row" *ngFor="let cat of categories">
+      <!-- CATEGORY -->
+      <div class="cat-name">
+        <span class="cat-icon">
+          {{ getCategoryIcon(cat.name) }}
+        </span>
+        {{ cat.name }}
+      </div>
+
+      <!-- ITEMS -->
+      <div class="items-count">
+        {{ cat.menuItemsCount }}
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="actions">
+        <button class="edit-btn me-4" (click)="onEdit(cat)">Edit</button>
+
+        <button class="delete-btn" (click)="onDelete(cat.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

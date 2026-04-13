@@ -5,7 +5,7 @@ export const Auth = {
   login: `${apiUrl}/Auth/login`,
   register: `${apiUrl}/Auth/register`,
   refresh: `${apiUrl}/Auth/refresh-token`,
-  currentUser: `${apiUrl}/Auth/current-user`,
+  currentUser: `${apiUrl}/Auth/CurrentUser`,
   UpdatecurrentUser: `${apiUrl}/Auth`,
 };
 
@@ -25,11 +25,6 @@ export const TableOrders = {
   complete: (id: number) => `${apiUrl}/TableOrders/${id}/complete`,
 };
 
-
-
-
-
-
 // mahmoud 33 53
 export const MenuItems = {
   getAll: `${apiUrl}/MenuItems`,
@@ -40,8 +35,11 @@ export const MenuItems = {
   toggleAvailability: (id: number) => `${apiUrl}/MenuItems/${id}/toggle-availability`,
 };
 
-export const Ingredients = {
-  getAll: `${apiUrl}/Ingredients`,
+export const Users = {
+  getAll: `${apiUrl}/User`,
+  getInactive: `${apiUrl}/User/inactive`,
+  toggle: (id: string) => `${apiUrl}/User/${id}/toggle-status`,
+  create: `${apiUrl}/User`,
 };
 
 export const Categories = {
@@ -73,12 +71,14 @@ export const Categories = {
 
 
 
-
-
-
-
-
-
+export const Categories = {
+  base: `${apiUrl}/Categories`,
+  getAll: `${apiUrl}/Categories`,
+  getById: (id: number) => `${apiUrl}/Categories/${id}`,
+  create: `${apiUrl}/Categories`,
+  update: (id: number) => `${apiUrl}/Categories/${id}`,
+  delete: (id: number) => `${apiUrl}/Categories/${id}`,
+};
 
 // mustafa 76 96
 export const Kitchen = {
@@ -105,17 +105,22 @@ export const Deliveries = {
 
 
 
+
+
+
+
+
+
+
 // Arwa 97 117
 
-
-
-
-
-
-
-
-
-
+export const Ingredients = {
+  getAll: `${apiUrl}/Ingredients`,
+  getById: (id: number) => `${apiUrl}/Ingredients/${id}`,
+  create: `${apiUrl}/Ingredients`,
+  update: (id: number) => `${apiUrl}/Ingredients/${id}`,
+  delete: (id: number) => `${apiUrl}/Ingredients/${id}`,
+};
 
 
 
@@ -136,16 +141,8 @@ export const Order = {
   myOrders: `${apiUrl}/Order/my`,
   updateStatus: (orderId: number) => `${apiUrl}/Order/${orderId}/status`,
   addItems: (orderId: number) => `${apiUrl}/Order/${orderId}/items`,
-  removeItem: (orderId: number, itemId: number) =>
-    `${apiUrl}/Order/${orderId}/items/${itemId}`,
-  cancel: (orderId: number) => `${apiUrl}/Order/${orderId}/cancel`
+  removeItem: (orderId: number, itemId: number) => `${apiUrl}/Order/${orderId}/items/${itemId}`,
+  cancel: (orderId: number) => `${apiUrl}/Order/${orderId}/cancel`,
 };
-
-
-
-
-
-
-
 
 // end of file

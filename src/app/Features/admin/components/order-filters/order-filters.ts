@@ -1,5 +1,6 @@
-import { Component, EventEmitter, NgModule, Output } from '@angular/core';
+import { Component, EventEmitter, Input, NgModule, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { BranchDto } from '../../../../Core/Models/BranchModels/Branch-dto';
 
 @Component({
   selector: 'app-order-filters',
@@ -8,6 +9,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './order-filters.scss',
 })
 export class OrderFilters {
+  @Input() branches : BranchDto[] = [];
 @Output() filterChange = new EventEmitter();
 
   filters: any = {

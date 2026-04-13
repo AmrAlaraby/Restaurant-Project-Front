@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
@@ -14,7 +15,7 @@ import { ApiResponse } from '../../Models/AuthModels/api-response';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private Router :Router) {}
 
   login(data: LoginRequestInterface): Observable<ApiResponse<TokenInterface>> {
     return this.http
@@ -46,6 +47,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.clear();
+    this.Router.navigate(['/login']);
   }
 
   private setSession(token: TokenInterface) {
@@ -63,4 +65,11 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.getAccessToken();
   }
+
+  isTokenExpired(): boolean {
+  const expiresAt = localStorage.getItem('expiresAt');
+  if (!expiresAt) return true;
+
+  return new Date(expiresAt) <= new Date();
+}
 }

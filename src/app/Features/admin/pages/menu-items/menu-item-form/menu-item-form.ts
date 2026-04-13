@@ -1,3 +1,4 @@
+import { CategoryService } from '../../../../../Core/Services/Categories-Service/categories-service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -7,7 +8,6 @@ import { Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/
 
 import { CategoryInterface } from '../../../../../Core/Models/MenuItemModels/category-interface';
 import { MenuItemsService } from '../../../../../Core/Services/Menu-Item-Service/menu-item-service';
-import { CategoriesService } from '../../../../../Core/Services/Categories-Service/categories-service';
 import { ImageUpload } from '../components/image-upload/image-upload';
 import { IngredientInterface } from '../../../../../Core/Models/MenuItemModels/ingredient-interface';
 import { IngredientsService } from '../../../../../Core/Services/Ingredients-Service/ingredients-Service';
@@ -42,7 +42,7 @@ export class MenuItemForm implements OnInit, OnChanges {
   constructor(
     private fb: FormBuilder,
     private menuItemsService: MenuItemsService,
-    private categoriesService: CategoriesService,
+    private categoriesService: CategoryService,
     private ingredientService: IngredientsService,
   ) {}
 
@@ -77,10 +77,10 @@ export class MenuItemForm implements OnInit, OnChanges {
   }
 
   loadIngredients(): void {
-    this.ingredientService.getAll().subscribe({
-      next: (ingredients) => {
-        this.ingredients = ingredients;
-      },
+    this.ingredientService.getAll(1, 1000).subscribe({
+      next: (response) => {
+        this.ingredients = response.data;
+      }
     });
   }
 

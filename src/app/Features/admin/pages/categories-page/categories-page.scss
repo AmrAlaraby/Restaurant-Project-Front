@@ -1,0 +1,284 @@
+.page {
+  padding: 24px;
+  min-height: 100vh;
+  background: #1a1d2e;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+// Breadcrumb
+.breadcrumb {
+  font-size: 13px;
+  color: #7a7f9a;
+  margin-bottom: 24px;
+
+  span {
+    color: #e0e0e0;
+  }
+}
+
+// Header
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  .title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .add-btn {
+    background: #ff6b35;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #e85520;
+    }
+  }
+}
+
+// Loading / Error
+.loading {
+  padding: 20px;
+  color: #7a7f9a;
+}
+
+.error {
+  padding: 12px 16px;
+  background: #3d0a0a;
+  color: #e05050;
+  border: 1px solid #6b1a1a;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+// Table Card
+.table-card {
+  background: #252839;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+// Table Head (UPDATED -> 4 columns)
+.table-head {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  padding: 14px 20px;
+  border-bottom: 1px solid #2e3150;
+
+  span {
+    font-size: 11px;
+    color: #7a7f9a;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+}
+
+// Table Row (UPDATED -> 4 columns)
+.table-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  padding: 16px 20px;
+  border-bottom: 1px solid #1e2136;
+  align-items: center;
+  transition: background 0.15s;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: #2a2e45;
+  }
+}
+
+// Category Name
+.cat-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: #e0e0e0;
+  font-weight: 500;
+
+  .cat-icon {
+    font-size: 18px;
+  }
+}
+
+// Items Count
+.items-count {
+  color: #c0c0c0;
+  font-size: 14px;
+}
+
+// Active Items Count
+.active-count {
+  font-size: 14px;
+  font-weight: 600;
+
+  &.active-green {
+    color: #30c878;
+  }
+  &.active-blue {
+    color: #4090e8;
+  }
+  &.active-orange {
+    color: #e8a030;
+  }
+}
+
+// Actions
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+// Edit Button
+.edit-btn {
+  background: #2e3150;
+  color: #c0c0c0;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #4090e8;
+    color: #fff;
+  }
+}
+
+// Delete Button
+.delete-btn {
+  background: #3d0a0a;
+  color: #e05050;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #e05050;
+    color: #fff;
+  }
+}
+.success-msg {
+  background: #0a2d1a;
+  color: #30c878;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #1a5e35;
+}
+
+.error-msg {
+  background: #3d0a0a;
+  color: #e05050;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #6b1a1a;
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.custom-category-modal {
+  background: #252839;
+  padding: 28px;
+  border-radius: 12px;
+  width: 340px;
+  color: #fff;
+  position: relative;
+  z-index: 10000;
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px 14px;
+    margin-top: 8px;
+    border-radius: 8px;
+    border: 1px solid #3a3f5c;
+    background: #1a1d2e;
+    color: #e0e0e0;
+    font-size: 14px;
+
+    &:focus {
+      outline: none;
+      border-color: #ff6b35;
+    }
+  }
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+
+  button[type='submit'] {
+    background: #ff6b35;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    &:hover {
+      background: #e85520;
+    }
+  }
+
+  button[type='button'] {
+    background: #2e3150;
+    color: #c0c0c0;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    &:hover {
+      background: #3a3f5c;
+    }
+  }
+}
+
+.confirm-delete-btn {
+  background: #e05050 !important;
+  color: #fff !important;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background: #c03030 !important;
+  }
+}

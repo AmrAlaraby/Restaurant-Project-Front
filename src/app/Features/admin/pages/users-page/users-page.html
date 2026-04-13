@@ -1,0 +1,33 @@
+<users-header (addUser)="onAddUser()"></users-header>
+
+@if (showModal) {
+  <user-modal (close)="closeModal()"></user-modal>
+}
+<users-filters
+  (roleChanged)="onRoleChange($event)"
+  (statusChanged)="onStatusChange($event)">
+</users-filters>
+
+
+<!-- @for (user of users; track user.id) {
+  <user-card
+    [user]="user"
+    (edit)="onEditUser(user)"
+    (toggle)="onToggleUser(user.id)">
+  </user-card>
+} -->
+
+
+<users-list
+  [users]="users"
+  (edit)="onEditUser($event)"
+  (toggle)="onToggleUser($event)">
+</users-list>
+
+
+<app-pagination
+  [pageIndex]="pageIndex"
+  [pageSize]="pageSize"
+  [totalCount]="totalCount"
+  (pageChanged)="onPageChange($event)">
+</app-pagination>

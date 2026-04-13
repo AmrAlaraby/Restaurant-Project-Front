@@ -1,0 +1,159 @@
+$primary: #4e73df;
+$danger: #e74a3b;
+$bg: #f5f7fb;
+$text-muted: #888;
+
+.ingredients-container {
+  padding: 25px;
+  background: $bg;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h2 {
+      margin: 0;
+      font-size: 26px;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      color: $text-muted;
+      font-size: 14px;
+    }
+
+    .count {
+      background: $primary;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+  }
+
+  /* Loading */
+  .loading {
+    text-align: center;
+    margin-top: 50px;
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #ddd;
+      border-top: 4px solid $primary;
+      border-radius: 50%;
+      margin: auto;
+      animation: spin 1s linear infinite;
+    }
+
+    p {
+      margin-top: 10px;
+      color: $text-muted;
+    }
+  }
+
+  /* Empty */
+  .empty {
+    text-align: center;
+    color: #777;
+    margin-top: 50px;
+    font-size: 18px;
+  }
+
+  /* Table Card */
+  .table-wrapper {
+    background: white;
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      thead {
+        background: #f8f9fc;
+
+        th {
+          text-align: left;
+          padding: 12px;
+          font-size: 14px;
+          color: #555;
+        }
+      }
+
+      tbody {
+        tr {
+          transition: 0.2s;
+
+          &:hover {
+            background: #f1f5ff;
+          }
+
+          td {
+            padding: 12px;
+            border-top: 1px solid #eee;
+          }
+
+          .name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .avatar {
+              background: $primary;
+              color: white;
+              width: 32px;
+              height: 32px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-weight: bold;
+            }
+          }
+
+          .badge {
+            background: #e3e6f0;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+          }
+
+          .actions {
+            text-align: right;
+
+            .btn {
+              border: none;
+              padding: 6px 12px;
+              border-radius: 8px;
+              cursor: pointer;
+              font-size: 13px;
+              transition: 0.2s;
+
+              &.delete {
+                background: $danger;
+                color: white;
+
+                &:hover {
+                  background: darken($danger, 10%);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

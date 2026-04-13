@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { CategoriesPage } from './Features/admin/pages/categories-page/categories-page';
 
 export const routes: Routes = [
   {
@@ -23,15 +24,21 @@ export const routes: Routes = [
   },
 
   {
-    path: "register",
-    loadComponent: () => import('./Features/auth/pages/register/register').then(m => m.Register)
+    path: 'register',
+    loadComponent: () => import('./Features/auth/pages/register/register').then((m) => m.Register),
   },
   {
-    path: "dashboard",
-    loadComponent: () => import('./Features/report/pages/dashboard/dashboard').then(m => m.DashboardComponent)
+    path: 'dashboard',
+    loadComponent: () =>
+      import('./Features/report/pages/dashboard/dashboard').then((m) => m.DashboardComponent),
+  },
+  {
+    path: 'ingredients',
+    loadComponent: () =>
+      import('./Features/Ingredient/ingredients/ingredients').then((m) => m.IngredientsComponent),
   },
 
-{
+  {
     path: '',
     redirectTo: 'tables',
     pathMatch: 'full',
@@ -64,11 +71,9 @@ export const routes: Routes = [
   //       (m) => m.OrdersPage,
   //     ),
   // },
-   {
+  {
     path: 'admin',
-    loadComponent: () =>
-      import('./Features/admin/pages/layout/layout')
-        .then(m => m.Layout),
+    loadComponent: () => import('./Features/admin/pages/layout/layout').then((m) => m.Layout),
 
     children: [
       { path: '', redirectTo: 'orders', pathMatch: 'full' },
@@ -115,5 +120,23 @@ export const routes: Routes = [
     import('./Features/admin/components/Delivery/delivery-details/delivery-details')
       .then(m => m.DeliveryDetails)
 }
+      {
+        path: 'orders',
+        loadComponent: () =>
+          import('./Features/admin/pages/orders-page/orders-page').then((m) => m.OrdersPage),
+      },
+    ],
+  },
+  {
+    path: 'admin/categories',
+    loadComponent: () =>
+      import('./Features/admin/pages/categories-page/categories-page').then(
+        (m) => m.CategoriesPage,
+      ),
+  },
+  {
+    path: 'admin/users',
+    loadComponent: () =>
+      import('./Features/admin/pages/users-page/users-page').then((m) => m.UsersPage),
+  },
 ];
-
