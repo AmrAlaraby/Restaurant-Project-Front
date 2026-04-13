@@ -24,6 +24,13 @@ export class CategoriesPage implements OnInit {
   showAddModal = false;
   addForm!: FormGroup;
 
+  selectedCategoryId: number | null = null;
+  showDeleteModal = false;
+
+  selectedCategory: Category | null = null;
+  showEditModal = false;
+  editForm!: FormGroup;
+
   constructor(
     private categoryService: CategoryService,
     private fb: FormBuilder,
@@ -37,9 +44,8 @@ export class CategoriesPage implements OnInit {
 
   // ✅ INIT FORM (FIX)
   private initForm(): void {
-    this.addForm = this.fb.group({
-      name: [''],
-    });
+    this.addForm = this.fb.group({ name: [''] });
+    this.editForm = this.fb.group({ name: [''] });
   }
 
   // 🔥 GET ALL
@@ -84,16 +90,21 @@ export class CategoriesPage implements OnInit {
 
   // EDIT
   onEdit(category: Category): void {
-    const updated = {
-      name: category.name + ' Updated',
-    };
+    this.selectedCategory = category;
+    this.editForm.patchValue({ name: category.name });
+    this.showEditModal = true;
+    document.body.style.overflow = 'hidden';
+  }
 
-    this.categoryService.update(category.id, updated).subscribe({
+  submitEdit(): void {
+    if (this.editForm.invalid || !this.selectedCategory) return;
+
+    this.categoryService.update(this.selectedCategory.id, this.editForm.value).subscribe({
       next: () => {
         this.successMessage = 'Category updated successfully ✔';
         this.errorMessage = null;
         this.loadCategories();
-
+        this.closeEditModal();
         setTimeout(() => (this.successMessage = null), 3000);
       },
       error: () => {
@@ -102,6 +113,12 @@ export class CategoriesPage implements OnInit {
     });
   }
 
+  closeEditModal(): void {
+    this.showEditModal = false;
+    this.selectedCategory = null;
+    this.editForm.reset();
+    document.body.style.overflow = '';
+  }
   // ADD
   submitAdd(): void {
     if (this.addForm.invalid) return;
@@ -122,19 +139,32 @@ export class CategoriesPage implements OnInit {
 
   // DELETE
   onDelete(id: number): void {
-    if (!confirm('Are you sure you want to delete this category?')) return;
+    this.selectedCategoryId = id;
+    this.showDeleteModal = true;
+    document.body.style.overflow = 'hidden';
+  }
 
-    this.categoryService.delete(id).subscribe({
+  confirmDelete(): void {
+    if (!this.selectedCategoryId) return;
+
+    this.categoryService.delete(this.selectedCategoryId).subscribe({
       next: () => {
         this.successMessage = 'Category deleted successfully ✔';
         this.loadCategories();
-
+        this.closeDeleteModal();
         setTimeout(() => (this.successMessage = null), 3000);
       },
       error: () => {
         this.errorMessage = 'Failed to delete category ❌';
+        this.closeDeleteModal();
       },
     });
+  }
+
+  closeDeleteModal(): void {
+    this.showDeleteModal = false;
+    this.selectedCategoryId = null;
+    document.body.style.overflow = '';
   }
 
   // MODAL

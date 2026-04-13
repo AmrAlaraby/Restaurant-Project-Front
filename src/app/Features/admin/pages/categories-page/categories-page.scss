@@ -269,3 +269,16 @@
     }
   }
 }
+
+.confirm-delete-btn {
+  background: #e05050 !important;
+  color: #fff !important;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background: #c03030 !important;
+  }
+}

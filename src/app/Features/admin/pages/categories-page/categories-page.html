@@ -13,6 +13,34 @@
   </div>
 </div>
 
+<!-- DELETE MODAL -->
+<div class="modal-backdrop" *ngIf="showDeleteModal">
+  <div class="custom-category-modal">
+    <h3>Delete Category</h3>
+    <p style="color: #a0a0b0; margin-top: 8px; font-size: 14px">
+      Are you sure you want to delete this category? This action cannot be undone.
+    </p>
+    <div class="modal-actions">
+      <button type="button" (click)="closeDeleteModal()">Cancel</button>
+      <button type="button" class="confirm-delete-btn" (click)="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal-backdrop" *ngIf="showEditModal">
+  <div class="custom-category-modal">
+    <h3>Edit Category</h3>
+    <form [formGroup]="editForm" (ngSubmit)="submitEdit()">
+      <input type="text" formControlName="name" placeholder="Category name" />
+      <div class="modal-actions">
+        <button type="button" (click)="closeEditModal()">Cancel</button>
+        <button type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <div class="page">
   <div class="breadcrumb">Home / <span>Categories</span></div>
 
