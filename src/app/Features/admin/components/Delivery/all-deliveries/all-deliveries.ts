@@ -92,6 +92,6 @@ export class AllDeliveries {
 
   // 🔥 Open details page
   openDetails(id: number) {
-    this.router.navigate(['/deliveries', id]);
+    this.router.navigate(['/admin/deliveries', id]);
   }
 }

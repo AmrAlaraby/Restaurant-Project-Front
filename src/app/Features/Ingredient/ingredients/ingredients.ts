@@ -39,7 +39,9 @@ loadData() {
 
   this.ingredientService.getAll(this.pageIndex, this.pageSize).subscribe({
     next: (res) => {
-      this.ingredients = res.data;     // 👈 مهم
+      console.log(res);
+      
+      this.ingredients = res.data || [];     // 👈 مهم
       this.totalCount = res.count;     // 👈 مهم
       this.loading = false;
     },
