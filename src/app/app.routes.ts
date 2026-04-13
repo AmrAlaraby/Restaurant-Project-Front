@@ -67,7 +67,7 @@ export const routes: Routes = [
    {
     path: 'ingredients',
     loadComponent: () =>
-      import('./Features/Ingredient/ingredients/ingredients').then((m) => m.IngredientsComponent),
+      import('./Features/admin/components/Ingredient/ingredients/ingredients').then((m) => m.IngredientsComponent),
   },
     ]
   },

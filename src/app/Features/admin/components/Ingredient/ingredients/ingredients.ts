@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IngredientsService } from '../../../Core/Services/Ingredients-Service/ingredients-Service';
-import { IngredientInterface } from '../../../../app/Core/Models/MenuItemModels/ingredient-interface';
 import { CommonModule } from '@angular/common';
-import { Pagination } from "../../../Shared/Components/pagination/pagination"; // 👈 مهم جدًا
 import { FormsModule } from '@angular/forms';
+import { Pagination } from '../../../../../Shared/Components/pagination/pagination';
+import { IngredientInterface } from '../../../../../Core/Models/MenuItemModels/ingredient-interface';
+import { IngredientsService } from '../../../../../Core/Services/Ingredients-Service/ingredients-Service';
 
 @Component({
   selector: 'app-ingredients',
@@ -40,9 +40,9 @@ loadData() {
   this.ingredientService.getAll(this.pageIndex, this.pageSize).subscribe({
     next: (res) => {
       console.log(res);
-      
-      this.ingredients = res.data || [];     // 👈 مهم
-      this.totalCount = res.count;     // 👈 مهم
+
+      this.ingredients = res.data || [];
+      this.totalCount = res.count;
       this.loading = false;
     },
     error: (err) => {
@@ -64,19 +64,19 @@ onPageChange(page: number) {
   }
   openModal() {
     this.showModal = true;
-    console.log(this.showModal); // لازم تبقى true
+    console.log(this.showModal);
   }
-  
+
   closeModal() {
     this.showModal = false;
-    this.newIngredient = { name: '', unit: '' }; // reset
+    this.newIngredient = { name: '', unit: '' };
   }
-  
+
   addIngredient() {
     this.ingredientService.create(this.newIngredient).subscribe({
       next: () => {
         this.closeModal();
-        this.loadData(); 
+        this.loadData();
       },
       error: (err) => {
         console.error(err);
