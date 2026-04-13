@@ -107,7 +107,7 @@ export const routes: Routes = [
 
 
 
-  
+
 {
   path: 'admin/deliveries',
   loadComponent: () =>
@@ -119,14 +119,12 @@ export const routes: Routes = [
   loadComponent: () =>
     import('./Features/admin/components/Delivery/delivery-details/delivery-details')
       .then(m => m.DeliveryDetails)
-}
+},
       {
         path: 'orders',
         loadComponent: () =>
           import('./Features/admin/pages/orders-page/orders-page').then((m) => m.OrdersPage),
       },
-    ],
-  },
   {
     path: 'admin/categories',
     loadComponent: () =>
