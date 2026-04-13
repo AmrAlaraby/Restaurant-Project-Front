@@ -1,0 +1,19 @@
+<div class="list">
+
+  @for (user of users; track user.id) {
+
+    <user-card
+      [user]="user"
+      (edit)="onEdit(user)"
+      (toggle)="onToggle(user.id)">
+    </user-card>
+
+  } @empty {
+
+    <div class="empty">
+      No users found
+    </div>
+
+  }
+
+</div>
