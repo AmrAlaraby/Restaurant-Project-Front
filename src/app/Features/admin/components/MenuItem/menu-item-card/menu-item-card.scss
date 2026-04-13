@@ -1,13 +1,15 @@
 .menu-item-card {
-    background: white;
+    background: #FFFFFF;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(192, 57, 43, 0.13);
+    box-shadow: 0 2px 8px rgba(192, 57, 43, 0.08);
     transition: 0.3s ease;
     height: 100%;
 
     &:hover {
         transform: translateY(-6px);
+        box-shadow: 0 8px 24px rgba(192, 57, 43, 0.14);
     }
 }
 
@@ -15,6 +17,7 @@
     width: 100%;
     height: 220px;
     overflow: hidden;
+    background: #FFF5F5;
 
     img {
         width: 100%;
@@ -36,11 +39,12 @@
 h5 {
     margin: 0;
     font-weight: 700;
+    color: #2D0A08;
 }
 
 .category {
     margin: 0;
-    color: #777;
+    color: #9B4437;
     font-size: 0.9rem;
 }
 
@@ -49,20 +53,24 @@ h5 {
     display: flex;
     justify-content: space-between;
     font-weight: 600;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(192, 57, 43, 0.13);
 }
 
 .price {
-    color: var(--restaurant-red);
+    color: #C0392B;
 }
 
 .prep-time {
-    color: #555;
+    color: #9B4437;
 }
 
 .badge {
     padding: 0.45rem 0.8rem;
     border-radius: 999px;
     font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.4px;
 }
 
 .available {
@@ -71,8 +79,8 @@ h5 {
 }
 
 .unavailable {
-    background: #ffebee;
-    color: #c62828;
+    background: #FDECEA;
+    color: #C0392B;
 }
 
 .actions {
@@ -86,20 +94,34 @@ h5 {
     border-radius: 10px;
     padding: 0.55rem;
     font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
 }
 
 .btn-view {
-    background: #eceff1;
+    background: #FFF5F5;
+    color: #9B4437;
+
+    &:hover { background: #FDECEA; }
 }
 
 .btn-edit {
-    background: #fff3e0;
+    background: #FDECEA;
+    color: #C0392B;
+
+    &:hover { background: rgba(192, 57, 43, 0.2); }
 }
 
 .btn-toggle {
-    background: #fff8e1;
+    background: #FFF5F5;
+    color: #9B4437;
+
+    &:hover { background: #FDECEA; }
 }
 
 .btn-delete {
-    background: #ffebee;
+    background: #96281B;
+    color: #fff;
+
+    &:hover { background: #C0392B; }
 }
