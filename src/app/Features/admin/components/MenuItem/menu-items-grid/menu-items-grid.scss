@@ -1,19 +1,21 @@
 .loading-state,
 .empty-state {
-    background: white;
+    background: #FFFFFF;
     padding: 3rem 2rem;
     border-radius: 20px;
     text-align: center;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(192, 57, 43, 0.13);
+    box-shadow: 0 2px 8px rgba(192, 57, 43, 0.08);
 
     h5 {
         margin-bottom: 0.5rem;
         font-weight: 700;
+        color: #2D0A08;
     }
 
     p {
         margin: 0;
-        color: #777;
+        color: #9B4437;
     }
 }
 

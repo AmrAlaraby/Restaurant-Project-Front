@@ -31,7 +31,7 @@
     border-radius: 50%;
 
     background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 20px rgba(192, 57, 43, 0.18);
 
     font-size: 1.1rem;
     cursor: pointer;
@@ -40,7 +40,8 @@
 
     &:hover {
         transform: scale(1.08);
-        background: #f4b400;
+        background: #C0392B;
+        color: #fff;
     }
 }
 
@@ -50,11 +51,11 @@
 
     margin: auto;
 
-    border: 2px dashed #d1d5db;
+    border: 2px dashed rgba(192, 57, 43, 0.3);
     border-radius: 18px;
 
     text-align: center;
-    background: #fafafa;
+    background: #FFF5F5;
 
     transition: 0.25s ease;
     cursor: pointer;
@@ -64,18 +65,20 @@
     justify-content: center;
 
     &.dragging {
-        border-color: #f4b400;
-        background: #fff9e6;
+        border-color: #C0392B;
+        background: #FDECEA;
     }
 }
+
 .placeholder-content {
     h6 {
         font-weight: 700;
         margin-bottom: 0.35rem;
+        color: #2D0A08;
     }
 
     p {
-        color: #777;
+        color: #9B4437;
         margin: 0;
     }
 }
@@ -87,7 +90,7 @@
     margin-inline: auto;
 
     &:hover {
-        background: #f4b400;
+        background: #C0392B;
         color: white;
     }
 }

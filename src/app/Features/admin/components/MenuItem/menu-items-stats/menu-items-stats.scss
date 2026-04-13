@@ -9,13 +9,13 @@
     padding: 1.25rem;
     border-radius: 16px;
     color: white;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(192, 57, 43, 0.12);
     transition: 0.3s ease;
 
     h6 {
         margin-bottom: 0.5rem;
         font-size: 0.9rem;
-        opacity: 0.9;
+        opacity: 0.88;
     }
 
     h3 {
@@ -26,21 +26,22 @@
 
     &:hover {
         transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(192, 57, 43, 0.18);
     }
 }
 
 .total {
-    background: linear-gradient(135deg, #c62828, #e53935);
+    background: #C0392B;
 }
 
 .available {
-    background: linear-gradient(135deg, #2e7d32, #43a047);
+    background: #2e7d32;
 }
 
 .unavailable {
-    background: linear-gradient(135deg, #616161, #757575);
+    background: #96281B;
 }
 
 .average {
-    background: linear-gradient(135deg, #f9a825, #ffb300);
+    background: #9B4437;
 }

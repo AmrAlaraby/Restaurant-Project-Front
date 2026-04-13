@@ -1,5 +1,7 @@
 .menu-items-page {
     padding: 2rem;
+    background: #FDF5F5;
+    min-height: 100vh;
 }
 
 .page-header {
@@ -13,37 +15,39 @@
     h2 {
         margin: 0;
         font-weight: 700;
+        color: #2D0A08;
     }
 
     p {
         margin: 0;
-        color: #777;
+        color: #9B4437;
     }
 }
 
 .btn-add {
     border: none;
-    background: var(--restaurant-red);
-    color: rgb(226, 129, 129) !important;
+    background: #C0392B;
+    color: #fff !important;
 
     padding: 0.9rem 1.5rem;
     border-radius: 12px;
     font-weight: 700;
+    cursor: pointer;
 
     transition: 0.25s ease;
 
     &:hover {
-        background: #cc1111;
+        background: #96281B;
         transform: translateY(-1px);
     }
 }
 
 // modal styles
 .modal {
-    background: rgba(0, 0, 0, 0.5);
-        position: fixed;
-    top : 0;
-    left:0;
+    background: rgba(45, 10, 8, 0.55);
+    position: fixed;
+    top: 0;
+    left: 0;
     right: 0;
     bottom: 0;
     inset: 0;
@@ -55,13 +59,19 @@
 .modal-content {
     background: #fff;
     border-radius: 12px;
+    border: 1px solid rgba(192, 57, 43, 0.15);
     padding: 1.5rem;
     height: 90vh;
     position: relative;
-  overflow-y: auto;}
-.modal-content::-webkit-scrollbar { width: 4px; }
-.modal-content::-webkit-scrollbar-track { background: transparent; }
-.modal-content::-webkit-scrollbar-thumb {background: rgba(196,30,30,.2); border-radius: 4px; }
+    overflow-y: auto;
+
+    &::-webkit-scrollbar { width: 4px; }
+    &::-webkit-scrollbar-track { background: transparent; }
+    &::-webkit-scrollbar-thumb {
+        background: rgba(192, 57, 43, 0.2);
+        border-radius: 4px;
+    }
+}
 
 .custom-modal-header {
     padding: 1.25rem 1.5rem;
@@ -69,10 +79,11 @@
     .modal-title {
         font-weight: 700;
         font-size: 1.35rem;
-        color: #1f2937;
+        color: #2D0A08;
     }
 
     small {
         font-size: 0.85rem;
+        color: #9B4437;
     }
 }

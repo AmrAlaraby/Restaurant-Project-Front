@@ -1,42 +1,39 @@
-
-
 .menu-item-form-page {
     padding: 0.5rem;
 }
-
 
 .menu-item-form {
     background: #ffffff;
     padding: 2rem;
     border-radius: 22px;
-    border: 1px solid #f1f1f1;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(192, 57, 43, 0.13);
+    box-shadow: 0 2px 8px rgba(192, 57, 43, 0.08);
 }
 
 .form-label {
     font-weight: 700;
     font-size: 0.9rem;
     margin-bottom: 0.55rem;
-    color: #374151;
+    color: #2D0A08;
 }
 
 .form-control,
 .form-select {
     min-height: 54px;
     border-radius: 14px;
-    border: 1px solid #dcdfe4;
+    border: 1px solid rgba(192, 57, 43, 0.2);
     padding-inline: 1rem;
     font-weight: 500;
     transition: all 0.25s ease;
     background: #fff;
 
     &:hover {
-        border-color: #f4c542;
+        border-color: rgba(192, 57, 43, 0.4);
     }
 
     &:focus {
-        border-color: #f4c542;
-        box-shadow: 0 0 0 0.22rem rgba(244, 197, 66, 0.18);
+        border-color: #C0392B;
+        box-shadow: 0 0 0 0.22rem rgba(192, 57, 43, 0.15);
     }
 }
 
@@ -57,30 +54,31 @@
     font-size: 0.95rem;
     border: 2px solid transparent;
     transition: all 0.25s ease;
+    cursor: pointer;
 }
 
 /* Cancel */
 .btn-cancel {
     background: #fff;
-    color: #c62828;
-    border-color: #c62828;
+    color: #C0392B;
+    border-color: rgba(192, 57, 43, 0.35);
 
     &:hover {
-        background: #c62828;
-        color: #fff;
+        background: #FDECEA;
+        border-color: #C0392B;
         transform: translateY(-1px);
     }
 }
 
 /* Submit */
 .btn-submit {
-    background: #fff;
-    color: #f4b400;
-    border-color: #f4b400;
+    background: #C0392B;
+    color: #fff;
+    border-color: #C0392B;
 
     &:hover {
-        background: #f4b400;
-        color: #fff;
+        background: #96281B;
+        border-color: #96281B;
         transform: translateY(-1px);
     }
 }
@@ -105,19 +103,33 @@
 }
 
 .btn-add-recipe {
-    border: 2px solid #f4b400;
+    border: 2px solid rgba(192, 57, 43, 0.35);
     background: white;
-    color: #f4b400;
+    color: #C0392B;
     padding: 0.55rem 1rem;
     border-radius: 10px;
     font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+
+    &:hover {
+        background: #FDECEA;
+        border-color: #C0392B;
+    }
 }
 
 .btn-remove-recipe {
-    border: 2px solid #c62828;
+    border: 2px solid rgba(150, 40, 27, 0.3);
     background: white;
-    color: #c62828;
+    color: #96281B;
     padding: 0.55rem 1rem;
     border-radius: 10px;
     font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+
+    &:hover {
+        background: #96281B;
+        color: #fff;
+    }
 }
