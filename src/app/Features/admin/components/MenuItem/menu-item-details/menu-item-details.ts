@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
-import { MenuItemDetailsInterface } from '../../../../../../Core/Models/MenuItemModels/menu-item-details-interface';
+import { MenuItemDetailsInterface } from '../../../../../Core/Models/MenuItemModels/menu-item-details-interface';
+
 
 
 @Component({
