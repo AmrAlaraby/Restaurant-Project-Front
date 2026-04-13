@@ -35,13 +35,12 @@ export const MenuItems = {
   toggleAvailability: (id: number) => `${apiUrl}/MenuItems/${id}/toggle-availability`,
 };
 
-// export const Ingredients = {
-//   getAll: `${apiUrl}/Ingredients`,
-// };
-
-// export const Categories = {
-//   getAll: `${apiUrl}/Categories`,
-// };
+export const Users = {
+  getAll: `${apiUrl}/User`,
+  getInactive: `${apiUrl}/User/inactive`,
+  toggle: (id: string) => `${apiUrl}/User/${id}/toggle-status`,
+  create: `${apiUrl}/User`,
+};
 
 // hossam 54 75
 

@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { UserQueryParams } from '../Models/UserModels/user-query-params';
 import { User } from '../Models/UserModels/user';
 import { PaginatedResultInterface } from '../Models/MenuItemModels/paginated-result-interface';
-
-
+import { AddUser } from '../Models/UserModels/add-user';
+import { Users } from '../Constants/Api_Urls';
 @Injectable({
   providedIn: 'root',
 })
@@ -47,5 +47,9 @@ export class UsersService {
 
   toggleUser(id: string) {
     return this.http.patch<void>(`${this.baseUrl}/${id}/toggle-status`, {});
+  }
+
+  createUser(user: AddUser) {
+    return this.http.post(this.baseUrl, user);
   }
 }
