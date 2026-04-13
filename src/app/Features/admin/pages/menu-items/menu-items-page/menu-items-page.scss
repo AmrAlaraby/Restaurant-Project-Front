@@ -41,7 +41,27 @@
 // modal styles
 .modal {
     background: rgba(0, 0, 0, 0.5);
+        position: fixed;
+    top : 0;
+    left:0;
+    right: 0;
+    bottom: 0;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    z-index: 1000;
 }
+
+.modal-content {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    height: 90vh;
+    position: relative;
+  overflow-y: auto;}
+.modal-content::-webkit-scrollbar { width: 4px; }
+.modal-content::-webkit-scrollbar-track { background: transparent; }
+.modal-content::-webkit-scrollbar-thumb {background: rgba(196,30,30,.2); border-radius: 4px; }
 
 .custom-modal-header {
     padding: 1.25rem 1.5rem;
