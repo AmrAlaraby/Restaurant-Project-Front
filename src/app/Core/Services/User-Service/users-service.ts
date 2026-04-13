@@ -1,10 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserQueryParams } from '../Models/UserModels/user-query-params';
-import { User } from '../Models/UserModels/user';
-import { PaginatedResultInterface } from '../Models/MenuItemModels/paginated-result-interface';
-import { AddUser } from '../Models/UserModels/add-user';
-import { Users } from '../Constants/Api_Urls';
+import { User } from '../../Models/UserModels/user';
+import { PaginatedResultInterface } from '../../Models/MenuItemModels/paginated-result-interface';
+import { AddUser } from '../../Models/UserModels/add-user';
+import { UserQueryParams } from '../../Models/UserModels/user-query-params';
+
 @Injectable({
   providedIn: 'root',
 })
