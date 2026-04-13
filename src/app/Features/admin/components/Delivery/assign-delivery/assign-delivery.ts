@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DeliveryService } from '../../../../../Core/Services/Delivery-Service/delivery-service';
 
-
 @Component({
   selector: 'app-assign-delivery',
   standalone: true,
@@ -24,9 +23,7 @@ export class AssignDelivery implements OnInit {
   loadingDrivers = false;
   assigning = false;
 
-  constructor(
-    private deliveryService: DeliveryService,
-  ) {}
+  constructor(private deliveryService: DeliveryService) {}
 
   ngOnInit(): void {
     this.loadBranches();
@@ -59,9 +56,7 @@ export class AssignDelivery implements OnInit {
 
     this.deliveryService.getUnAssignedDeliveries().subscribe({
       next: (res) => {
-        this.deliveries = res.filter(
-          (d: any) => d.branchName === this.selectedBranch.name
-        );
+        this.deliveries = res.filter((d: any) => d.branchName === this.selectedBranch.name);
         this.loadingDeliveries = false;
       },
       error: (err) => {
@@ -97,10 +92,12 @@ export class AssignDelivery implements OnInit {
   }
 
   assign() {
+    debugger;
     if (!this.selectedDelivery || !this.selectedDriverId) return;
+    console.log(this.selectedDelivery);
 
     const dto = {
-      orderId: this.selectedDelivery.deliveryId,
+      orderId: this.selectedDelivery.orderNumber,
       driverId: this.selectedDriverId,
       deliveryAddress: this.selectedDelivery.deliveryAddress,
     };
@@ -113,7 +110,7 @@ export class AssignDelivery implements OnInit {
         this.assigning = false;
 
         this.deliveries = this.deliveries.filter(
-          (d) => d.deliveryId !== this.selectedDelivery.deliveryId
+          (d) => d.deliveryId !== this.selectedDelivery.deliveryId,
         );
 
         this.selectedDelivery = null;
@@ -126,5 +123,4 @@ export class AssignDelivery implements OnInit {
       },
     });
   }
-
 }

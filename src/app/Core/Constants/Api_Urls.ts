@@ -42,9 +42,6 @@ export const Users = {
   create: `${apiUrl}/User`,
 };
 
-export const Categories = {
-  getAll: `${apiUrl}/Categories`,
-};
 
 
 
