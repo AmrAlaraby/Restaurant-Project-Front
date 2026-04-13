@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddUser } from '../../../../Core/Models/UserModels/add-user';
+import { AddUser } from '../../../../../Core/Models/UserModels/add-user';
+
+
 
 @Component({
   selector: 'user-modal',
