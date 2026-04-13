@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { OrderInterface } from '../../../../Core/Models/OrderModels/order-interface';
+import { OrderInterface } from '../../../../../Core/Models/OrderModels/order-interface';
+// import { OrderInterface } from '../../../../Core/Models/OrderModels/order-interface';
 
 @Component({
   selector: 'app-order-stats',

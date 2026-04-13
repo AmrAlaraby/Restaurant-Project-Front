@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { PaginatedResultInterface } from '../../../../Core/Models/MenuItemModels/paginated-result-interface';
 import { OrderInterface } from '../../../../Core/Models/OrderModels/order-interface';
 import { OrdersService } from '../../../../Core/Services/Orders-Service/orders-service';
-import { OrderStats } from '../../components/order-stats/order-stats';
-import { OrderFilters } from '../../components/order-filters/order-filters';
-import { OrderTable } from '../../components/order-table/order-table';
-import { OrderModal } from '../../components/order-modal/order-modal';
-import { OrderPagination } from '../../components/order-pagination/order-pagination';
-import { OrderDetails } from '../../components/order-details/order-details';
 import { KitchenService } from '../../../../Core/Services/Kitchen-Service/kitchen-service';
 import { BranchDto } from '../../../../Core/Models/BranchModels/Branch-dto';
 import { Pagination } from "../../../../Shared/Components/pagination/pagination";
+import { OrderDetails } from '../../components/Order/order-details/order-details';
+import { OrderFilters } from '../../components/Order/order-filters/order-filters';
+import { OrderModal } from '../../components/Order/order-modal/order-modal';
+import { OrderStats } from '../../components/Order/order-stats/order-stats';
+import { OrderTable } from '../../components/Order/order-table/order-table';
 
 @Component({
   selector: 'app-orders-page',
-  imports: [OrderStats, OrderFilters, OrderTable, OrderModal, OrderPagination, OrderDetails, Pagination],
+  imports: [OrderStats, OrderFilters, OrderTable, OrderModal, OrderDetails, Pagination],
   templateUrl: './orders-page.html',
   styleUrl: './orders-page.scss',
 })
@@ -54,7 +52,7 @@ export class OrdersPage implements OnInit {
 
   openModal() {
     console.log("clicked");
-    
+
     this.showModal = true;
   }
 

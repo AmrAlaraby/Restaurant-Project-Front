@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormBuilder, FormArray, ReactiveFormsModule } from '@angular/forms';
-import { OrdersService } from '../../../../Core/Services/Orders-Service/orders-service';
-import { MenuItemsService } from '../../../../Core/Services/Menu-Item-Service/menu-item-service';
+import { MenuItemsService } from '../../../../../Core/Services/Menu-Item-Service/menu-item-service';
+import { OrdersService } from '../../../../../Core/Services/Orders-Service/orders-service';
+
 
 @Component({
   selector: 'app-order-details',

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, NgModule, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BranchDto } from '../../../../Core/Models/BranchModels/Branch-dto';
+import { BranchDto } from '../../../../../Core/Models/BranchModels/Branch-dto';
+
 
 @Component({
   selector: 'app-order-filters',
