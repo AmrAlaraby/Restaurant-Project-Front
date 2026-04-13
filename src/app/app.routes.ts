@@ -48,7 +48,7 @@ export const routes: Routes = [
       { path: 'orders', loadComponent: () => import('./Features/admin/pages/orders-page/orders-page').then(m => m.OrdersPage) },
       {path: 'dashboard',loadComponent: () =>import('./Features/report/pages/dashboard/dashboard').then((m) => m.DashboardComponent),},
       {path: 'kitchen',loadComponent: () =>import('./Features/admin/components/Kitchen/kitchen-board/kitchen-board').then((m) => m.KitchenBoardComponent),},
-        {path: 'tables',loadComponent: () =>import('./Features/tables/pages/tables/tables-component/tables-component').then((m) => m.TablesComponent),},
+        {path: 'tables',loadComponent: () =>import('./Features/admin/components/tables/tables-component/tables-component').then((m) => m.TablesComponent),},
         {path: 'deliveries',loadComponent: () =>import('./Features/admin/pages/delivery-page/delivery-page/delivery-page').then(m => m.DeliveryPage)},
 {path: 'deliveries/:id',loadComponent: () =>import('./Features/admin/components/Delivery/delivery-details/delivery-details').then(m => m.DeliveryDetails)},
   {path: 'menu-items',loadComponent: () =>import('./Features/admin/pages/menu-items/menu-items-page/menu-items-page').then((m) => m.MenuItemsPage,),},
