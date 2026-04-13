@@ -15,15 +15,15 @@ export class UsersService {
 
   getUsers(params: UserQueryParams) {
     let httpParams = new HttpParams()
-      .set('pageIndex', params.pageIndex)
-      .set('pageSize', params.pageSize);
+      .set('pageIndex', params.pageIndex.toString())
+      .set('pageSize', params.pageSize.toString());
 
     if (params.roleId && params.roleId !== 'All') {
       httpParams = httpParams.set('roleId', params.roleId);
     }
 
     if (params.branchId) {
-      httpParams = httpParams.set('branchId', params.branchId);
+      httpParams = httpParams.set('branchId', params.branchId.toString());
     }
 
     return this.http.get<PaginatedResultInterface<User>>(this.baseUrl, {

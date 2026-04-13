@@ -1,7 +1,7 @@
 <!-- 🔥 MODAL (لا يظهر أثناء loading) -->
 <!-- MODAL فوق كل حاجة -->
 <div class="modal-backdrop" *ngIf="showAddModal">
-  <div class="modal">
+  <div class="custom-category-modal">
     <h3>Add Category</h3>
     <form [formGroup]="addForm" (ngSubmit)="submitAdd()">
       <input type="text" formControlName="name" placeholder="Category name" />

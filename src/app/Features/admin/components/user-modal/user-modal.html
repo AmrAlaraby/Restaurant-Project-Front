@@ -1,0 +1,36 @@
+<h1 style="color:red;">TEST MODAL</h1>
+<div class="modal-backdrop">
+
+  <div class="custom-user-modal">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h3>Add User</h3>
+      <button (click)="onClose()">×</button>
+    </div>
+
+    <!-- Body -->
+    <div class="modal-body">
+
+      <input placeholder="Name" />
+      <input placeholder="Email" />
+      <input placeholder="Password" />
+
+      <select>
+        <option>Admin</option>
+        <option>Waiter</option>
+        <option>Chef</option>
+        <option>Driver</option>
+      </select>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="onClose()">Cancel</button>
+      <button class="btn-save">Save</button>
+    </div>
+
+  </div>
+
+</div>
