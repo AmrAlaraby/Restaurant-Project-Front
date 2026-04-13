@@ -1,13 +1,13 @@
 :host {
-  --primary: #C41E1E;
-  --primary-dark: #a01818;
-  --bg: #f6f7fb;
-  --card: #ffffff;
-  --text: #1f1f1f;
-  --muted: #777;
-  --border: #eaeaea;
+  --primary: #C0392B;
+  --primary-dark: #96281B;
+  --bg: #FDF5F5;
+  --card: #FFFFFF;
+  --text: #2D0A08;
+  --muted: #9B4437;
+  --border: rgba(192, 57, 43, 0.13);
   --radius: 14px;
-  --shadow: 0 10px 30px rgba(0,0,0,.08);
+  --shadow: 0 8px 32px rgba(192, 57, 43, 0.12);
 }
 
 /* =========================
@@ -16,7 +16,7 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.55);
+  background: rgba(45, 10, 8, 0.5);
   display: grid;
   place-items: center;
   z-index: 999;
@@ -33,9 +33,13 @@
   overflow-y: auto;
   background: var(--card);
   border-radius: 18px;
+  border: 1px solid var(--border);
   box-shadow: var(--shadow);
   padding: 20px;
   animation: pop .25s ease;
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-thumb { background: rgba(192, 57, 43, 0.2); border-radius: 4px; }
 }
 
 /* =========================
@@ -52,29 +56,34 @@
   margin: 0;
   font-size: 20px;
   font-weight: 700;
+  color: var(--text);
 }
 
 .status {
   padding: 4px 10px;
   border-radius: 20px;
   font-size: 12px;
-  font-weight: 600;
-  background: #eee;
+  font-weight: 500;
   margin-left: 10px;
 }
 
-.status.Received { background: #fff3cd; color: #856404; }
-.status.Preparing { background: #cce5ff; color: #004085; }
-.status.Ready { background: #d4edda; color: #155724; }
-.status.Delivered { background: #d1ecf1; color: #0c5460; }
-.status.Cancelled { background: #f8d7da; color: #721c24; }
+.status.Received   { background: #FFF3E0; color: #E65100; border: 1px solid rgba(230,81,0,0.2); }
+.status.Preparing  { background: #FFF3E0; color: #E65100; border: 1px solid rgba(230,81,0,0.2); }
+.status.Ready      { background: #E8F5E9; color: #2E7D32; border: 1px solid rgba(46,125,50,0.2); }
+.status.Delivered  { background: #E3F2FD; color: #1565C0; border: 1px solid rgba(21,101,192,0.2); }
+.status.Cancelled  { background: #F5F5F5; color: #757575; border: 1px solid rgba(0,0,0,0.1); }
 
 .close {
   background: transparent;
   border: none;
   font-size: 22px;
   cursor: pointer;
-  color: #666;
+  color: var(--muted);
+  transition: color .15s;
+
+  &:hover {
+    color: var(--primary);
+  }
 }
 
 /* =========================
@@ -86,6 +95,10 @@
   font-size: 14px;
   color: var(--muted);
   margin-bottom: 15px;
+  padding: 12px;
+  background: #FFF5F5;
+  border-radius: 10px;
+  border: 1px solid var(--border);
 }
 
 /* =========================
@@ -105,13 +118,13 @@
   padding: 12px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: #fff;
+  background: #FFFFFF;
   transition: .2s;
-}
 
-.item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0,0,0,.05);
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(192, 57, 43, 0.08);
+  }
 }
 
 .item .left {
@@ -141,16 +154,16 @@
 .remove-btn {
   background: transparent;
   border: none;
-  color: var(--primary);
+  color: var(--muted);
   font-size: 18px;
   cursor: pointer;
   margin-left: 10px;
   transition: .2s;
-}
 
-.remove-btn:hover {
-  transform: scale(1.2);
-  color: var(--primary-dark);
+  &:hover {
+    transform: scale(1.2);
+    color: var(--primary);
+  }
 }
 
 /* =========================
@@ -159,12 +172,13 @@
 .add-section {
   margin-top: 20px;
   padding-top: 15px;
-  border-top: 1px dashed var(--border);
+  border-top: 1px dashed rgba(192, 57, 43, 0.2);
 }
 
 .add-section h3 {
   margin-bottom: 10px;
   font-size: 16px;
+  color: var(--text);
 }
 
 /* =========================
@@ -186,16 +200,21 @@ input {
   width: 100%;
   padding: 10px;
   border-radius: 10px;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(192, 57, 43, 0.2);
   outline: none;
-  transition: .2s;
+  background: #FFFFFF;
+  color: var(--text);
   font-size: 14px;
-}
+  transition: .2s;
 
-select:focus,
-input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(196, 30, 30, 0.1);
+  &:hover {
+    border-color: rgba(192, 57, 43, 0.4);
+  }
+
+  &:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.12);
+  }
 }
 
 /* =========================
@@ -210,15 +229,16 @@ button {
 .add-btn {
   width: 100%;
   padding: 10px;
-  border: 1px dashed var(--primary);
+  border: 1px dashed rgba(192, 57, 43, 0.35);
   background: transparent;
   color: var(--primary);
   border-radius: var(--radius);
   margin-top: 10px;
-}
 
-.add-btn:hover {
-  background: rgba(196,30,30,.05);
+  &:hover {
+    background: #FFF5F5;
+    border-color: var(--primary);
+  }
 }
 
 /* save */
@@ -228,30 +248,31 @@ button {
   padding: 12px;
   border: none;
   background: var(--primary);
-  color: #fff;
-  border-radius: 30px;
+  color: #FFFFFF;
+  border-radius: 8px;
   font-weight: 600;
+
+  &:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+  }
 }
 
-.save-btn:hover {
-  background: var(--primary-dark);
-  transform: translateY(-1px);
-}
-
-/* cancel */
+/* cancel order */
 .cancel-btn {
   width: 100%;
   margin-top: 15px;
   padding: 12px;
-  border: none;
-  background: #111;
-  color: #fff;
-  border-radius: 30px;
+  border: 1px solid rgba(192, 57, 43, 0.25);
+  background: #FFFFFF;
+  color: var(--primary);
+  border-radius: 8px;
   font-weight: 600;
-}
 
-.cancel-btn:hover {
-  opacity: .85;
+  &:hover {
+    background: #FDECEA;
+    border-color: var(--primary);
+  }
 }
 
 /* =========================
@@ -259,25 +280,18 @@ button {
 ========================= */
 @keyframes fadeIn {
   from { opacity: 0; }
-  to { opacity: 1; }
+  to   { opacity: 1; }
 }
 
 @keyframes pop {
-  from {
-    transform: scale(.95);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  from { transform: scale(.95); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
 }
 
 /* =========================
    RESPONSIVE
 ========================= */
 @media (max-width: 768px) {
-
   .panel {
     width: 95%;
     padding: 15px;
@@ -292,5 +306,4 @@ button {
     align-items: flex-start;
     gap: 8px;
   }
-
 }
