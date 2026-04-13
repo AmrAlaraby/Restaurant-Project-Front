@@ -5,14 +5,14 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } fr
 
 import { Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
-
 import { CategoryInterface } from '../../../../../Core/Models/MenuItemModels/category-interface';
 import { MenuItemsService } from '../../../../../Core/Services/Menu-Item-Service/menu-item-service';
-import { ImageUpload } from '../components/image-upload/image-upload';
+
 import { IngredientInterface } from '../../../../../Core/Models/MenuItemModels/ingredient-interface';
 import { IngredientsService } from '../../../../../Core/Services/Ingredients-Service/ingredients-Service';
 import { UpdateMenuItemInterface } from '../../../../../Core/Models/MenuItemModels/update-menu-item-interface';
 import { CreateMenuItemInterface } from '../../../../../Core/Models/MenuItemModels/create-menu-item-interface';
+import { ImageUpload } from '../image-upload/image-upload';
 @Component({
   selector: 'app-menu-item-form',
   standalone: true,
@@ -80,7 +80,7 @@ export class MenuItemForm implements OnInit, OnChanges {
     this.ingredientService.getAll(1, 1000).subscribe({
       next: (response) => {
         this.ingredients = response.data;
-      }
+      },
     });
   }
 

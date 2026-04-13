@@ -1,21 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { MenuItemsStats } from '../components/menu-items-stats/menu-items-stats';
-import { MenuItemsFilters } from '../components/menu-items-filters/menu-items-filters';
-import { MenuItemsGrid } from '../components/menu-items-grid/menu-items-grid';
-import { Pagination } from '../../../../../Shared/Components/pagination/pagination';
-import { MenuItemInterface } from '../../../../../Core/Models/MenuItemModels/menu-item-interface';
-import { CategoryInterface } from '../../../../../Core/Models/MenuItemModels/category-interface';
-import { MenuItemQueryParamsInterface } from '../../../../../Core/Models/MenuItemModels/menu-item-query-params-interface';
-import { MenuItemsStatsInterface } from '../../../../../Core/Models/MenuItemModels/menu-items-stats-interface';
-import { MenuItemsService } from '../../../../../Core/Services/Menu-Item-Service/menu-item-service';
-import { CategoryService } from '../../../../../Core/Services/Categories-Service/categories-service';
+import { CategoryInterface } from '../../../../Core/Models/MenuItemModels/category-interface';
+import { MenuItemDetailsInterface } from '../../../../Core/Models/MenuItemModels/menu-item-details-interface';
+import { MenuItemInterface } from '../../../../Core/Models/MenuItemModels/menu-item-interface';
+import { MenuItemQueryParamsInterface } from '../../../../Core/Models/MenuItemModels/menu-item-query-params-interface';
+import { MenuItemsStatsInterface } from '../../../../Core/Models/MenuItemModels/menu-items-stats-interface';
+import { CategoryService } from '../../../../Core/Services/Categories-Service/categories-service';
+import { MenuItemsService } from '../../../../Core/Services/Menu-Item-Service/menu-item-service';
+import { Pagination } from '../../../../Shared/Components/pagination/pagination';
+import { MenuItemDetails } from '../../components/MenuItem/menu-item-details/menu-item-details';
+import { MenuItemForm } from '../../components/MenuItem/menu-item-form/menu-item-form';
+import { MenuItemsFilters } from '../../components/MenuItem/menu-items-filters/menu-items-filters';
+import { MenuItemsGrid } from '../../components/MenuItem/menu-items-grid/menu-items-grid';
+import { MenuItemsStats } from '../../components/MenuItem/menu-items-stats/menu-items-stats';
 
-import { MenuItemForm } from '../menu-item-form/menu-item-form';
-import { compileNgModule } from '@angular/compiler';
-import { MenuItemDetails } from '../components/menu-item-details/menu-item-details';
-import { MenuItemDetailsInterface } from '../../../../../Core/Models/MenuItemModels/menu-item-details-interface';
+
+
+
 @Component({
   selector: 'app-menu-items-page',
   standalone: true,
@@ -199,5 +201,5 @@ export class MenuItemsPage implements OnInit {
     this.selectedMenuItemDetails = undefined;
   }
 
- 
+
 }
