@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AddUser } from '../../../../Core/Models/UserModels/add-user';
 
 @Component({
   selector: 'user-modal',
@@ -14,4 +15,11 @@ export class UserModal {
   onClose() {
     this.close.emit();
   }
+
+  user: AddUser = {
+    name: '',
+    email: '',
+    roleId: '',
+    branchId: undefined,
+  };
 }
