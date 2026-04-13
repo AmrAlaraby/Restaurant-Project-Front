@@ -7,14 +7,19 @@
       <p class="subtitle">Manage your ingredients easily</p>
     </div>
 
-    <div class="count" *ngIf="!loading">
-      {{ totalCount }} Items
+    <div class="actions-header">
+      <button type="button" class="btn add" (click)="openModal()">
+        + Add Item
+      </button>
+
+      <div class="count" *ngIf="!loading">
+        {{ totalCount }} Items
+      </div>
     </div>
   </div>
 
   <!-- Loading -->
   <div *ngIf="loading" class="loading">
-    <div class="spinner"></div>
     <p>Loading ingredients...</p>
   </div>
 
@@ -67,4 +72,47 @@
     (pageChanged)="onPageChange($event)">
   </app-pagination>
 
+</div>
+
+<!-- 🔥 IMPORTANT: modal OUTSIDE container -->
+<div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal-ingredient">
+
+    <h3>Add New Ingredient</h3>
+
+    <form (ngSubmit)="addIngredient()">
+
+      <div class="form-group">
+        <label>Name</label>
+        <input
+          type="text"
+          [(ngModel)]="newIngredient.name"
+          name="name"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Unit</label>
+        <input
+          type="text"
+          [(ngModel)]="newIngredient.unit"
+          name="unit"
+          required
+        />
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn cancel" (click)="closeModal()">
+          Cancel
+        </button>
+
+        <button type="submit" class="btn save">
+          Save
+        </button>
+      </div>
+
+    </form>
+
+  </div>
 </div>

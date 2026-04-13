@@ -3,11 +3,12 @@ import { IngredientsService } from '../../../Core/Services/Ingredients-Service/i
 import { IngredientInterface } from '../../../../app/Core/Models/MenuItemModels/ingredient-interface';
 import { CommonModule } from '@angular/common';
 import { Pagination } from "../../../Shared/Components/pagination/pagination"; // 👈 مهم جدًا
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-ingredients',
   standalone: true,
-  imports: [CommonModule, Pagination],
+  imports: [CommonModule, Pagination, FormsModule],
   templateUrl: './ingredients.html',
   styleUrls: ['./ingredients.scss'],
 })
@@ -19,6 +20,12 @@ export class IngredientsComponent implements OnInit {
   pageIndex = 1;
   pageSize = 10;
   totalCount = 0;
+  showModal = false;
+
+  newIngredient = {
+  name: '',
+  unit: ''
+  };
 
   constructor(private ingredientService: IngredientsService) {}
 
@@ -52,5 +59,27 @@ onPageChange(page: number) {
     this.ingredientService.delete(id).subscribe(() => {
       this.loadData();
     });
+  }
+  openModal() {
+    this.showModal = true;
+    console.log(this.showModal); // لازم تبقى true
+  }
+  
+  closeModal() {
+    this.showModal = false;
+    this.newIngredient = { name: '', unit: '' }; // reset
+  }
+  
+  addIngredient() {
+    this.ingredientService.create(this.newIngredient).subscribe({
+      next: () => {
+        this.closeModal();
+        this.loadData(); 
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+
   }
 }
