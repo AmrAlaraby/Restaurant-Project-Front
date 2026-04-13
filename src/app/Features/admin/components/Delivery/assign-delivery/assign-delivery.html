@@ -1,0 +1,65 @@
+<div class="assign-container">
+
+  <div class="assign-header">
+    <div class="assign-title">Assign Delivery</div>
+    <div class="assign-sub">Select a branch, then a delivery, then assign a driver</div>
+  </div>
+
+  <div class="assign-form">
+
+    <!-- Select Branch -->
+    <div class="form-group">
+      <label class="form-label">Branch</label>
+      <select class="form-select-styled"
+              [(ngModel)]="selectedBranch"
+              (ngModelChange)="onBranchChange($event)">
+        <option [ngValue]="null">-- Select Branch --</option>
+        <option *ngFor="let b of branches" [ngValue]="b">{{ b.name }}</option>
+      </select>
+    </div>
+
+    <!-- Select Delivery -->
+    <div class="form-group" *ngIf="selectedBranch">
+      <label class="form-label">Delivery</label>
+      <div *ngIf="loadingDeliveries" class="inline-loading">Loading deliveries...</div>
+      <select *ngIf="!loadingDeliveries"
+              class="form-select-styled"
+              [(ngModel)]="selectedDelivery"
+              (ngModelChange)="onDeliveryChange($event)">
+        <option [ngValue]="null">-- Select Delivery --</option>
+        <option *ngFor="let d of deliveries" [ngValue]="d">
+          Order #{{ d.orderNumber }} — {{ d.deliveryAddress?.city }}
+        </option>
+      </select>
+      <div *ngIf="!loadingDeliveries && deliveries.length === 0" class="empty-msg">
+        No unassigned deliveries for this branch.
+      </div>
+    </div>
+
+    <!-- Select Driver -->
+    <div class="form-group" *ngIf="selectedDelivery">
+      <label class="form-label">Driver</label>
+      <div *ngIf="loadingDrivers" class="inline-loading">Loading drivers...</div>
+      <select *ngIf="!loadingDrivers"
+              class="form-select-styled"
+              [(ngModel)]="selectedDriverId">
+        <option value="">-- Select Driver --</option>
+        <option *ngFor="let driver of drivers" [value]="driver.driverId">
+          {{ driver.name }} ({{ driver.branchName }})
+        </option>
+      </select>
+      <div *ngIf="!loadingDrivers && drivers.length === 0" class="empty-msg">
+        No available drivers for this branch.
+      </div>
+    </div>
+
+    <!-- Assign Button -->
+    <button class="assign-btn"
+            (click)="assign()"
+            [disabled]="!selectedDriverId || assigning">
+      {{ assigning ? 'Assigning...' : '+ Assign Driver' }}
+    </button>
+
+  </div>
+
+</div>

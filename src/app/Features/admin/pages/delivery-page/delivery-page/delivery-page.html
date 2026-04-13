@@ -1,0 +1,55 @@
+<div class="delivery-page">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <div class="page-title">Delivery Management</div>
+      <div class="page-sub">Live driver tracking</div>
+    </div>
+    <button class="assign-btn" (click)="setTab('assign')">+ Assign Driver</button>
+  </div>
+
+  <!-- Stats Row -->
+  <div class="stats-row" *ngIf="activeTab !== 'assign'">
+    <div class="stat-card">
+      <div class="stat-label">Total orders</div>
+      <div class="stat-val">{{ totalOrders }}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">On the way</div>
+      <div class="stat-val">{{ onTheWay }}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Picked up</div>
+      <div class="stat-val">{{ pickedUp }}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Delivered</div>
+      <div class="stat-val">{{ delivered }}</div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab-btn" [class.active]="activeTab === 'all'" (click)="setTab('all')">
+      All Deliveries
+    </button>
+    <button class="tab-btn" [class.active]="activeTab === 'own'" (click)="setTab('own')">
+      My Deliveries
+    </button>
+  </div>
+
+  <!-- Content -->
+  <div class="tab-content">
+    <div *ngIf="activeTab === 'all'">
+      <app-all-deliveries></app-all-deliveries>
+    </div>
+    <div *ngIf="activeTab === 'assign'">
+      <app-assign-delivery></app-assign-delivery>
+    </div>
+    <div *ngIf="activeTab === 'own'">
+      <app-own-deliveries></app-own-deliveries>
+    </div>
+  </div>
+
+</div>

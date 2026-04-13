@@ -1,0 +1,158 @@
+<!-- 🔥 FILTERS -->
+<div class="filters-bar">
+  <div class="filter-item">
+    <select class="filter-select" [(ngModel)]="filters.branchId" (change)="applyFilters()">
+      <option [ngValue]="null">All Branches</option>
+      <option *ngFor="let b of branches" [ngValue]="b.id">{{ b.name }}</option>
+    </select>
+  </div>
+
+  <div class="filter-item">
+    <select class="filter-select" [(ngModel)]="filters.status" (change)="applyFilters()">
+      <option [ngValue]="null">All Status</option>
+      <option *ngFor="let s of statuses" [ngValue]="s">{{ s }}</option>
+    </select>
+  </div>
+
+  <div class="filter-item">
+    <input
+      type="number"
+      class="filter-input"
+      placeholder="Order ID"
+      [(ngModel)]="filters.orderId"
+      (keyup.enter)="applyFilters()"
+    />
+  </div>
+
+  <div class="filter-item">
+    <input type="date" class="filter-input" [(ngModel)]="filters.date" (change)="applyFilters()" />
+  </div>
+</div>
+
+<!-- Loading -->
+<div *ngIf="loading" class="loading-wrap">
+  <div class="spinner"></div>
+  <span>Loading deliveries...</span>
+</div>
+
+<!-- Cards -->
+<div class="deliveries-list" *ngIf="!loading">
+  <div class="delivery-row" *ngFor="let d of deliveries" (click)="openDetails(d.id)">
+    <div class="row-id">#D-{{ d.id }}</div>
+
+    <div class="row-main">
+      <div class="row-title">Order #{{ d.order?.id }}</div>
+      <div class="row-addr">
+        <span class="pin"></span>
+        {{ d.deliveryAddress?.buildingNumber }} {{ d.deliveryAddress?.street }},
+        {{ d.deliveryAddress?.city }}
+      </div>
+    </div>
+
+    <!-- Steps -->
+    <div class="steps-wrap">
+      <div class="step">
+        <div
+          class="step-circle"
+          [ngClass]="{
+            done: true,
+            active: d.deliveryStatus === 'Assigned',
+          }"
+        >
+          ✓
+        </div>
+        <div class="step-label">Assigned</div>
+      </div>
+      <div
+        class="step-connector"
+        [ngClass]="{
+          done:
+            d.deliveryStatus === 'PickedUp' ||
+            d.deliveryStatus === 'OnTheWay' ||
+            d.deliveryStatus === 'Delivered',
+        }"
+      ></div>
+      <div class="step">
+        <div
+          class="step-circle"
+          [ngClass]="{
+            done:
+              d.deliveryStatus === 'PickedUp' ||
+              d.deliveryStatus === 'OnTheWay' ||
+              d.deliveryStatus === 'Delivered',
+            active: d.deliveryStatus === 'PickedUp',
+            inactive: d.deliveryStatus === 'Assigned',
+          }"
+        >
+          {{
+            d.deliveryStatus === 'PickedUp' ||
+            d.deliveryStatus === 'OnTheWay' ||
+            d.deliveryStatus === 'Delivered'
+              ? '✓'
+              : '–'
+          }}
+        </div>
+        <div class="step-label">Picked Up</div>
+      </div>
+      <div
+        class="step-connector"
+        [ngClass]="{ done: d.deliveryStatus === 'OnTheWay' || d.deliveryStatus === 'Delivered' }"
+      ></div>
+      <div class="step">
+        <div
+          class="step-circle"
+          [ngClass]="{
+            done: d.deliveryStatus === 'OnTheWay' || d.deliveryStatus === 'Delivered',
+            active: d.deliveryStatus === 'OnTheWay',
+            inactive: d.deliveryStatus === 'Assigned' || d.deliveryStatus === 'PickedUp',
+          }"
+        >
+          {{ d.deliveryStatus === 'OnTheWay' || d.deliveryStatus === 'Delivered' ? '✓' : '→' }}
+        </div>
+        <div class="step-label">On the Way</div>
+      </div>
+      <div class="step-connector" [ngClass]="{ done: d.deliveryStatus === 'Delivered' }"></div>
+      <div class="step">
+        <div
+          class="step-circle"
+          [ngClass]="{
+            done: d.deliveryStatus === 'Delivered',
+            inactive: d.deliveryStatus !== 'Delivered',
+          }"
+        >
+          {{ d.deliveryStatus === 'Delivered' ? '✓' : '📍' }}
+        </div>
+        <div class="step-label">Delivered</div>
+      </div>
+    </div>
+
+    <div class="row-right">
+      <div class="driver-name">
+        Driver: <b>{{ d.driverName || 'Not Assigned' }}</b>
+      </div>
+      <span
+        class="status-badge"
+        [ngClass]="{
+          'badge-assigned': d.deliveryStatus === 'Assigned',
+          'badge-pickedup': d.deliveryStatus === 'PickedUp',
+          'badge-onway': d.deliveryStatus === 'OnTheWay',
+          'badge-delivered': d.deliveryStatus === 'Delivered',
+        }"
+      >
+        {{ d.deliveryStatus || 'Unknown' }}
+      </span>
+      <div class="row-price">EGP {{ d.order?.totalAmount }}</div>
+    </div>
+  </div>
+
+  <div *ngIf="deliveries.length === 0" class="empty-state">No deliveries found.</div>
+</div>
+
+<!-- Pagination -->
+<app-pagination
+  [pageIndex]="pageIndex"
+  [pageSize]="pageSize"
+  [totalCount]="totalCount"
+  (pageChanged)="onPageChanged($event)"
+>
+</app-pagination>
