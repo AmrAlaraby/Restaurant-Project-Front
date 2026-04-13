@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivePendingStationsDTO } from '../../../Core/Models/KitchenModels/active-pending-stations-dto';
+import { ActivePendingStationsDTO } from '../../../../../Core/Models/KitchenModels/active-pending-stations-dto';
+// import { ActivePendingStationsDTO } from '../../../Core/Models/KitchenModels/active-pending-stations-dto';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { ActivePendingStationsDTO } from '../../../Core/Models/KitchenModels/act
   standalone: true,
   imports: [CommonModule],
 templateUrl: './active-stations-bar.html',
-  styleUrls: ['./active-stations-bar.scss'],   
+  styleUrls: ['./active-stations-bar.scss'],
 })
 export class ActiveStationsBarComponent {
   @Input() stations: ActivePendingStationsDTO[] = [];
