@@ -75,7 +75,6 @@
     <div class="table-head">
       <span>CATEGORY</span>
       <span>ITEMS</span>
-      <span>STATUS</span>
       <span>ACTIONS</span>
     </div>
 
@@ -93,14 +92,9 @@
         {{ cat.menuItemsCount }}
       </div>
 
-      <!-- STATUS -->
-      <div class="active-count" [ngClass]="getActiveClass(cat)">
-        {{ cat.menuItemsCount }}
-      </div>
-
       <!-- ACTIONS -->
       <div class="actions">
-        <button class="edit-btn" (click)="onEdit(cat)">Edit</button>
+        <button class="edit-btn me-4" (click)="onEdit(cat)">Edit</button>
 
         <button class="delete-btn" (click)="onDelete(cat.id)">Delete</button>
       </div>
