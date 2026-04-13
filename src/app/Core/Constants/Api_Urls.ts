@@ -42,6 +42,14 @@ export const Users = {
   create: `${apiUrl}/User`,
 };
 
+export const Categories = {
+  getAll: `${apiUrl}/Categories`,
+};
+
+
+
+
+
 // hossam 54 75
 
 
@@ -84,6 +92,16 @@ export const Branch = {
   getAll: `${apiUrl}/Branch`,
 };
 
+
+export const Deliveries = {
+  getAll: `${apiUrl}/Delivery/GetAll`,
+  unassigned: `${apiUrl}/Delivery/unassigned`,
+  ownAssigned: `${apiUrl}/Delivery/OwnAssignedDeliveries`,
+  getById: `${apiUrl}/Delivery/DeliveryById`,
+  assign: `${apiUrl}/Delivery/assign`,
+  updateStatus: (id: number) => `${apiUrl}/Delivery/${id}/status`,
+  availableDrivers: `${apiUrl}/Delivery/available-drivers`,
+};
 
 
 

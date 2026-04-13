@@ -1,0 +1,124 @@
+<div *ngIf="loading" class="loading-wrap">
+  <div class="spinner"></div>
+  <span>Loading...</span>
+</div>
+
+<div *ngIf="delivery" class="details-wrap">
+
+  <!-- Header -->
+  <div class="details-header">
+    <div>
+      <div class="details-title">Order #{{ delivery.order.id }}</div>
+      <div class="details-sub">{{ delivery.order.branchName }}</div>
+    </div>
+    <span class="status-badge"
+          [ngClass]="{
+            'badge-assigned':  delivery.deliveryStatus === 'Assigned',
+            'badge-pickedup':  delivery.deliveryStatus === 'PickedUp',
+            'badge-onway':     delivery.deliveryStatus === 'OnTheWay',
+            'badge-delivered': delivery.deliveryStatus === 'Delivered'
+          }">
+      {{ delivery.deliveryStatus }}
+    </span>
+  </div>
+
+  <!-- Progress Steps -->
+  <div class="steps-wrap">
+    <div class="step">
+      <div class="step-circle done">✓</div>
+      <div class="step-label">Assigned</div>
+    </div>
+    <div class="step-connector" [ngClass]="{'done': delivery.deliveryStatus === 'PickedUp' || delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered'}"></div>
+    <div class="step">
+      <div class="step-circle"
+           [ngClass]="{
+             'done': delivery.deliveryStatus === 'PickedUp' || delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered',
+             'inactive': delivery.deliveryStatus === 'Assigned'
+           }">
+        {{ delivery.deliveryStatus === 'PickedUp' || delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered' ? '✓' : '–' }}
+      </div>
+      <div class="step-label">Picked Up</div>
+    </div>
+    <div class="step-connector" [ngClass]="{'done': delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered'}"></div>
+    <div class="step">
+      <div class="step-circle"
+           [ngClass]="{
+             'done': delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered',
+             'active': delivery.deliveryStatus === 'OnTheWay',
+             'inactive': delivery.deliveryStatus === 'Assigned' || delivery.deliveryStatus === 'PickedUp'
+           }">
+        {{ delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered' ? '✓' : '→' }}
+      </div>
+      <div class="step-label">On the Way</div>
+    </div>
+    <div class="step-connector" [ngClass]="{'done': delivery.deliveryStatus === 'Delivered'}"></div>
+    <div class="step">
+      <div class="step-circle"
+           [ngClass]="{
+             'done': delivery.deliveryStatus === 'Delivered',
+             'inactive': delivery.deliveryStatus !== 'Delivered'
+           }">
+        {{ delivery.deliveryStatus === 'Delivered' ? '✓' : '📍' }}
+      </div>
+      <div class="step-label">Delivered</div>
+    </div>
+  </div>
+
+  <div class="details-grid">
+
+    <!-- Info -->
+    <div class="info-card">
+      <div class="card-title">Delivery Info</div>
+      <div class="info-row"><span>Driver</span><b>{{ delivery.driverName || 'Not Assigned' }}</b></div>
+      <div class="info-row"><span>Total</span><b class="red">EGP {{ delivery.order.totalAmount }}</b></div>
+      <div class="info-row"><span>Created</span><b>{{ delivery.createdAt | date:'dd/MM/yyyy hh:mm a' }}</b></div>
+      <div class="info-row" *ngIf="delivery.deliveredAt"><span>Delivered</span><b>{{ delivery.deliveredAt | date:'dd/MM/yyyy hh:mm a' }}</b></div>
+      <div class="info-row" *ngIf="delivery.cashCollected"><span>Cash Collected</span><b>EGP {{ delivery.cashCollected }}</b></div>
+    </div>
+
+    <!-- Address -->
+    <div class="info-card">
+      <div class="card-title">Delivery Address</div>
+      <div class="info-row"><span>Building</span><b>{{ delivery.deliveryAddress.buildingNumber }}</b></div>
+      <div class="info-row"><span>Street</span><b>{{ delivery.deliveryAddress.street }}</b></div>
+      <div class="info-row"><span>City</span><b>{{ delivery.deliveryAddress.city }}</b></div>
+      <div class="info-row" *ngIf="delivery.deliveryAddress.specialMark">
+        <span>Mark</span><b>{{ delivery.deliveryAddress.specialMark }}</b>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Items -->
+  <div class="items-card">
+    <div class="card-title">Order Items</div>
+    <div class="item-row" *ngFor="let item of delivery.order.items">
+      <span class="item-name">{{ item.menuItemName }}</span>
+      <span class="item-qty">x{{ item.quantity }}</span>
+      <span class="item-price">EGP {{ item.total }}</span>
+    </div>
+  </div>
+
+  <!-- Update Status -->
+  <div class="update-card">
+    <div class="card-title">Update Status</div>
+    <div class="update-form">
+      <select class="form-select-styled" [(ngModel)]="updateModel.status">
+        <option value="Assigned">Assigned</option>
+        <option value="PickedUp">Picked Up</option>
+        <option value="OnTheWay">On the Way</option>
+        <option value="Delivered">Delivered</option>
+      </select>
+      <input type="number"
+             class="form-input-styled"
+             placeholder="Cash Collected (EGP)"
+             [(ngModel)]="updateModel.cashCollected">
+      <button class="update-btn" (click)="updateStatus()">Update Status</button>
+    </div>
+  </div>
+
+  <button class="back-btn" (click)="goBack()">← Back</button>
+
+</div>
+
+

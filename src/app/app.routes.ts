@@ -77,6 +77,49 @@ export const routes: Routes = [
 
     children: [
       { path: '', redirectTo: 'orders', pathMatch: 'full' },
+      { path: 'orders', loadComponent: () => import('./Features/admin/pages/orders-page/orders-page').then(m => m.OrdersPage) },
+    ]
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+{
+  path: 'admin/deliveries',
+  loadComponent: () =>
+    import('./Features/admin/pages/delivery-page/delivery-page/delivery-page')
+      .then(m => m.DeliveryPage)
+},
+{
+  path: 'deliveries/:id',
+  loadComponent: () =>
+    import('./Features/admin/components/Delivery/delivery-details/delivery-details')
+      .then(m => m.DeliveryDetails)
+}
       {
         path: 'orders',
         loadComponent: () =>
