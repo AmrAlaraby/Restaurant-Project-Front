@@ -8,6 +8,7 @@ import { Category } from '../../../../Core/Models/CategoryModels/Category ';
 import { CategoryService } from '../../../../Core/Services/Categories-Service/categories-service';
 import { MenuItemInterface } from '../../../../Core/Models/MenuItemModels/menu-item-interface';
 import { MenuItemsService } from '../../../../Core/Services/Menu-Item-Service/menu-item-service';
+import { CreateOrderItemInterface } from '../../../../Core/Models/OrderModels/create-order-item-interface';
 
 @Component({
   selector: 'app-place-order',
@@ -21,6 +22,8 @@ export class PlaceOrder {
   selectedCategoryId?: number;
 
   menuItems: MenuItemInterface[] = [];
+
+  orderItems: CreateOrderItemInterface[] = [];
 
   pageIndex = 1;
   pageSize = 8;
@@ -68,4 +71,58 @@ export class PlaceOrder {
     this.pageIndex = page;
     this.loadMenuItems();
   }
+  // =========================
+  // ADD ITEM
+  // =========================
+  addToOrder(item: MenuItemInterface): void {
+
+  const existing = this.orderItems.find(x => x.menuItemId === item.id);
+
+  if (existing) {
+    existing.quantity++;
+    return;
+  }
+
+  this.orderItems.push({
+    menuItemId: item.id,
+    quantity: 1,
+    unitPrice: item.price,
+
+    
+    name: item.name,
+    imageUrl: item.imageUrl
+  } as any);
+}
+
+  // =========================
+  // REMOVE ITEM
+  // =========================
+  removeItem(menuItemId: number): void {
+    this.orderItems = this.orderItems.filter(x => x.menuItemId !== menuItemId);
+  }
+
+  // =========================
+  // DECREASE QUANTITY
+  // =========================
+  decreaseQty(menuItemId: number): void {
+    const item = this.orderItems.find(x => x.menuItemId === menuItemId);
+
+    if (!item) return;
+
+    item.quantity--;
+
+    if (item.quantity <= 0) {
+      this.removeItem(menuItemId);
+    }
+  }
+
+  // =========================
+  // TOTAL
+  // =========================
+  get total(): number {
+    return this.orderItems.reduce((sum, item) => {
+      return sum + item.quantity * item.unitPrice;
+    }, 0);
+  }
+
 }

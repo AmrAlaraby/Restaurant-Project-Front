@@ -1,6 +1,6 @@
 <div class="grid">
 
-  <div class="card" *ngFor="let item of items; trackBy: trackById">
+  <div class="card" *ngFor="let item of items; trackBy: trackById" (click)="add.emit(item)">
 
     <img [src]="item.imageUrl" />
 

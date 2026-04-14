@@ -22,7 +22,8 @@
           [pageIndex]="pageIndex"
           [pageSize]="pageSize"
           [totalCount]="totalCount"
-          (pageChanged)="onPageChange($event)">
+          (pageChanged)="onPageChange($event)"
+          (add)="addToOrder($event)">
         </app-menu-list>
       </div>
 
@@ -36,7 +37,12 @@
       </div>
 
       <div class="card">
-        <app-order-summary></app-order-summary>
+        <app-order-summary
+        [items]="orderItems"
+        [total]="total"
+        (remove)="removeItem($event)"
+        (decrease)="decreaseQty($event)">
+        </app-order-summary>
       </div>
 
       <div class="card">
