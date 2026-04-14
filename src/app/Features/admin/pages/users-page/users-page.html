@@ -14,6 +14,13 @@
     (userUpdated)="onUserUpdated()">
   </edit-user>
 }
+@if (showDetailsModal && selectedUserId) {
+  <user-details
+    [userId]="selectedUserId"
+    (close)="closeDetailsModal()">
+  </user-details>
+}
+
 <users-filters
   (roleChanged)="onRoleChange($event)"
   (statusChanged)="onStatusChange($event)"
@@ -33,7 +40,8 @@
 <users-list
   [users]="users"
   (edit)="onEditUser($event)"
-  (toggle)="onToggleUser($event)">
+  (toggle)="onToggleUser($event)"
+  (viewDetails)="onViewDetails($event)">
 </users-list>
 
 

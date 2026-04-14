@@ -1,4 +1,5 @@
-<div class="user-card">
+<div class="user-card" (click)="onViewDetails()">
+
   <!-- Avatar -->
   <div class="avatar">
     {{ initials }}
@@ -22,7 +23,7 @@
   </div>
 
   <!-- Actions -->
-  <div class="actions">
+  <div class="actions" (click)="$event.stopPropagation()">
     <button class="btn-outline" (click)="onEdit()">Edit</button>
 
     <div class="status-toggle" (click)="onToggle()">
@@ -35,4 +36,5 @@
       </span>
     </div>
   </div>
+
 </div>

@@ -1,0 +1,120 @@
+<div class="modal-backdrop" (click)="onClose()">
+  <div class="details-modal" (click)="$event.stopPropagation()">
+
+    <!-- Loading -->
+    @if (isLoading) {
+      <div class="loading">Loading...</div>
+    }
+
+    <!-- Error -->
+    @if (errorMessage) {
+      <div class="error-message">{{ errorMessage }}</div>
+    }
+
+    @if (userDetails && !isLoading) {
+
+      <!-- Header -->
+      <div class="modal-header">
+        <h3>User Details</h3>
+        <button class="btn-close" (click)="onClose()">×</button>
+      </div>
+
+      <!-- Profile -->
+      <div class="profile-section">
+        <div class="avatar">{{ initials }}</div>
+        <div class="profile-info">
+          <h4>{{ userDetails.name }}</h4>
+          <span class="username">&#64;{{ userDetails.userName }}</span>
+          <span class="role-badge">{{ userDetails.roleId }}</span>
+        </div>
+        <div class="status-badge" [class.active]="!userDetails.isDeleted" [class.inactive]="userDetails.isDeleted">
+          {{ userDetails.isDeleted ? 'Inactive' : 'Active' }}
+        </div>
+      </div>
+
+      <!-- Info Grid -->
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="label">EMAIL</span>
+          <span class="value">{{ userDetails.email }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">BRANCH</span>
+          <span class="value">{{ userDetails.branchName ?? '—' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">JOINED</span>
+          <span class="value">{{ userDetails.createdAt | date: 'mediumDate' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">ROLE</span>
+          <span class="value">{{ userDetails.roleId }}</span>
+        </div>
+      </div>
+
+      <!-- Orders -->
+      @if (userDetails.orders?.length) {
+        <div class="section">
+          <h5>Orders <span class="count">{{ userDetails.orders.length }}</span></h5>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (order of userDetails.orders; track order.id) {
+                  <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.orderType }}</td>
+                    <td><span class="status-pill" [class]="order.status.toLowerCase()">{{ order.status }}</span></td>
+                    <td>{{ order.totalAmount }} EGP</td>
+                    <td>{{ order.createdAt | date: 'shortDate' }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      }
+
+      <!-- Deliveries -->
+      @if (userDetails.deliveries?.length) {
+        <div class="section">
+          <h5>Deliveries <span class="count">{{ userDetails.deliveries.length }}</span></h5>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Status</th>
+                  <th>Address</th>
+                  <th>Cash Collected</th>
+                  <th>Delivered At</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (delivery of userDetails.deliveries; track delivery.id) {
+                  <tr>
+                    <td>{{ delivery.id }}</td>
+                    <td><span class="status-pill" [class]="delivery.deliveryStatus.toLowerCase()">{{ delivery.deliveryStatus }}</span></td>
+                    <td>{{ delivery.deliveryAddress.street }}, {{ delivery.deliveryAddress.city }}</td>
+                    <td>{{ delivery.cashCollected ?? '—' }}</td>
+                    <td>{{ delivery.deliveredAt | date: 'shortDate' }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      }
+
+    }
+
+  </div>
+</div>

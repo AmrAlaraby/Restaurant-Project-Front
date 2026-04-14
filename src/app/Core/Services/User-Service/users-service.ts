@@ -4,9 +4,11 @@ import { User } from '../../Models/UserModels/user';
 import { PaginatedResultInterface } from '../../Models/MenuItemModels/paginated-result-interface';
 import { AddUser } from '../../Models/UserModels/add-user';
 import { UpdateUser } from '../../Models/UserModels/update-user';
+
 import { UserQueryParams } from '../../Models/UserModels/user-query-params';
 import { Branch, Users } from '../../Constants/Api_Urls';
 import { BranchDto } from '../../Models/BranchModels/Branch-dto';
+import { UserDetails } from '../../Models/UserModels/user-details';
 
 
 @Injectable({
@@ -66,5 +68,9 @@ export class UsersService {
 
   updateUser(user: UpdateUser) {
     return this.http.put<User>(Users.update(user.id), user);
+  }
+
+  getUserDetails(id: string) {
+    return this.http.get<UserDetails>(Users.getById(id));
   }
 }

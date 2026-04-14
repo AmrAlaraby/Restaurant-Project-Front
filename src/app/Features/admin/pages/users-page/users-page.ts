@@ -6,6 +6,7 @@ import { UsersHeader } from '../../components/User/users-header/users-header';
 import { UsersFilters } from '../../components/User/users-filters/users-filters';
 import { AddUserComponent } from '../../components/User/add-user/add-user';
 import { EditUserComponent } from '../../components/User/edit-user/edit-user';
+import { UserDetailsComponent } from '../../components/User/user-details/user-details';
 import { UsersList } from '../../components/User/users-list/users-list';
 import { UsersService } from '../../../../Core/Services/User-Service/users-service';
 
@@ -13,7 +14,7 @@ import { UsersService } from '../../../../Core/Services/User-Service/users-servi
 @Component({
   selector: 'app-users-page',
   standalone: true,
-  imports: [UsersHeader, UsersFilters, UsersList, Pagination, AddUserComponent, EditUserComponent],
+  imports: [UsersHeader, UsersFilters, UsersList, Pagination, AddUserComponent, EditUserComponent, UserDetailsComponent],
   templateUrl: './users-page.html',
   styleUrl: './users-page.scss',
 })
@@ -133,5 +134,19 @@ export class UsersPage implements OnInit {
     this.showModal = false;
     this.pageIndex = 1;
     this.loadUsers();
+  }
+
+  //------------------------- User Details -----------------------------------
+  showDetailsModal = false;
+  selectedUserId: string | null = null;
+
+  onViewDetails(user: User) {
+    this.selectedUserId = user.id;
+    this.showDetailsModal = true;
+  }
+
+  closeDetailsModal() {
+    this.showDetailsModal = false;
+    this.selectedUserId = null;
   }
 }
