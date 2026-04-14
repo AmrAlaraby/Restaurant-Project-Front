@@ -90,6 +90,12 @@ export const Kitchen = {
 
 export const Branch = {
   getAll: `${apiUrl}/Branch`,
+  getAllWithTables: `${apiUrl}/Branch/GetAllBranchesWithTables`,
+  getById: (id: number) => `${apiUrl}/Branch/${id}`,
+  create: `${apiUrl}/Branch`,
+  update: (id: number) => `${apiUrl}/Branch/${id}`,
+  delete: (id: number) => `${apiUrl}/Branch/${id}`,
+  toggleStatus: (id: number) => `${apiUrl}/Branch/${id}/toggle-status`,
 };
 
 
