@@ -1,0 +1,9 @@
+<div class="branch-selector">
+
+  <select (change)="selectBranch($any($event.target).value)">
+    <option value="">All Branches</option>
+    <option *ngFor="let branch of branches" [value]="branch.id">
+      {{ branch.name }}
+    </option>
+  </select>
+</div>

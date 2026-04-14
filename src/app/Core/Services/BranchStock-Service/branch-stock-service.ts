@@ -13,10 +13,14 @@ import { PaginatedResultInterface } from '../../Models/MenuItemModels/paginated-
 export class BranchStockService {
   private http = inject(HttpClient);
 
-  getAll(pageIndex = 1, pageSize = 10): Observable<PaginatedResultInterface<BranchStockInterface>> {
-    return this.http.get<PaginatedResultInterface<BranchStockInterface>>(
-      `${BranchStock.getAll}?pageIndex=${pageIndex}&pageSize=${pageSize}`
-    );
+  getAll(branchId?: number): Observable<BranchStockInterface[]> {
+    let url = BranchStock.getAll;
+
+    if (branchId) {
+      url += `?branchId=${branchId}`;
+    }
+
+    return this.http.get<BranchStockInterface[]>(url);
   }
 
   getById(id: number): Observable<BranchStockInterface> {
