@@ -1,0 +1,20 @@
+<div class="card">
+  <h4>Order #{{ ticket.orderId }}</h4>
+  <p>Station: {{ ticket.station }}</p>
+
+  <p>Status: {{ ticket.status }}</p>
+
+  <p>Items:</p>
+  <ul>
+    @for (item of ticket.items; track item) {
+      <li>{{ item }}</li>
+    }
+  </ul>
+
+  <div class="actions">
+    @if (ticket.status !== TicketStatus.Done) {
+      <button (click)="markPreparing()">Preparing</button>
+      <button (click)="markDone()">Done</button>
+    }
+  </div>
+</div>
