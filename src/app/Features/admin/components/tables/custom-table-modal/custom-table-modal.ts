@@ -91,5 +91,8 @@ export class CustomTableModal implements OnChanges, OnInit {
       branchId: 0,
     });
   }
-  
+  seatArray() {
+  const cap = this.form.controls.capacity.value;
+  return Array(Math.min(cap || 1, 20)).fill(0);
+}
 }
