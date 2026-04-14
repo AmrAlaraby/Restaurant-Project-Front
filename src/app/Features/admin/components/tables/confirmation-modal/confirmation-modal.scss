@@ -1,67 +1,113 @@
+:host {
+  --primary: #C0392B;
+  --primary-dark: #96281B;
+  --bg: #FDF5F5;
+  --card: #FFFFFF;
+  --text: #2D0A08;
+  --muted: #9B4437;
+  --border: rgba(192, 57, 43, 0.15);
+  --shadow: 0 10px 30px rgba(192, 57, 43, 0.15);
+}
+
+/* =========================
+   BACKDROP
+========================= */
 .modal-backdrop {
-  position: fixed; inset: 0;
-  background: rgba(45, 10, 8, 0.5);
-  backdrop-filter: blur(2px);
-  display: flex; align-items: center; justify-content: center;
-  z-index: 9999;
+  position: fixed;
+  inset: 0;
+  background: rgba(45, 10, 8, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn .2s ease;
 }
 
+/* =========================
+   BOX
+========================= */
 .modal-box {
-  background: #fff; border-radius: 16px;
-  border: 1px solid rgba(192, 57, 43, 0.2);
-  width: 360px; max-width: 92vw;
-  box-shadow: 0 20px 60px rgba(45,10,8,0.18);
-  overflow: hidden;
+  width: 400px;
+  max-width: 90%;
+  background: var(--card);
+  border-radius: 16px;
+  padding: 22px;
+  text-align: center;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  animation: pop .25s ease;
 }
 
-.modal-icon-wrap {
-  padding: 1.8rem 1.5rem 1rem;
-  display: flex; flex-direction: column;
-  align-items: center; gap: 1rem; text-align: center;
+/* =========================
+   MESSAGE
+========================= */
+.modal-box p {
+  font-size: 15px;
+  color: var(--text);
+  margin-bottom: 20px;
+  line-height: 1.5;
 }
 
-.icon-circle {
-  width: 60px; height: 60px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  &.danger { background: rgba(192,57,43,0.1); border: 1.5px solid rgba(192,57,43,0.2); }
-  &.success { background: rgba(33,145,80,0.09); border: 1.5px solid rgba(33,145,80,0.3); }
+/* =========================
+   ACTIONS
+========================= */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
-.modal-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 19px; font-weight: 700; color: #2D0A08;
-}
-.modal-msg { font-size: 13px; color: #b08a83; line-height: 1.6; margin-top: 6px; }
-
-.detail-chip {
-  display: flex; align-items: center; gap: 8px;
-  background: #faf9f9; border: 1px solid rgba(192,57,43,0.18);
-  border-radius: 9px; padding: 10px 14px; width: 100%;
-}
-.chip-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #b08a83; }
-.chip-val   { font-size: 13px; font-weight: 600; color: #2D0A08; margin-top: 1px; }
-
-.modal-divider { height: 1px; background: rgba(192,57,43,0.08); margin: 0 1.5rem; }
-
-.modal-footer {
-  padding: 1rem 1.5rem 1.3rem;
-  display: flex; flex-direction: column; gap: 8px;
+/* =========================
+   BUTTONS
+========================= */
+button {
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: .2s;
 }
 
-.btn-confirm {
-  width: 100%; padding: 11px 12px; border-radius: 9px; border: none;
-  font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
-  font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.15s;
-
-  &.danger  { background: #C0392B; color: #fff; box-shadow: 0 2px 8px rgba(192,57,43,0.2); &:hover { background: #96281B; } }
-  &.success { background: #219150; color: #fff; box-shadow: 0 2px 8px rgba(33,145,80,0.22); &:hover { background: #1a7a42; } }
+/* YES */
+button:first-child {
+  background: var(--primary);
+  color: #fff;
 }
 
-.btn-cancel {
-  width: 100%; padding: 10px 12px; border-radius: 9px;
-  border: 1px solid rgba(192,57,43,0.2); background: transparent;
-  color: #9B4437; font-size: 11px; font-weight: 700;
-  letter-spacing: 0.09em; text-transform: uppercase;
-  font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.13s;
-  &:hover { background: #FDF5F5; color: #C0392B; border-color: #C0392B; }
+button:first-child:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+/* CANCEL */
+button:last-child {
+  background: #fff;
+  border: 1px solid rgba(192, 57, 43, 0.3);
+  color: var(--primary);
+}
+
+button:last-child:hover {
+  background: #FDECEA;
+}
+
+/* ERROR MODE (OK button only) */
+:host-context(.error) button {
+  width: 100%;
+  background: var(--primary);
+  color: #fff;
+}
+
+
+/* =========================
+   ANIMATION
+========================= */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pop {
+  from { transform: scale(.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }

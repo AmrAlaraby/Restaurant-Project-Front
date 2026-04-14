@@ -4,6 +4,7 @@
       <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/>
       <path d="M11 11L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
     </svg>
+
     <input
       type="text"
       placeholder="Search by table number..."
@@ -21,7 +22,12 @@
     }
   </select>
 
-  <select [(ngModel)]="isOccupied" (ngModelChange)="onFilterChange()" [class.occupied]="isOccupied === true" [class.available]="isOccupied === false">
+  <select
+    [(ngModel)]="isOccupied"
+    (ngModelChange)="onFilterChange()"
+    [class.occupied]="isOccupied === true"
+    [class.available]="isOccupied === false"
+  >
     <option [ngValue]="null">All status</option>
     <option [ngValue]="true">Occupied</option>
     <option [ngValue]="false">Available</option>
