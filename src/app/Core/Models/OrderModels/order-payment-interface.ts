@@ -1,5 +1,5 @@
 export interface OrderPaymentInterface {
-    paymentMethod: string;
+  paymentMethod: string;
   paymentStatus: string;
   paidAmount: number;
   paidAt?: Date;
