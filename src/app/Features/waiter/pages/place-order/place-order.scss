@@ -1,0 +1,29 @@
+.page {
+  padding: 20px;
+  background: #f5f1ec;
+  min-height: 100vh;
+}
+
+h2 {
+  margin-bottom: 16px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.menu-section {
+  background: #f8f5f2;
+  border-radius: 12px;
+  padding: 16px;
+  min-height: 400px;
+}
+
+.order-section {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  min-height: 400px;
+}
