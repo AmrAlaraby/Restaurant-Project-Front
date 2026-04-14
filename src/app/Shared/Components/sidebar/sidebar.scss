@@ -1,14 +1,15 @@
 /* ═══════════════════════════════════════════════════
-   RMS SIDEBAR  —  sidebar.css
-   Colors: Red #C41E1E  |  Yellow #F5C518  |  White #fff
+   RMS SIDEBAR  —  sidebar.scss
+   Colors: Red #C0392B  |  White #FFFFFF  |  Muted rose tones
    Responsive: desktop pinned / mobile drawer
 ═══════════════════════════════════════════════════ */
 
 /* ── CSS VARIABLES ── */
 :host  {
-  --red:           #C41E1E;
+  --red:           #C0392B;
   --red-dark:      #a01818;
-  --red-light:     #f9e6e6;
+  --red-light:     #FFF5F5;
+  --red-muted:     #9B4437;
   --yellow:        #F5C518;
   --yellow-dark:   #d4a800;
   --yellow-light:  #fffbea;
@@ -20,14 +21,17 @@
   --gray-600:      #666;
   --gray-800:      #2a2a2a;
   --black:         #111;
+
+  /* ── Sidebar design tokens (light/white theme) ── */
   --sb-bg:         #ffffff;
   --sb-surface:    #fafafa;
-  --sb-border:     rgba(196,30,30,.12);
-  --sb-text:       #666666;
-  --sb-text-hover: #111111;
+  --sb-border:     rgba(192,57,43,.12);
+  --sb-text:       #9B4437;
+  --sb-text-hover: #2D0A08;
+  --sb-label-clr:  #c4a8a3;
   --sb-width:      240px;
   --topbar-h:      56px;
-  --font:          'Poppins', sans-serif;
+  --font:          'DM Sans', 'Poppins', sans-serif;
   --radius:        12px;
   --radius-sm:     8px;
   --transition:    all .22s ease;
@@ -75,48 +79,33 @@ button { cursor: pointer; font-family: var(--font); }
   flex-direction: column;
   z-index: 300;
   transition: transform .3s cubic-bezier(.4,0,.2,1);
-  /* Subtle left border accent */
-  border-right: 3px solid #C41E1E;
-  border-right: 3px solid var(--red);
+  border-right: 1px solid rgba(192,57,43,.13);
+  box-shadow: 0 2px 20px rgba(192,57,43,.07);
   overflow: hidden;
 }
-
-// /* Decorative diagonal glow at top-right */
-// .sidebar::before {
-//   content: '';
-//   position: absolute;
-//   top: -60px;
-//   right: -60px;
-//   width: 180px;
-//   height: 180px;
-//   background: radial-gradient(circle, rgba(196,30,30,.22) 0%, transparent 70%);
-//   pointer-events: none;
-//   border-radius: 50%;
-//   z-index: 0;
-// }
 
 /* ── BRAND / LOGO ── */
 .sb-brand {
   display: flex;
   align-items: center;
-  gap: 11px;
-  padding: 18px 18px 16px;
-  border-bottom: 1px solid var(--sb-border);
+  gap: 10px;
+  padding: 18px 16px 14px;
+  border-bottom: 1px solid rgba(192,57,43,.1);
   flex-shrink: 0;
   position: relative;
   z-index: 1;
 }
 
 .sb-logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: var(--red);
   display: grid;
   place-items: center;
   color: var(--white);
   flex-shrink: 0;
-  box-shadow: 0 4px 14px rgba(196,30,30,.45);
+  box-shadow: 0 3px 10px rgba(192,57,43,.35);
 }
 
 .sb-brand-text {
@@ -126,17 +115,18 @@ button { cursor: pointer; font-family: var(--font); }
 }
 .sb-brand-name {
   font-size: 1.05rem;
-  font-weight: 800;
-  color: #111;
-  letter-spacing: .5px;
+  font-weight: 700;
+  color: #2D0A08;
+  letter-spacing: .3px;
   line-height: 1;
 }
 .sb-brand-sub {
-  font-size: .6rem;
-  font-weight: 600;
+  font-size: .58rem;
+  font-weight: 500;
   letter-spacing: 1.8px;
-  color: var(--yellow);
+  color: var(--red-muted);
   text-transform: uppercase;
+  margin-top: 1px;
 }
 
 /* Close button (mobile only) */
@@ -147,13 +137,13 @@ button { cursor: pointer; font-family: var(--font); }
   height: 30px;
   border-radius: 50%;
   border: 1px solid var(--sb-border);
-  background: rgba(255,255,255,.06);
+  background: transparent;
   color: var(--sb-text);
   align-items: center;
   justify-content: center;
   transition: var(--transition);
 }
-.sb-close-btn:hover { background: rgba(255,255,255,.12); color: var(--white); }
+.sb-close-btn:hover { background: var(--red-light); color: var(--red); }
 
 /* ── SCROLLABLE NAV ── */
 .sb-nav {
@@ -162,14 +152,13 @@ button { cursor: pointer; font-family: var(--font); }
   overflow-x: hidden;
   padding: 10px 0 8px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,.1) transparent;
-    scrollbar-color: rgba(196,30,30,.2) transparent;
+  scrollbar-color: rgba(192,57,43,.2) transparent;
   position: relative;
   z-index: 1;
 }
 .sb-nav::-webkit-scrollbar { width: 4px; }
 .sb-nav::-webkit-scrollbar-track { background: transparent; }
-.sb-nav::-webkit-scrollbar-thumb {background: rgba(196,30,30,.2); border-radius: 4px; }
+.sb-nav::-webkit-scrollbar-thumb { background: rgba(192,57,43,.2); border-radius: 4px; }
 
 /* ── SECTION ── */
 .sb-section {
@@ -179,71 +168,51 @@ button { cursor: pointer; font-family: var(--font); }
 .sb-section-label {
   display: block;
   font-size: .6rem;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 1.4px;
   text-transform: uppercase;
-  color: #aaaaaa;
+  color: var(--sb-label-clr);
   padding: 12px 8px 6px;
 }
-.sb-section ul { display: flex; flex-direction: column; gap: 2px; }
+.sb-section ul { display: flex; flex-direction: column; gap: 1px; }
 
 /* ── NAV LINK ── */
 .sb-link {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 9px 10px;
+  padding: 9px 14px;
+  margin: 1px 0;
   border-radius: var(--radius-sm);
-  color: #666666;
+  color: var(--sb-text);
   font-size: .83rem;
-  font-weight: 500;
+  font-weight: 400;
   transition: var(--transition);
   position: relative;
   overflow: hidden;
 }
-.sb-link::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(255,255,255,.0);
-  border-radius: var(--radius-sm);
-  transition: var(--transition);
-}
 .sb-link:hover {
-  color: #111111;
-  background: rgba(196,30,30,.06);
+  color: var(--sb-text-hover);
+  background: #FFF5F5;
 }
-.sb-link:hover .sb-icon { color: var(--yellow); }
+.sb-link:hover .sb-icon { color: var(--red); }
 
 /* ACTIVE STATE */
 .sb-link.active {
-  background: linear-gradient(90deg, rgba(196,30,30,.9) 0%, rgba(160,24,24,.75) 100%);
-  color: var(--white);
-  font-weight: 600;
-  box-shadow: 0 4px 18px rgba(196,30,30,.35), inset 0 1px 0 rgba(255,255,255,.1);
+  background: rgba(192,57,43,.1);
+  color: var(--red);
+  font-weight: 500;
 }
-.sb-link.active .sb-icon { color: var(--yellow); }
-/* Active left accent bar */
-.sb-link.active::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 20%;
-  bottom: 20%;
-  width: 3px;
-  border-radius: 0 3px 3px 0;
-  background: var(--yellow);
-  box-shadow: 0 0 8px var(--yellow);
-}
+.sb-link.active .sb-icon { color: var(--red); }
 
 /* ── ICON ── */
 .sb-icon {
-  width: 28px;
-  height: 28px;
+  width: 20px;
+  height: 20px;
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  color: rgba(255,255,255,.45);
+  color: var(--sb-text);
   transition: var(--transition);
 }
 
@@ -267,7 +236,7 @@ button { cursor: pointer; font-family: var(--font); }
 .sb-badge--red {
   background: var(--red);
   color: var(--white);
-  box-shadow: 0 2px 8px rgba(196,30,30,.5);
+  box-shadow: 0 2px 8px rgba(192,57,43,.4);
 }
 .sb-badge--yellow {
   background: var(--yellow);
@@ -280,34 +249,25 @@ button { cursor: pointer; font-family: var(--font); }
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 16px;
-  border-top: 1px solid var(--sb-border);
-  background: rgba(255,245,240,.6);
+  padding: 12px 14px;
+  border-top: 1px solid rgba(192,57,43,.1);
+  background: var(--sb-bg);
   flex-shrink: 0;
   position: relative;
   z-index: 1;
 }
-.sb-user::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 16px; right: 16px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(245,197,24,.3), transparent);
-}
 
 .sb-user-avatar {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--red), var(--red-dark));
+  background: var(--red);
   color: var(--white);
   display: grid;
   place-items: center;
-  font-size: .72rem;
-  font-weight: 700;
+  font-size: .7rem;
+  font-weight: 600;
   flex-shrink: 0;
-  border: 2px solid rgba(245,197,24,.4);
-  box-shadow: 0 0 0 2px rgba(196,30,30,.3);
   letter-spacing: .5px;
 }
 
@@ -320,16 +280,16 @@ button { cursor: pointer; font-family: var(--font); }
 }
 .sb-user-name {
   font-size: .82rem;
-  font-weight: 700;
-  color: #111111;
+  font-weight: 500;
+  color: #2D0A08;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .sb-user-role {
   font-size: .68rem;
-  color: var(--yellow);
-  font-weight: 500;
+  color: var(--red-muted);
+  font-weight: 400;
   text-transform: capitalize;
 }
 
@@ -338,35 +298,31 @@ button { cursor: pointer; font-family: var(--font); }
   height: 28px;
   border-radius: 6px;
   border: 1px solid var(--sb-border);
-  background: rgba(255,255,255,.06);
+  background: transparent;
   color: var(--sb-text);
   display: grid;
   place-items: center;
   transition: var(--transition);
   flex-shrink: 0;
 }
-.sb-user-menu:hover { background: #C41E1E; color: var(--white); }
+.sb-user-menu:hover { background: var(--red); color: var(--white); }
 
-  .sb-logout {
+.sb-logout {
   margin-left: auto;
-  padding: 6px 12px;
-  border-radius: 8px;
-  border: 1px solid #C41E1E;
-  background: #C41E1E;
-  color: #fff;
-  font-size: 12px;
+  padding: 5px 11px;
+  border-radius: 7px;
+  border: 1px solid var(--red);
+  background: transparent;
+  color: var(--red);
+  font-size: 11.5px;
   font-weight: 600;
   cursor: pointer;
   transition: all .2s ease;
 }
-
-/* hover */
 .sb-logout:hover {
-  background: #a01818;
-  border-color: #a01818;
+  background: var(--red);
+  color: #fff;
 }
-
-/* active click */
 .sb-logout:active {
   transform: scale(0.95);
 }
@@ -465,13 +421,13 @@ button { cursor: pointer; font-family: var(--font); }
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--red), var(--red-dark));
+  background: var(--red);
   color: var(--white);
   font-size: .7rem;
   font-weight: 700;
   display: grid;
   place-items: center;
-  border: 2px solid rgba(196,30,30,.3);
+  border: 2px solid rgba(192,57,43,.3);
   letter-spacing: .5px;
 }
 
@@ -499,7 +455,7 @@ button { cursor: pointer; font-family: var(--font); }
   /* Sidebar slides off-screen */
   .sidebar {
     transform: translateX(-100%);
-      pointer-events: none;   
+      pointer-events: none;
     box-shadow: none;
   }
   .sidebar.open {
@@ -553,15 +509,15 @@ button { cursor: pointer; font-family: var(--font); }
     left: calc(100% + 10px);
     top: 50%;
     transform: translateY(-50%);
-    background: var(--sb-bg);
+    background: var(--white);
     border: 1px solid var(--sb-border);
-    color: var(--white);
+    color: var(--red);
     padding: 5px 10px;
     border-radius: var(--radius-sm);
     font-size: .78rem;
     white-space: nowrap;
     z-index: 400;
-    box-shadow: 0 4px 16px rgba(0,0,0,.3);
+    box-shadow: 0 4px 16px rgba(192,57,43,.15);
   }
 
   .sb-user { padding: 12px 0; justify-content: center; }
