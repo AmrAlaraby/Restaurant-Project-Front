@@ -9,4 +9,5 @@ export interface OrderInterface {
   status: string;
   orderItems: OrderItemInterface[];
   totalAmount: number;
+  tableNumber?: string;
 }
