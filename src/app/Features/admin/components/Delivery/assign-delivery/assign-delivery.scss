@@ -1,4 +1,4 @@
-$red: #CC2929;
+$red: #C0392B;
 $white: #fff;
 $border: #e8e8e8;
 $text: #1a1a1a;
@@ -94,7 +94,7 @@ $muted: #999;
   align-self: flex-start;
 
   &:hover:not(:disabled) {
-    background: darken(#CC2929, 8%);
+    background: #96281B;
     transform: translateY(-1px);
   }
 
