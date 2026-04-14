@@ -307,3 +307,47 @@ button {
     gap: 8px;
   }
 }
+
+
+.status-actions {
+  margin: 15px 0;
+
+  h3 {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  .status-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  button {
+    padding: 8px 14px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 13px;
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+
+    &.active {
+      border-color: #ff9800;
+      background: #fff3e0;
+      color: #ff9800;
+      font-weight: 600;
+    }
+
+    &.cancel.active {
+      border-color: #f44336;
+      background: #ffebee;
+      color: #f44336;
+    }
+  }
+}

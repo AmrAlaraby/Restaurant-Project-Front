@@ -38,10 +38,12 @@ export class OrdersService {
     orderId: number,
     status: string
   ): Observable<OrderInterface> {
+    console.log(status);
+    
     return this.http.put<OrderInterface>(
-      Order.updateStatus(orderId),
-      status
-    );
+      Order.updateStatus(orderId),JSON.stringify(status), {
+  headers: { 'Content-Type': 'application/json' }
+});
   }
 
   addItemsToOrder(
