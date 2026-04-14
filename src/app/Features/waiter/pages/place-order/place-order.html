@@ -1,15 +1,41 @@
 <div class="page">
-  <h2>Place New Order</h2>
+
+  <div class="header">
+    <h2>Place New Order</h2>
+  </div>
 
   <div class="layout">
-    <!-- Left Section -->
-    <div class="menu-section">
-      <p>Menu Section (Coming Soon)</p>
+
+    <!-- LEFT SIDE -->
+    <div class="left-panel">
+
+      <div class="card">
+        <app-category-filter></app-category-filter>
+      </div>
+
+      <div class="card menu-card">
+        <app-menu-list></app-menu-list>
+      </div>
+
     </div>
 
-    <!-- Right Section -->
-    <div class="order-section">
-      <p>Order Section (Coming Soon)</p>
+    <!-- RIGHT SIDE -->
+    <div class="right-panel">
+
+      <div class="card">
+        <app-table-selector></app-table-selector>
+      </div>
+
+      <div class="card">
+        <app-order-summary></app-order-summary>
+      </div>
+
+      <div class="card">
+        <app-payment-selector></app-payment-selector>
+      </div>
+
     </div>
+
   </div>
+
 </div>

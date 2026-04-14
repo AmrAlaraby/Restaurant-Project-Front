@@ -1,0 +1,19 @@
+.categories {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+button {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  background: #eee;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+button.active {
+  background: #c0392b;
+  color: #fff;
+}
