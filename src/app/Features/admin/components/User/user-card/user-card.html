@@ -10,7 +10,9 @@
 
     <p>
       <span class="email">{{ user.email }}</span>
-      <span *ngIf="user.branchName"> • {{ user.branchName }}</span>
+      @if (user.branchName) {
+        <span> • {{ user.branchName }}</span>
+      }
     </p>
   </div>
 

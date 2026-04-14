@@ -3,7 +3,7 @@ export interface User {
   name: string;
   email: string;
   roleId: string;
-  branchId?: string | null;
+  branchId?: number | null;
   branchName?: string | null;
   isDeleted: boolean;
 }

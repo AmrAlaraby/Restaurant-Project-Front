@@ -1,21 +1,22 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { UserCard } from '../user-card/user-card';
+import { User } from '../../../../../Core/Models/UserModels/user';
+
 
 @Component({
   selector: 'users-list',
   standalone: true,
-  imports: [CommonModule, UserCard],
+  imports: [UserCard],
   templateUrl: './users-list.html',
   styleUrls: ['./users-list.scss'],
 })
 export class UsersList {
-  @Input() users: any[] = [];
+  @Input() users: User[] = [];
 
-  @Output() edit = new EventEmitter<any>();
+  @Output() edit = new EventEmitter<User>();
   @Output() toggle = new EventEmitter<string>();
 
-  onEdit(user: any) {
+  onEdit(user: User) {
     this.edit.emit(user);
   }
 

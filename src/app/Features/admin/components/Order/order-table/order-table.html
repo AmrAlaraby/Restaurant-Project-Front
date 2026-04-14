@@ -14,8 +14,22 @@
       <tr (click)="onView(order.id)" class="clickable">
         <td>{{order.id}}</td>
         <td>{{order.customerName}}</td>
-        <td>{{order.orderType}}</td>
-        <td>{{order.status}}</td>
+        <td>
+          <span class="type-badge" [ngClass]="{
+            't-dinein':   order.orderType === 'DineIn',
+            't-delivery': order.orderType === 'Delivery',
+            't-pickup':   order.orderType === 'PickUp'
+          }">{{order.orderType}}</span>
+        </td>
+        <td>
+          <span class="status-badge" [ngClass]="{
+            'st-received':  order.status === 'Received',
+            'st-preparing': order.status === 'Preparing',
+            'st-ready':     order.status === 'Ready',
+            'st-delivered': order.status === 'Delivered',
+            'st-cancelled': order.status === 'Cancelled'
+          }">{{order.status}}</span>
+        </td>
         <td>{{order.totalAmount}}</td>
       </tr>
     }

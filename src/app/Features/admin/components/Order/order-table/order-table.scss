@@ -55,36 +55,71 @@ tbody tr {
   }
 }
 
-/* badges */
+/* ── TYPE & STATUS BADGES — pill / oval pastel style ── */
+
+.type-badge,
 .status-badge {
-  padding: 4px 10px;
-  border-radius: 20px;
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 999px;       // full pill
   font-size: .7rem;
-  font-weight: 500;
-  letter-spacing: 0.4px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
+  border: 1.5px solid transparent;
 }
 
-.st-preparing {
-  background: #FFF3E0;
-  color: #E65100;
-  border: 1px solid rgba(230, 81, 0, 0.2);
+/* ── Type badges ── */
+.t-dinein {
+  background: #EAF0FF;
+  color: #5B7FD4;
+  border-color: #C5D4F7;
 }
 
-.st-ready {
-  background: #E8F5E9;
-  color: #2E7D32;
-  border: 1px solid rgba(46, 125, 50, 0.2);
+.t-delivery {
+  background: #E6F7EE;
+  color: #3DAB6E;
+  border-color: #B6E8CE;
 }
 
-.st-delivered {
-  background: #E3F2FD;
-  color: #1565C0;
-  border: 1px solid rgba(21, 101, 192, 0.2);
+.t-pickup {
+  background: #F4EEFF;
+  color: #9B6DD6;
+  border-color: #DEC8F5;
 }
 
-.st-cancelled {
+/* ── Status badges ── */
+.st-preparing,
+.s-preparing {
+  background: #FFF5E0;
+  color: #D4900A;
+  border-color: #F5DCA0;
+}
+
+.st-ready,
+.s-ready {
+  background: #E6F7EE;
+  color: #3DAB6E;
+  border-color: #B6E8CE;
+}
+
+.st-delivered,
+.s-delivered {
+  background: #E4F3FF;
+  color: #4A9FD4;
+  border-color: #B8DCEF;
+}
+
+.st-cancelled,
+.s-cancelled {
   background: #F5F5F5;
-  color: #757575;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #999999;
+  border-color: #DEDEDE;
+}
+
+.st-received,
+.s-received {
+  background: #FFF0F5;
+  color: #D46A8A;
+  border-color: #F5C0D0;
 }

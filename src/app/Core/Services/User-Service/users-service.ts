@@ -3,13 +3,16 @@ import { Injectable } from '@angular/core';
 import { User } from '../../Models/UserModels/user';
 import { PaginatedResultInterface } from '../../Models/MenuItemModels/paginated-result-interface';
 import { AddUser } from '../../Models/UserModels/add-user';
+import { UpdateUser } from '../../Models/UserModels/update-user';
 import { UserQueryParams } from '../../Models/UserModels/user-query-params';
+import { Branch, Users } from '../../Constants/Api_Urls';
+import { BranchDto } from '../../Models/BranchModels/Branch-dto';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-  private baseUrl = 'https://localhost:7232/api/User';
 
   constructor(private http: HttpClient) {}
 
@@ -26,30 +29,42 @@ export class UsersService {
       httpParams = httpParams.set('branchId', params.branchId.toString());
     }
 
-    return this.http.get<PaginatedResultInterface<User>>(this.baseUrl, {
+    return this.http.get<PaginatedResultInterface<User>>(Users.getAll, {
       params: httpParams,
     });
   }
 
   getInactiveUsers(params: UserQueryParams) {
     let httpParams = new HttpParams()
-      .set('pageIndex', params.pageIndex)
-      .set('pageSize', params.pageSize);
+      .set('pageIndex', params.pageIndex.toString())
+      .set('pageSize', params.pageSize.toString());
 
     if (params.roleId && params.roleId !== 'All') {
       httpParams = httpParams.set('roleId', params.roleId);
     }
 
-    return this.http.get<PaginatedResultInterface<User>>(`${this.baseUrl}/inactive`, {
+    return this.http.get<PaginatedResultInterface<User>>(Users.getInactive, {
       params: httpParams,
     });
   }
 
+  getRoles() {
+    return this.http.get<string[]>(Users.getRoles);
+  }
+
+  getBranches() {
+    return this.http.get<BranchDto[]>(Branch.getAll);
+  }
+
   toggleUser(id: string) {
-    return this.http.patch<void>(`${this.baseUrl}/${id}/toggle-status`, {});
+    return this.http.patch<void>(Users.toggle(id), {});
   }
 
   createUser(user: AddUser) {
-    return this.http.post(this.baseUrl, user);
+    return this.http.post<User>(Users.create, user);
+  }
+
+  updateUser(user: UpdateUser) {
+    return this.http.put<User>(Users.update(user.id), user);
   }
 }
