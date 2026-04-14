@@ -1,0 +1,25 @@
+<div class="filters">
+
+  <!-- TYPE -->
+  <select [formControl]="form.controls.orderType" (change)="onChange()">
+    <option [ngValue]="null">All Types</option>
+
+    @for (type of types; track type) {
+      <option [ngValue]="type">
+        {{ type }}
+      </option>
+    }
+  </select>
+
+  <!-- STATUS -->
+  <select [formControl]="form.controls.status" (change)="onChange()">
+    <option [ngValue]="null">All Status</option>
+
+    @for (status of statuses; track status) {
+      <option [ngValue]="status">
+        {{ status }}
+      </option>
+    }
+  </select>
+
+</div>

@@ -122,6 +122,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./Features/waiter/pages/kitchen/kitchen').then((m) => m.Kitchen),
       },
+      {
+        path: 'orders',
+        loadComponent: () =>
+          import('./Features/waiter/pages/waiter-orders-page/waiter-orders-page').then((m) => m.WaiterOrdersPage),
+      },
       //Areej 201 - 250
       //Arwa 251 - 300
       //mahmoud 301 - 350
