@@ -1,11 +1,23 @@
 <users-header (addUser)="onAddUser()"></users-header>
 
 @if (showModal) {
-  <user-modal (close)="closeModal()"></user-modal>
+  <add-user
+    (close)="closeModal()"
+    (userAdded)="onUserAdded()">
+  </add-user>
+}
+
+@if (showEditModal && selectedUser) {
+  <edit-user
+    [user]="selectedUser"
+    (close)="closeEditModal()"
+    (userUpdated)="onUserUpdated()">
+  </edit-user>
 }
 <users-filters
   (roleChanged)="onRoleChange($event)"
-  (statusChanged)="onStatusChange($event)">
+  (statusChanged)="onStatusChange($event)"
+  (branchChanged)="onBranchChange($event)">
 </users-filters>
 
 

@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'users-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './users-header.html',
   styleUrls: ['./users-header.scss'],
 })

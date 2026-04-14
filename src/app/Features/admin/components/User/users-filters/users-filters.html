@@ -2,13 +2,24 @@
 
   <!-- Roles -->
   <div class="roles">
-    <button
-      *ngFor="let role of roles"
-      (click)="selectRole(role)"
-      [class.active]="role === selectedRole"
-    >
-      {{ role }}
-    </button>
+    @for (role of roles; track role) {
+      <button
+        (click)="selectRole(role)"
+        [class.active]="role === selectedRole"
+      >
+        {{ role }}
+      </button>
+    }
+  </div>
+
+  <!-- Branches -->
+  <div class="branches">
+    <select [(ngModel)]="selectedBranchId" (ngModelChange)="selectBranch($event)">
+      <option [ngValue]="null">All Branches</option>
+      @for (branch of branches; track branch.id) {
+        <option [ngValue]="branch.id">{{ branch.name }}</option>
+      }
+    </select>
   </div>
 
   <!-- Status -->

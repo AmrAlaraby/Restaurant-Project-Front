@@ -1,17 +1,19 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { User } from '../../../../../Core/Models/UserModels/user';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'user-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './user-card.html',
   styleUrls: ['./user-card.scss'],
 })
 export class UserCard {
-  @Input() user: any;
+  @Input() user!: User;
 
-  @Output() edit = new EventEmitter<any>();
+  @Output() edit = new EventEmitter<User>();
   @Output() toggle = new EventEmitter<string>();
 
   get initials(): string {

@@ -70,12 +70,12 @@
     transition: var(--transition);
 
     &.active {
-        background: #22c55e; 
+        background: #22c55e;
         color: white;
     }
 
     &.inactive {
-        background: var(--red); 
+        background: var(--red);
         color: white;
     }
 }

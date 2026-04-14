@@ -1,6 +1,23 @@
 <div class="stats-bar">
-    <div>Total: {{ total }}</div>
-<div>Delivered: {{ delivered }}</div>
-<div>Preparing: {{ preparing }}</div>
-<div>Cancelled: {{ cancelled }}</div>
+
+  <div class="stat-card">
+    <h6>Total orders</h6>
+    <div class="val">{{ total }}</div>
   </div>
+
+  <div class="stat-card">
+    <h6>Delivered</h6>
+    <div class="val">{{ delivered }}</div>
+  </div>
+
+  <div class="stat-card">
+    <h6>Preparing</h6>
+    <div class="val">{{ preparing }}</div>
+  </div>
+
+  <div class="stat-card">
+    <h6>Cancelled</h6>
+    <div class="val">{{ cancelled }}</div>
+  </div>
+
+</div>

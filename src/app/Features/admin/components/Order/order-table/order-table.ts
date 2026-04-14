@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { OrderInterface } from '../../../../../Core/Models/OrderModels/order-interface';
+import { NgClass } from '@angular/common';
 
 
 @Component({
   selector: 'app-order-table',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './order-table.html',
   styleUrl: './order-table.scss',
 })

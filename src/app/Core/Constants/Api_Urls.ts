@@ -37,9 +37,12 @@ export const MenuItems = {
 
 export const Users = {
   getAll: `${apiUrl}/User`,
+  getById: (id: string) => `${apiUrl}/User/${id}`,
   getInactive: `${apiUrl}/User/inactive`,
-  toggle: (id: string) => `${apiUrl}/User/${id}/toggle-status`,
+  getRoles: `${apiUrl}/User/Roles`,
   create: `${apiUrl}/User`,
+  update: (id: string) => `${apiUrl}/User/${id}`,
+  toggle: (id: string) => `${apiUrl}/User/${id}/toggle-status`,
 };
 
 

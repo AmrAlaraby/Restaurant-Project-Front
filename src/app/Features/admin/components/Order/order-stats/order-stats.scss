@@ -1,6 +1,5 @@
 :host {
-  --white: #FFFFFF;
-  --gray-200: rgba(192, 57, 43, 0.13);
+  --red: #C0392B;
   --radius: 14px;
 }
 
@@ -12,22 +11,33 @@
 }
 
 .stat-card {
-  background: var(--white);
+  background: #FFFFFF;
   border-radius: var(--radius);
-  padding: 18px;
-  border: 1px solid var(--gray-200);
-  box-shadow: 0 2px 8px rgba(192, 57, 43, 0.08);
+  padding: 18px 20px;
+  border: 1px solid rgba(192, 57, 43, 0.13);
+  border-top: 2.5px solid var(--red);
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
+  transition: box-shadow 0.2s;
 
   &:hover {
-    box-shadow: 0 4px 14px rgba(192, 57, 43, 0.12);
+    box-shadow: 0 4px 14px rgba(192, 57, 43, 0.1);
   }
 }
 
+h6,
+.label {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #9B4437;
+  margin: 0;
+}
+
 .val {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #C0392B;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2D0A08;
+  line-height: 1;
+  margin: 0;
 }
