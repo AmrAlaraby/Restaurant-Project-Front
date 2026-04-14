@@ -15,18 +15,19 @@ export const routes: Routes = [
     redirectTo: 'admin',
     pathMatch: 'full',
   },
-  {
-  path: 'branch-stock',
-  loadComponent: () =>
-    import('./Features/admin/pages/branch-stock-page/branch-stock/branch-stock')
-      .then(m => m.BranchStockComponent)
-  },
+
   {
     path: 'admin',
     loadComponent: () => import('./Features/admin/pages/layout/layout').then((m) => m.Layout),
 
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      {
+        path: 'branch-stock',
+        loadComponent: () =>
+          import('./Features/admin/pages/branch-stock-page/branch-stock/branch-stock')
+            .then(m => m.BranchStockComponent)
+        },
       {
         path: 'orders',
         loadComponent: () =>
