@@ -1,12 +1,13 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UpdateCurrentUserInterface } from '../../../../Core/Models/AuthModels/update-current-user-interface';
 import { UserInterface } from '../../../../Core/Models/AuthModels/user-interface';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
-  imports: [],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './profile.html',
   styleUrl: './profile.scss',
 })
