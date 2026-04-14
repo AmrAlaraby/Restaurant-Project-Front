@@ -1,0 +1,45 @@
+<div class="page">
+  <h2>Kitchen Status</h2>
+
+  @if (loading) {
+    <p>Loading...</p>
+  }
+
+  @if (!loading && board) {
+    <!-- PENDING -->
+    <h3>Pending</h3>
+    <div class="grid">
+      @for (ticket of board.pending; track ticket.id) {
+        <app-kitchen-ticket-card
+          [ticket]="ticket"
+          (changeStatus)="onStatusChange($event.id, $event.status)"
+        >
+        </app-kitchen-ticket-card>
+      }
+    </div>
+
+    <!-- PREPARING -->
+    <h3>Preparing</h3>
+    <div class="grid">
+      @for (ticket of board.preparing; track ticket.id) {
+        <app-kitchen-ticket-card
+          [ticket]="ticket"
+          (changeStatus)="onStatusChange($event.id, $event.status)"
+        >
+        </app-kitchen-ticket-card>
+      }
+    </div>
+
+    <!-- DONE -->
+    <h3>Done</h3>
+    <div class="grid">
+      @for (ticket of board.done; track ticket.id) {
+        <app-kitchen-ticket-card
+          [ticket]="ticket"
+          (changeStatus)="onStatusChange($event.id, $event.status)"
+        >
+        </app-kitchen-ticket-card>
+      }
+    </div>
+  }
+</div>
