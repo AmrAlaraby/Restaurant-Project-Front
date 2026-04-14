@@ -6,6 +6,8 @@ import { OrderSummary } from "../../components/place-order/order-summary/order-s
 import { PaymentSelector } from "../../components/place-order/payment-selector/payment-selector";
 import { Category } from '../../../../Core/Models/CategoryModels/Category ';
 import { CategoryService } from '../../../../Core/Services/Categories-Service/categories-service';
+import { MenuItemInterface } from '../../../../Core/Models/MenuItemModels/menu-item-interface';
+import { MenuItemsService } from '../../../../Core/Services/Menu-Item-Service/menu-item-service';
 
 @Component({
   selector: 'app-place-order',
@@ -18,7 +20,16 @@ export class PlaceOrder {
   categories: Category[] = [];
   selectedCategoryId?: number;
 
-  constructor(private categoryService: CategoryService) {}
+  menuItems: MenuItemInterface[] = [];
+
+  pageIndex = 1;
+  pageSize = 8;
+  totalCount = 0;
+
+  constructor(
+    private categoryService: CategoryService,
+    private menuService: MenuItemsService
+  ) {}
 
   ngOnInit(): void {
     this.loadCategories();
@@ -28,6 +39,7 @@ export class PlaceOrder {
     this.categoryService.getAll().subscribe({
       next: (res) => {
         this.categories = res;
+        this.loadMenuItems();
       }
     });
   }
@@ -35,11 +47,25 @@ export class PlaceOrder {
   onCategoryChange(categoryId?: number): void {
     this.selectedCategoryId = categoryId;
 
-    // 🔥 هنا هنستخدمه في Commit 4
+    this.pageIndex = 1;
     this.loadMenuItems();
   }
 
   loadMenuItems(): void {
-    // placeholder for next commit
+    this.menuService.getAll({
+      categoryId: this.selectedCategoryId,
+      isAvailable: true,
+      pageIndex: this.pageIndex,
+      pageSize: this.pageSize
+    }).subscribe({
+      next: (res) => {
+        this.menuItems = res.data;
+        this.totalCount = res.count;
+      }
+    });
+  }
+  onPageChange(page: number): void {
+    this.pageIndex = page;
+    this.loadMenuItems();
   }
 }

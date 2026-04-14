@@ -1,7 +1,23 @@
 <div class="grid">
-  <div class="item" *ngFor="let i of [1,2,3,4,5,6,7,8]">
-    <div class="img"></div>
-    <div class="title"></div>
-    <div class="price"></div>
+
+  <div class="card" *ngFor="let item of items; trackBy: trackById">
+
+    <img [src]="item.imageUrl" />
+
+    <div class="info">
+      <h4>{{ item.name }}</h4>
+      <p>{{ item.prepTimeMinutes }} min</p>
+      <span>EGP {{ item.price }}</span>
+    </div>
+
   </div>
+
 </div>
+
+<!-- REUSABLE PAGINATION -->
+<app-pagination
+  [pageIndex]="pageIndex"
+  [pageSize]="pageSize"
+  [totalCount]="totalCount"
+  (pageChanged)="pageChanged.emit($event)">
+</app-pagination>

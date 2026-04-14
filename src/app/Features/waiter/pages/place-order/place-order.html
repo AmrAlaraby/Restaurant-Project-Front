@@ -17,7 +17,13 @@
       </div>
 
       <div class="card menu-card">
-        <app-menu-list></app-menu-list>
+        <app-menu-list
+          [items]="menuItems"
+          [pageIndex]="pageIndex"
+          [pageSize]="pageSize"
+          [totalCount]="totalCount"
+          (pageChanged)="onPageChange($event)">
+        </app-menu-list>
       </div>
 
     </div>
