@@ -46,11 +46,16 @@ export class Kitchen implements OnInit, OnDestroy {
   }
 
   onStatusChange(ticketId: number, status: TicketStatus) {
+    console.log('Sending to API:', ticketId, status);
+
     this.kitchenService.updateTicketStatus(ticketId, { status }).subscribe({
-      next: () => {
+      next: (res) => {
+        console.log('Updated successfully:', res);
         this.loadBoard();
       },
-      error: (err) => console.error(err),
+      error: (err) => {
+        console.error('Update failed:', err);
+      },
     });
   }
 
