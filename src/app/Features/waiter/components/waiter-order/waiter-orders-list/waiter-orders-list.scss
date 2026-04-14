@@ -1,0 +1,105 @@
+.table-container {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+.table-header,
+.table-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1.5fr;
+    padding: 14px 16px;
+    align-items: center;
+}
+
+.table-header {
+    background: #f8f8f8;
+    font-weight: 600;
+    font-size: 13px;
+    color: #888;
+}
+
+.table-row {
+    border-top: 1px solid #eee;
+}
+
+.table-row:hover {
+    filter: brightness(0.97);
+}
+
+/* Table badge */
+.table-badge {
+    background: #e0f2f1;
+    color: #00796b;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+/* Status */
+.status {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.status.Received {
+    background: #fdecea;
+    color: #d32f2f;
+}
+
+.status.Preparing {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+.status.Ready {
+    background: #e8f5e9;
+    color: #388e3c;
+}
+
+.status.Delivered {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.status.Cancelled {
+    background: #eeeeee;
+    color: #616161;
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.view-btn {
+    background: transparent;
+    border: 1px solid #ccc;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.add-btn {
+    background: #e53935;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.row-delivered {
+    background: #e8f5e9;
+}
+
+.row-cancelled {
+    background: #fdecea;
+}
+
+.row-preparing {
+    background: #fff8e1;
+}

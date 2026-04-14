@@ -1,0 +1,30 @@
+.filters-container {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.tabs {
+    display: flex;
+    gap: 8px;
+    background: #f1ece7;
+    padding: 6px;
+    border-radius: 12px;
+}
+
+.tab {
+    border: none;
+    background: transparent;
+    padding: 6px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #8b8178;
+    font-size: 14px;
+}
+
+.tab.active {
+    background: #fff;
+    color: #000;
+    font-weight: 500;
+}

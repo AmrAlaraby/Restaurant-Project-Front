@@ -19,11 +19,34 @@ export class OrdersService {
     return this.http.post<OrderInterface>(Order.create, dto);
   }
 
-  getAllOrders(params?: any): Observable<PaginatedResultInterface<OrderInterface>> {
-    return this.http.get<PaginatedResultInterface<OrderInterface>>(Order.getAll, {
-      params,
-    });
-  }
+  // Helper method to clean params
+  private buildParams(params: any): any {
+  const cleanParams: any = {};
+
+  Object.keys(params).forEach(key => {
+    const value = params[key];
+
+    if (value !== null && value !== undefined && value !== '') {
+      cleanParams[key] = value;
+    }
+  });
+  return cleanParams;
+}
+
+
+getAllOrders(
+  params?: any
+): Observable<PaginatedResultInterface<OrderInterface>> {
+
+  const cleanParams = this.buildParams(params);
+
+  return this.http.get<PaginatedResultInterface<OrderInterface>>(
+    Order.getAll,
+    {
+      params: cleanParams
+    }
+  );
+}
 
   getOrderById(id: number): Observable<OrderDetailsInterface> {
     return this.http.get<OrderDetailsInterface>(Order.getById(id));
@@ -57,7 +80,7 @@ export class OrdersService {
   cancelOrder(orderId: number): Observable<void> {
     return this.http.patch<void>(Order.cancel(orderId), {});
   }
-
+/// ----------------------------- Waiter View Methods -------------------
   private mapToWaiterOrder(order: OrderInterface): WaiterOrder {
     return {
       id: order.id,
@@ -68,6 +91,9 @@ export class OrdersService {
       totalAmount: order.totalAmount,
     };
   }
+
+
+
   // New method to get orders for waiter view
   getAllOrdersForWaiter(params: OrderFilters) {
     return this.getAllOrders(params).pipe(

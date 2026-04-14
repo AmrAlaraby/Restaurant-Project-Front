@@ -1,25 +1,31 @@
-<div class="filters">
-
-  <!-- TYPE -->
-  <select [formControl]="form.controls.orderType" (change)="onChange()">
-    <option [ngValue]="null">All Types</option>
-
-    @for (type of types; track type) {
-      <option [ngValue]="type">
-        {{ type }}
-      </option>
-    }
-  </select>
+<div class="filters-container">
 
   <!-- STATUS -->
-  <select [formControl]="form.controls.status" (change)="onChange()">
-    <option [ngValue]="null">All Status</option>
+  <div class="tabs">
 
-    @for (status of statuses; track status) {
-      <option [ngValue]="status">
-        {{ status }}
-      </option>
+    @for (tab of statusTabs; track tab.label) {
+      <button
+        class="tab"
+        [class.active]="activeStatus === tab.value"
+        (click)="selectStatus(tab.value)">
+        {{ tab.label }}
+      </button>
     }
-  </select>
+
+  </div>
+
+  <!-- TYPE -->
+  <div class="tabs">
+
+    @for (tab of typeTabs; track tab.label) {
+      <button
+        class="tab"
+        [class.active]="activeType === tab.value"
+        (click)="selectType(tab.value)">
+        {{ tab.label }}
+      </button>
+    }
+
+  </div>
 
 </div>
