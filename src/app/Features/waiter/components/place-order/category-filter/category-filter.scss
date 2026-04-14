@@ -2,18 +2,33 @@
   display: flex;
   gap: 10px;
   overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: none;
 }
 
-button {
-  border: none;
-  padding: 8px 14px;
+.categories::-webkit-scrollbar {
+  display: none;
+}
+
+.cat-btn {
+  padding: 8px 16px;
   border-radius: 20px;
-  background: #eee;
+  border: 1px solid transparent;
+  background: #f2f2f2;
+  color: #333;
   cursor: pointer;
   white-space: nowrap;
+  transition: all 0.2s ease;
+  font-size: 13px;
 }
 
-button.active {
+.cat-btn:hover {
+  background: #e8e8e8;
+}
+
+.cat-btn.active {
   background: #c0392b;
   color: #fff;
+  border-color: #c0392b;
+  box-shadow: 0 2px 6px rgba(192, 57, 43, 0.2);
 }
