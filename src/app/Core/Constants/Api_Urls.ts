@@ -121,7 +121,11 @@ export const Ingredients = {
   update: (id: number) => `${apiUrl}/Ingredients/${id}`,
   delete: (id: number) => `${apiUrl}/Ingredients/${id}`,
 };
-
+export const BranchStock = {
+  getAll: `${apiUrl}/BranchStock`,
+  getById: (id: number) => `${apiUrl}/BranchStock/${id}`,
+  update: (id: number) => `${apiUrl}/BranchStock/${id}`,
+};
 
 
 
