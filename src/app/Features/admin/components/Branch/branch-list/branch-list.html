@@ -1,0 +1,104 @@
+<div class="branch-page">
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1 class="page-title">Branch Management</h1>
+    <button class="btn-add" (click)="openCreate()">
+      <span>+</span> Add Branch
+    </button>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading-grid" *ngIf="isLoading()">
+    <div class="skeleton-card" *ngFor="let i of [1,2,3]"></div>
+  </div>
+
+  <!-- Error -->
+  <div class="error-state" *ngIf="error() && !isLoading()">
+    <p>{{ error() }}</p>
+    <button class="btn-retry" (click)="loadBranches()">Try Again</button>
+  </div>
+
+  <!-- Branch Cards Grid -->
+  <div class="branches-grid" *ngIf="!isLoading() && !error()">
+
+    <div
+      class="branch-card"
+      *ngFor="let branch of branches()"
+      [class.selected]="branch.id === selectedBranchId"
+    >
+      <!-- Card Header -->
+      <div class="card-header">
+        <h2 class="branch-name">{{ branch.name }}</h2>
+        <span class="status-badge" [class.active]="branch.isActive" [class.inactive]="!branch.isActive">
+          {{ branch.isActive ? 'ACTIVE' : 'INACTIVE' }}
+        </span>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- Address & Phone -->
+      <div class="branch-info">
+        <div class="info-row">
+          <span class="icon">📍</span>
+          <span>{{ getAddress(branch) }}</span>
+        </div>
+        <div class="info-row">
+          <span class="icon">📞</span>
+          <span>{{ branch.phone }}</span>
+        </div>
+        <div class="info-row" *ngIf="branch.specialMark">
+          <span class="icon">🔖</span>
+          <span>{{ branch.specialMark }}</span>
+        </div>
+        <div class="info-row" *ngIf="branch.note">
+          <span class="icon">📝</span>
+          <span>{{ branch.note }}</span>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-box">
+          <span class="stat-number">{{ branch.tablesCount }}</span>
+          <span class="stat-label">Tables</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">{{ branch.usersCount }}</span>
+          <span class="stat-label">Staff</span>
+        </div>
+      </div>
+
+      <!-- Action -->
+      <button class="btn-manage" (click)="selectBranch(branch.id)">
+        Manage Branch
+      </button>
+
+    </div>
+
+    <!-- Add New Branch Card -->
+    <div class="branch-card add-card" (click)="openCreate()">
+      <div class="add-card-inner">
+        <span class="add-icon">+</span>
+        <span class="add-label">Add New Branch</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!isLoading() && !error() && branches().length === 0">
+    <p>No branches found.</p>
+    <button class="btn-add" (click)="openCreate()">+ Add Branch</button>
+  </div>
+
+  <!-- Pagination -->
+  <app-pagination
+    *ngIf="!isLoading() && totalCount() > params.pageSize!"
+    [pageIndex]="params.pageIndex!"
+    [pageSize]="params.pageSize!"
+    [totalCount]="totalCount()"
+    (pageChanged)="onPageChanged($event)"
+  />
+
+</div>

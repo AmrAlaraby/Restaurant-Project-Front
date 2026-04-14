@@ -120,6 +120,10 @@ export const routes: Routes = [
       //Arwa 251 - 300
       //mahmoud 301 - 350
       //mustafa 351 - 400
+
+
+
+
     ],
   },
 
@@ -297,6 +301,30 @@ export const routes: Routes = [
 
 
 
+  {
+    path: 'admin',
+    children: [
+      //amr 400 -450
+      //hossam 451 - 500
+      {
+        path: 'branch',
+        loadComponent: () =>
+          import('./Features/admin/pages/branch-page/branch-page').then((m) => m.BranchPageComponent),
+      },
+      //Areej 501 - 550
+      //Arwa 551 - 600
+      //mahmoud 601 - 650
+      //mustafa 651 - 700
+    ],
+  },
+
+  // {
+  //   path: '',
+  //   loadComponent: () =>
+  //     import('./Features/admin/pages/branch-page/branch-page').then(
+  //       (m) => m.BranchPageComponent
+  //     ),
+  // },
 
 
 
