@@ -1,9 +1,39 @@
 <div class="page">
 
-  <h2>My Orders</h2>
+  <div class="header">
+  <div>
+    <h2>Orders</h2>
+    <p class="sub">
+      Only showing orders for your branch
+    </p>
+  </div>
+
+  <button class="new-order-btn" (click)="goToNewOrder()">
+    + New Order
+  </button>
+</div>
+
 
   <app-waiter-order-filters
     (filtersChanged)="onFiltersChanged($event)">
   </app-waiter-order-filters>
 
+  <app-waiter-orders-list
+    [orders]="orders"
+    (orderClicked)="onOrderClicked($event)"
+    (addItemClicked)="onAddItemClicked($event)">
+  </app-waiter-orders-list>
+
+  <app-pagination
+  [pageIndex]="filters.pageIndex"
+  [pageSize]="filters.pageSize"
+  [totalCount]="totalCount"
+  (pageChanged)="onPageChanged($event)">
+</app-pagination>
+@if (isModalOpen) {
+  <app-order-details
+    [orderId]="selectedOrderId"
+    (close)="closeModal()">
+  </app-order-details>
+}
 </div>

@@ -7,6 +7,7 @@ export interface OrderFilters {
   pageSize: number;
   status?: OrderStatus | null;
   orderType?: OrderType | null;
+  branchId?: number;
 }
 
 export interface WaiterOrder {
