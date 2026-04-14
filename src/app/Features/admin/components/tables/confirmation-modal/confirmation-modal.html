@@ -1,0 +1,20 @@
+@if (isOpen) {
+  <div class="modal-backdrop">
+    <div class="modal-box">
+
+      <p>{{ message }}</p>
+
+      <div class="actions">
+
+        @if (!isError) {
+          <button (click)="onConfirm()">Yes</button>
+          <button (click)="onCancel()">Cancel</button>
+        } @else {
+          <button (click)="onCancel()">OK</button>
+        }
+
+      </div>
+
+    </div>
+  </div>
+}

@@ -1,0 +1,29 @@
+<div class="filter-container">
+  <!-- Search Input -->
+  <input
+    type="text"
+    placeholder="Search by table number"
+    [(ngModel)]="search"
+    (ngModelChange)="onSearchChange($event)"
+  />
+
+  <!-- Branch Dropdown -->
+  <select [(ngModel)]="branchId" (ngModelChange)="onFilterChange()">
+    <option [ngValue]="null">All Branches</option>
+
+    @for (branch of branches; track branch.id) {
+      <option [ngValue]="branch.id">
+        {{ branch.name }}
+      </option>
+    }
+  </select>
+
+  <!-- Status -->
+  <select [(ngModel)]="isOccupied" (ngModelChange)="onFilterChange()">
+    <option [ngValue]="null">All</option>
+    <option [ngValue]="true">Occupied</option>
+    <option [ngValue]="false">Available</option>
+  </select>
+
+  <button (click)="resetFilters()">Reset</button>
+</div>

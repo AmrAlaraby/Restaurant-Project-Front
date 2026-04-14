@@ -1,0 +1,36 @@
+@if (isOpen) {
+
+  <div class="modal-backdrop">
+    <div class="modal-box">
+
+      @if (!order) {
+
+        <h3>No Order Yet</h3>
+        <p>This table is occupied but no order has been created yet.</p>
+
+      } @else {
+
+        <h3>Order #{{ order.id }}</h3>
+
+        <p>Customer: {{ order.customerName }}</p>
+        <p>Status: {{ order.status }}</p>
+        <p>Total: {{ order.totalAmount }}</p>
+
+        <hr />
+
+        <h4>Items</h4>
+
+        @for (item of order.items; track item.name) {
+          <div class="item">
+            {{ item.name }} × {{ item.quantity }} - {{ item.price }}
+          </div>
+        }
+
+      }
+
+      <button (click)="onClose()">Close</button>
+
+    </div>
+  </div>
+
+}

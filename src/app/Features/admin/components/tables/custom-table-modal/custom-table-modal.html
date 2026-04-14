@@ -1,0 +1,61 @@
+@if (isOpen) {
+  <div class="modal-backdrop" (click)="onClose()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <h3>
+          @if (isEdit) {
+            Update Table
+          } @else {
+            Create Table
+          }
+        </h3>
+
+        <!-- Table Number -->
+        <div>
+          <label>Table Number</label>
+          <input
+            type="text"
+            placeholder="Table Number (T01 or T001)"
+            formControlName="tableNumber"
+          />
+
+          @if (form.controls.tableNumber.touched && form.controls.tableNumber.invalid) {
+            <small class="error">
+              @if (form.controls.tableNumber.errors?.['required']) {
+                Table number is required
+              }
+
+              @if (form.controls.tableNumber.errors?.['pattern']) {
+                Must start with T followed by 2 or 3 numbers (e.g. T01 or T001)
+              }
+            </small>
+          }
+        </div>
+
+        <!-- Capacity -->
+        <div>
+          <label>Capacity</label>
+          <input type="number" placeholder="Capacity" formControlName="capacity" />
+        </div>
+
+        <!-- Branch -->
+        <div>
+          <label>Branch</label>
+
+          <select formControlName="branchId">
+            <option [ngValue]="0">Select Branch</option>
+
+            @for (branch of branches; track branch.id) {
+              <option [ngValue]="branch.id">
+                {{ branch.name }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <button type="submit">Save</button>
+        <button type="button" (click)="onClose()">Cancel</button>
+      </form>
+    </div>
+  </div>
+}

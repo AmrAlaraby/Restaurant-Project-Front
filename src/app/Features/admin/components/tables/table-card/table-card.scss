@@ -1,0 +1,21 @@
+.table-card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.table-card.available {
+    background-color: #e6ffe6;
+}
+
+.table-card.occupied {
+    background-color: #ffe6e6;
+}
+
+.actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
