@@ -1,0 +1,100 @@
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UpdateCurrentUserInterface } from '../../../../Core/Models/AuthModels/update-current-user-interface';
+import { UserInterface } from '../../../../Core/Models/AuthModels/user-interface';
+import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
+
+@Component({
+  selector: 'app-profile',
+  imports: [],
+  templateUrl: './profile.html',
+  styleUrl: './profile.scss',
+})
+export class Profile implements OnInit {
+  private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
+
+  user = signal<UserInterface | null>(null);
+  saved = signal(false);
+  saveError = signal('');
+  loading = signal(true);
+
+  form!: FormGroup;
+
+  // بيانات ثابتة للـ shift (جيها من API تاني لو عندك)
+  shiftInfo = {
+    shiftStart: '09:00 AM',
+    shiftEnd: '05:00 PM',
+    section: 'Tables 1–6, 8',
+    todaysOrders: 8,
+    totalOrders: 156,
+    totalSales: 48000,
+    rating: 4.7,
+  };
+
+  ngOnInit(): void {
+    this.authService.getCurrentUser().subscribe({
+      next: (user) => {
+        this.user.set(user);
+        this.loading.set(false);
+        this.form = this.fb.group(
+          {
+            name: [user.name, Validators.required],
+            email: [user.email, [Validators.required, Validators.email]],
+            userName: [''],
+            newPassword: ['', [Validators.minLength(6)]],
+            confirmPassword: [''],
+          },
+          { validators: this.passwordMatchValidator },
+        );
+      },
+      error: () => {
+        this.loading.set(false);
+      },
+    });
+  }
+
+  private passwordMatchValidator(group: FormGroup) {
+    const pass = group.get('newPassword')?.value;
+    const confirm = group.get('confirmPassword')?.value;
+    return pass && confirm && pass !== confirm ? { passwordMismatch: true } : null;
+  }
+
+  getInitials(name: string): string {
+    return name
+      .split(' ')
+      .map((n) => n[0])
+      .slice(0, 2)
+      .join('')
+      .toUpperCase();
+  }
+
+  onSave(): void {
+    if (this.form.invalid || !this.user()) return;
+
+    this.saveError.set('');
+
+    const dto: UpdateCurrentUserInterface = {
+      name: this.form.value.name,
+      email: this.form.value.email,
+      userName: this.form.value.userName || undefined,
+      newPassword: this.form.value.newPassword || undefined,
+      confirmPassword: this.form.value.confirmPassword || undefined,
+    };
+
+    this.authService.updateCurrentUser(this.user()!.email, dto).subscribe({
+      next: (updated) => {
+        this.user.set(updated);
+        this.saved.set(true);
+        setTimeout(() => this.saved.set(false), 3000);
+      },
+      error: (err) => {
+        this.saveError.set('Failed to save changes. Please try again.');
+      },
+    });
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+  }
+}

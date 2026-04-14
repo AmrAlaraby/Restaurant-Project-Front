@@ -43,9 +43,7 @@ export const routes: Routes = [
       {
         path: 'tables',
         loadComponent: () =>
-          import('./Features/admin/pages/tables-page/tables-page').then(
-            (m) => m.TablesPage,
-          ),
+          import('./Features/admin/pages/tables-page/tables-page').then((m) => m.TablesPage),
       },
       {
         path: 'deliveries',
@@ -89,17 +87,22 @@ export const routes: Routes = [
       },
     ],
   },
+
+  {
+    path: 'waiter', // أو admin أو cashier
+    children: [
+      // باقي routes الـ waiter
+      //amr 100 -150
+      //hossam 151 - 200
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./Features/waiter/pages/profile/profile').then((m) => m.Profile),
+      },
+      //Areej 201 - 250
+      //Arwa 251 - 300
+      //mahmoud 301 - 350
+      //mustafa 351 - 400
+    ],
+  },
 ];
-
-
-
-
-
-
-
-//amr 100 -150
-//hossam 151 - 200
-//Areej 201 - 250
-//Arwa 251 - 300
-//mahmoud 301 - 350
-//mustafa 351 - 400
