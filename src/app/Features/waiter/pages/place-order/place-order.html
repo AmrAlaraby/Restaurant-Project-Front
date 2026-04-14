@@ -17,7 +17,14 @@
       </div>
 
       <div class="card menu-card">
-        <app-menu-list></app-menu-list>
+        <app-menu-list
+          [items]="menuItems"
+          [pageIndex]="pageIndex"
+          [pageSize]="pageSize"
+          [totalCount]="totalCount"
+          (pageChanged)="onPageChange($event)"
+          (add)="addToOrder($event)">
+        </app-menu-list>
       </div>
 
     </div>
@@ -26,16 +33,36 @@
     <div class="right-panel">
 
       <div class="card">
-        <app-table-selector></app-table-selector>
+        <app-table-selector
+            [tables]="tables"
+            [(tableId)]="selectedTableId">
+        </app-table-selector>
       </div>
 
       <div class="card">
-        <app-order-summary></app-order-summary>
+        <app-order-summary
+        [items]="orderItems"
+        [total]="total"
+        (remove)="removeItem($event)"
+        (decrease)="decreaseQty($event)">
+        </app-order-summary>
       </div>
 
       <div class="card">
-        <app-payment-selector></app-payment-selector>
+        <app-payment-selector
+            [(method)]="paymentMethod">
+        </app-payment-selector>
       </div>
+
+      <button
+        class="btn-submit"
+        [disabled]="isLoading || orderItems.length === 0"
+        (click)="createOrder()">
+
+        {{ isLoading ? 'Sending...' : 'Send to Kitchen 🔥' }}
+
+      </button>
+
 
     </div>
 

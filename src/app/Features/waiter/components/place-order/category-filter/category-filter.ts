@@ -14,6 +14,7 @@ export class CategoryFilter {
   @Output() select = new EventEmitter<number | undefined>();
 
   onSelect(categoryId?: number): void {
+    this.selectedCategoryId = categoryId;
     this.select.emit(categoryId);
   }
 

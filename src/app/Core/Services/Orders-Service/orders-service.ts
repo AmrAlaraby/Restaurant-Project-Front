@@ -37,6 +37,16 @@ export class OrdersService {
 
   updateOrderStatus(orderId: number, status: string): Observable<OrderInterface> {
     return this.http.put<OrderInterface>(Order.updateStatus(orderId), status);
+  updateOrderStatus(
+    orderId: number,
+    status: string
+  ): Observable<OrderInterface> {
+    console.log(status);
+    
+    return this.http.put<OrderInterface>(
+      Order.updateStatus(orderId),JSON.stringify(status), {
+  headers: { 'Content-Type': 'application/json' }
+});
   }
 
   addItemsToOrder(

@@ -1,5 +1,33 @@
-<div>
-  <h4>Payment</h4>
-  <button>Cash</button>
-  <button>Card</button>
+<div class="payment">
+
+  <h4>Payment Method</h4>
+
+  <div class="options">
+
+    <button
+      [class.active]="method === 'Cash'"
+      (click)="select('Cash')">
+      Cash
+    </button>
+
+    <button
+      [class.active]="method === 'Card'"
+      (click)="select('Card')">
+      Card
+    </button>
+
+    <button
+      [class.active]="method === 'Instapay'"
+      (click)="select('Instapay')">
+      Instapay
+    </button>
+
+    <button
+      [class.active]="method === 'Wallet'"
+      (click)="select('Wallet')">
+      Wallet
+    </button>
+
+  </div>
+
 </div>

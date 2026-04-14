@@ -88,7 +88,7 @@ export class Profile implements OnInit {
       confirmPassword: v.confirmPassword?.trim() || undefined,
     };
 
-    console.log(dto); // 👈 تأكد
+    console.log(dto);
 
     this.authService.updateCurrentUser(this.user()!.email, dto).subscribe({
       next: (updated) => {
