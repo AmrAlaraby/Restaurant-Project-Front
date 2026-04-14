@@ -1,0 +1,30 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.item {
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.img {
+  height: 80px;
+  background: #ddd;
+  border-radius: 8px;
+}
+
+.title {
+  height: 10px;
+  background: #ccc;
+  margin-top: 10px;
+}
+
+.price {
+  height: 10px;
+  width: 50%;
+  background: #ddd;
+  margin-top: 6px;
+}
