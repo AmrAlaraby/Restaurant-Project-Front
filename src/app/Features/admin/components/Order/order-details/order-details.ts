@@ -197,4 +197,23 @@ export class OrderDetails implements OnInit {
   isReceived(): boolean {
     return this.order?.status === 'Received';
   }
+
+  updateStatus(status: string) {
+    debugger
+  if (!this.orderId) return;
+
+  this.ordersService.updateOrderStatus(this.orderId, status)
+    .subscribe({
+      next: (res) => {
+        console.log('✅ Status updated:', res);
+
+        this.order = res; // تحديث فوري في المودال
+        this.error = null;
+      },
+      error: (err) => {
+        console.error('❌ Status update error:', err);
+        this.error = err.error || 'Failed to update status';
+      }
+    });
+}
 }
