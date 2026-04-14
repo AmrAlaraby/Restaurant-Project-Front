@@ -1,0 +1,120 @@
+<div class="page">
+  <h1 class="page-title">My Profile</h1>
+
+  @if (loading()) {
+    <div class="loading">Loading...</div>
+  }
+
+  @if (!loading() && user()) {
+    <div class="grid">
+      <!-- LEFT COLUMN -->
+      <div class="col-left">
+        <!-- Profile Card -->
+        <div class="card profile-card">
+          <div class="avatar">{{ getInitials(user()!.name) }}</div>
+          <h2>{{ user()!.name }}</h2>
+          <p class="role">{{ user()!.role }} · Branch 1</p>
+          <div class="stats">
+            <div class="stat">
+              <span class="stat-val orders">{{ shiftInfo.totalOrders }}</span>
+              <span class="stat-lbl">Orders</span>
+            </div>
+            <div class="stat">
+              <span class="stat-val sales"
+                >EGP {{ shiftInfo.totalSales / 1000 | number: '1.0-0' }}K</span
+              >
+              <span class="stat-lbl">Total Sales</span>
+            </div>
+            <div class="stat">
+              <span class="stat-val rating">⭐ {{ shiftInfo.rating }}</span>
+              <span class="stat-lbl">Rating</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shift Card -->
+        <div class="card shift-card">
+          <h3 class="section-title">Shift Info</h3>
+          <div class="shift-row">
+            <span>Shift Start</span>
+            <span>{{ shiftInfo.shiftStart }}</span>
+          </div>
+          <div class="shift-row">
+            <span>Shift End</span>
+            <span>{{ shiftInfo.shiftEnd }}</span>
+          </div>
+          <div class="shift-row">
+            <span>Section</span>
+            <span>{{ shiftInfo.section }}</span>
+          </div>
+          <div class="shift-row">
+            <span>Today's Orders</span>
+            <span class="orders-badge">{{ shiftInfo.todaysOrders }} orders</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="col-right">
+        <div class="card form-card">
+          <h3 class="section-title">Personal Info</h3>
+
+          <form [formGroup]="form" (ngSubmit)="onSave()">
+            <div class="field">
+              <label>FULL NAME</label>
+              <input formControlName="name" type="text" placeholder="Full Name" />
+              @if (form.get('name')?.invalid && form.get('name')?.touched) {
+                <span class="field-error">Name is required</span>
+              }
+            </div>
+
+            <div class="field">
+              <label>EMAIL</label>
+              <input formControlName="email" type="email" placeholder="Email" />
+              @if (form.get('email')?.invalid && form.get('email')?.touched) {
+                <span class="field-error">Valid email is required</span>
+              }
+            </div>
+
+            <div class="field">
+              <label>USERNAME (optional)</label>
+              <input formControlName="userName" type="text" placeholder="Username" />
+            </div>
+
+            <div class="field">
+              <label>NEW PASSWORD (optional)</label>
+              <input formControlName="newPassword" type="password" placeholder="New Password" />
+              @if (form.get('newPassword')?.errors?.['minlength']) {
+                <span class="field-error">Minimum 6 characters</span>
+              }
+            </div>
+
+            <div class="field">
+              <label>CONFIRM PASSWORD</label>
+              <input
+                formControlName="confirmPassword"
+                type="password"
+                placeholder="Confirm Password"
+              />
+              @if (form.errors?.['passwordMismatch'] && form.get('confirmPassword')?.touched) {
+                <span class="field-error">Passwords do not match</span>
+              }
+            </div>
+
+            @if (saveError()) {
+              <p class="error-msg">{{ saveError() }}</p>
+            }
+
+            @if (saved()) {
+              <p class="success-msg">✓ Changes saved successfully!</p>
+            }
+
+            <button type="submit" class="btn-save" [disabled]="form.invalid">Save Changes</button>
+          </form>
+
+          <button class="btn-logout" (click)="onLogout()">Logout</button>
+        </div>
+      </div>
+    </div>
+  }
+</div>
