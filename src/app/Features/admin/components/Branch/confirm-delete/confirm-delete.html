@@ -1,0 +1,27 @@
+<div class="confirm-overlay" (click)="onOverlayClick($event)">
+  <div class="confirm-card">
+
+    <div class="confirm-icon">🗑️</div>
+
+    <h2 class="confirm-title">Delete Branch</h2>
+    <p class="confirm-message">
+      Are you sure you want to delete <strong>{{ branchName }}</strong>?
+      <br />
+      This action <span class="danger-text">cannot be undone</span>.
+    </p>
+
+    <div class="confirm-actions">
+      <button class="btn-cancel" (click)="cancel()" [disabled]="isDeleting()">
+        Cancel
+      </button>
+      <button class="btn-delete" (click)="confirm()" [disabled]="isDeleting()">
+        {{ isDeleting() ? 'Deleting...' : '🗑️ Yes, Delete' }}
+      </button>
+    </div>
+
+    <div class="delete-error" *ngIf="deleteError()">
+      ⚠️ {{ deleteError() }}
+    </div>
+
+  </div>
+</div>
