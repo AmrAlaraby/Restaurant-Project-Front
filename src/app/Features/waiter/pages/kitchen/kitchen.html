@@ -1,0 +1,48 @@
+<div class="kitchen-page">
+  <div class="page-header">
+    <h1 class="page-title">Kitchen Status</h1>
+    <p class="page-subtitle">Live view of your orders in the kitchen</p>
+  </div>
+
+  @if (loading) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <span>Loading orders...</span>
+    </div>
+  }
+
+  @if (!loading && board) {
+    <div class="tickets-list">
+      <!-- READY / DONE tickets -->
+      @for (ticket of board.done; track ticket.id) {
+        <app-kitchen-ticket-card
+          [ticket]="ticket"
+          (changeStatus)="onStatusChange($event.id, $event.status)"
+        />
+      }
+
+      <!-- PREPARING tickets -->
+      @for (ticket of board.preparing; track ticket.id) {
+        <app-kitchen-ticket-card
+          [ticket]="ticket"
+          (changeStatus)="onStatusChange($event.id, $event.status)"
+        />
+      }
+
+      <!-- PENDING tickets -->
+      @for (ticket of board.pending; track ticket.id) {
+        <app-kitchen-ticket-card
+          [ticket]="ticket"
+          (changeStatus)="onStatusChange($event.id, $event.status)"
+        />
+      }
+
+      @if (board.done.length === 0 && board.preparing.length === 0 && board.pending.length === 0) {
+        <div class="empty-state">
+          <span class="empty-icon">🍽️</span>
+          <p>No active kitchen orders</p>
+        </div>
+      }
+    </div>
+  }
+</div>

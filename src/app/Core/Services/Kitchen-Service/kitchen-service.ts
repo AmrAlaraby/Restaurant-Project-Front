@@ -10,28 +10,23 @@ import { UpdateTicketStatusRequestDto } from '../../Models/KitchenModels/update-
 import { KitchenTicketStatusDto } from '../../Models/KitchenModels/kitchen-ticket-status-dto';
 import { BranchDto } from '../../Models/BranchModels/Branch-dto';
 
-
 @Injectable({ providedIn: 'root' })
 export class KitchenService {
   constructor(private http: HttpClient) {}
 
-getBoard(params: KitchenTicketQueryParams): Observable<KitchenBoardDto> {
-  let httpParams = new HttpParams();
+  getBoard(params: KitchenTicketQueryParams): Observable<KitchenBoardDto> {
+    let httpParams = new HttpParams();
 
-  if (params.branchId != null)
-    httpParams = httpParams.set('branchId', params.branchId);
+    if (params.branchId != null) httpParams = httpParams.set('branchId', params.branchId);
 
-  if (params.orderId != null)
-    httpParams = httpParams.set('OrderId', params.orderId);
+    if (params.orderId != null) httpParams = httpParams.set('OrderId', params.orderId);
 
-  if (params.station)
-    httpParams = httpParams.set('Station', params.station);
+    if (params.station) httpParams = httpParams.set('Station', params.station);
 
-  if (params.status != null)
-    httpParams = httpParams.set('Status', params.status);
+    if (params.status != null) httpParams = httpParams.set('Status', params.status);
 
-  return this.http.get<KitchenBoardDto>(Kitchen.board, { params: httpParams });
-}
+    return this.http.get<KitchenBoardDto>(Kitchen.board, { params: httpParams });
+  }
 
   getTicket(id: number): Observable<KitchenTicketDetailsDto> {
     return this.http.get<KitchenTicketDetailsDto>(Kitchen.ticket(id));
@@ -42,19 +37,19 @@ getBoard(params: KitchenTicketQueryParams): Observable<KitchenBoardDto> {
   }
 
   getActiveStations(branchId: number | null) {
-  let params = new HttpParams();
+    let params = new HttpParams();
 
-  if (branchId != null) {
-    params = params.set('branchId', branchId);
+    if (branchId != null) {
+      params = params.set('branchId', branchId);
+    }
+
+    return this.http.get<ActivePendingStationsDTO[]>(Kitchen.activeStations, { params });
   }
 
-  return this.http.get<ActivePendingStationsDTO[]>(
-    Kitchen.activeStations,
-    { params }
-  );
-}
-
-  updateTicketStatus(ticketId: number, dto: UpdateTicketStatusRequestDto): Observable<KitchenTicketStatusDto> {
+  updateTicketStatus(
+    ticketId: number,
+    dto: UpdateTicketStatusRequestDto,
+  ): Observable<KitchenTicketStatusDto> {
     return this.http.put<KitchenTicketStatusDto>(Kitchen.updateStatus(ticketId), dto);
   }
 }

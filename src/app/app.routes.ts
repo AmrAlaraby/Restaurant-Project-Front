@@ -25,9 +25,10 @@ export const routes: Routes = [
       {
         path: 'branch-stock',
         loadComponent: () =>
-          import('./Features/admin/pages/branch-stock-page/branch-stock/branch-stock')
-            .then(m => m.BranchStockComponent)
-        },
+          import('./Features/admin/pages/branch-stock-page/branch-stock/branch-stock').then(
+            (m) => m.BranchStockComponent,
+          ),
+      },
       {
         path: 'orders',
         loadComponent: () =>
@@ -91,7 +92,7 @@ export const routes: Routes = [
           import('./Features/admin/components/Ingredient/ingredients/ingredients').then(
             (m) => m.IngredientsComponent,
           ),
-      }
+      },
     ],
   },
 
@@ -115,6 +116,16 @@ export const routes: Routes = [
         path: 'profile',
         loadComponent: () =>
           import('./Features/waiter/pages/profile/profile').then((m) => m.Profile),
+      },
+      {
+        path: 'kitchen',
+        loadComponent: () =>
+          import('./Features/waiter/pages/kitchen/kitchen').then((m) => m.Kitchen),
+      },
+      {
+        path: 'orders',
+        loadComponent: () =>
+          import('./Features/waiter/pages/waiter-orders-page/waiter-orders-page').then((m) => m.WaiterOrdersPage),
       },
       //Areej 201 - 250
       //Arwa 251 - 300
@@ -332,6 +343,12 @@ export const routes: Routes = [
 
 
 
+  //amr 100 -150
+  //hossam 151 - 200
+  //Areej 201 - 250
+  //Arwa 251 - 300
+  //mahmoud 301 - 350
+  //mustafa 351 - 400
 
   {
     path: 'cashier',

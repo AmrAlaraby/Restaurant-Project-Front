@@ -199,7 +199,7 @@ export class OrderDetails implements OnInit {
   }
 
   updateStatus(status: string) {
-    debugger
+    
   if (!this.orderId) return;
 
   this.ordersService.updateOrderStatus(this.orderId, status)
