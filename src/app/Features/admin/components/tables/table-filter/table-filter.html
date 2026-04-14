@@ -1,29 +1,39 @@
 <div class="filter-container">
-  <!-- Search Input -->
-  <input
-    type="text"
-    placeholder="Search by table number"
-    [(ngModel)]="search"
-    (ngModelChange)="onSearchChange($event)"
-  />
+  <div class="search-wrap">
+    <svg class="search-icon" width="14" height="14" viewBox="0 0 16 16" fill="none">
+      <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M11 11L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <input
+      type="text"
+      placeholder="Search by table number..."
+      [(ngModel)]="search"
+      (ngModelChange)="onSearchChange($event)"
+    />
+  </div>
 
-  <!-- Branch Dropdown -->
+  <div class="divider"></div>
+
   <select [(ngModel)]="branchId" (ngModelChange)="onFilterChange()">
-    <option [ngValue]="null">All Branches</option>
-
+    <option [ngValue]="null">All branches</option>
     @for (branch of branches; track branch.id) {
-      <option [ngValue]="branch.id">
-        {{ branch.name }}
-      </option>
+      <option [ngValue]="branch.id">{{ branch.name }}</option>
     }
   </select>
 
-  <!-- Status -->
-  <select [(ngModel)]="isOccupied" (ngModelChange)="onFilterChange()">
-    <option [ngValue]="null">All</option>
+  <select [(ngModel)]="isOccupied" (ngModelChange)="onFilterChange()" [class.occupied]="isOccupied === true" [class.available]="isOccupied === false">
+    <option [ngValue]="null">All status</option>
     <option [ngValue]="true">Occupied</option>
     <option [ngValue]="false">Available</option>
   </select>
 
-  <button (click)="resetFilters()">Reset</button>
+  <div class="divider"></div>
+
+  <button class="reset-btn" (click)="resetFilters()">
+    <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+      <path d="M2 7a5 5 0 1 0 1-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M2 2v3h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Reset
+  </button>
 </div>

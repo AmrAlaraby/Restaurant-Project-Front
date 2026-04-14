@@ -38,7 +38,6 @@ export class CustomTableModal implements OnChanges, OnInit {
 
   branches: Branch[] = [];
   private branchService = inject(BranchService);
-  // 🔥 الحل هنا: nonNullable form
   form = this.fb.nonNullable.group({
     tableNumber: ['', [Validators.required, Validators.pattern(/^T\d{2,3}$/)]],
     capacity: [0, [Validators.required, Validators.min(1), Validators.max(20)]],
@@ -81,6 +80,7 @@ export class CustomTableModal implements OnChanges, OnInit {
     const value = this.form.getRawValue();
     this.save.emit(value);
   }
+  
 
   onClose() {
     this.close.emit();
@@ -91,4 +91,5 @@ export class CustomTableModal implements OnChanges, OnInit {
       branchId: 0,
     });
   }
+  
 }

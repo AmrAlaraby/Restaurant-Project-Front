@@ -1,5 +1,107 @@
 .filter-container {
+  background: #fff;
+  border: 0.5px solid rgba(0,0,0,0.1);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+
+  .divider {
+    width: 0.5px;
+    height: 28px;
+    background: rgba(0,0,0,0.08);
+    flex-shrink: 0;
+  }
+
+  .search-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 160px;
+
+    .search-icon {
+      position: absolute;
+      left: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+      pointer-events: none;
+      display: flex;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px 12px 8px 34px;
+      font-size: 13px;
+      font-family: 'DM Sans', sans-serif;
+      border: 0.5px solid rgba(0,0,0,0.15);
+      border-radius: 8px;
+      background: #f5f4f0;
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 0.15s, background 0.15s;
+
+      &:focus {
+        border-color: rgba(0,0,0,0.3);
+        background: #fff;
+      }
+      &::placeholder { color: #aaa; }
+    }
+  }
+
+  select {
+    padding: 8px 32px 8px 12px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    border: 0.5px solid rgba(0,0,0,0.15);
+    border-radius: 8px;
+    background: #f5f4f0;
+    color: #1a1a1a;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23888' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    transition: border-color 0.15s;
+    min-width: 130px;
+
+    &:focus { border-color: rgba(0,0,0,0.3); }
+
+    &.occupied {
+      border-color: #F09595;
+      background-color: #FCEBEB;
+      color: #A32D2D;
+    }
+    &.available {
+      border-color: #97C459;
+      background-color: #EAF3DE;
+      color: #3B6D11;
+    }
+  }
+
+  .reset-btn {
     display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    border: 0.5px solid rgba(0,0,0,0.15);
+    border-radius: 8px;
+    background: transparent;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.12s;
+    white-space: nowrap;
+
+    &:hover {
+      background: #f5f4f0;
+      color: #1a1a1a;
+      border-color: rgba(0,0,0,0.3);
+    }
+  }
 }
