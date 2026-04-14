@@ -4,6 +4,7 @@
   display: block;
   min-height: 100vh;
 }
+
 /* =====================
    THEME (RMS STYLE)
 ===================== */
@@ -23,37 +24,17 @@
 /* =====================
    HEADER
 ===================== */
-
 .kds-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  padding: 1rem 2rem;
-  background: var(--R);
-  color: #fff;
-  box-shadow: 0 2px 12px rgba(150,40,27,0.25);
+  padding: 10px 24px;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--TB);
 
-  .logo-mark {
-    width: 44px;
-    height: 44px;
-    background: #fff;
-    color: var(--R);
-    font-weight: 700;
+  .header-right {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-  }
-
-  .header-title {
-    font-family: 'Playfair Display', serif;
-    margin: 0;
-    font-size: 1.2rem;
-  }
-
-  .header-sub {
-    font-size: 0.75rem;
-    opacity: 0.8;
+    justify-content: flex-end;
   }
 }
 
@@ -76,9 +57,17 @@
   color: var(--R);
   padding: 0.7rem 1rem;
   border-radius: 8px;
-
   display: flex;
   justify-content: space-between;
+
+  button {
+    background: none;
+    border: none;
+    color: var(--R);
+    cursor: pointer;
+    font-size: 14px;
+    &:hover { opacity: .7; }
+  }
 }
 
 /* =====================
@@ -106,9 +95,9 @@
       color: #9B4437;
     }
 
-    &.pending .stat-num { color: var(--R); }
-    &.preparing .stat-num { color: #E64A19; }
-    &.done .stat-num { color: #2E7D32; }
+    &.pending   .stat-num { color: var(--R); }
+    &.preparing .stat-num { color: #C0392B; }
+    &.done      .stat-num { color: #2E7D32; }
   }
 }
 
@@ -137,7 +126,7 @@
     align-items: center;
     padding: 0.8rem 1rem;
     border-bottom: 1px solid var(--TB);
-    background: var(--RL);
+    background: #FFF5F5;
 
     .col-dot {
       width: 9px;
@@ -146,9 +135,9 @@
       margin-right: 8px;
     }
 
-    .dot-pending { background: var(--R); }
-    .dot-preparing { background: #E64A19; }
-    .dot-done { background: #2E7D32; }
+    .dot-pending   { background: var(--R); }
+    .dot-preparing { background: #C0392B; }
+    .dot-done      { background: #2E7D32; }
 
     .col-title {
       font-size: 0.75rem;
@@ -211,9 +200,7 @@
 /* =====================
    SCROLLBAR
 ===================== */
-::-webkit-scrollbar {
-  width: 6px;
-}
+::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-thumb {
   background: rgba(192,57,43,0.25);
   border-radius: 10px;

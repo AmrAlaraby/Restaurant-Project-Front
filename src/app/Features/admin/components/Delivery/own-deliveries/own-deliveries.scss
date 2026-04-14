@@ -1,4 +1,4 @@
-$red: #CC2929;
+$red: #C0392B;
 $white: #fff;
 $border: #e8e8e8;
 $text: #1a1a1a;
@@ -191,8 +191,8 @@ $muted: #999;
   letter-spacing: 0.4px;
   text-transform: uppercase;
 
-  &.badge-assigned  { background: #f9e9e9; color: $red; }
+  &.badge-assigned  { background: #FDECEA; color: $red; }
   &.badge-pickedup  { background: #E3F2FD; color: #1565C0; }
-  &.badge-onway     { background: #FFF3E0; color: #E65100; }
+  &.badge-onway     { background: #FDECEA; color: #C0392B; }
   &.badge-delivered { background: #E8F5E9; color: #2E7D32; }
 }

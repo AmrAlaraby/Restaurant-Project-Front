@@ -26,7 +26,7 @@
      STATUS BORDER
   ===================== */
   &.status-0 { border-left-color: #C0392B; }  // Pending
-  &.status-1 { border-left-color: #E64A19; }  // Preparing
+  &.status-1 { border-left-color: #C0392B; }  // Preparing
   &.status-2 { border-left-color: #2E7D32; opacity: 0.85; } // Done
 
   /* =====================
@@ -59,7 +59,7 @@
 
       &.badge-1 {
         background: rgba(230, 74, 25, 0.12);
-        color: #E64A19;
+        color: #C0392B;
       }
 
       &.badge-2 {
@@ -100,7 +100,7 @@
         }
 
         &.time-warn {
-          color: #E64A19;
+          color: #C0392B;
           font-weight: 700;
         }
       }

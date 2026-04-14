@@ -1,14 +1,6 @@
 <div class="kds-root">
   <!-- Header -->
   <header class="kds-header">
-    <div class="header-left">
-      <div class="logo-mark">KDS</div>
-      <div class="header-info">
-        <h1 class="header-title">Kitchen Display System</h1>
-        <p class="header-sub">Live Order Board</p>
-      </div>
-    </div>
-
     <div class="header-right">
       <app-active-stations-bar
         [stations]="stations"
@@ -23,13 +15,6 @@
       (filterChanged)="onFilterChanged($event)"
     ></app-kitchen-filter>
   </div>
-
-  <!-- ✅ Refresh Button
-  <div class="refresh-bar">
-    <button class="btn-refresh" (click)="loadBoard(currentParams)">
-      🔄 Refresh
-    </button>
-  </div> -->
 
   <!-- Error Banner -->
   <div class="error-banner" *ngIf="error">
