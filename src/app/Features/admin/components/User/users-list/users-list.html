@@ -5,7 +5,8 @@
     <user-card
       [user]="user"
       (edit)="onEdit(user)"
-      (toggle)="onToggle(user.id)">
+      (toggle)="onToggle(user.id)"
+      (viewDetails)="onViewDetails(user)">
     </user-card>
 
   } @empty {

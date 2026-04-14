@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { User } from '../../../../../Core/Models/UserModels/user';
-import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -15,6 +14,7 @@ export class UserCard {
 
   @Output() edit = new EventEmitter<User>();
   @Output() toggle = new EventEmitter<string>();
+  @Output() viewDetails = new EventEmitter<User>();
 
   get initials(): string {
     if (!this.user?.name) return '';
@@ -31,5 +31,9 @@ export class UserCard {
 
   onToggle() {
     this.toggle.emit(this.user.id);
+  }
+
+  onViewDetails() {
+    this.viewDetails.emit(this.user);
   }
 }
