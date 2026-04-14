@@ -1,0 +1,58 @@
+<div class="tables-container">
+
+
+  <!-- -----------------Filter ------------------------- -->
+  <app-table-filter (filterChanged)="onFilterChanged($event)"> </app-table-filter>
+
+<button (click)="openCreateModal()">+ Add Table</button>
+  <!-- ------------------ No Tables Found --------------------- -->
+  @if (tables.length === 0) {
+    <p>No Tables Found</p>
+  }
+  <!-- ------------------ Tables List --------------------- -->
+  @for (table of tables; track table.id) {
+    <app-table-card
+      [table]="table"
+      (toggle)="onToggle($event)"
+      (delete)="onDelete(table)"
+      (openOrder)="onOpenOrder($event)"
+      (edit)="onEditTable($event)"
+    >
+    </app-table-card>
+  }
+  <!-- ------------------ Pagination --------------------- -->
+  <app-pagination
+    [pageIndex]="pageIndex"
+    [pageSize]="pageSize"
+    [totalCount]="totalCount"
+    (pageChanged)="onPageChanged($event)"
+  >
+  </app-pagination>
+</div>
+
+<!-- ----------------- Confirmation Modal --------------------- -->
+<app-confirmation-modal
+  [isOpen]="showModal"
+  [message]="modalMessage"
+  [isError]="isErrorModal"
+  (confirm)="confirmDelete()"
+  (cancel)="closeModal()"
+>
+</app-confirmation-modal>
+
+<!-- ----------------- Order Details Modal --------------------- -->
+<app-order-details-modal
+  [isOpen]="showOrderModal"
+  [order]="selectedOrder"
+  (close)="closeOrderModal()"
+>
+</app-order-details-modal>
+
+<!-- ----------------- Custom Table Modal --------------------- -->
+<app-custom-table-modal
+  [isOpen]="showTableModal"
+  [isEdit]="isEditMode"
+  [table]="selectedTable"
+  (close)="closeTableModal()"
+  (save)="onSaveTable($event)">
+</app-custom-table-modal>

@@ -111,12 +111,21 @@ onMenuChange(i: number) {
     }
   }
 
-  loadTables() {
-    const branchId = this.form.value.branchId;
+ loadTables() {
+  const branchId = this.form.value.branchId;
 
-    this.tableService.getAllTables(branchId, false)
-      .subscribe(res => this.tables.set(res));
-  }
+  const params = {
+    pageIndex: 1,
+    pageSize: 10,
+    branchId: branchId,
+    isOccupied: false
+  };
+
+  this.tableService.getTables(params)
+    .subscribe((res) => {
+      this.tables.set(res.data); 
+    });
+}
 
   loadMenu() {
     this.menuService.getAll({ pageIndex: 1, pageSize: 1000 })

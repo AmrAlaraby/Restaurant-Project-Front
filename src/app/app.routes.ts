@@ -43,8 +43,8 @@ export const routes: Routes = [
       {
         path: 'tables',
         loadComponent: () =>
-          import('./Features/admin/components/tables/tables-component/tables-component').then(
-            (m) => m.TablesComponent,
+          import('./Features/admin/pages/tables-page/tables-page').then(
+            (m) => m.TablesPage,
           ),
       },
       {
