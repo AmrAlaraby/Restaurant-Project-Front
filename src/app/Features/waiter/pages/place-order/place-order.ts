@@ -15,6 +15,7 @@ import { OrdersService } from '../../../../Core/Services/Orders-Service/orders-s
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { TableService } from '../../../../Core/Services/Table-Service/table-service';
 import { CreateOrderInterface } from '../../../../Core/Models/OrderModels/create-order-interface';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-place-order',
@@ -44,6 +45,7 @@ export class PlaceOrder {
   isLoading = false;
 
   constructor(
+    private route: ActivatedRoute,
     private categoryService: CategoryService,
     private menuService: MenuItemsService,
     private orderService: OrdersService,
@@ -107,7 +109,23 @@ loadUserAndThenTables(): void {
       branchId: this.currentUser.branchId 
     }).subscribe(res => {
       this.tables = res.data;
+
+      this.handleRouteTableSelection();
     });
+  }
+
+   handleRouteTableSelection(): void {
+    const tableNumber = this.route.snapshot.paramMap.get('tableNumber');
+
+    if (!tableNumber) return;
+
+    const matchedTable = this.tables.find(
+      t => t.id === Number(tableNumber)
+    );
+
+    if (matchedTable) {
+      this.selectedTableId = matchedTable.id;
+    }
   }
   // =========================
   // ADD ITEM
