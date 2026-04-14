@@ -1,0 +1,293 @@
+/* ═══════════════════════════════════════════════════════════
+   STOCK MANAGEMENT — FULL SCSS (Angular Ready)
+═══════════════════════════════════════════════════════════ */
+
+// ── VARIABLES ──────────────────────────────────────────────
+:root {
+  --red:          #C41E1E;
+  --red-dark:     #a01818;
+  --red-light:    #f9e6e6;
+
+  --yellow:       #F5C518;
+  --gray-100:     #f7f7f7;
+  --gray-200:     #e9e9e9;
+  --gray-400:     #aaaaaa;
+  --gray-600:     #666666;
+  --gray-800:     #2a2a2a;
+  --black:        #111111;
+
+  --white:        #ffffff;
+  --cream:        #FFF8F0;
+
+  --font:         'Poppins', sans-serif;
+  --radius:       12px;
+  --radius-sm:    8px;
+  --transition:   all .22s ease;
+}
+
+// ── RESET ──────────────────────────────────────────────────
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--cream);
+  color: var(--black);
+}
+
+// ── PAGE ───────────────────────────────────────────────────
+.page {
+  padding: 28px 32px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+// ── BREADCRUMB ─────────────────────────────────────────────
+.breadcrumb {
+  font-size: .75rem;
+  color: var(--gray-400);
+  margin-bottom: 14px;
+
+  span {
+    color: var(--red);
+    font-weight: 600;
+  }
+}
+
+// ── HEADER ──────────────────────────────────────────────────
+.page-header {
+  margin-bottom: 20px;
+
+  h1 {
+    font-size: 1.4rem;
+    font-weight: 800;
+  }
+}
+
+// ── BRANCH SELECTOR ────────────────────────────────────────
+.branch-selector {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 18px;
+
+  label {
+    font-size: .8rem;
+    color: var(--gray-600);
+    font-weight: 600;
+  }
+
+  select {
+    padding: 8px 12px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    outline: none;
+    cursor: pointer;
+
+    &:focus {
+      border-color: var(--red);
+    }
+  }
+}
+
+// ── LOADING ────────────────────────────────────────────────
+.loading-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px 0;
+  color: var(--gray-400);
+}
+
+.spinner {
+  width: 26px;
+  height: 26px;
+  border: 3px solid var(--gray-200);
+  border-top-color: var(--red);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ── EMPTY STATE ────────────────────────────────────────────
+.empty {
+  text-align: center;
+  padding: 40px;
+  color: var(--gray-400);
+  font-weight: 500;
+}
+
+// ── TABLE ───────────────────────────────────────────────────
+.table-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+  box-shadow: 0 2px 14px rgba(0,0,0,0.05);
+}
+
+.yellow-strip {
+  height: 3px;
+  background: var(--yellow);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: var(--red);
+  color: white;
+
+  th {
+    padding: 12px;
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--gray-100);
+
+  &:hover {
+    background: var(--red-light);
+  }
+}
+
+td {
+  padding: 12px;
+  font-size: .85rem;
+  color: var(--gray-800);
+}
+
+// columns styling
+td:nth-child(1) {
+  color: var(--gray-400);
+  font-weight: 700;
+}
+
+td:nth-child(2) {
+  font-weight: 600;
+}
+
+td:nth-child(4) {
+  text-align: center;
+}
+
+// ── BUTTONS ────────────────────────────────────────────────
+.btn-save {
+  background: var(--red);
+  color: white;
+  border: none;
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  font-size: .8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+
+  &:hover {
+    background: var(--red-dark);
+  }
+}
+
+// ── PAGINATION ─────────────────────────────────────────────
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  font-size: .8rem;
+  color: var(--gray-600);
+}
+
+// ── MODAL ───────────────────────────────────────────────────
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: white;
+  width: 420px;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.modal-header {
+  background: var(--red);
+  color: white;
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-body {
+  padding: 18px;
+}
+
+.modal-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+
+  input {
+    width: 120px;
+    padding: 6px;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+
+    &:focus {
+      border-color: var(--red);
+      outline: none;
+    }
+  }
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px;
+  background: var(--gray-100);
+}
+
+.btn-cancel {
+  background: transparent;
+  border: 1px solid var(--gray-200);
+  padding: 6px 12px;
+}
+
+.btn-save {
+  background: var(--red);
+  color: white;
+  border: none;
+  padding: 6px 14px;
+}
+
+// ── RESPONSIVE ─────────────────────────────────────────────
+@media (max-width: 768px) {
+  .page {
+    padding: 16px;
+  }
+
+  table {
+    font-size: .75rem;
+  }
+
+  .modal-content {
+    width: 90%;
+  }
+}

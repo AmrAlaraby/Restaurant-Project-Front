@@ -1,0 +1,63 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+}
+
+.info {
+  padding: 10px;
+}
+
+h4 {
+  margin: 0;
+  font-size: 14px;
+}
+
+p {
+  margin: 4px 0;
+  color: #777;
+}
+
+span {
+  color: #c0392b;
+  font-weight: bold;
+}
+
+.pagination-wrapper {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

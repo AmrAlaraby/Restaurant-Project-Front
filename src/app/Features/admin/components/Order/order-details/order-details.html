@@ -98,12 +98,7 @@
         + Add Item
       </button>
 
-      <!-- error -->
-      @if (error) {
-        <div class="alert alert-danger mt-3">
-          {{ error }}
-        </div>
-      }
+  
 
       <button class="save-btn" (click)="saveNewItems()">
         Save Items
@@ -113,6 +108,59 @@
 
     <!-- ACTIONS -->
     <div class="actions">
+
+          <!-- error -->
+      @if (error) {
+        <div class="alert alert-danger mt-3">
+          {{ error }}
+        </div>
+      }
+
+      
+      <!-- ========================= -->
+<!-- UPDATE STATUS -->
+<!-- ========================= -->
+<div class="status-actions">
+
+  <h3>Update Status</h3>
+
+  <div class="status-buttons">
+
+    <button
+      [class.active]="order.status === 'Received'"
+      (click)="updateStatus('Received')">
+      Received
+    </button>
+
+    <button
+      [class.active]="order.status === 'Preparing'"
+      (click)="updateStatus('Preparing')">
+      Preparing
+    </button>
+
+    <button
+      [class.active]="order.status === 'Ready'"
+      (click)="updateStatus('Ready')">
+      Ready
+    </button>
+
+    <button
+      [class.active]="order.status === 'Delivered'"
+      (click)="updateStatus('Delivered')">
+      Delivered
+    </button>
+
+    <button
+      class="cancel"
+      [class.active]="order.status === 'Cancelled'"
+      (click)="updateStatus('Cancelled')">
+      Cancel
+    </button>
+
+  </div>
+
+</div>
+
 
       <button
         class="cancel-btn"

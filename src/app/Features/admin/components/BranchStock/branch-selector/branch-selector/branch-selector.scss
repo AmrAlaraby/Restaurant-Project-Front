@@ -1,0 +1,28 @@
+.branch-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  select {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      border-color: #4e73df;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #4e73df;
+      box-shadow: 0 0 0 2px rgba(78, 115, 223, 0.2);
+    }
+  }
+}

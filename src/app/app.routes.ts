@@ -15,12 +15,19 @@ export const routes: Routes = [
     redirectTo: 'admin',
     pathMatch: 'full',
   },
+
   {
     path: 'admin',
     loadComponent: () => import('./Features/admin/pages/layout/layout').then((m) => m.Layout),
 
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      {
+        path: 'branch-stock',
+        loadComponent: () =>
+          import('./Features/admin/pages/branch-stock-page/branch-stock/branch-stock')
+            .then(m => m.BranchStockComponent)
+        },
       {
         path: 'orders',
         loadComponent: () =>
@@ -43,9 +50,7 @@ export const routes: Routes = [
       {
         path: 'tables',
         loadComponent: () =>
-          import('./Features/admin/pages/tables-page/tables-page').then(
-            (m) => m.TablesPage,
-          ),
+          import('./Features/admin/pages/tables-page/tables-page').then((m) => m.TablesPage),
       },
       {
         path: 'deliveries',
@@ -86,16 +91,37 @@ export const routes: Routes = [
           import('./Features/admin/components/Ingredient/ingredients/ingredients').then(
             (m) => m.IngredientsComponent,
           ),
-      },
+      }
     ],
   },
-];
 
-
-
-
-
-
+  {
+    path: 'waiter', // أو admin أو cashier
+    children: [
+      // باقي routes الـ waiter
+      //amr 100 -150
+      {
+        path: 'place-order',
+        loadComponent: () =>
+          import('./Features/waiter/pages/place-order/place-order').then((m) => m.PlaceOrder),
+      },
+      {
+        path: 'place-order/:tableNumber',
+        loadComponent: () =>
+          import('./Features/waiter/pages/place-order/place-order').then((m) => m.PlaceOrder),
+      },
+      //hossam 151 - 200
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./Features/waiter/pages/profile/profile').then((m) => m.Profile),
+      },
+      //Areej 201 - 250
+      //Arwa 251 - 300
+      //mahmoud 301 - 350
+      //mustafa 351 - 400
+    ],
+  },
 
 //amr 100 -150
 //hossam 151 - 200
@@ -103,3 +129,196 @@ export const routes: Routes = [
 //Arwa 251 - 300
 //mahmoud 301 - 350
 //mustafa 351 - 400
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  {
+    path: 'cashier',
+    children: [
+      //amr 400 -450
+      //hossam 451 - 500
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./Features/waiter/pages/profile/profile').then((m) => m.Profile),
+      },
+      //Areej 501 - 550
+      //Arwa 551 - 600
+      //mahmoud 601 - 650
+      //mustafa 651 - 700
+    ],
+  },
+];
