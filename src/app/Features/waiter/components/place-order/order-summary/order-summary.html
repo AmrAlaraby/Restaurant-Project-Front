@@ -1,2 +1,39 @@
-<h3>Order Summary</h3>
-<p>No items yet</p>
+<div class="summary">
+
+  <h3>Order Summary</h3>
+
+  <div *ngIf="items.length === 0" class="empty">
+    <p>No items yet 🍽️</p>
+  </div>
+
+  <div class="item" *ngFor="let i of items">
+
+    <!-- IMAGE -->
+    <img [src]="i.imageUrl" class="item-img" />
+
+    <!-- INFO -->
+    <div class="info">
+      <h4>{{ i.name }}</h4>
+
+      <div class="meta">
+        <span>Qty: {{ i.quantity }}</span>
+        <span>{{ i.unitPrice * i.quantity }} EGP</span>
+      </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="actions">
+      <button (click)="decrease.emit(i.menuItemId)">−</button>
+      <button class="danger" (click)="remove.emit(i.menuItemId)">×</button>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="total">
+    <span>Total</span>
+    <b>{{ total }} EGP</b>
+  </div>
+
+</div>

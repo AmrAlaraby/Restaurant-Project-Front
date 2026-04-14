@@ -17,6 +17,7 @@ export class MenuList {
   @Input() pageSize = 8;
   @Input() totalCount = 0;
 
+  @Output() add = new EventEmitter<MenuItemInterface>();
   @Output() pageChanged = new EventEmitter<number>();
 
   trackById(_: number, item: MenuItemInterface) {
