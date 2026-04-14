@@ -1,6 +1,13 @@
-<div>
-  <h4>Table</h4>
-  <select>
-    <option>Table 1</option>
-  </select>
+<div class="tables">
+  <h4>Select Table</h4>
+
+  <div class="grid">
+    @for (t of tables; track $index) {
+      <div class="table" [class.active]="t.id === tableId" (click)="selectTable(t.id)">
+        <span>{{ t.tableNumber }} </span>
+        <br />
+        <small>{{ t.capacity }} seats</small>
+      </div>
+    }
+  </div>
 </div>
