@@ -93,6 +93,18 @@ export const routes: Routes = [
     children: [
       // باقي routes الـ waiter
       //amr 100 -150
+      {
+    path: 'place-order',
+    loadComponent: () =>
+      import('./Features/waiter/pages/place-order/place-order')
+        .then(m => m.PlaceOrder)
+  },
+  {
+    path: 'place-order/:tableNumber',
+    loadComponent: () =>
+      import('./Features/waiter/pages/place-order/place-order')
+        .then(m => m.PlaceOrder)
+  },
       //hossam 151 - 200
       {
         path: 'profile',
