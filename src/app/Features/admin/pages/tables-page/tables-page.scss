@@ -1,0 +1,27 @@
+.tables-container {
+  font-family: 'DM Sans', sans-serif;
+  padding: 1.5rem;
+  background: #faf9f9;
+  min-height: 100vh;
+
+  .page-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1.25rem;
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 600; color: #2D0A08;
+    }
+
+    button {
+      background: #C0392B; color: #fff; border: none;
+      border-radius: 8px; padding: 9px 18px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+      font-family: 'DM Sans', sans-serif; cursor: pointer;
+      box-shadow: 0 2px 8px rgba(192,57,43,0.2);
+      transition: background 0.18s;
+      &:hover { background: #96281B; }
+      
+    }
+  }
+}

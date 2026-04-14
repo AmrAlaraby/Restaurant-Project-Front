@@ -1,36 +1,75 @@
 @if (isOpen) {
-
-  <div class="modal-backdrop">
-    <div class="modal-box">
+  <div class="modal-backdrop" (click)="onClose()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
 
       @if (!order) {
-
-        <h3>No Order Yet</h3>
-        <p>This table is occupied but no order has been created yet.</p>
+        <!-- No Order State -->
+        <div class="modal-header">
+          <div>
+            <h3 class="modal-title">No active order</h3>
+            <p class="modal-subtitle">No active order</p>
+          </div>
+          <button class="close-btn" (click)="onClose()">&#x2715;</button>
+        </div>
+        <div class="no-order">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect width="40" height="40" rx="20" fill="#f5f4f0"/>
+            <path d="M13 15h14M13 20h10M13 25h7" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <p class="no-order-title">No order yet</p>
+          <p class="no-order-sub">This table is occupied but no order has been created yet.</p>
+        </div>
+        <div class="modal-footer" style="justify-content: flex-end;">
+          <button class="close-main-btn" (click)="onClose()">Close</button>
+        </div>
 
       } @else {
-
-        <h3>Order #{{ order.id }}</h3>
-
-        <p>Customer: {{ order.customerName }}</p>
-        <p>Status: {{ order.status }}</p>
-        <p>Total: {{ order.totalAmount }}</p>
-
-        <hr />
-
-        <h4>Items</h4>
-
-        @for (item of order.items; track item.name) {
-          <div class="item">
-            {{ item.name }} × {{ item.quantity }} - {{ item.price }}
+        <!-- Order Details -->
+        <div class="modal-header">
+          <div>
+            <h3 class="modal-title">Order #{{ order.id }}</h3>
+          
           </div>
-        }
+          <button class="close-btn" (click)="onClose()">&#x2715;</button>
+        </div>
 
+        <div class="modal-meta">
+          <div class="meta-chip">
+            <span class="meta-label">Customer</span>
+            <span class="meta-value">{{ order.customerName }}</span>
+          </div>
+          <div class="meta-chip">
+            <span class="meta-label">Status</span>
+            <span class="meta-value">
+              <span class="status-badge" [class.status-pending]="order.status === 'pending'" [class.status-done]="order.status === 'done'">
+                {{ order.status }}
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="items-section">
+          <p class="items-label">Items</p>
+          @for (item of order.items; track item.name) {
+            <div class="item-row">
+              <div style="display:flex;align-items:center;">
+                <span class="item-name">{{ item.name }}</span>
+                <span class="item-qty">×{{ item.quantity }}</span>
+              </div>
+              <span class="item-price">{{ item.price }}</span>
+            </div>
+          }
+        </div>
+
+        <div class="modal-footer">
+          <div>
+            <p class="total-label">Total</p>
+            <p class="total-amount">{{ order.totalAmount }}</p>
+          </div>
+          <button class="close-main-btn" (click)="onClose()">Close</button>
+        </div>
       }
-
-      <button (click)="onClose()">Close</button>
 
     </div>
   </div>
-
 }
