@@ -75,13 +75,20 @@ export class Profile implements OnInit {
 
     this.saveError.set('');
 
+    const v = this.form.value;
+
+    const name = v.name?.trim();
+    const userNameInput = v.userName?.trim();
+
     const dto: UpdateCurrentUserInterface = {
-      name: this.form.value.name,
-      email: this.form.value.email,
-      userName: this.form.value.userName || undefined,
-      newPassword: this.form.value.newPassword || undefined,
-      confirmPassword: this.form.value.confirmPassword || undefined,
+      name: name,
+      email: v.email?.trim(),
+      userName: userNameInput && userNameInput !== '' ? userNameInput : name, // 🔥 هنا الحل
+      newPassword: v.newPassword?.trim() || undefined,
+      confirmPassword: v.confirmPassword?.trim() || undefined,
     };
+
+    console.log(dto); // 👈 تأكد
 
     this.authService.updateCurrentUser(this.user()!.email, dto).subscribe({
       next: (updated) => {
@@ -90,7 +97,8 @@ export class Profile implements OnInit {
         setTimeout(() => this.saved.set(false), 3000);
       },
       error: (err) => {
-        this.saveError.set('Failed to save changes. Please try again.');
+        console.log(err);
+        this.saveError.set(err?.error || 'Something went wrong');
       },
     });
   }
