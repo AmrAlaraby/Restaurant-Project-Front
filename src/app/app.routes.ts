@@ -16,6 +16,12 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
+  path: 'branch-stock',
+  loadComponent: () =>
+    import('./Features/admin/pages/branch-stock-page/branch-stock/branch-stock')
+      .then(m => m.BranchStockComponent)
+  },
+  {
     path: 'admin',
     loadComponent: () => import('./Features/admin/pages/layout/layout').then((m) => m.Layout),
 
@@ -84,7 +90,7 @@ export const routes: Routes = [
           import('./Features/admin/components/Ingredient/ingredients/ingredients').then(
             (m) => m.IngredientsComponent,
           ),
-      },
+      }
     ],
   },
 
@@ -115,6 +121,188 @@ export const routes: Routes = [
       //mustafa 351 - 400
     ],
   },
+
+//amr 100 -150
+//hossam 151 - 200
+//Areej 201 - 250
+//Arwa 251 - 300
+//mahmoud 301 - 350
+//mustafa 351 - 400
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   {
     path: 'cashier',
