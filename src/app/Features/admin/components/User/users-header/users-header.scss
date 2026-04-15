@@ -1,34 +1,49 @@
+:host {
+  --red: #C0392B;
+  --red-dark: #96281B;
+  --gray-600: #9B4437;
+  --black: #2D0A08;
+  --cream: #FDF5F5;
+}
+
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 
-    .left {
-        h2 {
-            margin: 0;
-            color: var(--black);
-        }
-
-        p {
-            margin: 4px 0 0;
-            color: var(--gray-600);
-            font-size: 13px;
-        }
+  .left {
+    h2 {
+      margin: 0;
+      color: var(--black);
+      font-size: 22px;
+      font-weight: 500;
     }
+
+    p {
+      margin: 4px 0 0;
+      color: var(--gray-600);
+      font-size: 13px;
+    }
+  }
 }
 
 .btn-add {
-    background: var(--red);
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: var(--shadow-btn);
+  background: var(--red);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(192, 57, 43, 0.25);
 
-    &:hover {
-        background: var(--red-dark);
-    }
+  &:hover {
+    background: var(--red-dark);
+  }
 }

@@ -1,11 +1,23 @@
+:host {
+  --red: #C0392B;
+  --red-dark: #96281B;
+  --gray-600: #9B4437;
+  --black: #2D0A08;
+  --cream: #FDF5F5;
+}
+
 .list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 0.5px solid #f0d8d6;
+  overflow: hidden;
 }
 
 .empty {
-    text-align: center;
-    padding: 20px;
-    color: var(--gray-600);
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--gray-600);
+  font-size: 14px;
 }

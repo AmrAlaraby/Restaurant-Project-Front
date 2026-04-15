@@ -1,0 +1,39 @@
+:host {
+  --red: #C0392B;
+  --red-dark: #96281B;
+  --gray-600: #9B4437;
+  --black: #2D0A08;
+  --cream: #FDF5F5;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 4px rgba(45, 10, 8, 0.06);
+  --shadow-btn: 0 2px 8px rgba(192, 57, 43, 0.25);
+  --transition: 0.2s ease;
+}
+
+:host {
+  display: block;
+  background: var(--cream);
+  min-height: 100vh;
+  padding: 24px;
+  font-family: inherit;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  font-size: 13px;
+  color: var(--gray-600);
+  margin-bottom: 20px;
+
+  span {
+    color: var(--black);
+    opacity: 0.4;
+    margin: 0 6px;
+  }
+}
+
+/* Pagination override — ensure it fits theme */
+app-pagination {
+  margin-top: 20px;
+}
