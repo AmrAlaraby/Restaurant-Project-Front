@@ -201,7 +201,9 @@ export const routes: Routes = [
       {
         path: 'orders',
         loadComponent: () =>
-          import('./Features/cashier/pages/cashier-orders-page/cashier-orders-page').then((m) => m.CashierOrdersPage),
+          import('./Features/cashier/pages/cashier-orders-page/cashier-orders-page').then(
+            (m) => m.CashierOrdersPage,
+          ),
       },
       //Areej 501 - 550
       //Arwa 551 - 600
@@ -214,7 +216,11 @@ export const routes: Routes = [
     path: 'driver',
     children: [
       //amr 400 -450
-
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('./Features/driver/pages/home-page/home-page').then((m) => m.HomePage),
+      },
       //hossam 451 - 500
       {
         path: 'profile',

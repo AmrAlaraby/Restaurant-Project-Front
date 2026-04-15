@@ -1,0 +1,139 @@
+<div class="dashboard" [class.dashboard--offline]="!isOnline">
+  <!-- ───── HEADER ───── -->
+  <header class="dashboard__header">
+    <div class="header__left">
+      <div class="header__avatar">
+        <span class="avatar__initials">{{ driver?.name ? driver!.name[0] : 'Y' }}</span>
+        <span class="avatar__bike">🚴</span>
+      </div>
+      <div class="header__info">
+        <h1 class="header__greeting">
+          Ready to ride, <span class="header__name">{{ driver?.name ?? 'Youssef' }}</span>
+        </h1>
+        <p class="header__branch">{{ driver?.branchName ?? 'Branch 1' }} · Nasr City Zone</p>
+      </div>
+    </div>
+
+    <button
+      class="status-toggle"
+      [class.status-toggle--online]="isOnline"
+      [class.status-toggle--offline]="!isOnline"
+      (click)="toggleOnlineStatus()"
+    >
+      <span class="status-toggle__dot"></span>
+      <span class="status-toggle__label">{{ isOnline ? 'Online' : 'Offline' }}</span>
+    </button>
+  </header>
+
+  <!-- ───── LOADING ───── -->
+  @if (loading) {
+    <div class="loading-state">
+      <div class="loading-state__spinner"></div>
+      <span>Loading your dashboard…</span>
+    </div>
+  }
+
+  @if (!loading) {
+    <!-- ───── STATS GRID ───── -->
+    <div class="stats-grid">
+      <div class="stat-card stat-card--deliveries">
+        <span class="stat-card__value">{{ deliveriesToday }}</span>
+        <span class="stat-card__label">Deliveries Today</span>
+      </div>
+
+      <div class="stat-card stat-card--cash">
+        <span class="stat-card__value">EGP {{ cashCollected | number: '1.0-0' }}</span>
+        <span class="stat-card__label">Cash Collected</span>
+      </div>
+
+      <div class="stat-card stat-card--rating">
+        <span class="stat-card__value">
+          <span class="stat-card__star">⭐</span>{{ ratingToday | number: '1.1-1' }}
+        </span>
+        <span class="stat-card__label">Rating Today</span>
+      </div>
+
+      <div class="stat-card stat-card--distance">
+        <span class="stat-card__value">{{ distanceToday }} km</span>
+        <span class="stat-card__label">Distance Today</span>
+      </div>
+    </div>
+
+    <!-- ───── ACTIVE DELIVERY ───── -->
+    @if (activeDelivery) {
+      <div class="active-delivery">
+        <div class="active-delivery__left">
+          <span class="active-delivery__bell">🔔</span>
+          <div class="active-delivery__info">
+            <h2 class="active-delivery__title">
+              Active Delivery — Order #{{ activeDelivery.order.id }}
+            </h2>
+            <p class="active-delivery__address">
+              📍 {{ formatActiveAddress() }} ·
+              {{ activeDelivery.order.items[0]?.menuItemName ?? activeDelivery.driverName }} · EGP
+              {{ activeDelivery.order.totalAmount | number: '1.0-0' }}
+            </p>
+          </div>
+        </div>
+        <button class="btn btn--view" (click)="viewActiveDelivery()">View Details →</button>
+      </div>
+    }
+
+    <!-- ───── PENDING ASSIGNMENTS ───── -->
+    <div class="section">
+      <div class="section__header">
+        <h2 class="section__title">Pending Assignments</h2>
+        <span class="section__badge">Ready for pickup at branch</span>
+      </div>
+
+      @if (pendingAssignments.length === 0) {
+        <div class="empty-state">
+          <span class="empty-state__icon">📦</span>
+          <p>No pending assignments right now</p>
+        </div>
+      }
+
+      <div class="assignments-list">
+        @for (item of pendingAssignments; track item.deliveryId) {
+          <div class="assignment-card">
+            <div class="assignment-card__left">
+              <div class="assignment-card__icon">📦</div>
+              <div class="assignment-card__info">
+                <h3 class="assignment-card__title">
+                  Order #{{ item.orderNumber }} — {{ item.customerName ?? 'Customer' }}
+                </h3>
+                <p class="assignment-card__meta">
+                  📍 {{ formatAddress(item) }} · {{ item.itemsCount }} items
+                  @if (item.deliveryAddress?.note) {
+                    · EGP {{ item.deliveryAddress.note }}
+                  }
+                </p>
+              </div>
+            </div>
+
+            <div class="assignment-card__actions">
+              <button
+                class="btn btn--accept"
+                [disabled]="actionLoading === item.deliveryId"
+                (click)="acceptDelivery(item)"
+              >
+                @if (actionLoading === item.deliveryId) {
+                  <span class="btn__spinner"></span>
+                } @else {
+                  Accept
+                }
+              </button>
+              <button
+                class="btn btn--decline"
+                [disabled]="actionLoading === item.deliveryId"
+                (click)="declineDelivery(item)"
+              >
+                Decline
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>
