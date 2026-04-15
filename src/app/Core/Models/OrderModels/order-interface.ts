@@ -10,4 +10,6 @@ export interface OrderInterface {
   orderItems: OrderItemInterface[];
   totalAmount: number;
   tableNumber?: string;
+  paymentMethod?: string;
+  paymentStatus: string;
 }

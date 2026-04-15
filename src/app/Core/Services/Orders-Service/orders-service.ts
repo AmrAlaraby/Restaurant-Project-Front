@@ -9,6 +9,8 @@ import { CreateOrderItemInterface } from '../../Models/OrderModels/create-order-
 import { OrderDetailsInterface } from '../../Models/OrderModels/order-details-interface';
 import { OrderInterface } from '../../Models/OrderModels/order-interface';
 import { OrderFilters, OrderStatus, OrderType, WaiterOrder } from '../../Models/OrderModels/waiter-order.model';
+import { CashierOrder, PaymentMethod, PaymentStatus } from '../../Models/OrderModels/cashier-order.model';
+
 
 @Injectable({
   providedIn: 'root',
@@ -103,4 +105,32 @@ getAllOrders(
       })),
     );
   }
+
+  //--------------------Cashier View Methods -------------------
+  private mapToCashierOrder(order: OrderInterface): CashierOrder {
+  return {
+    id: order.id,
+    orderType: order.orderType as OrderType,
+    customerName:
+      order.orderType === 'Delivery' || order.orderType === 'Pickup'
+        ? '-'
+        : order.customerName,
+    itemsCount: order.orderItems?.length ?? 0,
+    status: order.status as OrderStatus,
+    paymentStatus: order.paymentStatus as PaymentStatus | undefined,     
+    paymentMethod: order.paymentMethod as PaymentMethod | undefined,    
+  };
+}
+
+
+getAllOrdersForCashier(params: OrderFilters) {
+  const cleanParams = this.buildParams(params);
+
+  return this.getAllOrders(cleanParams).pipe(
+    map(res => ({
+      ...res,
+      data: res.data.map(o => this.mapToCashierOrder(o))
+    }))
+  );
+}
 }
