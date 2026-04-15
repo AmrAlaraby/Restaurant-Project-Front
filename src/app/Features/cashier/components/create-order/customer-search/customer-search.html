@@ -1,5 +1,6 @@
 <div class="search">
 
+  <!-- INPUT -->
   <input
     type="text"
     placeholder="Search by phone..."
@@ -28,10 +29,32 @@
   </div>
 
   <!-- NO RESULTS -->
-  <div *ngIf="!loading && results.length === 0 && searchTerm">
-    <button class="add-btn">
+  <div *ngIf="!loading && results.length === 0 && searchTerm && !showAddForm">
+
+    <button class="add-btn" (click)="openAddForm()">
       + Add Customer
     </button>
+
+  </div>
+
+  <!-- ADD FORM -->
+  <div *ngIf="showAddForm" class="add-form">
+
+    <input
+      type="text"
+      placeholder="Customer Name"
+      [(ngModel)]="newCustomerName"
+    />
+
+    <button
+      class="save-btn"
+      [disabled]="adding"
+      (click)="createCustomer()">
+
+      {{ adding ? 'Saving...' : 'Save Customer' }}
+
+    </button>
+
   </div>
 
 </div>
