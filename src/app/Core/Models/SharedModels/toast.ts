@@ -1,6 +1,6 @@
 export type ToastType = 'success' | 'error';
 
-export interface Toast {
+export interface ToastInterface {
   id: number;
   message: string;
   type: ToastType;

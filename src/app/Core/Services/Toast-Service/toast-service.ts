@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Toast, ToastType } from '../../Models/SharedModels/toast';
+import { ToastInterface, ToastType } from '../../Models/SharedModels/toast';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToastService {
-    private toastsSubject = new BehaviorSubject<Toast[]>([]);
+    private toastsSubject = new BehaviorSubject<ToastInterface[]>([]);
   toasts$ = this.toastsSubject.asObservable();
 
   private counter = 0;
@@ -14,7 +14,7 @@ export class ToastService {
 
   show(message: string, type: ToastType = 'success', duration = 3000) {
 
-    const toast: Toast = {
+    const toast: ToastInterface = {
       id: ++this.counter,
       message,
       type,
