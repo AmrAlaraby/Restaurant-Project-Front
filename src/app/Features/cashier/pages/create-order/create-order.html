@@ -73,18 +73,17 @@
       <!-- DELIVERY -->
 <ng-container *ngIf="orderType === 'Delivery'">
 
+  <!-- SEARCH -->
   <div class="card">
-
     <app-customer-search
       (select)="onCustomerSelected($event)">
     </app-customer-search>
-
   </div>
 
+  <!-- CUSTOMER INFO -->
   <div class="card" *ngIf="selectedCustomer">
 
     <h4>{{ selectedCustomer.name }}</h4>
-
     <p>{{ selectedCustomer.phoneNumber }}</p>
 
   </div>
