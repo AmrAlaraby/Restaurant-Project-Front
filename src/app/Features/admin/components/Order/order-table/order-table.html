@@ -13,7 +13,7 @@
         @for (order of orders; track $index) {
       <tr (click)="onView(order.id)" class="clickable">
         <td>{{order.id}}</td>
-        <td>{{order.customerName}}</td>
+        <td>{{order.userName}}</td>
         <td>
           <span class="type-badge" [ngClass]="{
             't-dinein':   order.orderType === 'DineIn',

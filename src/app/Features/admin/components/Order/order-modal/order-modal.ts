@@ -146,7 +146,7 @@ onMenuChange(i: number) {
   const raw = this.form.value;
 
   const dto: CreateOrderInterface = {
-    customerId: raw.customerId,
+    userId: raw.customerId,
     branchId: raw.branchId,
     orderType: raw.orderType,
     paymentMethod: raw.paymentMethod,

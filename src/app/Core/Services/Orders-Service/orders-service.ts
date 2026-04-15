@@ -111,10 +111,10 @@ getAllOrders(
   return {
     id: order.id,
     orderType: order.orderType as OrderType,
-    customerName:
+    userName:
       order.orderType === 'Delivery' || order.orderType === 'Pickup'
         ? '-'
-        : order.customerName,
+        : order.userName,
     itemsCount: order.orderItems?.length ?? 0,
     status: order.status as OrderStatus,
     paymentStatus: order.paymentStatus as PaymentStatus | undefined,     
