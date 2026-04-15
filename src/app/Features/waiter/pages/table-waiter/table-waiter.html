@@ -1,0 +1,49 @@
+<div class="tables-container">
+
+  <!-- Filter -->
+  <app-table-search 
+    (filterChanged)="onFilterChanged($event)">
+  </app-table-search>
+<h2 class="branch-title">{{ branchName }}</h2>
+
+  <!-- No Data -->
+  @if (tables.length === 0) {
+    <p>No Tables Found</p>
+  }
+
+  <!-- Tables -->
+  <!-- @for (table of tables; track table.id) {
+    <app-waiter-table-list
+      [table]="table"
+      (toggle)="onToggle($event)"   
+      (openOrder)="onOpenOrder($event)">
+    </app-waiter-table-list>
+  } -->
+    <div class="tables-grid">
+
+  @for (table of tables; track table.id) {
+    <app-waiter-table-list
+      [table]="table"
+      (toggle)="onToggle($event)"   
+      (openOrder)="onOpenOrder($event)">
+    </app-waiter-table-list>
+  }
+
+</div>
+
+  <!-- Pagination -->
+  <app-pagination
+    [pageIndex]="pageIndex"
+    [pageSize]="pageSize"
+    [totalCount]="totalCount"
+    (pageChanged)="onPageChanged($event)">
+  </app-pagination>
+
+</div>
+
+@if (showOrderModal) {
+  <app-order-details
+    [orderId]="selectedOrderId"
+    (close)="closeOrderModal()">
+  </app-order-details>
+}
