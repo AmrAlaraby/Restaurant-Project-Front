@@ -1,3 +1,4 @@
+import { OrderTable } from './../../../admin/components/Order/order-table/order-table';
 import { Component } from '@angular/core';
 import { CategoryFilter } from '../../../waiter/components/place-order/category-filter/category-filter';
 import { MenuList } from '../../../waiter/components/place-order/menu-list/menu-list';
@@ -12,10 +13,15 @@ import { MenuItemInterface } from '../../../../Core/Models/MenuItemModels/menu-i
 import { CreateOrderItemInterface } from '../../../../Core/Models/OrderModels/create-order-item-interface';
 import { TableInterface } from '../../../../Core/Models/TableModels/table-interface';
 import { ActivatedRoute } from '@angular/router';
+import { OrderType } from '../../../../Core/Models/OrderModels/waiter-order.model';
+import { OrderSummary } from "../../../waiter/components/place-order/order-summary/order-summary";
+import { TableSelector } from "../../../waiter/components/place-order/table-selector/table-selector";
+import { OrderTypeSelector } from "../../components/create-order/order-type-selector/order-type-selector";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-order',
-  imports: [CategoryFilter, MenuList],
+  imports: [CategoryFilter, MenuList, OrderSummary, TableSelector, OrderTypeSelector,CommonModule],
   templateUrl: './create-order.html',
   styleUrl: './create-order.scss',
 })
@@ -36,6 +42,8 @@ export class CreateOrder {
   selectedTableId?: number;
 
   currentUser!: UserInterface;
+
+  orderType: OrderType = 'DineIn';
 
   isLoading = false;
 

@@ -1,0 +1,24 @@
+.types {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: 500;
+}
+
+button:hover {
+  background: #ddd;
+}
+
+button.active {
+  background: #c0392b;
+  color: #fff;
+}
