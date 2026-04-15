@@ -71,13 +71,25 @@
       </ng-container>
 
       <!-- DELIVERY -->
-      <ng-container *ngIf="orderType === 'Delivery'">
+<ng-container *ngIf="orderType === 'Delivery'">
 
-        <div class="card delivery-placeholder">
-          <p>Customer Search & Address will be implemented next</p>
-        </div>
+  <div class="card">
 
-      </ng-container>
+    <app-customer-search
+      (select)="onCustomerSelected($event)">
+    </app-customer-search>
+
+  </div>
+
+  <div class="card" *ngIf="selectedCustomer">
+
+    <h4>{{ selectedCustomer.name }}</h4>
+
+    <p>{{ selectedCustomer.phoneNumber }}</p>
+
+  </div>
+
+</ng-container>
 
     </div>
 
