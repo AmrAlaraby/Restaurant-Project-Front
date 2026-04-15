@@ -198,6 +198,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./Features/waiter/pages/profile/profile').then((m) => m.Profile),
       },
+      {
+        path: 'orders',
+        loadComponent: () =>
+          import('./Features/cashier/pages/cashier-orders-page/cashier-orders-page').then((m) => m.CashierOrdersPage),
+      },
       //Areej 501 - 550
       //Arwa 551 - 600
       //mahmoud 601 - 650
