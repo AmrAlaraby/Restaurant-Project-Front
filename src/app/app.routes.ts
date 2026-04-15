@@ -360,6 +360,12 @@ export const routes: Routes = [
     path: 'cashier',
     children: [
       //amr 400 -450
+      {
+  path: 'create-order',
+  loadComponent: () =>
+    import('./Features/cashier/pages/create-order/create-order')
+      .then(m => m.CreateOrder)
+},
       //hossam 451 - 500
       {
         path: 'profile',

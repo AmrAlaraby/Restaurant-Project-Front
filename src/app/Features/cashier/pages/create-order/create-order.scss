@@ -1,0 +1,28 @@
+.page {
+  padding: 20px;
+  background: #f5f1ec;
+  min-height: 100vh;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.left-panel,
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px;
+}
+
+// .menu-card {
+// //   min-height: 500px;
+// }
