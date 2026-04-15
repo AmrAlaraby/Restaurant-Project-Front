@@ -8,6 +8,29 @@
     </button>
   </div>
 
+  <!-- Search -->
+  <div class="search-wrapper">
+    <span class="search-icon">🔍</span>
+    <input
+      class="search-input"
+      type="text"
+      placeholder="Search branches by name..."
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onSearchChange()"
+    />
+    <button
+      class="btn-clear"
+      *ngIf="searchTerm"
+      (click)="searchTerm = ''; onSearchChange()"
+    >✕</button>
+  </div>
+
+  <!-- Results Hint -->
+  <p class="results-hint" *ngIf="!isLoading() && !error()">
+    {{ totalCount() }} {{ totalCount() === 1 ? 'branch' : 'branches' }}
+    <span *ngIf="searchTerm"> for "{{ searchTerm }}"</span>
+  </p>
+
   <!-- Loading -->
   <div class="loading-grid" *ngIf="isLoading()">
     <div class="skeleton-card" *ngFor="let i of [1,2,3]"></div>
@@ -88,8 +111,8 @@
 
   <!-- Empty State -->
   <div class="empty-state" *ngIf="!isLoading() && !error() && branches().length === 0">
-    <p>No branches found.</p>
-    <button class="btn-add" (click)="openCreate()">+ Add Branch</button>
+    <p>No branches found<span *ngIf="searchTerm"> for "{{ searchTerm }}"</span>.</p>
+    <button class="btn-add" *ngIf="!searchTerm" (click)="openCreate()">+ Add Branch</button>
   </div>
 
   <!-- Pagination -->

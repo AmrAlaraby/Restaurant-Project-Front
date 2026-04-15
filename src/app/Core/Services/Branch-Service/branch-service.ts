@@ -19,12 +19,12 @@ export class BranchService {
     return this.http.get<Branch[]>(BranchApi.getAll);
   }
 
-
-getAllWithTables(params?: BranchQueryParams): Observable<PaginatedResult<GetBranch>> {
+  getAllWithTables(params?: BranchQueryParams): Observable<PaginatedResult<GetBranch>> {
     let httpParams = new HttpParams();
-    if (params?.role) httpParams = httpParams.set('role', params.role);
-    if (params?.pageIndex) httpParams = httpParams.set('pageIndex', params.pageIndex);
-    if (params?.pageSize) httpParams = httpParams.set('pageSize', params.pageSize);
+    if (params?.role)       httpParams = httpParams.set('role',       params.role);
+    if (params?.search)     httpParams = httpParams.set('search',     params.search);
+    if (params?.pageIndex)  httpParams = httpParams.set('pageIndex',  params.pageIndex);
+    if (params?.pageSize)   httpParams = httpParams.set('pageSize',   params.pageSize);
 
     return this.http.get<PaginatedResult<GetBranch>>(BranchApi.getAllWithTables, {
       params: httpParams,
@@ -50,6 +50,4 @@ getAllWithTables(params?: BranchQueryParams): Observable<PaginatedResult<GetBran
   toggleStatus(id: number): Observable<void> {
     return this.http.patch<void>(BranchApi.toggleStatus(id), {});
   }
-
-
 }
