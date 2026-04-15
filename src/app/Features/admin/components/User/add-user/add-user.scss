@@ -1,7 +1,15 @@
+:host {
+  --red: #C0392B;
+  --red-dark: #96281B;
+  --gray-600: #9B4437;
+  --black: #2D0A08;
+  --cream: #FDF5F5;
+}
+
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(45, 10, 8, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,7 +17,7 @@
 }
 
 .add-user-modal {
-  background: #1e2433;
+  background: #ffffff;
   border-radius: 16px;
   width: 620px;
   max-width: 95vw;
@@ -17,6 +25,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  border: 0.5px solid #f0d8d6;
 }
 
 // Header
@@ -28,14 +37,14 @@
   h3 {
     font-size: 20px;
     font-weight: 600;
-    color: #ffffff;
+    color: var(--black);
     margin: 0;
   }
 
   .btn-close {
-    background: #2a3147;
-    border: none;
-    color: #aab0c6;
+    background: #FDF5F5;
+    border: 0.5px solid #f0d8d6;
+    color: var(--gray-600);
     font-size: 18px;
     width: 36px;
     height: 36px;
@@ -47,7 +56,8 @@
     transition: background 0.2s;
 
     &:hover {
-      background: #343d57;
+      background: #FCEBEB;
+      color: var(--red);
     }
   }
 }
@@ -74,17 +84,17 @@
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.08em;
-    color: #7b82a0;
+    color: var(--gray-600);
     text-transform: uppercase;
   }
 
   input,
   select {
-    background: #252c3f;
-    border: 1px solid #2e3750;
+    background: #FDF5F5;
+    border: 1px solid #f0d8d6;
     border-radius: 10px;
     padding: 12px 16px;
-    color: #ffffff;
+    color: var(--black);
     font-size: 14px;
     outline: none;
     transition: border-color 0.2s;
@@ -92,22 +102,22 @@
     box-sizing: border-box;
 
     &::placeholder {
-      color: #4e5670;
+      color: #c9a09a;
     }
 
     &:focus {
-      border-color: #f97316;
+      border-color: var(--red);
     }
 
     option {
-      background: #252c3f;
-      color: #ffffff;
+      background: #ffffff;
+      color: var(--black);
     }
   }
 
   select {
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237b82a0' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239B4437' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 16px center;
     padding-right: 40px;
@@ -117,10 +127,10 @@
 
 // Error
 .error-message {
-  color: #f87171;
+  color: var(--red-dark);
   font-size: 13px;
-  background: rgba(248, 113, 113, 0.1);
-  border: 1px solid rgba(248, 113, 113, 0.2);
+  background: #FCEBEB;
+  border: 1px solid #f0c8c5;
   border-radius: 8px;
   padding: 10px 14px;
 }
@@ -133,8 +143,8 @@
 
   .btn-cancel {
     background: transparent;
-    border: 1px solid #2e3750;
-    color: #aab0c6;
+    border: 1px solid #f0d8d6;
+    color: var(--gray-600);
     padding: 10px 24px;
     border-radius: 10px;
     font-size: 14px;
@@ -142,12 +152,12 @@
     transition: background 0.2s;
 
     &:hover {
-      background: #252c3f;
+      background: #FDF5F5;
     }
   }
 
   .btn-save {
-    background: #f97316;
+    background: var(--red);
     border: none;
     color: #ffffff;
     padding: 10px 24px;
@@ -158,7 +168,7 @@
     transition: background 0.2s;
 
     &:hover {
-      background: #ea6c0a;
+      background: var(--red-dark);
     }
 
     &:disabled {

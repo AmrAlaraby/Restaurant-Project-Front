@@ -1,45 +1,104 @@
+:host {
+  --red: #C0392B;
+  --red-dark: #96281B;
+  --gray-600: #9B4437;
+  --black: #2D0A08;
+  --cream: #FDF5F5;
+}
+
 .filters {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 /* Roles */
 .roles {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 4px;
+  background: #ffffff;
+  border: 0.5px solid #f0d8d6;
+  border-radius: 10px;
+  padding: 5px;
 
-    button {
-        border: none;
-        background: var(--gray-200);
-        padding: 8px 14px;
-        border-radius: var(--radius-sm);
-        cursor: pointer;
-        transition: var(--transition);
+  button {
+    border: none;
+    background: transparent;
+    padding: 7px 14px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-size: 13px;
+    color: var(--gray-600);
 
-        &.active {
-            background: var(--black);
-            color: white;
-        }
+    &:hover:not(.active) {
+      background: #f9eeee;
     }
+
+    &.active {
+      background: var(--red);
+      color: white;
+      font-weight: 500;
+    }
+  }
+}
+
+/* Branches */
+.branches {
+  select {
+    background: #ffffff;
+    border: 0.5px solid #f0d8d6;
+    border-radius: 8px;
+    padding: 8px 36px 8px 14px;
+    font-size: 13px;
+    color: var(--black);
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239B4437' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    transition: border-color 0.2s;
+
+    &:focus {
+      border-color: var(--red);
+    }
+
+    option {
+      background: #ffffff;
+      color: var(--black);
+    }
+  }
 }
 
 /* Status */
 .status {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 4px;
+  background: #ffffff;
+  border: 0.5px solid #f0d8d6;
+  border-radius: 10px;
+  padding: 5px;
 
-    button {
-        border: none;
-        padding: 8px 14px;
-        border-radius: var(--radius-sm);
-        cursor: pointer;
-        background: var(--gray-200);
+  button {
+    border: none;
+    padding: 7px 14px;
+    border-radius: 7px;
+    cursor: pointer;
+    background: transparent;
+    font-size: 13px;
+    color: var(--gray-600);
+    transition: background 0.15s;
 
-        &.active {
-            background: var(--red);
-            color: white;
-        }
+    &:hover:not(.active) {
+      background: #f9eeee;
     }
+
+    &.active {
+      background: var(--red);
+      color: white;
+      font-weight: 500;
+    }
+  }
 }
