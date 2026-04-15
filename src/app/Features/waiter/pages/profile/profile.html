@@ -13,12 +13,13 @@
         <div class="card profile-card">
           <div class="avatar">{{ getInitials(user()!.name) }}</div>
           <h2>{{ user()!.name }}</h2>
-          <p class="role">{{ user()!.role }} · Branch 1</p>
-          <div class="stats">
-            <div class="stat">
-              <span class="stat-val orders">{{ shiftInfo.totalOrders }}</span>
-              <span class="stat-lbl">Orders</span>
-            </div>
+          <p class="role">{{ user()!.role }}</p>
+          <!--
+            <div class="stats">
+              <div class="stat">
+                <span class="stat-val orders">{{ shiftInfo.totalOrders }}</span>
+                <span class="stat-lbl">Orders</span>
+              </div>
             <div class="stat">
               <span class="stat-val sales"
                 >EGP {{ shiftInfo.totalSales / 1000 | number: '1.0-0' }}K</span
@@ -30,6 +31,7 @@
               <span class="stat-lbl">Rating</span>
             </div>
           </div>
+          -->
         </div>
       </div>
 
