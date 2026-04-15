@@ -186,7 +186,7 @@ loadUserAndThenTables(): void {
     if (!this.selectedTableId || this.orderItems.length === 0) return;
 
     const payload: CreateOrderInterface = {
-      customerId: this.currentUser.id,
+      userId: this.currentUser.id,
       branchId: this.currentUser.branchId || 1,
       orderType: 'DineIn',
       tableId: this.selectedTableId,

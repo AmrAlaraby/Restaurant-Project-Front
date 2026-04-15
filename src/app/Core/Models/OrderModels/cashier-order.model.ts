@@ -3,7 +3,7 @@ import { OrderStatus, OrderType } from "./waiter-order.model";
 export interface CashierOrder {
   id: number;
   orderType: OrderType;
-  customerName: string;
+  userName: string;
   itemsCount: number;
   status: OrderStatus;
   paymentStatus?: PaymentStatus;       

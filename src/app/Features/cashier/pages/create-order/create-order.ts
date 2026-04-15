@@ -232,7 +232,7 @@ addAddress(address: DeliveryAddress) {
   buildOrder(): CreateOrderInterface {
 
   const base: CreateOrderInterface = {
-    customerId: this.currentUser.id,
+    userId: this.currentUser.id,
     branchId: this.currentUser.branchId,
     orderType: this.orderType,
     paymentMethod: this.paymentMethod,
@@ -252,7 +252,7 @@ addAddress(address: DeliveryAddress) {
   // DELIVERY
   if (this.orderType === 'Delivery') {
 
-    base.customerId = this.selectedCustomer!.id;
+    base.userId = this.selectedCustomer!.id;
 
     base.deliveryAddress = {
       buildingNumber: this.selectedAddress!.buildingNumber,
