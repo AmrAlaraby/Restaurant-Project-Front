@@ -25,6 +25,7 @@ import { UsersService } from '../../../../Core/Services/User-Service/users-servi
 import { AddressSelector } from "../../components/create-order/address-selector/address-selector";
 import { CreateOrderInterface } from '../../../../Core/Models/OrderModels/create-order-interface';
 import { OrderAddressInterface } from '../../../../Core/Models/OrderModels/order-address-interface';
+import { ToastService } from '../../../../Core/Services/Toast-Service/toast-service';
 
 @Component({
   selector: 'app-create-order',
@@ -65,6 +66,7 @@ export class CreateOrder {
     private tableService: TableService,
     private authService: AuthService,
     private usersService: UsersService,
+    private toast: ToastService,
   ) {}
 
   ngOnInit(): void {
@@ -230,6 +232,7 @@ addAddress(address: DeliveryAddress) {
   buildOrder(): CreateOrderInterface {
 
   const base: CreateOrderInterface = {
+    customerId: this.currentUser.id,
     branchId: this.currentUser.branchId,
     orderType: this.orderType,
     paymentMethod: this.paymentMethod,
@@ -282,11 +285,13 @@ addAddress(address: DeliveryAddress) {
 
       this.submitting = false;
 
-      alert('✅ Order Created Successfully');
+      this.toast.success('Order Created Successfully');
+      
     },
     error: (err) => {
       this.submitting = false;
       console.log(err.error);
+      this.toast.error(`Failed to create order ${err.error ? '- ' + err.error : ''}`);
       
     }
   });
