@@ -2,7 +2,7 @@ import { CreateOrderItemInterface } from "./create-order-item-interface";
 import { OrderAddressInterface } from "./order-address-interface";
 
 export interface CreateOrderInterface {
-    customerId?: string;
+    userId?: string;
   branchId: number;
   orderType: string;
   items: CreateOrderItemInterface[];

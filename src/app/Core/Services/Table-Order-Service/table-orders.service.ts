@@ -22,7 +22,7 @@ export class TableOrdersService {
     return this.http.get<OrderDetailsDTO>(OrderApi.getById(orderId)).pipe(
       map((res) => ({
         id: res.id,
-        customerName: res.customerName,
+        userName: res.userName,
         status: res.status,
         totalAmount: res.totalAmount,
         tableNumber: res.tablenumber,

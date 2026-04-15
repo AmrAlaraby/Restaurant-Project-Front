@@ -4,7 +4,7 @@ export interface UnAssignedDelivery {
   deliveryId: number;
   orderNumber: string;
   branchName: string;
-  customerName: string | null;
+  userName: string | null;
   itemsCount: number;
   deliveryAddress: Address;
   createdAt: Date;
