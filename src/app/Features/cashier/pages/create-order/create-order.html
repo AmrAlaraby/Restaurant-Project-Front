@@ -80,11 +80,23 @@
     </app-customer-search>
   </div>
 
-  <!-- CUSTOMER INFO -->
+  <!-- CUSTOMER -->
   <div class="card" *ngIf="selectedCustomer">
 
     <h4>{{ selectedCustomer.name }}</h4>
     <p>{{ selectedCustomer.phoneNumber }}</p>
+
+  </div>
+
+  <!-- ADDRESSES -->
+  <div class="card" *ngIf="selectedCustomer">
+
+    <app-address-selector
+      [addresses]="selectedCustomer.addresses"
+      [selected]="selectedAddress"
+      (select)="onAddressSelected($event)"
+      (add)="addAddress($event)">
+    </app-address-selector>
 
   </div>
 

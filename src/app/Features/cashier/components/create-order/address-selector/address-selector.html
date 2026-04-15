@@ -1,0 +1,49 @@
+<div class="addresses">
+
+  <h4>Addresses</h4>
+
+  <!-- LIST -->
+  <div class="list">
+
+    <div
+      class="card"
+      *ngFor="let a of addresses"
+      [class.active]="a === selected"
+      (click)="selectAddress(a)">
+
+      <div class="line">
+        <b>#{{ a.buildingNumber }}</b>
+        <span>{{ a.street }}</span>
+      </div>
+
+      <div class="line">
+        <small>{{ a.city }}</small>
+      </div>
+
+      <div class="line" *ngIf="a.note">
+        <small>{{ a.note }}</small>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ADD BTN -->
+  <button class="add-btn" (click)="openForm()">
+    + Add Address
+  </button>
+
+  <!-- FORM -->
+  <div *ngIf="showForm" class="form">
+
+    <input type="number" placeholder="Building Number" [(ngModel)]="address.buildingNumber" />
+    <input type="text" placeholder="Street" [(ngModel)]="address.street" />
+    <input type="text" placeholder="City" [(ngModel)]="address.city" />
+    <input type="text" placeholder="Note" [(ngModel)]="address.note" />
+    <input type="text" placeholder="Special Mark" [(ngModel)]="address.specialMark" />
+
+    <button class="save-btn" (click)="save()">Save</button>
+
+  </div>
+
+</div>

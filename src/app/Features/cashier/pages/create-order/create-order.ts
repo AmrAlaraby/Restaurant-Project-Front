@@ -20,10 +20,13 @@ import { OrderTypeSelector } from "../../components/create-order/order-type-sele
 import { CommonModule } from '@angular/common';
 import { CustomerSearch } from "../../components/create-order/customer-search/customer-search";
 import { CustomerInterface } from '../../../../Core/Models/UserModels/customer-interface';
+import { DeliveryAddress } from '../../../../Core/Models/UserModels/delivery-address';
+import { UsersService } from '../../../../Core/Services/User-Service/users-service';
+import { AddressSelector } from "../../components/create-order/address-selector/address-selector";
 
 @Component({
   selector: 'app-create-order',
-  imports: [CategoryFilter, MenuList, OrderSummary, TableSelector, OrderTypeSelector, CommonModule, CustomerSearch],
+  imports: [CategoryFilter, MenuList, OrderSummary, TableSelector, OrderTypeSelector, CommonModule, CustomerSearch, AddressSelector],
   templateUrl: './create-order.html',
   styleUrl: './create-order.scss',
 })
@@ -44,6 +47,7 @@ export class CreateOrder {
   selectedTableId?: number;
 
   currentUser!: UserInterface;
+  selectedAddress?: DeliveryAddress;
 
   orderType: OrderType = 'DineIn';
 
@@ -58,6 +62,7 @@ export class CreateOrder {
     private orderService: OrdersService,
     private tableService: TableService,
     private authService: AuthService,
+    private usersService: UsersService,
   ) {}
 
   ngOnInit(): void {
@@ -189,5 +194,23 @@ loadUserAndThenTables(): void {
 
   onCustomerSelected(user: CustomerInterface) {
   this.selectedCustomer = user;
+}
+
+onAddressSelected(a: DeliveryAddress) {
+  this.selectedAddress = a;
+}
+
+addAddress(address: DeliveryAddress) {
+
+  if (!this.selectedCustomer) return;
+
+  this.usersService
+    .updateCustomerAddress(this.selectedCustomer.id, address)
+    .subscribe((updatedCustomer) => {
+
+      this.selectedCustomer = updatedCustomer;
+      this.selectedAddress = address;
+
+    });
 }
 }
