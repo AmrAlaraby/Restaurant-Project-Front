@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
 import { KitchenBoardDto } from '../../../../../Core/Models/KitchenModels/kitchen-board-dto';
 import { ActivePendingStationsDTO } from '../../../../../Core/Models/KitchenModels/active-pending-stations-dto';
 import { KitchenTicketDetailsDto } from '../../../../../Core/Models/KitchenModels/kitchen-ticket-details-dto';
@@ -10,6 +11,7 @@ import { KitchenService } from '../../../../../Core/Services/Kitchen-Service/kit
 import { AuthService } from '../../../../../Core/Services/Auth-Service/auth-service';
 import { UserInterface } from '../../../../../Core/Models/AuthModels/user-interface';
 import { TicketStatus } from '../../../../../Core/Models/KitchenModels/ticket-status';
+
 import { ActiveStationsBarComponent } from '../../../../admin/components/Kitchen/active-stations-bar/active-stations-bar';
 import { TicketCardComponent } from '../../../../admin/components/Kitchen/ticket-card/ticket-card';
 import { TicketDetailsModalComponent } from '../../../../admin/components/Kitchen/ticket-details/ticket-details';
@@ -33,6 +35,7 @@ export class ChefKitchenBoardComponent implements OnInit, OnDestroy {
   board: KitchenBoardDto = { pending: [], preparing: [], done: [] };
   stations: ActivePendingStationsDTO[] = [];
   selectedTicket: KitchenTicketDetailsDto | null = null;
+
   currentUser: UserInterface | null = null;
 
   loading = false;
@@ -58,10 +61,26 @@ export class ChefKitchenBoardComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (user) => {
+
+          // 👑 ROLE CHECK
+          if (user.role !== 'Chief') {
+            this.error = 'Access denied. Chief only.';
+            return;
+          }
+
           this.currentUser = user;
+
+          // 🟡 NO BRANCH → EMPTY STATE
+          if (!user.branchId) {
+            this.board = { pending: [], preparing: [], done: [] };
+            this.stations = [];
+            return;
+          }
+
           this.currentParams.branchId = user.branchId;
+
           this.loadBoard(this.currentParams);
-          this.loadStations(user.branchId); // ✅ Fix: load stations for ActiveStationsBarComponent
+          this.loadStations(user.branchId);
         },
         error: () => {
           this.error = 'Failed to load user data.';
@@ -118,12 +137,12 @@ export class ChefKitchenBoardComponent implements OnInit, OnDestroy {
   // Filter
   // =====================
   onFilterChanged(params: KitchenTicketQueryParams): void {
+    if (!this.currentUser?.branchId) return;
+
     const newParams: KitchenTicketQueryParams = {
       ...params,
-      branchId: this.currentUser!.branchId,
+      branchId: this.currentUser.branchId,
     };
-
-    if (JSON.stringify(newParams) === JSON.stringify(this.currentParams)) return;
 
     this.currentParams = newParams;
     this.loadBoard(this.currentParams);
@@ -149,8 +168,10 @@ export class ChefKitchenBoardComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          this.loadBoard(this.currentParams);
-          this.loadStations(this.currentUser!.branchId);
+          if (this.currentUser?.branchId) {
+            this.loadBoard(this.currentParams);
+            this.loadStations(this.currentUser.branchId);
+          }
 
           if (this.selectedTicket?.id === event.ticketId) {
             this.selectedTicket = null;
@@ -162,9 +183,6 @@ export class ChefKitchenBoardComponent implements OnInit, OnDestroy {
       });
   }
 
-  // =====================
-  // Modal
-  // =====================
   onCloseModal(): void {
     this.selectedTicket = null;
   }
