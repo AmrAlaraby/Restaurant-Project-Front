@@ -7,6 +7,8 @@ import { OrdersService } from '../../../../Core/Services/Orders-Service/orders-s
 import { CashierOrder } from '../../../../Core/Models/OrderModels/cashier-order.model';
 import { OrderFilters } from '../../../../Core/Models/OrderModels/waiter-order.model';
 import { Router } from '@angular/router';
+import { CashierOrdersList } from '../../components/cashier-orders/cashier-orders-list/cashier-orders-list';
+import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 
 
 @Component({
@@ -16,7 +18,8 @@ import { Router } from '@angular/router';
     CommonModule,
     WaiterOrderFilters,
     Pagination,
-    OrderDetails
+    OrderDetails,
+    CashierOrdersList 
   ],
   templateUrl: './cashier-orders-page.html',
   styleUrls: ['./cashier-orders-page.scss']
@@ -24,7 +27,7 @@ import { Router } from '@angular/router';
 export class CashierOrdersPage implements OnInit {
 
   private ordersService = inject(OrdersService);
-
+private authService = inject(AuthService);
 //--------- For navigation -------------
 private router = inject(Router);
 goToNewOrder() {
@@ -44,17 +47,40 @@ goToNewOrder() {
   selectedOrderId: number | null = null;
   isModalOpen = false;
 
-  ngOnInit() {
-    this.loadOrders();
-  }
+
+private loadCurrentUser() {
+  this.authService.getCurrentUser()
+    .subscribe({
+      next: (user) => {
+
+        if (!user.branchId) {
+          console.error('No branchId for user');
+          return;
+        }
+
+        this.filters.branchId = user.branchId;
+
+        this.loadOrders(); // 👈 بعد ما نحط البرانش
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+}
+
+
+ ngOnInit() {
+  this.loadCurrentUser();
+}
 
   onFiltersChanged(filters: OrderFilters) {
-    this.filters = {
-      ...filters
-    };
+  this.filters = {
+    ...filters,
+    branchId: this.filters.branchId 
+  };
 
-    this.loadOrders();
-  }
+  this.loadOrders();
+}
 
   private loadOrders() {
     this.ordersService.getAllOrdersForCashier(this.filters)
@@ -84,4 +110,12 @@ goToNewOrder() {
     this.selectedOrderId = null;
     this.loadOrders(); // refresh
   }
+
+  onPayClicked(orderId: number) {
+  this.router.navigate(['/cashier/payment', orderId]);
+}
+
+onAssignClicked(orderId: number) {
+  this.router.navigate(['/cashier/assign-drivers', orderId]);
+}
 }

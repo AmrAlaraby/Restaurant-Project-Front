@@ -12,7 +12,12 @@
     (filtersChanged)="onFiltersChanged($event)">
   </app-waiter-order-filters>
 
-  <!-- list هتتحط هنا بعد شوية -->
+<app-cashier-orders-list
+  [orders]="orders"
+  (orderClicked)="onOrderClicked($event)"
+  (payClicked)="onPayClicked($event)"
+  (assignClicked)="onAssignClicked($event)">
+</app-cashier-orders-list>
 
   <app-pagination
     [pageIndex]="filters.pageIndex"

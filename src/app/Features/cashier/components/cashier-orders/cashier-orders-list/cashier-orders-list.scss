@@ -1,0 +1,58 @@
+.table-container {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    overflow: hidden;
+}
+
+.table-header,
+.table-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr 0.8fr 1fr 1fr 1fr 1.5fr;
+    padding: 14px 16px;
+    align-items: center;
+}
+
+.table-header {
+    background: #f8f8f8;
+    font-size: 13px;
+    font-weight: 600;
+    color: #888;
+}
+
+.table-row {
+    border-top: 1px solid #eee;
+    cursor: pointer;
+}
+
+.table-row:hover {
+    background: #fafafa;
+}
+
+.actions {
+    display: flex;
+    gap: 6px;
+}
+
+.pay-btn {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+.assign-btn {
+    background: #ff9800;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+.receipt-btn {
+    background: transparent;
+    border: 1px solid #ccc;
+    padding: 4px 10px;
+    border-radius: 6px;
+}
