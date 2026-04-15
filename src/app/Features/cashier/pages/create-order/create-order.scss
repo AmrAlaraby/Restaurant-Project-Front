@@ -1,20 +1,50 @@
 .page {
   padding: 20px;
   background: #f5f1ec;
-  min-height: 100vh;
+
+  height: 100vh;
+  overflow: hidden;
 }
 
+/* GRID */
 .layout {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 20px;
+
+
+  height: 100%;
 }
 
-.left-panel,
+/* PANELS */
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  overflow: hidden;
+}
 .right-panel {
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  overflow-y: auto;
+
+  padding-right: 4px;
+}
+
+.right-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.right-panel::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.right-panel::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
 }
 
 .card {
