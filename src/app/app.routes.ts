@@ -122,6 +122,12 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./Features/waiter/pages/kitchen/kitchen').then((m) => m.Kitchen),
       },
+       {
+        path: 'tables',
+        loadComponent: () =>
+          import('./Features/waiter/pages/table-waiter/table-waiter').then((m) => m.TableWaiter),
+      },
+      
       {
         path: 'orders',
         loadComponent: () =>
