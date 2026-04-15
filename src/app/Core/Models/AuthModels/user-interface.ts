@@ -3,6 +3,6 @@ export interface UserInterface {
   email: string;
   name: string;
   role: string;
-  branchId?: number;
+  branchId: number;
   branchName?: string;
 }

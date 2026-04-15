@@ -23,6 +23,8 @@ import { CustomerInterface } from '../../../../Core/Models/UserModels/customer-i
 import { DeliveryAddress } from '../../../../Core/Models/UserModels/delivery-address';
 import { UsersService } from '../../../../Core/Services/User-Service/users-service';
 import { AddressSelector } from "../../components/create-order/address-selector/address-selector";
+import { CreateOrderInterface } from '../../../../Core/Models/OrderModels/create-order-interface';
+import { OrderAddressInterface } from '../../../../Core/Models/OrderModels/order-address-interface';
 
 @Component({
   selector: 'app-create-order',
@@ -53,7 +55,7 @@ export class CreateOrder {
 
   selectedCustomer?: CustomerInterface;
 
-  isLoading = false;
+  submitting = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -192,6 +194,17 @@ loadUserAndThenTables(): void {
     }, 0);
   }
 
+  canSubmit(): boolean {
+
+  if (this.orderItems.length === 0) return false;
+
+  if (this.orderType === 'DineIn' && !this.selectedTableId) return false;
+
+  if (this.orderType === 'Delivery' && !this.selectedAddress) return false;
+
+  return true;
+}
+
   onCustomerSelected(user: CustomerInterface) {
   this.selectedCustomer = user;
 }
@@ -212,5 +225,70 @@ addAddress(address: DeliveryAddress) {
       this.selectedAddress = address;
 
     });
+}
+
+  buildOrder(): CreateOrderInterface {
+
+  const base: CreateOrderInterface = {
+    branchId: this.currentUser.branchId,
+    orderType: this.orderType,
+    paymentMethod: this.paymentMethod,
+    items: this.orderItems.map(i => ({
+      menuItemId: i.menuItemId,
+      quantity: i.quantity,
+      unitPrice: i.unitPrice,
+      notes: i.notes
+    }))
+  };
+
+  // DINE IN
+  if (this.orderType === 'DineIn') {
+    base.tableId = this.selectedTableId!;
+  }
+
+  // DELIVERY
+  if (this.orderType === 'Delivery') {
+
+    base.customerId = this.selectedCustomer!.id;
+
+    base.deliveryAddress = {
+      buildingNumber: this.selectedAddress!.buildingNumber,
+      street: this.selectedAddress!.street,
+      city: this.selectedAddress!.city,
+      note: this.selectedAddress!.note,
+      specialMark: this.selectedAddress!.specialMark
+    } as OrderAddressInterface;
+  }
+
+  return base;
+}
+
+  submitOrder() {
+
+  if (!this.canSubmit()) return;
+
+  const order = this.buildOrder();
+
+  this.submitting = true;
+
+  this.orderService.createOrder(order).subscribe({
+    next: (res) => {
+
+      // 🔥 reset
+      this.orderItems = [];
+      this.selectedAddress = undefined;
+      this.selectedCustomer = undefined;
+      this.selectedTableId = undefined;
+
+      this.submitting = false;
+
+      alert('✅ Order Created Successfully');
+    },
+    error: (err) => {
+      this.submitting = false;
+      console.log(err.error);
+      
+    }
+  });
 }
 }
