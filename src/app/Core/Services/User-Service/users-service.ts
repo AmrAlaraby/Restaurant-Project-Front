@@ -9,6 +9,8 @@ import { UserQueryParams } from '../../Models/UserModels/user-query-params';
 import { Branch, Users } from '../../Constants/Api_Urls';
 import { BranchDto } from '../../Models/BranchModels/Branch-dto';
 import { UserDetails } from '../../Models/UserModels/user-details';
+import { CustomerInterface } from '../../Models/UserModels/customer-interface';
+import { CreateCustomerInterface } from '../../Models/UserModels/create-customer-interface';
 
 
 @Injectable({
@@ -73,4 +75,20 @@ export class UsersService {
   getUserDetails(id: string) {
     return this.http.get<UserDetails>(Users.getById(id));
   }
+
+  searchCustomers(phone: string) {
+
+  let params = new HttpParams()
+    .set('phoneNumber', phone)
+    .set('pageIndex', 1)
+    .set('pageSize', 5);
+
+  return this.http.get<PaginatedResultInterface<CustomerInterface>>(
+    Users.searchCustomers,
+    { params }
+  );
+  }
+  addCustomer(dto: CreateCustomerInterface) {
+  return this.http.post<CustomerInterface>(Users.addCustomer, dto);
+}
 }

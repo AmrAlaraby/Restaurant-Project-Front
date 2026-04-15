@@ -18,10 +18,12 @@ import { OrderSummary } from "../../../waiter/components/place-order/order-summa
 import { TableSelector } from "../../../waiter/components/place-order/table-selector/table-selector";
 import { OrderTypeSelector } from "../../components/create-order/order-type-selector/order-type-selector";
 import { CommonModule } from '@angular/common';
+import { CustomerSearch } from "../../components/create-order/customer-search/customer-search";
+import { CustomerInterface } from '../../../../Core/Models/UserModels/customer-interface';
 
 @Component({
   selector: 'app-create-order',
-  imports: [CategoryFilter, MenuList, OrderSummary, TableSelector, OrderTypeSelector,CommonModule],
+  imports: [CategoryFilter, MenuList, OrderSummary, TableSelector, OrderTypeSelector, CommonModule, CustomerSearch],
   templateUrl: './create-order.html',
   styleUrl: './create-order.scss',
 })
@@ -44,6 +46,8 @@ export class CreateOrder {
   currentUser!: UserInterface;
 
   orderType: OrderType = 'DineIn';
+
+  selectedCustomer?: CustomerInterface;
 
   isLoading = false;
 
@@ -182,4 +186,8 @@ loadUserAndThenTables(): void {
       return sum + item.quantity * item.unitPrice;
     }, 0);
   }
+
+  onCustomerSelected(user: CustomerInterface) {
+  this.selectedCustomer = user;
+}
 }
