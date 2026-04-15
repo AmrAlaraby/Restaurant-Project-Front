@@ -36,7 +36,6 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
   stationsLoading = false;
   error: string | null = null;
 
-  // Filters
   currentParams: KitchenTicketQueryParams = {
     branchId: null,
     orderId: null,
@@ -64,7 +63,14 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.error = null;
 
-    this.kitchenService.getBoard(params)
+    const safeParams: KitchenTicketQueryParams = {
+      branchId: params.branchId ?? null,
+      orderId: params.orderId ?? null,
+      station: params.station ?? null,
+      status: params.status ?? null,
+    };
+
+    this.kitchenService.getBoard(safeParams)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data) => {
@@ -79,12 +85,12 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
   }
 
   // =====================
-  // Load Stations
+  // Reload Stations
   // =====================
-  loadStations(branchId: number): void {
+  private refreshStations(): void {
     this.stationsLoading = true;
 
-    this.kitchenService.getActiveStations(branchId)
+    this.kitchenService.getActiveStations(this.currentParams.branchId ?? null)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data) => {
@@ -101,15 +107,21 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
   // Filter
   // =====================
   onFilterChanged(params: KitchenTicketQueryParams): void {
-    this.currentParams = params;
+    const safeParams: KitchenTicketQueryParams = {
+      branchId: params.branchId ?? null,
+      orderId: params.orderId ?? null,
+      station: params.station ?? null,
+      status: params.status ?? null,
+    };
 
-    this.loadBoard(params);
+    if (JSON.stringify(safeParams) === JSON.stringify(this.currentParams)) return;
 
-    if (params.branchId) {
-      this.loadStations(params.branchId);
-    } else {
-      this.stations = [];
-    }
+    this.currentParams = safeParams;
+    this.loadBoard(safeParams);
+  }
+
+  onStationsLoaded(stations: ActivePendingStationsDTO[]): void {
+    this.stations = stations;
   }
 
   // =====================
@@ -133,10 +145,7 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           this.loadBoard(this.currentParams);
-
-          if (this.currentParams.branchId) {
-            this.loadStations(this.currentParams.branchId);
-          }
+          this.refreshStations();
 
           if (this.selectedTicket?.id === event.ticketId) {
             this.selectedTicket = null;
