@@ -1,49 +1,63 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, interval, switchMap } from 'rxjs';
+import { Subscription, forkJoin, interval, switchMap, of } from 'rxjs';
 import { Delivery } from '../../../../Core/Models/DeliveryModels/delivery';
 import { UnAssignedDelivery } from '../../../../Core/Models/DeliveryModels/un-assigned-delivery';
 import { User } from '../../../../Core/Models/DeliveryModels/user';
 import { DeliveryService } from '../../../../Core/Services/Delivery-Service/delivery-service';
+import { UsersService } from '../../../../Core/Services/User-Service/users-service';
+
+// 👇 VM type بسيط للـ UI فقط
+type UnAssignedDeliveryVM = UnAssignedDelivery & {
+  totalAmount: number;
+};
 
 @Component({
   selector: 'app-home-page',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
 })
 export class HomePage implements OnInit, OnDestroy {
   private deliveryService = inject(DeliveryService);
+  private usersService = inject(UsersService);
 
-  // Driver info (from JWT / auth service — adjust to your auth setup)
   driver: User | null = null;
   isOnline = true;
 
-  // Stats
   deliveriesToday = 0;
   cashCollected = 0;
   ratingToday = 0;
   distanceToday = 0;
 
-  // Active delivery
   activeDelivery: Delivery | null = null;
 
-  // Pending assignments
-  pendingAssignments: UnAssignedDelivery[] = [];
+  // 👇 التعديل هنا
+  pendingAssignments: UnAssignedDeliveryVM[] = [];
 
-  // UI state
   loading = true;
-  actionLoading: number | null = null; // tracks which delivery is being accepted/declined
+  actionLoading: number | null = null;
 
   private pollSub?: Subscription;
 
   ngOnInit(): void {
+    this.loadDriverInfo();
     this.loadDashboard();
-    // Poll every 30s for new assignments
+
     this.pollSub = interval(30000)
-      .pipe(switchMap(() => this.deliveryService.getUnAssignedDeliveries()))
+      .pipe(
+        switchMap(() => {
+          if (!this.isOnline) return of([]);
+          return this.deliveryService.getUnAssignedDeliveries();
+        }),
+      )
       .subscribe({
-        next: (res) => (this.pendingAssignments = res),
+        next: (res) => {
+          if (Array.isArray(res)) {
+            this.pendingAssignments = this.normalizePending(res);
+          }
+        },
         error: (err) => console.error('Poll error:', err),
       });
   }
@@ -52,42 +66,73 @@ export class HomePage implements OnInit, OnDestroy {
     this.pollSub?.unsubscribe();
   }
 
+  private loadDriverInfo(): void {
+    const raw = localStorage.getItem('user');
+
+    if (!raw) return;
+
+    try {
+      const user = JSON.parse(raw);
+
+      this.usersService.getUserDetails(user.id).subscribe({
+        next: (res) => {
+          console.log('USER DETAILS RESPONSE:', res);
+
+          this.driver = {
+            id: res.id,
+            name: res.name,
+            email: res.email,
+            roleId: res.roleId,
+            branchId: res.branchId ?? null,
+            branchName: res.branchName ?? null,
+          };
+        },
+        error: (err) => {
+          console.log('USER DETAILS ERROR:', err);
+          this.driver = user;
+        },
+      });
+    } catch {
+      this.driver = null;
+    }
+  }
+
   loadDashboard(): void {
     this.loading = true;
 
-    // Load own assigned deliveries (active)
-    this.deliveryService.getOwnAssignedDeliveries().subscribe({
-      next: (data: Delivery[]) => {
-        // Active = the first delivery that's not delivered yet
-        this.activeDelivery =
-          data.find((d) => d.deliveryStatus === 'Assigned' || d.deliveryStatus === 'PickedUp') ??
-          null;
+    forkJoin({
+      deliveries: this.deliveryService.getOwnAssignedDeliveries(),
+      pending: this.deliveryService.getUnAssignedDeliveries(),
+    }).subscribe({
+      next: ({ deliveries, pending }) => {
+        this.pendingAssignments = this.normalizePending(pending);
 
-        // Stats from today's deliveries
-        const today = new Date().toDateString();
-        const todayDeliveries = data.filter(
-          (d) => d.deliveredAt && new Date(d.deliveredAt).toDateString() === today,
-        );
-
-        this.deliveriesToday = todayDeliveries.length;
-        this.cashCollected = todayDeliveries.reduce((sum, d) => sum + (d.cashCollected ?? 0), 0);
-        // Rating & distance: placeholders — connect to your actual endpoint
-        this.ratingToday = 4.9;
-        this.distanceToday = 22;
-
+        this.handleDeliveries(deliveries || []);
         this.loading = false;
       },
       error: (err) => {
-        console.error('Dashboard load error:', err);
+        console.error('Dashboard error:', err);
         this.loading = false;
       },
     });
+  }
 
-    // Load pending unassigned deliveries
-    this.deliveryService.getUnAssignedDeliveries().subscribe({
-      next: (res) => (this.pendingAssignments = res),
-      error: (err) => console.error('Pending load error:', err),
-    });
+  private handleDeliveries(deliveries: Delivery[]): void {
+    this.activeDelivery =
+      deliveries.find((d) =>
+        ['Assigned', 'PickedUp', 'OnTheWay'].includes(String(d.deliveryStatus)),
+      ) ?? null;
+
+    const todayDeliveries = deliveries.filter((d) => d.deliveredAt && this.isToday(d.deliveredAt!));
+
+    this.deliveriesToday = todayDeliveries.length;
+
+    this.cashCollected = todayDeliveries.reduce((sum, d) => {
+      return sum + (Number(d.cashCollected) || 0);
+    }, 0);
+
+    this.ratingToday = 4.9;
+    this.distanceToday = 22;
   }
 
   toggleOnlineStatus(): void {
@@ -96,56 +141,118 @@ export class HomePage implements OnInit, OnDestroy {
 
   viewActiveDelivery(): void {
     if (!this.activeDelivery) return;
-    // Navigate or open modal — wire to your router
     console.log('View delivery:', this.activeDelivery.id);
   }
 
-  acceptDelivery(delivery: UnAssignedDelivery): void {
-    this.actionLoading = delivery.deliveryId;
+  private isToday(date: string): boolean {
+    const d = new Date(date);
+    const today = new Date();
 
-    // Get driver ID from stored user / JWT
-    const driverId = this.getDriverId();
-
-    this.deliveryService.assignDelivery({ deliveryId: delivery.deliveryId, driverId }).subscribe({
-      next: () => {
-        this.actionLoading = null;
-        this.loadDashboard(); // refresh
-      },
-      error: (err) => {
-        console.error('Accept error:', err);
-        this.actionLoading = null;
-      },
-    });
+    return (
+      d.getFullYear() === today.getFullYear() &&
+      d.getMonth() === today.getMonth() &&
+      d.getDate() === today.getDate()
+    );
   }
 
-  declineDelivery(delivery: UnAssignedDelivery): void {
-    // Remove from local list (backend may not have a decline endpoint)
+  acceptDelivery(delivery: UnAssignedDeliveryVM): void {
+    this.actionLoading = delivery.deliveryId;
+
+    let driverId: string;
+
+    try {
+      driverId = this.getDriverId();
+    } catch (e) {
+      console.error(e);
+      this.actionLoading = null;
+      return;
+    }
+
+    this.deliveryService
+      .assignDelivery({
+        deliveryId: delivery.deliveryId,
+        driverId,
+      })
+      .subscribe({
+        next: () => {
+          // 1) remove instantly from UI
+          this.pendingAssignments = this.pendingAssignments.filter(
+            (d) => d.deliveryId !== delivery.deliveryId,
+          );
+
+          // 2) set active delivery immediately
+          this.activeDelivery = {
+            id: delivery.deliveryId,
+            deliveryStatus: 'Assigned',
+            createdAt: new Date().toISOString(),
+            deliveredAt: null,
+            cashCollected: null,
+            driverName: this.driver?.name || null,
+            order: {
+              id: Number(delivery.orderNumber),
+              totalAmount: delivery.totalAmount,
+              itemsCount: delivery.itemsCount,
+              status: 'Assigned',
+              orderType: 'Delivery',
+              branchName: null,
+              createdAt: new Date().toISOString(),
+              items: [],
+              calculatedTotal: delivery.totalAmount,
+            },
+            deliveryAddress: delivery.deliveryAddress,
+          } as any;
+
+          // 3) stop loading
+          this.actionLoading = null;
+
+          // 4) refresh dashboard stats
+          this.loadDashboard();
+        },
+
+        error: (err) => {
+          console.error('Accept error:', err);
+          this.actionLoading = null;
+        },
+      });
+  }
+
+  declineDelivery(delivery: UnAssignedDeliveryVM): void {
     this.pendingAssignments = this.pendingAssignments.filter(
       (d) => d.deliveryId !== delivery.deliveryId,
     );
   }
 
-  formatAddress(d: UnAssignedDelivery): string {
+  formatAddress(d: UnAssignedDeliveryVM): string {
     const a = d.deliveryAddress;
-    return `${a.buildingNumber} ${a.street}, ${a.city}`;
+    if (!a) return '';
+
+    return `${a.buildingNumber || ''} ${a.street || ''}, ${a.city || ''}`;
   }
 
   formatActiveAddress(): string {
-    if (!this.activeDelivery) return '';
+    if (!this.activeDelivery?.deliveryAddress) return '';
+
     const a = this.activeDelivery.deliveryAddress;
-    return `${a.buildingNumber} ${a.street}, ${a.city}`;
+
+    return `${a.buildingNumber || ''} ${a.street || ''}, ${a.city || ''}`;
+  }
+
+  private normalizePending(res: UnAssignedDelivery[]): UnAssignedDeliveryVM[] {
+    return res.map((x) => ({
+      ...x,
+      totalAmount: 0,
+    }));
   }
 
   private getDriverId(): string {
-    // Adjust based on how you store user info
     const raw = localStorage.getItem('user');
-    if (raw) {
-      try {
-        return JSON.parse(raw).id;
-      } catch {
-        return '';
-      }
-    }
-    return '';
+
+    if (!raw) throw new Error('User not logged in');
+
+    const parsed = JSON.parse(raw);
+
+    if (!parsed?.id) throw new Error('Invalid user data');
+
+    return parsed.id;
   }
 }
