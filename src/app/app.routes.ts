@@ -238,6 +238,14 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./Features/waiter/pages/profile/profile').then((m) => m.Profile),
       },
+
+            {
+        path: 'kitchen',
+        loadComponent: () =>
+          import('./Features/chief/components/chef-kitchen/chef-kitchen-board/chef-kitchen-board').then(
+            (m) => m.ChefKitchenBoardComponent,
+          ),
+      },
       //Areej 501 - 550
       //Arwa 551 - 600
       //mahmoud 601 - 650
