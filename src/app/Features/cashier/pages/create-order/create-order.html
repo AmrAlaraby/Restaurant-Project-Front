@@ -100,7 +100,50 @@
 
   </div>
 
+          <!-- PAYMENT -->
+<div class="card">
+
+  <h4>Payment</h4>
+
+  <div class="payments">
+
+    <button
+      *ngFor="let p of ['Cash','Card','Instapay','Wallet']"
+      [class.active]="paymentMethod === p"
+      (click)="paymentMethod = p">
+
+      {{ p }}
+
+    </button>
+
+  </div>
+
+</div>
+
+<!-- SUMMARY -->
+<div class="card">
+
+  <app-order-summary
+    [items]="orderItems"
+    [total]="total">
+  </app-order-summary>
+
+</div>
+
+<!-- SUBMIT -->
+<button
+  class="submit-btn"
+  [disabled]="!canSubmit() || submitting"
+  (click)="submitOrder()">
+
+  {{ submitting ? 'Processing...' : 'Create Order' }}
+
+</button>
+
 </ng-container>
+
+
+
 
     </div>
 
