@@ -223,7 +223,7 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'Chief',
+    path: 'chief',
     children: [
       //amr 400 -450
 
