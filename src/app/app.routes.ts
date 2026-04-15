@@ -222,4 +222,21 @@ export const routes: Routes = [
       //mustafa 651 - 700
     ],
   },
+  {
+    path: 'Chief',
+    children: [
+      //amr 400 -450
+
+      //hossam 451 - 500
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./Features/waiter/pages/profile/profile').then((m) => m.Profile),
+      },
+      //Areej 501 - 550
+      //Arwa 551 - 600
+      //mahmoud 601 - 650
+      //mustafa 651 - 700
+    ],
+  },
 ];
