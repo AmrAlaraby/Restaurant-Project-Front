@@ -6,11 +6,21 @@
     <div class="left-panel">
 
       <div class="card">
-        <app-category-filter></app-category-filter>
+        <app-category-filter
+        [categories]="categories"
+        (select)="onCategoryChange($event)"
+          ></app-category-filter>
       </div>
 
       <div class="card menu-card">
-        <app-menu-list></app-menu-list>
+        <app-menu-list
+          [items]="menuItems"
+          [pageIndex]="pageIndex"
+          [pageSize]="pageSize"
+          [totalCount]="totalCount"
+          (pageChanged)="onPageChange($event)"
+          (add)="addToOrder($event)">
+        </app-menu-list>
       </div>
 
     </div>
