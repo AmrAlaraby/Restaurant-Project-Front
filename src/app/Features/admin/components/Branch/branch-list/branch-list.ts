@@ -1,16 +1,16 @@
-import { Component, inject, OnInit, signal, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, inject, OnInit, OnChanges, SimpleChanges, signal, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { BranchQueryParams } from '../../../../../Core/Models/BranchModels/branch-query-params';
 import { GetBranch } from '../../../../../Core/Models/BranchModels/get-branch';
 import { BranchService } from '../../../../../Core/Services/Branch-Service/branch-service';
 import { Pagination } from '../../../../../Shared/Components/pagination/pagination';
 
-
 @Component({
   selector: 'app-branch-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, Pagination],
+  imports: [CommonModule, RouterModule, FormsModule, Pagination],
   templateUrl: './branch-list.html',
   styleUrls: ['./branch-list.scss'],
 })
@@ -27,6 +27,9 @@ export class BranchListComponent implements OnInit, OnChanges {
   isLoading = signal(false);
   error = signal<string | null>(null);
 
+  searchTerm = '';
+  private searchTimeout: any;
+
   params: BranchQueryParams = {
     pageIndex: 1,
     pageSize: 5,
@@ -40,6 +43,14 @@ export class BranchListComponent implements OnInit, OnChanges {
     if (changes['refreshTrigger'] && !changes['refreshTrigger'].firstChange) {
       this.loadBranches();
     }
+  }
+
+  onSearchChange(): void {
+    clearTimeout(this.searchTimeout);
+    this.searchTimeout = setTimeout(() => {
+      this.params = { ...this.params, search: this.searchTerm, pageIndex: 1 };
+      this.loadBranches();
+    }, 400);
   }
 
   loadBranches(): void {
