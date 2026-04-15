@@ -1,0 +1,59 @@
+<div class="table-container">
+
+  <div class="table-header">
+    <div>ORDER</div>
+    <div>TABLE</div>
+    <div>ITEMS</div>
+    <div>STATUS</div>
+    <div>TOTAL</div>
+    <div>ACTIONS</div>
+  </div>
+
+  @for (order of orders; track order.id) {
+
+    <div
+  class="table-row"
+  [ngClass]="getRowClass(order.status)"
+  (click)="onOrderClick(order.id)">
+
+      <div>#{{ order.id }}</div>
+
+      <div>
+        <span class="table-badge">
+          {{ order.tableNumber || 'N/A' }}
+        </span>
+      </div>
+
+      <div>{{ order.itemsCount }} items</div>
+
+      <div>
+        <span class="status" [class]="order.status">
+          {{ order.status }}
+        </span>
+      </div>
+
+      <div>{{ order.totalAmount }} EGP</div>
+
+      <div class="actions">
+
+    <button
+  class="view-btn"
+  (click)="onViewClick(order.id, $event)">
+  View
+</button>
+
+        @if (isReceived(order.status)) {
+          <button
+            class="add-btn"
+            (click)="onAddItem(order.id, $event)">
+            Add Item
+          </button>
+        }
+
+      </div>
+
+    </div>
+
+  }
+
+</div>

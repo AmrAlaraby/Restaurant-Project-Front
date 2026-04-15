@@ -106,7 +106,12 @@ export class KitchenTicketCard implements OnInit, OnDestroy {
   }
 
   markDone() {
-    this.localStatus = TicketStatus.Done; // instant UI update
-    this.changeStatus.emit({ id: this.ticket.id, status: TicketStatus.Done });
+    if (this.currentStatus !== TicketStatus.Preparing) return;
+
+    this.localStatus = TicketStatus.Done;
+    this.changeStatus.emit({
+      id: this.ticket.id,
+      status: TicketStatus.Done,
+    });
   }
 }

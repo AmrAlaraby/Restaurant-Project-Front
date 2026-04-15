@@ -1,0 +1,51 @@
+$bg: #ede9e1;
+
+.branch-page-layout {
+  display: flex;
+  min-height: 100vh;
+  background: $bg;
+  transition: all 0.3s ease;
+
+  // Default: list takes full width
+  .list-panel {
+    flex: 1;
+    overflow-y: auto;
+    transition: flex 0.3s ease;
+  }
+
+  .details-panel {
+    display: none;
+    overflow-y: auto;
+    border-left: 1px solid #e0dbd3;
+    animation: slideIn 0.25s ease;
+  }
+
+  // When details is open: split layout
+  &.has-details {
+    .list-panel {
+      flex: 0 0 420px;
+      min-width: 0;
+      border-right: 1px solid #e0dbd3;
+
+      @media (max-width: 900px) {
+        display: none;
+      }
+    }
+
+    .details-panel {
+      display: block;
+      flex: 1;
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

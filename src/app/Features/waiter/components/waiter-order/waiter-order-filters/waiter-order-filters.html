@@ -1,0 +1,31 @@
+<div class="filters-container">
+
+  <!-- STATUS -->
+  <div class="tabs">
+
+    @for (tab of statusTabs; track tab.label) {
+      <button
+        class="tab"
+        [class.active]="activeStatus === tab.value"
+        (click)="selectStatus(tab.value)">
+        {{ tab.label }}
+      </button>
+    }
+
+  </div>
+
+  <!-- TYPE -->
+  <div class="tabs">
+
+    @for (tab of typeTabs; track tab.label) {
+      <button
+        class="tab"
+        [class.active]="activeType === tab.value"
+        (click)="selectType(tab.value)">
+        {{ tab.label }}
+      </button>
+    }
+
+  </div>
+
+</div>
