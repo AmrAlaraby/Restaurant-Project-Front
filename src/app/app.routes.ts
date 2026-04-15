@@ -227,6 +227,9 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./Features/waiter/pages/profile/profile').then((m) => m.Profile),
       },
+      {path: 'delivery-history',
+        
+        loadComponent: () => import('./Features/driver/pages/delivery-history/delivery-history').then((m) => m.DeliveryHistory)},
       //Areej 501 - 550
       //Arwa 551 - 600
       //mahmoud 601 - 650
