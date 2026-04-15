@@ -70,7 +70,7 @@ export class WaiterOrderFilters {
     { label: 'All Types', value: null },
     { label: 'DineIn', value: 'DineIn' },
     { label: 'Delivery', value: 'Delivery' },
-    { label: 'Pickup', value: 'Pickup' }
+    { label: 'Pickup', value: 'PickUp' }
   ];
 
   selectStatus(status: OrderStatus | null) {

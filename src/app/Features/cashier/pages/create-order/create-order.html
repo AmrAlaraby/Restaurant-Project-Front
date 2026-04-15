@@ -26,11 +26,58 @@
     </div>
 
     <!-- RIGHT -->
-    <div class="right-panel">
+      <div class="right-panel">
 
+      <!-- ORDER TYPE -->
       <div class="card">
-        <p>Order Type + Dynamic Content (next commit)</p>
+        <app-order-type-selector
+          [(type)]="orderType">
+        </app-order-type-selector>
       </div>
+
+      <!-- DINE IN -->
+      <ng-container *ngIf="orderType === 'DineIn'">
+
+        <div class="card">
+          <app-table-selector
+            [tables]="tables"
+            [(tableId)]="selectedTableId">
+          </app-table-selector>
+        </div>
+
+        <div class="card">
+        <app-order-summary
+        [items]="orderItems"
+        [total]="total"
+        (remove)="removeItem($event)"
+        (decrease)="decreaseQty($event)">
+        </app-order-summary>
+      </div>
+
+      </ng-container>
+
+      <!-- PICKUP -->
+      <ng-container *ngIf="orderType === 'PickUp'">
+
+        <div class="card">
+        <app-order-summary
+        [items]="orderItems"
+        [total]="total"
+        (remove)="removeItem($event)"
+        (decrease)="decreaseQty($event)">
+        </app-order-summary>
+      </div>
+
+      </ng-container>
+
+      <!-- DELIVERY -->
+      <ng-container *ngIf="orderType === 'Delivery'">
+
+        <div class="card delivery-placeholder">
+          <p>Customer Search & Address will be implemented next</p>
+        </div>
+
+      </ng-container>
 
     </div>
 

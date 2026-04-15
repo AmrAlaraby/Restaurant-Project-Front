@@ -1,6 +1,6 @@
 export type OrderStatus = 'Received' | 'Preparing' | 'Ready' | 'Delivered' | 'Cancelled';
 
-export type OrderType = 'DineIn' | 'Delivery' | 'Pickup';
+export type OrderType = 'DineIn' | 'Delivery' | 'PickUp';
 
 export interface OrderFilters {
   pageIndex: number;

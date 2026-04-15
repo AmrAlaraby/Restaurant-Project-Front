@@ -1,0 +1,21 @@
+<div class="types">
+
+  <button
+    [class.active]="type === 'DineIn'"
+    (click)="select('DineIn')">
+    Dine In
+  </button>
+
+  <button
+    [class.active]="type === 'PickUp'"
+    (click)="select('PickUp')">
+    Pick Up
+  </button>
+
+  <button
+    [class.active]="type === 'Delivery'"
+    (click)="select('Delivery')">
+    Delivery
+  </button>
+
+</div>
