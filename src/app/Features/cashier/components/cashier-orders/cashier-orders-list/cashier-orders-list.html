@@ -1,0 +1,68 @@
+<div class="table-container">
+
+  <div class="table-header">
+    <div>ORDER</div>
+    <div>TYPE</div>
+    <div>WAITER</div>
+    <div>ITEMS</div>
+    <div>STATUS</div>
+    <div>PAYMENT</div>
+    <div>METHOD</div>
+    <div>ACTIONS</div>
+  </div>
+
+  @for (order of orders; track order.id) {
+
+    <div
+      class="table-row"
+      (click)="onOrderClick(order.id)">
+
+      <div>#{{ order.id }}</div>
+
+      <div>{{ order.orderType }}</div>
+
+      <div>{{ order.customerName }}</div>
+
+      <div>{{ order.itemsCount }}</div>
+
+      <div>
+        <span class="status" [class]="order.status">
+          {{ order.status }}
+        </span>
+      </div>
+
+      <div>{{ order.paymentStatus }}</div>
+
+      <div>{{ order.paymentMethod || '-' }}</div>
+
+      <div class="actions">
+
+        @if (isPending(order.paymentStatus )) {
+          <button
+            class="pay-btn"
+            (click)="onPay(order.id, $event)">
+            Pay
+          </button>
+        }
+
+        @if (isDelivery(order.orderType)) {
+          <button
+            class="assign-btn"
+            (click)="onAssign(order.id, $event)">
+            Assign
+          </button>
+        }
+
+        <button
+          class="receipt-btn"
+          (click)="onOrderClick(order.id)">
+          Receipt
+        </button>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>
