@@ -41,7 +41,7 @@
            [routerLink]="['/', prefix, link.route]"
            routerLinkActive="active">
 
-          <span class="sb-icon" [innerHTML]="link.icon"></span>
+          <span class="sb-icon" [innerHTML]="sanitize(link.icon)"></span>
 
           <span class="sb-label">
             {{ link.title }}
