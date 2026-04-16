@@ -1,0 +1,202 @@
+// Variables matching the style of كود 2
+$primary-red: #C0392B;
+$primary-red-dark: #96281B;
+$primary-green: #27AE60;
+$primary-green-dark: #1e8449;
+$text-dark: #2D0A08;
+$text-muted: #b08a83;
+$bg-light-red: rgba(192, 57, 43, 0.05);
+$border-light: rgba(192, 57, 43, 0.2);
+
+.home-header {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid $border-light;
+  
+  .welcome {
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: $text-dark;
+      margin: 0 0 8px 0;
+      
+      span {
+        color: $primary-red;
+        font-weight: 700;
+      }
+    }
+  }
+  
+  .branch-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-family: 'DM Sans', sans-serif;
+    
+    .label {
+      color: $text-muted;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+    
+    .branch-name {
+      color: $primary-red;
+      font-weight: 600;
+      background: $bg-light-red;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+    }
+  }
+}
+
+.page {
+  padding: 20px 24px;
+  background: #fef8f7;
+  min-height: 100vh;
+  
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: $text-dark;
+    margin: 28px 0 16px 0;
+    letter-spacing: -0.3px;
+    
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+  
+  .tables-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 16px 0 12px 0;
+    
+    h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: $text-dark;
+      margin: 0;
+      letter-spacing: -0.2px;
+    }
+    
+    .view-all-btn {
+      background: transparent;
+      border: 1px solid $border-light;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      color: $primary-red;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.05em;
+      
+      &:hover {
+        background: $bg-light-red;
+        border-color: $primary-red;
+        transform: translateX(2px);
+      }
+      
+      &::after {
+        content: '→';
+        transition: transform 0.15s;
+      }
+      
+      &:hover::after {
+        transform: translateX(3px);
+      }
+    }
+  }
+}
+
+// Optional: Add responsive design
+@media (max-width: 768px) {
+  .home-header {
+    .welcome h2 {
+      font-size: 20px;
+    }
+  }
+  
+  .page {
+    padding: 16px;
+    
+    h2 {
+      font-size: 18px;
+      margin: 20px 0 12px 0;
+    }
+    
+    .tables-header {
+      margin: 12px 0 8px 0;
+      
+      h3 {
+        font-size: 15px;
+      }
+      
+      .view-all-btn {
+        padding: 4px 12px;
+        font-size: 10px;
+      }
+    }
+  }
+}
+
+// Optional: Add animation for stats cards container
+app-stats-cards {
+  display: block;
+  margin-bottom: 8px;
+  animation: fadeInUp 0.4s ease-out;
+}
+
+// Optional: Smooth loading animation for the entire page
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Optional: Styling for the active orders section (to be added later)
+.active-orders-section {
+  margin-top: 32px;
+  
+  h2 {
+    margin-bottom: 16px;
+  }
+}
+
+// Optional: Add a subtle background pattern to match the restaurant theme
+.page {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(circle at 20% 40%, rgba(192, 57, 43, 0.02) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}

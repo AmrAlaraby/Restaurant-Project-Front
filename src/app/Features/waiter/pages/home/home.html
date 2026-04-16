@@ -1,6 +1,17 @@
+<div class="home-header">
+
+  <div class="welcome">
+    <h2>Welcome  , {{ waiterName }}</h2>
+  </div>
+
+  <div class="branch-info" *ngIf="branchName">
+    <span class="label">Branch{{branchId}} — </span>
+    <span class="branch-name">{{ branchName }}</span>
+  </div>
+
+</div>
 <div class="page">
 
-  <h1>Good morning 👋</h1>
 
   <!-- Stats -->
   <app-stats-cards
@@ -11,9 +22,14 @@
   <!-- Alert -->
 
   <!-- Tables -->
-  <h2>My Tables</h2>
-  <app-tables-grid [tables]="tables"></app-tables-grid>
+  <div class="tables-header">
+  <h3>Tables</h3>
 
+  <button class="view-all-btn" (click)="goToTables()">
+    View All →
+  </button>
+</div>
+<app-tables-grid [tables]="displayedTables"></app-tables-grid>
 
   <!-- Orders -->
   <h2>Active Orders</h2>
