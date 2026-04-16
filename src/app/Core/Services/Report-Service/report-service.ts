@@ -1,6 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
+
+import { Reports } from '../../Constants/Api_Urls';
 
 import { DashboardDTO } from '../../Models/ReportModels/dashboard-model';
 import { RevenueDTO } from '../../Models/ReportModels/revenue-model';
@@ -13,12 +15,11 @@ import { InventoryUsageDTO } from '../../Models/ReportModels/inventory-usage-mod
 })
 export class ReportService {
 
-  private baseUrl = 'https://localhost:7232/api/Reports';
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
   // Dashboard
   getDashboard(): Observable<DashboardDTO> {
-    return this.http.get<DashboardDTO>(`${this.baseUrl}/dashboard`);
+    return this.http.get<DashboardDTO>(Reports.dashboard);
   }
 
   // Revenue
@@ -29,21 +30,21 @@ export class ReportService {
     if (from) params = params.set('from', from.toISOString());
     if (to) params = params.set('to', to.toISOString());
 
-    return this.http.get<RevenueDTO[]>(`${this.baseUrl}/revenue`, { params });
+    return this.http.get<RevenueDTO[]>(Reports.revenue, { params });
   }
 
   // Orders By Type
   getOrdersByType(): Observable<OrdersByTypeDTO> {
-    return this.http.get<OrdersByTypeDTO>(`${this.baseUrl}/orders-by-type`);
+    return this.http.get<OrdersByTypeDTO>(Reports.ordersByType);
   }
 
   // Top Items
   getTopItems(top: number = 5): Observable<TopItemsDTO[]> {
-    return this.http.get<TopItemsDTO[]>(`${this.baseUrl}/top-items?top=${top}`);
+    return this.http.get<TopItemsDTO[]>(`${Reports.topItems}?top=${top}`);
   }
 
   // Inventory Usage
   getInventoryUsage(): Observable<InventoryUsageDTO[]> {
-    return this.http.get<InventoryUsageDTO[]>(`${this.baseUrl}/inventory-usage`);
+    return this.http.get<InventoryUsageDTO[]>(Reports.inventoryUsage);
   }
 }
