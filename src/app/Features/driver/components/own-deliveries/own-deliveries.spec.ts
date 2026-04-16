@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BranchSelectorComponent } from './branch-selector';
 
+import { OwnDeliveries } from './own-deliveries';
 
-describe('BranchSelector', () => {
-  let component: BranchSelectorComponent;
-  let fixture: ComponentFixture<BranchSelectorComponent>;
+describe('OwnDeliveries', () => {
+  let component: OwnDeliveries;
+  let fixture: ComponentFixture<OwnDeliveries>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BranchSelectorComponent]
+      imports: [OwnDeliveries]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BranchSelectorComponent);
+    fixture = TestBed.createComponent(OwnDeliveries);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,103 @@
+<div class="own-deliveries-wrap">
+
+  <div *ngIf="loading" class="loading-wrap">
+    <div class="spinner"></div>
+    <span>Loading your deliveries...</span>
+  </div>
+
+  <div *ngIf="!loading && deliveries.length === 0" class="empty-state">
+    No deliveries assigned to you.
+  </div>
+
+  <div class="delivery-card" *ngFor="let d of deliveries"
+       (click)="openDetails(d.id)"
+       style="cursor: pointer;">
+
+    <div class="card-top">
+      <div class="card-left">
+        <div class="delivery-id">#D-{{ d.id }}</div>
+        <div class="order-title">Order #{{ d.order.id }}</div>
+        <div class="branch-name">{{ d.order.branchName }}</div>
+      </div>
+      <span class="status-badge"
+            [ngClass]="{
+              'badge-assigned':  d.deliveryStatus === 'Assigned',
+              'badge-pickedup':  d.deliveryStatus === 'PickedUp',
+              'badge-onway':     d.deliveryStatus === 'OnTheWay',
+              'badge-delivered': d.deliveryStatus === 'Delivered'
+            }">
+        {{ d.deliveryStatus }}
+      </span>
+    </div>
+
+    <!-- Steps -->
+    <div class="steps-wrap">
+      <div class="step">
+        <div class="step-circle done">✓</div>
+        <div class="step-label">Assigned</div>
+      </div>
+      <div class="step-connector" [ngClass]="{'done': d.deliveryStatus === 'PickedUp' || d.deliveryStatus === 'OnTheWay' || d.deliveryStatus === 'Delivered'}"></div>
+      <div class="step">
+        <div class="step-circle"
+             [ngClass]="{
+               'done': d.deliveryStatus === 'PickedUp' || d.deliveryStatus === 'OnTheWay' || d.deliveryStatus === 'Delivered',
+               'inactive': d.deliveryStatus === 'Assigned'
+             }">
+          {{ d.deliveryStatus === 'PickedUp' || d.deliveryStatus === 'OnTheWay' || d.deliveryStatus === 'Delivered' ? '✓' : '–' }}
+        </div>
+        <div class="step-label">Picked Up</div>
+      </div>
+      <div class="step-connector" [ngClass]="{'done': d.deliveryStatus === 'OnTheWay' || d.deliveryStatus === 'Delivered'}"></div>
+      <div class="step">
+        <div class="step-circle"
+             [ngClass]="{
+               'done': d.deliveryStatus === 'OnTheWay' || d.deliveryStatus === 'Delivered',
+               'active': d.deliveryStatus === 'OnTheWay',
+               'inactive': d.deliveryStatus === 'Assigned' || d.deliveryStatus === 'PickedUp'
+             }">
+          {{ d.deliveryStatus === 'OnTheWay' || d.deliveryStatus === 'Delivered' ? '✓' : '→' }}
+        </div>
+        <div class="step-label">On the Way</div>
+      </div>
+      <div class="step-connector" [ngClass]="{'done': d.deliveryStatus === 'Delivered'}"></div>
+      <div class="step">
+        <div class="step-circle"
+             [ngClass]="{
+               'done': d.deliveryStatus === 'Delivered',
+               'inactive': d.deliveryStatus !== 'Delivered'
+             }">
+          {{ d.deliveryStatus === 'Delivered' ? '✓' : '📍' }}
+        </div>
+        <div class="step-label">Delivered</div>
+      </div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="section">
+        <div class="section-title">Address</div>
+        <div class="addr-line">
+          <span class="pin"></span>
+          {{ d.deliveryAddress.buildingNumber }} {{ d.deliveryAddress.street }}, {{ d.deliveryAddress.city }}
+        </div>
+        <div *ngIf="d.deliveryAddress.specialMark" class="addr-mark">{{ d.deliveryAddress.specialMark }}</div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Items ({{ d.order.itemsCount }})</div>
+        <div class="item-row" *ngFor="let item of d.order.items">
+          <span>{{ item.menuItemName }}</span>
+          <span class="item-qty">x{{ item.quantity }}</span>
+          <span class="item-price">EGP {{ item.total }}</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card-footer">
+      <span>Total: <b class="red">EGP {{ d.order.totalAmount }}</b></span>
+      <span>{{ d.createdAt | date:'dd/MM/yyyy hh:mm a' }}</span>
+    </div>
+
+  </div>
+</div>

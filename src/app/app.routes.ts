@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { OwnDeliveries } from './Features/driver/components/own-deliveries/own-deliveries';
+import { DeliveryDetails } from './Features/driver/components/delivery-details/delivery-details';
 
 export const routes: Routes = [
   {
@@ -228,8 +230,20 @@ export const routes: Routes = [
           import('./Features/waiter/pages/profile/profile').then((m) => m.Profile),
       },
       {path: 'delivery-history',
-        
-        loadComponent: () => import('./Features/driver/pages/delivery-history/delivery-history').then((m) => m.DeliveryHistory)},
+
+        loadComponent: () => import('./Features/driver/pages/delivery-history/delivery-history').then((m) => m.DeliveryHistory)
+      },
+
+        {
+    path: 'deliveries',
+    component: OwnDeliveries
+  },
+  {
+    path: 'deliveries/:id',
+    component: DeliveryDetails
+  }
+
+
       //Areej 501 - 550
       //Arwa 551 - 600
       //mahmoud 601 - 650
