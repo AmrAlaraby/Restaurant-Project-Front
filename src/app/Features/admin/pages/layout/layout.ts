@@ -132,6 +132,13 @@ export class Layout implements OnInit {
                 <circle cx="12" cy="5" r="2"/><path d="M15 13c0-2-1.5-3-3-3"/>
               </svg>`,
         },
+        {
+          title: 'Branches',
+          route: 'branches',
+          icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 13V7l5-4 5 4v6M6 13v-3h4v3"/>
+              </svg>`,
+        },  
       ],
     },
   ];
