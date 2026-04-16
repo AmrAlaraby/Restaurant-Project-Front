@@ -136,7 +136,13 @@ export const BranchStock = {
   getById: (id: number) => `${apiUrl}/BranchStock/${id}`,
   update: (id: number) => `${apiUrl}/BranchStock/${id}`,
 };
-
+export const Reports = {
+  dashboard: `${apiUrl}/Reports/dashboard`,
+  revenue: `${apiUrl}/Reports/revenue`,
+  ordersByType: `${apiUrl}/Reports/orders-by-type`,
+  topItems: `${apiUrl}/Reports/top-items`,
+  inventoryUsage: `${apiUrl}/Reports/inventory-usage`,
+};
 
 
 
