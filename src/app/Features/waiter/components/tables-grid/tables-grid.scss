@@ -1,0 +1,183 @@
+.tables {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 24px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+  border-radius: 16px;
+
+  .table-card {
+    position: relative;
+    background: white;
+    border-radius: 20px;
+    padding: 24px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      transition: all 0.3s ease;
+    }
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+      transform: translateY(0px);
+    }
+
+    h3 {
+      margin: 0 0 12px 0;
+      font-size: 28px;
+      font-weight: 700;
+      color: #2c3e50;
+      letter-spacing: -0.5px;
+    }
+
+    span {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 14px;
+      color: #7f8c8d;
+      font-weight: 500;
+
+      &::before {
+        content: '👥 ';
+        font-size: 12px;
+      }
+    }
+
+    // Busy state styles
+    &.busy {
+      background: linear-gradient(135deg, #fff5f5 0%, #ffe3e3 100%);
+      border: 1px solid rgba(220, 53, 69, 0.2);
+
+      &::before {
+        background: linear-gradient(90deg, #dc3545, #ff6b6b);
+      }
+
+      span {
+        background: #dc3545;
+        color: white;
+        box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
+      }
+
+      h3 {
+        color: #c0392b;
+      }
+
+      &:hover {
+        border-color: rgba(220, 53, 69, 0.4);
+        box-shadow: 0 12px 20px rgba(220, 53, 69, 0.2);
+      }
+    }
+
+    // Free state styles
+    &.free {
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+      border: 1px solid rgba(40, 167, 69, 0.2);
+
+      &::before {
+        background: linear-gradient(90deg, #28a745, #40c057);
+      }
+
+      span {
+        background: #28a745;
+        color: white;
+        box-shadow: 0 2px 4px rgba(40, 167, 69, 0.3);
+      }
+
+      h3 {
+        color: #2c3e50;
+      }
+
+      &:hover {
+        border-color: rgba(40, 167, 69, 0.4);
+        box-shadow: 0 12px 20px rgba(40, 167, 69, 0.15);
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .tables {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+    padding: 16px;
+
+    .table-card {
+      padding: 20px 12px;
+
+      h3 {
+        font-size: 24px;
+      }
+
+      span {
+        font-size: 10px;
+        padding: 4px 12px;
+      }
+
+      p {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+// Optional: Add animation for state changes
+.table-card {
+  animation: fadeInUp 0.4s ease-out;
+  animation-fill-mode: both;
+
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.05}s;
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Optional: Add subtle pulse animation for busy tables
+.busy {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+  }
+  50% {
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+  }
+}
