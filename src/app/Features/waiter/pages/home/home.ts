@@ -16,7 +16,8 @@ import { ReadyAlert } from '../../components/ready-alert/ready-alert';
     CommonModule,
     StatsCardsComponent,
     TablesGridComponent,
-   
+    ActiveOrders,
+    ReadyAlert
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss'
