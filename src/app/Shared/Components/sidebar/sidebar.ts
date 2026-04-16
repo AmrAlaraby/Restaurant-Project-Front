@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../Core/Services/Auth-Service/auth-service';
+import { SidebarSection } from '../../../Core/Models/SharedModels/sidebar-section';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,6 +10,7 @@ import { AuthService } from '../../../Core/Services/Auth-Service/auth-service';
   styleUrl: './sidebar.scss',
 })
 export class Sidebar {
+  @Input() sections: SidebarSection[] = [];
   @Input() prefix: string = ''; // admin / cashier / etc
   @Input() isOpen = false;
   @Input() UserName:string ='';
