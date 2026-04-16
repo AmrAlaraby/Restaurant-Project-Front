@@ -1,0 +1,126 @@
+$primary: #c0392b;
+$primary-hover: #a93226;
+$text-dark: #1a1a1a;
+$text-muted: #666666;
+$border: #e0dbd3;
+$radius: 16px;
+
+// ─── Overlay ──────────────────────────────────────────────────────────────────
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+// ─── Card ─────────────────────────────────────────────────────────────────────
+.confirm-card {
+  background: #fff;
+  border-radius: $radius;
+  padding: 40px 36px;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(24px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+// ─── Icon ─────────────────────────────────────────────────────────────────────
+.confirm-icon {
+  font-size: 48px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+// ─── Text ─────────────────────────────────────────────────────────────────────
+.confirm-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: $text-dark;
+  margin: 0;
+}
+
+.confirm-message {
+  font-size: 14px;
+  color: $text-muted;
+  line-height: 1.6;
+  margin: 0;
+
+  strong { color: $text-dark; }
+}
+
+.danger-text {
+  color: $primary;
+  font-weight: 600;
+}
+
+// ─── Actions ──────────────────────────────────────────────────────────────────
+.confirm-actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.btn-cancel {
+  flex: 1;
+  background: transparent;
+  border: 1.5px solid $border;
+  border-radius: 10px;
+  padding: 11px;
+  font-size: 14px;
+  font-weight: 600;
+  color: $text-dark;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover:not(:disabled) {
+    border-color: #aaa;
+    background: #f7f7f7;
+  }
+
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+.btn-delete {
+  flex: 1;
+  background: $primary;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 11px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover:not(:disabled) { background: $primary-hover; }
+  &:disabled { opacity: 0.6; cursor: not-allowed; }
+}
+
+// ─── Error ────────────────────────────────────────────────────────────────────
+.delete-error {
+  font-size: 13px;
+  color: $primary;
+  font-weight: 500;
+  margin-top: 4px;
+}

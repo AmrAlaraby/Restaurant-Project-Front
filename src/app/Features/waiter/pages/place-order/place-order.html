@@ -33,7 +33,10 @@
     <div class="right-panel">
 
       <div class="card">
-        <app-table-selector></app-table-selector>
+        <app-table-selector
+            [tables]="tables"
+            [(tableId)]="selectedTableId">
+        </app-table-selector>
       </div>
 
       <div class="card">
@@ -46,8 +49,20 @@
       </div>
 
       <div class="card">
-        <app-payment-selector></app-payment-selector>
+        <app-payment-selector
+            [(method)]="paymentMethod">
+        </app-payment-selector>
       </div>
+
+      <button
+        class="btn-submit"
+        [disabled]="isLoading || orderItems.length === 0"
+        (click)="createOrder()">
+
+        {{ isLoading ? 'Sending...' : 'Send to Kitchen 🔥' }}
+
+      </button>
+
 
     </div>
 

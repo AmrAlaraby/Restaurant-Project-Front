@@ -83,7 +83,10 @@ export class Profile implements OnInit {
     const dto: UpdateCurrentUserInterface = {
       name: name,
       email: v.email?.trim(),
-      userName: userNameInput && userNameInput !== '' ? userNameInput : name, // 🔥 هنا الحل
+      userName:
+        userNameInput && userNameInput !== ''
+          ? userNameInput
+          : name.split(' ').join('.').toLowerCase(),
       newPassword: v.newPassword?.trim() || undefined,
       confirmPassword: v.confirmPassword?.trim() || undefined,
     };

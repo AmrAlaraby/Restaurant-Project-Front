@@ -43,6 +43,10 @@ export const Users = {
   create: `${apiUrl}/User`,
   update: (id: string) => `${apiUrl}/User/${id}`,
   toggle: (id: string) => `${apiUrl}/User/${id}/toggle-status`,
+
+  searchCustomers: `${apiUrl}/User/GetAllCustomerUserAysnc`,
+  addCustomer: `${apiUrl}/User/AddCustomerAsync`,
+  updateCustomerAddress: (id: string) => `${apiUrl}/User/${id}/address`
 };
 
 

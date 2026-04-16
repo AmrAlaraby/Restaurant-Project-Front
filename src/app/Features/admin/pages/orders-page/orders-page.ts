@@ -73,7 +73,6 @@ export class OrdersPage implements OnInit {
   }
 
     openOrder(id: number) {
-      debugger;
     this.selectedOrderId = id;
     this.showDetailsModal = true;
   }

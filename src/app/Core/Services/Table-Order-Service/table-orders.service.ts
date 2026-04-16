@@ -11,19 +11,18 @@ import { TableOrders, Order as OrderApi } from '../../Constants/Api_Urls';
 export class TableOrdersService {
   private http = inject(HttpClient);
 
-  // 🔹 نجيب active orderId
   getActiveOrder(tableId: number): Observable<{ orderId: number }[]> {
     let params = new HttpParams().set('tableId', tableId).set('active', true);
 
     return this.http.get<{ orderId: number }[]>(TableOrders.getAll, { params });
   }
 
-  // 🔹 نجيب التفاصيل + mapping
+ 
   getOrderDetails(orderId: number): Observable<TableOrderInterface> {
     return this.http.get<OrderDetailsDTO>(OrderApi.getById(orderId)).pipe(
       map((res) => ({
         id: res.id,
-        customerName: res.customerName,
+        userName: res.userName,
         status: res.status,
         totalAmount: res.totalAmount,
         tableNumber: res.tablenumber,

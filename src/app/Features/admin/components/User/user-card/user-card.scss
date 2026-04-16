@@ -1,133 +1,152 @@
+:host {
+  --red: #C0392B;
+  --red-dark: #96281B;
+  --gray-600: #9B4437;
+  --black: #2D0A08;
+  --cream: #FDF5F5;
+}
+
 .user-card {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    background: var(--white);
-    padding: 15px;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #ffffff;
+  padding: 15px 20px;
+  border-radius: var(--radius, 10px);
+  border-bottom: 0.5px solid #f9eeee;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover {
+    background: #fdf8f8;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 /* Avatar */
 .avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: var(--gray-200);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #FCEBEB;
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  flex-shrink: 0;
 }
 
 /* Info */
 .info {
-    flex: 1;
+  flex: 1;
+  min-width: 0;
 
-    h4 {
-        margin: 0;
-    }
+  h4 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--black);
+  }
 
-    p {
-        margin: 4px 0 0;
-        font-size: 13px;
-        color: var(--gray-600);
-    }
+  p {
+    margin: 3px 0 0;
+    font-size: 12px;
+    color: var(--gray-600);
+  }
 
-    .email {
-        color: var(--black);
-    }
+  .email {
+    color: var(--red);
+  }
 }
 
 /* Role */
 .role {
-    padding: 6px 12px;
-    border-radius: var(--radius-sm);
-    font-size: 12px;
-    background: var(--gray-200);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  background: #FCEBEB;
+  color: var(--red-dark);
+  border: 0.5px solid #f0c8c5;
 }
 
 /* Actions */
 .actions {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 /* Buttons */
 .btn-outline {
-    border: 1px solid var(--gray-400);
-    background: transparent;
-    padding: 6px 12px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-}
+  border: 0.5px solid #d8a8a0;
+  background: transparent;
+  padding: 5px 14px;
+  border-radius: 7px;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--gray-600);
+  transition: background 0.15s;
 
-.btn-toggle {
-    border: none;
-    padding: 6px 12px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: var(--transition);
-
-    &.active {
-        background: #22c55e;
-        color: white;
-    }
-
-    &.inactive {
-        background: var(--red);
-        color: white;
-    }
+  &:hover {
+    background: #f9eeee;
+  }
 }
 
 /* Status Toggle */
 .status-toggle {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
 }
 
 /* Switch */
 .switch {
-    width: 42px;
-    height: 22px;
-    border-radius: 20px;
-    background: var(--gray-400);
-    position: relative;
-    transition: var(--transition);
+  width: 42px;
+  height: 22px;
+  border-radius: 20px;
+  background: #e8cece;
+  position: relative;
+  transition: background 0.2s;
+
+  .circle {
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: left 0.2s;
+  }
+
+  &.active {
+    background: var(--red);
 
     .circle {
-        width: 18px;
-        height: 18px;
-        background: white;
-        border-radius: 50%;
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        transition: var(--transition);
+      left: 22px;
     }
+  }
 
-    &.active {
-        background: #22c55e; // أخضر
+  &.inactive {
+    background: #e8cece;
 
-        .circle {
-            left: 22px;
-        }
+    .circle {
+      left: 2px;
     }
-
-    &.inactive {
-        background: var(--gray-400);
-
-        .circle {
-            left: 2px;
-        }
-    }
+  }
 }
 
 /* Label */
 .label {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--gray-600);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-600);
 }

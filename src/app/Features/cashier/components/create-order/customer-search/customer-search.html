@@ -1,0 +1,60 @@
+<div class="search">
+
+  <!-- INPUT -->
+  <input
+    type="text"
+    placeholder="Search by phone..."
+    [(ngModel)]="searchTerm"
+    (input)="onInput(searchTerm)"
+  />
+
+  <!-- LOADING -->
+  <div *ngIf="loading" class="loading">
+    Searching...
+  </div>
+
+  <!-- RESULTS -->
+  <div *ngIf="results.length > 0" class="dropdown">
+
+    <div
+      class="item"
+      *ngFor="let user of results"
+      (click)="selectCustomer(user)">
+
+      <span>{{ user.phoneNumber }}</span>
+      <small>{{ user.name }}</small>
+
+    </div>
+
+  </div>
+
+  <!-- NO RESULTS -->
+  <div *ngIf="!loading && results.length === 0 && searchTerm && !showAddForm">
+
+    <button class="add-btn" (click)="openAddForm()">
+      + Add Customer
+    </button>
+
+  </div>
+
+  <!-- ADD FORM -->
+  <div *ngIf="showAddForm" class="add-form">
+
+    <input
+      type="text"
+      placeholder="Customer Name"
+      [(ngModel)]="newCustomerName"
+    />
+
+    <button
+      class="save-btn"
+      [disabled]="adding"
+      (click)="createCustomer()">
+
+      {{ adding ? 'Saving...' : 'Save Customer' }}
+
+    </button>
+
+  </div>
+
+</div>

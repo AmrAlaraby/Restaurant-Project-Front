@@ -38,5 +38,25 @@
 /* Menu card larger */
 .menu-card {
   flex: 1;
-  min-height: 500px;
+//   min-height: 500px;
+}
+
+.btn-submit {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #c0392b;
+  color: #fff;
+
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

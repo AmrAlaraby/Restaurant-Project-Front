@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-payment-selector',
@@ -7,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './payment-selector.scss',
 })
 export class PaymentSelector {
+  @Input() method: string = 'Cash';
+  @Output() methodChange = new EventEmitter<string>();
 
+  select(method: string): void {
+    this.methodChange.emit(method);
+  }
 }

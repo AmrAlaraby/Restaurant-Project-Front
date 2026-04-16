@@ -1,6 +1,6 @@
 export interface OrderDetailsDTO {
   id: number;
-  customerName: string;
+  userName: string;
   status: string;
   totalAmount: number;
   tablenumber?: string;

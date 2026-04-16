@@ -1,0 +1,179 @@
+<div class="branch-details-page" *ngIf="!isLoading() && !error() && branch()">
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-left">
+      <button class="btn-back" (click)="close()">
+        <span>←</span> Branches
+      </button>
+      <div class="title-block">
+        <h1 class="page-title">{{ branch()!.name }}</h1>
+        <span class="status-badge" [class.active]="branch()!.isActive" [class.inactive]="!branch()!.isActive">
+          {{ branch()!.isActive ? 'ACTIVE' : 'INACTIVE' }}
+        </span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-toggle" (click)="toggleStatus()">
+        {{ branch()!.isActive ? 'Deactivate' : 'Activate' }}
+      </button>
+      <button class="btn-edit" (click)="openEdit()">
+        ✏️ Edit Branch
+      </button>
+      <button class="btn-delete" (click)="openDeleteConfirm()">
+        🗑️ Delete
+      </button>
+    </div>
+  </div>
+
+  <!-- Info + Stats Row -->
+  <div class="top-row">
+
+    <!-- Branch Info Card -->
+    <div class="info-card">
+      <h3 class="card-title">Branch Info</h3>
+      <hr class="divider" />
+      <div class="info-list">
+        <div class="info-row">
+          <span class="info-icon">📍</span>
+          <div>
+            <span class="info-label">Address</span>
+            <span class="info-value">{{ getAddress() }}</span>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-icon">📞</span>
+          <div>
+            <span class="info-label">Phone</span>
+            <span class="info-value">{{ branch()!.phone }}</span>
+          </div>
+        </div>
+        <div class="info-row" *ngIf="branch()!.specialMark">
+          <span class="info-icon">🔖</span>
+          <div>
+            <span class="info-label">Special Mark</span>
+            <span class="info-value">{{ branch()!.specialMark }}</span>
+          </div>
+        </div>
+        <div class="info-row" *ngIf="branch()!.note">
+          <span class="info-icon">📝</span>
+          <div>
+            <span class="info-label">Note</span>
+            <span class="info-value">{{ branch()!.note }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="stats-card">
+      <h3 class="card-title">Quick Stats</h3>
+      <hr class="divider" />
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-number">{{ branch()!.tablesCount }}</span>
+          <span class="stat-label">Tables</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">{{ branch()!.usersCount }}</span>
+          <span class="stat-label">Staff</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">{{ branch()!.tables.length }}</span>
+          <span class="stat-label">Active Tables</span>
+        </div>
+        <div class="stat-box accent">
+          <span class="stat-number">{{ occupiedTables() }}</span>
+          <span class="stat-label">Occupied</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs-bar">
+    <button class="tab-btn" [class.active]="activeTab() === 'tables'" (click)="setTab('tables')">
+      🪑 Tables ({{ branch()!.tables.length }})
+    </button>
+    <button class="tab-btn" [class.active]="activeTab() === 'staff'" (click)="setTab('staff')">
+      👥 Staff ({{ branch()!.users.length }})
+    </button>
+    <button class="tab-btn" [class.active]="activeTab() === 'stock'" (click)="setTab('stock')">
+      📦 Stock ({{ branch()!.branchStocks.length }})
+    </button>
+  </div>
+
+  <!-- Tables Tab -->
+  <div class="tab-content" *ngIf="activeTab() === 'tables'">
+    <div class="tables-grid">
+      <div class="table-card" *ngFor="let t of branch()!.tables" [class.occupied]="t.isOccupied">
+        <div class="table-number">{{ t.tableNumber }}</div>
+        <div class="table-meta">
+          <span class="capacity-badge">👤 {{ t.capacity }}</span>
+          <span class="occupation-badge" [class.occupied]="t.isOccupied">
+            {{ t.isOccupied ? 'Occupied' : 'Free' }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Staff Tab -->
+  <div class="tab-content" *ngIf="activeTab() === 'staff'">
+    <div class="staff-list">
+      <div class="staff-row" *ngFor="let u of branch()!.users">
+        <div class="staff-avatar">{{ getInitials(u.name) }}</div>
+        <div class="staff-info">
+          <span class="staff-name">{{ u.name }}</span>
+          <span class="staff-email">{{ u.email }}</span>
+        </div>
+        <span class="role-badge" [class]="'role-' + u.role.toLowerCase()">{{ u.role }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stock Tab -->
+  <div class="tab-content" *ngIf="activeTab() === 'stock'">
+    <div class="stock-list">
+      <div class="stock-row" *ngFor="let s of branch()!.branchStocks" [class.low]="isLowStock(s)">
+        <div class="stock-info">
+          <span class="ingredient-name">Ingredient #{{ s.ingredientId }}</span>
+          <span class="stock-warning" *ngIf="isLowStock(s)">⚠️ Low Stock</span>
+        </div>
+        <div class="stock-bar-wrap">
+          <div class="stock-bar">
+            <div class="stock-fill" [style.width.%]="getStockPercent(s)" [class.low]="isLowStock(s)"></div>
+          </div>
+          <span class="stock-qty">{{ s.quantityAvailable }} / {{ s.lowThreshold }} min</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Loading -->
+<div class="loading-state" *ngIf="isLoading()">
+  <div class="skeleton-header"></div>
+  <div class="skeleton-row">
+    <div class="skeleton-card tall"></div>
+    <div class="skeleton-card tall"></div>
+  </div>
+  <div class="skeleton-card wide"></div>
+</div>
+
+<!-- Error -->
+<div class="error-state" *ngIf="error() && !isLoading()">
+  <p>{{ error() }}</p>
+  <button class="btn-retry" (click)="loadBranch()">Try Again</button>
+</div>
+
+<!-- Confirm Delete Modal -->
+<app-confirm-delete
+  *ngIf="showDeleteConfirm() && branch()"
+  [branchId]="branch()!.id"
+  [branchName]="branch()!.name"
+  (cancelled)="onDeleteCancelled()"
+  (deleted)="onDeleteConfirmed()"
+/>

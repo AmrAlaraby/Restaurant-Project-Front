@@ -6,28 +6,28 @@
 
   <div class="filter-fields">
 
-  <!-- Branch Dropdown --->
-<div class="field-group">
-  <label>Branch</label>
+    <!-- Branch Dropdown -->
+    <div class="field-group">
+      <label>Branch</label>
+      <select
+        [(ngModel)]="params.branchId"
+        (ngModelChange)="onBranchChange()"
+        class="field-input"
+      >
+        <option [ngValue]="null">All Branches</option>
+        <option *ngFor="let branch of branches" [ngValue]="branch.id">
+          {{ branch.name }}
+        </option>
+      </select>
+    </div>
 
-  <select
-    [(ngModel)]="params.branchId"
-    (ngModelChange)="onBranchChange()"
-    class="field-input"
-  >
-    <option [ngValue]="null">All Branches</option>
-
-    <option *ngFor="let branch of branches" [ngValue]="branch.id">
-      {{ branch.name }}
-    </option>
-  </select>
-</div>
-
+    <!-- Order ID -->
     <div class="field-group">
       <label>Order ID</label>
       <input
         type="number"
         [(ngModel)]="params.orderId"
+        (ngModelChange)="onOrderIdChange()"
         placeholder="e.g. 101"
         class="field-input"
       />
@@ -36,7 +36,11 @@
     <!-- Station Dropdown -->
     <div class="field-group">
       <label>Station</label>
-      <select [(ngModel)]="params.station" class="field-input">
+      <select
+        [(ngModel)]="params.station"
+        (ngModelChange)="onFilterChange()"
+        class="field-input"
+      >
         <option [ngValue]="null">All Stations</option>
         <option *ngFor="let s of stations" [value]="s.station">
           {{ s.station }} ({{ s.pendingCount }} pending)
@@ -44,9 +48,14 @@
       </select>
     </div>
 
+    <!-- Status -->
     <div class="field-group">
       <label>Status</label>
-      <select [(ngModel)]="params.status" class="field-input">
+      <select
+        [(ngModel)]="params.status"
+        (ngModelChange)="onFilterChange()"
+        class="field-input"
+      >
         <option *ngFor="let opt of statusOptions" [ngValue]="opt.value">
           {{ opt.label }}
         </option>
@@ -57,6 +66,5 @@
 
   <div class="filter-actions">
     <button class="btn-reset" (click)="onReset()">Reset</button>
-    <button class="btn-apply" (click)="onApply()">Apply</button>
   </div>
 </div>

@@ -1,0 +1,40 @@
+<div class="branch-page-layout" [class.has-details]="showPanel()">
+
+  <!-- List Panel -->
+  <div class="list-panel">
+    <app-branch-list
+      (branchSelected)="onBranchSelected($event)"
+      [selectedBranchId]="selectedBranchId()"
+      (createRequested)="onCreateRequested()"
+      [refreshTrigger]="refreshTrigger()"
+    />
+  </div>
+
+  <!-- Details Panel -->
+  <div class="details-panel" *ngIf="showPanel() && activeView() === 'details'">
+    <app-branch-details
+      [branchId]="selectedBranchId()!"
+      (closed)="onCloseDetails()"
+      (editRequested)="onEditRequested()"
+      (deleted)="onBranchDeleted()"
+    />
+  </div>
+
+  <!-- Edit Panel -->
+  <div class="details-panel" *ngIf="showPanel() && activeView() === 'edit'">
+    <app-branch-edit
+      [branchId]="selectedBranchId()!"
+      (closed)="onCloseEdit()"
+      (saved)="onBranchSaved()"
+    />
+  </div>
+
+  <!-- Create Panel -->
+  <div class="details-panel" *ngIf="showPanel() && activeView() === 'create'">
+    <app-branch-create
+      (closed)="onCloseCreate()"
+      (created)="onBranchCreated()"
+    />
+  </div>
+
+</div>

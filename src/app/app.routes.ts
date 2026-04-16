@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { OwnDeliveries } from './Features/driver/components/own-deliveries/own-deliveries';
+import { DeliveryDetails } from './Features/driver/components/delivery-details/delivery-details';
 
 export const routes: Routes = [
   {
@@ -128,6 +130,19 @@ export const routes: Routes = [
           import('./Features/waiter/pages/home/home').then((m) => m.HomeComponent),
       },
 
+      {
+        path: 'tables',
+        loadComponent: () =>
+          import('./Features/waiter/pages/table-waiter/table-waiter').then((m) => m.TableWaiter),
+      },
+
+      {
+        path: 'orders',
+        loadComponent: () =>
+          import('./Features/waiter/pages/waiter-orders-page/waiter-orders-page').then(
+            (m) => m.WaiterOrdersPage,
+          ),
+      },
       //Areej 201 - 250
       //Arwa 251 - 300
       //mahmoud 301 - 350
@@ -143,14 +158,122 @@ export const routes: Routes = [
   //mustafa 351 - 400
 
   {
+    path: 'admin',
+    children: [
+      //amr 400 -450
+      //hossam 451 - 500
+      {
+        path: 'branch',
+        loadComponent: () =>
+          import('./Features/admin/pages/branch-page/branch-page').then(
+            (m) => m.BranchPageComponent,
+          ),
+      },
+      //Areej 501 - 550
+      //Arwa 551 - 600
+      //mahmoud 601 - 650
+      //mustafa 651 - 700
+    ],
+  },
+
+  // {
+  //   path: '',
+  //   loadComponent: () =>
+  //     import('./Features/admin/pages/branch-page/branch-page').then(
+  //       (m) => m.BranchPageComponent
+  //     ),
+  // },
+
+  //amr 100 -150
+  //hossam 151 - 200
+  //Areej 201 - 250
+  //Arwa 251 - 300
+  //mahmoud 301 - 350
+  //mustafa 351 - 400
+
+  {
     path: 'cashier',
     children: [
       //amr 400 -450
+      {
+        path: 'create-order',
+        loadComponent: () =>
+          import('./Features/cashier/pages/create-order/create-order').then((m) => m.CreateOrder),
+      },
       //hossam 451 - 500
       {
         path: 'profile',
         loadComponent: () =>
           import('./Features/waiter/pages/profile/profile').then((m) => m.Profile),
+      },
+      {
+        path: 'orders',
+        loadComponent: () =>
+          import('./Features/cashier/pages/cashier-orders-page/cashier-orders-page').then(
+            (m) => m.CashierOrdersPage,
+          ),
+      },
+      //Areej 501 - 550
+      //Arwa 551 - 600
+      //mahmoud 601 - 650
+      //mustafa 651 - 700
+    ],
+  },
+
+  {
+    path: 'driver',
+    children: [
+      //amr 400 -450
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('./Features/driver/pages/home-page/home-page').then((m) => m.HomePage),
+      },
+      //hossam 451 - 500
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./Features/waiter/pages/profile/profile').then((m) => m.Profile),
+      },
+      {path: 'delivery-history',
+
+        loadComponent: () => import('./Features/driver/pages/delivery-history/delivery-history').then((m) => m.DeliveryHistory)
+      },
+
+        {
+    path: 'deliveries',
+    component: OwnDeliveries
+  },
+  {
+    path: 'deliveries/:id',
+    component: DeliveryDetails
+  }
+
+
+      //Areej 501 - 550
+      //Arwa 551 - 600
+      //mahmoud 601 - 650
+      //mustafa 651 - 700
+    ],
+  },
+  {
+    path: 'chief',
+    children: [
+      //amr 400 -450
+
+      //hossam 451 - 500
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./Features/waiter/pages/profile/profile').then((m) => m.Profile),
+      },
+
+            {
+        path: 'kitchen',
+        loadComponent: () =>
+          import('./Features/chief/components/chef-kitchen/chef-kitchen-board/chef-kitchen-board').then(
+            (m) => m.ChefKitchenBoardComponent,
+          ),
       },
       //Areej 501 - 550
       //Arwa 551 - 600

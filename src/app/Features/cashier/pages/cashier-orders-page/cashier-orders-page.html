@@ -1,0 +1,36 @@
+<div class="page">
+
+  <div class="header">
+    <h2>Orders</h2>
+
+    <button class="new-order-btn" (click)="goToNewOrder()">
+      + New Order
+    </button>
+  </div>
+
+  <app-waiter-order-filters
+    (filtersChanged)="onFiltersChanged($event)">
+  </app-waiter-order-filters>
+
+<app-cashier-orders-list
+  [orders]="orders"
+  (orderClicked)="onOrderClicked($event)"
+  (payClicked)="onPayClicked($event)"
+  (assignClicked)="onAssignClicked($event)">
+</app-cashier-orders-list>
+
+  <app-pagination
+    [pageIndex]="filters.pageIndex"
+    [pageSize]="filters.pageSize"
+    [totalCount]="totalCount"
+    (pageChanged)="onPageChanged($event)">
+  </app-pagination>
+
+  @if (isModalOpen) {
+    <app-order-details
+      [orderId]="selectedOrderId"
+      (close)="closeModal()">
+    </app-order-details>
+  }
+
+</div>
