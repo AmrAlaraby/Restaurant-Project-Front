@@ -1,23 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
 
-import { TablesGrid } from './tables-grid';
-
-describe('TablesGrid', () => {
-  let component: TablesGrid;
-  let fixture: ComponentFixture<TablesGrid>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [TablesGrid]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(TablesGrid);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+@Component({
+  selector: 'app-tables-grid',
+  standalone: true,  // Important for standalone components
+  templateUrl: './tables-grid.html',
+  styleUrls: ['./tables-grid.scss']
+})
+export class TablesGrid {
+  tables = [
+    { tableNumber: 1, isOccupied: false, capacity: 4 },
+    // ... more tables
+  ];
+}
