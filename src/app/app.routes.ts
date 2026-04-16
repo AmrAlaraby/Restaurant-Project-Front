@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { OwnDeliveries } from './Features/driver/components/own-deliveries/own-deliveries';
 import { DeliveryDetails } from './Features/driver/components/delivery-details/delivery-details';
+import { WaiterLayout } from './Features/waiter/pages/waiter-layout/waiter-layout';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./Features/admin/pages/branch-stock-page/branch-stock/branch-stock').then(
             (m) => m.BranchStockComponent,
+          ),
+      },
+      {
+        path: 'branch',
+        loadComponent: () =>
+          import('./Features/admin/pages/branch-page/branch-page').then(
+            (m) => m.BranchPageComponent,
           ),
       },
       {
@@ -99,10 +107,12 @@ export const routes: Routes = [
   },
 
   {
-    path: 'waiter', // أو admin أو cashier
-    children: [
+    path: 'waiter', 
+    loadComponent: () => import('./Features/waiter/pages/waiter-layout/waiter-layout').then((m) => m.WaiterLayout)
+    ,children: [
       // باقي routes الـ waiter
       //amr 100 -150
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
         path: 'place-order',
         loadComponent: () =>
@@ -157,24 +167,7 @@ export const routes: Routes = [
   //mahmoud 301 - 350
   //mustafa 351 - 400
 
-  {
-    path: 'admin',
-    children: [
-      //amr 400 -450
-      //hossam 451 - 500
-      {
-        path: 'branch',
-        loadComponent: () =>
-          import('./Features/admin/pages/branch-page/branch-page').then(
-            (m) => m.BranchPageComponent,
-          ),
-      },
-      //Areej 501 - 550
-      //Arwa 551 - 600
-      //mahmoud 601 - 650
-      //mustafa 651 - 700
-    ],
-  },
+
 
   // {
   //   path: '',
