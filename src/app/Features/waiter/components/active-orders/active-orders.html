@@ -1,0 +1,13 @@
+<div class="orders">
+
+  <div class="order-card" *ngFor="let order of orders">
+
+    <h4>#{{ order.id }} - Table {{ order.tablenumber }}</h4>
+
+    <p>Total: {{ order.totalAmount }}</p>
+
+    <span>{{ order.status }}</span>
+
+  </div>
+
+</div>
