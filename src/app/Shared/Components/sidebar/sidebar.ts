@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../Core/Services/Auth-Service/auth-service';
 import { SidebarSection } from '../../../Core/Models/SharedModels/sidebar-section';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-sidebar',
@@ -19,11 +20,16 @@ export class Sidebar {
   @Output() close = new EventEmitter<void>();
 
   
-  constructor(private auth :AuthService) {}
+  constructor(private auth :AuthService,
+              private sanitizer: DomSanitizer) {}
   onClose() {
     this.close.emit();
   }
     logout() {
   this.auth.logout();
+  }
+  sanitize(icon: string): SafeHtml {
+  return this.sanitizer.bypassSecurityTrustHtml(icon);
 }
+
 }
