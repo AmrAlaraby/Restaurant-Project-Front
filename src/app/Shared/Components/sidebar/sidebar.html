@@ -26,7 +26,37 @@
   <!-- NAV -->
   <nav class="sb-nav">
 
-    <!-- OVERVIEW -->
+    <nav class="sb-nav">
+
+      @for (section of sections; track $index) {
+  <div class="sb-section">
+
+    <span class="sb-section-label">{{ section.title }}</span>
+
+    <ul>
+      @for (link of section.links; track $index) {
+      <li>
+
+        <a class="sb-link"
+           [routerLink]="['/', prefix, link.route]"
+           routerLinkActive="active">
+
+          <span class="sb-icon" [innerHTML]="link.icon"></span>
+
+          <span class="sb-label">
+            {{ link.title }}
+          </span>
+
+        </a>
+
+      </li>}
+    </ul>
+
+  </div>}
+
+</nav>
+
+    <!-- OVERVIEW
     <div class="sb-section">
       <span class="sb-section-label">Overview</span>
       <ul>
@@ -44,10 +74,10 @@
           </a>
         </li>
       </ul>
-    </div>
+    </div> -->
 
     <!-- OPERATIONS -->
-    <div class="sb-section">
+    <!-- <div class="sb-section">
       <span class="sb-section-label">Operations</span>
       <ul>
 
@@ -118,10 +148,10 @@
         </li>
 
       </ul>
-    </div>
+    </div> -->
 
     <!-- CATALOGUE -->
-    <div class="sb-section">
+    <!-- <div class="sb-section">
       <span class="sb-section-label">Catalogue</span>
       <ul>
 
@@ -178,10 +208,10 @@
         </li>
 
       </ul>
-    </div>
+    </div> -->
 
     <!-- MANAGEMENT -->
-    <div class="sb-section">
+    <!-- <div class="sb-section">
       <span class="sb-section-label">Management</span>
       <ul>
 
@@ -239,7 +269,7 @@
         </li>
 
       </ul>
-    </div>
+    </div> -->
 
   </nav>
 
