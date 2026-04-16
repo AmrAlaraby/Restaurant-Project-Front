@@ -54,8 +54,14 @@ export class Layout implements OnInit {
           title: 'Orders',
           route: 'orders',
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="3" width="12" height="10" rx="1.5"/><path d="M5 3V2M11 3V2M2 7h12"/>
-              </svg>`,
+                  <!-- Paper -->
+                  <path d="M4 2h8v12l-2-1-2 1-2-1-2 1V2z"/>
+  
+                  <!-- Lines (orders) -->
+                  <line x1="6" y1="5" x2="10" y2="5"/>
+                  <line x1="6" y1="7" x2="10" y2="7"/>
+                  <line x1="6" y1="9" x2="9" y2="9"/>
+                </svg>`,
         },
         {
           title: 'Kitchen',
@@ -67,9 +73,18 @@ export class Layout implements OnInit {
         {
           title: 'Tables',
           route: 'tables',
-          icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="1" y="5" width="14" height="8" rx="1"/><path d="M4 5V4a2 2 0 014 0v1M8 5V4a2 2 0 014 0v1"/>
-              </svg>`,
+          icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Table -->
+  <rect x="3" y="5" width="10" height="4" rx="1"/>
+  
+  <!-- Legs -->
+  <line x1="5" y1="9" x2="5" y2="13"/>
+  <line x1="11" y1="9" x2="11" y2="13"/>
+  
+  <!-- Chairs -->
+  <circle cx="2" cy="7" r="1"/>
+  <circle cx="14" cy="7" r="1"/>
+</svg>`,
         },
         {
           title: 'Deliveries',
@@ -134,11 +149,11 @@ export class Layout implements OnInit {
         },
         {
           title: 'Branches',
-          route: 'branches',
+          route: 'branch',
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 13V7l5-4 5 4v6M6 13v-3h4v3"/>
               </svg>`,
-        },  
+        },
       ],
     },
   ];
