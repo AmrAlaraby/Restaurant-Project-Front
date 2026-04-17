@@ -85,7 +85,7 @@ export class Profile implements OnInit {
       email: v.email?.trim(),
       userName:
         userNameInput && userNameInput !== ''
-          ? userNameInput
+          ? userNameInput.split(' ').join('.').toLowerCase()
           : name.split(' ').join('.').toLowerCase(),
       newPassword: v.newPassword?.trim() || undefined,
       confirmPassword: v.confirmPassword?.trim() || undefined,

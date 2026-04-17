@@ -107,9 +107,10 @@ export const routes: Routes = [
   },
 
   {
-    path: 'waiter', 
-    loadComponent: () => import('./Features/waiter/pages/waiter-layout/waiter-layout').then((m) => m.WaiterLayout)
-    ,children: [
+    path: 'waiter',
+    loadComponent: () =>
+      import('./Features/waiter/pages/waiter-layout/waiter-layout').then((m) => m.WaiterLayout),
+    children: [
       // باقي routes الـ waiter
       //amr 100 -150
       { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -134,7 +135,7 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./Features/waiter/pages/kitchen/kitchen').then((m) => m.Kitchen),
       },
-            {
+      {
         path: 'home',
         loadComponent: () =>
           import('./Features/waiter/pages/home/home').then((m) => m.HomeComponent),
@@ -167,8 +168,6 @@ export const routes: Routes = [
   //mahmoud 301 - 350
   //mustafa 351 - 400
 
-
-
   // {
   //   path: '',
   //   loadComponent: () =>
@@ -197,7 +196,7 @@ export const routes: Routes = [
       {
         path: 'profile',
         loadComponent: () =>
-          import('./Features/waiter/pages/profile/profile').then((m) => m.Profile),
+          import('./Features/cashier/pages/profile/profile').then((m) => m.Profile),
       },
       {
         path: 'orders',
@@ -228,20 +227,23 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./Features/waiter/pages/profile/profile').then((m) => m.Profile),
       },
-      {path: 'delivery-history',
+      {
+        path: 'delivery-history',
 
-        loadComponent: () => import('./Features/driver/pages/delivery-history/delivery-history').then((m) => m.DeliveryHistory)
+        loadComponent: () =>
+          import('./Features/driver/pages/delivery-history/delivery-history').then(
+            (m) => m.DeliveryHistory,
+          ),
       },
 
-        {
-    path: 'deliveries',
-    component: OwnDeliveries
-  },
-  {
-    path: 'deliveries/:id',
-    component: DeliveryDetails
-  }
-
+      {
+        path: 'deliveries',
+        component: OwnDeliveries,
+      },
+      {
+        path: 'deliveries/:id',
+        component: DeliveryDetails,
+      },
 
       //Areej 501 - 550
       //Arwa 551 - 600
@@ -261,7 +263,7 @@ export const routes: Routes = [
           import('./Features/waiter/pages/profile/profile').then((m) => m.Profile),
       },
 
-            {
+      {
         path: 'kitchen',
         loadComponent: () =>
           import('./Features/chief/components/chef-kitchen/chef-kitchen-board/chef-kitchen-board').then(
