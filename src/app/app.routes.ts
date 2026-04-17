@@ -225,7 +225,7 @@ export const routes: Routes = [
       {
         path: 'profile',
         loadComponent: () =>
-          import('./Features/waiter/pages/profile/profile').then((m) => m.Profile),
+          import('./Features/driver/pages/profile/profile').then((m) => m.Profile),
       },
       {
         path: 'delivery-history',
