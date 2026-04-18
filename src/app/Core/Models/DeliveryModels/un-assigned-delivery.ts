@@ -1,4 +1,5 @@
-import { Address } from "./address";
+import { Address } from './address';
+import { OrderItem } from './order-item';
 
 export interface UnAssignedDelivery {
   deliveryId: number;
@@ -8,4 +9,11 @@ export interface UnAssignedDelivery {
   itemsCount: number;
   deliveryAddress: Address;
   createdAt: Date;
+
+  // الـ API بيرجعهم — بنستخدمهم لحساب totalAmount
+  order?: {
+    items?: OrderItem[];
+    calculatedTotal?: number;
+    totalAmount?: number;
+  };
 }

@@ -6,6 +6,7 @@ import { Delivery } from '../../Models/DeliveryModels/delivery';
 import { Deliveries, Branch } from '../../Constants/Api_Urls';
 import { UnAssignedDelivery } from '../../Models/DeliveryModels/un-assigned-delivery';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -55,8 +56,17 @@ export class DeliveryService {
     return this.http.get<any>(Branch.getAll);
   }
 
-
   getOwnAssignedDeliveries(): Observable<any> {
-  return this.http.get<any>(Deliveries.ownAssigned);
-}
+    return this.http.get<any>(Deliveries.ownAssigned);
+  }
+
+  /**
+   * بترجع إجمالي عدد الأوردرات اللي الدرايفر وصلها من أول ما اشتغل
+   * بتفلتر على deliveryStatus === 'Delivered' (بدون أي date filter)
+   */
+  getDeliveredCount(): Observable<number> {
+    return this.http
+      .get<Delivery[]>(Deliveries.ownAssigned)
+      .pipe(map((deliveries) => deliveries.filter((d) => d.deliveryStatus === 'Delivered').length));
+  }
 }
