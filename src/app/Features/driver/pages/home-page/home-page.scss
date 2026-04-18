@@ -227,6 +227,9 @@ $shadow-active: 0 4px 20px rgba(192, 57, 43, 0.15);
   &--distance {
     border-top: 3px solid $purple;
   }
+  &--delivered {
+    border-top: 3px solid #16a34a;
+  }
 }
 
 .stat-card__value {
@@ -249,10 +252,32 @@ $shadow-active: 0 4px 20px rgba(192, 57, 43, 0.15);
   .stat-card--distance & {
     color: $purple;
   }
+  .stat-card--delivered & {
+    color: #16a34a;
+  }
 }
 
 .stat-card__star {
   font-size: 22px;
+}
+
+.stat-card__skeleton {
+  display: inline-block;
+  width: 48px;
+  height: 28px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 .stat-card__label {
@@ -493,6 +518,26 @@ $shadow-active: 0 4px 20px rgba(192, 57, 43, 0.15);
   border-top-color: #fff;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
+}
+
+// ─── Badge ────────────────────────────────────────────────────────
+.assignment-card__status {
+  flex-shrink: 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+
+  &--delivered {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #6ee7b7;
+  }
 }
 
 // ─── Empty State ──────────────────────────────────────────────────
