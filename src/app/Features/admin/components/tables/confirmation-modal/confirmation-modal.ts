@@ -9,7 +9,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class ConfirmationModal {
   @Input() isOpen = false;
   @Input() message = 'Are you sure?';
-  @Input() isError = false; 
+  @Input() isError = false;
 
   @Output() confirm = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();

@@ -9,7 +9,6 @@ import { OrderDetailsModal } from '../../components/tables/order-details-modal/o
 import { TableOrderInterface } from '../../../../Core/Models/TableModels/table-order-interface';
 import { TableFilter } from '../../components/tables/table-filter/table-filter';
 import { CustomTableModal } from '../../components/tables/custom-table-modal/custom-table-modal';
-import { FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -24,6 +23,7 @@ import { FormGroup } from '@angular/forms';
     CustomTableModal,
   ],
   templateUrl: './tables-page.html',
+  styleUrls: ['./tables-page.scss'],
 })
 export class TablesPage implements OnInit {
   private tableService = inject(TableService);
@@ -54,9 +54,11 @@ export class TablesPage implements OnInit {
   showTableModal = false;
   isEditMode = false;
   selectedTable: TableInterface | null = null;
+
   ngOnInit(): void {
     this.loadTables();
   }
+
   // ------------------------- Data Loading & Pagination --------------------//
   loadTables() {
     this.tableService
@@ -75,7 +77,6 @@ export class TablesPage implements OnInit {
       });
   }
 
-  // ------------ When page changes, update pageIndex and reload tables ----------------
   onPageChanged(page: number) {
     this.pageIndex = page;
     this.loadTables();
@@ -88,7 +89,6 @@ export class TablesPage implements OnInit {
     });
   }
 
-  // When delete button is clicked, we check if the table is occupied. If it is, we show an error modal. If not, we show a confirmation modal.
   onDelete(table: TableInterface) {
     if (table.isOccupied) {
       this.modalMessage = 'Cannot delete an occupied table';
@@ -117,14 +117,13 @@ export class TablesPage implements OnInit {
       },
     });
   }
-  // ------------------------- Close modal and reset state --------------------//
+
   closeModal() {
     this.showModal = false;
     this.selectedTableId = null;
     this.isErrorModal = false;
   }
 
-  // ------------------------- open order details for table --------------------//
   onOpenOrder(tableId: number) {
     this.tableOrdersService.getActiveOrder(tableId).subscribe({
       next: (orders) => {
@@ -145,28 +144,25 @@ export class TablesPage implements OnInit {
     });
   }
 
-  // ------------------------- Close order details modal --------------------//
   closeOrderModal() {
     this.showOrderModal = false;
     this.selectedOrder = null;
   }
 
-  // ------------------------- When filters change --------------------//
   onFilterChanged(filters: { branchId?: number; isOccupied?: boolean; search?: string }) {
     this.branchId = filters.branchId;
     this.isOccupied = filters.isOccupied;
     this.search = filters.search?.trim().toLowerCase();
-
     this.pageIndex = 1;
     this.loadTables();
   }
 
-  // ------------------------- Open/Close/Save to Create Modal --------------------//
   openCreateModal() {
     this.isEditMode = false;
     this.selectedTable = null;
     this.showTableModal = true;
   }
+
   closeTableModal() {
     this.showTableModal = false;
   }
@@ -197,6 +193,4 @@ export class TablesPage implements OnInit {
       this.openEditModal(table);
     }
   }
-  //----------------------------------------------------------------------
-  
 }
