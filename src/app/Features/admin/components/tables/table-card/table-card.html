@@ -1,33 +1,30 @@
-
 <div
   class="table-card"
   [class.occupied]="table.isOccupied"
   [class.available]="!table.isOccupied"
   (click)="onOpenOrder()"
 >
-  <h3>Table {{ table.tableNumber }}</h3>
+  <div class="card-center">
+    <h3>{{ table.tableNumber }}</h3>
 
-  <p>Capacity: {{ table.capacity }}</p>
-
-  <p>
-    Status:
     @if (table.isOccupied) {
-      <span class="occupied-text">Occupied</span>
+      <span class="badge-pill badge-occupied">
+        <span class="badge-dot"></span>Occupied
+      </span>
     } @else {
-      <span class="available-text">Available</span>
+      <span class="badge-pill badge-available">
+        <span class="badge-dot"></span>Available
+      </span>
     }
-  </p>
 
-  <div class="actions" (click)="$event.stopPropagation()">
-    <button (click)="onToggle()">
-      @if (table.isOccupied) {
-        Free
-      } @else {
-        Occupy
-      }
-    </button>
-    <button (click)="onEdit()">Edit</button>
-    <button (click)="onDelete()">Delete</button>
+    <span class="cap-info">Cap: {{ table.capacity }}</span>
   </div>
-  
+
+  <div class="card-actions" (click)="$event.stopPropagation()">
+    <button class="btn-toggle" (click)="onToggle()">
+      @if (table.isOccupied) { Free } @else { Occupy }
+    </button>
+    <button class="btn-edit" (click)="onEdit()">Edit</button>
+    <button class="btn-del" (click)="onDelete()">Delete</button>
+  </div>
 </div>

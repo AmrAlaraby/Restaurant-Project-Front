@@ -80,7 +80,7 @@ export class CustomTableModal implements OnChanges, OnInit {
     const value = this.form.getRawValue();
     this.save.emit(value);
   }
-  
+
 
   onClose() {
     this.close.emit();
