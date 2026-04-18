@@ -1,0 +1,41 @@
+<div class="notification-wrapper">
+
+    <!-- 🔔 Bell -->
+    <button class="bell" (click)="toggle()">
+        🔔
+
+        @if (unreadCount > 0) {
+        <span class="badge">{{ unreadCount }}</span>
+        }
+    </button>
+
+    <!-- Dropdown -->
+    @if (isOpen) {
+    <div class="dropdown">
+
+        @if (notifications.length === 0) {
+        <div class="empty">No notifications</div>
+        }
+
+        @for (n of notifications; track n.id) {
+        <div class="item" [class.unread]="!n.isRead" (click)="markAsRead(n)">
+
+            <div class="title">
+                {{ n.title }}
+            </div>
+
+            <div class="message">
+                {{ n.message }}
+            </div>
+
+            <div class="time">
+                {{ n.createdAt | date:'short' }}
+            </div>
+
+        </div>
+        }
+
+    </div>
+    }
+
+</div>

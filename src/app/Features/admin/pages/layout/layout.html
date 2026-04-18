@@ -1,16 +1,8 @@
 <div class="layout">
 
   <!-- SIDEBAR -->
-
-  <app-sidebar
-    [sections]="sidebarData"
-    [class.open]="isOpen"
-    prefix="admin"
-    [isOpen]="isOpen"
-    [AvatarLetters]="AvatarLetters"
-    [UserName]="UserName"
-    [UserRole]="UserRole"
-    (close)="closeSidebar()">
+  <app-sidebar [sections]="sidebarData" [class.open]="isOpen" prefix="admin" [isOpen]="isOpen"
+    [AvatarLetters]="AvatarLetters" [UserName]="UserName" [UserRole]="UserRole" (close)="closeSidebar()">
   </app-sidebar>
 
   <!-- CONTENT -->
@@ -27,7 +19,13 @@
         {{topbarTitle}}
       </div>
 
-      <div class="avatar">{{AvatarLetters}}</div>
+      <div class="topbar-right">
+        <app-notification-bell></app-notification-bell>
+
+        <div class="avatar">
+          {{AvatarLetters}}
+        </div>
+      </div>
 
     </header>
 

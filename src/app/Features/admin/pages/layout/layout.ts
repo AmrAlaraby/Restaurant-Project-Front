@@ -3,10 +3,11 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { Sidebar } from '../../../../Shared/Components/sidebar/sidebar';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
+import { NotificationBell } from "../../../../Shared/Components/notification-bell/notification-bell";
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet, Sidebar],
+  imports: [RouterOutlet, Sidebar, NotificationBell],
   templateUrl: './layout.html',
   styleUrl: './layout.scss',
 })

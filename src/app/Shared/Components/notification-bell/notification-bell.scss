@@ -1,0 +1,87 @@
+.notification-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+/* 🔔 Bell */
+.bell {
+    position: relative;
+    font-size: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* 🔴 Badge */
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 6px;
+    font-size: 11px;
+}
+
+/* 🔥 Dropdown */
+.dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+
+    width: 320px;
+    max-height: 400px;
+    overflow-y: auto;
+
+    background: #1e293b;
+    border-radius: 10px;
+    padding: 10px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+
+    z-index: 999999; // 🔥 الحل النهائي
+}
+
+/* Item */
+.item {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.item:hover {
+    background: #334155;
+}
+
+.item.unread {
+    background: #0f172a;
+    border-left: 3px solid #38bdf8;
+}
+
+/* Text */
+.title {
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.message {
+    font-size: 13px;
+    color: #cbd5f5;
+}
+
+.time {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 6px;
+}
+
+/* Empty */
+.empty {
+    text-align: center;
+    padding: 20px;
+    color: #94a3b8;
+}

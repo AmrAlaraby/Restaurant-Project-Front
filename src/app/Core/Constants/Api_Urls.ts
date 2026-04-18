@@ -165,4 +165,11 @@ export const Order = {
   cancel: (orderId: number) => `${apiUrl}/Order/${orderId}/cancel`,
 };
 
+export const signalRUrl = {
+  notifications: `https://localhost:7232/hubs/notifications`
+};
+export const Notification = {
+  getMyNotifications: `${apiUrl}/notifications`,
+  markAsRead: (id: number) => `${apiUrl}/notifications/${id}/read`,
+};
 // end of file
