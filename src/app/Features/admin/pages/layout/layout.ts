@@ -4,6 +4,9 @@ import { filter } from 'rxjs';
 import { Sidebar } from '../../../../Shared/Components/sidebar/sidebar';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { NotificationBell } from "../../../../Shared/Components/notification-bell/notification-bell";
+import { NotificationService } from '../../../../Core/Services/Notification-Service/NotificatoinService';
+import { SignalRService } from '../../../../Core/Services/SignalR-Service/SignalrService';
+import { ToastService } from '../../../../Core/Services/Toast-Service/toast-service';
 
 @Component({
   selector: 'app-layout',
@@ -159,9 +162,13 @@ export class Layout implements OnInit {
     },
   ];
 
+  notifications: any[] = [];
   constructor(
     private router: Router,
     private authService: AuthService,
+    private notificationService: NotificationService,
+    private signalR: SignalRService,
+    private toast: ToastService,
   ) {
     this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe(() => {
       const url = this.router.url.split('/').pop() || '';
@@ -170,6 +177,26 @@ export class Layout implements OnInit {
   }
   ngOnInit(): void {
     this.GetCurrentUser();
+        this.loadNotifications();
+
+    let token = this.authService.getAccessToken();
+    this.signalR.startConnection(token??"");
+
+
+    this.signalR.onNotification((data) => {
+      debugger;
+      this.notifications.unshift(data);
+
+      this.toast.show(
+        data.title,
+        'notification'
+      );
+    });
+  }
+
+    loadNotifications() {
+    this.notificationService.getMyNotifications()
+      .subscribe(res => this.notifications = res);
   }
 
   /* SIDEBAR CONTROL */
