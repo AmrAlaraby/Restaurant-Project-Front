@@ -5,7 +5,7 @@
 
 <div *ngIf="delivery" class="details-wrap">
 
-  <!-- Header -->
+  <!-- Page Header -->
   <div class="details-header">
     <div>
       <div class="details-title">Order #{{ delivery.order.id }}</div>
@@ -23,50 +23,51 @@
   </div>
 
   <!-- Progress Steps -->
-  <div class="steps-wrap">
-    <div class="step">
-      <div class="step-circle done">✓</div>
-      <div class="step-label">Assigned</div>
-    </div>
-    <div class="step-connector" [ngClass]="{'done': delivery.deliveryStatus === 'PickedUp' || delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered'}"></div>
-    <div class="step">
-      <div class="step-circle"
-           [ngClass]="{
-             'done': delivery.deliveryStatus === 'PickedUp' || delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered',
-             'inactive': delivery.deliveryStatus === 'Assigned'
-           }">
-        {{ delivery.deliveryStatus === 'PickedUp' || delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered' ? '✓' : '–' }}
+  <div class="steps-card">
+    <div class="steps-wrap">
+      <div class="step">
+        <div class="step-circle done">✓</div>
+        <div class="step-label">Assigned</div>
       </div>
-      <div class="step-label">Picked Up</div>
-    </div>
-    <div class="step-connector" [ngClass]="{'done': delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered'}"></div>
-    <div class="step">
-      <div class="step-circle"
-           [ngClass]="{
-             'done': delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered',
-             'active': delivery.deliveryStatus === 'OnTheWay',
-             'inactive': delivery.deliveryStatus === 'Assigned' || delivery.deliveryStatus === 'PickedUp'
-           }">
-        {{ delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered' ? '✓' : '→' }}
+      <div class="step-connector" [ngClass]="{'done': delivery.deliveryStatus === 'PickedUp' || delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered'}"></div>
+      <div class="step">
+        <div class="step-circle"
+             [ngClass]="{
+               'done': delivery.deliveryStatus === 'PickedUp' || delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered',
+               'inactive': delivery.deliveryStatus === 'Assigned'
+             }">
+          {{ delivery.deliveryStatus === 'PickedUp' || delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered' ? '✓' : '–' }}
+        </div>
+        <div class="step-label">Picked Up</div>
       </div>
-      <div class="step-label">On the Way</div>
-    </div>
-    <div class="step-connector" [ngClass]="{'done': delivery.deliveryStatus === 'Delivered'}"></div>
-    <div class="step">
-      <div class="step-circle"
-           [ngClass]="{
-             'done': delivery.deliveryStatus === 'Delivered',
-             'inactive': delivery.deliveryStatus !== 'Delivered'
-           }">
-        {{ delivery.deliveryStatus === 'Delivered' ? '✓' : '📍' }}
+      <div class="step-connector" [ngClass]="{'done': delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered'}"></div>
+      <div class="step">
+        <div class="step-circle"
+             [ngClass]="{
+               'done': delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered',
+               'active': delivery.deliveryStatus === 'OnTheWay',
+               'inactive': delivery.deliveryStatus === 'Assigned' || delivery.deliveryStatus === 'PickedUp'
+             }">
+          {{ delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered' ? '✓' : '→' }}
+        </div>
+        <div class="step-label">On the Way</div>
       </div>
-      <div class="step-label">Delivered</div>
+      <div class="step-connector" [ngClass]="{'done': delivery.deliveryStatus === 'Delivered'}"></div>
+      <div class="step">
+        <div class="step-circle"
+             [ngClass]="{
+               'done': delivery.deliveryStatus === 'Delivered',
+               'inactive': delivery.deliveryStatus !== 'Delivered'
+             }">
+          {{ delivery.deliveryStatus === 'Delivered' ? '✓' : '📍' }}
+        </div>
+        <div class="step-label">Delivered</div>
+      </div>
     </div>
   </div>
 
+  <!-- Info Grid -->
   <div class="details-grid">
-
-    <!-- Info -->
     <div class="info-card">
       <div class="card-title">Delivery Info</div>
       <div class="info-row"><span>Driver</span><b>{{ delivery.driverName || 'Not Assigned' }}</b></div>
@@ -76,7 +77,6 @@
       <div class="info-row" *ngIf="delivery.cashCollected"><span>Cash Collected</span><b>EGP {{ delivery.cashCollected }}</b></div>
     </div>
 
-    <!-- Address -->
     <div class="info-card">
       <div class="card-title">Delivery Address</div>
       <div class="info-row"><span>Building</span><b>{{ delivery.deliveryAddress.buildingNumber }}</b></div>
@@ -86,7 +86,6 @@
         <span>Mark</span><b>{{ delivery.deliveryAddress.specialMark }}</b>
       </div>
     </div>
-
   </div>
 
   <!-- Items -->
@@ -117,6 +116,9 @@
     </div>
   </div>
 
-  <button class="back-btn" (click)="goBack()">← Back</button>
+  <!-- Back -->
+  <div class="back-wrap">
+    <button class="back-btn" (click)="goBack()">← Back</button>
+  </div>
 
 </div>
