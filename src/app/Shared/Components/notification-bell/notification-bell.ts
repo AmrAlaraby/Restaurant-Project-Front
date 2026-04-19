@@ -1,6 +1,5 @@
 import { AuthService } from './../../../Core/Services/Auth-Service/auth-service';
-import { Auth } from './../../../Core/Constants/Api_Urls';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NotificationService } from '../../../Core/Services/Notification-Service/NotificatoinService';
 import { SignalRService } from '../../../Core/Services/SignalR-Service/SignalrService';
 import { ToastService } from '../../../Core/Services/Toast-Service/toast-service';
@@ -12,10 +11,11 @@ import { DatePipe } from '@angular/common';
   standalone: true,
   imports : [DatePipe],
   templateUrl: './notification-bell.html',
+  styleUrl: './notification-bell.scss',
 })
 export class NotificationBell implements OnInit {
 
-  notifications: any[] = [];
+  @Input() notifications: any[] = [];
   isOpen = false;
 
   constructor(
@@ -26,27 +26,9 @@ export class NotificationBell implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadNotifications();
 
-    let token = this.AuthService.getAccessToken();
-    this.signalR.startConnection(token??"");
-
-
-    this.signalR.onNotification((data) => {
-      debugger;
-      this.notifications.unshift(data);
-
-      this.toast.show(
-        data.title,
-        'notification'
-      );
-    });
   }
 
-  loadNotifications() {
-    this.notificationService.getMyNotifications()
-      .subscribe(res => this.notifications = res);
-  }
 
   toggle() {
     this.isOpen = !this.isOpen;
@@ -60,4 +42,8 @@ export class NotificationBell implements OnInit {
   get unreadCount() {
     return this.notifications.filter(n => !n.isRead).length;
   }
+}
+
+function Inbut(target: NotificationBell, propertyKey: ''): void {
+  throw new Error('Function not implemented.');
 }

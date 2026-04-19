@@ -1,10 +1,7 @@
-.notification-wrapper {
-    position: relative;
-    display: inline-block;
-}
+
 
 /* 🔔 Bell */
-.bell {
+.notification-bell {
     position: relative;
     font-size: 20px;
     background: transparent;
@@ -13,7 +10,7 @@
 }
 
 /* 🔴 Badge */
-.badge {
+.notification-badge {
     position: absolute;
     top: -5px;
     right: -8px;
@@ -25,7 +22,7 @@
 }
 
 /* 🔥 Dropdown */
-.dropdown {
+.notification-dropdown {
     position: absolute;
     top: 120%;
     right: 0;
