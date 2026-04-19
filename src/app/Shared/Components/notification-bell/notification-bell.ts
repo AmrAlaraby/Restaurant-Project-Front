@@ -1,3 +1,5 @@
+import { AuthService } from './../../../Core/Services/Auth-Service/auth-service';
+import { Auth } from './../../../Core/Constants/Api_Urls';
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../../../Core/Services/Notification-Service/NotificatoinService';
 import { SignalRService } from '../../../Core/Services/SignalR-Service/SignalrService';
@@ -19,14 +21,16 @@ export class NotificationBell implements OnInit {
   constructor(
     private notificationService: NotificationService,
     private signalR: SignalRService,
-    private toast: ToastService
+    private toast: ToastService,
+    private AuthService : AuthService
   ) {}
 
   ngOnInit() {
     this.loadNotifications();
 
-    const token = localStorage.getItem('token')!;
-    this.signalR.startConnection(token);
+    let token = this.AuthService.getAccessToken();
+    this.signalR.startConnection(token??"");
+
 
     this.signalR.onNotification((data) => {
       debugger;
