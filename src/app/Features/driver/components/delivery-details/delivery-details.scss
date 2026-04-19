@@ -3,7 +3,16 @@ $white: #fff;
 $border: #e8e8e8;
 $text: #1a1a1a;
 $muted: #999;
+$bg: #FAF7F7;
 
+:host {
+  display: block;
+  background: $bg;
+  min-height: 100vh;
+  padding: 28px 40px;
+}
+
+/* ── Loading ── */
 .loading-wrap {
   display: flex;
   align-items: center;
@@ -22,25 +31,24 @@ $muted: #999;
     animation: spin 0.7s linear infinite;
   }
 }
-
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* ── Wrap ── */
 .details-wrap {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
+/* ── Page Header ── */
 .details-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding-bottom: 16px;
-  border-bottom: 1px solid $border;
 
   .details-title {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 22px;
+    font-weight: 700;
     color: $text;
     margin-bottom: 4px;
   }
@@ -51,15 +59,18 @@ $muted: #999;
   }
 }
 
-// Steps
+/* ── Steps Card ── */
+.steps-card {
+  background: $white;
+  border: 1px solid $border;
+  border-radius: 12px;
+  padding: 20px;
+}
+
 .steps-wrap {
   display: flex;
   align-items: center;
-  padding: 16px 0;
-  background: #fafafa;
-  border-radius: 10px;
   justify-content: center;
-  border: 1px solid $border;
 }
 
 .step {
@@ -70,8 +81,8 @@ $muted: #999;
   min-width: 72px;
 
   .step-circle {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -82,9 +93,9 @@ $muted: #999;
     background: $white;
     color: #ccc;
 
-    &.done    { background: $red; border-color: $red; color: $white; }
-    &.active  { background: $white; border-color: $red; color: $red; }
-    &.inactive { background: #f5f5f5; border-color: #e0e0e0; color: #ccc; }
+    &.done     { background: $red;    border-color: $red;    color: $white; }
+    &.active   { background: $white;  border-color: $red;    color: $red;   }
+    &.inactive { background: #f5f5f5; border-color: #e0e0e0; color: #ccc;   }
   }
 
   .step-label {
@@ -95,7 +106,7 @@ $muted: #999;
 }
 
 .step-connector {
-  width: 28px;
+  width: 32px;
   height: 2px;
   background: #e8e8e8;
   margin-bottom: 18px;
@@ -103,64 +114,68 @@ $muted: #999;
   &.done { background: $red; }
 }
 
-// Grid
+/* ── Grid ── */
 .details-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+
+  @media (max-width: 768px) { grid-template-columns: 1fr; }
 }
 
-// Cards
+/* ── Cards ── */
 .info-card,
 .items-card,
 .update-card {
   background: $white;
-  border: 0.5px solid $border;
-  border-radius: 10px;
-  padding: 16px 20px;
+  border: 1px solid $border;
+  border-radius: 12px;
   border-top: 3px solid $red;
+  padding: 18px 22px;
 
   .card-title {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 700;
     color: $red;
-    margin-bottom: 12px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.6px;
+    margin-bottom: 14px;
   }
 }
 
+/* ── Info Rows ── */
 .info-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 7px 0;
-  border-bottom: 1px solid #f5f5f5;
-  font-size: 13px;
-
-  &:last-child { border-bottom: none; }
-
-  span { color: $muted; }
-  b { color: $text; font-weight: 500; }
-  .red { color: $red; }
-}
-
-.item-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
   padding: 8px 0;
   border-bottom: 1px solid #f5f5f5;
   font-size: 13px;
 
   &:last-child { border-bottom: none; }
 
-  .item-name { flex: 1; color: $text; }
-  .item-qty  { color: $muted; }
+  span { color: $muted; }
+  b    { color: $text; font-weight: 500; }
+  .red { color: $red; }
+}
+
+/* ── Item Rows ── */
+.item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid #f5f5f5;
+  font-size: 13px;
+
+  &:last-child { border-bottom: none; }
+
+  .item-name  { flex: 1; color: $text; }
+  .item-qty   { color: $muted; }
   .item-price { font-weight: 600; color: $red; }
 }
 
-// Update Form
+/* ── Update Form ── */
 .update-form {
   display: flex;
   gap: 12px;
@@ -190,7 +205,7 @@ $muted: #999;
   color: $white;
   border: none;
   border-radius: 8px;
-  padding: 9px 20px;
+  padding: 9px 22px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -199,7 +214,7 @@ $muted: #999;
   &:hover { background: #96281B; }
 }
 
-// Status Badges
+/* ── Status Badges ── */
 .status-badge {
   font-size: 11px;
   font-weight: 600;
@@ -208,30 +223,31 @@ $muted: #999;
   letter-spacing: 0.4px;
   text-transform: uppercase;
 
-  &.badge-assigned  { background: #FDECEA; color: $red; }
+  &.badge-assigned  { background: #FDECEA; color: $red;    }
   &.badge-pickedup  { background: #E3F2FD; color: #1565C0; }
-  &.badge-onway     { background: #FDECEA; color: #C0392B; }
+  &.badge-onway     { background: #FFF8E1; color: #F57F17; }
   &.badge-delivered { background: #E8F5E9; color: #2E7D32; }
 }
 
-:host {
-  display: block;
-  padding: 24px 48px;
+/* ── Back Button ── */
+.back-wrap {
+  display: flex;
+  justify-content: center;
 }
 
 .back-btn {
-  background: transparent;
-  border: 1px solid #e8e8e8;
-  border-radius: 8px;
-  padding: 8px 16px;
+  background: $white;
+  border: 1px solid $border;
+  border-radius: 10px;
+  padding: 10px 32px;
   font-size: 13px;
   color: #666;
   cursor: pointer;
-  margin-bottom: 20px;
+  width: 100%;
   transition: all 0.2s;
 
   &:hover {
-    border-color: #C0392B;
-    color: #C0392B;
+    border-color: $red;
+    color: $red;
   }
 }

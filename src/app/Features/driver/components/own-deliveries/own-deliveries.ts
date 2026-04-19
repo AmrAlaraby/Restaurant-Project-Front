@@ -28,7 +28,7 @@ export class OwnDeliveries implements OnInit {
 
     this.deliveryService.getOwnAssignedDeliveries().subscribe({
       next: (res) => {
-        this.deliveries = res;
+        this.deliveries = res.filter((d: any) => d.deliveryStatus !== 'Delivered');
         this.loading = false;
       },
       error: (err) => {
