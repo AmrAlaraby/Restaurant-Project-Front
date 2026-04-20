@@ -8,6 +8,7 @@ import { Pagination } from '../../../../Shared/Components/pagination/pagination'
 import { OrderDetails } from '../../../admin/components/Order/order-details/order-details';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { Router } from '@angular/router';
+import { SignalRService } from '../../../../Core/Services/SignalR-Service/SignalrService';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class WaiterOrdersPage implements OnInit {
   private ordersService = inject(OrdersService);
 private authService = inject(AuthService);
 private router = inject(Router);
+private signalR = inject(SignalRService);
 
   orders: WaiterOrder[] = [];
 
@@ -38,6 +40,38 @@ isModalOpen = false;
 
 ngOnInit() {
   this.loadCurrentUser();
+  this.listenToOrderUpdates()
+}
+
+listenToOrderUpdates() {
+          let token = this.authService.getAccessToken();
+    this.signalR.startRestaurantUpdatesConnection(token??"");
+
+    
+    this.signalR.onRestaurantUpdate("OrderCreated",(data) => {  
+      if(this.filters.pageIndex === 1 && (!this.filters.orderType || this.filters.orderType === data.orderType))
+        { 
+        this.orders.unshift(data);
+        //remove last item if exceeds page size        
+        if(this.orders.length > this.filters.pageSize){
+          this.orders.pop();}
+    
+        }
+      this.totalCount++;
+    });
+    
+    this.signalR.onRestaurantUpdate("OrderUpdated",(data) => {   
+      let index = this.orders.findIndex(o => o.id === data.id);
+      if(index !== -1 && index){
+        this.orders[index] = data;
+      }
+    });
+    this.signalR.onRestaurantUpdate("OrderCancelled",(data) => {   
+      let index = this.orders.findIndex(o => o.id === data.id);
+      if(index !== -1 && index){
+        this.orders[index] = data;
+      }
+    });
 }
 
 onFiltersChanged(filters: OrderFilters) {
