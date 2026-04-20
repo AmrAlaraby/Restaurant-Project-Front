@@ -19,8 +19,6 @@ import { UserQueryParams } from '../../../../Core/Models/UserModels/user-query-p
     CommonModule,
     StatsCardsComponent,
     TablesGridComponent,
-    ActiveOrders,
-    ReadyAlert
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss'

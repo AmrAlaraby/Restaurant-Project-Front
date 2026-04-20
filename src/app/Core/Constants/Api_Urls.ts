@@ -166,7 +166,8 @@ export const Order = {
 };
 
 export const signalRUrl = {
-  notifications: `https://localhost:7232/hubs/notifications`
+  notifications: `https://localhost:7232/hubs/notifications`,
+  restaurantUpdates: `https://localhost:7232/hubs/restaurant`,
 };
 export const Notification = {
   getMyNotifications: `${apiUrl}/notifications`,

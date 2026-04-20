@@ -63,12 +63,12 @@
 
           <div class="active-delivery__info">
             <h2 class="active-delivery__title">
-              Active Delivery — Order #{{ delivery.order?.id }}
+              Active Delivery — Order #{{ delivery.order.id }}
             </h2>
             <p class="active-delivery__address">
               📍 {{ formatActiveAddress() }} ·
-              {{ delivery.order?.items?.[0]?.menuItemName || delivery.driverName || 'Item' }} · EGP
-              {{ delivery.order?.totalAmount | number: '1.0-0' }}
+              {{ delivery.order.items[0]?.menuItemName || delivery.driverName || 'Item' }} · EGP
+              {{ delivery.order.totalAmount | number: '1.0-0' }}
             </p>
           </div>
         </div>
@@ -99,12 +99,12 @@
 
               <div class="assignment-card__info">
                 <h3 class="assignment-card__title">
-                  Order #{{ item.order?.id }} —
+                  Order #{{ item.order.id }} —
                   {{ item.driverName || 'Customer' }}
                 </h3>
                 <p class="assignment-card__meta">
-                  📍 {{ formatDeliveredAddress(item) }} · {{ item.order?.itemsCount || 0 }} items ·
-                  EGP {{ item.order?.totalAmount | number: '1.0-0' }}
+                  📍 {{ formatDeliveredAddress(item) }} · {{ item.order.itemsCount || 0 }} items ·
+                  EGP {{ item.order.totalAmount | number: '1.0-0' }}
                 </p>
               </div>
             </div>

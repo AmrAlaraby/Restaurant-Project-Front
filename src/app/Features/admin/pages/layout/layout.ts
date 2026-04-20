@@ -180,7 +180,7 @@ export class Layout implements OnInit {
         this.loadNotifications();
 
     let token = this.authService.getAccessToken();
-    this.signalR.startConnection(token??"");
+    this.signalR.startNotificationsConnection(token??"");
 
 
     this.signalR.onNotification((data) => {
