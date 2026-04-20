@@ -43,12 +43,34 @@ export class OrdersPage implements OnInit {
 
   ngOnInit(): void {
     this.loadOrders();
-        let token = this.authService.getAccessToken();
+    this.listenToOrderUpdates();
+  }
+  
+
+  loadOrders() {
+    this.ordersService.getAllOrders(this.filters).subscribe(res => {
+      this.orders = res.data;
+      this.totalCount = res.count;
+    });
+    this.KitchenService.getBranches().subscribe(res => {
+      this.branches = res;
+    });
+  }
+
+  listenToOrderUpdates() {
+          let token = this.authService.getAccessToken();
     this.signalR.startRestaurantUpdatesConnection(token??"");
 
     
-    this.signalR.onRestaurantUpdate("OrderCreated",(data) => {   
-      this.orders.unshift(data);
+    this.signalR.onRestaurantUpdate("OrderCreated",(data) => {  
+      if(this.filters.pageIndex === 1 && (!this.filters.orderType || this.filters.orderType === data.orderType))
+        { 
+        this.orders.unshift(data);
+        //remove last item if exceeds page size        
+        if(this.orders.length > this.filters.pageSize){
+          this.orders.pop();}
+    
+        }
       this.totalCount++;
     });
     
@@ -64,18 +86,7 @@ export class OrdersPage implements OnInit {
         this.orders[index] = data;
       }
     });
-  }
-  
-
-  loadOrders() {
-    this.ordersService.getAllOrders(this.filters).subscribe(res => {
-      this.orders = res.data;
-      this.totalCount = res.count;
-    });
-    this.KitchenService.getBranches().subscribe(res => {
-      this.branches = res;
-    });
-  }
+}
 
 
 
