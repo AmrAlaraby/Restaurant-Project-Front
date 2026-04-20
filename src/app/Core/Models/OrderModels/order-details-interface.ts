@@ -5,6 +5,7 @@ import { OrderPaymentInterface } from "./order-payment-interface";
 
 export interface OrderDetailsInterface {
     id: number;
+    branchId: number;
   branchName: string;
   userId: string;
   userName: string;

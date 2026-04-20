@@ -1,3 +1,5 @@
+import { SignalRService } from './../../../../../Core/Services/SignalR-Service/SignalrService';
+import { AuthService } from './../../../../../Core/Services/Auth-Service/auth-service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subject } from 'rxjs';
@@ -12,6 +14,7 @@ import { KitchenTicketDetailsDto } from '../../../../../Core/Models/KitchenModel
 import { KitchenTicketQueryParams } from '../../../../../Core/Models/KitchenModels/kitchen-ticket-query-params';
 import { KitchenService } from '../../../../../Core/Services/Kitchen-Service/kitchen-service';
 import { TicketStatus } from '../../../../../Core/Models/KitchenModels/ticket-status';
+import { OrderDetailsInterface } from '../../../../../Core/Models/OrderModels/order-details-interface';
 
 @Component({
   selector: 'app-kitchen-board',
@@ -45,10 +48,11 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  constructor(private kitchenService: KitchenService) {}
+  constructor(private kitchenService: KitchenService,private AuthService: AuthService,private SignalRService :SignalRService) {}
 
   ngOnInit(): void {
     this.loadBoard(this.currentParams);
+    this.listenToOrderUpdates()
   }
 
   ngOnDestroy(): void {
@@ -102,6 +106,85 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
         },
       });
   }
+
+  // =====================
+  // listen to updates
+  // =====================
+  listenToOrderUpdates() {
+            let token = this.AuthService.getAccessToken();
+      this.SignalRService.startRestaurantUpdatesConnection(token??"");
+  
+      
+      this.SignalRService.onRestaurantUpdate("OrderCreated",(data : OrderDetailsInterface) => {  
+        // Adding Tickets in the data data.kitchenTickets to the start of the pending list if the order matches the current filters
+        debugger;
+        if(this.currentParams.branchId && data.branchId !== this.currentParams.branchId) return;
+        if(this.currentParams.orderId && data.id !== this.currentParams.orderId) return;
+        data.kitchenTickets.forEach(ticket => {
+          if(this.currentParams.station && ticket.station !== this.currentParams.station) return;
+
+          this.board.pending.unshift({
+            id: ticket.id,
+            orderId: data.id,
+            station: ticket.station,
+            status: 0,
+            startedAt: null,
+            completedAt: null
+          });
+          });
+       
+        
+      });
+      this.SignalRService.onRestaurantUpdate("OrderUpdated",(data : OrderDetailsInterface) => {   
+        debugger;
+  if(this.currentParams.branchId && data.branchId !== this.currentParams.branchId) return;
+
+  // remove deleted tickets
+  this.board.pending = this.board.pending.filter(t =>
+    t.orderId !== data.id || data.kitchenTickets.some(k => k.id === t.id)
+  );
+
+  this.board.preparing = this.board.preparing.filter(t =>
+    t.orderId !== data.id || data.kitchenTickets.some(k => k.id === t.id)
+  );
+
+  this.board.done = this.board.done.filter(t =>
+    t.orderId !== data.id || data.kitchenTickets.some(k => k.id === t.id)
+  );
+
+  // recompute after delete
+  const allTickets = [...this.board.pending, ...this.board.preparing, ...this.board.done];
+
+  // add new tickets
+  data.kitchenTickets.forEach(ticket => {
+
+    const exists = allTickets.some(t => t.id === ticket.id);
+    if(exists) return;
+
+    if(this.currentParams.station && ticket.station !== this.currentParams.station) return;
+
+    this.board.pending.unshift({
+      id: ticket.id,
+      orderId: data.id,
+      station: ticket.station,
+      status: 0,
+      startedAt: null,
+      completedAt: null
+    });
+
+  });
+
+});
+      this.SignalRService.onRestaurantUpdate("OrderCancelled",(data : OrderDetailsInterface) => {   
+        // remove all tickets with order Id from the board
+        debugger;
+        if(this.currentParams.branchId && data.branchId !== this.currentParams.branchId) return;
+        this.board.pending = this.board.pending.filter(t => t.orderId !== data.id);
+        this.board.preparing = this.board.preparing.filter(t => t.orderId !== data.id);
+        this.board.done = this.board.done.filter(t => t.orderId !== data.id);
+      });
+  }
+
 
   // =====================
   // Filter
