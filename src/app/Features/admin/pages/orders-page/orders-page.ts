@@ -63,7 +63,7 @@ export class OrdersPage implements OnInit {
 
     
     this.signalR.onRestaurantUpdate("OrderCreated",(data) => {  
-      if(this.filters.pageIndex === 1 && (!this.filters.orderType || this.filters.orderType === data.orderType))
+      if(this.filters.pageIndex === 1 && (!this.filters.Ordertype || this.filters.Ordertype === data.orderType))
         { 
         this.orders.unshift(data);
         //remove last item if exceeds page size        
