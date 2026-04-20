@@ -7,7 +7,7 @@ export class SignalRService {
 
   private hubConnection!: signalR.HubConnection;
 
-  startConnection(token: string) {
+  startNotificationsConnection(token: string) {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(signalRUrl.notifications, {
         accessTokenFactory: () => token
@@ -18,7 +18,22 @@ export class SignalRService {
     return this.hubConnection.start();
   }
 
+  startRestaurantUpdatesConnection(token: string) {
+    this.hubConnection = new signalR.HubConnectionBuilder()
+      .withUrl(signalRUrl.restaurantUpdates, {
+        accessTokenFactory: () => token
+      })
+      .withAutomaticReconnect()
+      .build();
+
+    return this.hubConnection.start();
+  }
+
   onNotification(callback: (data: any) => void) {
     this.hubConnection.on('LowStockAlert', callback);
+  }
+
+  onRestaurantUpdate(eventName :string,callback: (data: any) => void) {
+    this.hubConnection.on(eventName, callback);
   }
 }

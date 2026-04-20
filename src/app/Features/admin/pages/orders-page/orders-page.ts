@@ -9,6 +9,8 @@ import { OrderFilters } from '../../components/Order/order-filters/order-filters
 import { OrderModal } from '../../components/Order/order-modal/order-modal';
 import { OrderStats } from '../../components/Order/order-stats/order-stats';
 import { OrderTable } from '../../components/Order/order-table/order-table';
+import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
+import { SignalRService } from '../../../../Core/Services/SignalR-Service/SignalrService';
 
 @Component({
   selector: 'app-orders-page',
@@ -34,11 +36,36 @@ export class OrdersPage implements OnInit {
   branches: BranchDto[] = [];
 
   constructor(private ordersService: OrdersService,
-    private KitchenService: KitchenService) {}
+    private KitchenService: KitchenService,
+    private authService: AuthService,
+    private signalR: SignalRService,
+  ) {}
 
   ngOnInit(): void {
     this.loadOrders();
+        let token = this.authService.getAccessToken();
+    this.signalR.startRestaurantUpdatesConnection(token??"");
+
+    
+    this.signalR.onRestaurantUpdate("OrderCreated",(data) => {   
+      this.orders.unshift(data);
+      this.totalCount++;
+    });
+    
+    this.signalR.onRestaurantUpdate("OrderUpdated",(data) => {   
+      let index = this.orders.findIndex(o => o.id === data.id);
+      if(index !== -1 && index){
+        this.orders[index] = data;
+      }
+    });
+    this.signalR.onRestaurantUpdate("OrderCancelled",(data) => {   
+      let index = this.orders.findIndex(o => o.id === data.id);
+      if(index !== -1 && index){
+        this.orders[index] = data;
+      }
+    });
   }
+  
 
   loadOrders() {
     this.ordersService.getAllOrders(this.filters).subscribe(res => {
@@ -49,6 +76,8 @@ export class OrdersPage implements OnInit {
       this.branches = res;
     });
   }
+
+
 
   openModal() {
     console.log("clicked");

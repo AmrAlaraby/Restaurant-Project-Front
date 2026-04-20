@@ -53,7 +53,7 @@
       </div>
 
       <!-- Orders -->
-      @if (userDetails.orders?.length) {
+      @if (userDetails.orders.length) {
         <div class="section">
           <h5>Orders <span class="count">{{ userDetails.orders.length }}</span></h5>
           <div class="table-wrapper">
@@ -84,7 +84,7 @@
       }
 
       <!-- Deliveries -->
-      @if (userDetails.deliveries?.length) {
+      @if (userDetails.deliveries.length) {
         <div class="section">
           <h5>Deliveries <span class="count">{{ userDetails.deliveries.length }}</span></h5>
           <div class="table-wrapper">

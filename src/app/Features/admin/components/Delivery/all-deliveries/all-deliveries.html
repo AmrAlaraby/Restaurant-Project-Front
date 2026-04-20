@@ -41,11 +41,11 @@
     <div class="row-id">#D-{{ d.id }}</div>
 
     <div class="row-main">
-      <div class="row-title">Order #{{ d.order?.id }}</div>
+      <div class="row-title">Order #{{ d.order.id }}</div>
       <div class="row-addr">
         <span class="pin"></span>
-        {{ d.deliveryAddress?.buildingNumber }} {{ d.deliveryAddress?.street }},
-        {{ d.deliveryAddress?.city }}
+        {{ d.deliveryAddress.buildingNumber }} {{ d.deliveryAddress.street }},
+        {{ d.deliveryAddress.city }}
       </div>
     </div>
 
@@ -141,7 +141,7 @@
       >
         {{ d.deliveryStatus || 'Unknown' }}
       </span>
-      <div class="row-price">EGP {{ d.order?.totalAmount }}</div>
+      <div class="row-price">EGP {{ d.order.totalAmount }}</div>
     </div>
   </div>
 
