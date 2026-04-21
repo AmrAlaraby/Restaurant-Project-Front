@@ -15,6 +15,7 @@ import { KitchenTicketQueryParams } from '../../../../../Core/Models/KitchenMode
 import { KitchenService } from '../../../../../Core/Services/Kitchen-Service/kitchen-service';
 import { TicketStatus } from '../../../../../Core/Models/KitchenModels/ticket-status';
 import { OrderDetailsInterface } from '../../../../../Core/Models/OrderModels/order-details-interface';
+import { KitchenTicketStatusDto } from '../../../../../Core/Models/KitchenModels/kitchen-ticket-status-dto';
 
 @Component({
   selector: 'app-kitchen-board',
@@ -183,6 +184,66 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
         this.board.preparing = this.board.preparing.filter(t => t.orderId !== data.id);
         this.board.done = this.board.done.filter(t => t.orderId !== data.id);
       });
+     this.SignalRService.onRestaurantUpdate(
+  "KitchenUpdated",
+  (data: KitchenTicketStatusDto) => {
+    debugger;
+    let ticket: any | undefined;
+    let currentList: any[];
+
+    // find ticket
+    if ((ticket = this.board.pending.find(t => t.id === data.id))) {
+      currentList = this.board.pending;
+    } 
+    else if ((ticket = this.board.preparing.find(t => t.id === data.id))) {
+      currentList = this.board.preparing;
+    } 
+    else if ((ticket = this.board.done.find(t => t.id === data.id))) {
+      currentList = this.board.done;
+    } 
+    else {
+      return;
+    }
+
+    // update values
+    ticket.status = data.status;
+    ticket.startedAt = data.startedAt;
+    ticket.completedAt = data.completedAt;
+
+    // determine target list
+    let targetList: any[];
+
+    switch (data.status) {
+      case TicketStatus.Pending:
+        targetList = this.board.pending;
+        break;
+
+      case TicketStatus.Preparing:
+        targetList = this.board.preparing;
+        break;
+
+      case TicketStatus.Done:
+        targetList = this.board.done;
+        break;
+
+      default:
+        return;
+    }
+
+    // move ticket if needed
+    if (currentList !== targetList) {
+
+      const index = currentList.indexOf(ticket);
+      if (index > -1) {
+        currentList.splice(index, 1);
+      }
+
+      targetList.unshift(ticket);
+    }
+
+  }
+);
+
   }
 
 
