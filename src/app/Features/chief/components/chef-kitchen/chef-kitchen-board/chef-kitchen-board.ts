@@ -16,6 +16,9 @@ import { ActiveStationsBarComponent } from '../../../../admin/components/Kitchen
 import { TicketCardComponent } from '../../../../admin/components/Kitchen/ticket-card/ticket-card';
 import { TicketDetailsModalComponent } from '../../../../admin/components/Kitchen/ticket-details/ticket-details';
 import { ChefKitchenFilterComponent } from '../chef-kitchen-filter/chef-kitchen-filter';
+import { OrderDetailsInterface } from '../../../../../Core/Models/OrderModels/order-details-interface';
+import { KitchenTicketStatusDto } from '../../../../../Core/Models/KitchenModels/kitchen-ticket-status-dto';
+import { SignalRService } from '../../../../../Core/Services/SignalR-Service/SignalrService';
 
 @Component({
   selector: 'app-chef-kitchen-board',
@@ -54,6 +57,7 @@ export class ChefKitchenBoardComponent implements OnInit, OnDestroy {
   constructor(
     private kitchenService: KitchenService,
     private authService: AuthService,
+    private SignalRService :SignalRService
   ) {}
 
   ngOnInit(): void {
@@ -63,7 +67,7 @@ export class ChefKitchenBoardComponent implements OnInit, OnDestroy {
         next: (user) => {
 
           // 👑 ROLE CHECK
-          if (user.role !== 'Chief') {
+          if (user.role !== 'Chef') {
             this.error = 'Access denied. Chief only.';
             return;
           }
@@ -86,6 +90,8 @@ export class ChefKitchenBoardComponent implements OnInit, OnDestroy {
           this.error = 'Failed to load user data.';
         },
       });
+
+      this.listenToOrderUpdates();
   }
 
   ngOnDestroy(): void {
@@ -133,6 +139,143 @@ export class ChefKitchenBoardComponent implements OnInit, OnDestroy {
       });
   }
 
+   // =====================
+    // listen to updates
+    // =====================
+    listenToOrderUpdates() {
+              let token = this.authService.getAccessToken();
+        this.SignalRService.startRestaurantUpdatesConnection(token??"");
+    
+        
+        this.SignalRService.onRestaurantUpdate("OrderCreated",(data : OrderDetailsInterface) => {  
+          // Adding Tickets in the data data.kitchenTickets to the start of the pending list if the order matches the current filters
+          debugger;
+          if(this.currentParams.branchId && data.branchId !== this.currentParams.branchId) return;
+          if(this.currentParams.orderId && data.id !== this.currentParams.orderId) return;
+          data.kitchenTickets.forEach(ticket => {
+            if(this.currentParams.station && ticket.station !== this.currentParams.station) return;
+  
+            this.board.pending.unshift({
+              id: ticket.id,
+              orderId: data.id,
+              station: ticket.station,
+              status: 0,
+              startedAt: null,
+              completedAt: null
+            });
+            });
+         
+          
+        });
+        this.SignalRService.onRestaurantUpdate("OrderUpdated",(data : OrderDetailsInterface) => {   
+          debugger;
+    if(this.currentParams.branchId && data.branchId !== this.currentParams.branchId) return;
+  
+    // remove deleted tickets
+    this.board.pending = this.board.pending.filter(t =>
+      t.orderId !== data.id || data.kitchenTickets.some(k => k.id === t.id)
+    );
+  
+    this.board.preparing = this.board.preparing.filter(t =>
+      t.orderId !== data.id || data.kitchenTickets.some(k => k.id === t.id)
+    );
+  
+    this.board.done = this.board.done.filter(t =>
+      t.orderId !== data.id || data.kitchenTickets.some(k => k.id === t.id)
+    );
+  
+    // recompute after delete
+    const allTickets = [...this.board.pending, ...this.board.preparing, ...this.board.done];
+  
+    // add new tickets
+    data.kitchenTickets.forEach(ticket => {
+  
+      const exists = allTickets.some(t => t.id === ticket.id);
+      if(exists) return;
+  
+      if(this.currentParams.station && ticket.station !== this.currentParams.station) return;
+  
+      this.board.pending.unshift({
+        id: ticket.id,
+        orderId: data.id,
+        station: ticket.station,
+        status: 0,
+        startedAt: null,
+        completedAt: null
+      });
+  
+    });
+  
+  });
+        this.SignalRService.onRestaurantUpdate("OrderCancelled",(data : OrderDetailsInterface) => {   
+          // remove all tickets with order Id from the board
+          debugger;
+          if(this.currentParams.branchId && data.branchId !== this.currentParams.branchId) return;
+          this.board.pending = this.board.pending.filter(t => t.orderId !== data.id);
+          this.board.preparing = this.board.preparing.filter(t => t.orderId !== data.id);
+          this.board.done = this.board.done.filter(t => t.orderId !== data.id);
+        });
+       this.SignalRService.onRestaurantUpdate(
+    "KitchenUpdated",
+    (data: KitchenTicketStatusDto) => {
+      debugger;
+      let ticket: any | undefined;
+      let currentList: any[];
+  
+      // find ticket
+      if ((ticket = this.board.pending.find(t => t.id === data.id))) {
+        currentList = this.board.pending;
+      } 
+      else if ((ticket = this.board.preparing.find(t => t.id === data.id))) {
+        currentList = this.board.preparing;
+      } 
+      else if ((ticket = this.board.done.find(t => t.id === data.id))) {
+        currentList = this.board.done;
+      } 
+      else {
+        return;
+      }
+  
+      // update values
+      ticket.status = data.status;
+      ticket.startedAt = data.startedAt;
+      ticket.completedAt = data.completedAt;
+  
+      // determine target list
+      let targetList: any[];
+  
+      switch (data.status) {
+        case TicketStatus.Pending:
+          targetList = this.board.pending;
+          break;
+  
+        case TicketStatus.Preparing:
+          targetList = this.board.preparing;
+          break;
+  
+        case TicketStatus.Done:
+          targetList = this.board.done;
+          break;
+  
+        default:
+          return;
+      }
+  
+      // move ticket if needed
+      if (currentList !== targetList) {
+  
+        const index = currentList.indexOf(ticket);
+        if (index > -1) {
+          currentList.splice(index, 1);
+        }
+  
+        targetList.unshift(ticket);
+      }
+  
+    }
+  );
+  
+    }
   // =====================
   // Filter
   // =====================
