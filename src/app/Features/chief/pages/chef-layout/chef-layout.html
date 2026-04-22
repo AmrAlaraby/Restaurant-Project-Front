@@ -1,0 +1,39 @@
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <app-sidebar [sections]="sidebarData" [class.open]="isOpen" prefix="chief" [isOpen]="isOpen"
+    [AvatarLetters]="AvatarLetters" [UserName]="UserName" [UserRole]="UserRole" (close)="closeSidebar()">
+  </app-sidebar>
+
+  <!-- CONTENT -->
+  <div class="app-shell">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+
+      <button class="hamburger" (click)="openSidebar()">
+        ☰
+      </button>
+
+      <div class="title">
+        {{topbarTitle}}
+      </div>
+
+      <div class="topbar-right">
+        <app-notification-bell [notifications]="notifications"></app-notification-bell>
+
+        <div class="avatar">
+          {{AvatarLetters}}
+        </div>
+      </div>
+
+    </header>
+
+    <!-- PAGE -->
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+
+</div>

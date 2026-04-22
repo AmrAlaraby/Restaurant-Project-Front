@@ -254,7 +254,9 @@ export const routes: Routes = [
   },
   {
     path: 'chief',
+    loadComponent: () => import('./Features/chief/pages/chef-layout/chef-layout').then((m) => m.ChefLayout),
     children: [
+            { path: '', redirectTo: 'kitchen', pathMatch: 'full' },
       //amr 400 -450
 
       //hossam 451 - 500
