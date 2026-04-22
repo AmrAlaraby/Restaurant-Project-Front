@@ -183,7 +183,7 @@ export class Layout implements OnInit {
     this.signalR.startNotificationsConnection(token??"");
 
 
-    this.signalR.onNotification((data) => {
+    this.signalR.onNotification('LowStockAlert',(data) => {
       debugger;
       this.notifications.unshift(data);
 

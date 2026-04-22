@@ -185,6 +185,7 @@ export const routes: Routes = [
 
   {
     path: 'cashier',
+    loadComponent: () => import('./Features/cashier/pages/cashier-layout/cashier-layout').then((m) => m.CashierLayout),
     children: [
       //amr 400 -450
       {
