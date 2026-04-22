@@ -215,6 +215,7 @@ export const routes: Routes = [
 
   {
     path: 'driver',
+    loadComponent: () => import('./Features/driver/pages/driver-layout/driver-layout').then((m) => m.DriverLayout),
     children: [
       //amr 400 -450
       {
