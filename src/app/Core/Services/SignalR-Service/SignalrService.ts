@@ -29,8 +29,8 @@ export class SignalRService {
     return this.hubConnection.start();
   }
 
-  onNotification(callback: (data: any) => void) {
-    this.hubConnection.on('LowStockAlert', callback);
+  onNotification(methodName :string,callback: (data: any) => void) {
+    this.hubConnection.on(methodName, callback);
   }
 
   onRestaurantUpdate(eventName :string,callback: (data: any) => void) {
