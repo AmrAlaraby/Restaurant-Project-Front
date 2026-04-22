@@ -185,7 +185,8 @@ export const routes: Routes = [
 
   {
     path: 'cashier',
-    loadComponent: () => import('./Features/cashier/pages/cashier-layout/cashier-layout').then((m) => m.CashierLayout),
+    loadComponent: () =>
+      import('./Features/cashier/pages/cashier-layout/cashier-layout').then((m) => m.CashierLayout),
     children: [
       //amr 400 -450
       {
@@ -215,7 +216,8 @@ export const routes: Routes = [
 
   {
     path: 'driver',
-    loadComponent: () => import('./Features/driver/pages/driver-layout/driver-layout').then((m) => m.DriverLayout),
+    loadComponent: () =>
+      import('./Features/driver/pages/driver-layout/driver-layout').then((m) => m.DriverLayout),
     children: [
       //amr 400 -450
       {
@@ -255,9 +257,10 @@ export const routes: Routes = [
   },
   {
     path: 'chief',
-    loadComponent: () => import('./Features/chief/pages/chef-layout/chef-layout').then((m) => m.ChefLayout),
+    loadComponent: () =>
+      import('./Features/chief/pages/chef-layout/chef-layout').then((m) => m.ChefLayout),
     children: [
-            { path: '', redirectTo: 'kitchen', pathMatch: 'full' },
+      { path: '', redirectTo: 'kitchen', pathMatch: 'full' },
       //amr 400 -450
 
       //hossam 451 - 500
@@ -278,6 +281,25 @@ export const routes: Routes = [
       //Arwa 551 - 600
       //mahmoud 601 - 650
       //mustafa 651 - 700
+    ],
+  },
+  {
+    path: 'customer',
+
+    children: [
+      //amr
+
+      //hossam
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./Features/customer/pages/profile/profile').then((m) => m.Profile),
+      },
+
+      //Areej
+      //Arwa
+      //mahmoud
+      //mustafa
     ],
   },
 ];
