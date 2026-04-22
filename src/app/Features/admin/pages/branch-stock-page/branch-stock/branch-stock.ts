@@ -6,6 +6,8 @@ import { BranchStockInterface } from '../../../../../Core/Models/BranchStockMode
 import { BranchSelectorComponent } from '../../../../admin/components/BranchStock/branch-selector/branch-selector/branch-selector';
 import { Pagination } from '../../../../../Shared/Components/pagination/pagination';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../../../../Core/Services/Auth-Service/auth-service';
+import { SignalRService } from '../../../../../Core/Services/SignalR-Service/SignalrService';
 
 @Component({
   selector: 'app-branch-stock',
@@ -31,10 +33,14 @@ export class BranchStockComponent implements OnInit {
     lowThreshold: 0
   };
 
-  constructor(private service: BranchStockService) {}
+  constructor(private service: BranchStockService,
+              private authService: AuthService,
+              private SignalRService: SignalRService
+  ) {}
 
   ngOnInit(): void {
     this.loadData();
+    this.listenToUpdates()
   }
 
   loadData() {
@@ -49,6 +55,19 @@ export class BranchStockComponent implements OnInit {
       error: () => this.loading = false
     });
   }
+
+  
+  listenToUpdates(): void {
+      let token = this.authService.getAccessToken();
+      this.SignalRService.startRestaurantUpdatesConnection(token??"");
+      this.SignalRService.onRestaurantUpdate("BranchStockUpdated",(data :BranchStockInterface) => {
+        let index = this.filteredStocks.findIndex(d => d.id === data.id);
+        if(index !== -1 && index!==null){
+          this.filteredStocks[index] = data;
+        }     
+      });
+    }
+
 
   applyPagination() {
     const start = (this.pageIndex - 1) * this.pageSize;
