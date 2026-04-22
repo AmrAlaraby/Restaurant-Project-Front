@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { SignalRService } from './../../../../Core/Services/SignalR-Service/SignalrService';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DeliveryService } from '../../../../Core/Services/Delivery-Service/delivery-service';
+import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
+import { Delivery } from '../../../../Core/Models/DeliveryModels/delivery';
 
 @Component({
   selector: 'app-own-deliveries',
@@ -16,11 +19,14 @@ export class OwnDeliveries implements OnInit {
 
   constructor(
     private deliveryService: DeliveryService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
+    private SignalRService:SignalRService 
   ) {}
 
   ngOnInit(): void {
     this.loadOwnDeliveries();
+    this.listenToUpdates();
   }
 
   loadOwnDeliveries() {
@@ -35,6 +41,14 @@ export class OwnDeliveries implements OnInit {
         console.error(err);
         this.loading = false;
       },
+    });
+  }
+
+    listenToUpdates(): void {
+      let token = this.authService.getAccessToken();
+      this.SignalRService.startRestaurantUpdatesConnection(token??"");
+      this.SignalRService.onRestaurantUpdate("OrderAssignedToDriver",(data :Delivery | null) => {
+      this.deliveries.unshift(data);
     });
   }
 
