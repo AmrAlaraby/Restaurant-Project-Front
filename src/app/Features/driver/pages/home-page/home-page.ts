@@ -1,3 +1,4 @@
+import { SignalRService } from './../../../../Core/Services/SignalR-Service/SignalrService';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit, signal, computed } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -18,6 +19,7 @@ export class HomePage implements OnInit, OnDestroy {
   private deliveryService = inject(DeliveryService);
   private usersService = inject(UsersService);
   private authService = inject(AuthService);
+  private SignalRService = inject(SignalRService);
 
   // ── Signals ──────────────────────────────────────────────────────
   driver = signal<User | null>(null);
@@ -46,6 +48,7 @@ export class HomePage implements OnInit, OnDestroy {
     this.loadDriverInfo();
     this.loadDashboard();
     this.loadDeliveredCount();
+    this.listenToUpdates()
   }
 
   ngOnDestroy(): void {}
@@ -88,6 +91,14 @@ export class HomePage implements OnInit, OnDestroy {
       },
     });
   }
+
+  listenToUpdates(): void {
+    let token = this.authService.getAccessToken();
+    this.SignalRService.startRestaurantUpdatesConnection(token??"");
+    this.SignalRService.onRestaurantUpdate("OrderAssignedToDriver",(data :Delivery | null) => {
+    this.activeDelivery.set(data);
+  });
+}
 
   loadDashboard(): void {
     this.loading.set(true);

@@ -1,3 +1,5 @@
+import { SignalRService } from './../../../../../Core/Services/SignalR-Service/SignalrService';
+import { signalRUrl } from './../../../../../Core/Constants/Api_Urls';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,6 +10,7 @@ import { DeliveryService } from '../../../../../Core/Services/Delivery-Service/d
 import { Pagination } from "../../../../../Shared/Components/pagination/pagination";
 import { Branch } from '../../../../../Core/Constants/Api_Urls';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../../../../Core/Services/Auth-Service/auth-service';
 
 @Component({
   selector: 'app-all-deliveries',
@@ -45,12 +48,15 @@ export class AllDeliveries {
   constructor(
     private service: DeliveryService,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
+    private SignalRService: SignalRService
   ) {}
 
   ngOnInit() {
     this.load();
     this.loadBranches();
+    this.listenToUpdates();
   }
 
   // 🔥 Load all deliveries
@@ -66,6 +72,23 @@ export class AllDeliveries {
         },
         error: _ => this.loading = false
       });
+  }
+
+  listenToUpdates(): void {
+    let token = this.authService.getAccessToken();
+    this.SignalRService.startRestaurantUpdatesConnection(token??"");
+    this.SignalRService.onRestaurantUpdate("OrderAssignedToDriver",(data :Delivery) => {
+      let index = this.deliveries.findIndex(d => d.id === data.id);
+      if(index !== -1 && index){
+        this.deliveries[index] = data;
+      }     
+    });
+    this.SignalRService.onRestaurantUpdate("deliveryUpdated",(data :Delivery) => {
+      let index = this.deliveries.findIndex(d => d.id === data.id);
+      if(index !== -1 && index){
+        this.deliveries[index] = data;
+      }     
+    });
   }
 
   // 🔥 Pagination
