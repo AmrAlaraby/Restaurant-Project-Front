@@ -114,6 +114,13 @@ export const Deliveries = {
   availableDrivers: `${apiUrl}/Delivery/available-drivers`,
 };
 
+export const Recipes = {
+  getAll: `${apiUrl}/Recipes`,
+  update: (id: number) => `${apiUrl}/Recipes/${id}`,
+  delete:  (id: number) => `${apiUrl}/Recipes/${id}`,
+
+};
+
 
 
 

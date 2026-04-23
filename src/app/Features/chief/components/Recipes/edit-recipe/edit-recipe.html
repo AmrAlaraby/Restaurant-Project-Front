@@ -1,0 +1,50 @@
+<div class="modal-overlay" (click)="cancel()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+
+    <div class="modal-header">
+      <h2 class="modal-title">Edit Quantity</h2>
+      <button class="close-btn" (click)="cancel()">✕</button>
+    </div>
+
+    <div class="modal-body">
+
+      <!-- Read-only info -->
+      <div class="info-row">
+        <span class="info-label">Menu Item</span>
+        <span class="info-value">{{ recipe().menuItemName }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Ingredient</span>
+        <span class="info-value">{{ recipe().ingredientName }}</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Editable quantity -->
+      <div class="field">
+        <label class="field-label">Quantity Required ({{ recipe().unit }})</label>
+        <input
+          type="number"
+          class="field-input"
+          [ngModel]="quantityRequired()"
+          (ngModelChange)="quantityRequired.set($event)"
+          min="0.01"
+          step="0.01"
+        />
+      </div>
+
+      @if (error()) {
+        <p class="error-msg">⚠️ {{ error() }}</p>
+      }
+
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="cancel()">Cancel</button>
+      <button class="btn-submit" (click)="submit()" [disabled]="isSubmitting()">
+        @if (isSubmitting()) { Saving... } @else { Save Changes }
+      </button>
+    </div>
+
+  </div>
+</div>
