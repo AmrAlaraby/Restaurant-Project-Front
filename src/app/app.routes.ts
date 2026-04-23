@@ -311,6 +311,16 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./Features/customer/pages/browse-menu-page/browse-menu-page').then((m) => m.BrowseMenuPage),
       },
+      {path: 'my-orders',
+      loadComponent: () =>
+      import('./Features/customer/pages/my-orders-page/my-orders-page').then((m) => m.MyOrdersPage)
+      },
+      
+      //Areej
+      //Arwa
+      
+      
+
       //Areej
       //Arwa
       //mahmoud
