@@ -327,7 +327,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./Features/customer/pages/basket-page/basket-page').then((m) => m.BasketPage)
       },
-      
+      {
+        path: 'track-delivery',
+        loadComponent: () =>
+          import('./Features/customer/pages/track-delivery-page/track-delivery-page').then(
+            (m) => m.TrackDeliveryPage
+          )
+      },
       //Areej
       //Arwa
       
