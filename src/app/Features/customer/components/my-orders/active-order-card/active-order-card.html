@@ -1,7 +1,7 @@
 <div class="active-card">
   <div class="active-card-header">
     <div>
-      <div class="active-order-id">#{{ order().id }}</div>
+      <div class="active-order-id">#{{ order().id.toString().padStart(4, '0') }}</div>
       <div class="active-order-meta">
         {{ order().orderItems?.length ?? 0 }} items · {{ order().orderType }}
       </div>
