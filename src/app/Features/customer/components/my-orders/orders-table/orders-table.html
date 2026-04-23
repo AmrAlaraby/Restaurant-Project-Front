@@ -16,7 +16,7 @@
       @for (order of orders(); track order.id) {
         <tr [class.active-row]="order.status !== 'Delivered' && order.status !== 'Cancelled'">
 
-          <td class="order-id">#{{ order.id | number:'4.0-0' }}</td>
+         <td class="order-id">#{{ order.id.toString().padStart(4, '0') }}</td>
 
           <td>
             {{ order.orderItems?.length ?? 0 }}

@@ -11,7 +11,7 @@ export class ActiveOrderCard {
   order = input.required<any>();
   track = output<number>();
 
-  readonly steps = ['Placed', 'Confirmed', 'On the Way', 'Delivered'];
+
 
   getStepIndex(status: string): number {
     const map: Record<string, number> = {
@@ -19,9 +19,17 @@ export class ActiveOrderCard {
       Confirmed: 1,
       OnTheWay: 2,
       Delivered: 3,
+         Received: 3, 
     };
     return map[status] ?? 0;
   }
+  get steps(): string[] {
+  const type = this.order().orderType;
+  if (type === 'Pickup' || type === 'DineIn') {
+    return ['Placed', 'Confirmed', 'Ready', 'Received'];
+  }
+  return ['Placed', 'Confirmed', 'On the Way', 'Delivered'];
+}
 
   getStatusBadgeClass(status: string): string {
     const map: Record<string, string> = {
@@ -30,6 +38,7 @@ export class ActiveOrderCard {
       OnTheWay: 'badge-onway',
       Confirmed: 'badge-confirmed',
       Pending: 'badge-pending',
+       Received: 'badge-delivered',
     };
     return map[status] ?? '';
   }

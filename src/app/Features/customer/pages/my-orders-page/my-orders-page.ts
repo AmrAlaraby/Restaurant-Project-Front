@@ -26,22 +26,25 @@ private ordersService = inject(OrdersService);
     this.loadOrders();
   }
  
-  loadOrders() {
-    this.loading.set(true);
-    this.ordersService.getMyOrders().subscribe({
-      next: (res) => {
-        const all = res.data ?? [];
-        this.orders.set(all);
-        const active = all.find(
-          (o: any) => o.status !== 'Delivered' && o.status !== 'Cancelled'
-        );
-        this.activeOrder.set(active ?? null);
-        this.loading.set(false);
-      },
-      error: () => this.loading.set(false),
-    });
-  }
- 
+ loadOrders() {
+  this.loading.set(true);
+  this.ordersService.getMyOrders().subscribe({
+    next: (res) => {
+      const all = res.data ?? [];
+      console.log(all.map((o: any) => ({ id: o.id, status: o.status }))); // ← هنا
+      this.orders.set(all);
+      const active = all.find(
+        (o: any) =>
+          o.status !== 'Delivered' &&
+          o.status !== 'Cancelled' &&
+          o.status !== 'Received'
+      );
+      this.activeOrder.set(active ?? null);
+      this.loading.set(false);
+    },
+    error: () => this.loading.set(false),
+  });
+}
   trackDelivery(orderId: number) {
     this.router.navigate(['/customer/track-delivery', orderId]);
   }

@@ -31,10 +31,12 @@ export class OrdersTable {
     return map[status] ?? '';
   }
 
-  formatDate(dateStr: string): string {
-    const d = new Date(dateStr);
-    return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
-  }
+formatDate(dateStr: string): string {
+  if (!dateStr) return '—';
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return '—'; // guard
+  return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+}
 
   onReorder(orderId: number) {
     this.reorder.emit(orderId);
