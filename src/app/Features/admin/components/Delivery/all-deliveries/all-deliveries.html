@@ -142,6 +142,9 @@
         {{ d.deliveryStatus || 'Unknown' }}
       </span>
       <div class="row-price">EGP {{ d.order.totalAmount }}</div>
+      <div class="row-cash" *ngIf="d.cashCollected !== null">
+        💵 Collected: <b>EGP {{ d.cashCollected }}</b>
+      </div>
     </div>
   </div>
 
