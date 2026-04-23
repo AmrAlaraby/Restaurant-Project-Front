@@ -1,0 +1,28 @@
+<div class="stock-card avail-card" *ngIf="stocks.length > 0">
+
+  <div class="card-title avail-title">Available Stock</div>
+
+  <div class="item-list">
+    <div class="stock-item" *ngFor="let item of stocks">
+
+      <div class="item-top">
+        <span class="item-name">{{ item.ingredientName }}</span>
+        <span class="item-qty avail-qty">{{ item.quantityAvailable }}kg</span>
+      </div>
+
+      <div class="bar-track">
+        <div
+          class="bar-fill"
+          [style.width.%]="getBarPercent(item)"
+          [style.background]="getBarColor(item)">
+        </div>
+      </div>
+
+      <div class="item-hint">
+        {{ item.quantityAvailable }} kg remaining
+      </div>
+
+    </div>
+  </div>
+
+</div>

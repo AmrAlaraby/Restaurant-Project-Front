@@ -1,0 +1,49 @@
+<div class="low-stock-card" *ngIf="stocks.length > 0">
+
+  <!-- Card Title -->
+  <div class="card-title">
+    <span class="warning-icon">⚠</span>
+    Low — Request Restock
+  </div>
+
+  <!-- Item List -->
+  <div class="item-list">
+    <div class="stock-item" *ngFor="let item of stocks">
+
+      <div class="item-top">
+        <span class="item-name">{{ item.ingredientName }}</span>
+        <span class="item-qty">{{ item.quantityAvailable }}kg</span>
+      </div>
+
+      <div class="bar-track">
+        <div
+          class="bar-fill"
+          [style.width.%]="getBarPercent(item)">
+        </div>
+      </div>
+
+      <div class="item-hint">
+        {{ item.quantityAvailable }} kg remaining
+        <ng-container *ngIf="item.lowThreshold">
+          · Threshold: {{ item.lowThreshold }} kg
+        </ng-container>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Restock Button -->
+  <button
+    class="restock-btn"
+    [class.sent]="requestSent"
+    (click)="requestRestock()">
+    {{ requestSent ? '✔ Request Sent!' : 'Request Restock from Manager' }}
+  </button>
+
+</div>
+
+<!-- No low stock -->
+<div class="all-good" *ngIf="stocks.length === 0">
+  <span class="check-icon">✔</span>
+  All ingredients are well stocked!
+</div>

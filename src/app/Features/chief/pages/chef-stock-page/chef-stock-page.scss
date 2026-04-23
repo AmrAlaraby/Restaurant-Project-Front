@@ -1,0 +1,74 @@
+$cream:    #F5F0EB;
+$gray-200: #e5e5e5;
+$gray-400: #aaaaaa;
+$gray-800: #2a2a2a;
+$red:      #C41E1E;
+$font:     'Poppins', sans-serif;
+$radius:   14px;
+
+.stock-page {
+  font-family: $font;
+  padding: 28px 32px;
+  background: $cream;
+  min-height: 100%;
+  color: $gray-800;
+}
+
+.stock-header {
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: $gray-800;
+  }
+
+  .subtitle {
+    font-size: .82rem;
+    color: $gray-400;
+    margin-top: 4px;
+  }
+}
+
+.stock-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.loading-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 48px 0;
+  color: $gray-400;
+  font-size: .85rem;
+}
+
+.spinner {
+  width: 26px;
+  height: 26px;
+  border: 3px solid $gray-200;
+  border-top-color: $red;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 48px;
+  color: $gray-400;
+  font-size: .9rem;
+  font-weight: 500;
+}

@@ -1,0 +1,211 @@
+// ── Variables ──────────────────────────────────────────────
+$red:        #C41E1E;
+$red-dark:   #a01818;
+$red-light:  #fdf0f0;
+$green:      #2E9E5B;
+$amber:      #F5A623;
+$cream:      #F5F0EB;
+$white:      #ffffff;
+$gray-100:   #f7f7f7;
+$gray-200:   #e5e5e5;
+$gray-400:   #aaaaaa;
+$gray-600:   #666666;
+$gray-800:   #2a2a2a;
+
+$radius:     14px;
+$radius-sm:  8px;
+$font:       'Poppins', sans-serif;
+
+// ── Page ───────────────────────────────────────────────────
+.stock-page {
+  font-family: $font;
+  padding: 28px 32px;
+  background: $cream;
+  min-height: 100%;
+  color: $gray-800;
+}
+
+// ── Header ─────────────────────────────────────────────────
+.stock-header {
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: $gray-800;
+  }
+
+  .subtitle {
+    font-size: .82rem;
+    color: $gray-400;
+    margin-top: 4px;
+  }
+}
+
+// ── Grid: two columns ──────────────────────────────────────
+.stock-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ── Cards ──────────────────────────────────────────────────
+.stock-card {
+  background: $white;
+  border-radius: $radius;
+  padding: 22px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, .06);
+
+  &.low-card {
+    border: 1.5px solid $red;
+  }
+
+  &.avail-card {
+    border: 1.5px solid $gray-200;
+  }
+}
+
+// ── Card Titles ────────────────────────────────────────────
+.card-title {
+  font-size: .85rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.low-title {
+  color: $red;
+
+  .warning-icon {
+    margin-right: 6px;
+    font-size: .9rem;
+  }
+}
+
+.avail-title {
+  color: $gray-600;
+}
+
+// ── Item List ──────────────────────────────────────────────
+.item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+// ── Single Item ────────────────────────────────────────────
+.stock-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-name {
+  font-size: .88rem;
+  font-weight: 600;
+  color: $gray-800;
+}
+
+.item-qty {
+  font-size: .88rem;
+  font-weight: 700;
+
+  &.low-qty   { color: $red; }
+  &.avail-qty { color: $green; }
+}
+
+// ── Progress Bar ───────────────────────────────────────────
+.bar-track {
+  width: 100%;
+  height: 6px;
+  background: $gray-200;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width .4s ease;
+}
+
+// ── Hint text ──────────────────────────────────────────────
+.item-hint {
+  font-size: .73rem;
+  color: $gray-400;
+
+  &.low-hint {
+    color: $gray-600;
+  }
+}
+
+// ── Divider inside card ────────────────────────────────────
+.item-divider {
+  height: 1px;
+  background: $gray-100;
+  margin: 4px 0;
+}
+
+// ── Restock Button ─────────────────────────────────────────
+.restock-btn {
+  margin-top: 22px;
+  width: 100%;
+  padding: 11px 0;
+  background: $red;
+  color: $white;
+  border: none;
+  border-radius: $radius-sm;
+  font-family: $font;
+  font-size: .82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s ease;
+
+  &:hover {
+    background: $red-dark;
+  }
+}
+
+// ── Empty State ────────────────────────────────────────────
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 48px;
+  color: $gray-400;
+  font-size: .9rem;
+  font-weight: 500;
+}
+
+// ── Loading ────────────────────────────────────────────────
+.loading-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 48px 0;
+  color: $gray-400;
+  font-size: .85rem;
+}
+
+.spinner {
+  width: 26px;
+  height: 26px;
+  border: 3px solid $gray-200;
+  border-top-color: $red;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
