@@ -322,6 +322,11 @@ export const routes: Routes = [
       loadComponent: () =>
       import('./Features/customer/pages/my-orders-page/my-orders-page').then((m) => m.MyOrdersPage)
       },
+      {
+        path: 'basket',
+        loadComponent: () =>
+          import('./Features/customer/pages/basket-page/basket-page').then((m) => m.BasketPage)
+      },
       
       //Areej
       //Arwa

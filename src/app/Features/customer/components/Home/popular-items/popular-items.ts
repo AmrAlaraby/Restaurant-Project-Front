@@ -26,8 +26,5 @@ private menuService = inject(MenuItemsService);
     this.router.navigate(['/customer/browse-menu']);
   }
 
-  onAddToCart(item: MenuItemInterface) {
-  console.log('added to cart', item);
-  }
   
 }

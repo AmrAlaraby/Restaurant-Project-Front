@@ -32,9 +32,14 @@ export class BasketService {
 
     this.http.get<Basket>(Baskets.get(id))
       .subscribe({
-        next: basket => this.basketSource.next(basket),
+        next: basket => {
+          if (!basket) {
+            this.createEmptyBasket(); 
+          } else {
+            this.basketSource.next(basket);
+          }
+        },
         error: () => {
-          // If there's no basket, create a new one
           this.createEmptyBasket();
         }
       });
@@ -57,7 +62,12 @@ export class BasketService {
     const existingItem = basket.items.find(x => x.id === item.id);
 
     if (existingItem) {
-      existingItem.quantity += item.quantity;
+      // existingItem.quantity += item.quantity;
+      basket.items = basket.items.map(i =>
+        i.id === item.id
+          ? { ...i, quantity: i.quantity + item.quantity }
+          : i
+      );
     } else {
       basket.items.push(item);
     }
@@ -104,13 +114,14 @@ export class BasketService {
   // Sync with Backend
   private setBasket(basket: Basket): void {
     this.http.post<Basket>(Baskets.createOrUpdate, basket)
-      .subscribe(updated => {
-        this.basketSource.next(updated);
+      .subscribe({
+        next: updated => this.basketSource.next(updated),
+        error: err => console.error('Basket sync failed', err)
       });
   }
 
   // Helper
-  private getCurrentBasket(): Basket {
+   getCurrentBasket(): Basket {
     const basket = this.basketSource.value;
 
     if (!basket) {

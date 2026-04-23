@@ -1,0 +1,114 @@
+@if (basket$ | async; as basket) {
+
+<div class="container">
+
+    <!-- LEFT SIDE -->
+    <div class="left">
+
+        <h2>My Cart 🛒</h2>
+
+        @for (item of basket.items; track item.id) {
+        <div class="item-card">
+
+            <div class="info">
+                <h4>{{ item.name }}</h4>
+                <span>EGP {{ item.price }} each</span>
+            </div>
+
+            <div class="actions">
+                <button (click)="decrease(item)">-</button>
+                <span>{{ item.quantity }}</span>
+                <button (click)="increase(item)">+</button>
+            </div>
+
+            <div class="price">
+                EGP {{ item.price * item.quantity }}
+            </div>
+
+            <button class="remove" (click)="removeItem(item.id)">✕</button>
+
+        </div>
+        }
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="right">
+
+        <!-- SUMMARY -->
+        <div class="card">
+            <h3>Order Summary</h3>
+
+            @for (item of basket.items; track item.id) {
+            <div class="row">
+                <span>{{ item.name }} x{{ item.quantity }}</span>
+                <span>EGP {{ item.price * item.quantity }}</span>
+            </div>
+            }
+
+            <hr>
+
+            <div class="row">
+                <span>Subtotal</span>
+                <span>EGP {{ getTotal(basket) }}</span>
+            </div>
+
+            @if (orderType === 'Delivery') {
+            <div class="row">
+                <span>Delivery</span>
+                <span>EGP 15</span>
+            </div>
+            }
+
+            <div class="row total">
+                <span>Total</span>
+                <span>
+                    EGP {{ getTotal(basket) + (orderType === 'Delivery' ? 15 : 0) }}
+                </span>
+            </div>
+        </div>
+
+        <!-- ORDER TYPE -->
+        <div class="card">
+            <h4>Order Type</h4>
+
+            <div class="options">
+                <button [class.active]="orderType === 'Delivery'" (click)="orderType = 'Delivery'">
+                    🚴 Delivery
+                </button>
+
+                <button [class.active]="orderType === 'Pickup'" (click)="orderType = 'Pickup'">
+                    🏪 Pickup
+                </button>
+            </div>
+
+            @if (orderType === 'Delivery') {
+            <input [(ngModel)]="address" placeholder="Enter address" />
+            }
+        </div>
+
+        <!-- PAYMENT -->
+        <div class="card">
+            <h4>Payment Method</h4>
+
+            <div class="options">
+                <button [class.active]="paymentMethod === 'Card'" (click)="paymentMethod = 'Card'">
+                    💳 Card
+                </button>
+
+                <button [class.active]="paymentMethod === 'Cash'" (click)="paymentMethod = 'Cash'">
+                    💵 Cash
+                </button>
+            </div>
+        </div>
+
+        <!-- PLACE ORDER -->
+        <button class="place-btn">
+            Place Order
+        </button>
+
+    </div>
+
+</div>
+
+}
