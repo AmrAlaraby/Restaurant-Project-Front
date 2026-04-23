@@ -1,0 +1,60 @@
+<div class="active-card">
+  <div class="active-card-header">
+    <div>
+      <div class="active-order-id">#{{ order().id }}</div>
+      <div class="active-order-meta">
+        {{ order().orderItems?.length ?? 0 }} items · {{ order().orderType }}
+      </div>
+
+      <!-- Items preview -->
+      <div class="items-preview">
+        @for (item of order().orderItems?.slice(0, 3); track $index; let last = $last) {
+          <span>
+            {{ item.menuItemName }} ×{{ item.quantity }}
+            @if (!last) { <span> · </span> }
+          </span>
+        }
+      </div>
+    </div>
+
+    <span class="status-badge" [ngClass]="getStatusBadgeClass(order().status)">
+      {{ order().status === 'OnTheWay' ? 'ON THE WAY 🚗' : order().status | uppercase }}
+    </span>
+  </div>
+
+  <!-- Progress Steps -->
+  <div class="steps-wrap">
+    @for (step of steps; track $index; let i = $index; let last = $last) {
+      <div class="step">
+        <div class="step-circle"
+          [ngClass]="{
+            'done':     i < getStepIndex(order().status),
+            'active':   i === getStepIndex(order().status),
+            'inactive': i > getStepIndex(order().status)
+          }">
+          @if (i < getStepIndex(order().status)) {
+            <span>✓</span>
+          } @else if (i === getStepIndex(order().status)) {
+            <span>→</span>
+          } @else {
+            <span>📍</span>
+          }
+        </div>
+        <div class="step-label">{{ step }}</div>
+      </div>
+
+      @if (!last) {
+        <div class="step-connector"
+          [ngClass]="{'done': i < getStepIndex(order().status)}">
+        </div>
+      }
+    }
+  </div>
+
+  <!-- Track button -->
+  @if (order().orderType === 'Delivery') {
+    <a class="track-link" (click)="onTrack()">
+      Tap to track in real time →
+    </a>
+  }
+</div>
