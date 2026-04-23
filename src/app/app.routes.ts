@@ -295,7 +295,15 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./Features/customer/pages/profile/profile').then((m) => m.Profile),
       },
-
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('./Features/customer/pages/home-page/home-page').then((m) => m.HomePage),
+      },{
+        path: 'browse-menu',
+        loadComponent: () =>
+          import('./Features/customer/pages/browse-menu-page/browse-menu-page').then((m) => m.BrowseMenuPage),
+      },
       //Areej
       //Arwa
       //mahmoud
