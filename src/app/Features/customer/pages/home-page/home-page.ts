@@ -13,6 +13,6 @@ export class HomePage {
 private router = inject(Router);
 
 goToBrowse() {
-  this.router.navigate(['/browse-menu']);
+  this.router.navigate(['/customer/browse-menu']);
 }
 }
