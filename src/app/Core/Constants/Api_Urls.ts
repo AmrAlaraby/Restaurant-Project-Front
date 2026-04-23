@@ -52,7 +52,7 @@ export const Users = {
 
 
 // Basket
-export const Basket = {
+export const Baskets = {
   get: (id: string) => `${apiUrl}/Baskets?id=${id}`,
   createOrUpdate: `${apiUrl}/Baskets`,
   delete: (id: string) => `${apiUrl}/Baskets/${id}`,
