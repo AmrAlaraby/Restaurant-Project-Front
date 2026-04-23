@@ -1,0 +1,19 @@
+<div class="row g-3">
+
+    @for (cat of categories; track cat.id) {
+    <div class="col-4 col-sm-3 col-md-2">
+
+        <div class="category-card" (click)="goToCategory(cat.id)">
+
+            <div class="icon-circle">
+                {{ getIcon(cat.name) }}
+            </div>
+
+            <p class="title">{{ cat.name }}</p>
+
+        </div>
+
+    </div>
+    }
+
+</div>

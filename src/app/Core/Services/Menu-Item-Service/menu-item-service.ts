@@ -56,4 +56,8 @@ export class MenuItemsService {
   toggleAvailability(id: number): Observable<void> {
     return this.http.patch<void>(MenuItems.toggleAvailability(id), {});
   }
+
+  getPopular() {
+  return this.http.get<MenuItemInterface[]>(MenuItems.popular);
+}
 }

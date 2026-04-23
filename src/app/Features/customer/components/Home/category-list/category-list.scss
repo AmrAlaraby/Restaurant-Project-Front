@@ -1,0 +1,65 @@
+.categories-wrapper {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 16px;
+    padding: 20px;
+}
+
+/* الكارت */
+.category-card {
+    background: #f8f8f8;
+    border-radius: 18px;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 1px solid #eee;
+}
+
+.category-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+    background: #fff;
+}
+
+/* الدائرة */
+.icon-circle {
+    width: 70px;
+    height: 70px;
+    margin: auto;
+    border-radius: 50%;
+    background: #ffe9dc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    transition: 0.3s;
+}
+
+/* hover effect للأيقونة */
+.category-card:hover .icon-circle {
+    background: #ff5a1f;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* النص */
+.title {
+    margin-top: 10px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* 📱 موبايل */
+@media (max-width: 768px) {
+    .categories-wrapper {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* 📱 صغير */
+@media (max-width: 480px) {
+    .categories-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

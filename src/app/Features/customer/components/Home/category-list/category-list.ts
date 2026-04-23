@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { CategoryService } from '../../../../Core/Services/Categories-Service/categories-service';
+import { CategoryService } from '../../../../../Core/Services/Categories-Service/categories-service';
 import { Router } from '@angular/router';
-import { Category } from '../../../../Core/Models/CategoryModels/Category ';
+import { Category } from '../../../../../Core/Models/CategoryModels/Category ';
 
 @Component({
   selector: 'app-category-list',
@@ -22,8 +22,21 @@ private categoryService = inject(CategoryService);
   }
 
   goToCategory(categoryId: number) {
-    this.router.navigate(['/browse-menu'], {
+    this.router.navigate(['/customer/browse-menu'], {
       queryParams: { categoryId }
     });
   }
+
+  getIcon(name: string): string {
+  const map: any = {
+    burgers: '🍔',
+    pizza: '🍕',
+    drinks: '🥤',
+    desserts: '🧁',
+    grills: '🍖',
+    salads: '🥗'
+  };
+
+  return map[name.toLowerCase()] || '🍽️';
+}
 }

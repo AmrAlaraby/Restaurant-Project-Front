@@ -1,1 +1,71 @@
-<p>browse-menu-page works!</p>
+<div class="container py-4">
+    <!-- search -->
+<div class="mb-3">
+    <input type="text" class="form-control" placeholder="Search food..." [formControl]="searchControl" />
+</div>
+<!-- filter by category  -->
+<div class="d-flex gap-2 flex-wrap mb-3">
+
+    <button class="btn btn-sm" [class.btn-dark]="selectedCategoryId === null"
+        [class.btn-outline-dark]="selectedCategoryId !== null" (click)="selectCategory(null)">
+        All
+    </button>
+    @for (cat of categories; track cat.id) {
+    <button class="btn btn-sm" [class.btn-dark]="selectedCategoryId === cat.id"
+        [class.btn-outline-dark]="selectedCategoryId !== cat.id" (click)="selectCategory(cat.id)">
+        {{ cat.name }}
+    </button>
+    }
+
+</div>
+
+<!-- sort -->
+<div class="d-flex gap-2 flex-wrap justify-content-end mb-3">
+
+    <button class="sort-btn" [class.active]="sort === 0" (click)="changeSort(0)">
+        🔥 Default
+    </button>
+
+    <button class="sort-btn" [class.active]="sort === 1" (click)="changeSort(1)">
+        💰 Low to High
+    </button>
+
+    <button class="sort-btn" [class.active]="sort === 2" (click)="changeSort(2)">
+        💸 High to Low
+    </button>
+
+</div>
+
+    <!-- items -->
+    <div class="row g-3">
+
+        @for (item of items; track item.id) {
+        <div class="col-12 col-md-6 col-lg-4">
+            <app-customer-menu-item-card [item]="item"></app-customer-menu-item-card>
+        </div>
+        }
+
+    </div>
+
+</div>
+
+<!-- cart bar -->
+@if (cartCount > 0) {
+<div class="cart-bar">
+
+    <div class="cart-content" (click)="goToCart()">
+        🛒 View Cart ({{ cartCount }}) - EGP {{ totalPrice }}
+    </div>
+
+
+  
+    <!-- pagination -->
+    <div class="mt-4">
+
+        <app-pagination [pageIndex]="pageIndex" [pageSize]="pageSize" [totalCount]="totalCount"
+            (pageChanged)="onPageChange($event)">
+        </app-pagination>
+
+    </div>
+</div>
+}
