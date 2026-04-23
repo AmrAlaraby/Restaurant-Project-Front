@@ -3,12 +3,51 @@ import { OrdersService } from '../../../../Core/Services/Orders-Service/orders-s
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { OrdersHeader } from "../../components/my-orders/orders-header/orders-header";
+import { ActiveOrderCard } from "../../components/my-orders/active-order-card/active-order-card";
+import { OrdersTable } from "../../components/my-orders/orders-table/orders-table";
+import { OrdersEmptyState } from "../../components/my-orders/orders-empty-state/orders-empty-state";
 
 @Component({
   selector: 'app-my-orders-page',
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule, OrdersHeader, ActiveOrderCard, OrdersTable, OrdersEmptyState],
   templateUrl: './my-orders-page.html',
   styleUrl: './my-orders-page.scss',
 })
 export class MyOrdersPage {
+private ordersService = inject(OrdersService);
+  private router = inject(Router);
+ 
+  loading = signal(true);
+  orders = signal<any[]>([]);
+  activeOrder = signal<any | null>(null);
+ 
+  ngOnInit() {
+    this.loadOrders();
+  }
+ 
+  loadOrders() {
+    this.loading.set(true);
+    this.ordersService.getMyOrders().subscribe({
+      next: (res) => {
+        const all = res.data ?? [];
+        this.orders.set(all);
+        const active = all.find(
+          (o: any) => o.status !== 'Delivered' && o.status !== 'Cancelled'
+        );
+        this.activeOrder.set(active ?? null);
+        this.loading.set(false);
+      },
+      error: () => this.loading.set(false),
+    });
+  }
+ 
+  trackDelivery(orderId: number) {
+    this.router.navigate(['/customer/track-delivery', orderId]);
+  }
+ 
+  reorder(orderId: number) {
+    // TODO: implement reorder logic
+    console.log('Reorder:', orderId);
+  }
 }

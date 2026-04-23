@@ -1,0 +1,29 @@
+<!-- Loading -->
+@if (loading()) {
+  <div class="loading-wrap">
+    <div class="spinner"></div>
+    <span>Loading your orders...</span>
+  </div>
+} @else {
+  <div class="page-wrap">
+
+    <app-orders-header />
+
+    @if (activeOrder()) {
+      <app-active-order-card
+        [order]="activeOrder()"
+        (track)="trackDelivery($event)"
+      />
+    }
+
+    @if (orders().length > 0) {
+      <app-orders-table
+        [orders]="orders()"
+        (reorder)="reorder($event)"
+      />
+    } @else {
+      <app-orders-empty-state />
+    }
+
+  </div>
+}
