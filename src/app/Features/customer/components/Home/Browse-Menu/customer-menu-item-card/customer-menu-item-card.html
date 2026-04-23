@@ -1,0 +1,26 @@
+<div class="menu-card">
+
+    <!-- الصورة -->
+    <div class="image-wrapper">
+        <img [src]="item.imageUrl" alt="{{ item.name }}" />
+    </div>
+
+    <!-- المحتوى -->
+    <div class="card-body">
+
+        <div class="info">
+            <h6 class="title">{{ item.name }}</h6>
+
+            <div class="meta">
+                <span>{{ item.category }}</span>
+                <span>• {{ item.prepTimeMinutes }} min</span>
+            </div>
+
+            <p class="price">EGP {{ item.price }}</p>
+        </div>
+
+        <button class="add-btn" (click)="onAdd()">+ Add</button>
+
+    </div>
+
+</div>

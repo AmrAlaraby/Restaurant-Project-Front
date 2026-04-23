@@ -33,6 +33,7 @@ export const MenuItems = {
   update: (id: number) => `${apiUrl}/MenuItems/${id}`,
   delete: (id: number) => `${apiUrl}/MenuItems/${id}`,
   toggleAvailability: (id: number) => `${apiUrl}/MenuItems/${id}/toggle-availability`,
+  popular: `${apiUrl}/MenuItems/popular`
 };
 
 export const Users = {
