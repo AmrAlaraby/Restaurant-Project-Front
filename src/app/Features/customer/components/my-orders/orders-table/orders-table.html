@@ -1,0 +1,51 @@
+<div class="orders-table-wrap">
+  <table class="orders-table">
+    <thead>
+      <tr>
+        <th>ORDER</th>
+        <th>ITEMS</th>
+        <th>TYPE</th>
+        <th>DATE</th>
+        <th>TOTAL</th>
+        <th>STATUS</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (order of orders(); track order.id) {
+        <tr [class.active-row]="order.status !== 'Delivered' && order.status !== 'Cancelled'">
+
+          <td class="order-id">#{{ order.id | number:'4.0-0' }}</td>
+
+          <td>
+            {{ order.orderItems?.length ?? 0 }}
+            item{{ (order.orderItems?.length ?? 0) !== 1 ? 's' : '' }}
+          </td>
+
+          <td>
+            <span class="type-badge" [ngClass]="getTypeBadgeClass(order.orderType)">
+              {{ order.orderType === 'DineIn' ? 'DINE-IN' : order.orderType | uppercase }}
+            </span>
+          </td>
+
+          <td>{{ formatDate(order.createdAt ?? order.date) }}</td>
+
+          <td class="order-total">EGP {{ order.totalAmount }}</td>
+
+          <td>
+            <span class="status-badge" [ngClass]="getStatusBadgeClass(order.status)">
+              {{ order.status | uppercase }}
+            </span>
+          </td>
+
+          <td>
+            <button class="reorder-btn" (click)="onReorder(order.id)">
+              Reorder
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
