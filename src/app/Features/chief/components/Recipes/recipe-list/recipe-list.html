@@ -1,0 +1,88 @@
+<div class="recipes-page">
+
+  <div class="recipes-header">
+    <h1 class="recipes-title">Recipes</h1>
+    <select class="filter-select" (change)="onMenuItemSelected($any($event.target).value)">
+      <option value="">All Menu Items</option>
+      @for (item of menuItems(); track item.id) {
+        <option [value]="item.id">{{ item.name }}</option>
+      }
+    </select>
+  </div>
+
+  @if (isLoading()) {
+    <div class="state-box">
+      <div class="spinner"></div>
+      <span>Loading recipes...</span>
+    </div>
+  }
+
+  @if (error()) {
+    <div class="state-box error">
+      <span>⚠️ {{ error() }}</span>
+    </div>
+  }
+
+  @if (!isLoading() && !error()) {
+    <div class="table-card">
+      <table class="recipes-table">
+        <thead>
+          <tr>
+            <th>MENU ITEM</th>
+            <th>INGREDIENT</th>
+            <th>QTY REQUIRED</th>
+            <th>UNIT</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (recipes().length === 0) {
+            <tr>
+              <td colspan="5" class="empty-cell">No recipes found.</td>
+            </tr>
+          }
+
+          @for (menuItem of menuItemNames(); track menuItem) {
+            @for (recipe of groupedRecipes().get(menuItem)!; track recipe.ingredientId; let first = $first) {
+              <tr>
+                <td class="menu-item-cell">
+                  @if (first) {
+                    <div class="menu-item-wrap">
+                      <span class="menu-icon">{{ getMenuItemIcon(menuItem) }}</span>
+                      <span class="menu-name">{{ menuItem }}</span>
+                    </div>
+                  }
+                </td>
+                <td class="ingredient-cell">{{ recipe.ingredientName }}</td>
+                <td class="qty-cell">{{ recipe.quantityRequired }}</td>
+                <td class="unit-cell">{{ recipe.unit }}</td>
+                <td class="action-cell">
+                  <button class="btn-edit" (click)="onEditClick(recipe)">Edit</button>
+                  <button
+                    class="btn-delete"
+                    (click)="onDeleteClick(recipe.ingredientId)"
+                    [disabled]="deletingId() === recipe.ingredientId"
+                  >
+                    {{ deletingId() === recipe.ingredientId ? '...' : 'Delete' }}
+                  </button>
+                </td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    </div>
+
+    @if (count() > pageSize()) {
+      <div class="pagination-wrap">
+        <app-pagination
+          [pageIndex]="pageIndex()"
+          [pageSize]="pageSize()"
+          [totalCount]="count()"
+          (pageChanged)="onPageChanged($event)"
+        />
+      </div>
+    }
+  }
+
+</div>

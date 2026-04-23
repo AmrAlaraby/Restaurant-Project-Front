@@ -277,6 +277,13 @@ export const routes: Routes = [
             (m) => m.ChefKitchenBoardComponent,
           ),
       },
+      {
+       path: 'recipes',
+    loadComponent: () =>
+      import('./Features/chief/pages/recipe-page/recipe-page').then(
+      (m) => m.RecipeListPage
+    ),
+  }
       //Areej 501 - 550
       //Arwa 551 - 600
       //mahmoud 601 - 650

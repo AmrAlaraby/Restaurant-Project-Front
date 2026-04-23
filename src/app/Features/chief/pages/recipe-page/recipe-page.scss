@@ -1,0 +1,27 @@
+.recipe-list-page {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.page-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1.5rem 1.5rem 0;
+  background: #f5f1ec;
+}
+
+.btn-add {
+  height: 38px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 20px;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+
+  &:hover { opacity: 0.8; }
+}

@@ -1,0 +1,26 @@
+<div class="recipe-list-page">
+
+  <div class="page-toolbar">
+    <button class="btn-add" (click)="showAddModal.set(true)">+ Add Recipe</button>
+  </div>
+
+  <app-recipes (editRequested)="onEditRequested($event)" />
+
+  @if (showAddModal()) {
+    <app-add-recipe
+      (saved)="onSaved()"
+      (cancelled)="showAddModal.set(false)"
+    />
+  }
+
+  @if (selectedRecipe()) {
+    <app-edit-recipe
+      [recipe]="selectedRecipe()!"
+      (saved)="onSaved()"
+      (cancelled)="selectedRecipe.set(null)"
+    />
+  }
+
+</div>
+
+
