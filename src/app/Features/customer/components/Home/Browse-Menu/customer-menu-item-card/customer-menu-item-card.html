@@ -1,11 +1,9 @@
 <div class="menu-card">
 
-    <!-- الصورة -->
     <div class="image-wrapper">
         <img [src]="item.imageUrl" alt="{{ item.name }}" />
     </div>
 
-    <!-- المحتوى -->
     <div class="card-body">
 
         <div class="info">
@@ -19,7 +17,9 @@
             <p class="price">EGP {{ item.price }}</p>
         </div>
 
-        <button class="add-btn" (click)="onAdd()">+ Add</button>
+        <button class="add-btn" (click)="addToCart(item)">
+            + Add
+        </button>
 
     </div>
 
