@@ -17,25 +17,25 @@ import { ApiResponse } from '../../Models/AuthModels/api-response';
 export class AuthService {
   constructor(private http: HttpClient,private Router :Router) {}
 
-  login(data: LoginRequestInterface): Observable<ApiResponse<TokenInterface>> {
-    return this.http
-      .post<ApiResponse<TokenInterface>>(Auth.login, data)
-      .pipe(tap((res) => this.setSession(res.data)));
-  }
+login(data: LoginRequestInterface) {
+  return this.http.post<ApiResponse<TokenInterface>>(
+    Auth.login,
+    data,
+    { withCredentials: true }
+  ).pipe(tap((res) => this.setSession(res.data)));
+}
 
   register(data: RegisterationRequestInterface): Observable<ApiResponse<UserInterface>> {
     return this.http.post<ApiResponse<UserInterface>>(Auth.register, data);
   }
 
-  refreshToken(): Observable<ApiResponse<TokenInterface>> {
-    const body: RefreshTokenRequestInterface = {
-      refreshToken: localStorage.getItem('refreshToken'),
-    };
-
-    return this.http
-      .post<ApiResponse<TokenInterface>>(Auth.refresh, body)
-      .pipe(tap((res) => this.setSession(res.data)));
-  }
+refreshToken(): Observable<ApiResponse<TokenInterface>> {
+  return this.http.post<ApiResponse<TokenInterface>>(
+    Auth.refresh,
+    {},
+    { withCredentials: true }
+  ).pipe(tap((res) => this.setSession(res.data)));
+}
 
   getCurrentUser(): Observable<UserInterface> {
     return this.http.get<UserInterface>(Auth.currentUser);
@@ -51,11 +51,11 @@ export class AuthService {
   }
 
   private setSession(token: TokenInterface) {
-    if (token.accessToken) localStorage.setItem('accessToken', token.accessToken);
+    // if (token.accessToken) localStorage.setItem('accessToken', token.accessToken);
 
-    if (token.refreshToken) localStorage.setItem('refreshToken', token.refreshToken);
+    // if (token.refreshToken) localStorage.setItem('refreshToken', token.refreshToken);
 
-    if (token.expiresAt) localStorage.setItem('expiresAt', token.expiresAt);
+    // if (token.expiresAt) localStorage.setItem('expiresAt', token.expiresAt);
   }
 
   getAccessToken(): string | null {

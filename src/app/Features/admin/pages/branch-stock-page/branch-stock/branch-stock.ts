@@ -58,9 +58,11 @@ export class BranchStockComponent implements OnInit {
 
   
   listenToUpdates(): void {
-      let token = this.authService.getAccessToken();
+      // let token = this.authService.getAccessToken();
+      let token =""
       this.SignalRService.startRestaurantUpdatesConnection(token??"");
       this.SignalRService.onRestaurantUpdate("BranchStockUpdated",(data :BranchStockInterface) => {
+        debugger
         let index = this.filteredStocks.findIndex(d => d.id === data.id);
         if(index !== -1 && index!==null){
           this.filteredStocks[index] = data;

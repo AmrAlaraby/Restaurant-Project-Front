@@ -11,8 +11,17 @@ export const authorizationInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const token = authService.getAccessToken();
 
-  // ⛔ skip login & register
-  if (req.url.includes('login') || req.url.includes('register')) {
+  // ✅ مهم جدًا: خلي كل request يبعت cookies
+  req = req.clone({
+    withCredentials: true
+  });
+
+  // ⛔ skip login & register & refresh
+  if (
+    req.url.includes('login') ||
+    req.url.includes('register') ||
+    req.url.includes('refresh-token')
+  ) {
     return next(req);
   }
 
@@ -28,10 +37,8 @@ export const authorizationInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
 
-      // 🔥 لو Unauthorized
-      if (error.status === 401) {
+      if (error.status === 401 && !req.url.includes('refresh-token')) {
 
-        // 🟢 أول request يعمل refresh
         if (!isRefreshing) {
           isRefreshing = true;
           refreshTokenSubject.next(null);
@@ -40,10 +47,8 @@ export const authorizationInterceptor: HttpInterceptorFn = (req, next) => {
             switchMap((res) => {
               isRefreshing = false;
 
-              const newToken = res.data.accessToken? res.data.accessToken : null;
+              const newToken = res.data?.accessToken || null;
               refreshTokenSubject.next(newToken);
-
-              // 💾 التوكن already بيتخزن في service
 
               const newReq = req.clone({
                 setHeaders: {
@@ -61,7 +66,6 @@ export const authorizationInterceptor: HttpInterceptorFn = (req, next) => {
           );
         }
 
-        // 🟡 باقي الـ requests تستنى
         return refreshTokenSubject.pipe(
           filter((token) => token != null),
           take(1),
