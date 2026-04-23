@@ -278,12 +278,19 @@ export const routes: Routes = [
           ),
       },
       {
-       path: 'recipes',
+      path: 'recipes',
     loadComponent: () =>
       import('./Features/chief/pages/recipe-page/recipe-page').then(
       (m) => m.RecipeListPage
     ),
-  }
+  },
+  {
+  path: 'stock',
+  loadComponent: () =>
+    import('./Features/chief/pages/chef-stock-page/chef-stock-page').then(
+      (m) => m.ChefStockPageComponent,
+    ),
+},
       //Areej 501 - 550
       //Arwa 551 - 600
       //mahmoud 601 - 650

@@ -1,0 +1,35 @@
+<div class="stock-page">
+
+  <!-- Header -->
+  <div class="stock-header">
+    <h1>Check Stock</h1>
+    <p class="subtitle">Ingredient availability for your station</p>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading-wrap" *ngIf="loading">
+    <div class="spinner"></div>
+    <span>Loading stock...</span>
+  </div>
+
+  <!-- Grid: Low + Available side by side -->
+  <div class="stock-grid" *ngIf="!loading">
+
+    <!-- Low Stock Card -->
+    <app-chef-low-stock
+      [stocks]="lowStocks">
+    </app-chef-low-stock>
+
+    <!-- Available Stock Card -->
+    <app-chef-available-stock
+      [stocks]="availableStocks">
+    </app-chef-available-stock>
+
+    <!-- Empty state -->
+    <div class="empty-state" *ngIf="allStocks.length === 0">
+      <span>No stock data found for your branch.</span>
+    </div>
+
+  </div>
+
+</div>
