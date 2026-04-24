@@ -1,0 +1,65 @@
+<div class="info-grid">
+
+  <!-- Delivery Address -->
+  <div class="info-card">
+    <div class="card-header">
+      <span class="card-icon">📍</span>
+      <div class="card-title">Delivery Address</div>
+    </div>
+
+    <div class="info-row">
+      <span>Building</span>
+      <b>{{ address().buildingNumber }}</b>
+    </div>
+    <div class="info-row">
+      <span>Street</span>
+      <b>{{ address().street }}</b>
+    </div>
+    <div class="info-row">
+      <span>City</span>
+      <b>{{ address().city }}</b>
+    </div>
+
+    @if (address().specialMark) {
+      <div class="info-row">
+        <span>Landmark</span>
+        <b>{{ address().specialMark }}</b>
+      </div>
+    }
+
+    @if (address().note) {
+      <div class="info-row">
+        <span>Note</span>
+        <b>{{ address().note }}</b>
+      </div>
+    }
+  </div>
+
+  <!-- Order Summary -->
+  <div class="info-card">
+    <div class="card-header">
+      <span class="card-icon">🧾</span>
+      <div class="card-title">Order Summary</div>
+    </div>
+
+    @for (item of items(); track $index) {
+      <div class="info-row">
+        <span>{{ item.menuItemName }} ×{{ item.quantity }}</span>
+        <b>EGP {{ item.total }}</b>
+      </div>
+    }
+
+    <div class="info-row total-row">
+      <span>Total</span>
+      <b class="total-amount">EGP {{ totalAmount() }}</b>
+    </div>
+
+    @if (cashCollected()) {
+      <div class="info-row">
+        <span>Cash Collected</span>
+        <b>EGP {{ cashCollected() }}</b>
+      </div>
+    }
+  </div>
+
+</div>
