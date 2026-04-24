@@ -33,7 +33,7 @@ export const MenuItems = {
   update: (id: number) => `${apiUrl}/MenuItems/${id}`,
   delete: (id: number) => `${apiUrl}/MenuItems/${id}`,
   toggleAvailability: (id: number) => `${apiUrl}/MenuItems/${id}/toggle-availability`,
-  popular: `${apiUrl}/MenuItems/popular`
+  popular: `${apiUrl}/MenuItems/popular`,
 };
 
 export const Users = {
@@ -47,9 +47,9 @@ export const Users = {
 
   searchCustomers: `${apiUrl}/User/GetAllCustomerUserAysnc`,
   addCustomer: `${apiUrl}/User/AddCustomerAsync`,
-  updateCustomerAddress: (id: string) => `${apiUrl}/User/${id}/address`
-};
 
+  updateCustomerAddress: (id: string) => `${apiUrl}/User/${id}/address`,
+};
 
 // Basket
 export const Baskets = {
@@ -59,30 +59,10 @@ export const Baskets = {
 };
 export const Payment = {
   pay: (id: number) => `${apiUrl}/payment/pay/${id}`,
-  confirmCash: (id: number) => `${apiUrl}/payment/confirm-cash/${id}`
+  confirmCash: (id: number) => `${apiUrl}/payment/confirm-cash/${id}`,
 };
 
-
 // hossam 54 75
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export const Categories = {
   base: `${apiUrl}/Categories`,
@@ -111,7 +91,6 @@ export const Branch = {
   toggleStatus: (id: number) => `${apiUrl}/Branch/${id}/toggle-status`,
 };
 
-
 export const Deliveries = {
   getAll: `${apiUrl}/Delivery/GetAll`,
   unassigned: `${apiUrl}/Delivery/unassigned`,
@@ -125,18 +104,8 @@ export const Deliveries = {
 export const Recipes = {
   getAll: `${apiUrl}/Recipes`,
   update: (id: number) => `${apiUrl}/Recipes/${id}`,
-  delete:  (id: number) => `${apiUrl}/Recipes/${id}`,
-
+  delete: (id: number) => `${apiUrl}/Recipes/${id}`,
 };
-
-
-
-
-
-
-
-
-
 
 // Arwa 97 117
 
@@ -159,15 +128,6 @@ export const Reports = {
   topItems: `${apiUrl}/Reports/top-items`,
   inventoryUsage: `${apiUrl}/Reports/inventory-usage`,
 };
-
-
-
-
-
-
-
-
-
 
 // Amr 118 138
 export const Order = {
