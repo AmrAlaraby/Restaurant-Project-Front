@@ -13,12 +13,13 @@ import { CustomerInterface } from '../../Models/UserModels/customer-interface';
 import { CreateCustomerInterface } from '../../Models/UserModels/create-customer-interface';
 import { DeliveryAddress } from '../../Models/UserModels/delivery-address';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-
+  getCustomerById(customerId: string) {
+    throw new Error('Method not implemented.');
+  }
   constructor(private http: HttpClient) {}
 
   getUsers(params: UserQueryParams) {
@@ -78,26 +79,18 @@ export class UsersService {
   }
 
   searchCustomers(phone: string) {
+    let params = new HttpParams().set('phoneNumber', phone).set('pageIndex', 1).set('pageSize', 5);
 
-  let params = new HttpParams()
-    .set('phoneNumber', phone)
-    .set('pageIndex', 1)
-    .set('pageSize', 5);
-
-  return this.http.get<PaginatedResultInterface<CustomerInterface>>(
-    Users.searchCustomers,
-    { params }
-  );
+    return this.http.get<PaginatedResultInterface<CustomerInterface>>(Users.searchCustomers, {
+      params,
+    });
   }
   addCustomer(dto: CreateCustomerInterface) {
-  return this.http.post<CustomerInterface>(Users.addCustomer, dto);
-}
+    return this.http.post<CustomerInterface>(Users.addCustomer, dto);
+  }
   updateCustomerAddress(customerId: string, address: DeliveryAddress) {
-  return this.http.put<CustomerInterface>(
-    Users.updateCustomerAddress(customerId),
-    { addressDTO: address }
-  );
-}
-
-
+    return this.http.put<CustomerInterface>(Users.updateCustomerAddress(customerId), {
+      addressDTO: address,
+    });
+  }
 }

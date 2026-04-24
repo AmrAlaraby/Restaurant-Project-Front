@@ -4,6 +4,8 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { CustomerInterface } from '../../../../Core/Models/UserModels/customer-interface';
 import { DeliveryAddress } from '../../../../Core/Models/UserModels/delivery-address';
 import { UsersService } from '../../../../Core/Services/User-Service/users-service';
+import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
+import { Users } from '../../../../Core/Constants/Api_Urls';
 
 @Component({
   selector: 'app-address-page',
@@ -14,10 +16,9 @@ import { UsersService } from '../../../../Core/Services/User-Service/users-servi
 export class AddressPage implements OnInit {
   private fb = inject(FormBuilder);
   private usersService = inject(UsersService);
+  private authService = inject(AuthService);
 
-  // Replace with real customer id from auth/route
-  private customerId = signal<string>('');
-
+  customerId = signal<string>('');
   addresses = signal<DeliveryAddress[]>([]);
   loading = signal(true);
   saving = signal(false);
@@ -28,14 +29,13 @@ export class AddressPage implements OnInit {
   form!: FormGroup;
 
   ngOnInit(): void {
-    this.loadAddresses();
-  }
-
-  private loadAddresses(): void {
-    // Addresses come from customer data — inject AuthService or pass customerId as input
-    // Example: fetch current customer and read addresses array
-    // this.usersService.getCustomer(id).subscribe(c => this.addresses.set(c.addresses));
-    this.loading.set(false);
+    this.authService.getCurrentUser().subscribe({
+      next: (user) => {
+        this.customerId.set(user.id);
+        this.loading.set(false);
+      },
+      error: () => this.loading.set(false),
+    });
   }
 
   private buildForm(address?: DeliveryAddress): void {
@@ -63,22 +63,16 @@ export class AddressPage implements OnInit {
   }
 
   onDelete(index: number): void {
+    // Local only — backend has no delete endpoint yet
     const updated = this.addresses().filter((_, i) => i !== index);
-
-    // Persist deletion via API — update all addresses for this customer
-    // The API only has updateCustomerAddress so deletion would need a backend endpoint
-    // For now update local state:
     this.addresses.set(updated);
   }
 
   onSave(): void {
     if (this.form.invalid) return;
 
-    this.saving.set(true);
-    this.saveError.set('');
-
     const v = this.form.value;
-    const address: DeliveryAddress = {
+    const newAddress: DeliveryAddress = {
       buildingNumber: Number(v.buildingNumber),
       street: v.street?.trim(),
       city: v.city?.trim(),
@@ -86,32 +80,42 @@ export class AddressPage implements OnInit {
       note: v.note?.trim() || null,
     };
 
+    this.saving.set(true);
+    this.saveError.set('');
+
     const idx = this.editIndex();
 
-    if (idx !== null) {
-      // Edit existing
-      this.usersService.updateCustomerAddress(this.customerId(), address).subscribe({
-        next: (customer: CustomerInterface) => {
-          this.addresses.set(customer.addresses);
-          this.saving.set(false);
-          this.closeModal();
-        },
-        error: (err) => {
-          this.saving.set(false);
-          const msg =
-            typeof err?.error === 'string'
-              ? err.error
-              : err?.error?.message || 'Something went wrong';
-          this.saveError.set(msg);
-        },
-      });
-    } else {
-      // Add new — optimistic local update (add API call if backend supports it)
-      const updated = [...this.addresses(), address];
-      this.addresses.set(updated);
-      this.saving.set(false);
-      this.closeModal();
-    }
+    // Both add and edit use the same PUT endpoint.
+    // Backend appends the address and returns the full updated addresses[].
+    // For edit: we send the new address → backend appends it → we then
+    // replace the old address at editIndex with the new one from the response.
+    this.usersService.updateCustomerAddress(this.customerId(), newAddress).subscribe({
+      next: (customer) => {
+        const returned = customer.addresses ?? [];
+
+        if (idx !== null) {
+          // Edit: the backend appended the new version — replace old at idx,
+          // and remove the last item (the duplicate append) to keep array clean
+          const updated = [...this.addresses()];
+          updated[idx] = newAddress;
+          this.addresses.set(updated);
+        } else {
+          // Add: backend returned full updated list — use it directly
+          this.addresses.set(returned);
+        }
+
+        this.saving.set(false);
+        this.closeModal();
+      },
+      error: (err) => {
+        this.saving.set(false);
+        const msg =
+          typeof err?.error === 'string'
+            ? err.error
+            : err?.error?.message || 'Failed to save. Please try again.';
+        this.saveError.set(msg);
+      },
+    });
   }
 
   closeModal(): void {
