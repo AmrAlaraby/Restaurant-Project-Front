@@ -45,9 +45,37 @@ refreshToken(): Observable<ApiResponse<TokenInterface>> {
     return this.http.put<UserInterface>(`${Auth.UpdatecurrentUser}?email=${email}`, dto);
   }
 
+sendResetCode(email: string) {
+  return this.http.post(
+    Auth.sendResetCode,
+    JSON.stringify(email),
+    {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      responseType: 'text' as 'json'
+    }
+  );
+}
+
+verifyCode(code: string) {
+  return this.http.post<{ resetSessionToken: string }>(
+    Auth.verifyResetCode,
+    code
+  );
+}
+
+resetPassword(data: {
+  resetSessionToken: string;
+  newPassword: string;
+  confirmPassword: string;
+}) {
+  return this.http.post(Auth.resetPassword, data);
+}
+
   logout(): void {
     localStorage.clear();
-    this.Router.navigate(['/login']);
+    this.Router.navigate(['/auth/login']);
   }
 
   private setSession(token: TokenInterface) {
