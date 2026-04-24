@@ -39,9 +39,11 @@
         <div class="form-group">
           <label class="form-label">
             Password
-            <a routerLink="/forgot-password" class="forgot-link">
-              Forgot password?
-            </a>
+            <a
+  [routerLink]="['/auth/forgot-password']"
+  [queryParams]="{ email: f['email'].value }"
+  class="forgot-link"
+>forgot password</a>
           </label>
 
           <div class="input-wrapper">
@@ -99,6 +101,6 @@
 
       <p class="register-prompt">
         New here?
-        <a routerLink="/register">Create account</a>
+        <a routerLink="/auth/register">Create account</a>
       </p>
     </div>

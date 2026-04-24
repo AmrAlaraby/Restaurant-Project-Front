@@ -7,6 +7,11 @@ export const Auth = {
   refresh: `${apiUrl}/Auth/refresh-token`,
   currentUser: `${apiUrl}/Auth/CurrentUser`,
   UpdatecurrentUser: `${apiUrl}/Auth`,
+
+  
+  sendResetCode: `${apiUrl}/Auth/send-reset-code`,
+  verifyResetCode: `${apiUrl}/Auth/verify-reset-code`,
+  resetPassword: `${apiUrl}/Auth/reset-password`,
 };
 
 // areej 12 32
