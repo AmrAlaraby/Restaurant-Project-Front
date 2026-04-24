@@ -18,18 +18,17 @@ export class DeliveryDetails {
   delivery?: Delivery;
   loading = false;
 
-  // 🔥 Update form
-updateModel = {
-  status: '',
-  cashCollected: undefined as number | undefined
-};
+  updateModel = {
+    cashCollected: undefined as number | undefined
+  };
 
-  statuses: string[] = [
-    'Assigned',
-    'PickedUp',
-    'OnTheWay',
-    'Delivered'
-  ];
+  cashError = '';
+
+  private statusFlow: Record<string, string> = {
+    'Assigned': 'PickedUp',
+    'PickedUp': 'OnTheWay',
+    'OnTheWay': 'Delivered',
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -48,10 +47,6 @@ updateModel = {
     this.service.getById(id).subscribe({
       next: (res) => {
         this.delivery = res;
-
-        // preload current status
-        this.updateModel.status = res.deliveryStatus;
-
         this.loading = false;
       },
       error: () => {
@@ -60,23 +55,41 @@ updateModel = {
     });
   }
 
- updateStatus() {
-  if (!this.delivery) return;
+  nextStatus(): string | null {
+    return this.delivery ? (this.statusFlow[this.delivery.deliveryStatus] ?? null) : null;
+  }
 
-  const body = {
-    status: this.updateModel.status,
-    cashCollected: this.updateModel.cashCollected ?? undefined
-  };
+  updateStatus() {
+    if (!this.delivery) return;
 
-  this.service.updateStatus(this.delivery.id, body)
-    .subscribe({
+    const next = this.nextStatus();
+    if (!next) return;
+
+    // Validation لو هنروح Delivered
+    if (next === 'Delivered') {
+      const cash = this.updateModel.cashCollected ?? 0;
+      if (cash < this.delivery.order.totalAmount) {
+        this.cashError = `Min amount is EGP ${this.delivery.order.totalAmount}`;
+        return;
+      }
+    }
+
+    this.cashError = '';
+
+    const body = {
+      status: next,
+      cashCollected: next === 'Delivered' ? this.updateModel.cashCollected : undefined
+    };
+
+    this.service.updateStatus(this.delivery.id, body).subscribe({
       next: (res) => {
         this.delivery = res;
+        this.updateModel.cashCollected = undefined;
       }
     });
-}
+  }
 
-goBack() {
-  this.router.navigate(['/admin/deliveries']);
-}
+  goBack() {
+    this.router.navigate(['/admin/deliveries']);
+  }
 }
