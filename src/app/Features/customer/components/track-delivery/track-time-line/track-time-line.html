@@ -1,0 +1,64 @@
+<div class="timeline-card">
+
+  <div class="timeline-header">
+    <div class="timeline-label">ORDER PROGRESS</div>
+    <div class="timeline-step-count">
+      Step {{ currentIndex() + 1 }} of {{ steps().length }}
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill"
+           [style.width.%]="(currentIndex() / (steps().length - 1)) * 100">
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline">
+    @for (step of steps(); track $index; let i = $index; let last = $last) {
+
+      <div class="timeline-row" [ngClass]="'state-' + getStepState(i)">
+
+        <!-- Left: circle + line -->
+        <div class="timeline-left">
+          <div class="tl-circle" [ngClass]="'state-' + getStepState(i)">
+            @if (getStepState(i) === 'done') {
+              <span class="circle-icon">✓</span>
+            } @else if (getStepState(i) === 'active') {
+              <span class="circle-icon active-arrow">→</span>
+            } @else {
+              <span class="circle-icon muted">·</span>
+            }
+          </div>
+
+          @if (!last) {
+            <div class="tl-line" [ngClass]="{'tl-line-done': getStepState(i) === 'done'}"></div>
+          }
+        </div>
+
+        <!-- Right: content -->
+        <div class="timeline-content">
+          <div class="tl-title" [class.tl-title-active]="getStepState(i) === 'active'">
+            {{ step.label }}
+
+            @if (getStepState(i) === 'active') {
+              <span class="you-are-here">● Now</span>
+            }
+          </div>
+
+          <div class="tl-desc">
+            @if (formatTime(step.timestamp)) {
+              <span class="tl-time">{{ formatTime(step.timestamp) }} — </span>
+            }
+            {{ getStepDesc(step, i) }}
+          </div>
+        </div>
+
+      </div>
+
+    }
+  </div>
+
+</div>
