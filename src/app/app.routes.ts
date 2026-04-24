@@ -328,7 +328,7 @@ export const routes: Routes = [
           import('./Features/customer/pages/basket-page/basket-page').then((m) => m.BasketPage)
       },
       {
-        path: 'track-delivery',
+        path: 'track-delivery/:id',
         loadComponent: () =>
           import('./Features/customer/pages/track-delivery-page/track-delivery-page').then(
             (m) => m.TrackDeliveryPage

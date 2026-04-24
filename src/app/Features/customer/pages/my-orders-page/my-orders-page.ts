@@ -31,8 +31,9 @@ private ordersService = inject(OrdersService);
   this.ordersService.getMyOrders().subscribe({
     next: (res) => {
       const all = res.data ?? [];
-      console.log(all.map((o: any) => ({ id: o.id, status: o.status }))); // ← هنا
+      console.log(all.map((o: any) => ({ id: o.id, status: o.status }))); 
       this.orders.set(all);
+      console.log(JSON.stringify(all[0], null, 2));
       const active = all.find(
         (o: any) =>
           o.status !== 'Delivered' &&
@@ -45,12 +46,12 @@ private ordersService = inject(OrdersService);
     error: () => this.loading.set(false),
   });
 }
-  trackDelivery(orderId: number) {
-    this.router.navigate(['/customer/track-delivery', orderId]);
-  }
+  onTrackDelivery(orderId: number) {
+  this.router.navigate(['/customer/track-delivery', orderId]);
+} 
  
   reorder(orderId: number) {
-    // TODO: implement reorder logic
+  
     console.log('Reorder:', orderId);
   }
 }
