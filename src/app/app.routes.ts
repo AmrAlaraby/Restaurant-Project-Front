@@ -361,6 +361,10 @@ export const routes: Routes = [
     path: 'verify-code',
     loadComponent: () => import('./Features/auth/pages/verify-code/verify-code').then((m) => m.VerifyCode),
   },
+  { 
+    path: 'reset-password',
+    loadComponent: () => import('./Features/auth/pages/reset-password/reset-password').then((m) => m.ResetPassword),
+  },
 
     ]},
 ];
