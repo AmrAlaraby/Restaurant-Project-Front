@@ -10,6 +10,7 @@ import { UserInterface } from '../../Models/AuthModels/user-interface';
 import { RefreshTokenRequestInterface } from '../../Models/AuthModels/refresh-token-request-interface';
 import { UpdateCurrentUserInterface } from '../../Models/AuthModels/update-current-user-interface';
 import { ApiResponse } from '../../Models/AuthModels/api-response';
+import { ResetCodeResponse } from '../../Models/AuthModels/reset-code-response';
 
 @Injectable({
   providedIn: 'root',
@@ -60,8 +61,8 @@ sendResetCode(email: string) {
 
 verifyCode(code: string) {
   return this.http.post<{ resetSessionToken: string }>(
-    Auth.verifyResetCode,
-    code
+    `${Auth.verifyResetCode}?code=${code}`,
+    null
   );
 }
 
