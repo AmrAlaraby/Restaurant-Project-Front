@@ -56,9 +56,13 @@ export class Profile implements OnInit {
   }
 
   private passwordMatchValidator(group: FormGroup) {
-    const pass = group.get('newPassword')?.value;
-    const confirm = group.get('confirmPassword')?.value;
-    return pass && confirm && pass !== confirm ? { passwordMismatch: true } : null;
+    const pass = group.get('newPassword')?.value?.trim();
+    const confirm = group.get('confirmPassword')?.value?.trim();
+
+    // If newPassword is filled, confirmPassword must also be filled and match
+    if (pass && !confirm) return { passwordMismatch: true };
+    if (pass && confirm && pass !== confirm) return { passwordMismatch: true };
+    return null;
   }
 
   getInitials(name: string): string {
@@ -76,22 +80,25 @@ export class Profile implements OnInit {
     this.saveError.set('');
 
     const v = this.form.value;
-
     const name = v.name?.trim();
     const userNameInput = v.userName?.trim();
+    const newPassword = v.newPassword?.trim();
+    const confirmPassword = v.confirmPassword?.trim();
+
+    // Helper to clean userName - letters and digits only
+    const sanitize = (str: string) =>
+      str
+        .toLowerCase()
+        .replace(/\s+/g, '')
+        .replace(/[^a-z0-9]/g, '');
 
     const dto: UpdateCurrentUserInterface = {
       name: name,
       email: v.email?.trim(),
-      userName:
-        userNameInput && userNameInput !== ''
-          ? userNameInput.split(' ').join('.').toLowerCase()
-          : name.split(' ').join('.').toLowerCase(),
-      newPassword: v.newPassword?.trim() || undefined,
-      confirmPassword: v.confirmPassword?.trim() || undefined,
+      userName: userNameInput ? sanitize(userNameInput) : sanitize(name),
+      ...(newPassword ? { newPassword, confirmPassword } : {}),
     };
-
-    console.log(dto);
+    console.log('Sending DTO:', JSON.stringify(dto));
 
     this.authService.updateCurrentUser(this.user()!.email, dto).subscribe({
       next: (updated) => {
@@ -100,8 +107,16 @@ export class Profile implements OnInit {
         setTimeout(() => this.saved.set(false), 3000);
       },
       error: (err) => {
-        console.log(err);
-        this.saveError.set(err?.error || 'Something went wrong');
+        const errBody = err?.error;
+        const msg =
+          typeof errBody === 'string'
+            ? errBody
+            : errBody?.message
+              ? typeof errBody.message === 'string'
+                ? errBody.message
+                : JSON.stringify(errBody.message)
+              : 'Something went wrong';
+        this.saveError.set(msg);
       },
     });
   }
