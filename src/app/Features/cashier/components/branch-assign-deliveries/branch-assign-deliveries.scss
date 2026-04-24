@@ -1,0 +1,304 @@
+$red: #C0392B;
+$red-light: #FDECEA;
+$white: #fff;
+$border: #e8e8e8;
+$text: #1a1a1a;
+$muted: #999;
+$bg: #f7f5f3;
+
+// ─── Page ────────────────────────────────────────────────────
+.bac-page {
+  padding: 4px 0;
+}
+
+// ─── Header ──────────────────────────────────────────────────
+.bac-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .bac-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: $text;
+    margin-bottom: 4px;
+  }
+
+  .bac-sub {
+    font-size: 13px;
+    color: $muted;
+  }
+
+  .bac-awaiting {
+    color: $text;
+    font-weight: 500;
+  }
+}
+
+// ─── Link Button ──────────────────────────────────────────────
+.bac-link-btn {
+  background: transparent;
+  border: 1.5px solid $border;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+
+  &:hover {
+    border-color: $red;
+    color: $red;
+  }
+
+  &.mt-12 {
+    margin-top: 12px;
+  }
+}
+
+// ─── Loading ─────────────────────────────────────────────────
+.bac-loading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 48px 0;
+  justify-content: center;
+  color: $muted;
+  font-size: 14px;
+
+  .spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid $border;
+    border-top-color: $red;
+    border-radius: 50%;
+    animation: bac-spin 0.7s linear infinite;
+  }
+}
+
+@keyframes bac-spin {
+  to { transform: rotate(360deg); }
+}
+
+// ─── Empty State ─────────────────────────────────────────────
+.bac-empty {
+  text-align: center;
+  padding: 56px 24px;
+  color: $muted;
+
+  .bac-empty-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
+
+  .bac-empty-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: $text;
+    margin-bottom: 6px;
+  }
+
+  .bac-empty-sub {
+    font-size: 13px;
+    color: $muted;
+  }
+}
+
+// ─── Orders List ─────────────────────────────────────────────
+.bac-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+// ─── Order Card ──────────────────────────────────────────────
+.bac-order-card {
+  background: $white;
+  border: 1px solid $border;
+  border-radius: 14px;
+  padding: 18px 22px;
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: 0 4px 18px rgba(192, 57, 43, 0.08);
+  }
+
+  // left accent — red for ready, blue for kitchen
+  &.card-ready  { border-left: 4px solid $red; }
+  &.card-kitchen { border-left: 4px solid #1565c0; }
+}
+
+// ─── Card Top ────────────────────────────────────────────────
+.bac-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+
+  .bac-order-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: $text;
+    margin-bottom: 5px;
+
+    .bac-order-customer {
+      font-weight: 400;
+      color: $muted;
+    }
+  }
+
+  .bac-order-meta {
+    font-size: 12px;
+    color: $muted;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .bac-pin {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: $red;
+    flex-shrink: 0;
+  }
+
+  .bac-cod {
+    font-weight: 500;
+    color: $text;
+  }
+}
+
+// ─── Status Badge ────────────────────────────────────────────
+.bac-status-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  &.badge-ready {
+    background: #e8f5e9;
+    color: #2e7d32;
+  }
+
+  &.badge-kitchen {
+    background: #fff3e0;
+    color: #e65100;
+  }
+}
+
+// ─── Assign Row ──────────────────────────────────────────────
+.bac-assign-row {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 16px;
+  margin-bottom: 16px;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bac-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  .bac-field-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: $muted;
+    text-transform: uppercase;
+  }
+}
+
+// ─── Select ──────────────────────────────────────────────────
+.bac-select {
+  width: 100%;
+  padding: 10px 38px 10px 14px;
+  border: 1px solid $border;
+  border-radius: 8px;
+  font-size: 14px;
+  color: $text;
+  background: $white;
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+
+  &:focus {
+    border-color: $red;
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.08);
+  }
+}
+
+// ─── Address Input ───────────────────────────────────────────
+.bac-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid $border;
+  border-radius: 8px;
+  font-size: 14px;
+  color: $text;
+  background: #f9f9f9;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:focus {
+    border-color: $red;
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.08);
+    background: $white;
+  }
+}
+
+// ─── Card Footer ─────────────────────────────────────────────
+.bac-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 4px;
+}
+
+// ─── Dispatch Button ─────────────────────────────────────────
+.bac-dispatch-btn {
+  background: $red;
+  color: $white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover:not(:disabled) {
+    background: #96281b;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+  }
+}

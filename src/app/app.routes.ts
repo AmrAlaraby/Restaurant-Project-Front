@@ -200,6 +200,13 @@ export const routes: Routes = [
             (m) => m.CashierOrdersPage,
           ),
       },
+      {
+        path: 'assign-deliveries',
+        loadComponent: () =>
+          import('./Features/cashier/components/branch-assign-deliveries/branch-assign-deliveries').then(
+            (m) => m.BranchAssignDeliveries,
+          ),
+      },
       //Areej 501 - 550
       //Arwa 551 - 600
       //mahmoud 601 - 650

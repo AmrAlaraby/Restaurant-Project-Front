@@ -1,0 +1,97 @@
+<div class="bac-page">
+
+  <!-- Page Header -->
+  <div class="bac-header">
+    <div class="bac-header-left">
+      <div class="bac-title">Assign Deliveries</div>
+      <div class="bac-sub" *ngIf="!loading">
+        Orders ready for delivery &middot;
+        <span class="bac-awaiting">{{ awaitingCount }} awaiting driver</span>
+      </div>
+    </div>
+    <button class="bac-link-btn" (click)="goToAssigned()">
+      View dispatched orders →
+    </button>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="bac-loading">
+    <div class="spinner"></div>
+    <span>Loading orders...</span>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading && orders.length === 0" class="bac-empty">
+    <div class="bac-empty-icon">🎉</div>
+    <div class="bac-empty-title">All orders dispatched!</div>
+    <div class="bac-empty-sub">No orders are awaiting a driver right now.</div>
+    <button class="bac-link-btn mt-12" (click)="goToAssigned()">View dispatched orders →</button>
+  </div>
+
+  <!-- Orders List -->
+  <div class="bac-list" *ngIf="!loading && orders.length > 0">
+
+    <div class="bac-order-card" *ngFor="let order of orders">
+
+      <!-- Card Top Row -->
+      <div class="bac-card-top">
+        <div class="bac-order-info">
+          <div class="bac-order-title">
+            Order #{{ order.orderNumber }}
+            <span class="bac-order-customer">— {{ order.userName || 'Customer' }}</span>
+          </div>
+          <div class="bac-order-meta">
+            <span class="bac-pin"></span>
+            {{ confirmedAddresses[order.deliveryId] }}
+            &middot;
+            <span class="bac-cod" *ngIf="order.order?.totalAmount">
+              EGP {{ order.order?.totalAmount }} COD
+            </span>
+          </div>
+        </div>
+        <span class="bac-status-badge badge-ready">
+          READY TO DISPATCH
+        </span>
+      </div>
+
+      <!-- Assign Row -->
+      <div class="bac-assign-row">
+
+        <!-- Driver Dropdown -->
+        <div class="bac-field">
+          <div class="bac-field-label">ASSIGN DRIVER</div>
+          <select class="bac-select"
+                  [(ngModel)]="selectedDrivers[order.deliveryId]">
+            <option value="">— Select driver —</option>
+            <option *ngFor="let driver of drivers" [value]="driver.driverId">
+              {{ driver.name }}
+              <ng-container *ngIf="driver.status === 'Online'"> · Online</ng-container>
+            </option>
+          </select>
+        </div>
+
+        <!-- Confirm Address -->
+        <div class="bac-field bac-field-addr">
+          <div class="bac-field-label">CONFIRM ADDRESS</div>
+          <input class="bac-input"
+                 type="text"
+                 [(ngModel)]="confirmedAddresses[order.deliveryId]" />
+        </div>
+
+      </div>
+
+      <!-- Dispatch Button -->
+      <div class="bac-card-footer">
+        <button class="bac-dispatch-btn"
+                (click)="dispatch(order)"
+                [disabled]="!selectedDrivers[order.deliveryId] || dispatching[order.deliveryId]">
+          <span *ngIf="!dispatching[order.deliveryId]">🚀 Dispatch Driver</span>
+          <span *ngIf="dispatching[order.deliveryId]">Dispatching...</span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
