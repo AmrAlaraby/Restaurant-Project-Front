@@ -12,7 +12,7 @@
     @if (activeOrder()) {
       <app-active-order-card
         [order]="activeOrder()"
-        (track)="trackDelivery($event)"
+        (track)="onTrackDelivery($event)"
       />
     }
 
