@@ -1,0 +1,346 @@
+$red: #C0392B;
+$red-light: #FDECEA;
+$white: #fff;
+$border: #e8e8e8;
+$text: #1a1a1a;
+$muted: #999;
+$bg: #f7f5f3;
+
+// ─── Page ─────────────────────────────────────────────────────
+.bad-page {
+  padding: 4px 0;
+}
+
+// ─── Header ───────────────────────────────────────────────────
+.bad-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  .bad-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .bad-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: $text;
+  }
+
+  .bad-sub {
+    font-size: 13px;
+    color: $muted;
+  }
+
+  .bad-count {
+    color: $text;
+    font-weight: 500;
+  }
+}
+
+// ─── Back Button ──────────────────────────────────────────────
+.bad-back-btn {
+  background: transparent;
+  border: 1.5px solid $border;
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  align-self: flex-start;
+
+  &:hover {
+    border-color: $red;
+    color: $red;
+  }
+}
+
+// ─── Filter ───────────────────────────────────────────────────
+.bad-filter-wrap {
+  align-self: flex-start;
+}
+
+.bad-filter-select {
+  padding: 9px 36px 9px 14px;
+  border: 1px solid $border;
+  border-radius: 8px;
+  font-size: 13px;
+  color: $text;
+  background: $white;
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  cursor: pointer;
+  transition: border-color 0.2s;
+
+  &:focus {
+    border-color: $red;
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.08);
+  }
+}
+
+// ─── Loading ──────────────────────────────────────────────────
+.bad-loading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 48px 0;
+  justify-content: center;
+  color: $muted;
+  font-size: 14px;
+
+  .spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid $border;
+    border-top-color: $red;
+    border-radius: 50%;
+    animation: bad-spin 0.7s linear infinite;
+  }
+}
+
+@keyframes bad-spin {
+  to { transform: rotate(360deg); }
+}
+
+// ─── Empty ────────────────────────────────────────────────────
+.bad-empty {
+  text-align: center;
+  padding: 56px 24px;
+  color: $muted;
+
+  .bad-empty-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
+
+  .bad-empty-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: $text;
+    margin-bottom: 6px;
+  }
+
+  .bad-empty-sub {
+    font-size: 13px;
+    color: $muted;
+  }
+}
+
+// ─── List ─────────────────────────────────────────────────────
+.bad-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+// ─── Delivery Row ─────────────────────────────────────────────
+.bad-delivery-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: $white;
+  border: 1px solid $border;
+  border-left: 4px solid $red;
+  border-radius: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.15s;
+
+  &:hover {
+    box-shadow: 0 4px 18px rgba(192, 57, 43, 0.09);
+    transform: translateY(-1px);
+  }
+}
+
+// ─── Row Left ─────────────────────────────────────────────────
+.bad-row-left {
+  min-width: 160px;
+  flex-shrink: 0;
+
+  .bad-row-id {
+    font-size: 11px;
+    color: #bbb;
+    margin-bottom: 3px;
+    font-weight: 500;
+  }
+
+  .bad-row-order {
+    font-size: 15px;
+    font-weight: 600;
+    color: $text;
+    margin-bottom: 5px;
+  }
+
+  .bad-row-addr {
+    font-size: 12px;
+    color: $muted;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .bad-pin {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $red;
+    flex-shrink: 0;
+  }
+}
+
+// ─── Steps ────────────────────────────────────────────────────
+.bad-steps {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.bad-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.bad-step-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  border: 2px solid $border;
+  background: $white;
+  color: $muted;
+  transition: all 0.2s;
+
+  &.done {
+    background: $red;
+    border-color: $red;
+    color: $white;
+  }
+
+  &.active {
+    border-color: $red;
+    color: $red;
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.12);
+  }
+
+  &.inactive {
+    border-color: $border;
+    color: #ccc;
+  }
+}
+
+.bad-step-label {
+  font-size: 10px;
+  color: $muted;
+  white-space: nowrap;
+}
+
+.bad-step-connector {
+  flex: 1;
+  height: 2px;
+  background: $border;
+  margin: 0 4px;
+  margin-bottom: 16px;
+  transition: background 0.3s;
+  min-width: 16px;
+
+  &.done {
+    background: $red;
+  }
+}
+
+// ─── Row Right ────────────────────────────────────────────────
+.bad-row-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+  min-width: 120px;
+
+  .bad-driver {
+    font-size: 12px;
+    color: $muted;
+
+    b {
+      color: $text;
+    }
+  }
+
+  .bad-amount {
+    font-size: 13px;
+    font-weight: 600;
+    color: $red;
+  }
+}
+
+// ─── Status Badge ─────────────────────────────────────────────
+.bad-status-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  &.badge-assigned  { background: #e3f2fd; color: #1565c0; }
+  &.badge-pickedup  { background: #fff8e1; color: #f57f17; }
+  &.badge-onway     { background: #fff3e0; color: #e65100; }
+  &.badge-delivered { background: #e8f5e9; color: #2e7d32; }
+}
+
+// ─── Arrow ────────────────────────────────────────────────────
+.bad-row-arrow {
+  font-size: 20px;
+  color: #ddd;
+  flex-shrink: 0;
+  margin-left: 4px;
+}
+
+// ─── Filter Input (Order ID) ──────────────────────────────────
+.bad-filter-input {
+  padding: 9px 14px;
+  border: 1px solid $border;
+  border-radius: 8px;
+  font-size: 13px;
+  color: $text;
+  background: $white;
+  outline: none;
+  width: 120px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:focus {
+    border-color: $red;
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.08);
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button { -webkit-appearance: none; }
+  -moz-appearance: textfield;
+}
+
+// make filter-wrap a flex row with gap
+.bad-filter-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

@@ -302,3 +302,42 @@ $bg: #f7f5f3;
     transform: none;
   }
 }
+
+// ─── Search Bar ───────────────────────────────────────────────
+.bac-search-wrap {
+  position: relative;
+  margin-bottom: 20px;
+  max-width: 280px;
+
+  .bac-search-input {
+    width: 100%;
+    padding: 10px 38px 10px 14px;
+    border: 1px solid $border;
+    border-radius: 8px;
+    font-size: 14px;
+    color: $text;
+    background: $white;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:focus {
+      border-color: $red;
+      box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.08);
+    }
+
+    // hide number arrows
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button { -webkit-appearance: none; }
+    -moz-appearance: textfield;
+  }
+
+  .bac-search-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    pointer-events: none;
+  }
+}
