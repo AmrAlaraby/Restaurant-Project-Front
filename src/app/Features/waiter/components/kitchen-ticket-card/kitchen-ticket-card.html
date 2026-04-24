@@ -1,31 +1,16 @@
-<div class="card" [ngClass]="cardClass">
+<div class="card card--ready">
   <!-- Top row: ticket info + status badge -->
   <div class="card__header">
     <div class="card__meta">
-      <span class="card__ticket-ref"
-        >#T-{{ ticket.id.toString().padStart(3, '0') }} · {{ ticket.station }}</span
-      >
-      <h3 class="card__order-title">Order #{{ ticket.orderId }} · Table {{ ticket.id }}</h3>
+      <span class="card__ticket-ref">
+        #T-{{ ticket.id.toString().padStart(3, '0') }} · {{ ticket.station }}
+      </span>
+      <h3 class="card__order-title">Order #{{ ticket.orderId }}</h3>
     </div>
 
-    <div
-      class="card__status-badge"
-      [ngClass]="{
-        'badge--ready': isReady,
-        'badge--preparing': isPreparing,
-        'badge--pending': isPending,
-      }"
-    >
-      <span class="badge__label">{{ statusLabel }}</span>
-
-      @if (isReady) {
-        <span class="badge__icon">🔔</span>
-      }
-
-      @if (isPreparing) {
-        <span class="badge__icon">🔥</span>
-        <span class="badge__timer">{{ timerDisplay }}</span>
-      }
+    <div class="card__status-badge badge--ready">
+      <span class="badge__label">READY — SERVE NOW!</span>
+      <span class="badge__icon">🔔</span>
     </div>
   </div>
 
@@ -37,15 +22,10 @@
     </span>
   </div>
 
-  <!-- Actions -->
-  @if (!isReady) {
-    <div class="card__actions">
-      @if (isPending) {
-        <button class="btn btn--primary" (click)="markPreparing()">Start Preparing</button>
-      }
-      @if (isPreparing) {
-        <button class="btn btn--success" (click)="markDone()">Confirm Served</button>
-      }
-    </div>
-  }
+  <!-- Action -->
+  <div class="card__actions">
+    <button class="btn btn--success" [disabled]="confirming" (click)="onConfirmServed()">
+      {{ confirming ? 'Confirming...' : '✓ Confirm Served' }}
+    </button>
+  </div>
 </div>

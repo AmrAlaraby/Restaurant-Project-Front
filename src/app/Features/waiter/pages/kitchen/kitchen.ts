@@ -45,29 +45,23 @@ export class Kitchen implements OnInit, OnDestroy {
     });
   }
 
-  onStatusChange(ticketId: number, status: TicketStatus) {
-    console.log('Sending to API:', ticketId, status);
+  onConfirmServed(ticketId: number) {
+    // Optimistically remove from list immediately
+    this.board.done = this.board.done.filter((t) => t.id !== ticketId);
 
-    this.kitchenService.updateTicketStatus(ticketId, { status }).subscribe({
-      next: (res) => {
-        console.log('Updated successfully:', res);
-        this.loadBoard();
+    this.kitchenService.confirmServed(ticketId).subscribe({
+      next: () => {
+        console.log(`Ticket #${ticketId} confirmed as served.`);
       },
       error: (err) => {
-        console.error('Update failed:', err);
+        console.error('Confirm served failed:', err);
+        // Re-fetch board to restore correct state on failure
+        this.loadBoard();
       },
     });
   }
 
   trackById(index: number, item: OrderKitchenTicketDTO) {
     return item.id;
-  }
-
-  get readyTickets(): OrderKitchenTicketDTO[] {
-    return this.board?.done ?? [];
-  }
-
-  get preparingTickets(): OrderKitchenTicketDTO[] {
-    return this.board?.preparing ?? [];
   }
 }
