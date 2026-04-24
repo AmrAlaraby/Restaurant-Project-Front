@@ -34,7 +34,7 @@ constructor(
     this.auth.sendResetCode(this.form.value.email!).subscribe({
       next: () => {
         this.isSubmitting = false;
-        this.router.navigate(['/verify-code']);
+        this.router.navigate(['/auth/verify-code']);
       },
       error: (err) => {
         this.isSubmitting = false;

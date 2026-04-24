@@ -1,0 +1,31 @@
+<div class="otp-wrapper">
+
+  <div class="otp-card">
+
+    <h2 class="otp-title">Verify Your Code 🔐</h2>
+    <p class="otp-subtitle">Enter the 6-digit code sent to your email</p>
+
+    <div class="otp-inputs">
+      <input maxlength="1" [(ngModel)]="otp[0]" (input)="move($event, 0)" />
+      <input maxlength="1" [(ngModel)]="otp[1]" (input)="move($event, 1)" />
+      <input maxlength="1" [(ngModel)]="otp[2]" (input)="move($event, 2)" />
+      <input maxlength="1" [(ngModel)]="otp[3]" (input)="move($event, 3)" />
+      <input maxlength="1" [(ngModel)]="otp[4]" (input)="move($event, 4)" />
+      <input maxlength="1" [(ngModel)]="otp[5]" (input)="move($event, 5)" />
+    </div>
+
+    <button class="otp-btn" (click)="verifyCode()" [disabled]="loading">
+      @if(!loading){
+        Verify Code
+      } @else {
+        Verifying...
+      }
+    </button>
+
+    @if(error){
+      <div class="otp-error">{{ error }}</div>
+    }
+
+  </div>
+
+</div>
