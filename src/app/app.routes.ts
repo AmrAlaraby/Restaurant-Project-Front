@@ -207,6 +207,13 @@ export const routes: Routes = [
             (m) => m.CashierOrdersPage,
           ),
       },
+      {
+        path: 'assign-deliveries',
+        loadComponent: () =>
+          import('./Features/cashier/components/branch-assign-deliveries/branch-assign-deliveries').then(
+            (m) => m.BranchAssignDeliveries,
+          ),
+      },
       //Areej 501 - 550
       //Arwa 551 - 600
       //mahmoud 601 - 650
@@ -278,19 +285,17 @@ export const routes: Routes = [
           ),
       },
       {
-      path: 'recipes',
-    loadComponent: () =>
-      import('./Features/chief/pages/recipe-page/recipe-page').then(
-      (m) => m.RecipeListPage
-    ),
-  },
-  {
-  path: 'stock',
-  loadComponent: () =>
-    import('./Features/chief/pages/chef-stock-page/chef-stock-page').then(
-      (m) => m.ChefStockPageComponent,
-    ),
-},
+        path: 'recipes',
+        loadComponent: () =>
+          import('./Features/chief/pages/recipe-page/recipe-page').then((m) => m.RecipeListPage),
+      },
+      {
+        path: 'stock',
+        loadComponent: () =>
+          import('./Features/chief/pages/chef-stock-page/chef-stock-page').then(
+            (m) => m.ChefStockPageComponent,
+          ),
+      },
       //Areej 501 - 550
       //Arwa 551 - 600
       //mahmoud 601 - 650
@@ -313,31 +318,35 @@ export const routes: Routes = [
         path: 'home',
         loadComponent: () =>
           import('./Features/customer/pages/home-page/home-page').then((m) => m.HomePage),
-      },{
+      },
+      {
         path: 'browse-menu',
         loadComponent: () =>
-          import('./Features/customer/pages/browse-menu-page/browse-menu-page').then((m) => m.BrowseMenuPage),
+          import('./Features/customer/pages/browse-menu-page/browse-menu-page').then(
+            (m) => m.BrowseMenuPage,
+          ),
       },
-      {path: 'my-orders',
-      loadComponent: () =>
-      import('./Features/customer/pages/my-orders-page/my-orders-page').then((m) => m.MyOrdersPage)
+      {
+        path: 'my-orders',
+        loadComponent: () =>
+          import('./Features/customer/pages/my-orders-page/my-orders-page').then(
+            (m) => m.MyOrdersPage,
+          ),
       },
       {
         path: 'basket',
         loadComponent: () =>
-          import('./Features/customer/pages/basket-page/basket-page').then((m) => m.BasketPage)
+          import('./Features/customer/pages/basket-page/basket-page').then((m) => m.BasketPage),
       },
       {
         path: 'track-delivery',
         loadComponent: () =>
           import('./Features/customer/pages/track-delivery-page/track-delivery-page').then(
-            (m) => m.TrackDeliveryPage
-          )
+            (m) => m.TrackDeliveryPage,
+          ),
       },
       //Areej
       //Arwa
-      
-      
 
       //Areej
       //Arwa
