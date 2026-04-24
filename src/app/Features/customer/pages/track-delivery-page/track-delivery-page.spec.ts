@@ -8,9 +8,8 @@ describe('TrackDeliveryPage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TrackDeliveryPage]
-    })
-    .compileComponents();
+      imports: [TrackDeliveryPage],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TrackDeliveryPage);
     component = fixture.componentInstance;
