@@ -4,14 +4,7 @@ import { DeliveryDetails } from './Features/driver/components/delivery-details/d
 import { WaiterLayout } from './Features/waiter/pages/waiter-layout/waiter-layout';
 
 export const routes: Routes = [
-  {
-    path: 'login',
-    loadComponent: () => import('./Features/auth/pages/login/login').then((m) => m.Login),
-  },
-  {
-    path: 'register',
-    loadComponent: () => import('./Features/auth/pages/register/register').then((m) => m.Register),
-  },
+
 
   {
     path: '',
@@ -347,4 +340,18 @@ export const routes: Routes = [
       //mustafa
     ],
   },
+   {
+    path: 'auth',
+    loadComponent: () =>
+      import('./Features/auth/pages/auth-layout/auth-layout').then((m) => m.AuthLayout),
+    children: [
+        {
+    path: 'login',
+    loadComponent: () => import('./Features/auth/pages/login/login').then((m) => m.Login),
+  },
+  {
+    path: 'register',
+    loadComponent: () => import('./Features/auth/pages/register/register').then((m) => m.Register),
+  },
+    ]},
 ];
