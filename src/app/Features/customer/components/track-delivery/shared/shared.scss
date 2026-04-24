@@ -1,0 +1,94 @@
+@use '../shared' as *;
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  animation: fadeUp 0.4s 0.3s ease both;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.info-card {
+  background: $white;
+  border: 1.5px solid $border;
+  border-radius: $radius-xl;
+  padding: 22px 26px;
+  box-shadow: $shadow-sm;
+}
+
+// ── Card Header ───────────────────────────────────────────────────────────────
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1.5px solid $border;
+}
+
+.card-icon {
+  font-size: 20px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $red-light;
+  border-radius: $radius-sm;
+  border: 1px solid $red-mid;
+}
+
+.card-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: $text-main;
+  letter-spacing: -0.2px;
+}
+
+// ── Rows ──────────────────────────────────────────────────────────────────────
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid lighten($border, 3%);
+  font-size: 14px;
+  gap: 12px;
+
+  &:last-child { border-bottom: none; }
+
+  span {
+    color: $text-muted;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  b {
+    color: $text-main;
+    font-weight: 700;
+    text-align: right;
+  }
+}
+
+.total-row {
+  margin-top: 6px;
+  padding-top: 14px !important;
+  border-top: 1.5px solid $border;
+  border-bottom: none !important;
+
+  span { font-weight: 700; color: $text-main; font-size: 15px; }
+}
+
+.total-amount {
+  color: $red !important;
+  font-size: 17px;
+  font-weight: 800 !important;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
