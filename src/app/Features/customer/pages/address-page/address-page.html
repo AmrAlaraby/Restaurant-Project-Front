@@ -1,0 +1,97 @@
+<div class="addresses-page">
+  <h1 class="page-title">My Addresses <span class="pin-icon">📍</span></h1>
+
+  @if (loading()) {
+    <div class="loading">Loading...</div>
+  }
+
+  @if (!loading()) {
+    <div class="addresses-list">
+      @for (address of addresses(); track $index) {
+        <div class="address-card" [class.default]="$index === 0">
+          <div class="card-header">
+            <div class="label-row">
+              <span class="address-label">{{
+                address.specialMark || 'Address ' + ($index + 1)
+              }}</span>
+              @if ($index === 0) {
+                <span class="default-badge">DEFAULT</span>
+              }
+            </div>
+            <div class="card-actions">
+              <button class="btn-edit" (click)="onEdit($index)">Edit</button>
+              <button class="btn-delete" (click)="onDelete($index)">Delete</button>
+            </div>
+          </div>
+
+          <p class="address-line">
+            {{ address.buildingNumber }} {{ address.street }}, {{ address.city }}
+          </p>
+          @if (address.note) {
+            <p class="address-note">{{ address.note }}</p>
+          }
+        </div>
+      }
+
+      <button class="btn-add" (click)="onAddNew()">+ Add New Address</button>
+    </div>
+  }
+
+  <!-- Add/Edit Modal -->
+  @if (showModal()) {
+    <div class="modal-overlay-address" (click)="closeModal()">
+      <div class="modal-address" (click)="$event.stopPropagation()">
+        <h2 class="modal-title-address">
+          {{ editIndex() !== null ? 'Edit Address' : 'Add New Address' }}
+        </h2>
+
+        <form [formGroup]="form" (ngSubmit)="onSave()">
+          <div class="field">
+            <label>BUILDING NUMBER</label>
+            <input formControlName="buildingNumber" type="number" placeholder="e.g. 15" />
+            @if (form.get('buildingNumber')?.invalid && form.get('buildingNumber')?.touched) {
+              <span class="field-error">Building number is required</span>
+            }
+          </div>
+
+          <div class="field">
+            <label>STREET</label>
+            <input formControlName="street" type="text" placeholder="e.g. El-Nasr St" />
+            @if (form.get('street')?.invalid && form.get('street')?.touched) {
+              <span class="field-error">Street is required</span>
+            }
+          </div>
+
+          <div class="field">
+            <label>CITY</label>
+            <input formControlName="city" type="text" placeholder="e.g. Cairo" />
+            @if (form.get('city')?.invalid && form.get('city')?.touched) {
+              <span class="field-error">City is required</span>
+            }
+          </div>
+
+          <div class="field">
+            <label>LABEL (optional)</label>
+            <input formControlName="specialMark" type="text" placeholder="e.g. Home, Work" />
+          </div>
+
+          <div class="field">
+            <label>NOTE (optional)</label>
+            <input formControlName="note" type="text" placeholder="e.g. Ring bell twice" />
+          </div>
+
+          @if (saveError()) {
+            <p class="error-msg">{{ saveError() }}</p>
+          }
+
+          <div class="modal-actions-address">
+            <button type="button" class="btn-cancel" (click)="closeModal()">Cancel</button>
+            <button type="submit" class="btn-save" [disabled]="form.invalid || saving()">
+              {{ saving() ? 'Saving...' : 'Save Address' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+</div>
