@@ -1,0 +1,22 @@
+<div class="header-wrap">
+  <button class="back-btn" (click)="back.emit()">
+    <span class="back-arrow">←</span>
+    <span>Back</span>
+  </button>
+
+  <div class="header-text">
+    <h1 class="page-title">Track Delivery</h1>
+    <p class="page-sub">
+      Order <span class="order-num">#{{ orderId().toString().padStart(4,'0') }}</span>
+      @if (branchName()) {
+        <span class="branch-sep">·</span>
+        <span class="branch-name">{{ branchName() }}</span>
+      }
+    </p>
+  </div>
+
+  <div class="header-badge">
+    <span class="pulse-dot"></span>
+    Live
+  </div>
+</div>
