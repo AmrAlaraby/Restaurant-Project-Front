@@ -57,7 +57,10 @@ export const Baskets = {
   createOrUpdate: `${apiUrl}/Baskets`,
   delete: (id: string) => `${apiUrl}/Baskets/${id}`,
 };
-
+export const Payment = {
+  pay: (id: number) => `${apiUrl}/payment/pay/${id}`,
+  confirmCash: (id: number) => `${apiUrl}/payment/confirm-cash/${id}`
+};
 
 
 // hossam 54 75

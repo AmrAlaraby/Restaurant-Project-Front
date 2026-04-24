@@ -17,6 +17,8 @@ import { CashierOrder, PaymentMethod, PaymentStatus } from '../../Models/OrderMo
 })
 export class OrdersService {
   constructor(private http: HttpClient) {}
+
+  
   createOrder(dto: CreateOrderInterface): Observable<OrderInterface> {
     return this.http.post<OrderInterface>(Order.create, dto);
   }

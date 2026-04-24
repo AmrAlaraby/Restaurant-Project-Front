@@ -1,27 +1,27 @@
 @if (basket$ | async; as basket) {
 
-<div class="container">
+<div class="basket-container">
 
-    <!-- LEFT SIDE -->
-    <div class="left">
+    <!-- LEFT -->
+    <div class="basket-items">
 
-        <h2>My Cart 🛒</h2>
+        <h2 class="title">My Cart 🛒</h2>
 
         @for (item of basket.items; track item.id) {
-        <div class="item-card">
+        <div class="item">
 
-            <div class="info">
+            <div class="item-info">
                 <h4>{{ item.name }}</h4>
                 <span>EGP {{ item.price }} each</span>
             </div>
 
-            <div class="actions">
-                <button (click)="decrease(item)">-</button>
+            <div class="item-actions">
+                <button (click)="decrease(item)">−</button>
                 <span>{{ item.quantity }}</span>
                 <button (click)="increase(item)">+</button>
             </div>
 
-            <div class="price">
+            <div class="item-price">
                 EGP {{ item.price * item.quantity }}
             </div>
 
@@ -32,8 +32,8 @@
 
     </div>
 
-    <!-- RIGHT SIDE -->
-    <div class="right">
+    <!-- RIGHT -->
+    <div class="basket-summary">
 
         <!-- SUMMARY -->
         <div class="card">
@@ -102,13 +102,12 @@
             </div>
         </div>
 
-        <!-- PLACE ORDER -->
-        <button class="place-btn">
+        <!-- BUTTON -->
+        <button class="place-btn" (click)="placeOrder(basket)">
             Place Order
         </button>
 
     </div>
 
 </div>
-
 }
