@@ -46,7 +46,7 @@ export class VerifyCode {
         localStorage.setItem('resetSessionToken', res.resetSessionToken);
 
         // 🚀 go to reset password page
-        this.router.navigate(['/reset-password']);
+        this.router.navigate(['/auth/reset-password']);
       },
       error: (err) => {
         this.loading = false;

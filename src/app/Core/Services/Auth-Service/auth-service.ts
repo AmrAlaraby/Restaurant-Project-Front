@@ -71,7 +71,16 @@ resetPassword(data: {
   newPassword: string;
   confirmPassword: string;
 }) {
-  return this.http.post(Auth.resetPassword, data);
+  return this.http.post(
+    Auth.resetPassword,
+    data,
+    {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      responseType: 'text'
+    }
+  );
 }
 
   logout(): void {
