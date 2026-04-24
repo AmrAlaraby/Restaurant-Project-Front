@@ -19,16 +19,16 @@ export class DeliveryDetails {
   loading = false;
 
   updateModel = {
-    status: '',
     cashCollected: undefined as number | undefined
   };
 
-  statuses: string[] = [
-    'Assigned',
-    'PickedUp',
-    'OnTheWay',
-    'Delivered'
-  ];
+  cashError = '';
+
+  private statusFlow: Record<string, string> = {
+    'Assigned': 'PickedUp',
+    'PickedUp': 'OnTheWay',
+    'OnTheWay': 'Delivered',
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -47,7 +47,6 @@ export class DeliveryDetails {
     this.service.getById(id).subscribe({
       next: (res) => {
         this.delivery = res;
-        this.updateModel.status = res.deliveryStatus;
         this.loading = false;
       },
       error: () => {
@@ -56,20 +55,38 @@ export class DeliveryDetails {
     });
   }
 
+  nextStatus(): string | null {
+    return this.delivery ? (this.statusFlow[this.delivery.deliveryStatus] ?? null) : null;
+  }
+
   updateStatus() {
     if (!this.delivery) return;
 
+    const next = this.nextStatus();
+    if (!next) return;
+
+    // Validation لو هنروح Delivered
+    if (next === 'Delivered') {
+      const cash = this.updateModel.cashCollected ?? 0;
+      if (cash < this.delivery.order.totalAmount) {
+        this.cashError = `Min amount is EGP ${this.delivery.order.totalAmount}`;
+        return;
+      }
+    }
+
+    this.cashError = '';
+
     const body = {
-      status: this.updateModel.status,
-      cashCollected: this.updateModel.cashCollected ?? undefined
+      status: next,
+      cashCollected: next === 'Delivered' ? this.updateModel.cashCollected : undefined
     };
 
-    this.service.updateStatus(this.delivery.id, body)
-      .subscribe({
-        next: (res) => {
-          this.delivery = res;
-        }
-      });
+    this.service.updateStatus(this.delivery.id, body).subscribe({
+      next: (res) => {
+        this.delivery = res;
+        this.updateModel.cashCollected = undefined;
+      }
+    });
   }
 
   goBack() {

@@ -73,7 +73,7 @@
       <div class="info-row"><span>Total</span><b class="red">EGP {{ delivery.order.totalAmount }}</b></div>
       <div class="info-row"><span>Created</span><b>{{ delivery.createdAt | date:'dd/MM/yyyy hh:mm a' }}</b></div>
       <div class="info-row" *ngIf="delivery.deliveredAt"><span>Delivered</span><b>{{ delivery.deliveredAt | date:'dd/MM/yyyy hh:mm a' }}</b></div>
-      <div class="info-row" *ngIf="delivery.cashCollected"><span>Cash Collected</span><b>EGP {{ delivery.cashCollected }}</b></div>
+      <div class="info-row" *ngIf="delivery.cashCollected !== null"><span>Cash Collected</span><b>EGP {{ delivery.cashCollected }}</b></div>
     </div>
 
     <!-- Address -->
@@ -100,25 +100,25 @@
   </div>
 
   <!-- Update Status -->
-  <div class="update-card">
+  <div class="update-card" *ngIf="nextStatus()">
     <div class="card-title">Update Status</div>
-    <div class="update-form">
-      <select class="form-select-styled" [(ngModel)]="updateModel.status">
-        <option value="Assigned">Assigned</option>
-        <option value="PickedUp">Picked Up</option>
-        <option value="OnTheWay">On the Way</option>
-        <option value="Delivered">Delivered</option>
-      </select>
-      <input type="number"
-             class="form-input-styled"
-             placeholder="Cash Collected (EGP)"
-             [(ngModel)]="updateModel.cashCollected">
-      <button class="update-btn" (click)="updateStatus()">Update Status</button>
+
+    <!-- Cash input — يظهر بس لو الخطوة الجاية Delivered -->
+    <div *ngIf="nextStatus() === 'Delivered'" class="cash-wrap">
+      <input
+        type="number"
+        class="form-input-styled"
+        placeholder="Cash Collected (EGP)"
+        [(ngModel)]="updateModel.cashCollected"
+      />
+      <span class="cash-hint" *ngIf="cashError">⚠️ {{ cashError }}</span>
     </div>
+
+    <button class="update-btn" (click)="updateStatus()">
+      Move to → <b>{{ nextStatus() }}</b>
+    </button>
   </div>
 
   <button class="back-btn" (click)="goBack()">← Back</button>
 
 </div>
-
-
