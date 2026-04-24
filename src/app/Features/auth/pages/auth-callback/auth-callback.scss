@@ -1,0 +1,98 @@
+/* ===== WRAPPER ===== */
+.callback-wrapper {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff8f0;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ===== CARD ===== */
+.callback-card {
+  width: 360px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 40px 30px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+  text-align: center;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* ===== LOADER ===== */
+.loader {
+  width: 60px;
+  height: 60px;
+  border: 5px solid #eee;
+  border-top: 5px solid #c41e1e;
+  border-radius: 50%;
+  margin: 0 auto 20px auto;
+  animation: spin 1s linear infinite;
+}
+
+/* ===== TEXT ===== */
+.callback-card h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 8px;
+}
+
+.callback-card p {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+/* ===== STEPS ===== */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #aaa;
+}
+
+.step .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ddd;
+}
+
+/* active step */
+.step.active {
+  color: #c41e1e;
+  font-weight: 600;
+}
+
+.step.active .dot {
+  background: #c41e1e;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

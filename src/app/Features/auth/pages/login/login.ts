@@ -67,4 +67,14 @@ ngOnInit(): void {
   togglePassword() {
   this.showPassword = !this.showPassword;
 }
+
+loginWithGoogle() {
+  window.location.href =
+    'https://localhost:7232/api/Auth/external-login?provider=Google';
+}
+
+loginWithFacebook() {
+  window.location.href =
+    'https://localhost:7232/api/Auth/external-login?provider=Facebook';
+}
 }
