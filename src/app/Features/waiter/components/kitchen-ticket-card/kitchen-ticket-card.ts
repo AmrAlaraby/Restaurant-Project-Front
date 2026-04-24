@@ -10,24 +10,18 @@ import { CommonModule } from '@angular/common';
   styleUrl: './kitchen-ticket-card.scss',
 })
 export class KitchenTicketCard implements OnInit, OnDestroy {
+  ngOnInit(): void {
+    // Nothing to initialise for this presentational card
+  }
+  ngOnDestroy(): void {
+    // No subscriptions or timers to clean up
+  }
   @Input() ticket!: OrderKitchenTicketDTO;
 
-  @Output() changeStatus = new EventEmitter<{
-    id: number;
-    status: TicketStatus;
-  }>();
+  // Emits the ticket id up to the parent to handle the API call & list removal
+  @Output() confirmServed = new EventEmitter<number>();
 
-  TicketStatus = TicketStatus;
-
-  // Optimistic local status — updates instantly on click before API responds
-  localStatus: TicketStatus | null = null;
-
-  get currentStatus(): TicketStatus {
-    return this.localStatus ?? this.ticket.status;
-  }
-
-  elapsedSeconds = 0;
-  private timerInterval: any;
+  confirming = false;
 
   // Station emoji map
   private stationEmojis: Record<string, string> = {
@@ -39,79 +33,14 @@ export class KitchenTicketCard implements OnInit, OnDestroy {
     pasta: '🍝',
   };
 
-  ngOnInit(): void {
-    if (this.ticket.startedAt) {
-      const start = new Date(this.ticket.startedAt).getTime();
-      this.elapsedSeconds = Math.floor((Date.now() - start) / 1000);
-      this.timerInterval = setInterval(() => {
-        this.elapsedSeconds++;
-      }, 1000);
-    }
-  }
-
-  ngOnDestroy(): void {
-    if (this.timerInterval) clearInterval(this.timerInterval);
-  }
-
   get stationEmoji(): string {
     const key = this.ticket.station?.toLowerCase() ?? '';
     return this.stationEmojis[key] ?? '🍽️';
   }
 
-  get statusLabel(): string {
-    switch (this.currentStatus) {
-      case TicketStatus.Done:
-        return 'READY — SERVE NOW!';
-      case TicketStatus.Preparing:
-        return 'PREPARING';
-      default:
-        return 'PENDING';
-    }
-  }
-
-  get timerDisplay(): string {
-    const m = Math.floor(this.elapsedSeconds / 60)
-      .toString()
-      .padStart(2, '0');
-    const s = (this.elapsedSeconds % 60).toString().padStart(2, '0');
-    return `${m}:${s}`;
-  }
-
-  get cardClass(): string {
-    switch (this.currentStatus) {
-      case TicketStatus.Done:
-        return 'card--ready';
-      case TicketStatus.Preparing:
-        return 'card--preparing';
-      default:
-        return 'card--pending';
-    }
-  }
-
-  get isReady(): boolean {
-    return this.currentStatus === TicketStatus.Done;
-  }
-
-  get isPreparing(): boolean {
-    return this.currentStatus === TicketStatus.Preparing;
-  }
-
-  get isPending(): boolean {
-    return this.currentStatus === TicketStatus.Pending;
-  }
-
-  markPreparing() {
-    this.localStatus = TicketStatus.Preparing; // instant UI update
-    this.changeStatus.emit({ id: this.ticket.id, status: TicketStatus.Preparing });
-  }
-
-  markDone() {
-    if (this.currentStatus !== TicketStatus.Preparing) return;
-
-    this.localStatus = TicketStatus.Done;
-    this.changeStatus.emit({
-      id: this.ticket.id,
-      status: TicketStatus.Done,
-    });
+  onConfirmServed() {
+    if (this.confirming) return;
+    this.confirming = true;
+    this.confirmServed.emit(this.ticket.id);
   }
 }

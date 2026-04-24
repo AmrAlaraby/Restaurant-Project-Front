@@ -52,4 +52,8 @@ export class KitchenService {
   ): Observable<KitchenTicketStatusDto> {
     return this.http.put<KitchenTicketStatusDto>(Kitchen.updateStatus(ticketId), dto);
   }
+
+  confirmServed(id: number): Observable<void> {
+    return this.http.patch<void>(Kitchen.confirmServed(id), {});
+  }
 }
