@@ -1,0 +1,203 @@
+// ── Variables ─────────────────────────────────────────────────────────────────
+$red:          #c8102e;
+$red-light:    #fdf1f3;
+$red-mid:      #f5d0d6;
+$yellow:       #ffc72c;
+$yellow-light: #fffbee;
+$yellow-mid:   #ffe89a;
+$text-main:    #1a1209;
+$text-muted:   #7a6f65;
+$border:       #efe9e0;
+$white:        #ffffff;
+$radius-xl:    24px;
+$shadow-md:    0 4px 16px rgba(0,0,0,0.08);
+
+.timeline-card {
+  background: $white;
+  border: 1.5px solid $border;
+  border-radius: $radius-xl;
+  padding: 28px 32px;
+  box-shadow: $shadow-md;
+  animation: fadeUp 0.4s 0.2s ease both;
+}
+
+// ── Header ────────────────────────────────────────────────────────────────────
+.timeline-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.timeline-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: $text-muted;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.timeline-step-count {
+  font-size: 12px;
+  font-weight: 700;
+  color: $red;
+  background: $red-light;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid $red-mid;
+}
+
+// ── Progress Bar ──────────────────────────────────────────────────────────────
+.progress-bar-wrap {
+  margin-bottom: 28px;
+}
+
+.progress-bar-track {
+  height: 5px;
+  background: $border;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, $red 0%, $yellow 100%);
+  border-radius: 10px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// ── Timeline ──────────────────────────────────────────────────────────────────
+.timeline { display: flex; flex-direction: column; }
+
+.timeline-row {
+  display: flex;
+  gap: 18px;
+
+  &.state-inactive {
+    opacity: 0.45;
+  }
+}
+
+// ── Left column ───────────────────────────────────────────────────────────────
+.timeline-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.tl-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+
+  &.state-done {
+    background: $red;
+    border: 2px solid $red;
+  }
+
+  &.state-active {
+    background: $yellow;
+    border: 2px solid #e6a800;
+    box-shadow: 0 0 0 6px rgba(255,199,44,0.2);
+    animation: activePulse 1.8s ease infinite;
+  }
+
+  &.state-inactive {
+    background: $white;
+    border: 2px solid $border;
+  }
+}
+
+@keyframes activePulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(255,199,44,0.2); }
+  50%       { box-shadow: 0 0 0 10px rgba(255,199,44,0); }
+}
+
+.circle-icon {
+  font-size: 15px;
+  font-weight: 800;
+  color: $white;
+
+  &.active-arrow { color: $text-main; }
+  &.muted        { color: #ccc; }
+}
+
+.tl-line {
+  width: 2px;
+  flex: 1;
+  min-height: 28px;
+  background: $border;
+  margin: 5px 0;
+  border-radius: 2px;
+  transition: background 0.4s ease;
+
+  &.tl-line-done {
+    background: linear-gradient(180deg, $red 0%, $yellow 100%);
+  }
+}
+
+// ── Right content ─────────────────────────────────────────────────────────────
+.timeline-content {
+  padding-bottom: 28px;
+  padding-top: 6px;
+  flex: 1;
+}
+
+.tl-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: $text-main;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: -0.2px;
+
+  &.tl-title-active {
+    color: #7a5800;
+  }
+}
+
+.you-are-here {
+  font-size: 11px;
+  font-weight: 800;
+  color: #7a5800;
+  background: $yellow-light;
+  border: 1px solid $yellow-mid;
+  padding: 3px 10px;
+  border-radius: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.tl-desc {
+  font-size: 13px;
+  color: $text-muted;
+  margin-top: 4px;
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+.tl-time {
+  font-weight: 700;
+  color: $text-main;
+  opacity: 0.8;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .timeline-card { padding: 20px 18px; }
+}
