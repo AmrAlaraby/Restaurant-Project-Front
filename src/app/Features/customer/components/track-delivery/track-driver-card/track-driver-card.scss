@@ -1,0 +1,215 @@
+// ── Variables ─────────────────────────────────────────────────────────────────
+$red:          #c8102e;
+$red-light:    #fdf1f3;
+$red-mid:      #f5d0d6;
+$yellow:       #ffc72c;
+$yellow-light: #fffbee;
+$yellow-mid:   #ffe89a;
+$text-main:    #1a1209;
+$text-muted:   #7a6f65;
+$border:       #efe9e0;
+$white:        #ffffff;
+$radius-md:    12px;
+$radius-xl:    24px;
+$shadow-md:    0 4px 16px rgba(0,0,0,0.08);
+
+// ── Driver Card ───────────────────────────────────────────────────────────────
+.driver-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: $white;
+  border: 1.5px solid $border;
+  border-radius: $radius-xl;
+  padding: 22px 26px;
+  box-shadow: $shadow-md;
+  animation: fadeUp 0.4s 0.1s ease both;
+  position: relative;
+  overflow: hidden;
+
+  // subtle red accent stripe on left
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, $red 0%, $yellow 100%);
+    border-radius: 4px 0 0 4px;
+  }
+}
+
+// ── Avatar ────────────────────────────────────────────────────────────────────
+.driver-avatar {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.avatar-emoji {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: $yellow-light;
+  border: 2px solid $yellow-mid;
+  font-size: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.avatar-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid $yellow;
+  opacity: 0.5;
+  animation: ringPulse 2s ease infinite;
+}
+
+@keyframes ringPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50%       { transform: scale(1.08); opacity: 0.2; }
+}
+
+// ── Info ──────────────────────────────────────────────────────────────────────
+.driver-info { flex: 1; }
+
+.driver-label {
+  font-size: 10px;
+  font-weight: 800;
+  color: $red;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.driver-name {
+  font-size: 18px;
+  font-weight: 800;
+  color: $text-main;
+  letter-spacing: -0.3px;
+}
+
+.driver-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: $text-muted;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #27c77a;
+  animation: pulse 1.5s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(39,199,122,0.5); }
+  50%       { box-shadow: 0 0 0 5px rgba(39,199,122,0); }
+}
+
+// ── Action Buttons ────────────────────────────────────────────────────────────
+.driver-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 20px;
+  border-radius: $radius-md;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1.5px solid;
+  transition: all 0.18s ease;
+  font-family: inherit;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &.call-btn {
+    background: $red-light;
+    border-color: $red-mid;
+    color: $red;
+
+    &:not(:disabled):hover {
+      background: $red;
+      color: $white;
+      border-color: $red;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(200,16,46,0.25);
+    }
+  }
+
+  &.msg-btn {
+    background: $yellow-light;
+    border-color: $yellow-mid;
+    color: #7a5800;
+
+    &:not(:disabled):hover {
+      background: $yellow;
+      color: $text-main;
+      border-color: $yellow;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255,199,44,0.35);
+    }
+  }
+}
+
+// ── No Driver ─────────────────────────────────────────────────────────────────
+.no-driver-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: $white;
+  border: 1.5px dashed $border;
+  border-radius: $radius-xl;
+  padding: 22px 26px;
+  animation: fadeUp 0.4s 0.1s ease both;
+}
+
+.no-driver-icon {
+  font-size: 32px;
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.no-driver-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: $text-main;
+}
+
+.no-driver-sub {
+  font-size: 13px;
+  color: $text-muted;
+  margin-top: 2px;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .driver-card   { flex-wrap: wrap; }
+  .driver-actions { width: 100%; }
+  .action-btn    { flex: 1; justify-content: center; }
+}

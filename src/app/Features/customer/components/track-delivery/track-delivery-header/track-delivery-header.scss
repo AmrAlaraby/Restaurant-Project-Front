@@ -1,4 +1,16 @@
-@use '../shared/shared' as *;
+// ── Variables ─────────────────────────────────────────────────────────────────
+$red:          #c8102e;
+$red-light:    #fdf1f3;
+$red-mid:      #f5d0d6;
+$yellow:       #ffc72c;
+$yellow-light: #fffbee;
+$yellow-mid:   #ffe89a;
+$text-main:    #1a1209;
+$text-muted:   #7a6f65;
+$border:       #efe9e0;
+$white:        #ffffff;
+$radius-md:    12px;
+$shadow-sm:    0 1px 4px rgba(0,0,0,0.06);
 
 .header-wrap {
   display: flex;
@@ -76,7 +88,7 @@
   border: 1.5px solid $yellow-mid;
   font-size: 12px;
   font-weight: 800;
-  color: darken($yellow, 30%);
+  color: #7a5800;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
