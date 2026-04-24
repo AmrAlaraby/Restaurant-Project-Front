@@ -1,0 +1,48 @@
+<!-- Loading -->
+@if (loading()) {
+  <div class="loading-wrap">
+    <div class="spinner"></div>
+    <span>Tracking your order...</span>
+  </div>
+}
+
+<!-- Content -->
+@if (!loading() && delivery()) {
+  <div class="page-wrap">
+
+    <app-track-delivery-header
+      [orderId]="delivery()!.order.id"
+      [branchName]="delivery()!.order.branchName ?? null"
+      (back)="goBack()"
+    />
+
+    <app-track-driver-card
+      [driverName]="delivery()!.driverName ?? null"
+      [driverPhone]="delivery()!.driverPhone ?? null"
+      (call)="callDriver()"
+      (message)="messageDriver()"
+    />
+
+    <app-track-timeline
+      [steps]="steps"
+      [currentIndex]="currentIndex"
+    />
+
+    <app-track-info-grid
+      [address]="delivery()!.deliveryAddress"
+      [items]="delivery()!.order.items"
+      [totalAmount]="delivery()!.order.totalAmount"
+      [cashCollected]="delivery()!.cashCollected ?? null"
+    />
+
+  </div>
+}
+
+<!-- Not found -->
+@if (!loading() && !delivery()) {
+  <div class="empty-state">
+    <div class="empty-icon">📦</div>
+    <p>Delivery not found.</p>
+    <button class="back-btn" (click)="goBack()">← Go Back</button>
+  </div>
+}
