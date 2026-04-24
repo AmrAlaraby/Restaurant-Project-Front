@@ -79,4 +79,14 @@ export class Register {
   return password === confirm ? null : { passwordMismatch: true };
 }
 
+loginWithGoogle() {
+  window.location.href =
+    'https://localhost:7232/api/Auth/external-login?provider=Google';
+}
+
+loginWithFacebook() {
+  window.location.href =
+    'https://localhost:7232/api/Auth/external-login?provider=Facebook';
+}
+
 }
