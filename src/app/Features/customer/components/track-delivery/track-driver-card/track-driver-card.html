@@ -1,0 +1,42 @@
+@if (driverName()) {
+  <div class="driver-card">
+
+    <div class="driver-avatar">
+      <span class="avatar-emoji">🛵</span>
+      <span class="avatar-ring"></span>
+    </div>
+
+    <div class="driver-info">
+      <div class="driver-label">YOUR DRIVER</div>
+      <div class="driver-name">{{ driverName() }}</div>
+      <div class="driver-status">
+        <span class="status-dot"></span>
+        On the way to you
+      </div>
+    </div>
+
+    <div class="driver-actions">
+      <button class="action-btn call-btn"
+              (click)="call.emit()"
+              [disabled]="!driverPhone()">
+        <span>📞</span>
+        Call
+      </button>
+      <button class="action-btn msg-btn"
+              (click)="message.emit()"
+              [disabled]="!driverPhone()">
+        <span>💬</span>
+        Message
+      </button>
+    </div>
+
+  </div>
+} @else {
+  <div class="no-driver-card">
+    <div class="no-driver-icon">🕐</div>
+    <div class="no-driver-text">
+      <div class="no-driver-title">Finding your driver</div>
+      <div class="no-driver-sub">A driver will be assigned shortly</div>
+    </div>
+  </div>
+}
