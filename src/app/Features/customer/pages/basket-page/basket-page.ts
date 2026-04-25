@@ -8,6 +8,7 @@ import { Router, RouterModule } from '@angular/router';
 import { OrdersService } from '../../../../Core/Services/Orders-Service/orders-service';
 import { PaymentService } from '../../../../Core/Services/Payment-Service/payment-service';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
+import { CreateOrderInterface } from '../../../../Core/Models/OrderModels/create-order-interface';
 
 @Component({
   selector: 'app-basket-page',
@@ -20,7 +21,7 @@ export class BasketPage {
 
   basket$!: Observable<Basket | null>;
 
-  orderType: 'Delivery' | 'Pickup' = 'Delivery';
+  orderType: 'Delivery' | 'PickUp' = 'Delivery';
   paymentMethod: 'Card' | 'Cash' = 'Card';
 
   address: string = '';
@@ -55,19 +56,19 @@ export class BasketPage {
   }
 
   // 🔥 mapping functions
-  private mapPaymentMethod(value: string): number {
+  private mapPaymentMethod(value: string): string {
     switch (value) {
-      case 'Card': return 2;
-      case 'Cash': return 1;
-      default: return 1;
+      case 'Card': return 'Card';
+      case 'Cash': return 'Cash';
+      default: return 'Cash';
     }
   }
 
-  private mapOrderType(value: string): number {
+  private mapOrderType(value: string): string {
     switch (value) {
-      case 'Delivery': return 3;
-      case 'Pickup': return 2;
-      default: return 2;
+      case 'Delivery': return 'Delivery';
+      case 'PickUp': return 'PickUp';
+      default: return 'PickUp';
     }
   }
 
@@ -84,7 +85,7 @@ export class BasketPage {
       next: (user) => {
 
         // ✅ DTO (string)
-        const dto = {
+        const dto :CreateOrderInterface = {
           userId: user.id,
           branchId: 1,
 
@@ -107,7 +108,7 @@ export class BasketPage {
         };
 
         // ✅ API DTO (numbers)
-        const apiDto = {
+        const apiDto :CreateOrderInterface = {
           ...dto,
           paymentMethod: this.mapPaymentMethod(dto.paymentMethod),
           orderType: this.mapOrderType(dto.orderType)

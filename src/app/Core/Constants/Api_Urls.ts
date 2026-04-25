@@ -141,6 +141,7 @@ export const Order = {
   getAll: `${apiUrl}/Order`,
   getById: (id: number) => `${apiUrl}/Order/${id}`,
   myOrders: `${apiUrl}/Order/my`,
+  myActiveOrders: `${apiUrl}/Order/myactive`,
   updateStatus: (orderId: number) => `${apiUrl}/Order/${orderId}/status`,
   addItems: (orderId: number) => `${apiUrl}/Order/${orderId}/items`,
   removeItem: (orderId: number, itemId: number) => `${apiUrl}/Order/${orderId}/items/${itemId}`,

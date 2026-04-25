@@ -90,13 +90,19 @@ export class TrackDeliveryPage implements OnInit {
  
   loadDeliveryByOrderId(orderId: number) {
     this.loading.set(true);
-    this.deliveryService.getAll(1, 100).subscribe({
+    this.deliveryService.getAll(1, 100,{orderId:orderId}).subscribe({
       next: (res) => {
+        console.log(res);
+        
         const match = res.data?.find((d: any) => d.order?.id === orderId);
         if (match) this.delivery.set(match);
         this.loading.set(false);
       },
-      error: () => this.loading.set(false),
+      error: (err) => {
+        this.loading.set(false)
+        console.log(err);
+        
+      },
     });
   }
  
