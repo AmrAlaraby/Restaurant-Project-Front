@@ -62,6 +62,12 @@ getAllOrders(
     });
   }
 
+  getMyActiveOrders(params?: any): Observable<PaginatedResultInterface<OrderDetailsInterface>> {
+    return this.http.get<PaginatedResultInterface<OrderDetailsInterface>>(Order.myActiveOrders, {
+      params,
+    });
+  }
+
   updateOrderStatus(orderId: number, status: string): Observable<OrderInterface> {
     console.log(status);
 
