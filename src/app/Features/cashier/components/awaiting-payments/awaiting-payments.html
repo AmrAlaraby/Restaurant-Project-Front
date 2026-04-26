@@ -1,0 +1,26 @@
+<div class="awaiting-payments">
+
+  <!-- Search Input -->
+  <div class="search-bar">
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      placeholder="Order # or Table #"
+      class="search-input"
+    />
+    <button class="load-btn" (click)="loadOrders()">Load</button>
+  </div>
+
+  <!-- Order Chips -->
+  <div class="order-chips">
+    <button
+      *ngFor="let order of filteredOrders"
+      class="chip"
+      [class.active]="selectedOrderId === order.id"
+      (click)="select(order.id)"
+    >
+      {{ getOrderLabel(order) }} · #{{ order.id }}
+    </button>
+  </div>
+
+</div>

@@ -1,0 +1,38 @@
+<div class="payment-page">
+
+  <h1 class="page-title">Payment Terminal</h1>
+
+  <div class="payment-layout">
+
+    <!-- LEFT COLUMN -->
+    <div class="left-col">
+
+      <!-- Find Order (Awaiting Payments) -->
+      <div class="card">
+        <div class="card-label">FIND ORDER</div>
+        <app-awaiting-payments
+          (onSelect)="onOrderSelected($event)">
+        </app-awaiting-payments>
+      </div>
+
+      <!-- Bill Preview -->
+      <div class="card">
+        <div class="card-label">BILL PREVIEW</div>
+        <app-bill-preview
+          [orderId]="selectedOrderId">
+        </app-bill-preview>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="right-col">
+      <app-payment-terminal
+        [orderId]="selectedOrderId"
+        (paymentConfirmed)="onPaymentConfirmed()">
+      </app-payment-terminal>
+    </div>
+
+  </div>
+
+</div>ث

@@ -17,4 +17,11 @@ export class PaymentService {
             {}
         );
     }
+    
+    confirmCash(orderId: number) {
+    return this.http.post(
+      `https://localhost:7232/api/payment/confirm-cash/${orderId}`,
+      {}
+    );
+  }
 }

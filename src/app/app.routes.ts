@@ -207,6 +207,13 @@ export const routes: Routes = [
             (m) => m.BranchAssignDeliveries,
           ),
       },
+      {
+        path: 'payments',
+        loadComponent: () =>
+          import('./Features/cashier/pages/cashier-payment/cashier-payment').then(
+            (m) => m.CashierPayment,
+          ),
+      }
       //Areej 501 - 550
       //Arwa 551 - 600
       //mahmoud 601 - 650

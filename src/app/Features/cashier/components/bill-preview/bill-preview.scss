@@ -1,0 +1,158 @@
+.bill {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+.bill-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.order-number {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.order-meta {
+  font-size: 13px;
+  color: #888;
+  margin-top: 2px;
+}
+
+/* ── Status Badges ───────────────────────────────────────── */
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.badge-ready       { background: #dcfce7; color: #15803d; }
+.badge-awaiting    { background: #fef9c3; color: #854d0e; }
+.badge-paid        { background: #dbeafe; color: #1d4ed8; }
+.badge-preparing   { background: #ffedd5; color: #9a3412; }
+.badge-delivered   { background: #f3e8ff; color: #6b21a8; }
+.badge-cancelled   { background: #fee2e2; color: #b91c1c; }
+.badge-default     { background: #f3f4f6; color: #6b7280; }
+
+/* ── Divider ─────────────────────────────────────────────── */
+.bill-divider {
+  height: 1px;
+  background: #f0ebe5;
+}
+
+/* ── Payment Method ──────────────────────────────────────── */
+.payment-method-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pm-label {
+  font-size: 12px;
+  color: #aaa;
+  font-weight: 500;
+}
+
+.pm-badge {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  background: #f5f0eb;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+/* ── Items List ──────────────────────────────────────────── */
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: #faf8f5;
+  border-radius: 10px;
+
+  &:hover {
+    background: #f5f0eb;
+  }
+}
+
+.item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.item-qty {
+  font-size: 12px;
+  font-weight: 700;
+  color: #c0392b;
+  background: #fdf5f4;
+  border: 1px solid #f5c6c0;
+  border-radius: 6px;
+  padding: 2px 8px;
+  min-width: 32px;
+  text-align: center;
+}
+
+.item-name {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.item-price {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
+
+/* ── Total ───────────────────────────────────────────────── */
+.bill-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.total-amount {
+  font-size: 20px;
+  font-weight: 800;
+  color: #c0392b;
+}
+
+/* ── Empty ───────────────────────────────────────────────── */
+.bill-empty {
+  text-align: center;
+  padding: 30px 0;
+  color: #ccc;
+
+  .bill-empty-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 13px;
+  }
+}
