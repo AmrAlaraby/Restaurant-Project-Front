@@ -9,11 +9,14 @@ import { OrdersService } from '../../../../Core/Services/Orders-Service/orders-s
 import { PaymentService } from '../../../../Core/Services/Payment-Service/payment-service';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { CreateOrderInterface } from '../../../../Core/Models/OrderModels/create-order-interface';
+import { AddressDto } from '../../../../Core/Models/AuthModels/address-dto';
+import { AddAddressModal } from '../../components/Home/Address-Model/add-address-modal/add-address-modal';
+import { BasketItem } from '../../../../Core/Models/BasketModels/BasketItem';
 
 @Component({
   selector: 'app-basket-page',
   standalone: true,
-  imports: [FormsModule, AsyncPipe, RouterModule],
+  imports: [FormsModule, AsyncPipe, RouterModule, AddAddressModal],
   templateUrl: './basket-page.html',
   styleUrl: './basket-page.scss',
 })
@@ -24,7 +27,10 @@ export class BasketPage {
   orderType: 'Delivery' | 'PickUp' = 'Delivery';
   paymentMethod: 'Card' | 'Cash' = 'Card';
 
-  address: string = '';
+  savedAddresses: AddressDto[] = [];
+  selectedAddress: AddressDto | null = null;
+
+  showAddressModal = false;
 
   constructor(
     private basketService: BasketService,
@@ -32,74 +38,111 @@ export class BasketPage {
     private paymentService: PaymentService,
     private authService: AuthService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.basket$ = this.basketService.basket$;
     this.basketService.loadBasket();
+    this.loadUserAddresses();
+  }
+
+  // =========================
+  // Basket Actions
+  // =========================
+
+  increase(item: BasketItem) {
+    this.basketService.updateQuantity(item.id, item.quantity + 1);
+  }
+
+  decrease(item: BasketItem) {
+    this.basketService.updateQuantity(item.id, item.quantity - 1);
   }
 
   removeItem(id: number) {
     this.basketService.removeItem(id);
   }
 
-  increase(item: any) {
-    this.basketService.updateQuantity(item.id, item.quantity + 1);
-  }
-
-  decrease(item: any) {
-    this.basketService.updateQuantity(item.id, item.quantity - 1);
-  }
+  // =========================
+  // Helpers
+  // =========================
 
   getTotal(basket: Basket): number {
-    return basket.items.reduce((s, i) => s + i.price * i.quantity, 0);
+    return basket.items.reduce((sum, item) => {
+      return sum + (item.price * item.quantity);
+    }, 0);
   }
 
-  // 🔥 mapping functions
-  private mapPaymentMethod(value: string): string {
-    switch (value) {
-      case 'Card': return 'Card';
-      case 'Cash': return 'Cash';
-      default: return 'Cash';
-    }
+  formatAddress(addr: AddressDto): string {
+    return `${addr.buildingNumber} ${addr.street}, ${addr.city}`;
   }
 
-  private mapOrderType(value: string): string {
-    switch (value) {
-      case 'Delivery': return 'Delivery';
-      case 'PickUp': return 'PickUp';
-      default: return 'PickUp';
-    }
+  onAddressSelect(event: Event) {
+    const index = +(event.target as HTMLSelectElement).value;
+    this.selectedAddress = this.savedAddresses[index] ?? null;
   }
+
+  // =========================
+  // Address Modal
+  // =========================
+
+  goToAddAddress() {
+    this.showAddressModal = true;
+  }
+
+  onModalClosed() {
+    this.showAddressModal = false;
+  }
+
+  onAddressAdded() {
+    this.showAddressModal = false;
+    this.loadUserAddresses();
+  }
+
+  private loadUserAddresses() {
+    this.authService.getCurrentUser().subscribe({
+      next: (user) => {
+        this.authService.getUserAddresses(user.id).subscribe({
+          next: (addresses) => {
+            this.savedAddresses = addresses;
+            if (addresses.length > 0) {
+              this.selectedAddress = addresses[0];
+            }
+          },
+          error: (err) => console.error('Failed to load addresses', err)
+        });
+      },
+      error: (err) => console.error('Failed to get user', err)
+    });
+  }
+
+  // =========================
+  // Order
+  // =========================
 
   placeOrder(basket: Basket) {
 
     if (!basket.items.length) return;
 
-    if (this.orderType === 'Delivery' && !this.address) {
-      alert('Enter address');
+    if (this.orderType === 'Delivery' && !this.selectedAddress) {
+      alert('Please select a delivery address');
       return;
     }
 
     this.authService.getCurrentUser().subscribe({
       next: (user) => {
 
-        // ✅ DTO (string)
-        const dto :CreateOrderInterface = {
+        const dto: CreateOrderInterface = {
           userId: user.id,
           branchId: 1,
-
           orderType: this.orderType,
           paymentMethod: this.paymentMethod,
-
-          deliveryAddress: this.orderType === 'Delivery'
+          deliveryAddress: this.orderType === 'Delivery' && this.selectedAddress
             ? {
-              buildingNumber: 1,
-              street: this.address,
-              city: 'Cairo'
-            }
+                buildingNumber: this.selectedAddress.buildingNumber,
+                street: this.selectedAddress.street,
+                city: this.selectedAddress.city
+              }
             : undefined,
-
           items: basket.items.map(i => ({
             menuItemId: i.id,
             quantity: i.quantity,
@@ -107,17 +150,9 @@ export class BasketPage {
           }))
         };
 
-        // ✅ API DTO (numbers)
-        const apiDto :CreateOrderInterface = {
-          ...dto,
-          paymentMethod: this.mapPaymentMethod(dto.paymentMethod),
-          orderType: this.mapOrderType(dto.orderType)
-        };
-
-        this.ordersService.createOrder(apiDto as any).subscribe({
+        this.ordersService.createOrder(dto as any).subscribe({
           next: (order) => {
 
-            // 🟢 CARD
             if (this.paymentMethod === 'Card') {
               this.paymentService.pay(order.id).subscribe({
                 next: (res) => {
@@ -127,7 +162,6 @@ export class BasketPage {
               return;
             }
 
-            // 🟡 CASH
             this.basketService.clearBasket();
             this.router.navigate(['/order-success']);
           },

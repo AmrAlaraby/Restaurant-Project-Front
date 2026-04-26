@@ -18,7 +18,7 @@
 
     <app-track-driver-card
       [driverName]="delivery()!.driverName ?? null"
-      [driverPhone]="delivery()!.driverPhone ?? null"
+      [driverPhone]="delivery()!.driverNumber ?? null"
       (call)="callDriver()"
       (message)="messageDriver()"
     />

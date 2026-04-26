@@ -55,6 +55,7 @@ export const Users = {
   searchCustomers: `${apiUrl}/User/GetAllCustomerUserAysnc`,
   addCustomer: `${apiUrl}/User/AddCustomerAsync`,
   updateCustomerAddress: (id: string) => `${apiUrl}/User/${id}/address`,
+  getAddresses: (id: string) => `${apiUrl}/User/${id}/addresses`,
 };
 
 // Basket
