@@ -1,54 +1,59 @@
 <div class="menu-item-card">
 
+  <!-- IMAGE -->
   <div class="image-wrapper">
-    <img
-      [src]="item.imageUrl"
-      [alt]="item.name"
-    />
+    <img [src]="item.imageUrl" [alt]="item.name" />
   </div>
 
+  <!-- CONTENT -->
   <div class="content">
 
-    <div class="top-section">
-      <div>
-        <h5>{{ item.name }}</h5>
-        <p class="category">{{ item.category }}</p>
-      </div>
+    <!-- TITLE + STATUS -->
+    <div class="top">
+      <h6>{{ item.name }}</h6>
 
-      <span
-        *ngIf="showAvailability"
-        class="badge"
-        [ngClass]="item.isAvailable ? 'available' : 'unavailable'"
-      >
+      <span class="badge" [class.available]="item.isAvailable" [class.unavailable]="!item.isAvailable">
         {{ item.isAvailable ? 'Available' : 'Unavailable' }}
       </span>
     </div>
 
+    <!-- CATEGORY -->
+    <p class="category">{{ item.category }}</p>
+
+    <!-- DETAILS -->
     <div class="details">
-      <span class="price">${{ item.price }}</span>
-      <span class="prep-time">{{ item.prepTimeMinutes }} min</span>
+      <span> {{ item.price }} <strong>EGP</strong></span>
+      <span>{{ item.prepTimeMinutes }} <strong> min</strong></span>
     </div>
 
-    <div
-      *ngIf="showAdminActions"
-      class="actions"
-    >
-      <button class="btn btn-view" (click)="onView()">
-        View
-      </button>
-
-      <button class="btn btn-edit" (click)="onEdit()">
-        Edit
-      </button>
-
-      <button class="btn btn-toggle" (click)="onToggleAvailability()">
-        Toggle
-      </button>
-
-      <button class="btn btn-delete" (click)="onDelete()">
-        Delete
-      </button>
+    <!-- ACTIONS -->
+    @if (showAdminActions) {
+  <div class="actions">
+  
+    <!-- VIEW -->
+    <button class="btn-icon view" (click)="onView()">
+      <i class="bi bi-eye"></i>
+    </button>
+  
+    <!-- EDIT -->
+    <button class="btn-icon edit" (click)="onEdit()">
+      <i class="bi bi-pencil"></i>
+    </button>
+  
+    <!-- SWITCH -->
+    <div class="switch-container" (click)="onToggleAvailability()">
+      <div class="switch" [class.active]="item.isAvailable">
+        <div class="circle"></div>
+      </div>
     </div>
+  
+    <!-- DELETE -->
+    <button class="btn-icon delete" (click)="onDelete()">
+      <i class="bi bi-trash-fill"></i>
+    </button>
+  
+  </div>
+    }
 
   </div>
 

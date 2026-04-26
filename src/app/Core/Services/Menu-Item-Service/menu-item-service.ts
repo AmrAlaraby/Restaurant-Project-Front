@@ -10,6 +10,7 @@ import { MenuItemQueryParamsInterface } from '../../Models/MenuItemModels/menu-i
 import { CreateMenuItemInterface } from '../../Models/MenuItemModels/create-menu-item-interface';
 import { UpdateMenuItemInterface } from '../../Models/MenuItemModels/update-menu-item-interface';
 import { MenuItemFormDataHelper } from '../../Helpers/menu-item-form-data.helper';
+import { MenuItemsStatsInterface } from '../../Models/MenuItemModels/menu-items-stats-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -59,5 +60,9 @@ export class MenuItemsService {
 
   getPopular() {
   return this.http.get<MenuItemInterface[]>(MenuItems.popular);
+}
+
+getStats() {
+  return this.http.get<MenuItemsStatsInterface>(MenuItems.stats);
 }
 }

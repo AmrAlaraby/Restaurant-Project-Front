@@ -12,5 +12,9 @@ import { MenuItemsStatsInterface } from '../../../../../Core/Models/MenuItemMode
 })
 export class MenuItemsStats {
   @Input({ required: true })
-  stats!: MenuItemsStatsInterface;
+  stats: MenuItemsStatsInterface = {
+    totalItems: 0,
+    availableItems: 0,
+    unavailableItems: 0
+  };
 }
