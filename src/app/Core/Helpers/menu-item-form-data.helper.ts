@@ -6,6 +6,7 @@ export class MenuItemFormDataHelper {
     const formData = new FormData();
 
     formData.append('Name', dto.name);
+    formData.append('ArabicName', dto.arabicName);
     formData.append('Price', dto.price.toString());
     formData.append('PrepTimeMinutes', dto.prepTimeMinutes.toString());
     formData.append('CategoryId', dto.categoryId.toString());
@@ -24,6 +25,7 @@ export class MenuItemFormDataHelper {
     const formData = new FormData();
 
     formData.append('Name', dto.name);
+    formData.append('ArabicName', dto.arabicName);
     formData.append('Price', dto.price.toString());
     formData.append('PrepTimeMinutes', dto.prepTimeMinutes.toString());
     formData.append('CategoryId', dto.categoryId.toString());

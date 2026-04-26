@@ -4,86 +4,102 @@
     min-height: 100vh;
 }
 
+/* ================= HEADER ================= */
 .page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
-    gap: 1rem;
-    flex-wrap: wrap;
 
     h2 {
-        margin: 0;
         font-weight: 700;
         color: #2D0A08;
     }
-
-    p {
-        margin: 0;
-        color: #9B4437;
-    }
 }
 
+/* ================= BUTTON ================= */
 .btn-add {
     border: none;
     background: #C0392B;
-    color: #fff !important;
-
+    color: #fff;
     padding: 0.9rem 1.5rem;
     border-radius: 12px;
     font-weight: 700;
     cursor: pointer;
 
-    transition: 0.25s ease;
-
     &:hover {
         background: #96281B;
-        transform: translateY(-1px);
     }
 }
 
-// modal styles
-.modal {
-    background: rgba(45, 10, 8, 0.55);
+/* ================= BACKDROP ================= */
+.custom-backdrop {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     inset: 0;
-    display: grid;
-    place-items: center;
+    background: rgba(45, 10, 8, 0.55);
     z-index: 1000;
 }
 
-.modal-content {
+/* ================= MODAL ================= */
+.custom-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+}
+
+/* ================= MODAL BOX ================= */
+.modal-box {
     background: #fff;
     border-radius: 12px;
     border: 1px solid rgba(192, 57, 43, 0.15);
     padding: 1.5rem;
-    height: 90vh;
+    width: 100%;
+    max-width: 700px;
     position: relative;
-    overflow-y: auto;
+    z-index: 1002;
+}
 
-    &::-webkit-scrollbar { width: 4px; }
-    &::-webkit-scrollbar-track { background: transparent; }
-    &::-webkit-scrollbar-thumb {
-        background: rgba(192, 57, 43, 0.2);
-        border-radius: 4px;
-    }
+/* sizes */
+.modal-box.large {
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-box.small {
+    max-width: 400px;
+}
+
+/* ================= HEADER ================= */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
 .custom-modal-header {
-    padding: 1.25rem 1.5rem;
-
     .modal-title {
         font-weight: 700;
-        font-size: 1.35rem;
         color: #2D0A08;
     }
 
     small {
-        font-size: 0.85rem;
         color: #9B4437;
     }
+}
+
+/* ================= BODY ================= */
+.modal-body {
+    margin-bottom: 1rem;
+}
+
+/* ================= FOOTER ================= */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
 }
