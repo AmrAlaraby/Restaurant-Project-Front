@@ -84,7 +84,7 @@ app-sidebar {
 
   app-sidebar {
     position: fixed;
-    left: 0;
+    inset-inline-start: 0;
     top: 0;
     height: 100%;
     z-index: 1000;

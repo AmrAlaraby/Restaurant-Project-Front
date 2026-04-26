@@ -7,10 +7,11 @@ import { NotificationBell } from "../../../../Shared/Components/notification-bel
 import { NotificationService } from '../../../../Core/Services/Notification-Service/NotificatoinService';
 import { SignalRService } from '../../../../Core/Services/SignalR-Service/SignalrService';
 import { ToastService } from '../../../../Core/Services/Toast-Service/toast-service';
+import { LangSwitchComponent } from "../../../../Shared/Components/lang-switch/lang-switch";
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet, Sidebar, NotificationBell],
+  imports: [RouterOutlet, Sidebar, NotificationBell, LangSwitchComponent],
   templateUrl: './layout.html',
   styleUrl: './layout.scss',
 })
