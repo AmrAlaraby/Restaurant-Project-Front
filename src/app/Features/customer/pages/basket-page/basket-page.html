@@ -1,3 +1,4 @@
+
 @if (basket$ | async; as basket) {
 
 <div class="basket-container">
@@ -83,7 +84,25 @@
             </div>
 
             @if (orderType === 'Delivery') {
-            <input [(ngModel)]="address" placeholder="Enter address" />
+            <div class="address-section">
+                <label class="address-label">DELIVERY ADDRESS</label>
+
+                @if (savedAddresses.length > 0) {
+                <div class="address-select-wrapper">
+                    <select (change)="onAddressSelect($event)">
+                        @for (addr of savedAddresses; track $index) {
+                        <option [value]="$index">
+                            📍 {{ formatAddress(addr) }}
+                        </option>
+                        }
+                    </select>
+                </div>
+                }
+
+                <button class="add-address-btn" (click)="goToAddAddress()">
+                    ＋ Add new address
+                </button>
+            </div>
             }
         </div>
 
@@ -110,4 +129,13 @@
     </div>
 
 </div>
+
+}
+
+<!-- ✅ MODAL (FIXED) -->
+@if (showAddressModal) {
+  <app-add-address-modal
+    (closed)="onModalClosed()"
+    (addressAdded)="onAddressAdded()">
+  </app-add-address-modal>
 }
