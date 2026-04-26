@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, input, Input, Output } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { CategoryInterface } from '../../../../../Core/Models/MenuItemModels/category-interface';
 import { MenuItemQueryParamsInterface } from '../../../../../Core/Models/MenuItemModels/menu-item-query-params-interface';
+import { Branch } from '../../../../../Core/Models/BranchModels/branch-interface';
 
 @Component({
   selector: 'app-menu-items-filters',
@@ -18,6 +19,8 @@ export class MenuItemsFilters {
   @Input() categories: CategoryInterface[] = [];
 
   @Input() filters: MenuItemQueryParamsInterface = {};
+
+  @Input() branches : Branch[] = [];
 
   @Output() filtersChanged = new EventEmitter<MenuItemQueryParamsInterface>();
 

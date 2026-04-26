@@ -5,4 +5,5 @@ export interface MenuItemQueryParamsInterface {
   sort?: number;
   pageIndex?: number;
   pageSize?: number;
+  branchId?: number;
 }

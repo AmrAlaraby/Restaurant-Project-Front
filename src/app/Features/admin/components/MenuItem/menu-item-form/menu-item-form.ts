@@ -134,7 +134,9 @@ export class MenuItemForm implements OnInit, OnChanges {
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
+      console.log("supmitted");
       return;
+      
     }
 
     this.loading = true;

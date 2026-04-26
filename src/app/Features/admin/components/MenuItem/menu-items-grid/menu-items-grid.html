@@ -10,16 +10,20 @@
   <p>Try adjusting filters or add a new menu item.</p>
 </div>
 
-<div
-  *ngIf="!loading && items.length > 0"
-  class="grid-wrapper"
->
-  <app-menu-item-card
-    *ngFor="let item of items"
-    [item]="item"
-    (view)="onView($event)"
-    (edit)="onEdit($event)"
-    (delete)="onDelete($event)"
-    (toggleAvailability)="onToggle($event)"
-  />
+<div class="row g-4">
+
+<div class="row g-4 mt-2">
+
+  @for (item of items; track item.id) {
+  <div class="col-6 col-md-4 col-lg-3 col-xl-2-4 d-flex">
+
+    <app-menu-item-card class="w-100 h-100" [item]="item" (view)="onView($event)" (edit)="onEdit($event)"
+      (delete)="onDelete($event)" (toggleAvailability)="onToggle($event)">
+
+    </app-menu-item-card>
+
+  </div>
+  }
+
+</div>
 </div>

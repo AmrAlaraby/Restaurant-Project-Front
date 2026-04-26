@@ -1,47 +1,70 @@
 .filters-wrapper {
-    background: white;
-    padding: 1.25rem;
-    border-radius: 18px;
-    border: 1px solid rgba(192, 57, 43, 0.13);
-    box-shadow: 0 2px 8px rgba(192, 57, 43, 0.08);
-    margin-bottom: 2rem;
+    background: var(--white);
+    padding: 16px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--gray-200);
+    margin-bottom: 24px;
 }
 
+/* LABEL */
 .form-label {
     font-weight: 600;
-    font-size: 0.9rem;
-    color: #9B4437;
+    font-size: 13px;
+    color: var(--gray-600);
+    margin-bottom: 4px;
 }
 
+/* INPUT + SELECT */
 .form-control,
 .form-select {
-    border-radius: 12px;
-    min-height: 48px;
-    border: 1px solid rgba(192, 57, 43, 0.2);
+    height: 44px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--gray-200);
+    font-size: 14px;
+    transition: var(--transition);
 
     &:hover {
-        border-color: rgba(192, 57, 43, 0.4);
+        border-color: var(--gray-400);
     }
 
     &:focus {
-        border-color: #C0392B;
-        box-shadow: 0 0 0 0.2rem rgba(192, 57, 43, 0.15);
+        border-color: var(--red);
+        box-shadow: 0 0 0 3px rgba(196, 30, 30, 0.1);
     }
 }
 
+/* 🔥 RESET BUTTON */
 .btn-reset {
-    min-height: 48px;
-    border-radius: 12px;
-    background: #FFF5F5;
-    border: 1px solid rgba(192, 57, 43, 0.2);
-    color: #9B4437;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--red-light);
+    background: var(--red-light);
+    color: var(--red);
     font-weight: 600;
-    transition: 0.3s;
-    cursor: pointer;
+    font-size: 14px;
+    transition: var(--transition);
 
-    &:hover {
-        background: #FDECEA;
-        border-color: #C0392B;
-        color: #C0392B;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* HOVER */
+.btn-reset:hover {
+    background: var(--red);
+    color: var(--white);
+    border-color: var(--red);
+    box-shadow: var(--shadow-btn);
+}
+
+/* CLICK */
+.btn-reset:active {
+    transform: scale(0.97);
+}
+
+/* optional spacing fix */
+.row.g-3>* {
+    display: flex;
+    flex-direction: column;
 }

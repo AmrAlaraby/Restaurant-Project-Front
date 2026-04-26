@@ -1,44 +1,54 @@
 <div class="filters-wrapper">
+
   <div class="row g-3 align-items-end">
-    <div class="col-lg-4 col-md-6">
+
+    <!-- Search -->
+    <div class="col-12 col-md-6 col-xl-3">
       <label class="form-label">Search</label>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Search menu items..."
-        [(ngModel)]="filters.search"
-        (ngModelChange)="onFilterChange('search')"
-      />
+      <input type="text" class="form-control" placeholder="Search menu items..." [(ngModel)]="filters.search"
+        (ngModelChange)="onFilterChange('search')" />
     </div>
 
-    <div class="col-lg-2 col-md-6">
+    <!-- Category -->
+    <div class="col-6 col-md-3 col-xl-2">
       <label class="form-label">Category</label>
-      <select
-        class="form-select"
-        [(ngModel)]="filters.categoryId"
-        (ngModelChange)="onFilterChange()"
-      >
+      <select class="form-select" [(ngModel)]="filters.categoryId" (ngModelChange)="onFilterChange('categoryId')">
         <option [ngValue]="undefined">All</option>
-        <option *ngFor="let category of categories" [ngValue]="category.id">
+
+        @for (category of categories; track category.id) {
+        <option [ngValue]="category.id">
           {{ category.name }}
         </option>
+        }
       </select>
     </div>
 
-    <div class="col-lg-2 col-md-6">
+    <!-- Branch -->
+    <div class="col-6 col-md-3 col-xl-2">
+      <label class="form-label">Branch</label>
+      <select class="form-select" [(ngModel)]="filters.branchId" (ngModelChange)="onFilterChange('branchId')">
+        <option [ngValue]="undefined">All</option>
+
+        @for (branch of branches; track branch.id) {
+        <option [ngValue]="branch.id">
+          {{ branch.name }}
+        </option>
+        }
+      </select>
+    </div>
+
+    <!-- Availability -->
+    <div class="col-6 col-md-3 col-xl-2">
       <label class="form-label">Availability</label>
-      <select
-        class="form-select"
-        [(ngModel)]="filters.isAvailable"
-        (ngModelChange)="onFilterChange()"
-      >
+      <select class="form-select" [(ngModel)]="filters.isAvailable" (ngModelChange)="onFilterChange()">
         <option [ngValue]="undefined">All</option>
         <option [ngValue]="true">Available</option>
         <option [ngValue]="false">Unavailable</option>
       </select>
     </div>
 
-    <div class="col-lg-2 col-md-6">
+    <!-- Sort -->
+    <div class="col-6 col-md-3 col-xl-2">
       <label class="form-label">Sort</label>
       <select class="form-select" [(ngModel)]="filters.sort" (ngModelChange)="onFilterChange()">
         <option [ngValue]="undefined">Default</option>
@@ -47,8 +57,13 @@
       </select>
     </div>
 
-    <div class="col-lg-2 col-md-12">
-      <button class="btn btn-reset w-100" (click)="onReset()">Reset Filters</button>
+    <!-- Reset -->
+    <div class="col-12 col-md-3 col-xl-1 d-flex align-items-end">
+      <button class="btn btn-reset w-100" (click)="onReset()">
+        Reset
+      </button>
     </div>
+
   </div>
+
 </div>

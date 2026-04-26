@@ -1,3 +1,5 @@
+import { MenuItemsStatsInterface } from './../../../../Core/Models/MenuItemModels/menu-items-stats-interface';
+import { BranchService } from './../../../../Core/Services/Branch-Service/branch-service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -5,7 +7,6 @@ import { CategoryInterface } from '../../../../Core/Models/MenuItemModels/catego
 import { MenuItemDetailsInterface } from '../../../../Core/Models/MenuItemModels/menu-item-details-interface';
 import { MenuItemInterface } from '../../../../Core/Models/MenuItemModels/menu-item-interface';
 import { MenuItemQueryParamsInterface } from '../../../../Core/Models/MenuItemModels/menu-item-query-params-interface';
-import { MenuItemsStatsInterface } from '../../../../Core/Models/MenuItemModels/menu-items-stats-interface';
 import { CategoryService } from '../../../../Core/Services/Categories-Service/categories-service';
 import { MenuItemsService } from '../../../../Core/Services/Menu-Item-Service/menu-item-service';
 import { Pagination } from '../../../../Shared/Components/pagination/pagination';
@@ -14,6 +15,7 @@ import { MenuItemForm } from '../../components/MenuItem/menu-item-form/menu-item
 import { MenuItemsFilters } from '../../components/MenuItem/menu-items-filters/menu-items-filters';
 import { MenuItemsGrid } from '../../components/MenuItem/menu-items-grid/menu-items-grid';
 import { MenuItemsStats } from '../../components/MenuItem/menu-items-stats/menu-items-stats';
+import { Branch } from '../../../../Core/Models/BranchModels/branch-interface';
 
 
 
@@ -36,6 +38,7 @@ import { MenuItemsStats } from '../../components/MenuItem/menu-items-stats/menu-
 export class MenuItemsPage implements OnInit {
   menuItems: MenuItemInterface[] = [];
   categories: CategoryInterface[] = [];
+  branches : Branch[] = [];
 
   showFormModal = false;
   selectedMenuItemId?: number;
@@ -60,19 +63,21 @@ export class MenuItemsPage implements OnInit {
   stats: MenuItemsStatsInterface = {
     totalItems: 0,
     availableItems: 0,
-    unavailableItems: 0,
-    averagePrice: 0,
+    unavailableItems: 0
   };
 
   constructor(
     private menuItemsService: MenuItemsService,
     private categoriesService: CategoryService,
+    private BranchService: BranchService,
     private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.loadCategories();
+    this.loadBranches();
     this.loadMenuItems();
+    this.loadStats();
   }
 
   loadMenuItems(): void {
@@ -102,17 +107,27 @@ export class MenuItemsPage implements OnInit {
     });
   }
 
+  loadBranches(): void {
+    this.BranchService.getBranches().subscribe({
+      next: (branches) => {
+        this.branches = branches;
+      },
+    });
+  }
+
   calculateStats(): void {
     const availableItems = this.menuItems.filter((item) => item.isAvailable).length;
 
     const totalPrice = this.menuItems.reduce((sum, item) => sum + item.price, 0);
 
-    this.stats = {
-      totalItems: this.totalCount,
-      availableItems,
-      unavailableItems: this.totalCount - availableItems,
-      averagePrice: this.menuItems.length ? totalPrice / this.menuItems.length : 0,
-    };
+   
+  }
+  loadStats() {
+    this.menuItemsService.getStats().subscribe({
+      next: (res) => {
+        this.stats = res;
+      }
+    });
   }
 
   onFiltersChanged(filters: MenuItemQueryParamsInterface): void {
@@ -123,6 +138,7 @@ export class MenuItemsPage implements OnInit {
     };
 
     this.loadMenuItems();
+    this.loadStats();
   }
 
   resetFilters(): void {

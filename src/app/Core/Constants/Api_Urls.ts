@@ -1,4 +1,5 @@
 import { environment } from '../../../environments/environment.development';
+import { StatsCardsComponent } from '../../Features/waiter/components/stats-cards/stats-cards';
 
 const apiUrl = environment.apiUrl;
 export const Auth = {
@@ -39,6 +40,7 @@ export const MenuItems = {
   delete: (id: number) => `${apiUrl}/MenuItems/${id}`,
   toggleAvailability: (id: number) => `${apiUrl}/MenuItems/${id}/toggle-availability`,
   popular: `${apiUrl}/MenuItems/popular`,
+  stats : `${apiUrl}/MenuItems/stats`,
 };
 
 export const Users = {

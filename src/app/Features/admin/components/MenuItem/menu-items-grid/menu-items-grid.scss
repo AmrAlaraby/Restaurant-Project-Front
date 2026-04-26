@@ -1,26 +1,5 @@
-.loading-state,
-.empty-state {
-    background: #FFFFFF;
-    padding: 3rem 2rem;
-    border-radius: 20px;
-    text-align: center;
-    border: 1px solid rgba(192, 57, 43, 0.13);
-    box-shadow: 0 2px 8px rgba(192, 57, 43, 0.08);
-
-    h5 {
-        margin-bottom: 0.5rem;
-        font-weight: 700;
-        color: #2D0A08;
+@media (min-width: 1200px) {
+    .col-xl-2-4 {
+        width: 20%;
     }
-
-    p {
-        margin: 0;
-        color: #9B4437;
-    }
-}
-
-.grid-wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.5rem;
 }
