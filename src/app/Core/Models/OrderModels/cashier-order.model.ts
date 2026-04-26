@@ -8,6 +8,7 @@ export interface CashierOrder {
   status: OrderStatus;
   paymentStatus?: PaymentStatus;       
   paymentMethod?: PaymentMethod;
+  deliveryStatus?: string;
 }
 
 export type PaymentStatus = 'Pending' | 'Paid' | 'Failed' | 'Refunded';

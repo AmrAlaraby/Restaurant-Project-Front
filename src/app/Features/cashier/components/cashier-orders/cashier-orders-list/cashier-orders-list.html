@@ -37,7 +37,7 @@
 
       <div class="actions">
 
-        @if (isPending(order.paymentStatus )) {
+        @if (isPending(order.paymentStatus )&& order.status !== 'Cancelled' && order.status !== 'Delivered') {
           <button
             class="pay-btn"
             (click)="onPay(order.id, $event)">
@@ -45,7 +45,7 @@
           </button>
         }
 
-        @if (isDelivery(order.orderType)) {
+        @if (isDelivery(order.orderType) && order.deliveryStatus == "UnAssigned" && order.status !== 'Delivered') {
           <button
             class="assign-btn"
             (click)="onAssign(order.id, $event)">
