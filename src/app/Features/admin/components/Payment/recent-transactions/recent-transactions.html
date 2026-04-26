@@ -1,0 +1,131 @@
+<div class="widget-wrapper">
+
+  <!-- ── HEADER ── -->
+  <div class="widget-header">
+    <div class="header-left">
+      <h2 class="widget-title">Recent Transactions</h2>
+      <span class="tx-count">{{ totalCount() }} total</span>
+    </div>
+
+    <!-- Branch dropdown -->
+    <div class="select-wrap">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      <select class="filter-select" (change)="onBranchChange($event)">
+        <option value="">All Branches</option>
+        @for (b of branches(); track b.id) {
+          <option [value]="b.id">{{ b.name }}</option>
+        }
+      </select>
+      <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ── FILTERS ROW ── -->
+  <div class="filters-row">
+
+    <!-- Order ID -->
+    <div class="filter-input-wrap">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input
+        type="number"
+        class="filter-input"
+        placeholder="Order ID..."
+        [value]="orderIdFilter() ?? ''"
+        (input)="onOrderIdChange($event)"
+      />
+    </div>
+
+    <!-- Method -->
+    <div class="select-wrap">
+      <select class="filter-select" (change)="onMethodChange($event)">
+        <option value="">All Methods</option>
+        <option value="Cash">Cash</option>
+        <option value="Card">Card</option>
+        <option value="InstaPay">InstaPay</option>
+        <option value="Wallet">Wallet</option>
+      </select>
+      <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </div>
+
+    <!-- Status -->
+    <div class="select-wrap">
+      <select class="filter-select" (change)="onStatusChange($event)">
+        <option value="">All Statuses</option>
+        <option value="Paid">Paid</option>
+        <option value="Pending">Pending</option>
+        <option value="Refunded">Refunded</option>
+        <option value="Failed">Failed</option>
+      </select>
+      <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </div>
+
+  </div>
+
+  <!-- ── TABLE ── -->
+  <div class="table-wrap">
+
+    @if (loading()) {
+      <div class="state-box">
+        <div class="spinner"></div>
+      </div>
+    } @else if (error()) {
+      <div class="state-box error">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <span>{{ error() }}</span>
+        <button class="retry-btn" (click)="load()">Retry</button>
+      </div>
+    } @else {
+      <table class="tx-table">
+        <thead>
+          <tr>
+            <th>ORDER</th>
+            <th>METHOD</th>
+            <th>STATUS</th>
+            <th>AMOUNT</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (tx of payments(); track tx.id) {
+            <tr class="tx-row">
+              <td class="order-cell">#{{ tx.orderId }}</td>
+              <td class="method-cell">
+                <span class="method-badge">
+                  <span class="method-dot" [ngClass]="methodDotClass(tx.paymentMethod)"></span>
+                  {{ tx.paymentMethod }}
+                </span>
+              </td>
+              <td class="status-cell">
+                <span [ngClass]="statusClass(tx.paymentStatus)">
+                  {{ tx.paymentStatus | uppercase }}
+                </span>
+              </td>
+              <td class="amount-cell" [class.negative]="isRefunded(tx.paymentStatus)">
+                {{ isRefunded(tx.paymentStatus) ? '-' : '' }}EGP {{ tx.paidAmount | number:'1.0-0' }}
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="4" class="empty-state">No transactions found</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+
+  </div>
+</div>

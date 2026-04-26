@@ -1,0 +1,608 @@
+// ─── Design Tokens ──────────────────────────────────────────────
+$bg: #0f1117;
+$surface: #181c27;
+$surface-2: #1f2436;
+$border: #2a3050;
+$border-light: #36406a;
+$accent: #6c8eff;
+$accent-glow: rgba(108, 142, 255, 0.18);
+$text-primary: #e8eaf6;
+$text-secondary: #8b95b8;
+$text-muted: #555e80;
+$green: #3ecf8e;
+$green-bg: rgba(62, 207, 142, 0.1);
+$red: #f4735a;
+$red-bg: rgba(244, 115, 90, 0.1);
+$amber: #f5a623;
+$amber-bg: rgba(245, 166, 35, 0.1);
+$radius: 14px;
+$radius-sm: 8px;
+$font: 'Cairo', 'Segoe UI', sans-serif;
+
+// ─── Base ────────────────────────────────────────────────────────
+.suggest-wrapper {
+  font-family: $font;
+  direction: rtl;
+  background: $bg;
+  min-height: 100vh;
+  padding: 32px 24px;
+  max-width: 820px;
+  margin: 0 auto;
+  color: $text-primary;
+}
+
+// ─── Header ─────────────────────────────────────────────────────
+.suggest-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.header-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: $accent-glow;
+  border: 1px solid rgba(108, 142, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $accent;
+  flex-shrink: 0;
+}
+
+.header-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: $text-primary;
+  margin: 0 0 4px;
+}
+
+.header-sub {
+  font-size: 13px;
+  color: $text-secondary;
+  margin: 0;
+}
+
+// ─── Input Section ───────────────────────────────────────────────
+.input-section {
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.input-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: $text-secondary;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+// ─── Selected Tags ───────────────────────────────────────────────
+.selected-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: $accent-glow;
+  border: 1px solid rgba(108, 142, 255, 0.35);
+  color: $accent;
+  border-radius: 20px;
+  padding: 5px 12px 5px 8px;
+  font-size: 13px;
+  font-weight: 500;
+  animation: tagIn 0.18s ease;
+}
+
+@keyframes tagIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.tag-unit {
+  font-size: 11px;
+  color: $text-muted;
+  background: $surface-2;
+  border-radius: 10px;
+  padding: 1px 6px;
+}
+
+.tag-remove {
+  background: none;
+  border: none;
+  color: $accent;
+  cursor: pointer;
+  font-size: 17px;
+  line-height: 1;
+  padding: 0;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+
+  &:hover { opacity: 1; }
+}
+
+// ─── Dropdown ────────────────────────────────────────────────────
+.dropdown-wrapper {
+  position: relative;
+}
+
+.dropdown-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: $surface-2;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  color: $text-secondary;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-family: $font;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  text-align: right;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+  }
+
+  &:hover {
+    border-color: $border-light;
+    color: $text-primary;
+  }
+
+  &.open {
+    border-color: $accent;
+    box-shadow: 0 0 0 3px $accent-glow;
+    color: $text-primary;
+  }
+}
+
+.chevron {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+
+  &.rotated { transform: rotate(180deg); }
+}
+
+.dropdown-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  left: 0;
+  background: $surface;
+  border: 1px solid $border-light;
+  border-radius: $radius-sm;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  overflow: hidden;
+  animation: dropIn 0.18s ease;
+}
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid $border;
+  color: $text-muted;
+}
+
+.search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: $text-primary;
+  font-size: 14px;
+  font-family: $font;
+  flex: 1;
+  direction: rtl;
+
+  &::placeholder { color: $text-muted; }
+}
+
+.dropdown-list {
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+  max-height: 220px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { background: $border-light; border-radius: 4px; }
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover {
+    background: $surface-2;
+  }
+}
+
+.item-name {
+  font-size: 14px;
+  color: $text-primary;
+}
+
+.item-unit {
+  font-size: 12px;
+  color: $text-muted;
+  background: $surface-2;
+  border-radius: 8px;
+  padding: 2px 8px;
+}
+
+.dropdown-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px 16px;
+  color: $text-muted;
+  font-size: 13px;
+}
+
+// ─── Hint ────────────────────────────────────────────────────────
+.input-hint {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: $text-muted;
+}
+
+// ─── Score Slider ────────────────────────────────────────────────
+.score-control {
+  margin-top: 24px;
+}
+
+.score-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: $text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.score-badge {
+  background: $accent-glow;
+  color: $accent;
+  border: 1px solid rgba(108, 142, 255, 0.3);
+  border-radius: 20px;
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.score-slider {
+  width: 100%;
+  appearance: none;
+  height: 5px;
+  background: $surface-2;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: $accent;
+    box-shadow: 0 0 10px $accent-glow;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+
+    &:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 16px rgba(108, 142, 255, 0.5);
+    }
+  }
+}
+
+.score-marks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: $text-muted;
+  margin-top: 6px;
+}
+
+// ─── Actions ─────────────────────────────────────────────────────
+.actions-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.btn-suggest {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: $accent;
+  color: #fff;
+  border: none;
+  border-radius: $radius-sm;
+  padding: 13px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: $font;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 18px rgba(108, 142, 255, 0.3);
+
+  &:hover:not(:disabled) {
+    background: lighten(#6c8eff, 6%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(108, 142, 255, 0.45);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+.btn-reset {
+  background: $surface;
+  color: $text-secondary;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  padding: 13px 20px;
+  font-size: 14px;
+  font-family: $font;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+
+  &:hover {
+    background: $surface-2;
+    color: $text-primary;
+    border-color: $border-light;
+  }
+}
+
+// ─── Spinners ────────────────────────────────────────────────────
+.loading-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+.spinner-sm {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(108, 142, 255, 0.2);
+  border-top-color: $accent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ─── Error ───────────────────────────────────────────────────────
+.error-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: $red-bg;
+  border: 1px solid rgba(244, 115, 90, 0.3);
+  border-radius: $radius-sm;
+  color: $red;
+  padding: 14px 16px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+// ─── Results ─────────────────────────────────────────────────────
+.results-section {
+  animation: fadeUp 0.3s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.results-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.results-count {
+  background: $surface-2;
+  border: 1px solid $border;
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 13px;
+  color: $text-secondary;
+}
+
+// ─── Empty State ─────────────────────────────────────────────────
+.empty-state {
+  text-align: center;
+  padding: 56px 24px;
+  color: $text-muted;
+
+  svg { margin-bottom: 16px; opacity: 0.5; }
+  p { font-size: 16px; color: $text-secondary; margin: 0 0 8px; }
+  span { font-size: 13px; }
+}
+
+// ─── Cards ───────────────────────────────────────────────────────
+.results-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.result-card {
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: 20px;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  animation: fadeUp 0.25s ease both;
+
+  @for $i from 1 through 20 {
+    &:nth-child(#{$i}) { animation-delay: #{($i - 1) * 0.05}s; }
+  }
+
+  &:hover {
+    border-color: $border-light;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.card-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.score-pill {
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 700;
+
+  &.score-high   { background: $green-bg;  color: $green;  border: 1px solid rgba(62, 207, 142, 0.3); }
+  &.score-medium { background: $amber-bg;  color: $amber;  border: 1px solid rgba(245, 166, 35, 0.3); }
+  &.score-low    { background: $red-bg;    color: $red;    border: 1px solid rgba(244, 115, 90, 0.3); }
+}
+
+.score-bar-track {
+  height: 5px;
+  background: $surface-2;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.score-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+
+  &.score-high   { background: $green; }
+  &.score-medium { background: $amber; }
+  &.score-low    { background: $red;   }
+}
+
+// ─── Ingredient Groups ───────────────────────────────────────────
+.card-ingredients {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ing-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ing-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+
+  &.matched-label { color: $green; }
+  &.missing-label { color: $red;   }
+}
+
+.ing-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ing-tag {
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+
+  &.matched {
+    background: $green-bg;
+    color: $green;
+    border: 1px solid rgba(62, 207, 142, 0.25);
+  }
+
+  &.missing {
+    background: $red-bg;
+    color: $red;
+    border: 1px solid rgba(244, 115, 90, 0.25);
+  }
+}
+
+// ─── Responsive ──────────────────────────────────────────────────
+@media (max-width: 600px) {
+  .suggest-wrapper { padding: 20px 16px; }
+  .card-top { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .actions-row { flex-direction: column; }
+}

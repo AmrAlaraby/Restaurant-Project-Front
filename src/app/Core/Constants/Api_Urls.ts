@@ -9,7 +9,7 @@ export const Auth = {
   currentUser: `${apiUrl}/Auth/CurrentUser`,
   UpdatecurrentUser: `${apiUrl}/Auth`,
 
-  
+
   sendResetCode: `${apiUrl}/Auth/send-reset-code`,
   verifyResetCode: `${apiUrl}/Auth/verify-reset-code`,
   resetPassword: `${apiUrl}/Auth/reset-password`,
@@ -66,6 +66,7 @@ export const Baskets = {
 export const Payment = {
   pay: (id: number) => `${apiUrl}/payment/pay/${id}`,
   confirmCash: (id: number) => `${apiUrl}/payment/confirm-cash/${id}`,
+  getAll: `${apiUrl}/payment`,
 };
 
 // hossam 54 75
@@ -157,5 +158,10 @@ export const signalRUrl = {
 export const Notification = {
   getMyNotifications: `${apiUrl}/notifications`,
   markAsRead: (id: number) => `${apiUrl}/notifications/${id}/read`,
+};
+
+export const Ai = {
+  suggest: `${apiUrl}/AiRecipe/suggest`,
+  sync: `${apiUrl}/AiRecipe/sync`,
 };
 // end of file

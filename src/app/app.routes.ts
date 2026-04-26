@@ -4,8 +4,6 @@ import { DeliveryDetails } from './Features/driver/components/delivery-details/d
 import { WaiterLayout } from './Features/waiter/pages/waiter-layout/waiter-layout';
 
 export const routes: Routes = [
-
-
   {
     path: '',
     redirectTo: 'admin',
@@ -94,6 +92,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./Features/admin/components/Ingredient/ingredients/ingredients').then(
             (m) => m.IngredientsComponent,
+          ),
+      },
+      {
+        path: 'transactions',
+        loadComponent: () =>
+          import('./Features/admin/components/Payment/recent-transactions/recent-transactions').then(
+            (m) => m.RecentTransactionsComponent,
           ),
       },
     ],
@@ -213,7 +218,14 @@ export const routes: Routes = [
           import('./Features/cashier/pages/cashier-payment/cashier-payment').then(
             (m) => m.CashierPayment,
           ),
-      }
+      },
+      {
+        path: 'transactions',
+        loadComponent: () =>
+          import('./Features/cashier/components/transaction-log/transaction-log').then(
+            (m) => m.TransactionLogComponent,
+          ),
+      },
       //Areej 501 - 550
       //Arwa 551 - 600
       //mahmoud 601 - 650
@@ -345,6 +357,14 @@ export const routes: Routes = [
             (m) => m.TrackDeliveryPage,
           ),
       },
+      // ✅ AI Suggest Route
+      {
+        path: 'ai-suggest',
+        loadComponent: () =>
+          import('./Features/customer/components/Ai/ai-suggest/ai-suggest').then(
+            (m) => m.AiSuggestComponent,
+          ),
+      },
       //Areej
       //Arwa
 
@@ -354,35 +374,44 @@ export const routes: Routes = [
       //mustafa
     ],
   },
-   {
+  {
     path: 'auth',
     loadComponent: () =>
       import('./Features/auth/pages/auth-layout/auth-layout').then((m) => m.AuthLayout),
     children: [
-        {
-    path: 'login',
-    loadComponent: () => import('./Features/auth/pages/login/login').then((m) => m.Login),
+      {
+        path: 'login',
+        loadComponent: () => import('./Features/auth/pages/login/login').then((m) => m.Login),
+      },
+      {
+        path: 'register',
+        loadComponent: () =>
+          import('./Features/auth/pages/register/register').then((m) => m.Register),
+      },
+      {
+        path: 'forgot-password',
+        loadComponent: () =>
+          import('./Features/auth/pages/forgot-password/forgot-password').then(
+            (m) => m.ForgotPassword,
+          ),
+      },
+      {
+        path: 'verify-code',
+        loadComponent: () =>
+          import('./Features/auth/pages/verify-code/verify-code').then((m) => m.VerifyCode),
+      },
+      {
+        path: 'reset-password',
+        loadComponent: () =>
+          import('./Features/auth/pages/reset-password/reset-password').then(
+            (m) => m.ResetPassword,
+          ),
+      },
+      {
+        path: 'auth-callback',
+        loadComponent: () =>
+          import('./Features/auth/pages/auth-callback/auth-callback').then((m) => m.AuthCallback),
+      },
+    ],
   },
-  {
-    path: 'register',
-    loadComponent: () => import('./Features/auth/pages/register/register').then((m) => m.Register),
-  },
-  { 
-    path: 'forgot-password',
-    loadComponent: () => import('./Features/auth/pages/forgot-password/forgot-password').then((m) => m.ForgotPassword),
-  },
-  { 
-    path: 'verify-code',
-    loadComponent: () => import('./Features/auth/pages/verify-code/verify-code').then((m) => m.VerifyCode),
-  },
-  { 
-    path: 'reset-password',
-    loadComponent: () => import('./Features/auth/pages/reset-password/reset-password').then((m) => m.ResetPassword),
-  },
-  { 
-    path: 'auth-callback',
-    loadComponent: () => import('./Features/auth/pages/auth-callback/auth-callback').then((m) => m.AuthCallback),
-  },
-
-    ]},
 ];

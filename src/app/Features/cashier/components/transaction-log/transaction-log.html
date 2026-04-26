@@ -1,0 +1,154 @@
+<div class="page-wrapper">
+
+  <!-- ── MAIN ── -->
+  <main class="main-content">
+
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Transaction Log</h1>
+        <p class="page-subtitle">
+          All payments processed during your shift
+          @if (currentUser()) {
+            &nbsp;·&nbsp;
+            <span class="branch-chip">🏬 {{ currentUser()!.branchName ?? 'Branch' }}</span>
+          }
+        </p>
+      </div>
+      <button class="export-btn" (click)="exportCSV()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Export CSV
+      </button>
+    </div>
+
+    <!-- ── FILTERS ROW ── -->
+    <div class="controls-row">
+
+      <!-- Method filter tabs -->
+      <div class="filter-tabs">
+        @for (f of filterOptions; track f) {
+          <button
+            class="filter-tab"
+            [class.active]="activeFilter() === f"
+            (click)="onFilterChange(f)"
+          >
+            <span class="tab-icon">{{ tabIcon(f) }}</span>{{ f }}
+          </button>
+        }
+      </div>
+
+      <!-- Order ID + Status filters -->
+      <div class="extra-filters">
+        <div class="search-box">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input
+            type="number"
+            placeholder="Order ID..."
+            [value]="orderIdFilter() ?? ''"
+            (input)="onOrderIdChange($event)"
+          />
+        </div>
+
+        <select class="status-select" (change)="onStatusChange($event)">
+          <option value="">All Statuses</option>
+          <option value="Paid">Paid</option>
+          <option value="Pending">Pending</option>
+          <option value="Refunded">Refunded</option>
+          <option value="Failed">Failed</option>
+        </select>
+      </div>
+
+    </div>
+
+    <!-- ── TABLE ── -->
+    <div class="table-container">
+
+      @if (loading()) {
+        <div class="state-box">
+          <div class="spinner"></div>
+          <p>Loading transactions…</p>
+        </div>
+
+      } @else if (error()) {
+        <div class="state-box error">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <p>{{ error() }}</p>
+          <button class="retry-btn" (click)="loadPayments()">Retry</button>
+        </div>
+
+      } @else {
+        <table class="transactions-table">
+          <thead>
+            <tr>
+              <th>TIME</th>
+              <th>ORDER</th>
+              <th>METHOD</th>
+              <th>AMOUNT</th>
+              <th>STATUS</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (tx of payments(); track tx.id) {
+              <tr class="table-row">
+                <td class="time-cell">
+                  {{ tx.paidAt ? (tx.paidAt | date:'HH:mm') : '—' }}
+                </td>
+                <td class="order-cell">#{{ tx.orderId }}</td>
+                <td class="method-cell">
+                  <span class="method-badge">
+                    <span class="method-dot" [ngClass]="methodDotClass(tx.paymentMethod)"></span>
+                    {{ tx.paymentMethod }}
+                  </span>
+                </td>
+                <td class="amount-cell" [class.negative]="isRefunded(tx.paymentStatus)">
+                  {{ isRefunded(tx.paymentStatus) ? '-' : '' }}EGP {{ tx.paidAmount | number:'1.0-2' }}
+                </td>
+                <td class="status-cell">
+                  <span [ngClass]="statusClass(tx.paymentStatus)">
+                    {{ tx.paymentStatus | uppercase }}
+                  </span>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="5" class="empty-state">
+                  <svg width="40" height="40" fill="none" stroke="#ccc" stroke-width="1.5" viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="18" height="18" rx="3"/>
+                    <path d="M3 9h18M9 21V9"/>
+                  </svg>
+                  <p>No transactions found</p>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+        <!-- ── PAGINATION ── -->
+        @if (totalCount() > pageSize) {
+          <div class="pagination-row">
+            <span class="pagination-info">
+              Showing {{ (pageIndex() - 1) * pageSize + 1 }}–{{ min(pageIndex() * pageSize, totalCount()) }}
+              of {{ totalCount() }} transactions
+            </span>
+            <app-pagination
+              [pageIndex]="pageIndex()"
+              [pageSize]="pageSize"
+              [totalCount]="totalCount()"
+              (pageChanged)="onPageChange($event)"
+            />
+          </div>
+        }
+      }
+
+    </div>
+  </main>
+</div>
