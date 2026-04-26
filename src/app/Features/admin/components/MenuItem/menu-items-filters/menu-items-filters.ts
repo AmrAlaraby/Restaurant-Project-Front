@@ -38,19 +38,32 @@ export class MenuItemsFilters {
     });
   }
 
+  // onFilterChange(field?: string): void {
+  //   if (field === 'search') {
+  //     this.searchSubject.next(this.filters.search || '');
+  //     return;
+  //   }
+
+  //   this.filters.pageIndex = 1;
+
+  //   this.filtersChanged.emit({
+  //     ...this.filters,
+  //   });
+  // }
+
   onFilterChange(field?: string): void {
     if (field === 'search') {
-      this.searchSubject.next(this.filters.search || '');
+      const value = this.filters.search || '';
+      this.searchSubject.next(value);
       return;
     }
 
-    this.filters.pageIndex = 1;
-
     this.filtersChanged.emit({
       ...this.filters,
+      pageIndex: 1,
     });
   }
-
+  
   onReset(): void {
     this.resetClicked.emit();
   }

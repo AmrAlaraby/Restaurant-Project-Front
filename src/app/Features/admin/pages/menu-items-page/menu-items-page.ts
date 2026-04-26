@@ -127,6 +127,7 @@ export class MenuItemsPage implements OnInit {
   // ================= FILTER =================
   onFiltersChanged(filters: MenuItemQueryParamsInterface): void {
     this.filters = {
+      ...this.filters,
       ...filters,
       pageIndex: 1,
       pageSize: this.filters.pageSize,
