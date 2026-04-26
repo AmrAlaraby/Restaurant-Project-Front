@@ -9,6 +9,7 @@ import { OrderInterface } from '../../Models/OrderModels/order-interface';
 import { PaginatedResultInterface } from '../../Models/MenuItemModels/paginated-result-interface';
 import { OrdersService } from './orders-service';
 import { OrderDetailsInterface } from '../../Models/OrderModels/order-details-interface';
+import { TicketStatus } from '../../Models/KitchenModels/ticket-status';
 
 fdescribe('OrdersService', () => {
   let service: OrdersService;
@@ -18,6 +19,7 @@ fdescribe('OrdersService', () => {
   const mockOrderDetails: OrderDetailsInterface = {
   id: 1,
   branchName: 'Main',
+      branchId:1,
   userId: 'u1',
   userName: 'Ahmed',
   orderType: 'DineIn',
@@ -33,7 +35,7 @@ fdescribe('OrdersService', () => {
     {
       id: 1,
       station: 'Grill',
-      status: 'Preparing',
+      status: TicketStatus.Pending,
     },
   ],
   totalAmount: 100,
@@ -43,6 +45,7 @@ fdescribe('OrdersService', () => {
   const mockOrder: OrderInterface = {
     id: 1,
     branchName: 'Main',
+    branchId:1,
     userId: 'u1',
     userName: 'Ahmed',
     orderType: 'DineIn',

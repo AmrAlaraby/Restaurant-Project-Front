@@ -69,7 +69,6 @@ listenToOrderUpdates() {
       }});
         this.signalR.onRestaurantUpdate("deliveryUpdated",(data :Delivery | null) => {
           if(data){
-            debugger;
             let index = this.ActiveOrders.findIndex(o => o.id === data.order.id);
             if(index !== -1){
               
@@ -77,16 +76,14 @@ listenToOrderUpdates() {
                 this.ActiveOrders[index].delivery.deliveryStatus = data.deliveryStatus;
                 this.ActiveOrders[index].delivery.driverName = data.driverName ?? undefined;
               }
+              if(data.deliveryStatus === 'Delivered'){
+        this.ActiveOrders.splice(index,1);
+      }
             }
       }});
     
-    // this.signalR.onRestaurantUpdate("OrderCreated",(data) => {  
-    //     debugger;
-    //     this.ActiveOrders.unshift(data);    
-    // });
     
     this.signalR.onRestaurantUpdate("OrderUpdated",(data) => {   
-      debugger;
       let index = this.ActiveOrders.findIndex(o => o.id === data.id);
       if(index !== -1 && index){
         this.ActiveOrders[index] = data;
@@ -95,12 +92,6 @@ listenToOrderUpdates() {
         this.ActiveOrders.splice(index,1);
       }
     });
-    // this.signalR.onRestaurantUpdate("OrderCancelled",(data) => {   
-    //   debugger;
-    //   let index = this.ActiveOrders.findIndex(o => o.id === data.id);
-    //   if(index !== -1 && index){
-    //     this.ActiveOrders.splice(index,1);
-    //   }
-    // });
+
 }
 }
