@@ -60,6 +60,7 @@ export class MenuItemForm implements OnInit, OnChanges {
   initializeForm(): void {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(150)]],
+      arabicName: ['', [Validators.required, Validators.maxLength(150)]],
       price: [null, [Validators.required, Validators.min(0.01)]],
       prepTimeMinutes: [null, [Validators.required, Validators.min(1)]],
       categoryId: [null, Validators.required],
@@ -93,6 +94,7 @@ export class MenuItemForm implements OnInit, OnChanges {
       next: (menuItem) => {
         this.form.patchValue({
           name: menuItem.name,
+          arabicName: menuItem.arabicName,
           price: menuItem.price,
           prepTimeMinutes: menuItem.prepTimeMinutes,
           categoryId: menuItem.categoryId,
@@ -121,20 +123,10 @@ export class MenuItemForm implements OnInit, OnChanges {
     this.selectedImageFile = file;
   }
 
-  // onSubmit(): void {
-  //   if (this.form.invalid) {
-  //     this.form.markAllAsTouched();
-  //     return;
-  //   }
-
-  //   console.log('Submitted:', this.form.value);
-
-  //   this.formSubmitted.emit();
-  // }
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      console.log("supmitted");
+      
       return;
       
     }

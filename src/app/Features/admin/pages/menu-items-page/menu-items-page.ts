@@ -17,9 +17,6 @@ import { MenuItemsGrid } from '../../components/MenuItem/menu-items-grid/menu-it
 import { MenuItemsStats } from '../../components/MenuItem/menu-items-stats/menu-items-stats';
 import { Branch } from '../../../../Core/Models/BranchModels/branch-interface';
 
-
-
-
 @Component({
   selector: 'app-menu-items-page',
   standalone: true,
@@ -38,7 +35,7 @@ import { Branch } from '../../../../Core/Models/BranchModels/branch-interface';
 export class MenuItemsPage implements OnInit {
   menuItems: MenuItemInterface[] = [];
   categories: CategoryInterface[] = [];
-  branches : Branch[] = [];
+  branches: Branch[] = [];
 
   showFormModal = false;
   selectedMenuItemId?: number;
@@ -48,7 +45,6 @@ export class MenuItemsPage implements OnInit {
 
   showDetailsModal = false;
   selectedMenuItemDetails?: MenuItemDetailsInterface;
-
 
   isEditMode = false;
 
@@ -63,15 +59,15 @@ export class MenuItemsPage implements OnInit {
   stats: MenuItemsStatsInterface = {
     totalItems: 0,
     availableItems: 0,
-    unavailableItems: 0
+    unavailableItems: 0,
   };
 
   constructor(
     private menuItemsService: MenuItemsService,
     private categoriesService: CategoryService,
     private BranchService: BranchService,
-    private router: Router,
-  ) {}
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.loadCategories();
@@ -80,6 +76,7 @@ export class MenuItemsPage implements OnInit {
     this.loadStats();
   }
 
+  // ================= LOAD DATA =================
   loadMenuItems(): void {
     this.loading = true;
 
@@ -89,7 +86,6 @@ export class MenuItemsPage implements OnInit {
         this.totalCount = response.count;
 
         this.calculateStats();
-
         this.loading = false;
       },
       error: (error) => {
@@ -115,21 +111,20 @@ export class MenuItemsPage implements OnInit {
     });
   }
 
-  calculateStats(): void {
-    const availableItems = this.menuItems.filter((item) => item.isAvailable).length;
-
-    const totalPrice = this.menuItems.reduce((sum, item) => sum + item.price, 0);
-
-   
-  }
-  loadStats() {
+  loadStats(): void {
     this.menuItemsService.getStats().subscribe({
       next: (res) => {
         this.stats = res;
-      }
+      },
     });
   }
 
+  calculateStats(): void {
+    const availableItems = this.menuItems.filter((item) => item.isAvailable).length;
+    const totalPrice = this.menuItems.reduce((sum, item) => sum + item.price, 0);
+  }
+
+  // ================= FILTER =================
   onFiltersChanged(filters: MenuItemQueryParamsInterface): void {
     this.filters = {
       ...filters,
@@ -154,14 +149,36 @@ export class MenuItemsPage implements OnInit {
     this.filters.pageIndex = page;
     this.loadMenuItems();
   }
+  handleFormSubmitted(): void {
+    this.showFormModal = false;
+    this.loadMenuItems();
+  }
+  // ================= MODALS CONTROL =================
 
+  
+  closeAllModals(): void {
+    this.showFormModal = false;
+    this.showDeleteModal = false;
+    this.showDetailsModal = false;
+  }
+
+  // ================= OPEN =================
   onAddNew(): void {
+    this.closeAllModals();
     this.selectedMenuItemId = undefined;
     this.isEditMode = false;
     this.showFormModal = true;
   }
 
+  onEdit(id: number): void {
+    this.closeAllModals();
+    this.selectedMenuItemId = id;
+    this.isEditMode = true;
+    this.showFormModal = true;
+  }
+
   onView(id: number): void {
+    this.closeAllModals();
     this.menuItemsService.getById(id).subscribe({
       next: (menuItem) => {
         this.selectedMenuItemDetails = menuItem;
@@ -170,32 +187,26 @@ export class MenuItemsPage implements OnInit {
     });
   }
 
-  onEdit(id: number): void {
-    this.selectedMenuItemId = id;
-    this.isEditMode = true;
-    this.showFormModal = true;
-  }
-
   onDelete(id: number): void {
+    this.closeAllModals(); 
     this.selectedDeleteId = id;
     this.showDeleteModal = true;
   }
 
   onToggleAvailability(id: number): void {
     this.menuItemsService.toggleAvailability(id).subscribe({
-      next: () => this.loadMenuItems(),
+      next: () => {
+        this.loadMenuItems();
+        this.loadStats();
+      },
     });
   }
-  // Form Modal Methods
+
+  // ================= CLOSE =================
   closeFormModal(): void {
     this.showFormModal = false;
   }
 
-  handleFormSubmitted(): void {
-    this.showFormModal = false;
-    this.loadMenuItems();
-  }
-  // Delete Modal Methods
   closeDeleteModal(): void {
     this.showDeleteModal = false;
     this.selectedDeleteId = undefined;
@@ -217,5 +228,8 @@ export class MenuItemsPage implements OnInit {
     this.selectedMenuItemDetails = undefined;
   }
 
-
+  // ================= UTIL =================
+  isAnyModalOpen(): boolean {
+    return this.showFormModal || this.showDeleteModal || this.showDetailsModal;
+  }
 }
