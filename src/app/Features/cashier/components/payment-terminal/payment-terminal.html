@@ -1,0 +1,99 @@
+<div class="terminal" *ngIf="order">
+
+  <!-- ✅ Success Banner -->
+  <div class="success-banner" *ngIf="paymentSuccess">
+    <div class="success-icon-wrap">✅</div>
+    <div>
+      <div class="success-title">Payment Confirmed!</div>
+      <div class="success-sub">
+        Order #{{ order.id }} · EGP {{ order.totalAmount }} · {{ order.payment?.paymentMethod }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Method (read-only — comes from backend) -->
+  <div class="section" *ngIf="!paymentSuccess">
+    <div class="section-label">PAYMENT METHOD</div>
+    <div class="methods-grid">
+
+      <div class="method-btn" [class.active]="order.payment?.paymentMethod === 'Cash'">
+        <span class="method-icon">💵</span>
+        <span>Cash</span>
+      </div>
+
+      <div class="method-btn" [class.active]="order.payment?.paymentMethod === 'Card'">
+        <span class="method-icon">💳</span>
+        <span>Card</span>
+      </div>
+
+      <div class="method-btn" [class.active]="order.payment?.paymentMethod === 'InstaPay'">
+        <span class="method-icon">📱</span>
+        <span>InstaPay</span>
+      </div>
+
+      <div class="method-btn" [class.active]="order.payment?.paymentMethod === 'Wallet'">
+        <span class="method-icon">👛</span>
+        <span>Wallet</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Amounts Row -->
+  <div class="section amounts-row" *ngIf="!paymentSuccess">
+
+    <div class="amount-box">
+      <div class="section-label">TOTAL DUE</div>
+      <div class="total-due">EGP {{ order.totalAmount }}</div>
+    </div>
+
+    <!-- Amount Received — only shown for Cash -->
+    <div class="amount-box" *ngIf="isCash">
+      <div class="section-label">AMOUNT RECEIVED</div>
+      <input
+        type="number"
+        class="amount-input"
+        [(ngModel)]="amountReceived"
+        min="0"
+        placeholder="0"
+      />
+    </div>
+
+  </div>
+
+  <!-- Change Due — Cash only -->
+  <div class="change-row" *ngIf="isCash && !paymentSuccess">
+    <span class="change-label">Change Due</span>
+    <span class="change-value" [class.negative]="change < 0">
+      EGP {{ change | number:'1.2-2' }}
+    </span>
+  </div>
+
+  <!-- Warning if not enough cash -->
+  <div class="warning-msg" *ngIf="isCash && amountReceived > 0 && change < 0 && !paymentSuccess">
+    ⚠️ Amount received is less than total due
+  </div>
+
+  <!-- Confirm Button -->
+  <button
+    class="confirm-btn"
+    (click)="confirmPayment()"
+    [disabled]="isLoading || paymentSuccess || (isCash && amountReceived < order.totalAmount)"
+    *ngIf="!paymentSuccess"
+  >
+    <span *ngIf="!isLoading">✅ Confirm Payment</span>
+    <span *ngIf="isLoading">Processing...</span>
+  </button>
+
+  <!-- Refund Button -->
+  <button class="refund-btn" (click)="issueRefund()" *ngIf="!paymentSuccess">
+    ↩ Issue Refund
+  </button>
+
+</div>
+
+<!-- Empty State -->
+<div class="terminal-empty" *ngIf="!order">
+  <div class="empty-icon">🧾</div>
+  <p>Select an order to begin payment</p>
+</div>

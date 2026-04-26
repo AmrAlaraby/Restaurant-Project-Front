@@ -1,4 +1,4 @@
-export type OrderStatus = 'Received' | 'Preparing' | 'Ready' | 'Delivered' | 'Cancelled';
+export type OrderStatus = 'Received' | 'Preparing' | 'Ready' | 'Delivered' | 'Cancelled' | 'AwaitingPayment' | 'Paid';
 
 export type OrderType = 'DineIn' | 'Delivery' | 'PickUp';
 

@@ -1,0 +1,74 @@
+.awaiting-payments {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.search-bar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.search-input {
+  flex: 1;
+  height: 44px;
+  border: none;
+  border-radius: 10px;
+  background: #f0ebe5;
+  padding: 0 16px;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+
+  &::placeholder {
+    color: #aaa;
+  }
+}
+
+.load-btn {
+  height: 44px;
+  padding: 0 22px;
+  background: #c0392b;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: #a93226;
+  }
+}
+
+.order-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip {
+  padding: 8px 16px;
+  background: #f0ebe5;
+  border: 1.5px solid transparent;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #444;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: #c0392b33;
+    background: #fdf5f4;
+  }
+
+  &.active {
+    background: #fdf5f4;
+    border-color: #c0392b;
+    color: #c0392b;
+    font-weight: 600;
+  }
+}

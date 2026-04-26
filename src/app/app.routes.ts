@@ -213,6 +213,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'payments',
+        loadComponent: () =>
+          import('./Features/cashier/pages/cashier-payment/cashier-payment').then(
+            (m) => m.CashierPayment,
+          ),
+      },
+      {
         path: 'transactions',
         loadComponent: () =>
           import('./Features/cashier/components/transaction-log/transaction-log').then(
