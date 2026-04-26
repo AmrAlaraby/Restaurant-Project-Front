@@ -94,6 +94,13 @@ export const routes: Routes = [
             (m) => m.IngredientsComponent,
           ),
       },
+      {
+        path: 'transactions',
+        loadComponent: () =>
+          import('./Features/admin/components/Payment/recent-transactions/recent-transactions').then(
+            (m) => m.RecentTransactionsComponent,
+          ),
+      },
     ],
   },
 
