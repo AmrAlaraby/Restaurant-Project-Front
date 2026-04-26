@@ -71,7 +71,7 @@ button { cursor: pointer; font-family: var(--font); }
 .sidebar {
   position: fixed;
   top: 0;
-  left: 0;
+  inset-inline-start: 0;
   width: var(--sb-width);
   height: 100vh;
   background: var(--sb-bg);
@@ -506,7 +506,7 @@ button { cursor: pointer; font-family: var(--font); }
   .sb-link:hover .sb-label {
     display: block;
     position: absolute;
-    left: calc(100% + 10px);
+    inset-inline-start: calc(100% + 10px);
     top: 50%;
     transform: translateY(-50%);
     background: var(--white);

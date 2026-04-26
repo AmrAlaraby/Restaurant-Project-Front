@@ -1,1 +1,6 @@
 @import 'app/Features/auth/pages/auth-layout/auth-layout.scss';
+
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
