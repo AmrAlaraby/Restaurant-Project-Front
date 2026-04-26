@@ -316,10 +316,11 @@ export const routes: Routes = [
   },
   {
     path: 'customer',
-
+    loadComponent: () =>
+      import('./Features/customer/pages/customer-layout/customer-layout').then((m) => m.CustomerLayout),
     children: [
       //amr
-
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       //hossam
       {
         path: 'profile',
