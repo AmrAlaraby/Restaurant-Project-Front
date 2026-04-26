@@ -201,7 +201,7 @@ export class CustomerLayout {
     this.signalR.startNotificationsConnection(token??"");
 
 
-    this.signalR.onNotification("OrderAssignedToDriver",(data) => {
+    this.signalR.onNotification("DeliveryStatusChange",(data) => {
       debugger;
       this.notifications.unshift(data);
 
