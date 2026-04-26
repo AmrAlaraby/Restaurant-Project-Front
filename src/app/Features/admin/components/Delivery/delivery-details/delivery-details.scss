@@ -106,8 +106,12 @@ $muted: #999;
 // Grid
 .details-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 // Cards
@@ -143,6 +147,16 @@ $muted: #999;
   span { color: $muted; }
   b { color: $text; font-weight: 500; }
   .red { color: $red; }
+}
+
+.phone-link {
+  color: $red;
+  font-weight: 500;
+  font-size: 13px;
+  text-decoration: none;
+  transition: opacity 0.15s;
+
+  &:hover { opacity: 0.75; }
 }
 
 .item-row {

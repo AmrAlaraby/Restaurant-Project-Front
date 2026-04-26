@@ -8,7 +8,9 @@ export interface Delivery {
   deliveredAt: string | null;
   cashCollected: number | null;
   driverName: string | null;
-  driverPhone: string | null;
+ driverNumber: string | null;
+  customerPhoneNumber: string | null;
+  customerName: string | null;
 
   order: Order;
   deliveryAddress: Address;

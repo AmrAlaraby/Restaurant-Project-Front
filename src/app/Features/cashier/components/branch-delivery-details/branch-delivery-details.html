@@ -66,14 +66,34 @@
 
   <div class="details-grid">
 
-    <!-- Info -->
+    <!-- Delivery Info -->
     <div class="info-card">
       <div class="card-title">Delivery Info</div>
-      <div class="info-row"><span>Driver</span><b>{{ delivery.driverName || 'Not Assigned' }}</b></div>
       <div class="info-row"><span>Total</span><b class="red">EGP {{ delivery.order.totalAmount }}</b></div>
       <div class="info-row"><span>Created</span><b>{{ delivery.createdAt | date:'dd/MM/yyyy hh:mm a' }}</b></div>
       <div class="info-row" *ngIf="delivery.deliveredAt"><span>Delivered</span><b>{{ delivery.deliveredAt | date:'dd/MM/yyyy hh:mm a' }}</b></div>
       <div class="info-row" *ngIf="delivery.cashCollected !== null"><span>Cash Collected</span><b>EGP {{ delivery.cashCollected }}</b></div>
+    </div>
+
+    <!-- People -->
+    <div class="info-card">
+      <div class="card-title">People</div>
+      <div class="info-row">
+        <span>Driver</span>
+        <b>{{ delivery.driverName || 'Not Assigned' }}</b>
+      </div>
+      <div class="info-row" *ngIf="delivery.driverNumber">
+        <span>Driver Phone</span>
+        <a class="phone-link" href="tel:{{ delivery.driverNumber }}">📞 {{ delivery.driverNumber }}</a>
+      </div>
+      <div class="info-row">
+        <span>Customer</span>
+        <b>{{ delivery.customerName || '—' }}</b>
+      </div>
+      <div class="info-row" *ngIf="delivery.customerPhoneNumber">
+        <span>Customer Phone</span>
+        <a class="phone-link" href="tel:{{ delivery.customerPhoneNumber }}">📞 {{ delivery.customerPhoneNumber }}</a>
+      </div>
     </div>
 
     <!-- Address -->
