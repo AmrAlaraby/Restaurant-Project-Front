@@ -159,4 +159,9 @@ export const Notification = {
   getMyNotifications: `${apiUrl}/notifications`,
   markAsRead: (id: number) => `${apiUrl}/notifications/${id}/read`,
 };
+
+export const Ai = {
+  suggest: `${apiUrl}/AiRecipe/suggest`,
+  sync: `${apiUrl}/AiRecipe/sync`,
+};
 // end of file

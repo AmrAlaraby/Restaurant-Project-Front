@@ -350,6 +350,14 @@ export const routes: Routes = [
             (m) => m.TrackDeliveryPage,
           ),
       },
+      // ✅ AI Suggest Route
+      {
+        path: 'ai-suggest',
+        loadComponent: () =>
+          import('./Features/customer/components/Ai/ai-suggest/ai-suggest').then(
+            (m) => m.AiSuggestComponent,
+          ),
+      },
       //Areej
       //Arwa
 
