@@ -58,6 +58,8 @@ export class CreateOrder {
 
   submitting = false;
 
+  lastOrderId?: number;
+
   constructor(
     private route: ActivatedRoute,
     private categoryService: CategoryService,
@@ -94,7 +96,6 @@ loadUserAndThenTables(): void {
 
   onCategoryChange(categoryId?: number): void {
     this.selectedCategoryId = categoryId;
-
     this.pageIndex = 1;
     this.loadMenuItems();
   }
@@ -113,6 +114,7 @@ loadUserAndThenTables(): void {
       }
     });
   }
+
   onPageChange(page: number): void {
     this.pageIndex = page;
     this.loadMenuItems();
@@ -123,16 +125,15 @@ loadUserAndThenTables(): void {
       pageIndex: 1,
       pageSize: 50,
       isOccupied: false,
-      branchId: this.currentUser.branchId 
+      branchId: this.currentUser.branchId
     }).subscribe(res => {
       this.tables = res.data;
-
       this.handleRouteTableSelection();
     });
   }
-   handleRouteTableSelection(): void {
-    const tableNumber = this.route.snapshot.paramMap.get('tableNumber');
 
+  handleRouteTableSelection(): void {
+    const tableNumber = this.route.snapshot.paramMap.get('tableNumber');
     if (!tableNumber) return;
 
     const matchedTable = this.tables.find(
@@ -143,28 +144,26 @@ loadUserAndThenTables(): void {
       this.selectedTableId = matchedTable.id;
     }
   }
+
   // =========================
   // ADD ITEM
   // =========================
   addToOrder(item: MenuItemInterface): void {
+    const existing = this.orderItems.find(x => x.menuItemId === item.id);
 
-  const existing = this.orderItems.find(x => x.menuItemId === item.id);
+    if (existing) {
+      existing.quantity++;
+      return;
+    }
 
-  if (existing) {
-    existing.quantity++;
-    return;
+    this.orderItems.push({
+      menuItemId: item.id,
+      quantity: 1,
+      unitPrice: item.price,
+      name: item.name,
+      imageUrl: item.imageUrl
+    } as any);
   }
-
-  this.orderItems.push({
-    menuItemId: item.id,
-    quantity: 1,
-    unitPrice: item.price,
-
-    
-    name: item.name,
-    imageUrl: item.imageUrl
-  } as any);
-}
 
   // =========================
   // REMOVE ITEM
@@ -178,7 +177,6 @@ loadUserAndThenTables(): void {
   // =========================
   decreaseQty(menuItemId: number): void {
     const item = this.orderItems.find(x => x.menuItemId === menuItemId);
-
     if (!item) return;
 
     item.quantity--;
@@ -198,103 +196,104 @@ loadUserAndThenTables(): void {
   }
 
   canSubmit(): boolean {
-
-  if (this.orderItems.length === 0) return false;
-
-  if (this.orderType === 'DineIn' && !this.selectedTableId) return false;
-
-  if (this.orderType === 'Delivery' && !this.selectedAddress) return false;
-
-  return true;
-}
+    if (this.orderItems.length === 0) return false;
+    if (this.orderType === 'DineIn' && !this.selectedTableId) return false;
+    if (this.orderType === 'Delivery' && !this.selectedAddress) return false;
+    return true;
+  }
 
   onCustomerSelected(user: CustomerInterface) {
-  this.selectedCustomer = user;
-}
+    this.selectedCustomer = user;
+  }
 
-onAddressSelected(a: DeliveryAddress) {
-  this.selectedAddress = a;
-}
+  onAddressSelected(a: DeliveryAddress) {
+    this.selectedAddress = a;
+  }
 
-addAddress(address: DeliveryAddress) {
+  addAddress(address: DeliveryAddress) {
+    if (!this.selectedCustomer) return;
 
-  if (!this.selectedCustomer) return;
-
-  this.usersService
-    .updateCustomerAddress(this.selectedCustomer.id, address)
-    .subscribe((updatedCustomer) => {
-
-      this.selectedCustomer = updatedCustomer;
-      this.selectedAddress = address;
-
-    });
-}
+    this.usersService
+      .updateCustomerAddress(this.selectedCustomer.id, address)
+      .subscribe((updatedCustomer) => {
+        this.selectedCustomer = updatedCustomer;
+        this.selectedAddress = address;
+      });
+  }
 
   buildOrder(): CreateOrderInterface {
+    const base: CreateOrderInterface = {
+      userId: this.currentUser.id,
+      branchId: this.currentUser.branchId,
+      orderType: this.orderType,
+      paymentMethod: this.paymentMethod,
+      items: this.orderItems.map(i => ({
+        menuItemId: i.menuItemId,
+        quantity: i.quantity,
+        unitPrice: i.unitPrice,
+        notes: i.notes
+      }))
+    };
 
-  const base: CreateOrderInterface = {
-    userId: this.currentUser.id,
-    branchId: this.currentUser.branchId,
-    orderType: this.orderType,
-    paymentMethod: this.paymentMethod,
-    items: this.orderItems.map(i => ({
-      menuItemId: i.menuItemId,
-      quantity: i.quantity,
-      unitPrice: i.unitPrice,
-      notes: i.notes
-    }))
-  };
+    // DINE IN
+    if (this.orderType === 'DineIn') {
+      base.tableId = this.selectedTableId!;
+    }
 
-  // DINE IN
-  if (this.orderType === 'DineIn') {
-    base.tableId = this.selectedTableId!;
+    // DELIVERY
+    if (this.orderType === 'Delivery') {
+      base.userId = this.selectedCustomer!.id;
+
+      base.deliveryAddress = {
+        buildingNumber: this.selectedAddress!.buildingNumber,
+        street: this.selectedAddress!.street,
+        city: this.selectedAddress!.city,
+        note: this.selectedAddress!.note,
+        specialMark: this.selectedAddress!.specialMark
+      } as OrderAddressInterface;
+    }
+
+    return base;
   }
-
-  // DELIVERY
-  if (this.orderType === 'Delivery') {
-
-    base.userId = this.selectedCustomer!.id;
-
-    base.deliveryAddress = {
-      buildingNumber: this.selectedAddress!.buildingNumber,
-      street: this.selectedAddress!.street,
-      city: this.selectedAddress!.city,
-      note: this.selectedAddress!.note,
-      specialMark: this.selectedAddress!.specialMark
-    } as OrderAddressInterface;
-  }
-
-  return base;
-}
 
   submitOrder() {
+    if (!this.canSubmit()) return;
 
-  if (!this.canSubmit()) return;
+    const order = this.buildOrder();
+    this.submitting = true;
 
-  const order = this.buildOrder();
+    this.orderService.createOrder(order).subscribe({
+      next: (res) => {
+        this.lastOrderId = res.id;
 
-  this.submitting = true;
+        // reset
+        this.orderItems = [];
+        this.selectedAddress = undefined;
+        this.selectedCustomer = undefined;
+        this.selectedTableId = undefined;
 
-  this.orderService.createOrder(order).subscribe({
-    next: (res) => {
+        this.submitting = false;
+        this.toast.success('Order Created Successfully');
+      },
+      error: (err) => {
+        this.submitting = false;
+        console.log(err.error);
+        this.toast.error(`Failed to create order ${err.error ? '- ' + err.error : ''}`);
+      }
+    });
+  }
 
-      // 🔥 reset
-      this.orderItems = [];
-      this.selectedAddress = undefined;
-      this.selectedCustomer = undefined;
-      this.selectedTableId = undefined;
+  markAsPaid() {
+    if (!this.lastOrderId) return;
 
-      this.submitting = false;
-
-      this.toast.success('Order Created Successfully');
-      
-    },
-    error: (err) => {
-      this.submitting = false;
-      console.log(err.error);
-      this.toast.error(`Failed to create order ${err.error ? '- ' + err.error : ''}`);
-      
-    }
-  });
-}
+    this.orderService.markAsPaid(this.lastOrderId).subscribe({
+      next: () => {
+        this.toast.success('Order Marked as Paid');
+        this.lastOrderId = undefined;
+      },
+      error: (err) => {
+        this.toast.error('Failed to mark as paid');
+      }
+    });
+  }
 }
