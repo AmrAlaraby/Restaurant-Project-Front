@@ -10,137 +10,144 @@ import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service
 import { Router } from '@angular/router';
 import { SignalRService } from '../../../../Core/Services/SignalR-Service/SignalrService';
 
-
 @Component({
   selector: 'app-waiter-orders-page',
   standalone: true,
-  imports: [CommonModule, WaiterOrderFilters, WaiterOrdersList, Pagination, OrderDetails],
+  imports: [
+    CommonModule,
+    WaiterOrderFilters,
+    WaiterOrdersList,
+    Pagination,
+    OrderDetails
+  ],
   templateUrl: './waiter-orders-page.html',
   styleUrls: ['./waiter-orders-page.scss']
 })
 export class WaiterOrdersPage implements OnInit {
 
   private ordersService = inject(OrdersService);
-private authService = inject(AuthService);
-private router = inject(Router);
-private signalR = inject(SignalRService);
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  private signalR = inject(SignalRService);
 
   orders: WaiterOrder[] = [];
 
   totalCount = 0;
   selectedOrderId: number | null = null;
-isModalOpen = false;
+  isModalOpen = false;
 
   filters: OrderFilters = {
     pageIndex: 1,
     pageSize: 10,
     status: null,
-    orderType: null
+    orderType: 'DineIn' 
   };
 
-ngOnInit() {
-  this.loadCurrentUser();
-  this.listenToOrderUpdates()
-}
+  ngOnInit() {
+    this.loadCurrentUser();
+    this.listenToOrderUpdates();
+  }
 
-listenToOrderUpdates() {
-          let token = this.authService.getAccessToken();
-    this.signalR.startRestaurantUpdatesConnection(token??"");
+  listenToOrderUpdates() {
+    let token = this.authService.getAccessToken();
+    this.signalR.startRestaurantUpdatesConnection(token ?? "");
 
-    
-    this.signalR.onRestaurantUpdate("OrderCreated",(data) => {  
-      if(this.filters.pageIndex === 1 && (!this.filters.orderType || this.filters.orderType === data.orderType))
-        { 
+    this.signalR.onRestaurantUpdate("OrderCreated", (data) => {
+      if (
+        this.filters.pageIndex === 1 &&
+        (!this.filters.orderType || this.filters.orderType === data.orderType)
+      ) {
         this.orders.unshift(data);
-        //remove last item if exceeds page size        
-        if(this.orders.length > this.filters.pageSize){
-          this.orders.pop();}
-    
+
+        if (this.orders.length > this.filters.pageSize) {
+          this.orders.pop();
         }
+      }
+
       this.totalCount++;
     });
-    
-    this.signalR.onRestaurantUpdate("OrderUpdated",(data) => {   
+
+    this.signalR.onRestaurantUpdate("OrderUpdated", (data) => {
       let index = this.orders.findIndex(o => o.id === data.id);
-      if(index !== -1 && index){
+      if (index !== -1) {
         this.orders[index] = data;
       }
     });
-    this.signalR.onRestaurantUpdate("OrderCancelled",(data) => {   
+
+    this.signalR.onRestaurantUpdate("OrderCancelled", (data) => {
       let index = this.orders.findIndex(o => o.id === data.id);
-      if(index !== -1 && index){
+      if (index !== -1) {
         this.orders[index] = data;
       }
     });
-}
+  }
 
-onFiltersChanged(filters: OrderFilters) {
-  this.filters = {
-    ...filters,
-    branchId: this.filters.branchId // 👈 نحافظ عليه
-  };
+  onFiltersChanged(filters: OrderFilters) {
+    this.filters = {
+      ...filters,
+      branchId: this.filters.branchId,
+      orderType: 'DineIn' // 
+    };
 
-  this.loadOrders();
-}
+    this.loadOrders();
+  }
 
- private loadOrders() {
-  this.ordersService.getAllOrdersForWaiter(this.filters)
-    .subscribe({
-      next: (res) => {
-        this.orders = res.data;
-        this.totalCount = res.count; 
-      },
-      error: (err) => {
-        console.error('Error loading orders:', err);
-      }
-    });
-}
-
-private loadCurrentUser() {
-  this.authService.getCurrentUser()
-    .subscribe({
-      next: (user) => {
-
-        console.log('User:', user);
-
-        if (!user.branchId) {
-          console.error('User has no branchId');
-          return;
+  private loadOrders() {
+    this.ordersService.getAllOrdersForWaiter(this.filters)
+      .subscribe({
+        next: (res) => {
+          this.orders = res.data;
+          this.totalCount = res.count;
+        },
+        error: (err) => {
+          console.error('Error loading orders:', err);
         }
+      });
+  }
 
-        this.filters.branchId = user.branchId;
+  private loadCurrentUser() {
+    this.authService.getCurrentUser()
+      .subscribe({
+        next: (user) => {
 
-        this.loadOrders(); 
-      },
-      error: (err) => {
-        console.error('Error loading user:', err);
-      }
-    });
-}
+          if (!user.branchId) {
+            console.error('User has no branchId');
+            return;
+          }
 
+          this.filters.branchId = user.branchId;
+          this.filters.orderType = 'DineIn'; 
 
- onOrderClicked(orderId: number) {
-  this.selectedOrderId = orderId;
-  this.isModalOpen = true;
-}
+          this.loadOrders();
+        },
+        error: (err) => {
+          console.error('Error loading user:', err);
+        }
+      });
+  }
 
-onAddItemClicked(orderId: number) {
-  this.selectedOrderId = orderId;
-  this.isModalOpen = true;
-}
+  onOrderClicked(orderId: number) {
+    this.selectedOrderId = orderId;
+    this.isModalOpen = true;
+  }
 
-closeModal() {
-  this.isModalOpen = false;
-  this.selectedOrderId = null;
-  this.loadOrders(); 
-}
+  onAddItemClicked(orderId: number) {
+    this.selectedOrderId = orderId;
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+    this.selectedOrderId = null;
+    this.loadOrders();
+  }
 
   onPageChanged(page: number) {
-  this.filters.pageIndex = page;
-  this.loadOrders();
-}
+    this.filters.pageIndex = page;
+    this.loadOrders();
+  }
 
-goToNewOrder() {
-  this.router.navigate(['/waiter/place-order']);
-}
+  goToNewOrder() {
+    this.router.navigate(['/waiter/place-order']);
+  }
 }
