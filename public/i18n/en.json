@@ -8,6 +8,44 @@
   },
 
   "ADMIN": {
+    "HOME": {
+      "STATS": {
+        "TODAY_SALE": "Today Sale",
+        "ORDERS_TODAY": "Orders Today",
+        "AVG_ORDER": "Avg Order Value",
+        "LOW_STOCK": "Low Stock Alerts"
+      },
+
+      "REVENUE": {
+        "TITLE": "Revenue Trends",
+        "EMPTY": "No revenue data available yet."
+      },
+
+      "ORDERS": {
+        "TITLE": "Order Breakdown",
+        "DINE_IN": "Dine In",
+        "PICKUP": "Pickup",
+        "DELIVERY": "Delivery"
+      },
+
+      "TOP_ITEMS": {
+        "TITLE": "Top Selling Items",
+        "EMPTY": "No items found.",
+        "ORDERS": "orders"
+      },
+
+      "INVENTORY": {
+        "TITLE": "Inventory Usage",
+        "EMPTY": "No inventory data.",
+        "SHOW_ALL": "Show All",
+        "TABLE": {
+          "INDEX": "#",
+          "INGREDIENT": "Ingredient",
+          "USED": "Used",
+          "UNIT": "Unit"
+        }
+      }
+    },
     "LAYOUT": {
       "TOPBAR": {
         "DASHBOARD": "Dashboard",

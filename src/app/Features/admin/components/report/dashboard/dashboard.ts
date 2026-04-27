@@ -6,11 +6,13 @@ import { OrdersByTypeDTO } from '../../../../../Core/Models/ReportModels/orders-
 import { TopItemsDTO } from '../../../../../Core/Models/ReportModels/top-items-model';
 import { InventoryUsageDTO } from '../../../../../Core/Models/ReportModels/inventory-usage-model';
 import { ReportService } from '../../../../../Core/Services/Report-Service/report-service';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,TranslatePipe],
   selector: 'app-dashboard',
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.scss']
@@ -22,11 +24,17 @@ export class DashboardComponent implements OnInit {
   orders?: OrdersByTypeDTO;
   topItems: TopItemsDTO[] = [];
   inventory: InventoryUsageDTO[] = [];
+  CurrentLanguage: string = 'en';
 
-  constructor(private reportService: ReportService) {}
+  constructor(private reportService: ReportService,private localizationService:LocalizationService) {}
 
   ngOnInit(): void {
     this.loadData();
+    this.getCurrentLanguage();
+  }
+
+  getCurrentLanguage(): void {
+    this.CurrentLanguage = this.localizationService.getCurrentLang();
   }
 
   loadData() {
@@ -91,5 +99,17 @@ export class DashboardComponent implements OnInit {
         console.error('Response body:', err.error);
       }
     });
+  }
+  getIngredientName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+     return item.ingredientArabicName || item.ingredientName;
+    }
+    return item.ingredientName;
+  }
+    getmenuItemName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+     return item.arabicName || item.name;
+    }
+    return item.name;
   }
 }
