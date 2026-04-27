@@ -150,6 +150,7 @@ export const Order = {
   addItems: (orderId: number) => `${apiUrl}/Order/${orderId}/items`,
   removeItem: (orderId: number, itemId: number) => `${apiUrl}/Order/${orderId}/items/${itemId}`,
   cancel: (orderId: number) => `${apiUrl}/Order/${orderId}/cancel`,
+  markAsPaid: (orderId: number) => `${apiUrl}/Order/${orderId}/mark-paid`,
 };
 
 export const signalRUrl = {

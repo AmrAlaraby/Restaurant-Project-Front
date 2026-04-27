@@ -18,7 +18,7 @@ import { CashierOrder, PaymentMethod, PaymentStatus } from '../../Models/OrderMo
 export class OrdersService {
   constructor(private http: HttpClient) {}
 
-  
+
   createOrder(dto: CreateOrderInterface): Observable<OrderInterface> {
     return this.http.post<OrderInterface>(Order.create, dto);
   }
@@ -125,8 +125,8 @@ getAllOrders(
         : order.userName,
     itemsCount: order.orderItems?.length ?? 0,
     status: order.status as OrderStatus,
-    paymentStatus: order.paymentStatus as PaymentStatus | undefined,     
-    paymentMethod: order.paymentMethod as PaymentMethod | undefined,    
+    paymentStatus: order.paymentStatus as PaymentStatus | undefined,
+    paymentMethod: order.paymentMethod as PaymentMethod | undefined,
   };
 }
 
@@ -140,5 +140,8 @@ getAllOrdersForCashier(params: OrderFilters) {
       data: res.data.map(o => this.mapToCashierOrder(o))
     }))
   );
+}
+markAsPaid(orderId: number): Observable<any> {
+  return this.http.patch(Order.markAsPaid(orderId), {});
 }
 }

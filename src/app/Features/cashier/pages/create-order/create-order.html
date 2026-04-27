@@ -137,6 +137,14 @@
 
 </div>
 
+<!-- MARK AS PAID -->
+<button
+  class="submit-btn"
+  style="background: #2980b9; margin-top: 8px;"
+  *ngIf="lastOrderId"
+  (click)="markAsPaid()">
+  Mark as Paid
+</button>
 
 <!-- SUBMIT -->
 <button
