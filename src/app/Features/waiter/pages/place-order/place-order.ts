@@ -56,7 +56,7 @@ export class PlaceOrder {
 ngOnInit(): void {
   this.loadCategories();
   this.loadUserAndThenTables();
-  this.loadMenuItems();
+  
 }
 
   loadCategories(): void {
@@ -71,7 +71,7 @@ ngOnInit(): void {
 loadUserAndThenTables(): void {
   this.authService.getCurrentUser().subscribe(user => {
     this.currentUser = user;
-
+    this.loadMenuItems();
     this.loadTables();
   });
 }
@@ -86,6 +86,7 @@ loadUserAndThenTables(): void {
   loadMenuItems(): void {
     this.menuService.getAll({
       categoryId: this.selectedCategoryId,
+      branchId: this.currentUser.branchId,
       isAvailable: true,
       pageIndex: this.pageIndex,
       pageSize: this.pageSize
