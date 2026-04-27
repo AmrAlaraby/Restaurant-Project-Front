@@ -1,0 +1,247 @@
+<div class="page-wrapper">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="header-title">
+      <span class="pin-icon">📍</span>
+      <h1>My Addresses</h1>
+    </div>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input
+      class="search-input"
+      type="text"
+      placeholder="Search by city, street, building…"
+      [value]="searchQuery()"
+      (input)="onSearchInput($any($event.target).value)"
+    />
+    @if (searchQuery()) {
+      <button class="search-clear" (click)="clearSearch()">✕</button>
+    }
+  </div>
+
+  <!-- Loading Skeleton -->
+  @if (loading()) {
+    <div class="addresses-list">
+      @for (i of [1,2,3]; track i) {
+        <div class="address-card skeleton">
+          <div class="sk-line sk-title"></div>
+          <div class="sk-line sk-body"></div>
+          <div class="sk-line sk-body short"></div>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Addresses List -->
+  @if (!loading()) {
+
+    <!-- No results -->
+    @if (filteredAddresses().length === 0) {
+      <div class="empty-state">
+        <span class="empty-icon">{{ searchQuery() ? '🔎' : '🗺️' }}</span>
+        <p>{{ searchQuery() ? 'No addresses match "' + searchQuery() + '"' : 'No addresses saved yet.' }}</p>
+        @if (searchQuery()) {
+          <button class="btn-clear-link" (click)="clearSearch()">Clear search</button>
+        }
+      </div>
+    }
+
+    @if (filteredAddresses().length > 0) {
+      <div class="addresses-list">
+        @for (addr of pagedAddresses(); track trackByAddr($index, addr); let i = $index) {
+
+          <!-- index 0 of the full filtered list = latest added -->
+          <div
+            class="address-card"
+            [class.latest-card]="(pageIndex() - 1) * pageSize() + i === 0"
+          >
+            <!-- Card Top Row -->
+            <div class="card-header">
+              <div class="card-label">
+                <span class="label-icon">🏠</span>
+                <span class="label-text">
+                  {{ addr.buildingNumber }} {{ addr.street }}
+                </span>
+                @if ((pageIndex() - 1) * pageSize() + i === 0) {
+                  <span class="badge-latest">LATEST</span>
+                }
+              </div>
+
+              <div class="card-actions">
+                <button
+                  class="btn-edit"
+                  (click)="openEdit(addr)"
+                  [disabled]="isDeleting(addr)"
+                >
+                  Edit
+                </button>
+                <button
+                  class="btn-delete"
+                  (click)="deleteAddress(addr)"
+                  [disabled]="isDeleting(addr)"
+                >
+                  @if (isDeleting(addr)) {
+                    <span class="spinner"></span>
+                  } @else {
+                    Delete
+                  }
+                </button>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="card-body">
+              <p class="address-main">
+                {{ addr.buildingNumber }} {{ addr.street }}, {{ addr.city }}
+              </p>
+              <p class="address-sub">
+                @if (addr.specialMark) {
+                  <span>{{ addr.specialMark }}</span>
+                }
+                @if (addr.note) {
+                  <span class="dot-sep">·</span>
+                  <span>{{ addr.note }}</span>
+                }
+              </p>
+            </div>
+
+          </div>
+        }
+      </div>
+
+      <!-- ── PAGINATION ── -->
+      @if (totalPages() > 1) {
+        <div class="pagination">
+          <!-- Prev -->
+          <button
+            class="page-btn nav-btn"
+            [disabled]="pageIndex() === 1"
+            (click)="goToPage(pageIndex() - 1)"
+            title="Previous"
+          >‹</button>
+
+          <!-- Page numbers -->
+          @for (p of pageNumbers(); track $index) {
+            @if (p === '...') {
+              <span class="page-ellipsis">…</span>
+            } @else {
+              <button
+                class="page-btn"
+                [class.active]="pageIndex() === p"
+                (click)="goToPage(+p)"
+              >{{ p }}</button>
+            }
+          }
+
+          <!-- Next -->
+          <button
+            class="page-btn nav-btn"
+            [disabled]="pageIndex() === totalPages()"
+            (click)="goToPage(pageIndex() + 1)"
+            title="Next"
+          >›</button>
+        </div>
+
+        <p class="pagination-info">
+          Showing {{ (pageIndex() - 1) * pageSize() + 1 }}–{{ Math.min(pageIndex() * pageSize(), filteredAddresses().length) }}
+          of {{ filteredAddresses().length }} addresses
+        </p>
+      }
+    }
+
+    <!-- Add Button -->
+    <button class="btn-add" (click)="openAdd()">
+      <span>+</span> Add New Address
+    </button>
+  }
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     MODAL OVERLAY
+═══════════════════════════════════════════ -->
+@if (modalMode()) {
+  <div class="modal-overlay" (click)="closeModal()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+
+      <div class="modal-header">
+        <h2>{{ modalMode() === 'add' ? 'Add New Address' : 'Edit Address' }}</h2>
+        <button class="modal-close" (click)="closeModal()">✕</button>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="submitForm()" class="modal-form">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Building Number <span class="req">*</span></label>
+            <input
+              type="number"
+              formControlName="buildingNumber"
+              placeholder="e.g. 15"
+              [class.input-error]="hasError('buildingNumber', 'required') || hasError('buildingNumber', 'min')"
+            />
+            @if (hasError('buildingNumber', 'required')) {
+              <span class="error-msg">Required</span>
+            }
+            @if (hasError('buildingNumber', 'min')) {
+              <span class="error-msg">Must be > 0</span>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Street <span class="req">*</span></label>
+            <input
+              type="text"
+              formControlName="street"
+              placeholder="e.g. El-Nasr St"
+              [class.input-error]="hasError('street', 'required')"
+            />
+            @if (hasError('street', 'required')) {
+              <span class="error-msg">Required</span>
+            }
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>City <span class="req">*</span></label>
+          <input
+            type="text"
+            formControlName="city"
+            placeholder="e.g. Cairo"
+            [class.input-error]="hasError('city', 'required')"
+          />
+          @if (hasError('city', 'required')) {
+            <span class="error-msg">Required</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label>Delivery Note</label>
+          <input type="text" formControlName="note" placeholder="e.g. Ring bell twice" />
+        </div>
+
+        <div class="form-group">
+          <label>Special Mark</label>
+          <input type="text" formControlName="specialMark" placeholder="e.g. Apt 5, Floor 3" />
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" (click)="closeModal()">Cancel</button>
+          <button type="submit" class="btn-save" [disabled]="saving()">
+            @if (saving()) {
+              <span class="spinner white"></span>
+            } @else {
+              {{ modalMode() === 'add' ? 'Add Address' : 'Save Changes' }}
+            }
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+}

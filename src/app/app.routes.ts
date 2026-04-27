@@ -324,7 +324,9 @@ export const routes: Routes = [
   {
     path: 'customer',
     loadComponent: () =>
-      import('./Features/customer/pages/customer-layout/customer-layout').then((m) => m.CustomerLayout),
+      import('./Features/customer/pages/customer-layout/customer-layout').then(
+        (m) => m.CustomerLayout,
+      ),
     children: [
       //amr
       { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -371,6 +373,14 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./Features/customer/components/Ai/ai-suggest/ai-suggest').then(
             (m) => m.AiSuggestComponent,
+          ),
+      },
+      // ✅ Saved Addresses Route
+      {
+        path: 'saved-addresses',
+        loadComponent: () =>
+          import('./Features/customer/pages/Address-Page/saved-addresses/saved-addresses').then(
+            (m) => m.SavedAddressesComponent,
           ),
       },
       //Areej

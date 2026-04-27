@@ -45,10 +45,6 @@ export class AuthService {
     return this.http.get<UserInterface>(Auth.currentUser);
   }
 
-  // getUserAddresses(userId: string): Observable<AddressDto[]> {
-  //   return this.http.get<AddressDto[]>(Users.getAddresses(userId));
-  // }
-
   getUserAddresses(): Observable<AddressDto[]> {
   return this.http.get<{ data: AddressDto[] }>(Users.getMyAddresses).pipe(
     map(res => res.data ?? [])
