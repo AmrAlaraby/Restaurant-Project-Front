@@ -4,7 +4,15 @@
       "USER": {
         "LOGOUT": "تسجيل الخروج"
       }
-    }
+    },
+    "PAGINATION": {
+    "SHOWING": "عرض الصفحة {{pageIndex}} من {{totalPages}} ({{totalCount}} عنصر)",
+    "PREV": "السابق",
+    "NEXT": "التالي"
+  },
+  "NOTIFICATION":{
+    "NONOTIFICATION": "لا توجد إشعارات"
+  }
   },
 
   "ADMIN": {

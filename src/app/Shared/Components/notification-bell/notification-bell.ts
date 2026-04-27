@@ -4,12 +4,13 @@ import { NotificationService } from '../../../Core/Services/Notification-Service
 import { SignalRService } from '../../../Core/Services/SignalR-Service/SignalrService';
 import { ToastService } from '../../../Core/Services/Toast-Service/toast-service';
 import { DatePipe } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-notification-bell',
   standalone: true,
-  imports : [DatePipe],
+  imports : [DatePipe,TranslatePipe],
   templateUrl: './notification-bell.html',
   styleUrl: './notification-bell.scss',
 })

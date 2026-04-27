@@ -14,7 +14,9 @@
     <div class="notification-dropdown">
 
         @if (notifications.length === 0) {
-        <div class="empty">No notifications</div>
+        <div class="empty">
+            {{ 'SHARED.NOTIFICATION.NONOTIFICATION' | translate }}
+        </div>
         }
 
         @for (n of notifications; track n.id) {
