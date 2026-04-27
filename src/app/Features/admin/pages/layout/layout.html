@@ -1,7 +1,7 @@
 <div class="layout">
 
   <!-- SIDEBAR -->
-  <app-sidebar [sections]="sidebarData" [class.open]="isOpen" prefix="admin" [isOpen]="isOpen"
+  <app-sidebar [sections]="sidebarData" [class.open]="isOpen" prefix="admin" SectionPrefix="ADMIN.LAYOUT.SIDEBAR.SECTIONS." LinkPrifix="ADMIN.LAYOUT.SIDEBAR.LINKS." [isOpen]="isOpen"
     [AvatarLetters]="AvatarLetters" [UserName]="UserName" [UserRole]="UserRole" (close)="closeSidebar()">
   </app-sidebar>
 
@@ -16,7 +16,7 @@
       </button>
 
       <div class="title">
-        {{topbarTitle}}
+        {{ topbarTitle | translate }}
       </div>
 
       <div class="topbar-right">

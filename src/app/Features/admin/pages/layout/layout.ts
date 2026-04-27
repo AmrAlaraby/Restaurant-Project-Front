@@ -8,10 +8,11 @@ import { NotificationService } from '../../../../Core/Services/Notification-Serv
 import { SignalRService } from '../../../../Core/Services/SignalR-Service/SignalrService';
 import { ToastService } from '../../../../Core/Services/Toast-Service/toast-service';
 import { LangSwitchComponent } from "../../../../Shared/Components/lang-switch/lang-switch";
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet, Sidebar, NotificationBell, LangSwitchComponent],
+  imports: [RouterOutlet, Sidebar, NotificationBell, LangSwitchComponent, TranslatePipe],
   templateUrl: './layout.html',
   styleUrl: './layout.scss',
 })
@@ -21,30 +22,30 @@ export class Layout implements OnInit {
   AvatarLetters: string = '';
   UserRole: string = '';
 
-  pageTitles: any = {
-    dashboard: 'Dashboard',
-    orders: 'Order Management',
-    kitchen: 'Kitchen Display',
-    tables: 'Table Management',
-    deliveries: 'Deliveries',
-    payments: 'Payments',
-    menu: 'Menu Items',
-    stock: 'Stock',
-    categories: 'Categories',
-    users: 'Users',
-    branches: 'Branches',
-    reports: 'Reports',
-    settings: 'Settings',
-  };
+pageTitles: any = {
+  dashboard: 'DASHBOARD',
+  orders: 'ORDERS',
+  kitchen: 'KITCHEN',
+  tables: 'TABLES',
+  deliveries: 'DELIVERIES',
+  payments: 'PAYMENTS',
+  'menu-items': 'MENU_ITEMS',
+  stock: 'STOCK',
+  categories: 'CATEGORIES',
+  users: 'USERS',
+  branches: 'BRANCHES',
+  reports: 'REPORTS',
+  settings: 'SETTINGS',
+};
 
   topbarTitle = '';
 
   sidebarData = [
     {
-      title: 'Overview',
+      title: 'OVERVIEW',
       links: [
         {
-          title: 'Dashboard',
+          title: 'DASHBOARD',
           route: 'dashboard',
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/>
@@ -53,10 +54,10 @@ export class Layout implements OnInit {
       ],
     },
     {
-      title: 'Operations',
+      title: 'OPERATIONS',
       links: [
         {
-          title: 'Orders',
+          title: 'ORDERS',
           route: 'orders',
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                   <!-- Paper -->
@@ -69,14 +70,14 @@ export class Layout implements OnInit {
                 </svg>`,
         },
         {
-          title: 'Kitchen',
+          title: 'KITCHEN',
           route: 'kitchen',
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 13V7l5-4 5 4v6"/><path d="M6 13v-3h4v3"/>
               </svg>`,
         },
         {
-          title: 'Tables',
+          title: 'TABLES',
           route: 'tables',
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
   <!-- Table -->
@@ -92,7 +93,7 @@ export class Layout implements OnInit {
 </svg>`,
         },
         {
-          title: 'Deliveries',
+          title: 'DELIVERIES',
           route: 'deliveries',
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="6" cy="6" r="3"/><path d="M2 13c0-2.5 2.2-4 4-4s4 1.5 4 4"/>
@@ -100,7 +101,7 @@ export class Layout implements OnInit {
               </svg>`,
         },
         {
-          title: 'Payments',
+          title: 'PAYMENTS',
           route: 'payments',
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="1" y="4" width="14" height="9" rx="1"/><path d="M1 8h14"/>
@@ -109,31 +110,31 @@ export class Layout implements OnInit {
       ],
     },
     {
-      title: 'Catalogue',
+      title: "CATALOGUE",
       links: [
         {
-          title: 'Menu Items',
+          title: "MENU_ITEMS",
           route: 'menu-items',
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M2 2h4v4H2zM10 2h4v4h-4zM2 10h4v4H2zM10 10h4v4h-4z"/>
               </svg>`,
         },
         {
-          title: 'Stock',
+          title: "STOCK",
           route: 'branch-stock',
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="2" y="2" width="12" height="12" rx="1.5"/><path d="M5 8h6M8 5v6"/>
               </svg>`,
         },
         {
-          title: 'Categories',
+          title: "CATEGORIES",
           route: 'categories',
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M8 2l1.5 3H13l-2.7 2 1 3.2L8 8.5l-3.3 1.7 1-3.2L3 5h3.5z"/>
               </svg>`,
         },
         {
-          title: 'Ingredients',
+          title: 'INGREDIENTS',
           route: 'ingredients',
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M8 2a4 4 0 0 1 4 4c0 4-4 8-4 8S4 10 4 6a4 4 0 0 1 4-4z"/><circle cx="8" cy="6" r="1.5"/>
@@ -142,10 +143,10 @@ export class Layout implements OnInit {
       ],
     },
     {
-      title: 'Management',
+      title: "MANAGEMENT",
       links: [
         {
-          title: 'Users',
+          title: "USERS",
           route: 'users',
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="6" cy="5" r="2.5"/><path d="M1 13c0-2.5 2.2-4 5-4s5 1.5 5 4"/>
@@ -153,7 +154,7 @@ export class Layout implements OnInit {
               </svg>`,
         },
         {
-          title: 'Branches',
+          title: "BRANCHES",
           route: 'branch',
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 13V7l5-4 5 4v6M6 13v-3h4v3"/>
@@ -173,7 +174,7 @@ export class Layout implements OnInit {
   ) {
     this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe(() => {
       const url = this.router.url.split('/').pop() || '';
-      this.topbarTitle = this.pageTitles[url] || 'Dashboard';
+      this.topbarTitle = `ADMIN.LAYOUT.TOPBAR.${this.pageTitles[url] || 'DASHBOARD'}`;
     });
   }
   ngOnInit(): void {

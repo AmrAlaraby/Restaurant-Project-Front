@@ -31,7 +31,7 @@
       @for (section of sections; track $index) {
   <div class="sb-section">
 
-    <span class="sb-section-label">{{ section.title }}</span>
+    <span class="sb-section-label">{{ SectionPrefix + section.title | translate }}</span>
 
     <ul>
       @for (link of section.links; track $index) {
@@ -44,7 +44,7 @@
           <span class="sb-icon" [innerHTML]="sanitize(link.icon)"></span>
 
           <span class="sb-label">
-            {{ link.title }}
+            {{ LinkPrifix + link.title | translate }}
           </span>
 
         </a>
@@ -282,7 +282,7 @@
       <span class="sb-user-role">{{UserRole}}</span>
     </div>
     <button class="sb-logout" (click)="logout()">
-      Logout
+      {{ 'SHARED.SIDEBAR.USER.LOGOUT' | translate }}
     </button>
   </div>
 
