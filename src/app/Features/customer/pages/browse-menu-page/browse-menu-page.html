@@ -58,20 +58,4 @@
 </div>
 
 <!-- CART BAR -->
-@if (basket$ | async; as basket) {
-
-@if (basket.items && basket.items.length > 0) {
-
-<div class="cart-bar">
-
-    <div class="cart-content" (click)="goToCart()">
-        🛒 View Cart
-        ({{ getCount(basket) }})
-        - EGP {{ getTotal(basket) }}
-    </div>
-
-</div>
-
-}
-
-}
+<app-cart-bar></app-cart-bar>
