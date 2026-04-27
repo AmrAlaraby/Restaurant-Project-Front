@@ -74,7 +74,7 @@ export class CreateOrder {
   ngOnInit(): void {
     this.loadCategories();
     this.loadUserAndThenTables();
-    this.loadMenuItems();
+    
   }
 
   loadCategories(): void {
@@ -86,12 +86,13 @@ export class CreateOrder {
     });
   }
 
-  loadUserAndThenTables(): void {
-    this.authService.getCurrentUser().subscribe(user => {
-      this.currentUser = user;
-      this.loadTables();
-    });
-  }
+loadUserAndThenTables(): void {
+  this.authService.getCurrentUser().subscribe(user => {
+    this.currentUser = user;
+    this.loadMenuItems();
+    this.loadTables();
+  });
+}
 
   onCategoryChange(categoryId?: number): void {
     this.selectedCategoryId = categoryId;
@@ -102,6 +103,7 @@ export class CreateOrder {
   loadMenuItems(): void {
     this.menuService.getAll({
       categoryId: this.selectedCategoryId,
+      branchId : this.currentUser.branchId,
       isAvailable: true,
       pageIndex: this.pageIndex,
       pageSize: this.pageSize

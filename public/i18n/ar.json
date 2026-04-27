@@ -1,0 +1,53 @@
+{
+  "SHARED": {
+    "SIDEBAR": {
+      "USER": {
+        "LOGOUT": "تسجيل الخروج"
+      }
+    }
+  },
+
+  "ADMIN": {
+    "LAYOUT": {
+      "TOPBAR": {
+        "DASHBOARD": "لوحة التحكم",
+        "ORDERS": "إدارة الطلبات",
+        "KITCHEN": "شاشة المطبخ",
+        "TABLES": "إدارة الطاولات",
+        "DELIVERIES": "التوصيل",
+        "PAYMENTS": "المدفوعات",
+        "MENU_ITEMS": "عناصر القائمة",
+        "STOCK": "المخزون",
+        "CATEGORIES": "التصنيفات",
+        "USERS": "المستخدمين",
+        "BRANCHES": "الفروع",
+        "REPORTS": "التقارير",
+        "SETTINGS": "الإعدادات"
+      },
+
+      "SIDEBAR": {
+        "SECTIONS": {
+          "OVERVIEW": "نظرة عامة",
+          "OPERATIONS": "العمليات",
+          "CATALOGUE": "الكتالوج",
+          "MANAGEMENT": "الإدارة"
+        },
+
+        "LINKS": {
+          "DASHBOARD": "لوحة التحكم",
+          "ORDERS": "الطلبات",
+          "KITCHEN": "المطبخ",
+          "TABLES": "الطاولات",
+          "DELIVERIES": "التوصيل",
+          "PAYMENTS": "المدفوعات",
+          "MENU_ITEMS": "عناصر القائمة",
+          "STOCK": "المخزون",
+          "CATEGORIES": "التصنيفات",
+          "INGREDIENTS": "المكونات",
+          "USERS": "المستخدمين",
+          "BRANCHES": "الفروع"
+        }
+      }
+    }
+  }
+}
