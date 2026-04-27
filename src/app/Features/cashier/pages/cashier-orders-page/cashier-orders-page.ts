@@ -156,10 +156,10 @@ export class CashierOrdersPage implements OnInit {
   }
 
   onPayClicked(orderId: number) {
-    this.router.navigate(['/cashier/payment', orderId]);
+    this.router.navigate(['/cashier/payments']);
   }
 
   onAssignClicked(orderId: number) {
-    this.router.navigate(['/cashier/assign-drivers', orderId]);
+    this.router.navigate(['/cashier/assign-deliveries', orderId]);
   }
 }
