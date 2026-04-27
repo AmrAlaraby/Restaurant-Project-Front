@@ -1,36 +1,68 @@
 <div class="ticket-card" [class]="'status-' + ticket.status">
+
+  <!-- HEADER -->
   <div class="ticket-header">
     <div class="ticket-id">#{{ ticket.id }}</div>
-    <div class="status-badge" [class]="'badge-' + ticket.status">{{ statusLabel }}</div>
+
+    <div class="status-badge" [class]="'badge-' + ticket.status">
+      {{ statusLabel }}
+    </div>
   </div>
 
+  <!-- META -->
   <div class="ticket-meta">
+
     <div class="meta-row">
-      <span class="meta-label">ORDER</span>
+      <span class="meta-label">
+        {{ 'ADMIN.KITCHEN.TICKET.ORDER' | translate }}
+      </span>
       <span class="meta-value">#{{ ticket.orderId }}</span>
     </div>
+
     <div class="meta-row">
-      <span class="meta-label">STATION</span>
+      <span class="meta-label">
+        {{ 'ADMIN.KITCHEN.TICKET.STATION' | translate }}
+      </span>
       <span class="meta-value station-name">{{ ticket.station }}</span>
     </div>
+
     <div class="meta-row" *ngIf="ticket.startedAt">
-      <span class="meta-label">STARTED</span>
-      <span class="meta-value">{{ ticket.startedAt | date: 'HH:mm' }}</span>
+      <span class="meta-label">
+        {{ 'ADMIN.KITCHEN.TICKET.STARTED' | translate }}
+      </span>
+      <span class="meta-value">
+        {{ ticket.startedAt | date: 'HH:mm' }}
+      </span>
     </div>
+
     <div class="meta-row" *ngIf="ticket.completedAt">
-      <span class="meta-label">DONE</span>
-      <span class="meta-value">{{ ticket.completedAt | date: 'HH:mm' }}</span>
+      <span class="meta-label">
+        {{ 'ADMIN.KITCHEN.TICKET.DONE' | translate }}
+      </span>
+      <span class="meta-value">
+        {{ ticket.completedAt | date: 'HH:mm' }}
+      </span>
     </div>
+
     <div class="meta-row" *ngIf="elapsedMinutes !== null">
-      <span class="meta-label">TIME</span>
-      <span class="meta-value" [class.time-warn]="elapsedMinutes > 15 && ticket.status !== 2">
+      <span class="meta-label">
+        {{ 'ADMIN.KITCHEN.TICKET.TIME' | translate }}
+      </span>
+      <span class="meta-value"
+            [class.time-warn]="elapsedMinutes > 15 && ticket.status !== 2">
         {{ elapsedMinutes }}m
       </span>
     </div>
+
   </div>
 
+  <!-- ACTIONS -->
   <div class="ticket-actions">
-    <button class="btn-details" (click)="onDetails()">Details</button>
+
+    <button class="btn-details" (click)="onDetails()">
+      {{ 'ADMIN.KITCHEN.TICKET.DETAILS' | translate }}
+    </button>
+
     <button
       *ngIf="nextStatus !== null"
       class="btn-advance"
@@ -38,5 +70,7 @@
     >
       {{ nextStatusLabel }}
     </button>
+
   </div>
+
 </div>

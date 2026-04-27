@@ -1,58 +1,104 @@
 <div class="modal-backdrop" (click)="onClose()">
   <div class="modal-panel" (click)="$event.stopPropagation()">
+
     <div class="modal-header">
       <div class="modal-title">
-        <span class="label">TICKET</span>
+        <span class="label">
+          {{ 'ADMIN.KITCHEN.MODAL.TICKET' | translate }}
+        </span>
         <span class="id">#{{ ticket.id }}</span>
       </div>
+
       <button class="btn-close" (click)="onClose()">✕</button>
     </div>
 
     <div class="modal-body">
+
       <div class="info-grid">
+
         <div class="info-item">
-          <span class="info-label">ORDER</span>
+          <span class="info-label">
+            {{ 'ADMIN.KITCHEN.MODAL.ORDER' | translate }}
+          </span>
           <span class="info-value">#{{ ticket.orderId }}</span>
         </div>
+
         <div class="info-item">
-          <span class="info-label">STATION</span>
+          <span class="info-label">
+            {{ 'ADMIN.KITCHEN.MODAL.STATION' | translate }}
+          </span>
           <span class="info-value highlight">{{ ticket.station }}</span>
         </div>
+
         <div class="info-item">
-          <span class="info-label">STATUS</span>
-          <span class="info-value status-val" [class]="'s-' + ticket.status">{{ statusLabel }}</span>
+          <span class="info-label">
+            {{ 'ADMIN.KITCHEN.MODAL.STATUS' | translate }}
+          </span>
+          <span class="info-value status-val"
+                [class]="'s-' + ticket.status">
+            {{ statusLabelKey | translate }}
+          </span>
         </div>
+
         <div class="info-item" *ngIf="ticket.startedAt">
-          <span class="info-label">STARTED AT</span>
-          <span class="info-value">{{ ticket.startedAt | date: 'dd MMM, HH:mm' }}</span>
+          <span class="info-label">
+            {{ 'ADMIN.KITCHEN.MODAL.STARTED_AT' | translate }}
+          </span>
+          <span class="info-value">
+            {{ ticket.startedAt | date: 'dd MMM, HH:mm' }}
+          </span>
         </div>
+
         <div class="info-item" *ngIf="ticket.completedAt">
-          <span class="info-label">COMPLETED AT</span>
-          <span class="info-value">{{ ticket.completedAt | date: 'dd MMM, HH:mm' }}</span>
+          <span class="info-label">
+            {{ 'ADMIN.KITCHEN.MODAL.COMPLETED_AT' | translate }}
+          </span>
+          <span class="info-value">
+            {{ ticket.completedAt | date: 'dd MMM, HH:mm' }}
+          </span>
         </div>
+
       </div>
 
       <div class="items-section">
-        <div class="section-label">ORDER ITEMS</div>
+
+        <div class="section-label">
+          {{ 'ADMIN.KITCHEN.MODAL.ORDER_ITEMS' | translate }}
+        </div>
+
         <div class="items-list">
-          <div class="item-row" *ngFor="let item of ticket.items; let i = index">
+
+          <div class="item-row"
+               *ngFor="let item of getItemsNames(ticket); let i = index">
             <span class="item-num">{{ i + 1 }}</span>
             <span class="item-name">{{ item }}</span>
           </div>
-          <div class="no-items" *ngIf="ticket.items.length === 0">No items found.</div>
+
+          <div class="no-items" *ngIf="ticket.items.length === 0">
+            {{ 'ADMIN.KITCHEN.MODAL.NO_ITEMS' | translate }}
+          </div>
+
         </div>
+
       </div>
+
     </div>
 
     <div class="modal-footer">
-      <button class="btn-cancel" (click)="onClose()">Close</button>
+
+      <button class="btn-cancel" (click)="onClose()">
+        {{ 'ADMIN.KITCHEN.MODAL.CLOSE' | translate }}
+      </button>
+
       <button
         *ngIf="nextStatus !== null"
         class="btn-advance"
         (click)="onAdvance()"
       >
-        {{ nextStatusLabel }}
+        {{ nextStatusLabelKey | translate }}
       </button>
+
     </div>
+
   </div>
 </div>

@@ -16,6 +16,69 @@
   },
 
   "ADMIN": {
+"KITCHEN": {
+    "STATS": {
+      "PENDING": "قيد الانتظار",
+      "PREPARING": "قيد التحضير",
+      "DONE": "تم"
+    },
+
+    "BOARD": {
+      "NO_PENDING": "لا توجد طلبات معلقة",
+      "NO_PREPARING": "لا توجد طلبات قيد التنفيذ",
+      "NO_DONE": "لا توجد طلبات مكتملة"
+    },
+
+    "LOADING": "جاري تحميل لوحة المطبخ…",
+
+    "FILTERS": {
+      "TITLE": "الفلاتر",
+      "BRANCH": "الفرع",
+      "ALL_BRANCHES": "كل الفروع",
+      "ORDER_ID": "رقم الطلب",
+      "STATION": "المحطة",
+      "ALL_STATIONS": "كل المحطات",
+      "STATUS": "الحالة",
+      "RESET": "إعادة ضبط"
+    },
+
+    "TICKET": {
+      "ORDER": "الطلب",
+      "STATION": "المحطة",
+      "STARTED": "بدأ",
+      "DONE": "انتهى",
+      "TIME": "الوقت",
+      "DETAILS": "تفاصيل"
+    },
+
+    "MODAL": {
+      "TICKET": "تذكرة",
+      "ORDER": "الطلب",
+      "STATION": "المحطة",
+      "STATUS": "الحالة",
+      "STARTED_AT": "بدأ في",
+      "COMPLETED_AT": "انتهى في",
+      "ORDER_ITEMS": "عناصر الطلب",
+      "NO_ITEMS": "لا توجد عناصر",
+      "CLOSE": "إغلاق"
+    },
+
+    "STATIONS": {
+      "ACTIVE": "المحطات النشطة",
+      "LOADING": "جاري التحميل…",
+      "EMPTY": "لا توجد محطات نشطة"
+    },
+      "STATUS": {
+        "ALL": "الكل",
+    "PENDING": "قيد الانتظار",
+    "PREPARING": "جاري التحضير",
+    "DONE": "تم"
+  },
+  "ACTIONS": {
+    "START_PREPARING": "ابدأ التحضير",
+    "MARK_DONE": "تم التحضير"
+  }
+  },
      "ORDERS": {
       "BREADCRUMB": "الرئيسية / الطلبات",
       "TITLE": "إدارة الطلبات",
