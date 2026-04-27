@@ -4,10 +4,11 @@ import { UpdateCurrentUserInterface } from '../../../../Core/Models/AuthModels/u
 import { UserInterface } from '../../../../Core/Models/AuthModels/user-interface';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,TranslatePipe],
   templateUrl: './profile.html',
   styleUrl: './profile.scss',
 })

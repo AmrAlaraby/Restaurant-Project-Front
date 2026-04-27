@@ -1,7 +1,9 @@
 <div class="dashboard">
-  <!-- ───── HEADER ───── -->
+
+  <!-- HEADER -->
   <header class="dashboard__header">
     <div class="header__left">
+
       <div class="header__avatar">
         <span class="avatar__initials">{{ driverInitial() }}</span>
         <span class="avatar__bike">🚴</span>
@@ -9,38 +11,38 @@
 
       <div class="header__info">
         <h1 class="header__greeting">
-          Ready to ride,
+          {{ 'DRIVER.DASHBOARD.READY' | translate }},
           <span class="header__name">{{ driverFirstName() }}</span>
         </h1>
-        <p class="header__branch">{{ branchLabel() }} · Nasr City Zone</p>
-      </div>
-    </div>
 
-    <!-- <button
-      class="status-toggle"
-      [class.status-toggle--online]="isOnline()"
-      [class.status-toggle--offline]="!isOnline()"
-      (click)="toggleOnlineStatus()"
-    >
-      <span class="status-toggle__dot"></span>
-      <span class="status-toggle__label">{{ isOnline() ? 'Online' : 'Offline' }}</span>
-    </button> -->
+        <p class="header__branch">
+          {{ branchLabel() }} · {{ 'DRIVER.DASHBOARD.ZONE' | translate }}
+        </p>
+      </div>
+
+    </div>
   </header>
 
-  <!-- ───── LOADING ───── -->
+  <!-- LOADING -->
   @if (loading()) {
     <div class="loading-state">
       <div class="loading-state__spinner"></div>
-      <span>Loading your dashboard…</span>
+      <span>{{ 'DRIVER.DASHBOARD.LOADING' | translate }}</span>
     </div>
   }
 
   @if (!loading()) {
-    <!-- ───── STATS ───── -->
+
+    <!-- STATS -->
     <div class="stats-grid">
+
       <div class="stat-card stat-card--cash">
-        <span class="stat-card__value">EGP {{ cashCollected() | number: '1.0-0' }}</span>
-        <span class="stat-card__label">Cash Collected</span>
+        <span class="stat-card__value">
+          EGP {{ cashCollected() | number: '1.0-0' }}
+        </span>
+        <span class="stat-card__label">
+          {{ 'DRIVER.DASHBOARD.CASH_COLLECTED' | translate }}
+        </span>
       </div>
 
       <div class="stat-card stat-card--delivered">
@@ -51,70 +53,102 @@
             ✅ {{ deliveredCount() }}
           }
         </span>
-        <span class="stat-card__label">Total Delivered</span>
+
+        <span class="stat-card__label">
+          {{ 'DRIVER.DASHBOARD.TOTAL_DELIVERED' | translate }}
+        </span>
       </div>
+
     </div>
 
-    <!-- ───── ACTIVE DELIVERY ───── -->
+    <!-- ACTIVE DELIVERY -->
     @if (activeDelivery(); as delivery) {
+
       <div class="active-delivery">
+
         <div class="active-delivery__left">
           <span class="active-delivery__bell">🔔</span>
 
           <div class="active-delivery__info">
+
             <h2 class="active-delivery__title">
-              Active Delivery — Order #{{ delivery.order.id }}
+              {{ 'DRIVER.DASHBOARD.ACTIVE_TITLE' | translate }}
+              — Order #{{ delivery.order.id }}
             </h2>
+
             <p class="active-delivery__address">
               📍 {{ formatActiveAddress() }} ·
-              {{ delivery.order.items[0]?.menuItemName || delivery.driverName || 'Item' }} · EGP
-              {{ delivery.order.totalAmount | number: '1.0-0' }}
+              {{ delivery.order.items[0]?.menuItemName || delivery.driverName || 'Item' }} ·
+              EGP {{ delivery.order.totalAmount | number: '1.0-0' }}
             </p>
+
           </div>
         </div>
 
-        <button class="btn btn--view" (click)="viewActiveDelivery()">View Details →</button>
+        <button class="btn btn--view" (click)="viewActiveDelivery()">
+          {{ 'DRIVER.DASHBOARD.VIEW_DETAILS' | translate }} →
+        </button>
+
       </div>
+
     }
 
-    <!-- ───── DONE ORDERS ───── -->
+    <!-- DONE ORDERS -->
     <div class="section">
+
       <div class="section__header">
-        <h2 class="section__title">Done Orders</h2>
-        <span class="section__badge">✅ Delivered</span>
+        <h2 class="section__title">
+          {{ 'DRIVER.DASHBOARD.DONE_TITLE' | translate }}
+        </h2>
+
+        <span class="section__badge">
+          {{ 'DRIVER.STATUS.DELIVERED' | translate }}
+        </span>
       </div>
 
       @if (doneOrders().length === 0) {
         <div class="empty-state">
           <span class="empty-state__icon">📦</span>
-          <p>No delivered orders yet</p>
+          <p>{{ 'DRIVER.DASHBOARD.EMPTY' | translate }}</p>
         </div>
       }
 
       <div class="assignments-list">
+
         @for (item of doneOrders(); track item.id) {
           <div class="assignment-card">
+
             <div class="assignment-card__left">
               <div class="assignment-card__icon">✅</div>
 
               <div class="assignment-card__info">
+
                 <h3 class="assignment-card__title">
-                  Order #{{ item.order.id }} —
-                  {{ item.driverName || 'Customer' }}
+                  {{ 'DRIVER.DASHBOARD.ORDER' | translate }} #{{ item.order.id }}
+                  — {{ item.driverName || 'Customer' }}
                 </h3>
+
                 <p class="assignment-card__meta">
-                  📍 {{ formatDeliveredAddress(item) }} · {{ item.order.itemsCount || 0 }} items ·
+                  📍 {{ formatDeliveredAddress(item) }} ·
+                  {{ item.order.itemsCount || 0 }}
+                  {{ 'DRIVER.DASHBOARD.ITEMS' | translate }} ·
                   EGP {{ item.order.totalAmount | number: '1.0-0' }}
                 </p>
+
               </div>
             </div>
 
             <div class="assignment-card__status">
-              <span class="badge badge--delivered">Delivered</span>
+              <span class="badge badge--delivered">
+                {{ 'DRIVER.STATUS.DELIVERED' | translate }}
+              </span>
             </div>
+
           </div>
         }
+
       </div>
     </div>
+
   }
 </div>

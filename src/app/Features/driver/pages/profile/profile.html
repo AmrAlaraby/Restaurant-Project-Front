@@ -1,84 +1,100 @@
 <div class="page">
-  <h1 class="page-title">My Profile</h1>
+
+  <h1 class="page-title">
+    {{ 'DRIVER.PROFILE.TITLE' | translate }}
+  </h1>
 
   @if (loading()) {
-    <div class="loading">Loading...</div>
+    <div class="loading">
+      {{ 'DRIVER.PROFILE.LOADING' | translate }}
+    </div>
   }
 
   @if (!loading() && user()) {
+
     <div class="grid">
-      <!-- LEFT COLUMN -->
+
+      <!-- LEFT -->
       <div class="col-left">
-        <!-- Profile Card -->
+
         <div class="card profile-card">
-          <div class="avatar">{{ getInitials(user()!.name) }}</div>
-          <h2>{{ user()!.name }}</h2>
-          <p class="role">{{ user()!.role }}</p>
-          <!--
-            <div class="stats">
-              <div class="stat">
-                <span class="stat-val orders">{{ shiftInfo.totalOrders }}</span>
-                <span class="stat-lbl">Orders</span>
-              </div>
-            <div class="stat">
-              <span class="stat-val sales"
-                >EGP {{ shiftInfo.totalSales / 1000 | number: '1.0-0' }}K</span
-              >
-              <span class="stat-lbl">Total Sales</span>
-            </div>
-            <div class="stat">
-              <span class="stat-val rating">⭐ {{ shiftInfo.rating }}</span>
-              <span class="stat-lbl">Rating</span>
-            </div>
+
+          <div class="avatar">
+            {{ getInitials(user()!.name) }}
           </div>
-          -->
+
+          <h2>{{ user()!.name }}</h2>
+
+          <p class="role">
+            {{ user()!.role }}
+          </p>
+
         </div>
+
       </div>
 
-      <!-- RIGHT COLUMN -->
+      <!-- RIGHT -->
       <div class="col-right">
+
         <div class="card form-card">
-          <h3 class="section-title">Personal Info</h3>
+
+          <h3 class="section-title">
+            {{ 'DRIVER.PROFILE.PERSONAL_INFO' | translate }}
+          </h3>
 
           <form [formGroup]="form" (ngSubmit)="onSave()">
+
             <div class="field">
-              <label>FULL NAME</label>
-              <input formControlName="name" type="text" placeholder="Full Name" />
+              <label>{{ 'DRIVER.PROFILE.FULL_NAME' | translate }}</label>
+              <input formControlName="name" type="text"
+                     [placeholder]="'DRIVER.PROFILE.FULL_NAME' | translate" />
+
               @if (form.get('name')?.invalid && form.get('name')?.touched) {
-                <span class="field-error">Name is required</span>
+                <span class="field-error">
+                  {{ 'DRIVER.PROFILE.ERROR_NAME' | translate }}
+                </span>
               }
             </div>
 
             <div class="field">
-              <label>EMAIL</label>
-              <input formControlName="email" type="email" placeholder="Email" />
+              <label>{{ 'DRIVER.PROFILE.EMAIL' | translate }}</label>
+              <input formControlName="email" type="email"
+                     [placeholder]="'DRIVER.PROFILE.EMAIL' | translate" />
+
               @if (form.get('email')?.invalid && form.get('email')?.touched) {
-                <span class="field-error">Valid email is required</span>
+                <span class="field-error">
+                  {{ 'DRIVER.PROFILE.ERROR_EMAIL' | translate }}
+                </span>
               }
             </div>
 
             <div class="field">
-              <label>USERNAME (optional)</label>
-              <input formControlName="userName" type="text" placeholder="Username" />
+              <label>{{ 'DRIVER.PROFILE.USERNAME' | translate }}</label>
+              <input formControlName="userName" type="text"
+                     [placeholder]="'DRIVER.PROFILE.USERNAME' | translate" />
             </div>
 
             <div class="field">
-              <label>NEW PASSWORD (optional)</label>
-              <input formControlName="newPassword" type="password" placeholder="New Password" />
+              <label>{{ 'DRIVER.PROFILE.NEW_PASSWORD' | translate }}</label>
+              <input formControlName="newPassword" type="password"
+                     [placeholder]="'DRIVER.PROFILE.NEW_PASSWORD' | translate" />
+
               @if (form.get('newPassword')?.errors?.['minlength']) {
-                <span class="field-error">Minimum 6 characters</span>
+                <span class="field-error">
+                  {{ 'DRIVER.PROFILE.ERROR_PASSWORD_LENGTH' | translate }}
+                </span>
               }
             </div>
 
             <div class="field">
-              <label>CONFIRM PASSWORD</label>
-              <input
-                formControlName="confirmPassword"
-                type="password"
-                placeholder="Confirm Password"
-              />
+              <label>{{ 'DRIVER.PROFILE.CONFIRM_PASSWORD' | translate }}</label>
+              <input formControlName="confirmPassword" type="password"
+                     [placeholder]="'DRIVER.PROFILE.CONFIRM_PASSWORD' | translate" />
+
               @if (form.errors?.['passwordMismatch'] && form.get('confirmPassword')?.touched) {
-                <span class="field-error">Passwords do not match</span>
+                <span class="field-error">
+                  {{ 'DRIVER.PROFILE.ERROR_PASSWORD_MATCH' | translate }}
+                </span>
               }
             </div>
 
@@ -87,15 +103,30 @@
             }
 
             @if (saved()) {
-              <p class="success-msg">✓ Changes saved successfully!</p>
+              <p class="success-msg">
+                {{ 'DRIVER.PROFILE.SUCCESS' | translate }}
+              </p>
             }
 
-            <button type="submit" class="btn-save" [disabled]="form.invalid">Save Changes</button>
+            <button type="submit"
+                    class="btn-save"
+                    [disabled]="form.invalid">
+
+              {{ 'DRIVER.PROFILE.SAVE' | translate }}
+
+            </button>
+
           </form>
 
-          <button class="btn-logout" (click)="onLogout()">Logout</button>
+          <button class="btn-logout" (click)="onLogout()">
+            {{ 'DRIVER.PROFILE.LOGOUT' | translate }}
+          </button>
+
         </div>
+
       </div>
+
     </div>
   }
+
 </div>

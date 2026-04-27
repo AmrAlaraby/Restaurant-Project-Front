@@ -367,6 +367,39 @@
       "PICKED_UP": "Picked Up",
       "ON_THE_WAY": "On the Way",
       "DELIVERED": "Delivered"
+    },
+        "DASHBOARD": {
+      "READY": "Ready to ride",
+      "ZONE": "Nasr City Zone",
+      "LOADING": "Loading your dashboard…",
+      "CASH_COLLECTED": "Cash Collected",
+      "TOTAL_DELIVERED": "Total Delivered",
+      "ACTIVE_TITLE": "Active Delivery",
+      "VIEW_DETAILS": "View Details",
+      "DONE_TITLE": "Done Orders",
+      "EMPTY": "No delivered orders yet",
+      "ORDER": "Order",
+      "ITEMS": "items"
+    },
+    "PROFILE": {
+      "TITLE": "My Profile",
+      "LOADING": "Loading...",
+      "PERSONAL_INFO": "Personal Info",
+
+      "FULL_NAME": "Full Name",
+      "EMAIL": "Email",
+      "USERNAME": "Username (optional)",
+      "NEW_PASSWORD": "New Password (optional)",
+      "CONFIRM_PASSWORD": "Confirm Password",
+
+      "ERROR_NAME": "Name is required",
+      "ERROR_EMAIL": "Valid email is required",
+      "ERROR_PASSWORD_LENGTH": "Minimum 6 characters",
+      "ERROR_PASSWORD_MATCH": "Passwords do not match",
+
+      "SUCCESS": "Changes saved successfully!",
+      "SAVE": "Save Changes",
+      "LOGOUT": "Logout"
     }
   }
 }

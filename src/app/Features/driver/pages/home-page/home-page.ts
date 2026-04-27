@@ -7,11 +7,12 @@ import { User } from '../../../../Core/Models/DeliveryModels/user';
 import { DeliveryService } from '../../../../Core/Services/Delivery-Service/delivery-service';
 import { UsersService } from '../../../../Core/Services/User-Service/users-service';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [CommonModule, DecimalPipe],
+  imports: [CommonModule, DecimalPipe,TranslatePipe],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
 })
