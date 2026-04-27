@@ -11,11 +11,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BasketService } from '../../../../Core/Services/Basket-Service/baskets-service';
 import { Basket } from '../../../../Core/Models/BasketModels/Basket';
 import { AsyncPipe } from '@angular/common';
+import { CartBar } from "../../components/cart-bar/cart-bar";
 
 @Component({
   selector: 'app-browse-menu-page',
   standalone: true,
-  imports: [CustomerMenuItemCard, Pagination, ReactiveFormsModule, AsyncPipe],
+  imports: [CustomerMenuItemCard, Pagination, ReactiveFormsModule, AsyncPipe, CartBar],
   templateUrl: './browse-menu-page.html',
   styleUrls: ['./browse-menu-page.scss'],
 })

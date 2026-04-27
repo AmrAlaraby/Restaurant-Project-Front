@@ -8,10 +8,11 @@ import { OrderDetailsInterface } from '../../../../Core/Models/OrderModels/order
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { SignalRService } from '../../../../Core/Services/SignalR-Service/SignalrService';
 import { Delivery } from '../../../../Core/Models/DeliveryModels/delivery';
+import { CartBar } from "../../components/cart-bar/cart-bar";
 
 @Component({
   selector: 'app-home-page',
-  imports: [CategoryList,PopularItems],
+  imports: [CategoryList, PopularItems, CartBar],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
 })
