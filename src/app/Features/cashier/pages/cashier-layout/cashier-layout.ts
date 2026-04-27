@@ -27,7 +27,7 @@ export class CashierLayout {
     kitchen: 'Kitchen Display',
     tables: 'Table Management',
     deliveries: 'Deliveries',
-    payments: 'Payments',
+    payments: 'payments',
     menu: 'Menu Items',
     stock: 'Stock',
     categories: 'Categories',

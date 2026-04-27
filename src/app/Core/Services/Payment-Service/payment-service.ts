@@ -21,12 +21,12 @@ export class PaymentService {
         );
     }
     
-    confirmCash(orderId: number) {
-    return this.http.post(
-      `https://localhost:7232/api/payment/confirm-cash/${orderId}`,
-      {}
-    );
-  }
+    confirmCash(orderId: number, paidAmount: number) {
+      return this.http.post(
+        Payment.confirmCash(orderId),
+        paidAmount
+      );
+    }
 
   getAll(params: PaymentQueryParams): Observable<PaginatedResult<PaymentDto>> {
     let httpParams = new HttpParams();

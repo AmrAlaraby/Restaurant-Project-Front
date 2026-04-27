@@ -141,6 +141,7 @@ getAllOrdersForCashier(params: OrderFilters) {
     }))
   );
 }
+
 markAsPaid(orderId: number): Observable<any> {
   return this.http.patch(Order.markAsPaid(orderId), {});
 }

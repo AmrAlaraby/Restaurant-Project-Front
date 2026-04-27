@@ -28,6 +28,7 @@ export class AuthService {
       { withCredentials: true }
     ).pipe(tap((res) => this.setSession(res.data)));
   }
+  
 
   register(data: RegisterationRequestInterface): Observable<ApiResponse<UserInterface>> {
     return this.http.post<ApiResponse<UserInterface>>(Auth.register, data);
