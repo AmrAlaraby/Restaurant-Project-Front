@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UpdateCustomerAddressDTO } from '../../../../../../Core/Models/UserModels/update-customer-address-dto';
 import { AuthService } from '../../../../../../Core/Services/Auth-Service/auth-service';
+import { AddressDto } from '../../../../../../Core/Models/AuthModels/address-dto';
 
 @Component({
   selector: 'app-add-address-modal',
@@ -13,7 +14,7 @@ import { AuthService } from '../../../../../../Core/Services/Auth-Service/auth-s
 export class AddAddressModal {
 
   @Output() closed = new EventEmitter<void>();
-  @Output() addressAdded = new EventEmitter<void>();
+  @Output() addressAdded = new EventEmitter<AddressDto[]>(); // ✅ بنبعت العناوين مباشرة
 
   loading = false;
 
@@ -53,10 +54,9 @@ export class AddAddressModal {
         };
 
         this.authService.addUserAddress(user.id, dto).subscribe({
-          next: () => {
+          next: (res) => {
             this.loading = false;
-            this.addressAdded.emit();
-            this.close();
+            this.addressAdded.emit(res.addresses ?? []); // ✅ بنبعت العناوين من الـ response
           },
           error: (err) => {
             console.error(err);

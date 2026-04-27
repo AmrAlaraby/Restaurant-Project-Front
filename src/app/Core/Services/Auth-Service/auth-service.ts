@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { Auth, Users } from '../../Constants/Api_Urls';
 import { LoginRequestInterface } from '../../Models/AuthModels/login-request-interface';
 import { TokenInterface } from '../../Models/AuthModels/token-interface';
@@ -45,9 +45,15 @@ export class AuthService {
     return this.http.get<UserInterface>(Auth.currentUser);
   }
 
-  getUserAddresses(userId: string): Observable<AddressDto[]> {
-    return this.http.get<AddressDto[]>(Users.getAddresses(userId));
-  }
+  // getUserAddresses(userId: string): Observable<AddressDto[]> {
+  //   return this.http.get<AddressDto[]>(Users.getAddresses(userId));
+  // }
+
+  getUserAddresses(): Observable<AddressDto[]> {
+  return this.http.get<{ data: AddressDto[] }>(Users.getMyAddresses).pipe(
+    map(res => res.data ?? [])
+  );
+}
 
   addUserAddress(userId: string, dto: UpdateCustomerAddressDTO): Observable<any> {
     return this.http.put(Users.updateCustomerAddress(userId), dto);
