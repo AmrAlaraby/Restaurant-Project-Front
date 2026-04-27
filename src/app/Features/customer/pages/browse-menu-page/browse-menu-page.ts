@@ -12,6 +12,7 @@ import { BasketService } from '../../../../Core/Services/Basket-Service/baskets-
 import { Basket } from '../../../../Core/Models/BasketModels/Basket';
 import { AsyncPipe } from '@angular/common';
 import { CartBar } from "../../components/cart-bar/cart-bar";
+import { BranchStateService } from '../../../../Core/Services/Branch-Service/branch-state-service';
 
 @Component({
   selector: 'app-browse-menu-page',
@@ -28,7 +29,7 @@ export class BrowseMenuPage implements OnInit {
 
   constructor(
     private basketService: BasketService,
-    // private router: Router
+    private branchState: BranchStateService
   ) { }
   private router = inject(Router);
   basket$!: Observable<Basket | null>;
@@ -53,12 +54,17 @@ export class BrowseMenuPage implements OnInit {
         : null;
 
       this.pageIndex = 1;
-      this.loadItems();
+      this.branchState.selectedBranch$.subscribe(branch => {
+        if (branch) {
+          this.pageIndex = 1;
+          this.loadItems();
+        }
+      });
     });
 
     this.handleSearch();
 
-    // 🔥 basket
+    
     this.basket$ = this.basketService.basket$;
     this.basketService.loadBasket();
   }
@@ -78,11 +84,14 @@ export class BrowseMenuPage implements OnInit {
   }
 
   loadItems() {
+    const branchId = this.branchState.getCurrentBranchId();
+
     this.menuService.getAll({
       pageIndex: this.pageIndex,
       pageSize: this.pageSize,
       search: this.searchControl.value || undefined,
       categoryId: this.selectedCategoryId || undefined,
+      branchId: branchId || undefined,
       isAvailable: true,
       sort: this.sort === 0 ? undefined : this.sort
     }).subscribe(res => {

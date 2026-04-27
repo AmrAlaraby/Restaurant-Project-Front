@@ -58,10 +58,11 @@ export class MenuItemsService {
     return this.http.patch<void>(MenuItems.toggleAvailability(id), {});
   }
 
-  getPopular() {
-  return this.http.get<MenuItemInterface[]>(MenuItems.popular);
-}
-
+  getPopular(branchId?: number) {
+    return this.http.get<MenuItemInterface[]>(MenuItems.popular, {
+      params: branchId ? { branchId } : {}
+    });
+  }
 getStats() {
   return this.http.get<MenuItemsStatsInterface>(MenuItems.stats);
 }

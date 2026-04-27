@@ -2,12 +2,12 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Branch as BranchApi } from '../../Constants/Api_Urls';
-import { Branch } from '../../Models/BranchModels/branch-interface';
 import { BranchQueryParams } from '../../Models/BranchModels/branch-query-params';
 import { CreateBranch } from '../../Models/BranchModels/create-branch';
 import { GetBranch } from '../../Models/BranchModels/get-branch';
 import { UpdateBranch } from '../../Models/BranchModels/update-branch';
 import { PaginatedResult } from '../../Models/DeliveryModels/paginated-result';
+import { BranchDto } from '../../Models/BranchModels/Branch-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +15,8 @@ import { PaginatedResult } from '../../Models/DeliveryModels/paginated-result';
 export class BranchService {
   private http = inject(HttpClient);
 
-  getBranches(): Observable<Branch[]> {
-    return this.http.get<Branch[]>(BranchApi.getAll);
+  getBranches(): Observable<BranchDto[]> {
+    return this.http.get<BranchDto[]>(BranchApi.getAll);
   }
 
   getAllWithTables(params?: BranchQueryParams): Observable<PaginatedResult<GetBranch>> {
