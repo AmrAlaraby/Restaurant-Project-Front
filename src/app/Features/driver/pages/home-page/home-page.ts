@@ -23,7 +23,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   // ── Signals ──────────────────────────────────────────────────────
   driver = signal<User | null>(null);
-  isOnline = signal<boolean>(true);
+  // isOnline = signal<boolean>(true);
   loading = signal<boolean>(true);
 
   deliveriesToday = signal<number>(0);
@@ -158,9 +158,9 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   // ─── Actions ─────────────────────────────────────────────────────
-  toggleOnlineStatus(): void {
-    this.isOnline.update((v) => !v);
-  }
+  // toggleOnlineStatus(): void {
+  //   this.isOnline.update((v) => !v);
+  // }
 
   viewActiveDelivery(): void {
     const delivery = this.activeDelivery();
