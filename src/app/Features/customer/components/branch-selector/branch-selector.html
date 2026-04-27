@@ -1,0 +1,37 @@
+<div class="branch-selector">
+
+    <!-- selected -->
+    <div class="selected" (click)="toggle()">
+
+        @if (selected$ | async; as branch) {
+        {{ branch.name }}
+        } @else {
+        Select Branch
+        }
+
+        ▼
+    </div>
+
+    <!-- dropdown -->
+    @if (isOpen) {
+
+    <div class="dropdown">
+
+        @if (branches$ | async; as branches) {
+
+        @for (b of branches; track b.id) {
+
+        <div class="item" (click)="select(b)">
+            <div class="name">{{ b.name }}</div>
+            <div class="phone">{{ b.phone }}</div>
+        </div>
+
+        }
+
+        }
+
+    </div>
+
+    }
+
+</div>

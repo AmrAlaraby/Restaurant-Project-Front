@@ -7,10 +7,13 @@ import { SignalRService } from '../../../../Core/Services/SignalR-Service/Signal
 import { ToastService } from '../../../../Core/Services/Toast-Service/toast-service';
 import { NotificationBell } from '../../../../Shared/Components/notification-bell/notification-bell';
 import { Sidebar } from '../../../../Shared/Components/sidebar/sidebar';
+import { CartIcon } from "../../components/cart-icon/cart-icon";
+import { BranchStateService } from '../../../../Core/Services/Branch-Service/branch-state-service';
+import { BranchSelector } from "../../components/branch-selector/branch-selector";
 
 @Component({
   selector: 'app-customer-layout',
-  imports: [RouterOutlet, Sidebar, NotificationBell],
+  imports: [RouterOutlet, Sidebar, NotificationBell, CartIcon, BranchSelector],
   templateUrl: './customer-layout.html',
   styleUrl: './customer-layout.scss',
 })
@@ -187,6 +190,7 @@ export class CustomerLayout {
     private notificationService: NotificationService,
     private signalR: SignalRService,
     private toast: ToastService,
+    private branchState: BranchStateService
   ) {
     this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe(() => {
       const url = this.router.url.split('/').pop() || '';
@@ -195,7 +199,8 @@ export class CustomerLayout {
   }
   ngOnInit(): void {
     this.GetCurrentUser();
-        this.loadNotifications();
+    this.loadNotifications();
+    this.branchState.loadBranches();
 
     let token = this.authService.getAccessToken();
     this.signalR.startNotificationsConnection(token??"");

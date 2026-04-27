@@ -1,0 +1,15 @@
+<div class="cart-icon" (click)="goToCart()">
+
+    🛒
+
+    @if (basket$ | async; as basket) {
+    @if (basket.items && basket.items.length > 0) {
+
+    <span class="badge">
+        {{ getCount(basket) }}
+    </span>
+
+    }
+    }
+
+</div>
