@@ -1,0 +1,46 @@
+<div class="orders-list">
+  <div
+    class="order-card"
+    *ngFor="let order of orders"
+    [ngClass]="getCardClass(order)"
+  >
+    <!-- Left: icon + info -->
+    <div class="order-left">
+      <span class="order-type-icon">{{ getTypeIcon(order) }}</span>
+      <div class="order-info">
+        <div class="order-title">
+          Order #{{ order.id }} · {{ getTypeLabel(order) }} · {{ order.userName }}
+        </div>
+        <div class="order-items">
+          <span *ngFor="let item of order.previewItems; let last = last">
+            {{ item.emoji }} {{ item.name }} ×{{ item.quantity }}<span *ngIf="!last"> · </span>
+          </span>
+          <span *ngIf="order.extraLabel" class="extra-label">· {{ order.extraLabel }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: amount + action -->
+    <div class="order-right">
+      <div class="order-amount">EGP {{ order.totalAmount }}</div>
+      <button
+        class="action-btn"
+        [ngClass]="getActionClass(order)"
+        (click)="onAction(order)"
+      >
+        {{ getActionLabel(order) }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="orders.length === 0 && !loading">
+    <span>🎉</span>
+    <p>No orders awaiting payment</p>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading" *ngIf="loading">
+    <div class="spinner"></div>
+  </div>
+</div>

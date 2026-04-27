@@ -1,0 +1,33 @@
+<div class="transactions-card">
+  <h3 class="card-title">Recent Transactions</h3>
+
+  <table class="txn-table" *ngIf="transactions.length > 0">
+    <thead>
+      <tr>
+        <th>ORDER</th>
+        <th>METHOD</th>
+        <th>AMOUNT</th>
+        <th>STATUS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let txn of transactions">
+        <td class="txn-order">#{{ txn.orderId }}</td>
+        <td class="txn-method">
+          <span class="method-icon">{{ getMethodIcon(txn.method) }}</span>
+          {{ txn.method }}
+        </td>
+        <td class="txn-amount">EGP {{ txn.amount }}</td>
+        <td>
+          <span class="status-pill" [ngClass]="getStatusClass(txn.status)">
+            {{ txn.status }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="empty-txn" *ngIf="transactions.length === 0">
+    No transactions yet
+  </div>
+</div>

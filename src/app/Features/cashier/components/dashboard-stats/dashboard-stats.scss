@@ -1,0 +1,40 @@
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 3px solid transparent;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  font-family: 'DM Mono', monospace;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #999;
+  font-weight: 500;
+}
+
+/* Accent variants matching the image */
+.green  { border-top-color: #16a34a; .stat-value { color: #16a34a; } }
+.red    { border-top-color: #c0392b; .stat-value { color: #c0392b; } }
+.green2 { border-top-color: #16a34a; .stat-value { color: #1a1a1a; } }
+.red2   { border-top-color: #c0392b; .stat-value { color: #c0392b; } }

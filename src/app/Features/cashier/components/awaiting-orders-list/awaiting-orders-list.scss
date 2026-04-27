@@ -1,0 +1,146 @@
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Order Card ──────────────────────────────────────────── */
+.order-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-left: 4px solid transparent;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  transition: transform 0.15s, box-shadow 0.15s;
+
+  &:hover {
+    transform: translateX(3px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+
+  &.card-red  { border-left-color: #c0392b; }
+  &.card-blue { border-left-color: #1d4ed8; }
+}
+
+/* ── Left ────────────────────────────────────────────────── */
+.order-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  min-width: 0;
+}
+
+.order-type-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.order-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.order-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.order-items {
+  font-size: 13px;
+  color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.extra-label {
+  color: #aaa;
+}
+
+/* ── Right ───────────────────────────────────────────────── */
+.order-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.order-amount {
+  font-size: 18px;
+  font-weight: 800;
+  color: #c0392b;
+  font-family: 'DM Mono', monospace;
+}
+
+/* ── Buttons ─────────────────────────────────────────────── */
+.action-btn {
+  height: 36px;
+  padding: 0 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &.btn-primary {
+    background: #c0392b;
+    color: #fff;
+    border: none;
+
+    &:hover { background: #a93226; }
+  }
+
+  &.btn-outline {
+    background: transparent;
+    color: #555;
+    border: 1.5px solid #ddd;
+
+    &:hover {
+      border-color: #999;
+      color: #222;
+    }
+  }
+}
+
+/* ── Empty / Loading ─────────────────────────────────────── */
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #ccc;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  span { font-size: 32px; }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #f0ebe5;
+  border-top-color: #c0392b;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

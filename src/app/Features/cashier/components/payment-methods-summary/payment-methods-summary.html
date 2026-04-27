@@ -1,0 +1,26 @@
+<div class="summary-card">
+  <h3 class="card-title">Payment Methods — Today</h3>
+
+  <div class="methods-list">
+    <div class="method-row" *ngFor="let m of summary">
+      <div class="method-left">
+        <span class="method-icon">{{ m.icon }}</span>
+        <span class="method-name">{{ m.method }}</span>
+      </div>
+      <div class="method-right">
+        <span class="method-amount">EGP {{ m.amount | number }} · {{ m.count }} txns</span>
+      </div>
+      <div class="progress-bar-wrap">
+        <div
+          class="progress-bar-fill"
+          [style.width.%]="getPercent(m)"
+          [style.background]="m.color"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-summary" *ngIf="summary.length === 0">
+    No transactions today
+  </div>
+</div>
