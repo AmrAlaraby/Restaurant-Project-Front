@@ -1,0 +1,10 @@
+<div class="stats-grid">
+  <div
+    class="stat-card"
+    *ngFor="let s of stats"
+    [ngClass]="s.accent"
+  >
+    <div class="stat-value">{{ s.value }}</div>
+    <div class="stat-label">{{ s.label }}</div>
+  </div>
+</div>

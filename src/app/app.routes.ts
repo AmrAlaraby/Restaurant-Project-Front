@@ -226,6 +226,13 @@ export const routes: Routes = [
             (m) => m.TransactionLogComponent,
           ),
       },
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('./Features/cashier/pages/cashier-dashboard/cashier-dashboard').then(
+            (m) => m.CashierDashboard,
+          ),
+      },
       //Areej 501 - 550
       //Arwa 551 - 600
       //mahmoud 601 - 650

@@ -1,0 +1,35 @@
+<div class="dashboard">
+
+  <!-- ── Top Bar ─────────────────────────────────────────── -->
+  <header class="top-bar">
+    <div class="greeting-block">
+      <h1 class="greeting">Good morning, {{ cashierName }} 💳</h1>
+      <p class="sub-info">Cashier Station · {{ branchName }} </p>
+    </div>
+    <button class="process-btn" routerLink="/cashier/payment">
+      💳 Process Payment
+    </button>
+  </header>
+
+  <!-- ── Stats Row ───────────────────────────────────────── -->
+  <app-dashboard-stats [stats]="stats"></app-dashboard-stats>
+
+  <!-- ── Awaiting Payment List ───────────────────────────── -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-title">
+        <span class="section-icon">⏳</span>
+        <h2>Awaiting Payment</h2>
+      </div>
+      <span class="section-hint">Orders that are ready and need payment</span>
+    </div>
+    <app-awaiting-orders-list (onPayNow)="goToPayment($event)"></app-awaiting-orders-list>
+  </section>
+
+  <!-- ── Bottom Row ──────────────────────────────────────── -->
+  <div class="bottom-row">
+    <app-payment-methods-summary [summary]="paymentSummary"></app-payment-methods-summary>
+    <app-recent-transactions [transactions]="recentTransactions"></app-recent-transactions>
+  </div>
+
+</div>
