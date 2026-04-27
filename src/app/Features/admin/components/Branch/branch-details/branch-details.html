@@ -138,7 +138,7 @@
     <div class="stock-list">
       <div class="stock-row" *ngFor="let s of branch()!.branchStocks" [class.low]="isLowStock(s)">
         <div class="stock-info">
-          <span class="ingredient-name">Ingredient #{{ s.ingredientId }}</span>
+          <span class="ingredient-name">{{ s.ingredientName ?? 'Ingredient #' + s.ingredientId }}</span>
           <span class="stock-warning" *ngIf="isLowStock(s)">⚠️ Low Stock</span>
         </div>
         <div class="stock-bar-wrap">
