@@ -132,7 +132,7 @@ button { cursor: pointer; font-family: var(--font); }
 /* Close button (mobile only) */
 .sb-close-btn {
   display: none;
-  margin-left: auto;
+  margin-inline-start: auto;
   width: 30px;
   height: 30px;
   border-radius: 50%;

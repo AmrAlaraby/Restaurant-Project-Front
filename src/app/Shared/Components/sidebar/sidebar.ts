@@ -3,10 +3,11 @@ import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../Core/Services/Auth-Service/auth-service';
 import { SidebarSection } from '../../../Core/Models/SharedModels/sidebar-section';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterModule],
+  imports: [RouterModule, TranslatePipe],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss',
 })
@@ -17,6 +18,8 @@ export class Sidebar implements OnChanges {
   @Input() UserName:string ='';
   @Input() AvatarLetters:string ='';
   @Input() UserRole:string ='';
+  @Input() SectionPrefix:string ='';
+  @Input() LinkPrifix:string ='';
   @Output() close = new EventEmitter<void>();
 
   

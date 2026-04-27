@@ -1,0 +1,53 @@
+{
+  "SHARED": {
+    "SIDEBAR": {
+      "USER": {
+        "LOGOUT": "Logout"
+      }
+    }
+  },
+
+  "ADMIN": {
+    "LAYOUT": {
+      "TOPBAR": {
+        "DASHBOARD": "Dashboard",
+        "ORDERS": "Order Management",
+        "KITCHEN": "Kitchen Display",
+        "TABLES": "Table Management",
+        "DELIVERIES": "Deliveries",
+        "PAYMENTS": "Payments",
+        "MENU_ITEMS": "Menu Items",
+        "STOCK": "Stock",
+        "CATEGORIES": "Categories",
+        "USERS": "Users",
+        "BRANCHES": "Branches",
+        "REPORTS": "Reports",
+        "SETTINGS": "Settings"
+      },
+
+      "SIDEBAR": {
+        "SECTIONS": {
+          "OVERVIEW": "Overview",
+          "OPERATIONS": "Operations",
+          "CATALOGUE": "Catalogue",
+          "MANAGEMENT": "Management"
+        },
+
+        "LINKS": {
+          "DASHBOARD": "Dashboard",
+          "ORDERS": "Orders",
+          "KITCHEN": "Kitchen",
+          "TABLES": "Tables",
+          "DELIVERIES": "Deliveries",
+          "PAYMENTS": "Payments",
+          "MENU_ITEMS": "Menu Items",
+          "STOCK": "Stock",
+          "CATEGORIES": "Categories",
+          "INGREDIENTS": "Ingredients",
+          "USERS": "Users",
+          "BRANCHES": "Branches"
+        }
+      }
+    }
+  }
+}
