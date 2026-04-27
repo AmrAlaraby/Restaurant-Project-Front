@@ -3,10 +3,12 @@ import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { Sidebar } from '../../../../Shared/Components/sidebar/sidebar';
+import { LangSwitchComponent } from "../../../../Shared/Components/lang-switch/lang-switch";
+import { NotificationBell } from "../../../../Shared/Components/notification-bell/notification-bell";
 
 @Component({
   selector: 'app-waiter-layout',
-  imports: [RouterOutlet, Sidebar],
+  imports: [RouterOutlet, Sidebar, LangSwitchComponent, NotificationBell],
   templateUrl: './waiter-layout.html',
   styleUrl: './waiter-layout.scss',
 })

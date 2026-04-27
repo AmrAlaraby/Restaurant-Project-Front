@@ -9,6 +9,7 @@ import { OrderDetailsModal } from '../../components/tables/order-details-modal/o
 import { TableOrderInterface } from '../../../../Core/Models/TableModels/table-order-interface';
 import { TableFilter } from '../../components/tables/table-filter/table-filter';
 import { CustomTableModal } from '../../components/tables/custom-table-modal/custom-table-modal';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 @Component({
@@ -21,6 +22,7 @@ import { CustomTableModal } from '../../components/tables/custom-table-modal/cus
     OrderDetailsModal,
     TableFilter,
     CustomTableModal,
+    TranslatePipe
   ],
   templateUrl: './tables-page.html',
   styleUrls: ['./tables-page.scss'],
@@ -132,7 +134,8 @@ export class TablesPage implements OnInit {
           this.showOrderModal = true;
           return;
         }
-        const orderId = orders[0].orderId;
+
+        const orderId = orders[orders.length-1].orderId;
         this.tableOrdersService.getOrderDetails(orderId).subscribe({
           next: (orderDetails) => {
             this.selectedOrder = orderDetails;

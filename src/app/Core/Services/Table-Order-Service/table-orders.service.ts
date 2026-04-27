@@ -28,6 +28,7 @@ export class TableOrdersService {
         tableNumber: res.tablenumber,
         items: res.orderItems.map((item) => ({
           name: item.menuItemName,
+          arabicName: item.arabicMenuItemName,
           quantity: item.quantity,
           price: item.unitPrice,
         })),

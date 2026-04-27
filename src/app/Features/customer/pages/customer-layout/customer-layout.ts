@@ -7,13 +7,14 @@ import { SignalRService } from '../../../../Core/Services/SignalR-Service/Signal
 import { ToastService } from '../../../../Core/Services/Toast-Service/toast-service';
 import { NotificationBell } from '../../../../Shared/Components/notification-bell/notification-bell';
 import { Sidebar } from '../../../../Shared/Components/sidebar/sidebar';
+import { LangSwitchComponent } from "../../../../Shared/Components/lang-switch/lang-switch";
 import { CartIcon } from "../../components/cart-icon/cart-icon";
 import { BranchStateService } from '../../../../Core/Services/Branch-Service/branch-state-service';
 import { BranchSelector } from "../../components/branch-selector/branch-selector";
-
+imports: [RouterOutlet, Sidebar, NotificationBell, LangSwitchComponent]
 @Component({
   selector: 'app-customer-layout',
-  imports: [RouterOutlet, Sidebar, NotificationBell, CartIcon, BranchSelector],
+  imports: [RouterOutlet, Sidebar, NotificationBell, CartIcon, BranchSelector, LangSwitchComponent],
   templateUrl: './customer-layout.html',
   styleUrl: './customer-layout.scss',
 })

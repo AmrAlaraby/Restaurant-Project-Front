@@ -12,11 +12,15 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TableInterface } from '../../../../../Core/Models/TableModels/table-interface';
 import { BranchService } from '../../../../../Core/Services/Branch-Service/branch-service';
 import { Branch } from '../../../../../Core/Models/BranchModels/branch-interface';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
+import { Subject, takeUntil } from 'rxjs';
+import { KitchenService } from '../../../../../Core/Services/Kitchen-Service/kitchen-service';
 
 @Component({
   selector: 'app-custom-table-modal',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,TranslatePipe],
   templateUrl: './custom-table-modal.html',
   styleUrls: ['./custom-table-modal.scss'],
 })
@@ -36,6 +40,10 @@ export class CustomTableModal implements OnChanges, OnInit {
     branchId: number;
   }>();
 
+  constructor(private localizationService: LocalizationService,private kitchenService: KitchenService) {}
+    CurrentLanguage: string = 'en';
+    
+
   branches: Branch[] = [];
   private branchService = inject(BranchService);
   form = this.fb.nonNullable.group({
@@ -49,7 +57,19 @@ export class CustomTableModal implements OnChanges, OnInit {
       next: (res) => (this.branches = res),
       error: (err) => console.error(err),
     });
+
+    this.getCurrentLanguage();
   }
+
+  private destroy$ = new Subject<void>();
+    getCurrentLanguage(): void {
+      this.CurrentLanguage = this.localizationService.getCurrentLang();
+      this.localizationService.currentLang$
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(lang => {
+      this.CurrentLanguage = lang;
+    });
+    }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['table']) {
@@ -95,4 +115,10 @@ export class CustomTableModal implements OnChanges, OnInit {
   const cap = this.form.controls.capacity.value;
   return Array(Math.min(cap || 1, 20)).fill(0);
 }
+  getBranchName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+     return item.arabicName || item.name;
+    }
+    return item.name;
+  }
 }

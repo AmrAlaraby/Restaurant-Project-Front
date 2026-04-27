@@ -8,6 +8,7 @@ export interface OrderDetailsDTO {
 }
 export interface OrderItemDTO {
   menuItemName: string;
+  arabicMenuItemName?: string;
   quantity: number;
   unitPrice: number;
 }
