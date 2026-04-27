@@ -1,4 +1,4 @@
-<div class="dashboard" [class.dashboard--offline]="!isOnline()">
+<div class="dashboard">
   <!-- ───── HEADER ───── -->
   <header class="dashboard__header">
     <div class="header__left">
@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <button
+    <!-- <button
       class="status-toggle"
       [class.status-toggle--online]="isOnline()"
       [class.status-toggle--offline]="!isOnline()"
@@ -24,7 +24,7 @@
     >
       <span class="status-toggle__dot"></span>
       <span class="status-toggle__label">{{ isOnline() ? 'Online' : 'Offline' }}</span>
-    </button>
+    </button> -->
   </header>
 
   <!-- ───── LOADING ───── -->
