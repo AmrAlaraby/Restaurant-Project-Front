@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { OrderFilters, OrderStatus, OrderType } from '../../../../../Core/Models/OrderModels/waiter-order.model';
 
 @Component({
@@ -11,7 +11,7 @@ import { OrderFilters, OrderStatus, OrderType } from '../../../../../Core/Models
 export class WaiterOrderFilters {
 
   @Output() filtersChanged = new EventEmitter<OrderFilters>();
-
+  @Input() hideTypeFilter: boolean = false;
   activeStatus: OrderStatus | null = null;
   activeType: OrderType | null = null;
 
@@ -46,7 +46,7 @@ export class WaiterOrderFilters {
       pageIndex: 1,
       pageSize: 10,
       status: this.activeStatus,
-      orderType: this.activeType
+      orderType: this.hideTypeFilter ? 'DineIn' : this.activeType
     });
   }
 }
