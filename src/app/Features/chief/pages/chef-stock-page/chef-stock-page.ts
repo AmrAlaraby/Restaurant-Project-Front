@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ChefLowStockComponent } from '../../components/chef-kitchen/chef-low-stock/chef-low-stock';
 import { ChefAvailableStockComponent } from '../../components/chef-kitchen/chef-available-stock/chef-available-stock';
 import { BranchStockInterface } from '../../../../Core/Models/BranchStockModels/BranchStockInterface';
@@ -12,7 +13,7 @@ import { SignalRService } from '../../../../Core/Services/SignalR-Service/Signal
 @Component({
   selector: 'app-chef-stock-page',
   standalone: true,
-  imports: [CommonModule, ChefLowStockComponent, ChefAvailableStockComponent],
+  imports: [CommonModule, FormsModule, ChefLowStockComponent, ChefAvailableStockComponent],
   templateUrl: './chef-stock-page.html',
   styleUrl: './chef-stock-page.scss'
 })
@@ -20,6 +21,7 @@ export class ChefStockPageComponent implements OnInit {
 
   allStocks: BranchStockInterface[] = [];
   loading = true;
+  searchTerm = '';
 
   constructor(
     private service:        BranchStockService,
@@ -58,11 +60,19 @@ export class ChefStockPageComponent implements OnInit {
     );
   }
 
+  private get filteredStocks(): BranchStockInterface[] {
+    const term = this.searchTerm.trim().toLowerCase();
+    if (!term) return this.allStocks;
+    return this.allStocks.filter(s =>
+      s.ingredientName?.toLowerCase().includes(term) ?? false
+    );
+  }
+
   get lowStocks(): BranchStockInterface[] {
-    return this.allStocks.filter(s => s.quantityAvailable <= s.lowThreshold);
+    return this.filteredStocks.filter(s => s.quantityAvailable <= s.lowThreshold);
   }
 
   get availableStocks(): BranchStockInterface[] {
-    return this.allStocks.filter(s => s.quantityAvailable > s.lowThreshold);
+    return this.filteredStocks.filter(s => s.quantityAvailable > s.lowThreshold);
   }
 }

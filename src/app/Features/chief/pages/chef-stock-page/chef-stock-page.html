@@ -12,6 +12,16 @@
     <span>Loading stock...</span>
   </div>
 
+  <!-- Search -->
+  <div class="search-wrap" *ngIf="!loading">
+    <span class="search-icon">🔍</span>
+    <input
+      class="search-input"
+      type="text"
+      placeholder="Search ingredient..."
+      [(ngModel)]="searchTerm" />
+  </div>
+
   <!-- Grid: Low + Available side by side -->
   <div class="stock-grid" *ngIf="!loading">
 
