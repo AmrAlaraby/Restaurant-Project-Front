@@ -4,7 +4,15 @@
       "USER": {
         "LOGOUT": "Logout"
       }
-    }
+    },
+    "PAGINATION": {
+    "SHOWING": "Showing Page {{pageIndex}} of {{totalPages}} ({{totalCount}} Items)",
+    "PREV": "Prev",
+    "NEXT": "Next"
+  },
+  "NOTIFICATION":{
+    "NONOTIFICATION": "No notifications"
+  }
   },
 
   "ADMIN": {
