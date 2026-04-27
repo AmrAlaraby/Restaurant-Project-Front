@@ -16,7 +16,7 @@
   },
 
   "ADMIN": {
-    
+
     "TABLES": {
        "ORDER_MODAL": {
         "NO_ACTIVE_TITLE": "لا يوجد طلب نشط",
@@ -308,5 +308,66 @@
         }
       }
     }
+  },
+
+  "DRIVER": {
+    "STATUS": {
+      "Assigned": "تم التعيين",
+      "PickedUp": "تم الاستلام",
+      "OnTheWay": "في الطريق",
+      "Delivered": "تم التوصيل",
+
+      "ASSIGNED": "تم التعيين",
+      "PICKED_UP": "تم الاستلام",
+      "ON_THE_WAY": "في الطريق",
+      "DELIVERED": "تم التوصيل"
+    },
+    "DELIVERY_DETAILS": {
+      "LOADING": "جاري التحميل...",
+      "ORDER": "طلب",
+      "INFO": "بيانات التوصيل",
+      "TOTAL": "الإجمالي",
+      "CREATED": "تاريخ الإنشاء",
+      "DELIVERED_AT": "تم التوصيل",
+      "CASH_COLLECTED": "المبلغ المحصل",
+      "PEOPLE": "الأشخاص",
+      "DRIVER": "السائق",
+      "DRIVER_PHONE": "هاتف السائق",
+      "CUSTOMER": "العميل",
+      "CUSTOMER_PHONE": "هاتف العميل",
+      "NOT_ASSIGNED": "غير معين",
+      "ADDRESS": "عنوان التوصيل",
+      "BUILDING": "المبنى",
+      "STREET": "الشارع",
+      "CITY": "المدينة",
+      "MARK": "علامة مميزة",
+      "ITEMS": "عناصر الطلب",
+      "UPDATE_STATUS": "تحديث الحالة",
+      "MOVE_TO": "انتقال إلى →",
+      "CASH_PLACEHOLDER": "المبلغ المحصل (جنيه)",
+      "BACK": "رجوع ←"
+    },
+      "DELIVERIES": {
+      "TITLE": "إدارة التوصيلات",
+      "SUBTITLE": "تتبع مباشر للسائق",
+      "LOADING": "جاري تحميل التوصيلات...",
+      "EMPTY": "لا توجد طلبات مخصصة لك.",
+      "ORDER": "طلب",
+      "DRIVER": "السائق",
+      "NA": "غير متاح",
+      "COLLECTED": "تم تحصيل"
+    },
+    "STATUS": {
+      "Assigned": "تم التعيين",
+      "PickedUp": "تم الاستلام",
+      "OnTheWay": "في الطريق",
+      "Delivered": "تم التوصيل",
+
+      "ASSIGNED": "تم التعيين",
+      "PICKED_UP": "تم الاستلام",
+      "ON_THE_WAY": "في الطريق",
+      "DELIVERED": "تم التوصيل"
+    }
   }
 }
+

@@ -16,7 +16,7 @@
   },
 
   "ADMIN": {
-   
+
     "TABLES": {
       "ORDER_MODAL": {
         "NO_ACTIVE_TITLE": "No active order",
@@ -198,7 +198,7 @@
         "INSTAPAY": "InstaPay",
         "WALLET": "Wallet"
        }
-      },     
+      },
 
       "MODAL": {
         "NEW_ORDER": "New Order",
@@ -310,42 +310,84 @@
     }
   },
 
-  
+  "DRIVER": {
+    "STATUS": {
+      "Assigned": "Assigned",
+      "PickedUp": "Picked Up",
+      "OnTheWay": "On the Way",
+      "Delivered": "Delivered",
 
+      "ASSIGNED": "Assigned",
+      "PICKED_UP": "Picked Up",
+      "ON_THE_WAY": "On the Way",
+      "DELIVERED": "Delivered"
+    },
+    "DELIVERY_DETAILS": {
+      "LOADING": "Loading...",
+      "ORDER": "Order",
+      "INFO": "Delivery Info",
+      "TOTAL": "Total",
+      "CREATED": "Created",
+      "DELIVERED_AT": "Delivered",
+      "CASH_COLLECTED": "Cash Collected",
+      "PEOPLE": "People",
+      "DRIVER": "Driver",
+      "DRIVER_PHONE": "Driver Phone",
+      "CUSTOMER": "Customer",
+      "CUSTOMER_PHONE": "Customer Phone",
+      "NOT_ASSIGNED": "Not Assigned",
+      "ADDRESS": "Delivery Address",
+      "BUILDING": "Building",
+      "STREET": "Street",
+      "CITY": "City",
+      "MARK": "Mark",
+      "ITEMS": "Order Items",
+      "UPDATE_STATUS": "Update Status",
+      "MOVE_TO": "Move to →",
+      "CASH_PLACEHOLDER": "Cash Collected (EGP)",
+      "BACK": "← Back"
+    },
+      "DELIVERIES": {
+      "TITLE": "Delivery Management",
+      "SUBTITLE": "Live driver tracking",
+      "LOADING": "Loading your deliveries...",
+      "EMPTY": "No deliveries assigned to you.",
+      "ORDER": "Order",
+      "DRIVER": "Driver",
+      "NA": "N/A",
+      "COLLECTED": "Collected"
+    },
+    "STATUS": {
+      "Assigned": "Assigned",
+      "PickedUp": "Picked Up",
+      "OnTheWay": "On the Way",
+      "Delivered": "Delivered",
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- "AMR": "350"
+      "ASSIGNED": "Assigned",
+      "PICKED_UP": "Picked Up",
+      "ON_THE_WAY": "On the Way",
+      "DELIVERED": "Delivered"
+    }
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
