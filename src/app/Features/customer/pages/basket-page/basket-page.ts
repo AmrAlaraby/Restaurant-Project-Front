@@ -93,25 +93,23 @@ export class BasketPage {
     this.showAddressModal = false;
   }
 
-  onAddressAdded() {
+  onAddressAdded(addresses: AddressDto[]) {
     this.showAddressModal = false;
-    this.loadUserAddresses();
+    this.savedAddresses = addresses; // ✅ بناخد العناوين من الـ response مباشرة
+    if (addresses.length > 0) {
+      this.selectedAddress = addresses[addresses.length - 1]; // ✅ بنختار العنوان الجديد
+    }
   }
 
   private loadUserAddresses() {
-    this.authService.getCurrentUser().subscribe({
-      next: (user) => {
-        this.authService.getUserAddresses(user.id).subscribe({
-          next: (addresses) => {
-            this.savedAddresses = addresses;
-            if (addresses.length > 0) {
-              this.selectedAddress = addresses[0];
-            }
-          },
-          error: (err) => console.error('Failed to load addresses', err)
-        });
+    this.authService.getUserAddresses().subscribe({
+      next: (addresses) => {
+        this.savedAddresses = addresses;
+        if (addresses.length > 0) {
+          this.selectedAddress = addresses[0];
+        }
       },
-      error: (err) => console.error('Failed to get user', err)
+      error: (err) => console.error('Failed to load addresses', err)
     });
   }
 

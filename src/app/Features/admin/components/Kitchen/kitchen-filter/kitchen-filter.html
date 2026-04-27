@@ -1,47 +1,65 @@
 <div class="filter-bar">
+
   <div class="filter-title">
     <span class="filter-icon">⚙</span>
-    <span>FILTERS</span>
+    <span>
+      {{ 'ADMIN.KITCHEN.FILTERS.TITLE' | translate }}
+    </span>
   </div>
 
   <div class="filter-fields">
 
     <!-- Branch Dropdown -->
     <div class="field-group">
-      <label>Branch</label>
+      <label>
+        {{ 'ADMIN.KITCHEN.FILTERS.BRANCH' | translate }}
+      </label>
+
       <select
         [(ngModel)]="params.branchId"
         (ngModelChange)="onBranchChange()"
         class="field-input"
       >
-        <option [ngValue]="null">All Branches</option>
+        <option [ngValue]="null">
+          {{ 'ADMIN.KITCHEN.FILTERS.ALL_BRANCHES' | translate }}
+        </option>
+
         <option *ngFor="let branch of branches" [ngValue]="branch.id">
-          {{ branch.name }}
+          {{ getBranchName(branch) }}
         </option>
       </select>
     </div>
 
     <!-- Order ID -->
     <div class="field-group">
-      <label>Order ID</label>
+      <label>
+        {{ 'ADMIN.KITCHEN.FILTERS.ORDER_ID' | translate }}
+      </label>
+
       <input
         type="number"
         [(ngModel)]="params.orderId"
         (ngModelChange)="onOrderIdChange()"
-        placeholder="e.g. 101"
+        [placeholder]="'e.g. 101'" 
         class="field-input"
       />
     </div>
 
     <!-- Station Dropdown -->
     <div class="field-group">
-      <label>Station</label>
+      <label>
+        {{ 'ADMIN.KITCHEN.FILTERS.STATION' | translate }}
+      </label>
+
       <select
         [(ngModel)]="params.station"
         (ngModelChange)="onFilterChange()"
         class="field-input"
       >
-        <option [ngValue]="null">All Stations</option>
+        <option [ngValue]="null">
+          {{ 'ADMIN.KITCHEN.FILTERS.ALL_STATIONS' | translate }}
+        </option>
+
         <option *ngFor="let s of stations" [value]="s.station">
           {{ s.station }} ({{ s.pendingCount }} pending)
         </option>
@@ -50,21 +68,27 @@
 
     <!-- Status -->
     <div class="field-group">
-      <label>Status</label>
+      <label>
+        {{ 'ADMIN.KITCHEN.FILTERS.STATUS' | translate }}
+      </label>
+
       <select
-        [(ngModel)]="params.status"
-        (ngModelChange)="onFilterChange()"
-        class="field-input"
-      >
-        <option *ngFor="let opt of statusOptions" [ngValue]="opt.value">
-          {{ opt.label }}
-        </option>
-      </select>
+  [(ngModel)]="params.status"
+  (ngModelChange)="onFilterChange()"
+  class="field-input"
+>
+  <option *ngFor="let opt of statusOptions" [ngValue]="opt.value">
+    {{ 'ADMIN.KITCHEN.STATUS.' + opt.key | translate }}
+  </option>
+</select>
     </div>
 
   </div>
 
   <div class="filter-actions">
-    <button class="btn-reset" (click)="onReset()">Reset</button>
+    <button class="btn-reset" (click)="onReset()">
+      {{ 'ADMIN.KITCHEN.FILTERS.RESET' | translate }}
+    </button>
   </div>
+
 </div>

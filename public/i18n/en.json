@@ -4,10 +4,81 @@
       "USER": {
         "LOGOUT": "Logout"
       }
-    }
+    },
+    "PAGINATION": {
+    "SHOWING": "Showing Page {{pageIndex}} of {{totalPages}} ({{totalCount}} Items)",
+    "PREV": "Prev",
+    "NEXT": "Next"
+  },
+  "NOTIFICATION":{
+    "NONOTIFICATION": "No notifications"
+  }
   },
 
   "ADMIN": {
+    "KITCHEN": {
+    "STATS": {
+      "PENDING": "Pending",
+      "PREPARING": "Preparing",
+      "DONE": "Done"
+    },
+
+    "BOARD": {
+      "NO_PENDING": "No pending tickets",
+      "NO_PREPARING": "No tickets in progress",
+      "NO_DONE": "No completed tickets"
+    },
+
+    "LOADING": "Loading kitchen board…",
+
+    "FILTERS": {
+      "TITLE": "Filters",
+      "BRANCH": "Branch",
+      "ALL_BRANCHES": "All Branches",
+      "ORDER_ID": "Order ID",
+      "STATION": "Station",
+      "ALL_STATIONS": "All Stations",
+      "STATUS": "Status",
+      "RESET": "Reset"
+    },
+
+    "TICKET": {
+      "ORDER": "Order",
+      "STATION": "Station",
+      "STARTED": "Started",
+      "DONE": "Done",
+      "TIME": "Time",
+      "DETAILS": "Details"
+    },
+
+    "MODAL": {
+      "TICKET": "Ticket",
+      "ORDER": "Order",
+      "STATION": "Station",
+      "STATUS": "Status",
+      "STARTED_AT": "Started At",
+      "COMPLETED_AT": "Completed At",
+      "ORDER_ITEMS": "Order Items",
+      "NO_ITEMS": "No items found",
+      "CLOSE": "Close"
+    },
+
+    "STATIONS": {
+      "ACTIVE": "Active Stations",
+      "LOADING": "Loading…",
+      "EMPTY": "No active stations"
+    },
+    "STATUS": {
+      "ALL": "All",
+    "PENDING": "Pending",
+    "PREPARING": "Preparing",
+    "DONE": "Done"
+  },
+  "ACTIONS": {
+    "START_PREPARING": "Start Preparing",
+    "MARK_DONE": "Mark Done"
+  }
+  },
     "ORDERS": {
       "BREADCRUMB": "Home / Orders",
       "TITLE": "Order Management",

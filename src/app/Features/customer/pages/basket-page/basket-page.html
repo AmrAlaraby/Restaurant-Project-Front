@@ -1,4 +1,3 @@
-
 @if (basket$ | async; as basket) {
 
 <div class="basket-container">
@@ -132,10 +131,10 @@
 
 }
 
-<!-- ✅ MODAL (FIXED) -->
+<!-- ✅ MODAL -->
 @if (showAddressModal) {
   <app-add-address-modal
     (closed)="onModalClosed()"
-    (addressAdded)="onAddressAdded()">
+    (addressAdded)="onAddressAdded($event)">  <!-- ✅ أضفنا $event -->
   </app-add-address-modal>
 }

@@ -4,8 +4,11 @@
 >
 
   <div class="pagination-info">
-    Showing Page {{ pageIndex }} of {{ totalPages }}
-    ({{ totalCount }} Items)
+    {{ 'SHARED.PAGINATION.SHOWING' | translate : {
+  pageIndex: pageIndex,
+  totalPages: totalPages,
+  totalCount: totalCount
+} }}
   </div>
 
   <div class="pagination-controls">
@@ -15,7 +18,7 @@
       [disabled]="pageIndex === 1"
       (click)="changePage(pageIndex - 1)"
     >
-      Prev
+      {{ 'SHARED.PAGINATION.PREV' | translate }}
     </button>
 
     <button
@@ -32,7 +35,7 @@
       [disabled]="pageIndex === totalPages"
       (click)="changePage(pageIndex + 1)"
     >
-      Next
+      {{ 'SHARED.PAGINATION.NEXT' | translate }}
     </button>
 
   </div>

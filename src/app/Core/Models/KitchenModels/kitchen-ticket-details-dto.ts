@@ -8,4 +8,5 @@ export interface KitchenTicketDetailsDto {
   completedAt: string | null;
   orderId: number;
   items: string[];
+  arabicItems: string[];
 }

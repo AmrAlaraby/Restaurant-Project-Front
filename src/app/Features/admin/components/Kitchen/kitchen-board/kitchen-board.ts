@@ -16,6 +16,8 @@ import { KitchenService } from '../../../../../Core/Services/Kitchen-Service/kit
 import { TicketStatus } from '../../../../../Core/Models/KitchenModels/ticket-status';
 import { OrderDetailsInterface } from '../../../../../Core/Models/OrderModels/order-details-interface';
 import { KitchenTicketStatusDto } from '../../../../../Core/Models/KitchenModels/kitchen-ticket-status-dto';
+import { TranslatePipe } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-kitchen-board',
@@ -26,6 +28,7 @@ import { KitchenTicketStatusDto } from '../../../../../Core/Models/KitchenModels
     TicketCardComponent,
     TicketDetailsModalComponent,
     ActiveStationsBarComponent,
+    TranslatePipe
   ],
   templateUrl: './kitchen-board.html',
   styleUrls: ['./kitchen-board.scss'],
