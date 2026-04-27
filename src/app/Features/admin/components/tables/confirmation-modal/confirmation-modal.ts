@@ -1,14 +1,17 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-confirmation-modal',
   standalone: true,
+  imports: [TranslatePipe],
   templateUrl: './confirmation-modal.html',
   styleUrls: ['./confirmation-modal.scss'],
 })
 export class ConfirmationModal {
   @Input() isOpen = false;
-  @Input() message = 'Are you sure?';
+  @Input() message = 'ADMIN.TABLES.MODAL.MESSAGE';
   @Input() isError = false;
 
   @Output() confirm = new EventEmitter<void>();

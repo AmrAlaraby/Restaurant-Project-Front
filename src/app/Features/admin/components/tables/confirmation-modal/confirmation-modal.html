@@ -2,15 +2,25 @@
   <div class="modal-backdrop">
     <div class="modal-box">
 
-      <p>{{ message }}</p>
+      <p>{{ message | translate }}</p>
 
       <div class="actions">
 
         @if (!isError) {
-          <button (click)="onConfirm()">Yes</button>
-          <button (click)="onCancel()">Cancel</button>
+          <button (click)="onConfirm()">
+            {{ 'ADMIN.TABLES.MODAL.YES' | translate }}
+          </button>
+
+          <button (click)="onCancel()">
+            {{ 'ADMIN.TABLES.MODAL.CANCEL' | translate }}
+          </button>
+
         } @else {
-          <button (click)="onCancel()">OK</button>
+
+          <button (click)="onCancel()">
+            {{ 'ADMIN.TABLES.MODAL.OK' | translate }}
+          </button>
+
         }
 
       </div>
@@ -18,6 +28,7 @@
     </div>
   </div>
 }
+
 <!-- @if (isOpen) {
   <div class="modal-backdrop" (click)="onBackdropClick($event)">
     <div class="modal-box">

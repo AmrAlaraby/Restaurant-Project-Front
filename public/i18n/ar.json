@@ -16,6 +16,65 @@
   },
 
   "ADMIN": {
+    
+    "TABLES": {
+       "ORDER_MODAL": {
+        "NO_ACTIVE_TITLE": "لا يوجد طلب نشط",
+        "NO_ACTIVE_SUBTITLE": "لا يوجد طلب نشط",
+        "NO_ORDER_TITLE": "لا يوجد طلب بعد",
+        "NO_ORDER_SUB": "هذه الطاولة مشغولة ولكن لم يتم إنشاء طلب بعد.",
+        "CLOSE": "إغلاق",
+        "ORDER": "طلب",
+        "CUSTOMER": "العميل",
+        "STATUS": "الحالة",
+        "ITEMS": "الأصناف",
+        "TOTAL": "الإجمالي"
+      },
+      "FORM": {
+        "EDIT_TITLE": "تعديل الطاولة",
+        "ADD_TITLE": "إضافة طاولة جديدة",
+        "EDIT_SUB": "تحديث بيانات الطاولة",
+        "ADD_SUB": "قم بإدخال البيانات المطلوبة",
+        "TABLE_NUMBER": "رقم الطاولة",
+        "TABLE_NUMBER_PLACEHOLDER": "T01 أو T001",
+        "TABLE_NUMBER_HINT": "الصيغة: حرف T ثم رقمين أو 3 أرقام",
+        "CAPACITY": "السعة",
+        "CAPACITY_PLACEHOLDER": "مثال: 4",
+        "BRANCH": "الفرع",
+        "SELECT_BRANCH": "اختر الفرع",
+        "SEAT_PREVIEW": "معاينة المقاعد",
+        "PREVIEW_HINT": "أدخل السعة لعرض المقاعد",
+        "DISCARD": "إلغاء",
+        "CREATE": "إنشاء الطاولة",
+        "SAVE_CHANGES": "حفظ التعديلات",
+        "VALIDATION": {
+          "REQUIRED": "مطلوب",
+          "TABLE_NUMBER_REQUIRED": "رقم الطاولة مطلوب",
+          "TABLE_NUMBER_PATTERN": "يجب أن يبدأ بـ T متبوعًا برقمين أو 3 أرقام"
+        }
+      }
+,
+       "MODAL": {
+    "YES": "نعم",
+    "NO": "لا",
+    "OK": "حسناً",
+    "CANCEL": "إلغاء",
+    "MESSAGE": "هل أنت متأكد أنك تريد حذف الطاولة؟"
+  },
+  "TITLE": "إدارة الطاولات",
+  "SUBTITLE": "متابعة وإدارة جميع طاولات المطعم",
+
+  "STATUS": {
+    "AVAILABLE": "متاحة",
+    "OCCUPIED": "مشغولة"
+  },
+
+  "ACTIONS": {
+    "ADD_TABLE": "إضافة طاولة"
+  },
+
+  "EMPTY": "لا توجد طاولات"
+},
 "KITCHEN": {
     "STATS": {
       "PENDING": "قيد الانتظار",

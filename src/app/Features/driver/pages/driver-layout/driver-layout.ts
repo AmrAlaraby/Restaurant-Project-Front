@@ -7,10 +7,11 @@ import { SignalRService } from '../../../../Core/Services/SignalR-Service/Signal
 import { ToastService } from '../../../../Core/Services/Toast-Service/toast-service';
 import { NotificationBell } from '../../../../Shared/Components/notification-bell/notification-bell';
 import { Sidebar } from '../../../../Shared/Components/sidebar/sidebar';
+import { LangSwitchComponent } from "../../../../Shared/Components/lang-switch/lang-switch";
 
 @Component({
   selector: 'app-driver-layout',
-  imports: [RouterOutlet, Sidebar, NotificationBell],
+  imports: [RouterOutlet, Sidebar, NotificationBell, LangSwitchComponent],
   templateUrl: './driver-layout.html',
   styleUrl: './driver-layout.scss',
 })

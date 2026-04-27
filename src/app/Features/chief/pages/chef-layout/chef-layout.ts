@@ -7,10 +7,11 @@ import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service
 import { NotificationService } from '../../../../Core/Services/Notification-Service/NotificatoinService';
 import { SignalRService } from '../../../../Core/Services/SignalR-Service/SignalrService';
 import { ToastService } from '../../../../Core/Services/Toast-Service/toast-service';
+import { LangSwitchComponent } from "../../../../Shared/Components/lang-switch/lang-switch";
 
 @Component({
   selector: 'app-chef-layout',
-  imports: [RouterOutlet, Sidebar, NotificationBell],
+  imports: [RouterOutlet, Sidebar, NotificationBell, LangSwitchComponent],
   templateUrl: './chef-layout.html',
   styleUrl: './chef-layout.scss',
 })

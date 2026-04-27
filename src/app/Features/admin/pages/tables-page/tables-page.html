@@ -3,47 +3,64 @@
   <!-- ── Page Header ── -->
   <div class="page-header">
     <div class="page-header__title">
-      <h2>Table Management</h2>
-      <p>Monitor and manage all restaurant tables</p>
+      <h2>{{ 'ADMIN.TABLES.TITLE' | translate }}</h2>
+      <p>{{ 'ADMIN.TABLES.SUBTITLE' | translate }}</p>
     </div>
 
     <div class="header-right">
+
       <!-- Status Legend -->
       <div class="status-legend">
         <div class="legend-item">
-          <span class="legend-dot available"></span> Available
+          <span class="legend-dot available"></span>
+          {{ 'ADMIN.TABLES.STATUS.AVAILABLE' | translate }}
         </div>
+
         <div class="legend-item">
-          <span class="legend-dot occupied"></span> Occupied
+          <span class="legend-dot occupied"></span>
+          {{ 'ADMIN.TABLES.STATUS.OCCUPIED' | translate }}
         </div>
       </div>
 
       <!-- Add Table Button -->
       <button class="btn-add" (click)="openCreateModal()">
+
         <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
           <path d="M7 2v10M2 7h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
         </svg>
-        Add Table
+
+        {{ 'ADMIN.TABLES.ACTIONS.ADD_TABLE' | translate }}
+
       </button>
+
     </div>
   </div>
 
   <!-- ── Filter ── -->
-  <app-table-filter (filterChanged)="onFilterChanged($event)"></app-table-filter>
+  <app-table-filter
+    (filterChanged)="onFilterChanged($event)">
+  </app-table-filter>
 
-  <!-- ── No Tables ── -->
+  <!-- ── Empty State ── -->
   @if (tables.length === 0) {
     <div class="empty-state">
+
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
         <rect width="48" height="48" rx="24" fill="#FDECEA"/>
-        <path d="M16 20h16M16 28h10" stroke="#C0392B" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M16 20h16M16 28h10"
+              stroke="#C0392B"
+              stroke-width="1.5"
+              stroke-linecap="round"/>
       </svg>
-      <p>No Tables Found</p>
+
+      <p>{{ 'ADMIN.TABLES.EMPTY' | translate }}</p>
+
     </div>
   }
 
   <!-- ── Tables Grid ── -->
   <div class="tables-grid">
+
     @for (table of tables; track table.id) {
       <app-table-card
         [table]="table"
@@ -53,6 +70,7 @@
         (edit)="onEditTable($event)"
       ></app-table-card>
     }
+
   </div>
 
   <!-- ── Pagination ── -->
@@ -60,26 +78,26 @@
     [pageIndex]="pageIndex"
     [pageSize]="pageSize"
     [totalCount]="totalCount"
-    (pageChanged)="onPageChanged($event)"
-  ></app-pagination>
+    (pageChanged)="onPageChanged($event)">
+  </app-pagination>
 
 </div>
 
 <!-- ── Confirmation Modal ── -->
 <app-confirmation-modal
   [isOpen]="showModal"
-  [message]="modalMessage"
+  [message]="'ADMIN.TABLES.MODAL.MESSAGE'"
   [isError]="isErrorModal"
   (confirm)="confirmDelete()"
-  (cancel)="closeModal()"
-></app-confirmation-modal>
+  (cancel)="closeModal()">
+</app-confirmation-modal>
 
 <!-- ── Order Details Modal ── -->
 <app-order-details-modal
   [isOpen]="showOrderModal"
   [order]="selectedOrder"
-  (close)="closeOrderModal()"
-></app-order-details-modal>
+  (close)="closeOrderModal()">
+</app-order-details-modal>
 
 <!-- ── Custom Table Modal ── -->
 <app-custom-table-modal
@@ -87,5 +105,5 @@
   [isEdit]="isEditMode"
   [table]="selectedTable"
   (close)="closeTableModal()"
-  (save)="onSaveTable($event)"
-></app-custom-table-modal>
+  (save)="onSaveTable($event)">
+</app-custom-table-modal>
