@@ -3,6 +3,7 @@ import { CashierOrder } from '../../../../Core/Models/OrderModels/cashier-order.
 import { OrdersService } from '../../../../Core/Services/Orders-Service/orders-service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 
 @Component({
   selector: 'app-awaiting-payments',
@@ -18,17 +19,21 @@ export class AwaitingPayments implements OnInit {
 
   @Output() onSelect = new EventEmitter<number>();
 
-  constructor(private orderService: OrdersService) {}
+  constructor(private orderService: OrdersService, private authService: AuthService) {}
 
   ngOnInit() {
     this.loadOrders();
+
   }
+
 
   loadOrders() {
     this.orderService.getAllOrdersForCashier({
       pageIndex: 1,
       pageSize: 20,
-      status: 'AwaitingPayment'
+      paymentStatus: 'Pending',
+     
+   
     }).subscribe(res => {
       this.orders = res.data;
     });

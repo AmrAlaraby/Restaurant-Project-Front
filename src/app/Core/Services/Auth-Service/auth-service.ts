@@ -28,6 +28,7 @@ export class AuthService {
       { withCredentials: true }
     ).pipe(tap((res) => this.setSession(res.data)));
   }
+  
 
   register(data: RegisterationRequestInterface): Observable<ApiResponse<UserInterface>> {
     return this.http.post<ApiResponse<UserInterface>>(Auth.register, data);
@@ -44,6 +45,8 @@ export class AuthService {
   getCurrentUser(): Observable<UserInterface> {
     return this.http.get<UserInterface>(Auth.currentUser);
   }
+
+
 
   getUserAddresses(userId: string): Observable<AddressDto[]> {
     return this.http.get<AddressDto[]>(Users.getAddresses(userId));

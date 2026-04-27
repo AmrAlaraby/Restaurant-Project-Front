@@ -47,7 +47,7 @@ export class PaymentTerminal implements OnChanges {
     return this.order?.payment?.paymentMethod === 'Cash';
   }
 
-  // Change Due = money from customer - order total
+  // Change Due = money received from customer - order total
   get change(): number {
     if (!this.order) return 0;
     return this.amountReceived - this.order.totalAmount;
@@ -57,17 +57,20 @@ export class PaymentTerminal implements OnChanges {
     if (!this.order) return;
     this.isLoading = true;
 
-    const method = this.order.payment?.paymentMethod;
+    const method = this.order?.payment?.paymentMethod;
 
     if (method === 'Cash') {
-      this.paymentService.confirmCash(this.orderId).subscribe({
-        next: () => {
-          this.handleSuccess();
-        },
+
+      this.paymentService.confirmCash(this.orderId, this.order.totalAmount).subscribe({
+        
+        next: () => this.handleSuccess(),
         error: () => { this.isLoading = false; }
+        
       });
 
+
     } else if (method === 'Card') {
+
       this.paymentService.pay(this.orderId).subscribe({
         next: (res) => {
           window.open(res.iframeUrl, '_blank');
@@ -77,26 +80,26 @@ export class PaymentTerminal implements OnChanges {
       });
 
     } else {
-      // InstaPay / Wallet — adjust to your API
-      this.paymentService.confirmCash(this.orderId).subscribe({
-        next: () => {
-          this.handleSuccess();
-        },
+      // InstaPay / Wallet — نفس منطق الـ cash (بدّل لو عندك endpoint مختلف)
+      this.paymentService.confirmCash(this.orderId, this.order.totalAmount).subscribe({
+        next: () => this.handleSuccess(),
         error: () => { this.isLoading = false; }
       });
     }
   }
 
   private handleSuccess() {
-    // ✅ Update payment status locally to Paid
-    if (this.order.payment) {
+    // ✅ تحديث الـ status محلياً فوراً
+    if (this.order?.payment) {
       this.order.payment.paymentStatus = 'Paid';
+      this.order.payment.paidAmount = this.amountReceived;
     }
     this.order.status = 'Paid';
+
     this.isLoading = false;
     this.paymentSuccess = true;
 
-    // After 3 seconds, emit to parent to reload the orders list
+    // بعد 3 ثواني ابعت event للـ parent عشان يعمل reload للأوردرات
     setTimeout(() => {
       this.paymentConfirmed.emit();
     }, 3000);

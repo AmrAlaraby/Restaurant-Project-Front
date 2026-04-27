@@ -27,7 +27,7 @@ export class CashierLayout {
     kitchen: 'Kitchen Display',
     tables: 'Table Management',
     deliveries: 'Deliveries',
-    payments: 'Payments',
+    payments: 'payments',
     menu: 'Menu Items',
     stock: 'Stock',
     categories: 'Categories',
@@ -52,7 +52,7 @@ export class CashierLayout {
         },
         {
           title: 'Process Payment',
-          route: 'Payments',
+          route: 'payments',
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                   <!-- Card -->
                   <rect x="1.5" y="3" width="13" height="9" rx="1.5"/>
