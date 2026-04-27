@@ -1,6 +1,7 @@
 export interface BranchDto {
   id: number;
   name: string;
+  arabicName: string;
   phone: string;
   isActive: boolean;
 

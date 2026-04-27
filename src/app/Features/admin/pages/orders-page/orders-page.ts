@@ -11,10 +11,11 @@ import { OrderStats } from '../../components/Order/order-stats/order-stats';
 import { OrderTable } from '../../components/Order/order-table/order-table';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { SignalRService } from '../../../../Core/Services/SignalR-Service/SignalrService';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-orders-page',
-  imports: [OrderStats, OrderFilters, OrderTable, OrderModal, OrderDetails, Pagination],
+  imports: [OrderStats, OrderFilters, OrderTable, OrderModal, OrderDetails, Pagination, TranslatePipe],
   templateUrl: './orders-page.html',
   styleUrl: './orders-page.scss',
 })

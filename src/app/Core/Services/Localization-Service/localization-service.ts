@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocalizationService {
   constructor(private translate: TranslateService) {}
+
+  currentLang$ = new BehaviorSubject<string>('en');
+
 
   init() {
   const savedLang = localStorage.getItem('lang');
@@ -29,6 +33,7 @@ const lang = browserLang?.toLowerCase().includes('ar') ? 'ar' : 'en';
 
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    this.currentLang$.next(lang);
   }
 
   getCurrentLang() {

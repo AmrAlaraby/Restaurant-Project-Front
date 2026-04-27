@@ -5,12 +5,14 @@ import { CreateOrderInterface } from '../../../../../Core/Models/OrderModels/cre
 import { MenuItemsService } from '../../../../../Core/Services/Menu-Item-Service/menu-item-service';
 import { OrdersService } from '../../../../../Core/Services/Orders-Service/orders-service';
 import { TableService } from '../../../../../Core/Services/Table-Service/table-service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
 
 @Component({
   selector: 'app-order-modal',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,TranslatePipe],
   templateUrl: './order-modal.html',
   styleUrl: './order-modal.scss',
 })
@@ -19,6 +21,8 @@ export class OrderModal implements OnInit {
   @Output() close = new EventEmitter();
 
   form!: FormGroup;
+
+  CurrentLanguage: string = 'en';
 
   tables = signal<any[]>([]);
   menuItems = signal<any[]>([]);
@@ -29,17 +33,27 @@ export class OrderModal implements OnInit {
     private fb: FormBuilder,
     private ordersService: OrdersService,
     private tableService: TableService,
-    private menuService: MenuItemsService
+    private menuService: MenuItemsService,
+    private localizationService:LocalizationService
   ) {}
 
   ngOnInit() {
     this.initForm();
     this.loadMenu();
     this.addItem();
+    this.getCurrentLanguage();
 
     this.form.valueChanges.subscribe(() => {
     this.calculateTotal();
   });
+  }
+
+  getCurrentLanguage(): void {
+    this.CurrentLanguage = this.localizationService.getCurrentLang();
+    this.localizationService.currentLang$
+    .subscribe(lang => {
+      this.CurrentLanguage = lang;
+    });
   }
 
 total = 0;
@@ -174,4 +188,17 @@ onMenuChange(i: number) {
       }
     });
 }
+
+  getBranchName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+     return item.arabicName || item.name;
+    }
+    return item.name;
+  }
+  getMenuItemName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+     return item.arabicName || item.name;
+    }
+    return item.name;
+  }
 }

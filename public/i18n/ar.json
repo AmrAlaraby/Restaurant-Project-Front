@@ -8,6 +8,97 @@
   },
 
   "ADMIN": {
+     "ORDERS": {
+      "BREADCRUMB": "الرئيسية / الطلبات",
+      "TITLE": "إدارة الطلبات",
+      "NEW_ORDER": "طلب جديد",
+
+      "FILTERS": {
+        "ALL_TYPES": "كل الأنواع",
+        "ALL_STATUS": "كل الحالات",
+        "ALL_BRANCHES": "كل الفروع",
+
+        "DINEIN": "داخل المطعم",
+        "PICKUP": "استلام",
+        "DELIVERY": "توصيل",
+
+        "RECEIVED": "تم الاستلام",
+        "PREPARING": "قيد التحضير",
+        "READY": "جاهز",
+        "DELIVERED": "تم التوصيل",
+        "CANCELLED": "ملغي",
+        "AWAITINGPAYMENT": "في انتظار الدفع"
+      },
+
+      "TABLE": {
+        "ID": "رقم",
+        "CUSTOMER": "العميل",
+        "TYPE": "النوع",
+        "STATUS": "الحالة",
+        "TOTAL": "الإجمالي"
+      },
+
+      "STATS": {
+        "TOTAL": "إجمالي الطلبات",
+        "DELIVERED": "تم التوصيل",
+        "PREPARING": "قيد التحضير",
+        "CANCELLED": "ملغي"
+      },
+
+      "DETAILS": {
+        "ORDER": "طلب",
+        "CUSTOMER": "العميل",
+        "TYPE": "النوع",
+        "TOTAL": "الإجمالي",
+
+        "QTY": "الكمية",
+        "ADD_ITEMS": "إضافة عناصر",
+        "SELECT_ITEM": "اختر عنصر",
+
+        "SAVE": "حفظ",
+
+        "UPDATE_STATUS": "تحديث الحالة",
+
+        "CANCEL_ORDER": "إلغاء الطلب"
+      },
+      "ENUMS": {
+        "PAYMENT_METHOD": {
+        "CASH": "نقدي",
+        "CARD": "بطاقة",
+        "INSTAPAY": "إنستا باي",
+        "WALLET": "محفظة إلكترونية"
+          }
+      },
+
+      "MODAL": {
+        "NEW_ORDER": "طلب جديد",
+        "BRANCH": "الفرع",
+        "SELECT_BRANCH": "اختر الفرع",
+
+        "ORDER_TYPE": "نوع الطلب",
+        "SELECT_TYPE": "اختر النوع",
+
+        "TABLE": "الطاولة",
+        "SELECT_TABLE": "اختر طاولة",
+
+        "CUSTOMER_ID": "رقم العميل",
+
+        "PAYMENT": "طريقة الدفع",
+
+        "TOTAL": "الإجمالي",
+        "PLACE_ORDER": "إنشاء الطلب",
+
+        "BUILDING": "رقم المبنى",
+        "STREET": "الشارع",
+        "CITY": "المدينة",
+        "NOTE": "ملاحظة",
+        "MARK": "علامة مميزة",
+        "SELECT_ITEM": "اختر عنصر",
+
+        "ADD_ITEM": "إضافة عنصر"
+
+      }
+    },
     "HOME": {
       "STATS": {
         "TODAY_SALE": "مبيعات اليوم",
