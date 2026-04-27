@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { OrderInterface } from '../../../../../Core/Models/OrderModels/order-interface';
+import { TranslatePipe } from '@ngx-translate/core';
 // import { OrderInterface } from '../../../../Core/Models/OrderModels/order-interface';
 
 @Component({
   selector: 'app-order-stats',
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: './order-stats.html',
   styleUrl: './order-stats.scss',
 })

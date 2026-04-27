@@ -8,6 +8,98 @@
   },
 
   "ADMIN": {
+    "ORDERS": {
+      "BREADCRUMB": "Home / Orders",
+      "TITLE": "Order Management",
+      "NEW_ORDER": "+ New Order",
+
+      "FILTERS": {
+        "ALL_TYPES": "All Types",
+        "ALL_STATUS": "All Status",
+        "ALL_BRANCHES": "All Branches",
+
+        "DINEIN": "DineIn",
+        "PICKUP": "PickUp",
+        "DELIVERY": "Delivery",
+
+        "RECEIVED": "Received",
+        "PREPARING": "Preparing",
+        "READY": "Ready",
+        "DELIVERED": "Delivered",
+        "CANCELLED": "Cancelled",
+        "AWAITINGPAYMENT": "Awaiting Payment"
+      },
+
+      "TABLE": {
+        "ID": "ID",
+        "CUSTOMER": "Customer",
+        "TYPE": "Type",
+        "STATUS": "Status",
+        "TOTAL": "Total"
+      },
+
+      "STATS": {
+        "TOTAL": "Total orders",
+        "DELIVERED": "Delivered",
+        "PREPARING": "Preparing",
+        "CANCELLED": "Cancelled"
+      },
+
+      "DETAILS": {
+        "ORDER": "Order",
+        "CUSTOMER": "Customer",
+        "TYPE": "Type",
+        "TOTAL": "Total",
+
+        "QTY": "Qty",
+        "ADD_ITEMS": "Add New Items",
+        "SELECT_ITEM": "Select Item",
+
+        "SAVE": "Save Items",
+
+        "UPDATE_STATUS": "Update Status",
+
+        "CANCEL_ORDER": "Cancel Order"
+      },
+
+      "ENUMS": {
+        "PAYMENT_METHOD": {
+        "CASH": "Cash",
+        "CARD": "Card",
+        "INSTAPAY": "InstaPay",
+        "WALLET": "Wallet"
+       }
+      },     
+
+      "MODAL": {
+        "NEW_ORDER": "New Order",
+        "BRANCH": "Branch",
+        "SELECT_BRANCH": "Select Branch",
+
+        "ORDER_TYPE": "Order Type",
+        "SELECT_TYPE": "Select Type",
+
+        "TABLE": "Table",
+        "SELECT_TABLE": "Select Table",
+
+        "CUSTOMER_ID": "Customer ID",
+
+        "PAYMENT": "Payment Method",
+
+        "TOTAL": "Total",
+        "PLACE_ORDER": "Place Order",
+
+        "BUILDING": "Building Number",
+        "STREET": "Street",
+        "CITY": "City",
+        "NOTE": "Note",
+        "MARK": "Special Mark",
+        "SELECT_ITEM": "Select Item",
+
+        "ADD_ITEM": "+ Add Item"
+
+      }
+    },
     "HOME": {
       "STATS": {
         "TODAY_SALE": "Today Sale",

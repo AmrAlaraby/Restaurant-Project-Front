@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormGroup, FormBuilder, FormArray, ReactiveFormsModule } from '@angular/forms';
 import { MenuItemsService } from '../../../../../Core/Services/Menu-Item-Service/menu-item-service';
 import { OrdersService } from '../../../../../Core/Services/Orders-Service/orders-service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
 
 @Component({
   selector: 'app-order-details',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,TranslatePipe],
   templateUrl: './order-details.html',
   styleUrl: './order-details.scss',
 })
@@ -23,16 +25,28 @@ export class OrderDetails implements OnInit {
   form!: FormGroup;
   error:string|null =null;
 
+  CurrentLanguage: string = 'en';
+
   constructor(
     private ordersService: OrdersService,
     private menuService: MenuItemsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private localizationService:LocalizationService
   ) {}
 
   ngOnInit() {
     this.initForm();
     this.loadMenu();
     this.loadOrder();
+    this.getCurrentLanguage();
+  }
+
+  getCurrentLanguage(): void {
+    this.CurrentLanguage = this.localizationService.getCurrentLang();
+    this.localizationService.currentLang$
+    .subscribe(lang => {
+      this.CurrentLanguage = lang;
+    });
   }
 
   // =========================
@@ -216,4 +230,16 @@ export class OrderDetails implements OnInit {
       }
     });
 }
+  getMenuItemName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+     return item.arabicName || item.name;
+    }
+    return item.name;
+  }
+  getOrdertemName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+     return item.arabicMenuItemName || item.menuItemName;
+    }
+    return item.menuItemName;
+  }
 }

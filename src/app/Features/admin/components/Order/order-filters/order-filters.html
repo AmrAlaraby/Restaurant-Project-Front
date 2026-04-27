@@ -2,26 +2,48 @@
 
     <select (change)="emit()"
             [(ngModel)]="filters.Ordertype">
-      <option selected value="">All Types</option>
-      <option value="DineIn">DineIn</option>
-      <option value="PickUp">PickUp</option>
-      <option value="Delivery">Delivery</option>
+      <option selected value="">
+        {{ 'ADMIN.ORDERS.FILTERS.ALL_TYPES' | translate }}
+      </option>
+      <option value="DineIn">
+        {{ 'ADMIN.ORDERS.FILTERS.DINEIN' | translate }}
+      </option>
+      <option value="PickUp">
+        {{ 'ADMIN.ORDERS.FILTERS.PICKUP' | translate }}
+      </option>
+      <option value="Delivery">
+        {{ 'ADMIN.ORDERS.FILTERS.DELIVERY' | translate }}
+      </option>
     </select>
 
 <select (change)="emit()" [(ngModel)]="filters.status">
-  <option value="">All Status</option>
-  <option value="Received">Received</option>
-  <option value="Preparing">Preparing</option>
-  <option value="Ready">Ready</option>
-  <option value="Delivered">Delivered</option>
-  <option value="Cancelled">Cancelled</option>
+  <option value="">
+    {{ 'ADMIN.ORDERS.FILTERS.ALL_STATUS' | translate }}
+  </option>
+  <option value="Received">
+    {{ 'ADMIN.ORDERS.FILTERS.RECEIVED' | translate }}
+  </option>
+  <option value="Preparing">
+    {{ 'ADMIN.ORDERS.FILTERS.PREPARING' | translate }}
+  </option>
+  <option value="Ready">
+    {{ 'ADMIN.ORDERS.FILTERS.READY' | translate }}
+  </option>
+  <option value="Delivered">
+    {{ 'ADMIN.ORDERS.FILTERS.DELIVERED' | translate }}
+  </option>
+  <option value="Cancelled">
+    {{ 'ADMIN.ORDERS.FILTERS.CANCELLED' | translate }}
+  </option>
 </select>
 
     <select (change)="emit()"
             [(ngModel)]="filters.branchId">
-      <option selected value="">All Branches</option>
+      <option selected value="">
+        {{ 'ADMIN.ORDERS.FILTERS.ALL_BRANCHES' | translate }}
+      </option>
       @for (Branch of branches; track $index) {
-        <option value="{{Branch.id}}">{{Branch.name}}</option>
+        <option value="{{Branch.id}}">{{getBranchName(Branch)}}</option>
       }
     </select>
 

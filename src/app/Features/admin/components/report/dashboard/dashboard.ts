@@ -31,10 +31,15 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.loadData();
     this.getCurrentLanguage();
+
   }
 
   getCurrentLanguage(): void {
     this.CurrentLanguage = this.localizationService.getCurrentLang();
+    this.localizationService.currentLang$
+    .subscribe(lang => {
+      this.CurrentLanguage = lang;
+    });
   }
 
   loadData() {

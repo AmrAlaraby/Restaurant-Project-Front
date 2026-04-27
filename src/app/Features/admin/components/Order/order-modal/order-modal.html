@@ -1,124 +1,168 @@
 <div class="modal-overlay" (click)="close.emit()">
   <div class="form-modal" (click)="$event.stopPropagation()">
-
+    <!-- HEADER -->
     <div class="modal-header">
-      <h2>New <span>Order</span></h2>
+      <h2>
+        {{ 'ADMIN.ORDERS.MODAL.NEW_ORDER' | translate }}
+      </h2>
       <button class="close-btn" (click)="close.emit()">×</button>
     </div>
 
     <form [formGroup]="form">
-
       <!-- Branch -->
       <div class="input-group">
-        <label>Branch</label>
+        <label>{{ 'ADMIN.ORDERS.MODAL.BRANCH' | translate }}</label>
+
         <select formControlName="branchId">
-          <option selected value="">Select Branch</option>
+          <option value="">
+            {{ 'ADMIN.ORDERS.MODAL.SELECT_BRANCH' | translate }}
+          </option>
+
           @for (Branch of branches; track $index) {
-            <option value="{{Branch.id}}">{{Branch.name}}</option>
+            <option [value]="Branch.id">
+              {{ getBranchName(Branch) }}
+            </option>
           }
         </select>
       </div>
 
-      <!-- Type -->
+      <!-- Order Type -->
       <div class="input-group">
-        <label>Order Type</label>
+        <label>{{ 'ADMIN.ORDERS.MODAL.ORDER_TYPE' | translate }}</label>
+
         <select formControlName="orderType" (change)="onTypeChange()">
-          <option selected value="">Select Type</option>
-          <option value="DineIn">DineIn</option>
-          <option value="PickUp">PickUp</option>
-          <option value="Delivery">Delivery</option>
+          <option value="">
+            {{ 'ADMIN.ORDERS.MODAL.SELECT_TYPE' | translate }}
+          </option>
+
+          <option value="DineIn">
+            {{ 'ADMIN.ORDERS.FILTERS.DINEIN' | translate }}
+          </option>
+
+          <option value="PickUp">
+            {{ 'ADMIN.ORDERS.FILTERS.PICKUP' | translate }}
+          </option>
+
+          <option value="Delivery">
+            {{ 'ADMIN.ORDERS.FILTERS.DELIVERY' | translate }}
+          </option>
         </select>
       </div>
 
-      <!-- Table -->
+      <!-- TABLE -->
       @if (form.value.orderType === 'DineIn') {
         <div class="input-group">
-          <label>Table</label>
+          <label>{{ 'ADMIN.ORDERS.MODAL.TABLE' | translate }}</label>
+
           <select formControlName="tableId">
-            <option selected value="">Select Table</option>
+            <option value="">
+              {{ 'ADMIN.ORDERS.MODAL.SELECT_TABLE' | translate }}
+            </option>
+
             @for (t of tables(); track t.id) {
-              <option [value]="t.id">{{ t.tableNumber }}</option>
+              <option [value]="t.id">
+                {{ t.tableNumber }}
+              </option>
             }
           </select>
         </div>
       }
 
-      <!-- Delivery -->
+      <!-- DELIVERY ADDRESS -->
       @if (form.value.orderType === 'Delivery') {
         <div formGroupName="deliveryAddress" class="grid">
+          <input
+            formControlName="buildingNumber"
+            [placeholder]="'ADMIN.ORDERS.MODAL.BUILDING' | translate"
+          />
 
-          <input formControlName="buildingNumber" placeholder="Building Number">
-          <input formControlName="street" placeholder="Street">
-          <input formControlName="city" placeholder="City">
-          <input formControlName="note" placeholder="Note">
-          <input formControlName="specialMark" placeholder="Special Mark">
+          <input formControlName="street" [placeholder]="'ADMIN.ORDERS.MODAL.STREET' | translate" />
 
+          <input formControlName="city" [placeholder]="'ADMIN.ORDERS.MODAL.CITY' | translate" />
+
+          <input formControlName="note" [placeholder]="'ADMIN.ORDERS.MODAL.NOTE' | translate" />
+
+          <input
+            formControlName="specialMark"
+            [placeholder]="'ADMIN.ORDERS.MODAL.MARK' | translate"
+          />
         </div>
       }
 
-      <!-- Customer -->
+      <!-- CUSTOMER -->
       <div class="input-group">
-        <label>Customer ID</label>
-        <input formControlName="customerId" placeholder="Enter Customer ID">
+        <label>{{ 'ADMIN.ORDERS.MODAL.CUSTOMER_ID' | translate }}</label>
+
+        <input
+          formControlName="customerId"
+          [placeholder]="'ADMIN.ORDERS.MODAL.CUSTOMER_ID' | translate"
+        />
       </div>
 
-      <!-- Items -->
+      <!-- ITEMS -->
       <div formArrayName="items" class="items-box">
-
         @for (item of items.controls; track $index; let i = $index) {
-
           <div class="item-row" [formGroupName]="i">
-
             <select formControlName="menuItemId" (change)="onMenuChange(i)">
-              <option selected value="">Select Item</option>
+              <option value="">
+                {{ 'ADMIN.ORDERS.MODAL.SELECT_ITEM' | translate }}
+              </option>
+
               @for (m of menuItems(); track m.id) {
-                <option [value]="m.id">
-                  {{ m.name }} - {{ m.price }} EGP
-                </option>
+                <option [value]="m.id">{{ getMenuItemName(m) }} - {{ m.price }} EGP</option>
               }
             </select>
 
-            <input type="number" formControlName="quantity">
+            <input type="number" formControlName="quantity" />
 
-            <span class="price">
-              {{ item.value.unitPrice * item.value.quantity }} EGP
-            </span>
+            <span class="price"> {{ item.value.unitPrice * item.value.quantity }} EGP </span>
 
             <button type="button" class="remove-btn" (click)="removeItem(i)">✕</button>
-
           </div>
         }
 
-        <button type="button" class="add-btn" (click)="addItem()">+ Add Item</button>
-
+        <button type="button" class="add-btn" (click)="addItem()">
+          {{ 'ADMIN.ORDERS.MODAL.ADD_ITEM' | translate }}
+        </button>
       </div>
 
-      <!-- Payment -->
+      <!-- PAYMENT -->
       <div class="input-group">
-        <label>Payment Method</label>
+        <label>{{ 'ADMIN.ORDERS.MODAL.PAYMENT' | translate }}</label>
+
         <select formControlName="paymentMethod">
-          <option selected>Cash</option>
-          <option>Card</option>
-          <option>InstaPay</option>
-          <option>Wallet</option>
+          <option value="Cash">
+            {{ 'ADMIN.ORDERS.ENUMS.PAYMENT_METHOD.CASH' | translate }}
+          </option>
+
+          <option value="Card">
+            {{ 'ADMIN.ORDERS.ENUMS.PAYMENT_METHOD.CARD' | translate }}
+          </option>
+
+          <option value="InstaPay">
+            {{ 'ADMIN.ORDERS.ENUMS.PAYMENT_METHOD.INSTAPAY' | translate }}
+          </option>
+
+          <option value="Wallet">
+            {{ 'ADMIN.ORDERS.ENUMS.PAYMENT_METHOD.WALLET' | translate }}
+          </option>
         </select>
       </div>
 
       <!-- TOTAL -->
-      <div class="total-box">
-        Total: {{total }} EGP
-      </div>
-      <!-- error -->
+      <div class="total-box">{{ 'ADMIN.ORDERS.MODAL.TOTAL' | translate }}: {{ total }} EGP</div>
+
+      <!-- ERROR -->
       @if (error) {
         <div class="alert alert-danger">
           {{ error }}
         </div>
       }
+
+      <!-- SUBMIT -->
       <button type="button" class="submit-btn" (click)="submit()">
-        Place Order
+        {{ 'ADMIN.ORDERS.MODAL.PLACE_ORDER' | translate }}
       </button>
-
     </form>
-
   </div>
 </div>

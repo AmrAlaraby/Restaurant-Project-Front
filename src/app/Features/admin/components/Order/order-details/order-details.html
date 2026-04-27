@@ -5,7 +5,7 @@
     <!-- HEADER -->
     <div class="header">
       <div>
-        <h2>Order #{{order.id}}</h2>
+        <h2>{{ 'ADMIN.ORDERS.DETAILS.ORDER' | translate }} #{{order.id}}</h2>
 
         <span class="status" [class]="order.status">
           {{order.status}}
@@ -17,9 +17,9 @@
 
     <!-- INFO -->
     <div class="info">
-      <div>Customer: {{order.userName}}</div>
-      <div>Type: {{order.orderType}}</div>
-      <div>Total: {{order.totalAmount}} EGP</div>
+      <div>{{ 'ADMIN.ORDERS.DETAILS.CUSTOMER' | translate }}: {{order.userName}}</div>
+      <div>{{ 'ADMIN.ORDERS.DETAILS.TYPE' | translate }}: {{order.orderType}}</div>
+      <div>{{ 'ADMIN.ORDERS.DETAILS.TOTAL' | translate }}: {{order.totalAmount}} EGP</div>
     </div>
 
     <!-- ========================= -->
@@ -30,8 +30,8 @@
       <div class="item" *ngFor="let item of order.orderItems">
 
         <div class="left">
-          <div class="name">{{item.menuItemName}}</div>
-          <div class="qty">Qty: {{item.quantity}}</div>
+          <div class="name">{{getOrdertemName(item)}}</div>
+          <div class="qty">{{ 'ADMIN.ORDERS.DETAILS.QTY' | translate }}: {{item.quantity}}</div>
         </div>
 
         <div class="price">
@@ -54,7 +54,9 @@
     <!-- ========================= -->
     <div class="add-section" *ngIf="isReceived()">
 
-      <h3>Add New Items</h3>
+      <h3>
+        {{ 'ADMIN.ORDERS.DETAILS.ADD_ITEMS' | translate }}
+      </h3>
 
       <form [formGroup]="form">
 
@@ -66,11 +68,13 @@
 
               <select formControlName="menuItemId" (change)="onMenuChange(i)">
 
-                <option value="">Select Item</option>
+                <option value="">
+                  {{ 'ADMIN.ORDERS.DETAILS.SELECT_ITEM' | translate }}
+                </option>
 
                 @for (m of availableMenuItems; track m.id) {
                   <option [value]="m.id">
-                    {{m.name}} - {{m.price}} EGP
+                    {{getMenuItemName(m)}} - {{m.price}} EGP
                   </option>
                 }
 
@@ -95,13 +99,13 @@
         *ngIf="availableMenuItems.length > 0"
         (click)="addItem()">
 
-        + Add Item
+        {{ 'ADMIN.ORDERS.MODAL.ADD_ITEM' | translate }}
       </button>
 
   
 
       <button class="save-btn" (click)="saveNewItems()">
-        Save Items
+        {{ 'ADMIN.ORDERS.DETAILS.SAVE' | translate }}
       </button>
 
     </div>
@@ -122,39 +126,41 @@
 <!-- ========================= -->
 <div class="status-actions">
 
-  <h3>Update Status</h3>
+  <h3>
+    {{ 'ADMIN.ORDERS.DETAILS.UPDATE_STATUS' | translate }}
+  </h3>
 
   <div class="status-buttons">
 
     <button
       [class.active]="order.status === 'Received'"
       (click)="updateStatus('Received')">
-      Received
+      {{ 'ADMIN.ORDERS.FILTERS.RECEIVED' | translate }}
     </button>
 
     <button
       [class.active]="order.status === 'Preparing'"
       (click)="updateStatus('Preparing')">
-      Preparing
+      {{ 'ADMIN.ORDERS.FILTERS.PREPARING' | translate }}
     </button>
 
     <button
       [class.active]="order.status === 'Ready'"
       (click)="updateStatus('Ready')">
-      Ready
+      {{ 'ADMIN.ORDERS.FILTERS.READY' | translate }}
     </button>
 
     <button
       [class.active]="order.status === 'Delivered'"
       (click)="updateStatus('Delivered')">
-      Delivered
+      {{ 'ADMIN.ORDERS.FILTERS.DELIVERED' | translate }}
     </button>
 
     <button
       class="cancel"
       [class.active]="order.status === 'Cancelled'"
       (click)="updateStatus('Cancelled')">
-      Cancel
+      {{ 'ADMIN.ORDERS.FILTERS.CANCELLED' | translate }}
     </button>
 
   </div>
@@ -167,7 +173,7 @@
         *ngIf="isReceived()"
         (click)="cancelOrder()">
 
-        Cancel Order
+        {{ 'ADMIN.ORDERS.DETAILS.CANCEL_ORDER' | translate }}
       </button>
 
     </div>
