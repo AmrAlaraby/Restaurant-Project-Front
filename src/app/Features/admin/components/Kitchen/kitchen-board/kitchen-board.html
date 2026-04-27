@@ -1,4 +1,5 @@
 <div class="kds-root">
+
   <!-- Header -->
   <header class="kds-header">
     <div class="header-right">
@@ -27,17 +28,23 @@
   <div class="stats-row">
     <div class="stat-chip pending">
       <span class="stat-num">{{ totalPending }}</span>
-      <span class="stat-label">PENDING</span>
+      <span class="stat-label">
+        {{ 'ADMIN.KITCHEN.STATS.PENDING' | translate }}
+      </span>
     </div>
 
     <div class="stat-chip preparing">
       <span class="stat-num">{{ totalPreparing }}</span>
-      <span class="stat-label">PREPARING</span>
+      <span class="stat-label">
+        {{ 'ADMIN.KITCHEN.STATS.PREPARING' | translate }}
+      </span>
     </div>
 
     <div class="stat-chip done">
       <span class="stat-num">{{ totalDone }}</span>
-      <span class="stat-label">DONE</span>
+      <span class="stat-label">
+        {{ 'ADMIN.KITCHEN.STATS.DONE' | translate }}
+      </span>
     </div>
   </div>
 
@@ -48,7 +55,9 @@
     <div class="board-column col-pending">
       <div class="col-header">
         <span class="col-dot dot-pending"></span>
-        <span class="col-title">PENDING</span>
+        <span class="col-title">
+          {{ 'ADMIN.KITCHEN.STATS.PENDING' | translate }}
+        </span>
         <span class="col-count">{{ board.pending.length }}</span>
       </div>
 
@@ -61,7 +70,7 @@
         ></app-ticket-card>
 
         <div class="empty-col" *ngIf="board.pending.length === 0">
-          No pending tickets
+          {{ 'ADMIN.KITCHEN.BOARD.NO_PENDING' | translate }}
         </div>
       </div>
     </div>
@@ -70,7 +79,9 @@
     <div class="board-column col-preparing">
       <div class="col-header">
         <span class="col-dot dot-preparing"></span>
-        <span class="col-title">PREPARING</span>
+        <span class="col-title">
+          {{ 'ADMIN.KITCHEN.STATS.PREPARING' | translate }}
+        </span>
         <span class="col-count">{{ board.preparing.length }}</span>
       </div>
 
@@ -83,7 +94,7 @@
         ></app-ticket-card>
 
         <div class="empty-col" *ngIf="board.preparing.length === 0">
-          No tickets in progress
+          {{ 'ADMIN.KITCHEN.BOARD.NO_PREPARING' | translate }}
         </div>
       </div>
     </div>
@@ -92,7 +103,9 @@
     <div class="board-column col-done">
       <div class="col-header">
         <span class="col-dot dot-done"></span>
-        <span class="col-title">DONE</span>
+        <span class="col-title">
+          {{ 'ADMIN.KITCHEN.STATS.DONE' | translate }}
+        </span>
         <span class="col-count">{{ board.done.length }}</span>
       </div>
 
@@ -105,17 +118,20 @@
         ></app-ticket-card>
 
         <div class="empty-col" *ngIf="board.done.length === 0">
-          No completed tickets
+          {{ 'ADMIN.KITCHEN.BOARD.NO_DONE' | translate }}
         </div>
       </div>
     </div>
+
   </div>
 
   <!-- Loading -->
   <ng-template #loadingTpl>
     <div class="loading-state">
       <div class="spinner"></div>
-      <p>Loading kitchen board…</p>
+      <p>
+        {{ 'ADMIN.KITCHEN.LOADING' | translate }}
+      </p>
     </div>
   </ng-template>
 
@@ -126,4 +142,5 @@
     (close)="onCloseModal()"
     (statusUpdate)="onStatusUpdate($event)"
   ></app-ticket-details-modal>
+
 </div>

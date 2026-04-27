@@ -1,16 +1,21 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+
+
 import { KitchenTicketQueryParams } from '../../../../../Core/Models/KitchenModels/kitchen-ticket-query-params';
 import { BranchDto } from '../../../../../Core/Models/BranchModels/Branch-dto';
 import { ActivePendingStationsDTO } from '../../../../../Core/Models/KitchenModels/active-pending-stations-dto';
 import { TicketStatus } from '../../../../../Core/Models/KitchenModels/ticket-status';
 import { KitchenService } from '../../../../../Core/Services/Kitchen-Service/kitchen-service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-kitchen-filter',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,TranslatePipe],
   templateUrl: './kitchen-filter.html',
   styleUrls: ['./kitchen-filter.scss'],
 })
@@ -29,17 +34,17 @@ export class KitchenFilterComponent implements OnInit, OnDestroy {
     status: null,
   };
 
-  statusOptions = [
-    { label: 'All', value: null },
-    { label: 'Pending', value: TicketStatus.Pending },
-    { label: 'Preparing', value: TicketStatus.Preparing },
-    { label: 'Done', value: TicketStatus.Done },
-  ];
+statusOptions = [
+  { key: 'ALL', value: null },
+  { key: 'PENDING', value: TicketStatus.Pending },
+  { key: 'PREPARING', value: TicketStatus.Preparing },
+  { key: 'DONE', value: TicketStatus.Done },
+];
 
   private debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
-  constructor(private kitchenService: KitchenService) {}
-
+  constructor(private localizationService: LocalizationService,private kitchenService: KitchenService) {}
+  CurrentLanguage: string = 'en';
   ngOnInit(): void {
     this.kitchenService.getBranches().subscribe({
       next: (data: BranchDto[]) => {
@@ -47,13 +52,24 @@ export class KitchenFilterComponent implements OnInit, OnDestroy {
       },
       error: (err) => console.error('Failed to load branches', err),
     });
-
+    this.getCurrentLanguage();
     // تحميل كل الـ stations عند البداية
     this.loadStations(null);
+  }
+private destroy$ = new Subject<void>();
+  getCurrentLanguage(): void {
+    this.CurrentLanguage = this.localizationService.getCurrentLang();
+    this.localizationService.currentLang$
+  .pipe(takeUntil(this.destroy$))
+  .subscribe(lang => {
+    this.CurrentLanguage = lang;
+  });
   }
 
   ngOnDestroy(): void {
     if (this.debounceTimer) clearTimeout(this.debounceTimer);
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   // ✅ هنا عملنا handling للـ undefined
@@ -119,5 +135,11 @@ export class KitchenFilterComponent implements OnInit, OnDestroy {
     this.filterChanged.emit({ ...this.params });
 
     this.loadStations(null);
+  }
+  getBranchName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+     return item.arabicName || item.name;
+    }
+    return item.name;
   }
 }
