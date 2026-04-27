@@ -35,28 +35,36 @@
     <div class="stat-card">
       <div class="stat-icon red"><i class="fas fa-chart-line"></i></div>
       <div>
-        <div class="stat-label">Today Sale</div>
+        <div class="stat-label">
+          {{ 'ADMIN.HOME.STATS.TODAY_SALE' | translate }}
+        </div>
         <div class="stat-value">{{ dashboard?.totalRevenueToday | currency:'EGP':'symbol':'1.0-0' }}</div>
       </div>
     </div>
     <div class="stat-card">
       <div class="stat-icon yellow"><i class="fas fa-chart-bar"></i></div>
       <div>
-        <div class="stat-label">Orders Today</div>
+        <div class="stat-label">
+          {{ 'ADMIN.HOME.STATS.ORDERS_TODAY' | translate }}
+        </div>
         <div class="stat-value">{{ dashboard?.ordersToday ?? 0 }}</div>
       </div>
     </div>
     <div class="stat-card">
       <div class="stat-icon green"><i class="fas fa-chart-area"></i></div>
       <div>
-        <div class="stat-label">Avg Order Value</div>
+        <div class="stat-label">
+          {{ 'ADMIN.HOME.STATS.AVG_ORDER' | translate }}
+        </div>
         <div class="stat-value">{{ dashboard?.avgOrderValueToday | currency:'EGP':'symbol':'1.0-0' }}</div>
       </div>
     </div>
     <div class="stat-card">
       <div class="stat-icon blue"><i class="fas fa-exclamation-triangle"></i></div>
       <div>
-        <div class="stat-label">Low Stock Alerts</div>
+        <div class="stat-label">
+          {{ 'ADMIN.HOME.STATS.LOW_STOCK' | translate }}
+        </div>
         <div class="stat-value">{{ dashboard?.lowStockIngredientsCount ?? 0 }}</div>
       </div>
     </div>
@@ -69,12 +77,16 @@
     <div class="card">
       <div class="card-header">
         <div>
-          <div class="card-title">Revenue Trends</div>
+          <div class="card-title">
+            {{ 'ADMIN.HOME.REVENUE.TITLE' | translate }}
+          </div>
         </div>
       </div>
       <div class="empty-state" *ngIf="revenue.length === 0">
         <i class="fas fa-chart-line"></i>
-        <p>No revenue data available yet.</p>
+        <p>
+          {{ 'ADMIN.HOME.REVENUE.EMPTY' | translate }}
+        </p>
       </div>
       <div class="rev-list" *ngIf="revenue.length > 0">
         <div class="rev-item" *ngFor="let r of revenue">
@@ -91,40 +103,54 @@
     <div class="card">
       <div class="card-header">
         <div>
-          <div class="card-title">Order Breakdown</div>
+          <div class="card-title">
+            {{ 'ADMIN.HOME.ORDERS.TITLE' | translate }}
+          </div>
         </div>
       </div>
       <div class="orders-grid">
         <div class="order-card dine">
           <div class="oc-icon"><i class="fas fa-concierge-bell"></i></div>
-          <div class="oc-label">Dine In</div>
+          <div class="oc-label">
+            {{ 'ADMIN.HOME.ORDERS.DINE_IN' | translate }}
+          </div>
           <div class="oc-val">{{ orders?.dineInCount ?? 0 }}</div>
         </div>
         <div class="order-card pick">
           <div class="oc-icon"><i class="fas fa-shopping-bag"></i></div>
-          <div class="oc-label">Pickup</div>
+          <div class="oc-label">
+            {{ 'ADMIN.HOME.ORDERS.PICKUP' | translate }}
+          </div>
           <div class="oc-val">{{ orders?.pickupCount ?? 0 }}</div>
         </div>
         <div class="order-card del">
           <div class="oc-icon"><i class="fas fa-motorcycle"></i></div>
-          <div class="oc-label">Delivery</div>
+          <div class="oc-label">
+            {{ 'ADMIN.HOME.ORDERS.DELIVERY' | translate }}
+          </div>
           <div class="oc-val">{{ orders?.deliveryCount ?? 0 }}</div>
         </div>
       </div>
       <div class="order-bars" *ngIf="orders">
         <ng-container *ngIf="(orders.dineInCount + orders.pickupCount + orders.deliveryCount) as total">
           <div class="order-bar-row">
-            <span class="bar-label">Dine In</span>
+            <span class="bar-label">
+              {{ 'ADMIN.HOME.ORDERS.DINE_IN' | translate }}
+            </span>
             <div class="bar-track"><div class="bar-fill dine" [style.width.%]="(orders.dineInCount / total) * 100"></div></div>
             <span class="bar-pct">{{ ((orders.dineInCount / total) * 100) | number:'1.0-0' }}%</span>
           </div>
           <div class="order-bar-row">
-            <span class="bar-label">Pickup</span>
+            <span class="bar-label">
+              {{ 'ADMIN.HOME.ORDERS.PICKUP' | translate }}
+            </span>
             <div class="bar-track"><div class="bar-fill pick" [style.width.%]="(orders.pickupCount / total) * 100"></div></div>
             <span class="bar-pct">{{ ((orders.pickupCount / total) * 100) | number:'1.0-0' }}%</span>
           </div>
           <div class="order-bar-row">
-            <span class="bar-label">Delivery</span>
+            <span class="bar-label">
+              {{ 'ADMIN.HOME.ORDERS.DELIVERY' | translate }}
+            </span>
             <div class="bar-track"><div class="bar-fill del" [style.width.%]="(orders.deliveryCount / total) * 100"></div></div>
             <span class="bar-pct">{{ ((orders.deliveryCount / total) * 100) | number:'1.0-0' }}%</span>
           </div>
@@ -141,23 +167,29 @@
     <div class="card">
       <div class="card-header">
         <div>
-          <div class="card-title">Top Selling Items</div>
+          <div class="card-title">
+            {{ 'ADMIN.HOME.TOP_ITEMS.TITLE' | translate }}
+          </div>
         </div>
       </div>
       <div class="empty-state" *ngIf="topItems.length === 0">
         <i class="fas fa-hamburger"></i>
-        <p>No items found.</p>
+        <p>
+          {{ 'ADMIN.HOME.TOP_ITEMS.EMPTY' | translate }}
+        </p>
       </div>
       <div class="food-list" *ngIf="topItems.length > 0">
         <div class="food-item" *ngFor="let item of topItems; let i = index">
           <div class="food-rank" [class.gold]="i === 0" [class.silver]="i === 1">{{ i + 1 }}</div>
           <div class="food-info">
-            <div class="food-name">{{ item.name }}</div>
+            <div class="food-name">{{ getmenuItemName(item)}}</div>
             <div class="food-bar-wrap">
               <div class="food-bar" [style.width.%]="(item.orderCount / topItems[0].orderCount) * 100"></div>
             </div>
           </div>
-          <div class="food-count">{{ item.orderCount }} orders</div>
+          <div class="food-count">
+            {{ item.orderCount }} {{ 'ADMIN.HOME.TOP_ITEMS.ORDERS' | translate }}
+          </div>
         </div>
       </div>
     </div>
@@ -166,28 +198,34 @@
     <div class="card span-2">
       <div class="card-header">
         <div>
-          <div class="card-title">Inventory Usage</div>
+          <div class="card-title">
+            {{ 'ADMIN.HOME.INVENTORY.TITLE' | translate }}
+          </div>
         </div>
-        <a class="show-all" href="#">Show All</a>
+        <a class="show-all" href="#">
+          {{ 'ADMIN.HOME.INVENTORY.SHOW_ALL' | translate }}
+        </a>
       </div>
       <div class="empty-state" *ngIf="inventory.length === 0">
         <i class="fas fa-box-open"></i>
-        <p>No inventory data.</p>
+        <p>
+          {{ 'ADMIN.HOME.INVENTORY.EMPTY' | translate }}
+        </p>
       </div>
       <div class="table-wrap" *ngIf="inventory.length > 0">
         <table class="inv-table">
           <thead>
             <tr>
-              <th>#</th>
-              <th>Ingredient</th>
-              <th>Used</th>
-              <th>Unit</th>
+              <th>{{ 'ADMIN.HOME.INVENTORY.TABLE.INDEX' | translate }}</th>
+              <th>{{ 'ADMIN.HOME.INVENTORY.TABLE.INGREDIENT' | translate }}</th>
+              <th>{{ 'ADMIN.HOME.INVENTORY.TABLE.USED' | translate }}</th>
+              <th>{{ 'ADMIN.HOME.INVENTORY.TABLE.UNIT' | translate }}</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let item of inventory; let i = index">
               <td class="row-num">{{ i + 1 }}</td>
-              <td class="ing-name">{{ item.ingredientName }}</td>
+              <td class="ing-name">{{ getIngredientName(item) }}</td>
               <td class="ing-qty">{{ item.quantityUsed }}</td>
               <td><span class="unit-badge">{{ item.unit }}</span></td>
             </tr>
