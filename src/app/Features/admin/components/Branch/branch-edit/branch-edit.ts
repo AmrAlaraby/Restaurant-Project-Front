@@ -12,11 +12,12 @@ import {
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BranchService } from '../../../../../Core/Services/Branch-Service/branch-service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-branch-edit',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,TranslatePipe],
   templateUrl: './branch-edit.html',
   styleUrls: ['./branch-edit.scss'],
 })

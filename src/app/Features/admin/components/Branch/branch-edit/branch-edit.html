@@ -2,94 +2,214 @@
 
   <!-- Header -->
   <div class="page-header">
+
     <div class="header-left">
+
       <button class="btn-back" (click)="close()">
-        <span>←</span> Back
+        <span>←</span>
+        {{ 'ADMIN.BRANCH_EDIT.BACK' | translate }}
       </button>
+
       <div class="title-block">
-        <h1 class="page-title">Edit Branch</h1>
+        <h1 class="page-title">
+          {{ 'ADMIN.BRANCH_EDIT.EDIT_TITLE' | translate }}
+        </h1>
       </div>
+
     </div>
+
     <div class="header-actions">
-      <button class="btn-cancel" (click)="close()">Cancel</button>
-      <button class="btn-save" (click)="submit()" [disabled]="isSaving()">
-        {{ isSaving() ? 'Saving...' : '💾 Save Changes' }}
+
+      <button class="btn-cancel" (click)="close()">
+        {{ 'ADMIN.BRANCH_EDIT.CANCEL' | translate }}
       </button>
+
+      <button class="btn-save" (click)="submit()" [disabled]="isSaving()">
+
+        {{
+          isSaving()
+            ? ('ADMIN.BRANCH_EDIT.SAVING' | translate)
+            : ('ADMIN.BRANCH_EDIT.SAVE' | translate)
+        }}
+
+      </button>
+
     </div>
+
   </div>
 
-  <!-- Form Card -->
+  <!-- Form -->
   <div class="form-card" [formGroup]="form">
 
-    <h3 class="card-title">Branch Information</h3>
+    <h3 class="card-title">
+      {{ 'ADMIN.BRANCH_EDIT.INFO' | translate }}
+    </h3>
+
     <hr class="divider" />
 
     <div class="form-grid">
 
       <!-- Name -->
       <div class="field-group full-width">
-        <label class="field-label">Branch Name <span class="required">*</span></label>
-        <input class="field-input" type="text" formControlName="name" placeholder="e.g. Downtown Branch" />
-        <span class="field-error" *ngIf="isInvalid('name')">Branch name is required.</span>
+
+        <label class="field-label">
+          {{ 'ADMIN.BRANCH_EDIT.NAME' | translate }}
+          <span class="required">*</span>
+        </label>
+
+        <input class="field-input"
+               type="text"
+               formControlName="name"
+               [placeholder]="'ADMIN.BRANCH_EDIT.PLACEHOLDERS.NAME' | translate" />
+
+        <span class="field-error" *ngIf="isInvalid('name')">
+          {{ 'ADMIN.BRANCH_EDIT.ERRORS.NAME' | translate }}
+        </span>
+
       </div>
 
       <!-- Phone -->
       <div class="field-group">
-        <label class="field-label">Phone <span class="required">*</span></label>
-        <input class="field-input" type="text" formControlName="phone" placeholder="e.g. +20 100 000 0000" />
-        <span class="field-error" *ngIf="isInvalid('phone')">Phone number is required.</span>
+
+        <label class="field-label">
+          {{ 'ADMIN.BRANCH_EDIT.PHONE' | translate }}
+          <span class="required">*</span>
+        </label>
+
+        <input class="field-input"
+               type="text"
+               formControlName="phone"
+               [placeholder]="'ADMIN.BRANCH_EDIT.PLACEHOLDERS.PHONE' | translate" />
+
+        <span class="field-error" *ngIf="isInvalid('phone')">
+          {{ 'ADMIN.BRANCH_EDIT.ERRORS.PHONE' | translate }}
+        </span>
+
       </div>
 
-      <!-- Building Number -->
+      <!-- Building -->
       <div class="field-group">
-        <label class="field-label">Building Number <span class="required">*</span></label>
-        <input class="field-input" type="number" formControlName="buildingNumber" placeholder="e.g. 12" />
-        <span class="field-error" *ngIf="isInvalid('buildingNumber')">Building number is required.</span>
+
+        <label class="field-label">
+          {{ 'ADMIN.BRANCH_EDIT.BUILDING' | translate }}
+          <span class="required">*</span>
+        </label>
+
+        <input class="field-input"
+               type="number"
+               formControlName="buildingNumber"
+               [placeholder]="'ADMIN.BRANCH_EDIT.PLACEHOLDERS.BUILDING' | translate" />
+
+        <span class="field-error" *ngIf="isInvalid('buildingNumber')">
+          {{ 'ADMIN.BRANCH_EDIT.ERRORS.BUILDING' | translate }}
+        </span>
+
       </div>
 
       <!-- Street -->
       <div class="field-group">
-        <label class="field-label">Street <span class="required">*</span></label>
-        <input class="field-input" type="text" formControlName="street" placeholder="e.g. Tahrir St." />
-        <span class="field-error" *ngIf="isInvalid('street')">Street is required.</span>
+
+        <label class="field-label">
+          {{ 'ADMIN.BRANCH_EDIT.STREET' | translate }}
+          <span class="required">*</span>
+        </label>
+
+        <input class="field-input"
+               type="text"
+               formControlName="street"
+               [placeholder]="'ADMIN.BRANCH_EDIT.PLACEHOLDERS.STREET' | translate" />
+
+        <span class="field-error" *ngIf="isInvalid('street')">
+          {{ 'ADMIN.BRANCH_EDIT.ERRORS.STREET' | translate }}
+        </span>
+
       </div>
 
       <!-- City -->
       <div class="field-group">
-        <label class="field-label">City <span class="required">*</span></label>
-        <input class="field-input" type="text" formControlName="city" placeholder="e.g. Cairo" />
-        <span class="field-error" *ngIf="isInvalid('city')">City is required.</span>
+
+        <label class="field-label">
+          {{ 'ADMIN.BRANCH_EDIT.CITY' | translate }}
+          <span class="required">*</span>
+        </label>
+
+        <input class="field-input"
+               type="text"
+               formControlName="city"
+               [placeholder]="'ADMIN.BRANCH_EDIT.PLACEHOLDERS.CITY' | translate" />
+
+        <span class="field-error" *ngIf="isInvalid('city')">
+          {{ 'ADMIN.BRANCH_EDIT.ERRORS.CITY' | translate }}
+        </span>
+
       </div>
 
-      <!-- Is Active -->
+      <!-- Status -->
       <div class="field-group toggle-group">
-        <label class="field-label">Status</label>
+
+        <label class="field-label">
+          {{ 'ADMIN.BRANCH_EDIT.STATUS' | translate }}
+        </label>
+
         <div class="toggle-row">
+
           <label class="toggle-switch">
             <input type="checkbox" formControlName="isActive" />
             <span class="toggle-slider"></span>
           </label>
-          <span class="toggle-label">{{ form.value.isActive ? 'Active' : 'Inactive' }}</span>
+
+          <span class="toggle-label">
+            {{
+              form.value.isActive
+                ? ('ADMIN.BRANCH_EDIT.ACTIVE' | translate)
+                : ('ADMIN.BRANCH_EDIT.INACTIVE' | translate)
+            }}
+          </span>
+
         </div>
+
       </div>
 
       <!-- Special Mark -->
       <div class="field-group full-width">
-        <label class="field-label">Special Mark <span class="optional">(optional)</span></label>
-        <input class="field-input" type="text" formControlName="specialMark" placeholder="e.g. Near the mall" />
+
+        <label class="field-label">
+          {{ 'ADMIN.BRANCH_EDIT.SPECIAL_MARK' | translate }}
+          <span class="optional">
+            {{ 'ADMIN.BRANCH_EDIT.OPTIONAL' | translate }}
+          </span>
+        </label>
+
+        <input class="field-input"
+               type="text"
+               formControlName="specialMark"
+               [placeholder]="'ADMIN.BRANCH_EDIT.PLACEHOLDERS.MARK' | translate" />
+
       </div>
 
       <!-- Note -->
       <div class="field-group full-width">
-        <label class="field-label">Note <span class="optional">(optional)</span></label>
-        <textarea class="field-input field-textarea" formControlName="note" rows="3" placeholder="Any additional notes..."></textarea>
+
+        <label class="field-label">
+          {{ 'ADMIN.BRANCH_EDIT.NOTE' | translate }}
+          <span class="optional">
+            {{ 'ADMIN.BRANCH_EDIT.OPTIONAL' | translate }}
+          </span>
+        </label>
+
+        <textarea class="field-input field-textarea"
+                  formControlName="note"
+                  rows="3"
+                  [placeholder]="'ADMIN.BRANCH_EDIT.PLACEHOLDERS.NOTE' | translate">
+        </textarea>
+
       </div>
 
     </div>
 
   </div>
 
-  <!-- Save Error -->
+  <!-- Error -->
   <div class="save-error" *ngIf="saveError()">
     ⚠️ {{ saveError() }}
   </div>
@@ -104,6 +224,11 @@
 
 <!-- Error -->
 <div class="error-state" *ngIf="error() && !isLoading()">
+
   <p>{{ error() }}</p>
-  <button class="btn-retry" (click)="loadBranch()">Try Again</button>
+
+  <button class="btn-retry" (click)="loadBranch()">
+    {{ 'ADMIN.BRANCH_EDIT.ERROR.RETRY' | translate }}
+  </button>
+
 </div>

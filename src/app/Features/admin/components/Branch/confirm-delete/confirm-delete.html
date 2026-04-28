@@ -3,24 +3,34 @@
 
     <div class="confirm-icon">🗑️</div>
 
-    <h2 class="confirm-title">Delete Branch</h2>
+    <h2 class="confirm-title">
+      {{ 'ADMIN.BRANCH_DELETE.TITLE' | translate }}
+    </h2>
+
     <p class="confirm-message">
-      Are you sure you want to delete <strong>{{ branchName }}</strong>?
+      {{ 'ADMIN.BRANCH_DELETE.MESSAGE_PART_1' | translate }}
+      <strong>{{ branchName }}</strong>?
       <br />
-      This action <span class="danger-text">cannot be undone</span>.
+      {{ 'ADMIN.BRANCH_DELETE.MESSAGE_PART_2' | translate }}
+      <span class="danger-text">⚠️</span>
     </p>
 
     <div class="confirm-actions">
       <button class="btn-cancel" (click)="cancel()" [disabled]="isDeleting()">
-        Cancel
+        {{ 'ADMIN.BRANCH_DELETE.CANCEL' | translate }}
       </button>
+
       <button class="btn-delete" (click)="confirm()" [disabled]="isDeleting()">
-        {{ isDeleting() ? 'Deleting...' : '🗑️ Yes, Delete' }}
+        {{
+          isDeleting()
+            ? ('ADMIN.BRANCH_DELETE.DELETING' | translate)
+            : ('ADMIN.BRANCH_DELETE.DELETE' | translate)
+        }}
       </button>
     </div>
 
     <div class="delete-error" *ngIf="deleteError()">
-      ⚠️ {{ deleteError() }}
+      ⚠️ {{ 'ADMIN.BRANCH_DELETE.ERROR' | translate }}
     </div>
 
   </div>

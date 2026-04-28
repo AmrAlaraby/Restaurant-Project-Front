@@ -17,6 +17,142 @@
 
   "ADMIN": {
 
+     "BRANCH_DELETE": {
+      "TITLE": "Delete Branch",
+      "MESSAGE_PART_1": "Are you sure you want to delete",
+      "MESSAGE_PART_2": "This action cannot be undone",
+      "CANCEL": "Cancel",
+      "DELETE": "Yes, Delete",
+      "DELETING": "Deleting...",
+      "ERROR": "An error occurred while deleting"
+    },
+
+    "BRANCH_EDIT": {
+      "BACK": "Back",
+      "EDIT_TITLE": "Edit Branch",
+      "CANCEL": "Cancel",
+      "SAVE": "Save Changes",
+      "SAVING": "Saving...",
+
+      "INFO": "Branch Information",
+
+      "NAME": "Branch Name",
+      "PHONE": "Phone",
+      "BUILDING": "Building Number",
+      "STREET": "Street",
+      "CITY": "City",
+
+      "STATUS": "Status",
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive",
+
+      "SPECIAL_MARK": "Special Mark",
+      "NOTE": "Note",
+      "OPTIONAL": "(optional)",
+
+      "PLACEHOLDERS": {
+        "NAME": "e.g. Downtown Branch",
+        "PHONE": "e.g. +20 100 000 0000",
+        "BUILDING": "e.g. 12",
+        "STREET": "e.g. Tahrir St.",
+        "CITY": "e.g. Cairo",
+        "MARK": "e.g. Near the mall",
+        "NOTE": "Any additional notes..."
+      },
+
+      "ERRORS": {
+        "NAME": "Branch name is required.",
+        "PHONE": "Phone number is required.",
+        "BUILDING": "Building number is required.",
+        "STREET": "Street is required.",
+        "CITY": "City is required"
+      },
+
+      "ERROR": {
+        "RETRY": "Try Again"
+      }
+    },
+
+     "BRANCH_DETAILS": {
+      "BACK": "Branches",
+      "ACTIVE": "ACTIVE",
+      "INACTIVE": "INACTIVE",
+
+      "ACTIVATE": "Activate",
+      "DEACTIVATE": "Deactivate",
+      "EDIT": "Edit Branch",
+      "DELETE": "Delete",
+
+      "BRANCH_INFO": "Branch Info",
+      "ADDRESS": "Address",
+      "PHONE": "Phone",
+      "SPECIAL_MARK": "Special Mark",
+      "NOTE": "Note",
+
+      "QUICK_STATS": "Quick Stats",
+      "TABLES": "Tables",
+      "STAFF": "Staff",
+      "ACTIVE_TABLES": "Active Tables",
+      "OCCUPIED": "Occupied",
+
+      "TABS": {
+        "TABLES": "Tables",
+        "STAFF": "Staff",
+        "STOCK": "Stock"
+      },
+
+      "TABLE": {
+        "OCCUPIED": "Occupied",
+        "FREE": "Free"
+      },
+
+      "STOCK": {
+        "LOW": "Low Stock"
+      },
+
+      "ERROR": {
+        "RETRY": "Try Again"
+      }
+
+  },
+
+    "BRANCHES": {
+      "BACK": "Branches",
+      "NEW_BRANCH": "New Branch",
+      "CANCEL": "Cancel",
+      "CREATE": "Create Branch",
+      "CREATING": "Creating...",
+
+      "BASIC_INFO": "Basic Info",
+      "ADDRESS": "Address",
+
+      "NAME": "Branch Name",
+      "PHONE": "Phone",
+      "SPECIAL_MARK": "Special Mark",
+      "NOTE": "Note",
+
+      "OPTIONAL": "(optional)",
+
+      "NAME_PLACEHOLDER": "e.g. Downtown Branch",
+      "PHONE_PLACEHOLDER": "e.g. +20 100 000 0000",
+      "MARK_PLACEHOLDER": "e.g. Near the mall",
+      "NOTE_PLACEHOLDER": "Any additional notes...",
+
+      "BUILDING": "Building Number",
+      "STREET": "Street",
+      "CITY": "City",
+
+      "BUILDING_PLACEHOLDER": "e.g. 12",
+      "STREET_PLACEHOLDER": "e.g. Tahrir St.",
+      "CITY_PLACEHOLDER": "e.g. Cairo",
+
+      "ERROR_NAME": "Branch name is required.",
+      "ERROR_PHONE": "Phone number is required.",
+      "ERROR_BUILDING": "Building number is required.",
+      "ERROR_STREET": "Street is required.",
+      "ERROR_CITY": "City is required"
+    },
+
     "TABLES": {
       "ORDER_MODAL": {
         "NO_ACTIVE_TITLE": "No active order",
@@ -30,7 +166,7 @@
         "ITEMS": "Items",
         "TOTAL": "Total"
       },
-       "FORM": {
+      "FORM": {
         "EDIT_TITLE": "Edit Table",
         "ADD_TITLE": "Add New Table",
         "EDIT_SUB": "Update the table information",

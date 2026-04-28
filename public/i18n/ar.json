@@ -16,6 +16,140 @@
   },
 
   "ADMIN": {
+     "BRANCH_DELETE": {
+      "TITLE": "حذف الفرع",
+      "MESSAGE_PART_1": "هل أنت متأكد أنك تريد حذف",
+      "MESSAGE_PART_2": "هذا الإجراء لا يمكن التراجع عنه",
+      "CANCEL": "إلغاء",
+      "DELETE": "نعم، حذف",
+      "DELETING": "جاري الحذف...",
+      "ERROR": "حدث خطأ أثناء الحذف"
+    },
+
+    "BRANCH_EDIT": {
+      "BACK": "رجوع",
+      "EDIT_TITLE": "تعديل الفرع",
+      "CANCEL": "إلغاء",
+      "SAVE": "حفظ التغييرات",
+      "SAVING": "جاري الحفظ...",
+
+      "INFO": "بيانات الفرع",
+
+      "NAME": "اسم الفرع",
+      "PHONE": "الهاتف",
+      "BUILDING": "رقم المبنى",
+      "STREET": "الشارع",
+      "CITY": "المدينة",
+
+      "STATUS": "الحالة",
+      "ACTIVE": "نشط",
+      "INACTIVE": "غير نشط",
+
+      "SPECIAL_MARK": "علامة مميزة",
+      "NOTE": "ملاحظات",
+      "OPTIONAL": "(اختياري)",
+
+      "PLACEHOLDERS": {
+        "NAME": "مثال: فرع وسط البلد",
+        "PHONE": "مثال: +20 100 000 0000",
+        "BUILDING": "مثال: 12",
+        "STREET": "مثال: شارع التحرير",
+        "CITY": "مثال: القاهرة",
+        "MARK": "مثال: بجوار المول",
+        "NOTE": "أي ملاحظات إضافية..."
+      },
+
+      "ERRORS": {
+        "NAME": "اسم الفرع مطلوب",
+        "PHONE": "رقم الهاتف مطلوب",
+        "BUILDING": "رقم المبنى مطلوب",
+        "STREET": "الشارع مطلوب",
+        "CITY": "المدينة مطلوبة"
+      },
+
+      "ERROR": {
+        "RETRY": "حاول مرة أخرى"
+      }
+    },
+
+     "BRANCH_DETAILS": {
+      "BACK": "الفروع",
+      "ACTIVE": "نشط",
+      "INACTIVE": "غير نشط",
+
+      "ACTIVATE": "تفعيل",
+      "DEACTIVATE": "إلغاء التفعيل",
+      "EDIT": "تعديل الفرع",
+      "DELETE": "حذف",
+
+      "BRANCH_INFO": "بيانات الفرع",
+      "ADDRESS": "العنوان",
+      "PHONE": "الهاتف",
+      "SPECIAL_MARK": "علامة مميزة",
+      "NOTE": "ملاحظات",
+
+      "QUICK_STATS": "إحصائيات سريعة",
+      "TABLES": "الطاولات",
+      "STAFF": "الموظفين",
+      "ACTIVE_TABLES": "طاولات نشطة",
+      "OCCUPIED": "مشغولة",
+
+      "TABS": {
+        "TABLES": "الطاولات",
+        "STAFF": "الموظفين",
+        "STOCK": "المخزون"
+      },
+
+      "TABLE": {
+        "OCCUPIED": "مشغولة",
+        "FREE": "فارغة"
+      },
+
+      "STOCK": {
+        "LOW": "مخزون منخفض"
+      },
+
+      "ERROR": {
+        "RETRY": "حاول مرة أخرى"
+      }
+    },
+
+    "BRANCHES": {
+      "BACK": "الفروع",
+      "NEW_BRANCH": "فرع جديد",
+      "CANCEL": "إلغاء",
+      "CREATE": "إنشاء الفرع",
+      "CREATING": "جاري الإنشاء...",
+
+      "BASIC_INFO": "المعلومات الأساسية",
+      "ADDRESS": "العنوان",
+
+      "NAME": "اسم الفرع",
+      "PHONE": "الهاتف",
+      "SPECIAL_MARK": "علامة مميزة",
+      "NOTE": "ملاحظات",
+
+      "OPTIONAL": "(اختياري)",
+
+      "NAME_PLACEHOLDER": "مثال: فرع وسط البلد",
+      "PHONE_PLACEHOLDER": "مثال: +20 100 000 0000",
+      "MARK_PLACEHOLDER": "مثال: بجوار المول",
+      "NOTE_PLACEHOLDER": "أي ملاحظات إضافية...",
+
+      "BUILDING": "رقم المبنى",
+      "STREET": "الشارع",
+      "CITY": "المدينة",
+
+      "BUILDING_PLACEHOLDER": "مثال: 12",
+      "STREET_PLACEHOLDER": "مثال: شارع التحرير",
+      "CITY_PLACEHOLDER": "مثال: القاهرة",
+
+      "ERROR_NAME": "اسم الفرع مطلوب",
+      "ERROR_PHONE": "رقم الهاتف مطلوب",
+      "ERROR_BUILDING": "رقم المبنى مطلوب",
+      "ERROR_STREET": "الشارع مطلوب",
+      "ERROR_CITY": "المدينة مطلوبة"
+    },
 
     "TABLES": {
        "ORDER_MODAL": {

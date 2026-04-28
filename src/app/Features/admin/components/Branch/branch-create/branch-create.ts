@@ -2,11 +2,12 @@ import { Component, inject, signal, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BranchService } from '../../../../../Core/Services/Branch-Service/branch-service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-branch-create',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,TranslatePipe],
   templateUrl: './branch-create.html',
   styleUrls: ['./branch-create.scss'],
 })
