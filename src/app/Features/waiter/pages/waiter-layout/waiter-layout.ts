@@ -53,11 +53,11 @@ export class WaiterLayout {
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
                   <!-- Table -->
                     <rect x="3" y="5" width="10" height="4" rx="1"/>
-  
+
                   <!-- Legs -->
                     <line x1="5" y1="9" x2="5" y2="13"/>
                     <line x1="11" y1="9" x2="11" y2="13"/>
-  
+
                   <!-- Chairs -->
                     <circle cx="2" cy="7" r="1"/>
                     <circle cx="14" cy="7" r="1"/>
@@ -69,7 +69,7 @@ export class WaiterLayout {
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                   <!-- Paper -->
                   <path d="M4 2h8v12l-2-1-2 1-2-1-2 1V2z"/>
-  
+
                   <!-- Lines (orders) -->
                   <line x1="6" y1="5" x2="10" y2="5"/>
                   <line x1="6" y1="7" x2="10" y2="7"/>
@@ -87,11 +87,11 @@ export class WaiterLayout {
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                   <!-- Paper -->
                   <rect x="3" y="2" width="10" height="12" rx="1.5"/>
-  
+
                   <!-- Lines -->
                   <line x1="5" y1="5" x2="11" y2="5"/>
                   <line x1="5" y1="7" x2="11" y2="7"/>
-  
+
                   <!-- Plus -->
                   <line x1="8" y1="10" x2="8" y2="13"/>
                   <line x1="6.5" y1="11.5" x2="9.5" y2="11.5"/>
@@ -99,14 +99,14 @@ export class WaiterLayout {
         },
         {
           title: 'Kitchen Status',
-          route: 'kitchen',
+          route: 'kitchen-status',
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                   <!-- Chef hat -->
                   <path d="M4 7a2.5 2.5 0 1 1 5 0 2.5 2.5 0 1 1 5 0c0 1.5-1.2 2-2.5 2H6.5C5.2 9 4 8.5 4 7z"/>
-  
+
                   <!-- Base -->
                   <rect x="6" y="9" width="6" height="3" rx="1"/>
-  
+
                   <!-- Status lines -->
                   <line x1="2" y1="11" x2="4" y2="11"/>
                   <line x1="2" y1="13" x2="5" y2="13"/>
@@ -123,10 +123,10 @@ export class WaiterLayout {
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                   <!-- Circle -->
                   <circle cx="8" cy="8" r="6"/>
-  
+
                   <!-- Head -->
                   <circle cx="8" cy="6" r="2"/>
-  
+
                   <!-- Body -->
                   <path d="M5 11c1-1.5 5-1.5 6 0"/>
                 </svg>`,

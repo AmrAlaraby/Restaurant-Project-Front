@@ -51,7 +51,7 @@ export class ChefLayout {
                   <!-- Spoon -->
                   <circle cx="5" cy="4" r="1.5"/>
                   <line x1="5" y1="5.5" x2="5" y2="13"/>
-  
+
                   <!-- Fork -->
                   <line x1="10" y1="3" x2="10" y2="13"/>
                   <line x1="9" y1="3" x2="9" y2="6"/>
@@ -69,17 +69,17 @@ export class ChefLayout {
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                   <!-- Box -->
                   <rect x="2" y="3" width="12" height="10" rx="1.5"/>
-  
+
                   <!-- Lines -->
                   <line x1="2" y1="7" x2="14" y2="7"/>
-  
-                  <!-- Check 
+
+                  <!-- Check
                   <path d="M5 10l2 2 4-4"/>-->
                 </svg>`,
         },
         {
           title: 'Recipes',
-          route: 'Recipes',
+          route: 'recipes',
           icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="1.6"
                   stroke-linecap="round" stroke-linejoin="round">
@@ -108,10 +108,10 @@ export class ChefLayout {
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                   <!-- Circle -->
                   <circle cx="8" cy="8" r="6"/>
-  
+
                   <!-- Head -->
                   <circle cx="8" cy="6" r="2"/>
-  
+
                   <!-- Body -->
                   <path d="M5 11c1-1.5 5-1.5 6 0"/>
                 </svg>`,
