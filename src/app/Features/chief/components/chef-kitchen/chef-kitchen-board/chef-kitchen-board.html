@@ -23,23 +23,24 @@
     <button (click)="error = null">✕</button>
   </div>
 
-  <!-- Stats Row -->
-  <div class="stats-row">
-    <div class="stat-chip pending">
-      <span class="stat-num">{{ totalPending }}</span>
-      <span class="stat-label">PENDING</span>
-    </div>
+<div class="stats-row">
 
-    <div class="stat-chip preparing">
-      <span class="stat-num">{{ totalPreparing }}</span>
-      <span class="stat-label">PREPARING</span>
-    </div>
-
-    <div class="stat-chip done">
-      <span class="stat-num">{{ totalDone }}</span>
-      <span class="stat-label">DONE</span>
-    </div>
+  <div class="stat-card pending">
+    <div class="stat-num">{{ totalPending }}</div>
+    <div class="stat-label">Pending Tickets</div>
   </div>
+
+  <div class="stat-card preparing">
+    <div class="stat-num">{{ totalPreparing }}</div>
+    <div class="stat-label">Preparing Now</div>
+  </div>
+
+  <div class="stat-card done">
+    <div class="stat-num">{{ totalDone }}</div>
+    <div class="stat-label">Done Today</div>
+  </div>
+
+</div>
 
   <!-- Board -->
   <div class="kds-board" *ngIf="!loading; else loadingTpl">
