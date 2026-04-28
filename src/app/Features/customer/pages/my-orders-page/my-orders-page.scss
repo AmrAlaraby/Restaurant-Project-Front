@@ -10,12 +10,13 @@ $radius-lg:   16px;
 
 // ── Page Layout ─────────────────────────────────────────────────────────────
 .page-wrap {
-  padding: 32px;
-  max-width: 1100px;
+  width: 100%;
+  max-width: 1400px;
   margin: 0 auto;
-  font-family: 'Segoe UI', system-ui, sans-serif;
-}
 
+  padding: 24px 48px; // 👈 زودنا اليمين والشمال
+  box-sizing: border-box;
+}
 .page-header {
   margin-bottom: 28px;
 }
