@@ -11,6 +11,7 @@
       <div class="details-title">Order #{{ delivery.order.id }}</div>
       <div class="details-sub">{{ delivery.order.branchName }}</div>
     </div>
+
     <span class="status-badge"
           [ngClass]="{
             'badge-assigned':  delivery.deliveryStatus === 'Assigned',
@@ -22,36 +23,45 @@
     </span>
   </div>
 
-  <!-- Progress Steps -->
+  <!-- Steps -->
   <div class="steps-wrap">
     <div class="step">
       <div class="step-circle done">✓</div>
       <div class="step-label">Assigned</div>
     </div>
-    <div class="step-connector" [ngClass]="{'done': delivery.deliveryStatus === 'PickedUp' || delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered'}"></div>
+
+    <div class="step-connector"
+         [ngClass]="{'done': delivery.deliveryStatus !== 'Assigned'}"></div>
+
     <div class="step">
       <div class="step-circle"
            [ngClass]="{
-             'done': delivery.deliveryStatus === 'PickedUp' || delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered',
+             'done': delivery.deliveryStatus !== 'Assigned',
              'inactive': delivery.deliveryStatus === 'Assigned'
            }">
-        {{ delivery.deliveryStatus === 'PickedUp' || delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered' ? '✓' : '–' }}
+        {{ delivery.deliveryStatus !== 'Assigned' ? '✓' : '–' }}
       </div>
       <div class="step-label">Picked Up</div>
     </div>
-    <div class="step-connector" [ngClass]="{'done': delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered'}"></div>
+
+    <div class="step-connector"
+         [ngClass]="{'done': delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered'}"></div>
+
     <div class="step">
       <div class="step-circle"
            [ngClass]="{
              'done': delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered',
              'active': delivery.deliveryStatus === 'OnTheWay',
-             'inactive': delivery.deliveryStatus === 'Assigned' || delivery.deliveryStatus === 'PickedUp'
+             'inactive': delivery.deliveryStatus !== 'OnTheWay' && delivery.deliveryStatus !== 'Delivered'
            }">
         {{ delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered' ? '✓' : '→' }}
       </div>
       <div class="step-label">On the Way</div>
     </div>
-    <div class="step-connector" [ngClass]="{'done': delivery.deliveryStatus === 'Delivered'}"></div>
+
+    <div class="step-connector"
+         [ngClass]="{'done': delivery.deliveryStatus === 'Delivered'}"></div>
+
     <div class="step">
       <div class="step-circle"
            [ngClass]="{
@@ -64,59 +74,99 @@
     </div>
   </div>
 
+  <!-- GRID -->
   <div class="details-grid">
 
     <!-- Delivery Info -->
     <div class="info-card">
       <div class="card-title">Delivery Info</div>
-      <div class="info-row"><span>Total</span><b class="red">EGP {{ delivery.order.totalAmount }}</b></div>
-      <div class="info-row"><span>Created</span><b>{{ delivery.createdAt | date:'dd/MM/yyyy hh:mm a' }}</b></div>
-      <div class="info-row" *ngIf="delivery.deliveredAt"><span>Delivered</span><b>{{ delivery.deliveredAt | date:'dd/MM/yyyy hh:mm a' }}</b></div>
-      <div class="info-row" *ngIf="delivery.cashCollected !== null"><span>Cash Collected</span><b>EGP {{ delivery.cashCollected }}</b></div>
+
+      <div class="info-row">
+        <span>Total</span>
+        <b class="red">EGP {{ delivery.order.totalAmount }}</b>
+      </div>
+
+      <div class="info-row">
+        <span>Created</span>
+        <b>{{ delivery.createdAt | date:'dd/MM/yyyy hh:mm a' }}</b>
+      </div>
+
+      <div class="info-row" *ngIf="delivery.deliveredAt">
+        <span>Delivered</span>
+        <b>{{ delivery.deliveredAt | date:'dd/MM/yyyy hh:mm a' }}</b>
+      </div>
+
+      <div class="info-row" *ngIf="delivery.cashCollected !== null">
+        <span>Cash Collected</span>
+        <b>EGP {{ delivery.cashCollected }}</b>
+      </div>
     </div>
 
     <!-- People -->
     <div class="info-card">
       <div class="card-title">People</div>
+
       <div class="info-row">
         <span>Driver</span>
         <b>{{ delivery.driverName || 'Not Assigned' }}</b>
       </div>
+
       <div class="info-row" *ngIf="delivery.driverNumber">
         <span>Driver Phone</span>
-        <a class="phone-link" href="tel:{{ delivery.driverNumber }}">📞 {{ delivery.driverNumber }}</a>
+        <a class="phone-link" href="tel:{{ delivery.driverNumber }}">
+          📞 {{ delivery.driverNumber }}
+        </a>
       </div>
+
       <div class="info-row">
         <span>Customer</span>
         <b>{{ delivery.customerName || '—' }}</b>
       </div>
+
       <div class="info-row" *ngIf="delivery.customerPhoneNumber">
         <span>Customer Phone</span>
-        <a class="phone-link" href="tel:{{ delivery.customerPhoneNumber }}">📞 {{ delivery.customerPhoneNumber }}</a>
+        <a class="phone-link" href="tel:{{ delivery.customerPhoneNumber }}">
+          📞 {{ delivery.customerPhoneNumber }}
+        </a>
       </div>
     </div>
 
     <!-- Address -->
-    <div class="info-card">
+    <div class="info-card address-card">
       <div class="card-title">Delivery Address</div>
-      <div class="info-row"><span>Building</span><b>{{ delivery.deliveryAddress.buildingNumber }}</b></div>
-      <div class="info-row"><span>Street</span><b>{{ delivery.deliveryAddress.street }}</b></div>
-      <div class="info-row"><span>City</span><b>{{ delivery.deliveryAddress.city }}</b></div>
+
+      <div class="info-row">
+        <span>Building</span>
+        <b>{{ delivery.deliveryAddress.buildingNumber }}</b>
+      </div>
+
+      <div class="info-row">
+        <span>Street</span>
+        <b>{{ delivery.deliveryAddress.street }}</b>
+      </div>
+
+      <div class="info-row">
+        <span>City</span>
+        <b>{{ delivery.deliveryAddress.city }}</b>
+      </div>
+
       <div class="info-row" *ngIf="delivery.deliveryAddress.specialMark">
-        <span>Mark</span><b>{{ delivery.deliveryAddress.specialMark }}</b>
+        <span>Mark</span>
+        <b>{{ delivery.deliveryAddress.specialMark }}</b>
       </div>
     </div>
 
-  </div>
+    <!-- Items -->
+    <div class="items-card items-side">
+      <div class="card-title">Order Items</div>
 
-  <!-- Items -->
-  <div class="items-card">
-    <div class="card-title">Order Items</div>
-    <div class="item-row" *ngFor="let item of delivery.order.items">
-      <span class="item-name">{{ item.menuItemName }}</span>
-      <span class="item-qty">x{{ item.quantity }}</span>
-      <span class="item-price">EGP {{ item.total }}</span>
+      <div class="item-row" *ngFor="let item of delivery.order.items">
+        <span class="item-name">{{ item.menuItemName }}</span>
+        <span class="item-qty">x{{ item.quantity }}</span>
+        <span class="item-price">EGP {{ item.total }}</span>
+      </div>
     </div>
+
   </div>
 
   <button class="back-btn" (click)="goBack()">← Back</button>

@@ -11,13 +11,22 @@
   <!-- Header -->
   <div class="bad-header">
     <div class="bad-header-left">
-      <button class="bad-back-btn" (click)="goBack()">← Back</button>
-      <div class="bad-title">Dispatched Orders</div>
-      <div class="bad-sub" *ngIf="!loading">
-        {{ branchName }} &middot;
-        <span class="bad-count">{{ totalCount }} order{{ totalCount !== 1 ? 's' : '' }}</span>
-      </div>
-    </div>
+
+  <div class="bad-title">Dispatched Orders</div>
+
+  <div class="bad-sub" *ngIf="!loading">
+    {{ branchName }} &middot;
+    <span class="bad-count">
+      {{ totalCount }} order{{ totalCount !== 1 ? 's' : '' }}
+    </span>
+  </div>
+
+  <!-- Back button under title -->
+  <button class="bad-back-btn bad-back-spaced" (click)="goBack()">
+    ← Back
+  </button>
+
+</div>
 
     <!-- Filters -->
     <div class="bad-filter-wrap">
