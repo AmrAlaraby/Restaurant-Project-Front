@@ -27,7 +27,7 @@
         </option>
 
         <option *ngFor="let b of branches" [ngValue]="b">
-          {{ b.name }}
+          {{ getBranchName(b) }}
         </option>
       </select>
     </div>

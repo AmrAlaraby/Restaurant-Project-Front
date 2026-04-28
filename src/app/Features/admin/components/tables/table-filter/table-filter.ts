@@ -1,14 +1,16 @@
 import { Component, Output, EventEmitter, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Subject, debounceTime } from 'rxjs';
+import { Subject, debounceTime, takeUntil } from 'rxjs';
 import { BranchService } from '../../../../../Core/Services/Branch-Service/branch-service';
 import { Branch } from '../../../../../Core/Models/BranchModels/branch-interface';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
 
 @Component({
   selector: 'app-table-filter',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,TranslatePipe],
   templateUrl: './table-filter.html',
   styleUrls: ['./table-filter.scss'],
 })
@@ -35,7 +37,22 @@ export class TableFilter implements OnInit, OnDestroy {
     });
 
     this.filterSubject.pipe(debounceTime(1000)).subscribe(() => this.emitFilters());
+    this.getCurrentLanguage();
   }
+
+  constructor(private localizationService: LocalizationService) {}
+    CurrentLanguage: string = 'en';
+  
+    private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(lang => {
+        this.CurrentLanguage = lang;
+      });
+      }
+
 
   onSearchChange(value: string) {
     this.search = value;
@@ -62,5 +79,14 @@ export class TableFilter implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.filterSubject.complete();
+    this.destroy$.next();
+      this.destroy$.complete();
+  }
+
+  getBranchName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+     return item.arabicName || item.name;
+    }
+    return item.name;
   }
 }

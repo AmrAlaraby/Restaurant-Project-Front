@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DeliveryService } from '../../../../../Core/Services/Delivery-Service/delivery-service';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Subject, takeUntil } from 'rxjs';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
 @Component({
   selector: 'app-assign-delivery',
   standalone: true,
-  imports: [CommonModule, FormsModule,TranslatePipe],
+  imports: [CommonModule, FormsModule, TranslatePipe],
   templateUrl: './assign-delivery.html',
   styleUrls: ['./assign-delivery.scss'],
 })
@@ -24,11 +26,32 @@ export class AssignDelivery implements OnInit {
   loadingDrivers = false;
   assigning = false;
 
-  constructor(private deliveryService: DeliveryService) {}
+  constructor(
+    private deliveryService: DeliveryService,
+    private localizationService: LocalizationService,
+  ) {}
 
   ngOnInit(): void {
     this.loadBranches();
+    this.getCurrentLanguage();
   }
+
+  CurrentLanguage: string = 'en';
+
+  private destroy$ = new Subject<void>();
+  getCurrentLanguage(): void {
+    this.CurrentLanguage = this.localizationService.getCurrentLang();
+    this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+      this.CurrentLanguage = lang;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+
 
   loadBranches() {
     this.deliveryService.getBranches().subscribe({
@@ -123,5 +146,12 @@ export class AssignDelivery implements OnInit {
         this.assigning = false;
       },
     });
+  }
+
+    getBranchName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.arabicName || item.name;
+    }
+    return item.name;
   }
 }

@@ -16,7 +16,63 @@
   },
 
   "ADMIN": {
+     
+    "MENU_ITEMS": {
+      "CARD": {
+      "AVAILABLE": "متاح",
+      "UNAVAILABLE": "غير متاح",
+      "CURRENCY": "جنيه",
+      "MIN": "دقيقة"
+    },
+      "IMAGE": {
+      "LABEL": "صورة العنصر",
+      "DRAG_DROP": "اسحب الصورة وضعها هنا",
+      "OR_BROWSE": "أو اضغط بالأسفل للاختيار",
+      "BROWSE": "اختيار صورة"
+    },
+    "PAGE": {
+      "TITLE": "إدارة عناصر المنيو",
+      "ADD_NEW": "إضافة عنصر جديد"
+    },
+    "FORM": {
+      "CREATE_TITLE": "إضافة عنصر جديد",
+      "EDIT_TITLE": "تعديل عنصر",
+      "CREATE_SUBTITLE": "إضافة عنصر جديد إلى المنيو",
+      "EDIT_SUBTITLE": "تحديث بيانات العنصر"
+    },
+    "DELETE": {
+      "TITLE": "حذف عنصر",
+      "MESSAGE": "هل أنت متأكد من حذف هذا العنصر؟ لا يمكن التراجع عن هذا الإجراء.",
+      "CANCEL": "إلغاء",
+      "CONFIRM": "حذف"
+    },
+    "DETAILS": {
+      "TITLE": "تفاصيل العنصر",
+      "NAME": "الاسم",
+      "PRICE": "السعر",
+      "CATEGORY": "الفئة",
+      "PREP_TIME": "وقت التحضير",
+      "STATUS": "الحالة",
+      "RECIPES_TITLE": "الوصفات / المكونات"
+    }
+  },
 
+     "DELIVERY": {
+    "PAGE": {
+      "TITLE": "إدارة التوصيل",
+      "SUBTITLE": "تتبع السائقين بشكل مباشر",
+      "ASSIGN_DRIVER": "تعيين سائق"
+    },
+    "STATS": {
+      "TOTAL_ORDERS": "إجمالي الطلبات",
+      "ON_THE_WAY": "في الطريق",
+      "PICKED_UP": "تم الاستلام",
+      "DELIVERED": "تم التوصيل"
+    },
+    "TABS": {
+      "ALL": "كل الطلبات"
+    }
+  },
     
 
     "DELIVERY_DETAILS": {
@@ -219,6 +275,23 @@
     },
 
     "TABLES": {
+      "FILTER": {
+        "SEARCH_PLACEHOLDER": "ابحث برقم الطاولة...",
+        "ALL_BRANCHES": "كل الفروع",
+        "ALL_STATUS": "كل الحالات",
+        "OCCUPIED": "مشغولة",
+        "AVAILABLE": "متاحة",
+        "RESET": "إعادة ضبط"
+      },
+       "CARD": {
+        "OCCUPIED": "مشغولة",
+        "AVAILABLE": "متاحة",
+        "CAPACITY": "السعة",
+        "FREE": "إخلاء",
+        "OCCUPY": "إشغال",
+        "EDIT": "تعديل",
+        "DELETE": "حذف"
+      },
        "ORDER_MODAL": {
         "NO_ACTIVE_TITLE": "لا يوجد طلب نشط",
         "NO_ACTIVE_SUBTITLE": "لا يوجد طلب نشط",

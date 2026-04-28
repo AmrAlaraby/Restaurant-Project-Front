@@ -4,11 +4,12 @@ import { AllDeliveries } from '../../../components/Delivery/all-deliveries/all-d
 import { AssignDelivery } from '../../../components/Delivery/assign-delivery/assign-delivery';
 import { OwnDeliveries } from '../../../components/Delivery/own-deliveries/own-deliveries';
 import { DeliveryService } from '../../../../../Core/Services/Delivery-Service/delivery-service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-delivery-page',
   standalone: true,
-  imports: [CommonModule, AllDeliveries, AssignDelivery, OwnDeliveries],
+  imports: [CommonModule, AllDeliveries, AssignDelivery, OwnDeliveries, TranslatePipe],
   templateUrl: './delivery-page.html',
   styleUrls: ['./delivery-page.scss'],
 })
