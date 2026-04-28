@@ -161,7 +161,7 @@ export class BasketPage {
             }
 
             this.basketService.clearBasket();
-            this.router.navigate(['/order-success']);
+            this.router.navigate(['/customer/order-success']);
           },
           error: err => {
             console.error(err);

@@ -383,6 +383,12 @@ export const routes: Routes = [
             (m) => m.SavedAddressesComponent,
           ),
       },
+      {
+        path: 'order-success',
+        loadComponent: () =>
+          import('./Features/customer/components/order-success/order-success')
+            .then(m => m.OrderSuccess)
+      }
       //Areej
       //Arwa
 
