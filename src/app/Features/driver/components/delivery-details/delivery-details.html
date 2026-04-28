@@ -78,9 +78,10 @@
     </div>
   </div>
 
-  <!-- Info -->
+  <!-- GRID (كل الكروت + items هنا) -->
   <div class="details-grid">
 
+    <!-- Info -->
     <div class="info-card">
       <div class="card-title">{{ 'DRIVER.DELIVERY_DETAILS.INFO' | translate }}</div>
 
@@ -105,6 +106,7 @@
       </div>
     </div>
 
+    <!-- People -->
     <div class="info-card">
       <div class="card-title">{{ 'DRIVER.DELIVERY_DETAILS.PEOPLE' | translate }}</div>
 
@@ -129,7 +131,8 @@
       </div>
     </div>
 
-    <div class="info-card">
+    <!-- Address -->
+    <div class="info-card address-card">
       <div class="card-title">{{ 'DRIVER.DELIVERY_DETAILS.ADDRESS' | translate }}</div>
 
       <div class="info-row">
@@ -153,17 +156,17 @@
       </div>
     </div>
 
-  </div>
+    <!-- Items -->
+    <div class="items-card items-side">
+      <div class="card-title">{{ 'DRIVER.DELIVERY_DETAILS.ITEMS' | translate }}</div>
 
-  <!-- Items -->
-  <div class="items-card">
-    <div class="card-title">{{ 'DRIVER.DELIVERY_DETAILS.ITEMS' | translate }}</div>
-
-    <div class="item-row" *ngFor="let item of delivery.order.items">
-      <span class="item-name">{{ item.menuItemName }}</span>
-      <span class="item-qty">x{{ item.quantity }}</span>
-      <span class="item-price">EGP {{ item.total }}</span>
+      <div class="item-row" *ngFor="let item of delivery.order.items">
+        <span class="item-name">{{ item.menuItemName }}</span>
+        <span class="item-qty">x{{ item.quantity }}</span>
+        <span class="item-price">EGP {{ item.total }}</span>
+      </div>
     </div>
+
   </div>
 
   <!-- Update -->
@@ -177,7 +180,6 @@
         [placeholder]="'DRIVER.DELIVERY_DETAILS.CASH_PLACEHOLDER' | translate"
         [(ngModel)]="updateModel.cashCollected"
       />
-     
     </div>
 
     <button class="update-btn" (click)="updateStatus()">

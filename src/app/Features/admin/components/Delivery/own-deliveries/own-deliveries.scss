@@ -45,27 +45,36 @@ $muted: #999;
   border-radius: 12px;
   overflow: hidden;
 
+  margin-bottom: 14px; /* 👈 أقل من قبل */
+
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  /* TOP */
   .card-top {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    padding: 16px 20px 12px;
+    padding: 10px 16px 8px; /* 👈 أصغر */
     border-bottom: 1px solid #f5f5f5;
 
     .card-left {
       .delivery-id { font-size: 11px; color: #bbb; margin-bottom: 2px; }
-      .order-title { font-size: 16px; font-weight: 600; color: $text; }
+      .order-title { font-size: 15px; font-weight: 600; color: $text; }
       .branch-name { font-size: 12px; color: $muted; margin-top: 2px; }
     }
   }
 }
 
-// Steps
+/* STEPS */
 .steps-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 20px;
+  padding: 10px 16px; /* 👈 أصغر */
   background: #fafafa;
   border-bottom: 1px solid $border;
 }
@@ -74,17 +83,17 @@ $muted: #999;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  min-width: 64px;
+  gap: 2px; /* 👈 أقل */
+  min-width: 60px;
 
   .step-circle {
-    width: 28px;
-    height: 28px;
+    width: 24px;   /* 👈 أصغر */
+    height: 24px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     border: 2px solid #e0e0e0;
     background: $white;
@@ -103,19 +112,20 @@ $muted: #999;
 }
 
 .step-connector {
-  width: 20px;
+  width: 18px;
   height: 2px;
   background: #e8e8e8;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   flex-shrink: 0;
+
   &.done { background: $red; }
 }
 
-// Body
+/* BODY */
 .card-body {
-  padding: 16px 20px;
+  padding: 10px 16px; /* 👈 أصغر */
   display: flex;
-  gap: 24px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 
@@ -129,7 +139,7 @@ $muted: #999;
     color: $red;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 }
 
@@ -141,52 +151,51 @@ $muted: #999;
   gap: 6px;
 
   .pin {
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: $red;
-    flex-shrink: 0;
   }
 }
 
 .addr-mark {
   font-size: 12px;
   color: $muted;
-  margin-top: 4px;
-  padding-left: 13px;
+  margin-top: 3px;
+  padding-left: 12px;
 }
 
 .item-row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 13px;
-  padding: 4px 0;
+  gap: 8px;
+  font-size: 12.5px;
+  padding: 3px 0;
   color: $text;
 
   .item-qty  { color: $muted; }
   .item-price { font-weight: 600; color: $red; margin-left: auto; }
 }
 
-// Footer
+/* FOOTER */
 .card-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 20px;
+  padding: 8px 16px; /* 👈 أصغر */
   background: #fafafa;
   border-top: 1px solid $border;
-  font-size: 13px;
+  font-size: 12.5px;
   color: $muted;
 
   .red { color: $red; font-weight: 600; }
 }
 
-// Status Badges
+/* STATUS */
 .status-badge {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: 6px;
   letter-spacing: 0.4px;
   text-transform: uppercase;
