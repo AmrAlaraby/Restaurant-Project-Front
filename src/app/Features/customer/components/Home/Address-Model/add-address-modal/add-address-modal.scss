@@ -56,4 +56,33 @@
   display: flex;
   gap: 10px;
   padding: 16px 20px;
+
+  button {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+
+    &:first-child {
+      background: #f0f0f0;
+      color: #555;
+    }
+
+    &:last-child {
+      background: #c0392b;
+      color: white;
+
+      &:hover {
+        background: #a93226;
+      }
+
+      &:disabled {
+        background: #e0a09a;
+        cursor: not-allowed;
+      }
+    }
+  }
 }
