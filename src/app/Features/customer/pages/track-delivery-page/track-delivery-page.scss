@@ -16,12 +16,13 @@ $radius-md: 12px;
 }
 
 .page-wrap {
-  padding: 32px;
-  max-width: 820px;
-  margin: 0 auto;
+  padding: 24px;      // مسافة من كل الجوانب (مريحة أكتر)
+  width: 100%;
+  max-width: 1200px;  // عرض مناسب للشاشات الكبيرة
+  margin: 0 auto;     // يفضل في النص بشكل أنيق
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;          // مسافة بين الكومبوننتس
 }
 
 // ── Loading ───────────────────────────────────────────────────────────────────
