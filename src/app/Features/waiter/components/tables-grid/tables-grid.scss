@@ -4,71 +4,71 @@
   gap: 20px;
 
   .table-card {
-    background: #fff;
-    border-radius: 12px;
-    border: 1px solid rgba(192, 57, 43, 0.2);
+    background: #f9e6e6;
+    border-radius: 16px;
+    border: 2px solid #e74c3c;
     padding: 1rem 1.1rem 0.9rem;
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 1px 4px rgba(192, 57, 43, 0.05);
-    transition: border-color 0.15s, transform 0.12s;
+    box-shadow: none;
+    transition: 0.2s ease;
 
-    &:hover { border-color: #C0392B; transform: translateY(-1px); }
-    &.free { border-left: 3px solid #27AE60; }
-    &.busy { border-left: 3px solid #C0392B; }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 190px;
+    text-align: center;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+
+    &.free {
+      background: #e9f4ee;
+      border-color: #1f9d6e;
+    }
+
+    &.busy {
+      background: #f9e6e6;
+      border-color: #e74c3c;
+    }
 
     h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 19px;
-      font-weight: 600;
-      color: #2D0A08;
-      margin-bottom: 2px;
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0 0 10px 0;
+      color: #1f1f1f;
+      font-family: inherit;
     }
 
     span {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 10px;
+      display: inline-block;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.06em;
-      padding: 3px 9px;
+      padding: 5px 12px;
       border-radius: 999px;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-top: 6px;
     }
 
     p {
-      font-size: 11px;
-      color: #b08a83;
-      margin: 0;
+      font-size: 12px;
+      margin: 4px 0;
+      color: #6b6b6b;
     }
 
     &.free span {
-      background: rgba(39, 174, 96, 0.1);
-      color: #1e8449;
-
-      &::before {
-        content: '';
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background: #27AE60;
-      }
+      background: #d6f5e7;
+      color: #1f9d6e;
     }
 
     &.busy span {
-      background: rgba(192, 57, 43, 0.1);
-      color: #C0392B;
-
-      &::before {
-        content: '';
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background: #C0392B;
-      }
+      background: #ffd6d6;
+      color: #e74c3c;
     }
   }
 }

@@ -10,8 +10,8 @@
   </div>
 
 </div>
-<div class="page">
 
+<div class="page">
 
   <!-- Stats -->
   <app-stats-cards
@@ -19,19 +19,18 @@
     [orders]="activeOrdersCount">
   </app-stats-cards>
 
-  <!-- Alert -->
+  <!-- Active Orders (NOW ABOVE TABLES) -->
+  <h2 class="section-title">Active Orders</h2>
 
   <!-- Tables -->
   <div class="tables-header">
-  <h3>Tables</h3>
+    <h3>Tables</h3>
 
-  <button class="view-all-btn" (click)="goToTables()">
-    View All →
-  </button>
-</div>
-<app-tables-grid [tables]="displayedTables"></app-tables-grid>
+    <button class="view-all-btn" (click)="goToTables()">
+      View All →
+    </button>
+  </div>
 
-  <!-- Orders -->
-  <h2>Active Orders</h2>
+  <app-tables-grid [tables]="displayedTables"></app-tables-grid>
 
 </div>
