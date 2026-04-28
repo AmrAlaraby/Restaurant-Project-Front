@@ -1,6 +1,8 @@
 <div class="image-upload">
 
-  <label class="form-label">Menu Item Image</label>
+  <label class="form-label">
+    {{ 'ADMIN.MENU_ITEMS.IMAGE.LABEL' | translate }}
+  </label>
 
   <input
     #fileInput
@@ -42,8 +44,12 @@
       (dragleave)="onDragLeave()"
     >
       <div class="placeholder-content">
-        <h6>Drag & Drop Image Here</h6>
-        <p>or click below to browse</p>
+        <h6>
+          {{ 'ADMIN.MENU_ITEMS.IMAGE.DRAG_DROP' | translate }}
+        </h6>
+        <p>
+          {{ 'ADMIN.MENU_ITEMS.IMAGE.OR_BROWSE' | translate }}
+        </p>
       </div>
     </div>
 
@@ -52,7 +58,7 @@
       class="browse-btn"
       (click)="fileInput.click()"
     >
-      Browse Image
+      {{ 'ADMIN.MENU_ITEMS.IMAGE.BROWSE' | translate }}
     </button>
 
   </ng-template>

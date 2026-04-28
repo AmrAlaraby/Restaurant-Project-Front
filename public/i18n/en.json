@@ -16,6 +16,61 @@
   },
 
   "ADMIN": {
+    "MENU_ITEMS": {
+      "CARD": {
+        "AVAILABLE": "Available",
+        "UNAVAILABLE": "Unavailable",
+        "CURRENCY": "EGP",
+        "MIN": "min"
+      },
+      "IMAGE": {
+        "LABEL": "Menu Item Image",
+        "DRAG_DROP": "Drag & Drop Image Here",
+        "OR_BROWSE": "or click below to browse",
+        "BROWSE": "Browse Image"
+      },
+    "PAGE": {
+      "TITLE": "Menu Items Management",
+      "ADD_NEW": "Add New Item"
+    },
+    "FORM": {
+      "CREATE_TITLE": "Create Menu Item",
+      "EDIT_TITLE": "Edit Menu Item",
+      "CREATE_SUBTITLE": "Add a new item to your menu",
+      "EDIT_SUBTITLE": "Update menu item information"
+    },
+    "DELETE": {
+      "TITLE": "Delete Menu Item",
+      "MESSAGE": "Are you sure you want to delete this menu item? This action cannot be undone.",
+      "CANCEL": "Cancel",
+      "CONFIRM": "Delete"
+    },
+    "DETAILS": {
+      "TITLE": "Menu Item Details",
+      "NAME": "Name",
+      "PRICE": "Price",
+      "CATEGORY": "Category",
+      "PREP_TIME": "Prep Time",
+      "STATUS": "Status",
+      "RECIPES_TITLE": "Recipes / Ingredients"
+    }
+  },
+    "DELIVERY": {
+    "PAGE": {
+      "TITLE": "Delivery Management",
+      "SUBTITLE": "Live driver tracking",
+      "ASSIGN_DRIVER": "Assign Driver"
+    },
+    "STATS": {
+      "TOTAL_ORDERS": "Total orders",
+      "ON_THE_WAY": "On the way",
+      "PICKED_UP": "Picked up",
+      "DELIVERED": "Delivered"
+    },
+    "TABS": {
+      "ALL": "All Deliveries"
+    }
+  },
 
     
 
@@ -221,6 +276,23 @@
     },
 
     "TABLES": {
+      "FILTER": {
+        "SEARCH_PLACEHOLDER": "Search by table number...",
+        "ALL_BRANCHES": "All branches",
+        "ALL_STATUS": "All status",
+        "OCCUPIED": "Occupied",
+        "AVAILABLE": "Available",
+        "RESET": "Reset"
+      },
+      "CARD": {
+        "OCCUPIED": "Occupied",
+        "AVAILABLE": "Available",
+        "CAPACITY": "Cap",
+        "FREE": "Free",
+        "OCCUPY": "Occupy",
+        "EDIT": "Edit",
+        "DELETE": "Delete"
+      },
       "ORDER_MODAL": {
         "NO_ACTIVE_TITLE": "No active order",
         "NO_ACTIVE_SUBTITLE": "No active order",

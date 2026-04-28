@@ -11,7 +11,7 @@
       </option>
 
       <option *ngFor="let b of branches" [ngValue]="b.id">
-        {{ b.name }}
+        {{ getBranchName(b) }}
       </option>
     </select>
   </div>
@@ -26,7 +26,7 @@
       </option>
 
       <option *ngFor="let s of statuses" [ngValue]="s">
-        {{ s }}
+        {{ s | translate}}
       </option>
     </select>
   </div>
@@ -118,7 +118,7 @@
       </div>
 
       <span class="status-badge">
-        {{ d.deliveryStatus }}
+        {{  "ADMIN.STATUS."+d.deliveryStatus.toUpperCase() | translate }}
       </span>
 
       <div class="row-price">

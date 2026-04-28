@@ -1,10 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { TableInterface } from '../../../../../Core/Models/TableModels/table-interface';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-table-card',
   standalone: true,
+  imports:[TranslatePipe],
   templateUrl: './table-card.html',
   styleUrls: ['./table-card.scss'],
 })

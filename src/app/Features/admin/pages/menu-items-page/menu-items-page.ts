@@ -16,6 +16,7 @@ import { MenuItemsFilters } from '../../components/MenuItem/menu-items-filters/m
 import { MenuItemsGrid } from '../../components/MenuItem/menu-items-grid/menu-items-grid';
 import { MenuItemsStats } from '../../components/MenuItem/menu-items-stats/menu-items-stats';
 import { Branch } from '../../../../Core/Models/BranchModels/branch-interface';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-menu-items-page',
@@ -28,6 +29,7 @@ import { Branch } from '../../../../Core/Models/BranchModels/branch-interface';
     Pagination,
     MenuItemForm,
     MenuItemDetails,
+    TranslatePipe
   ],
   templateUrl: './menu-items-page.html',
   styleUrls: ['./menu-items-page.scss'],

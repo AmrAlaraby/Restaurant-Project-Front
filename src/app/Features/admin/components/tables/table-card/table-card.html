@@ -9,22 +9,36 @@
 
     @if (table.isOccupied) {
       <span class="badge-pill badge-occupied">
-        <span class="badge-dot"></span>Occupied
+        <span class="badge-dot"></span>
+        {{ 'ADMIN.TABLES.CARD.OCCUPIED' | translate }}
       </span>
     } @else {
       <span class="badge-pill badge-available">
-        <span class="badge-dot"></span>Available
+        <span class="badge-dot"></span>
+        {{ 'ADMIN.TABLES.CARD.AVAILABLE' | translate }}
       </span>
     }
 
-    <span class="cap-info">Cap: {{ table.capacity }}</span>
+    <span class="cap-info">
+      {{ 'ADMIN.TABLES.CARD.CAPACITY' | translate }}: {{ table.capacity }}
+    </span>
   </div>
 
   <div class="card-actions" (click)="$event.stopPropagation()">
     <button class="btn-toggle" (click)="onToggle()">
-      @if (table.isOccupied) { Free } @else { Occupy }
+      @if (table.isOccupied) {
+        {{ 'ADMIN.TABLES.CARD.FREE' | translate }}
+      } @else {
+        {{ 'ADMIN.TABLES.CARD.OCCUPY' | translate }}
+      }
     </button>
-    <button class="btn-edit" (click)="onEdit()">Edit</button>
-    <button class="btn-del" (click)="onDelete()">Delete</button>
+
+    <button class="btn-edit" (click)="onEdit()">
+      {{ 'ADMIN.TABLES.CARD.EDIT' | translate }}
+    </button>
+
+    <button class="btn-del" (click)="onDelete()">
+      {{ 'ADMIN.TABLES.CARD.DELETE' | translate }}
+    </button>
   </div>
 </div>

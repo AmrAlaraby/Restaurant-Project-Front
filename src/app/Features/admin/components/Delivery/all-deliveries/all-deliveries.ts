@@ -12,6 +12,8 @@ import { Branch } from '../../../../../Core/Constants/Api_Urls';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../../../Core/Services/Auth-Service/auth-service';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Subject, takeUntil } from 'rxjs';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
 @Component({
   selector: 'app-all-deliveries',
@@ -40,10 +42,10 @@ export class AllDeliveries {
 
   branches: any[] = [];
   statuses: string[] = [
-    'Assigned',
-    'PickedUp',
-    'OnTheWay',
-    'Delivered'
+    'ADMIN.STATUS.ASSIGNED',
+    'ADMIN.STATUS.PICKED_UP',
+    'ADMIN.STATUS.ON_THE_WAY',
+    'ADMIN.STATUS.DELIVERED',
   ];
 
   constructor(
@@ -51,14 +53,28 @@ export class AllDeliveries {
     private http: HttpClient,
     private router: Router,
     private authService: AuthService,
-    private SignalRService: SignalRService
+    private SignalRService: SignalRService,
+    private localizationService: LocalizationService
   ) {}
 
   ngOnInit() {
     this.load();
     this.loadBranches();
     this.listenToUpdates();
+    this.getCurrentLanguage();
   }
+
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+        getCurrentLanguage(): void {
+          this.CurrentLanguage = this.localizationService.getCurrentLang();
+          this.localizationService.currentLang$
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(lang => {
+          this.CurrentLanguage = lang;
+        });
+        }
 
   // 🔥 Load all deliveries
   load() {
@@ -73,6 +89,11 @@ export class AllDeliveries {
         },
         error: _ => this.loading = false
       });
+  }
+
+    ngOnDestroy(): void {
+    this.destroy$.next();
+      this.destroy$.complete();
   }
 
   listenToUpdates(): void {
@@ -117,5 +138,12 @@ export class AllDeliveries {
   // 🔥 Open details page
   openDetails(id: number) {
     this.router.navigate(['/admin/deliveries', id]);
+  }
+
+  getBranchName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+     return item.arabicName || item.name;
+    }
+    return item.name;
   }
 }

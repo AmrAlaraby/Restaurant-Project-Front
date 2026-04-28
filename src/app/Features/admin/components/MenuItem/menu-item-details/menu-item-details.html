@@ -1,72 +1,91 @@
 <div class="details-wrapper">
+
   <div class="image-wrapper">
-    <img [src]="menuItem.imageUrl" [alt]="menuItem.name" class="details-image" />
+    <img
+      [src]="menuItem.imageUrl"
+      [alt]="menuItem.name"
+      class="details-image"
+    />
   </div>
 
   <div class="details-grid">
+
     <div class="detail-card">
-      <span>Name</span>
-      <strong>{{ menuItem.name }}</strong>
+      <span>{{ 'ADMIN.MENU_ITEMS.DETAILS.NAME' | translate }}</span>
+      <strong>{{ getItemName(menuItem) }}</strong>
     </div>
 
     <div class="detail-card">
-      <span>Price</span>
-      <strong>${{ menuItem.price }}</strong>
-    </div>
-
-    <div class="detail-card">
-      <span>Category</span>
-      <strong>{{ menuItem.categoryName }}</strong>
-    </div>
-
-    <div class="detail-card">
-      <span>Prep Time</span>
-      <strong>{{ menuItem.prepTimeMinutes }} min</strong>
-    </div>
-
-    <div class="detail-card">
-      <span>Status</span>
+      <span>{{ 'ADMIN.MENU_ITEMS.DETAILS.PRICE' | translate }}</span>
       <strong>
-        {{ menuItem.isAvailable ? 'Available' : 'Unavailable' }}
+        {{ menuItem.price }}
+        {{ 'ADMIN.MENU_ITEMS.CARD.CURRENCY' | translate }}
       </strong>
     </div>
-  </div>
 
+    <div class="detail-card">
+      <span>{{ 'ADMIN.MENU_ITEMS.DETAILS.CATEGORY' | translate }}</span>
+      <strong>{{ getCategoryName(menuItem) }}</strong>
+    </div>
+
+    <div class="detail-card">
+      <span>{{ 'ADMIN.MENU_ITEMS.DETAILS.PREP_TIME' | translate }}</span>
+      <strong>
+        {{ menuItem.prepTimeMinutes }}
+        {{ 'ADMIN.MENU_ITEMS.CARD.MIN' | translate }}
+      </strong>
+    </div>
+
+    <div class="detail-card">
+      <span>{{ 'ADMIN.MENU_ITEMS.DETAILS.STATUS' | translate }}</span>
+      <strong>
+        {{ menuItem.isAvailable
+            ? ('ADMIN.MENU_ITEMS.CARD.AVAILABLE' | translate)
+            : ('ADMIN.MENU_ITEMS.CARD.UNAVAILABLE' | translate)
+        }}
+      </strong>
+    </div>
+
+  </div>
 
   <!-------------------------- Recipes Section ---------------------------------------->
-  <div
-  class="recipes-section"
-  *ngIf="menuItem.recipes?.length"
->
-
-  <button
-    type="button"
-    class="recipes-toggle"
-    (click)="toggleRecipes()"
-  >
-    <span>Recipes / Ingredients</span>
-
-    <span class="arrow">
-      {{ showRecipes ? '▲' : '▼' }}
-    </span>
-  </button>
 
   <div
-    class="recipes-table"
-    *ngIf="showRecipes"
+    class="recipes-section"
+    *ngIf="menuItem.recipes.length"
   >
-    <div
-      class="recipe-item"
-      *ngFor="let recipe of menuItem.recipes"
+
+    <button
+      type="button"
+      class="recipes-toggle"
+      (click)="toggleRecipes()"
     >
-      <span>{{ recipe.ingredientName }}</span>
+      <span>
+        {{ 'ADMIN.MENU_ITEMS.DETAILS.RECIPES_TITLE' | translate }}
+      </span>
 
-      <strong>
-        {{ recipe.quantityRequired }}
-        {{ recipe.unit }}
-      </strong>
+      <span class="arrow">
+        {{ showRecipes ? '▲' : '▼' }}
+      </span>
+    </button>
+
+    <div
+      class="recipes-table"
+      *ngIf="showRecipes"
+    >
+      <div
+        class="recipe-item"
+        *ngFor="let recipe of menuItem.recipes"
+      >
+        <span>{{ getIngredientName(recipe) }}</span>
+
+        <strong>
+          {{ recipe.quantityRequired }}
+          {{ recipe.unit }}
+        </strong>
+      </div>
     </div>
+
   </div>
 
-</div>
 </div>
