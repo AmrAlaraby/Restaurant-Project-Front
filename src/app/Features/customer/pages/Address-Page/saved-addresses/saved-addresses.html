@@ -3,14 +3,17 @@
   <!-- Page Header -->
   <div class="page-header">
     <div class="header-title">
-      <span class="pin-icon">📍</span>
+
       <h1>My Addresses</h1>
+      <button class="btn-add" (click)="openAdd()">
+        <span>+</span> Add New Address
+      </button>
     </div>
   </div>
 
   <!-- Search Bar -->
   <div class="search-wrap">
-    <span class="search-icon">🔍</span>
+
     <input
       class="search-input"
       type="text"
@@ -81,7 +84,7 @@
                 </button>
                 <button
                   class="btn-delete"
-                  (click)="deleteAddress(addr)"
+                  (click)="confirmDelete(addr)"
                   [disabled]="isDeleting(addr)"
                 >
                   @if (isDeleting(addr)) {
@@ -153,10 +156,6 @@
       }
     }
 
-    <!-- Add Button -->
-    <button class="btn-add" (click)="openAdd()">
-      <span>+</span> Add New Address
-    </button>
   }
 
 </div>
@@ -242,6 +241,27 @@
         </div>
 
       </form>
+    </div>
+  </div>
+}
+
+<!-- CONFIRM DELETE -->
+@if (addressToDelete()) {
+  <div class="modal-overlay" (click)="cancelDelete()">
+    <div class="confirm-card" (click)="$event.stopPropagation()">
+      
+      <h3>Delete Address?</h3>
+      <p>Are you sure you want to delete this address? This action cannot be undone.</p>
+      <div class="confirm-actions">
+        <button class="btn-cancel" (click)="cancelDelete()">No, Keep It</button>
+        <button class="btn-confirm-delete" (click)="deleteAddress(addressToDelete()!)" [disabled]="isDeleting(addressToDelete()!)">
+          @if (isDeleting(addressToDelete()!)) {
+            <span class="spinner white"></span>
+          } @else {
+            Yes, Delete
+          }
+        </button>
+      </div>
     </div>
   </div>
 }
