@@ -43,3 +43,17 @@
     color: #ff5a1f;
     font-weight: bold;
 }
+
+.btn-outline-primary {
+  font-size: 14px;
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+/* 👇 تكبير زرار See All تحديدًا */
+button.btn-outline-primary {
+  font-size: 15px;
+  padding: 8px 18px;
+  border-radius: 12px;
+}
