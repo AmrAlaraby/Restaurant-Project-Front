@@ -13,35 +13,35 @@ export class ActiveOrderCard {
 
 
 
-  getStepIndex(status: string): number {
-    const map: Record<string, number> = {
-      Pending: 0,
-      Confirmed: 1,
-      OnTheWay: 2,
-      Delivered: 3,
-         Received: 3, 
-    };
-    return map[status] ?? 0;
-  }
-  get steps(): string[] {
-  const type = this.order().orderType;
-  if (type === 'Pickup' || type === 'DineIn') {
-    return ['Placed', 'Confirmed', 'Ready', 'Received'];
-  }
-  return ['Placed', 'Confirmed', 'On the Way', 'Delivered'];
+getStepIndex(status: string): number {
+  const map: Record<string, number> = {
+    Received: 0,
+    Preparing: 1,
+    Ready: 2,
+    Delivered: 3,
+  };
+  return map[status] ?? 0;
 }
 
-  getStatusBadgeClass(status: string): string {
-    const map: Record<string, string> = {
-      Delivered: 'badge-delivered',
-      Cancelled: 'badge-cancelled',
-      OnTheWay: 'badge-onway',
-      Confirmed: 'badge-confirmed',
-      Pending: 'badge-pending',
-       Received: 'badge-delivered',
-    };
-    return map[status] ?? '';
+get steps(): string[] {
+  const type = this.order().orderType;
+  if (type === 'Pickup' || type === 'DineIn') {
+    return ['Received', 'Preparing', 'Ready', 'Delivered'];
   }
+  return ['Received', 'Preparing', 'On the Way', 'Delivered'];
+}
+
+getStatusBadgeClass(status: string): string {
+  const map: Record<string, string> = {
+    Received:       'badge-confirmed',
+    Preparing:      'badge-pending',
+    Ready:          'badge-onway',
+    Delivered:      'badge-delivered',
+    Cancelled:      'badge-cancelled',
+    AwaitingPayment:'badge-pending',
+  };
+  return map[status] ?? '';
+}
 
   onTrack() {
     this.track.emit(this.order().id);
