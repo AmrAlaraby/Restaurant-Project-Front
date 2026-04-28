@@ -7,4 +7,5 @@ export interface PaymentDto {
   paymentStatus: string;
   paidAmount: number;
   paidAt: string | null;
+  createdAt: string | null;
 }

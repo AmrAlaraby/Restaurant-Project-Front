@@ -40,4 +40,7 @@ export class PaymentService {
 
     return this.http.get<PaginatedResult<PaymentDto>>(Payment.getAll, { params: httpParams });
   }
+ getAllWithoutPagination(): Observable<PaymentDto[]> {
+    return this.http.get<PaymentDto[]>(`${Payment.getAll}/all`);
+  }
 }

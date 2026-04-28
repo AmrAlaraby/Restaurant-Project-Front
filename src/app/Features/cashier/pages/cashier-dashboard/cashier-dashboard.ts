@@ -75,19 +75,21 @@ export class CashierDashboard implements OnInit {
     });
   }
 
+
   loadStats() {
+    this.paymentService.getAllWithoutPagination().subscribe(payments => {
+    const todayPayments = payments.filter(p => this.isTodayRelevant(p));
+    const todayPending = payments.filter(p => p.paymentStatus === 'Pending' ).length;
+    console.log('Today\'s Payments:', todayPayments);
+    console.log('Today\'s Pending Payments:', todayPending);
 
-
-    this.paymentService.getAll({ pageIndex: 1, pageSize: 100 }).subscribe(res => {
-      const payments = res.data ?? [];
-
-      const collected = payments
+      const collected = todayPayments
         .filter(p => p.paymentStatus === 'Paid')
         .reduce((sum, p) => sum + (p.paidAmount ?? 0), 0);
 
-      const pending = payments.filter(p => p.paymentStatus === 'Pending').length;
-      const processed = payments.filter(p => p.paymentStatus === 'Paid').length;
-      const refunded = payments.filter(p => p.paymentStatus === 'Refunded').length;
+      const pending = todayPending;
+      const processed = todayPayments.filter(p => p.paymentStatus === 'Paid').length;
+      const refunded = todayPayments.filter(p => p.paymentStatus === 'Refunded').length;
 
       this.stats = [
         { value: `EGP ${collected.toLocaleString()}`, label: 'Collected Today', accent: 'green' },
@@ -96,6 +98,20 @@ export class CashierDashboard implements OnInit {
         { value: `${refunded}`,  label: 'Refunds Issued',     accent: 'red2' },
       ];
     });
+  }
+   goToOrders() {
+      this.router.navigate(['/cashier/orders']);
+    }
+
+  private isToday(date: string | null): boolean {
+    if (!date) return false;
+    const d = new Date(date);
+    const now = new Date();
+    return (
+      d.getFullYear() === now.getFullYear() &&
+      d.getMonth() === now.getMonth() &&
+      d.getDate() === now.getDate()
+    );
   }
 
   loadPaymentSummary() {
@@ -130,6 +146,16 @@ export class CashierDashboard implements OnInit {
   }
 
   goToPayment(orderId: number) {
-    this.router.navigate(['/cashier/payment'], { queryParams: { orderId } });
+      this.router.navigate(['/cashier/payments'], { queryParams: { orderId } });
+    }
+
+    private isTodayRelevant(p: any): boolean {
+    if (p.paymentStatus === 'Paid' || p.paymentStatus === 'Refunded') {
+      return this.isToday(p.paidAt);
+    }
+    if (p.paymentStatus === 'Pending') {
+      return this.isToday(p.createdAt);
+    }
+    return false;
   }
 }
