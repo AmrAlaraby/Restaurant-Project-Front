@@ -11,7 +11,7 @@
     </div>
     <div>
       <h2 class="header-title">AI Recipe Suggester</h2>
-      <p class="header-sub">اختر المكونات المتاحة وسيقترح النظام أفضل الأطباق المناسبة</p>
+      <p class="header-sub">Select available ingredients and the system will suggest the best matching dishes</p>
     </div>
   </div>
 
@@ -19,7 +19,7 @@
   <div class="input-section">
 
     <!-- Dropdown Label -->
-    <label class="input-label">المكونات المتاحة</label>
+    <label class="input-label">Available Ingredients</label>
 
     <!-- Selected Tags -->
     <div class="selected-tags" *ngIf="hasIngredients()">
@@ -42,11 +42,11 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
           </svg>
-          إضافة مكون
+          Add Ingredient
         </span>
         <span *ngIf="ingredientsLoading()" class="loading-text">
           <span class="spinner-sm"></span>
-          جاري التحميل...
+          Loading...
         </span>
         <svg class="chevron" [class.rotated]="dropdownOpen()" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <polyline points="6 9 12 15 18 9"/>
@@ -55,6 +55,7 @@
 
       <!-- Dropdown Panel -->
       <div class="dropdown-panel" *ngIf="dropdownOpen()">
+
         <!-- Search inside dropdown -->
         <div class="dropdown-search">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -63,7 +64,7 @@
           <input
             class="search-input"
             type="text"
-            placeholder="ابحث عن مكون..."
+            placeholder="Search ingredient..."
             [ngModel]="searchQuery()"
             (ngModelChange)="searchQuery.set($event)"
             autofocus
@@ -82,23 +83,24 @@
           </li>
 
           <li class="dropdown-empty" *ngIf="filteredIngredients().length === 0">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-            </svg>
-            لا توجد نتائج
+            No results found
           </li>
         </ul>
+
       </div>
     </div>
 
-    <p class="input-hint" *ngIf="!hasIngredients()">اضغط على "إضافة مكون" لاختيار المكونات المتاحة عندك</p>
+    <p class="input-hint" *ngIf="!hasIngredients()">
+      Click "Add Ingredient" to select your available ingredients
+    </p>
 
-    <!-- Min Score Slider -->
+    <!-- Min Score Slider
     <div class="score-control">
       <label class="score-label">
-        الحد الأدنى للتطابق
+        Minimum Match Score
         <span class="score-badge">{{ getScorePercent(minScore()) }}%</span>
       </label>
+
       <input
         class="score-slider"
         type="range"
@@ -108,16 +110,19 @@
         [ngModel]="minScore()"
         (ngModelChange)="minScore.set(+$event)"
       />
+
       <div class="score-marks">
         <span>0%</span>
         <span>50%</span>
         <span>100%</span>
       </div>
     </div>
-  </div>
+
+  </div> -->
 
   <!-- Actions -->
   <div class="actions-row">
+
     <button
       class="btn-suggest"
       [disabled]="!hasIngredients() || isLoading()"
@@ -127,17 +132,19 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
         </svg>
-        ابحث عن وصفات
+        Find Recipes
       </span>
+
       <span *ngIf="isLoading()" class="loading-text">
         <span class="spinner"></span>
-        جاري البحث...
+        Searching...
       </span>
     </button>
 
     <button class="btn-reset" (click)="reset()" *ngIf="hasIngredients() || hasSearched()">
-      إعادة ضبط
+      Reset
     </button>
+
   </div>
 
   <!-- Error -->
@@ -152,8 +159,8 @@
   <div class="results-section" *ngIf="hasSearched()">
 
     <div class="results-header">
-      <span class="results-title">النتائج</span>
-      <span class="results-count">{{ totalResults() }} طبق</span>
+      <span class="results-title">Results</span>
+      <span class="results-count">{{ totalResults() }} dishes</span>
     </div>
 
     <!-- Empty State -->
@@ -162,8 +169,8 @@
         <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
         <line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
       </svg>
-      <p>لا توجد وصفات تطابق المكونات المدخلة</p>
-      <span>حاول تقليل الحد الأدنى للتطابق أو أضف مكونات أخرى</span>
+      <p>No recipes match your ingredients</p>
+      <span>Try lowering the match score or adding more ingredients</span>
     </div>
 
     <!-- Cards -->
@@ -188,10 +195,7 @@
         <div class="card-ingredients">
           <div class="ing-group" *ngIf="item.matched_ingredients.length">
             <span class="ing-label matched-label">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-              متوفر ({{ item.matched_ingredients.length }})
+              Matched ({{ item.matched_ingredients.length }})
             </span>
             <div class="ing-tags">
               <span class="ing-tag matched" *ngFor="let ing of item.matched_ingredients">{{ ing }}</span>
@@ -200,10 +204,7 @@
 
           <div class="ing-group" *ngIf="item.missing_ingredients.length">
             <span class="ing-label missing-label">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-              </svg>
-              ناقص ({{ item.missing_ingredients.length }})
+              Missing ({{ item.missing_ingredients.length }})
             </span>
             <div class="ing-tags">
               <span class="ing-tag missing" *ngFor="let ing of item.missing_ingredients">{{ ing }}</span>
@@ -213,6 +214,7 @@
 
       </div>
     </div>
+
   </div>
 
 </div>
