@@ -670,6 +670,22 @@
 
   "CHEF": {
     "KITCHEN": {
+      "FILTERS": {
+        "TITLE": "الفلاتر",
+        "ORDER_ID": "رقم الطلب",
+        "ORDER_PLACEHOLDER": "مثال: 101",
+        "STATION": "المحطة",
+        "ALL_STATIONS": "كل المحطات",
+        "STATUS": "الحالة",
+        "RESET": "إعادة ضبط",
+        "PENDING": "قيد الانتظار"
+      },
+      "STATUS": {
+        "ALL": "الكل",
+        "PENDING": "قيد الانتظار",
+        "PREPARING": "قيد التحضير",
+        "DONE": "تم"
+      },
     "STATS": {
       "PENDING": "طلبات قيد الانتظار",
       "PREPARING": "قيد التحضير",

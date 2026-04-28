@@ -669,6 +669,22 @@
 
   "CHEF": {
     "KITCHEN": {
+      "FILTERS": {
+       "TITLE": "Filters",
+       "ORDER_ID": "Order ID",
+       "ORDER_PLACEHOLDER": "e.g. 101",
+       "STATION": "Station",
+       "ALL_STATIONS": "All Stations",
+       "STATUS": "Status",
+       "RESET": "Reset",
+       "PENDING": "pending"
+     },
+     "STATUS": {
+       "ALL": "All",
+       "PENDING": "Pending",
+       "PREPARING": "Preparing",
+       "DONE": "Done"
+     },
     "STATS": {
       "PENDING": "Pending Tickets",
       "PREPARING": "Preparing Now",
