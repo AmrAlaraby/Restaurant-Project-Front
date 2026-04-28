@@ -46,27 +46,32 @@ export class BrowseMenuPage implements OnInit {
   sort = 0;
 
   ngOnInit(): void {
+
     this.loadCategories();
 
+    // 🔥 1. load basket الأول
+    this.basket$ = this.basketService.basket$;
+    this.basketService.loadBasket();
+
+    // 🔥 2. query params
     this.route.queryParams.subscribe(params => {
       this.selectedCategoryId = params['categoryId']
         ? +params['categoryId']
         : null;
 
       this.pageIndex = 1;
-      this.branchState.selectedBranch$.subscribe(branch => {
-        if (branch) {
-          this.pageIndex = 1;
-          this.loadItems();
-        }
-      });
+      this.loadItems();
+    });
+
+    // 🔥 3. branch change (لوحده مش جوه subscribe)
+    this.branchState.selectedBranch$.subscribe(branch => {
+      if (branch) {
+        this.pageIndex = 1;
+        this.loadItems();
+      }
     });
 
     this.handleSearch();
-
-    
-    this.basket$ = this.basketService.basket$;
-    this.basketService.loadBasket();
   }
 
   goToCart() {
