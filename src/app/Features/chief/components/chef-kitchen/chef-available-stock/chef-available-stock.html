@@ -1,13 +1,17 @@
 <div class="stock-card avail-card" *ngIf="stocks.length > 0">
 
-  <div class="card-title avail-title">Available Stock</div>
+  <div class="card-title avail-title">
+    {{ 'CHEF.STOCK.AVAILABLE.TITLE' | translate }}
+  </div>
 
   <div class="item-list">
     <div class="stock-item" *ngFor="let item of stocks">
 
       <div class="item-top">
-        <span class="item-name">{{ item.ingredientName }}</span>
-        <span class="item-qty avail-qty">{{ item.quantityAvailable }}kg</span>
+        <span class="item-name">{{ getIngredientName(item) }}</span>
+        <span class="item-qty avail-qty">
+          {{ item.quantityAvailable }} {{ item.unit }}
+        </span>
       </div>
 
       <div class="bar-track">
@@ -19,7 +23,9 @@
       </div>
 
       <div class="item-hint">
-        {{ item.quantityAvailable }} kg remaining
+        {{ item.quantityAvailable }}
+        {{ item.unit }}
+        {{ 'CHEF.STOCK.AVAILABLE.REMAINING' | translate }}
       </div>
 
     </div>

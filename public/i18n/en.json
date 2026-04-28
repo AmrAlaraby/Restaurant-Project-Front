@@ -586,17 +586,6 @@
   },
 
   "DRIVER": {
-    "STATUS": {
-      "Assigned": "Assigned",
-      "PickedUp": "Picked Up",
-      "OnTheWay": "On the Way",
-      "Delivered": "Delivered",
-
-      "ASSIGNED": "Assigned",
-      "PICKED_UP": "Picked Up",
-      "ON_THE_WAY": "On the Way",
-      "DELIVERED": "Delivered"
-    },
     "DELIVERY_DETAILS": {
       "LOADING": "Loading...",
       "ORDER": "Order",
@@ -676,7 +665,50 @@
       "SAVE": "Save Changes",
       "LOGOUT": "Logout"
     }
+  },
+
+  "CHEF": {
+    "KITCHEN": {
+    "STATS": {
+      "PENDING": "Pending Tickets",
+      "PREPARING": "Preparing Now",
+      "DONE": "Done Today"
+    },
+    "COLUMNS": {
+      "PENDING": "Pending",
+      "PREPARING": "Preparing",
+      "DONE": "Done"
+    },
+    "EMPTY": {
+      "PENDING": "No pending tickets",
+      "PREPARING": "No tickets in progress",
+      "DONE": "No completed tickets"
+    },
+    "LOADING": "Loading kitchen board..."
+  },
+  "SIDEBAR": {
+    "KITCHEN": "Kitchen",
+    "KITCHEN_BOARD": "Kitchen Board",
+
+    "INVENTORY": "Inventory",
+    "CHECK_STOCK": "Check Stock",
+    "RECIPES": "Recipes",
+
+    "ACCOUNT": "Account",
+    "PROFILE": "My Profile"
+  },
+   "STOCK": {
+    "TITLE": "Check Stock",
+    "SUBTITLE": "Ingredient availability for your station",
+    "LOADING": "Loading stock...",
+    "SEARCH": "Search ingredient...",
+    "EMPTY": "No stock data found for your branch.",
+    "AVAILABLE": {
+      "TITLE": "Available Stock",
+      "REMAINING": " remaining"
+    }
   }
+}
 }
 
 

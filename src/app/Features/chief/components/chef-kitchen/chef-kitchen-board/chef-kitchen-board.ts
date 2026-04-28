@@ -19,6 +19,7 @@ import { ChefKitchenFilterComponent } from '../chef-kitchen-filter/chef-kitchen-
 import { OrderDetailsInterface } from '../../../../../Core/Models/OrderModels/order-details-interface';
 import { KitchenTicketStatusDto } from '../../../../../Core/Models/KitchenModels/kitchen-ticket-status-dto';
 import { SignalRService } from '../../../../../Core/Services/SignalR-Service/SignalrService';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-chef-kitchen-board',
@@ -29,6 +30,7 @@ import { SignalRService } from '../../../../../Core/Services/SignalR-Service/Sig
     TicketCardComponent,
     TicketDetailsModalComponent,
     ActiveStationsBarComponent,
+    TranslatePipe
   ],
   templateUrl: './chef-kitchen-board.html',
   styleUrls: ['./chef-kitchen-board.scss'],
