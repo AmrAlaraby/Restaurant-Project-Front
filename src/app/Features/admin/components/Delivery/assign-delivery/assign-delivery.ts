@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DeliveryService } from '../../../../../Core/Services/Delivery-Service/delivery-service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-assign-delivery',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,TranslatePipe],
   templateUrl: './assign-delivery.html',
   styleUrls: ['./assign-delivery.scss'],
 })

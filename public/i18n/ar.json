@@ -16,6 +16,73 @@
   },
 
   "ADMIN": {
+
+    
+
+    "DELIVERY_DETAILS": {
+  "LOADING": "جاري التحميل...",
+  "ORDER": "الطلب",
+  "BRANCH": "الفرع",
+  "INFO": "معلومات التوصيل",
+  "TOTAL": "الإجمالي",
+  "CREATED": "تاريخ الإنشاء",
+  "DELIVERED_AT": "تم التسليم",
+  "CASH_COLLECTED": "المبلغ المحصل",
+  "PEOPLE": "الأشخاص",
+  "DRIVER": "السائق",
+  "DRIVER_PHONE": "رقم السائق",
+  "CUSTOMER": "العميل",
+  "CUSTOMER_PHONE": "رقم العميل",
+  "NOT_ASSIGNED": "غير مُعيّن",
+  "ADDRESS": "عنوان التوصيل",
+  "BUILDING": "المبنى",
+  "STREET": "الشارع",
+  "CITY": "المدينة",
+  "MARK": "علامة مميزة",
+  "ITEMS": "عناصر الطلب",
+  "UPDATE_STATUS": "تحديث الحالة",
+  "MOVE_TO": "الانتقال إلى →",
+  "CASH_PLACEHOLDER": "المبلغ المحصل (جنيه)",
+  "BACK": "← رجوع"
+},
+
+     "ASSIGN_DELIVERY": {
+      "TITLE": "تعيين توصيل",
+      "SUBTITLE": "اختر الفرع ثم الطلب ثم السائق",
+      "BRANCH": "الفرع",
+      "DELIVERY": "الطلب",
+      "DRIVER": "السائق",
+      "SELECT_BRANCH": "-- اختر الفرع --",
+      "SELECT_DELIVERY": "-- اختر الطلب --",
+      "SELECT_DRIVER": "-- اختر السائق --",
+      "LOADING_DELIVERIES": "جاري تحميل الطلبات...",
+      "LOADING_DRIVERS": "جاري تحميل السائقين...",
+      "NO_DELIVERIES": "لا يوجد طلبات غير معينة لهذا الفرع",
+      "NO_DRIVERS": "لا يوجد سائقين متاحين لهذا الفرع",
+      "ASSIGN": "تعيين السائق",
+      "ASSIGNING": "جاري التعيين..."
+    },
+
+     "DELIVERIES": {
+      "FILTERS": {
+        "ALL_BRANCHES": "كل الفروع",
+        "ALL_STATUS": "كل الحالات",
+        "ORDER_ID": "رقم الطلب",
+        "DATE": "التاريخ"
+      },
+      "LOADING": "جاري تحميل الطلبات...",
+      "DRIVER": "السائق",
+      "NOT_ASSIGNED": "غير معين",
+      "CURRENCY": "ج.م",
+      "COLLECTED": "تم تحصيله",
+      "NO_DATA": "لا يوجد طلبات"
+    },
+    "STATUS": {
+      "ASSIGNED": "تم التعيين",
+      "PICKED_UP": "تم الاستلام",
+      "ON_THE_WAY": "في الطريق",
+      "DELIVERED": "تم التسليم"
+    },
      "BRANCH_DELETE": {
       "TITLE": "حذف الفرع",
       "MESSAGE_PART_1": "هل أنت متأكد أنك تريد حذف",

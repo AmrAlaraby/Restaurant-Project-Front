@@ -17,6 +17,73 @@
 
   "ADMIN": {
 
+    
+
+    "DELIVERY_DETAILS": {
+  "LOADING": "Loading...",
+  "ORDER": "Order",
+  "BRANCH": "Branch",
+  "INFO": "Delivery Info",
+  "TOTAL": "Total",
+  "CREATED": "Created",
+  "DELIVERED_AT": "Delivered",
+  "CASH_COLLECTED": "Cash Collected",
+  "PEOPLE": "People",
+  "DRIVER": "Driver",
+  "DRIVER_PHONE": "Driver Phone",
+  "CUSTOMER": "Customer",
+  "CUSTOMER_PHONE": "Customer Phone",
+  "NOT_ASSIGNED": "Not Assigned",
+  "ADDRESS": "Delivery Address",
+  "BUILDING": "Building",
+  "STREET": "Street",
+  "CITY": "City",
+  "MARK": "Mark",
+  "ITEMS": "Order Items",
+  "UPDATE_STATUS": "Update Status",
+  "MOVE_TO": "Move to →",
+  "CASH_PLACEHOLDER": "Cash Collected (EGP)",
+  "BACK": "← Back"
+},
+
+    "ASSIGN_DELIVERY": {
+      "TITLE": "Assign Delivery",
+      "SUBTITLE": "Select a branch, then a delivery, then assign a driver",
+      "BRANCH": "Branch",
+      "DELIVERY": "Delivery",
+      "DRIVER": "Driver",
+      "SELECT_BRANCH": "-- Select Branch --",
+      "SELECT_DELIVERY": "-- Select Delivery --",
+      "SELECT_DRIVER": "-- Select Driver --",
+      "LOADING_DELIVERIES": "Loading deliveries...",
+      "LOADING_DRIVERS": "Loading drivers...",
+      "NO_DELIVERIES": "No unassigned deliveries for this branch",
+      "NO_DRIVERS": "No available drivers for this branch",
+      "ASSIGN": "Assign Driver",
+      "ASSIGNING": "Assigning..."
+    },
+
+     "DELIVERIES": {
+      "FILTERS": {
+        "ALL_BRANCHES": "All Branches",
+        "ALL_STATUS": "All Status",
+        "ORDER_ID": "Order ID",
+        "DATE": "Date"
+      },
+      "LOADING": "Loading deliveries...",
+      "DRIVER": "Driver",
+      "NOT_ASSIGNED": "Not Assigned",
+      "CURRENCY": "EGP",
+      "COLLECTED": "Collected",
+      "NO_DATA": "No deliveries found"
+    },
+    "STATUS": {
+      "ASSIGNED": "Assigned",
+      "PICKED_UP": "Picked Up",
+      "ON_THE_WAY": "On the Way",
+      "DELIVERED": "Delivered"
+    },
+
      "BRANCH_DELETE": {
       "TITLE": "Delete Branch",
       "MESSAGE_PART_1": "Are you sure you want to delete",
