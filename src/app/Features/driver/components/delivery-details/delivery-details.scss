@@ -251,3 +251,26 @@ $bg: #FAF7F7;
     color: $red;
   }
 }
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 16px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Address تحت الشمال */
+.address-card {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+/* Items تحت اليمين */
+.items-side {
+  grid-column: 2;
+  grid-row: 2;
+}
