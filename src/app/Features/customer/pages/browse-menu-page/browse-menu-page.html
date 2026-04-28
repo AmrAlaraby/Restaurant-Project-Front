@@ -5,37 +5,46 @@
         <input type="text" class="form-control" placeholder="Search food..." [formControl]="searchControl" />
     </div>
 
-    <!-- categories -->
-    <div class="d-flex gap-2 flex-wrap mb-3">
+    <!-- categories + sort (same row) -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
 
-        <button class="btn btn-sm" [class.btn-dark]="selectedCategoryId === null"
-            [class.btn-outline-dark]="selectedCategoryId !== null" (click)="selectCategory(null)">
-            All
-        </button>
+        <!-- categories -->
+        <div class="d-flex gap-2 flex-wrap">
 
-        @for (cat of categories; track cat.id) {
-        <button class="btn btn-sm" [class.btn-dark]="selectedCategoryId === cat.id"
-            [class.btn-outline-dark]="selectedCategoryId !== cat.id" (click)="selectCategory(cat.id)">
-            {{ cat.name }}
-        </button>
-        }
+            <button class="btn btn-sm"
+                [class.btn-dark]="selectedCategoryId === null"
+                [class.btn-outline-dark]="selectedCategoryId !== null"
+                (click)="selectCategory(null)">
+                All
+            </button>
 
-    </div>
+            @for (cat of categories; track cat.id) {
+            <button class="btn btn-sm"
+                [class.btn-dark]="selectedCategoryId === cat.id"
+                [class.btn-outline-dark]="selectedCategoryId !== cat.id"
+                (click)="selectCategory(cat.id)">
+                {{ cat.name }}
+            </button>
+            }
 
-    <!-- sort -->
-    <div class="d-flex gap-2 justify-content-end mb-3">
+        </div>
 
-        <button class="sort-btn" [class.active]="sort === 0" (click)="changeSort(0)">
-            🔥 Default
-        </button>
+        <!-- sort -->
+        <div class="d-flex gap-2">
 
-        <button class="sort-btn" [class.active]="sort === 1" (click)="changeSort(1)">
-            💰 Low to High
-        </button>
+            <button class="sort-btn" [class.active]="sort === 0" (click)="changeSort(0)">
+                🔥 Default
+            </button>
 
-        <button class="sort-btn" [class.active]="sort === 2" (click)="changeSort(2)">
-            💸 High to Low
-        </button>
+            <button class="sort-btn" [class.active]="sort === 1" (click)="changeSort(1)">
+                💰 Low to High
+            </button>
+
+            <button class="sort-btn" [class.active]="sort === 2" (click)="changeSort(2)">
+                💸 High to Low
+            </button>
+
+        </div>
 
     </div>
 
@@ -50,7 +59,10 @@
 
     <!-- pagination -->
     <div class="mt-4">
-        <app-pagination [pageIndex]="pageIndex" [pageSize]="pageSize" [totalCount]="totalCount"
+        <app-pagination
+            [pageIndex]="pageIndex"
+            [pageSize]="pageSize"
+            [totalCount]="totalCount"
             (pageChanged)="onPageChange($event)">
         </app-pagination>
     </div>
