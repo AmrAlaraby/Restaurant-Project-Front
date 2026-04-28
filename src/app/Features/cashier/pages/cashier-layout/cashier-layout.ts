@@ -58,7 +58,19 @@ export class CashierLayout {
                   <!-- Card -->
                   <rect x="1.5" y="3" width="13" height="9" rx="1.5"/>
                   <line x1="1.5" y1="6" x2="14.5" y2="6"/>
-  
+
+                  <!-- Check -->
+                 <path d="M5.5 10l1.5 1.5L10.5 8"/>
+                </svg>`,
+        },
+             {
+          title: 'Transactions',
+          route: 'transactions',
+          icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                  <!-- Card -->
+                  <rect x="1.5" y="3" width="13" height="9" rx="1.5"/>
+                  <line x1="1.5" y1="6" x2="14.5" y2="6"/>
+
                   <!-- Check -->
                  <path d="M5.5 10l1.5 1.5L10.5 8"/>
                 </svg>`,
@@ -69,7 +81,7 @@ export class CashierLayout {
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                   <!-- Paper -->
                   <path d="M4 2h8v12l-2-1-2 1-2-1-2 1V2z"/>
-  
+
                   <!-- Lines (orders) -->
                   <line x1="6" y1="5" x2="10" y2="5"/>
                   <line x1="6" y1="7" x2="10" y2="7"/>
@@ -87,11 +99,11 @@ export class CashierLayout {
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                   <!-- Paper -->
                   <rect x="3" y="2" width="10" height="12" rx="1.5"/>
-  
+
                   <!-- Lines -->
                   <line x1="5" y1="5" x2="11" y2="5"/>
                   <line x1="5" y1="7" x2="11" y2="7"/>
-  
+
                   <!-- Plus -->
                   <line x1="8" y1="10" x2="8" y2="13"/>
                   <line x1="6.5" y1="11.5" x2="9.5" y2="11.5"/>
@@ -128,10 +140,10 @@ export class CashierLayout {
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                   <!-- Circle -->
                   <circle cx="8" cy="8" r="6"/>
-  
+
                   <!-- Head -->
                   <circle cx="8" cy="6" r="2"/>
-  
+
                   <!-- Body -->
                   <path d="M5 11c1-1.5 5-1.5 6 0"/>
                 </svg>`,
