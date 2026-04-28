@@ -74,6 +74,13 @@ export class SavedAddressesComponent implements OnInit, OnDestroy {
   modalMode      = signal<ModalMode>(null);
   editingAddress = signal<AddressDto | null>(null);
 
+  // ── confirm delete ────────────────────────────────────
+  private _addressToDelete = signal<AddressDto | null>(null);
+  addressToDelete = this._addressToDelete.asReadonly();
+
+  confirmDelete(addr: AddressDto) { this._addressToDelete.set(addr); }
+  cancelDelete()                  { this._addressToDelete.set(null); }
+
   searchQuery = signal('');
   pageIndex   = signal(1);
   pageSize    = signal(5);
@@ -218,7 +225,7 @@ export class SavedAddressesComponent implements OnInit, OnDestroy {
       city: addr.city,
     };
     this.svc.deleteAddress(this.userId, dto).subscribe({
-      next: () => { this.deleting.set(null); this.loadAddresses(); },
+      next: () => { this.deleting.set(null); this._addressToDelete.set(null); this.loadAddresses(); },
       error: () => this.deleting.set(null),
     });
   }

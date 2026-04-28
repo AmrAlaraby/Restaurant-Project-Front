@@ -9,14 +9,21 @@ import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service
 import { SignalRService } from '../../../../Core/Services/SignalR-Service/SignalrService';
 import { Delivery } from '../../../../Core/Models/DeliveryModels/delivery';
 import { CartBar } from "../../components/cart-bar/cart-bar";
+import { BranchSelector } from "../../components/branch-selector/branch-selector";
 
 @Component({
   selector: 'app-home-page',
-  imports: [CategoryList, PopularItems, CartBar],
+  imports: [CategoryList, PopularItems, CartBar, BranchSelector],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
 })
 export class HomePage implements OnInit {
+toggleDropdown() {
+throw new Error('Method not implemented.');
+}
+selectBranch(_t8: any) {
+throw new Error('Method not implemented.');
+}
 ngOnInit(): void {
   this.loadOrders();
   this.listenToOrderUpdates();
@@ -42,18 +49,18 @@ loadOrders() {
   this.ordersService.getMyActiveOrders(params).subscribe({
     next: (res) => {
       const all = res.data ?? [];
-      // console.log(all.map((o: any) => ({ id: o.id, status: o.status }))); 
+      // console.log(all.map((o: any) => ({ id: o.id, status: o.status })));
       this.ActiveOrders=all;
       // console.log(this.ActiveOrders);
-    
+
     },
-   
+
   });
 }
 
   onTrackDelivery(orderId: number) {
   this.router.navigate(['/customer/track-delivery', orderId]);
-} 
+}
 
 listenToOrderUpdates() {
         let token = this.authService.getAccessToken();
@@ -72,7 +79,7 @@ listenToOrderUpdates() {
           if(data){
             let index = this.ActiveOrders.findIndex(o => o.id === data.order.id);
             if(index !== -1){
-              
+
               if(this.ActiveOrders[index].delivery){
                 this.ActiveOrders[index].delivery.deliveryStatus = data.deliveryStatus;
                 this.ActiveOrders[index].delivery.driverName = data.driverName ?? undefined;
@@ -82,9 +89,9 @@ listenToOrderUpdates() {
       }
             }
       }});
-    
-    
-    this.signalR.onRestaurantUpdate("OrderUpdated",(data) => {   
+
+
+    this.signalR.onRestaurantUpdate("OrderUpdated",(data) => {
       let index = this.ActiveOrders.findIndex(o => o.id === data.id);
       if(index !== -1 && index){
         this.ActiveOrders[index] = data;

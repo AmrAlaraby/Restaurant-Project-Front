@@ -1,33 +1,39 @@
-// ─── Design Tokens ──────────────────────────────────────────────
-$bg: #0f1117;
-$surface: #181c27;
-$surface-2: #1f2436;
-$border: #2a3050;
-$border-light: #36406a;
-$accent: #6c8eff;
-$accent-glow: rgba(108, 142, 255, 0.18);
-$text-primary: #e8eaf6;
-$text-secondary: #8b95b8;
-$text-muted: #555e80;
-$green: #3ecf8e;
-$green-bg: rgba(62, 207, 142, 0.1);
-$red: #f4735a;
-$red-bg: rgba(244, 115, 90, 0.1);
-$amber: #f5a623;
-$amber-bg: rgba(245, 166, 35, 0.1);
-$radius: 14px;
-$radius-sm: 8px;
-$font: 'Cairo', 'Segoe UI', sans-serif;
+// ─── Design Tokens (warm beige - matches project) ───────────────
+$bg-page:        #f0ebe4;
+$bg-card:        #ffffff;
+$bg-card-2:      #faf8f6;
+$border:         #e0d9d0;
+$border-focus:   #c8c0b8;
+
+$text-primary:   #1a1a1a;
+$text-secondary: #6b6460;
+$text-muted:     #9c9490;
+
+$red:            #c0392b;
+$red-light:      #fdf0f0;
+$red-border:     #f5c0c0;
+
+$green:          #3ea87a;
+$green-light:    #e8f5f0;
+$green-border:   #b2d9c8;
+
+$amber:          #d4860a;
+$amber-light:    #fef6e4;
+$amber-border:   #f5d89a;
+
+$radius:         16px;
+$radius-sm:      10px;
+$font:           'DM Sans', 'Nunito', sans-serif;
+$shadow-card:    0 2px 10px rgba(0,0,0,.06);
+$shadow-modal:   0 20px 60px rgba(0,0,0,.18);
 
 // ─── Base ────────────────────────────────────────────────────────
 .suggest-wrapper {
   font-family: $font;
-  direction: rtl;
-  background: $bg;
+  background: $bg-page;
   min-height: 100vh;
-  padding: 32px 24px;
-  max-width: 820px;
-  margin: 0 auto;
+  padding: 50px 40px 60px;
+  max-width: 100%;
   color: $text-primary;
 }
 
@@ -36,19 +42,19 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .header-icon {
   width: 52px;
   height: 52px;
-  border-radius: 14px;
-  background: $accent-glow;
-  border: 1px solid rgba(108, 142, 255, 0.3);
+  border-radius: $radius;
+  background: $green-light;
+  border: 1px solid $green-border;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: $accent;
+  color: $green;
   flex-shrink: 0;
 }
 
@@ -67,20 +73,21 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
 
 // ─── Input Section ───────────────────────────────────────────────
 .input-section {
-  background: $surface;
-  border: 1px solid $border;
+  background: $bg-card;
+  border: 1.5px solid $border;
   border-radius: $radius;
   padding: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  box-shadow: $shadow-card;
 }
 
 .input-label {
   display: block;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
-  color: $text-secondary;
+  color: $text-muted;
   margin-bottom: 10px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
 }
 
@@ -96,9 +103,9 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: $accent-glow;
-  border: 1px solid rgba(108, 142, 255, 0.35);
-  color: $accent;
+  background: $green-light;
+  border: 1px solid $green-border;
+  color: $green;
   border-radius: 20px;
   padding: 5px 12px 5px 8px;
   font-size: 13px;
@@ -114,7 +121,7 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
 .tag-unit {
   font-size: 11px;
   color: $text-muted;
-  background: $surface-2;
+  background: $border;
   border-radius: 10px;
   padding: 1px 6px;
 }
@@ -122,7 +129,7 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
 .tag-remove {
   background: none;
   border: none;
-  color: $accent;
+  color: $green;
   cursor: pointer;
   font-size: 17px;
   line-height: 1;
@@ -144,8 +151,8 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  background: $surface-2;
-  border: 1px solid $border;
+  background: $bg-card-2;
+  border: 1.5px solid $border;
   border-radius: $radius-sm;
   color: $text-secondary;
   padding: 12px 16px;
@@ -153,7 +160,6 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   font-family: $font;
   cursor: pointer;
   transition: border-color 0.2s, color 0.2s;
-  text-align: right;
 
   span {
     display: flex;
@@ -163,13 +169,13 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   }
 
   &:hover {
-    border-color: $border-light;
+    border-color: $border-focus;
     color: $text-primary;
   }
 
   &.open {
-    border-color: $accent;
-    box-shadow: 0 0 0 3px $accent-glow;
+    border-color: $green;
+    box-shadow: 0 0 0 3px rgba(62, 168, 122, .12);
     color: $text-primary;
   }
 }
@@ -186,10 +192,10 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   top: calc(100% + 6px);
   right: 0;
   left: 0;
-  background: $surface;
-  border: 1px solid $border-light;
+  background: $bg-card;
+  border: 1.5px solid $border-focus;
   border-radius: $radius-sm;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 32px rgba(0,0,0,.12);
   z-index: 100;
   overflow: hidden;
   animation: dropIn 0.18s ease;
@@ -217,7 +223,6 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   font-size: 14px;
   font-family: $font;
   flex: 1;
-  direction: rtl;
 
   &::placeholder { color: $text-muted; }
 }
@@ -231,7 +236,7 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
 
   &::-webkit-scrollbar { width: 4px; }
   &::-webkit-scrollbar-track { background: transparent; }
-  &::-webkit-scrollbar-thumb { background: $border-light; border-radius: 4px; }
+  &::-webkit-scrollbar-thumb { background: $border; border-radius: 4px; }
 }
 
 .dropdown-item {
@@ -242,9 +247,7 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   cursor: pointer;
   transition: background 0.15s;
 
-  &:hover {
-    background: $surface-2;
-  }
+  &:hover { background: $bg-card-2; }
 }
 
 .item-name {
@@ -255,7 +258,7 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
 .item-unit {
   font-size: 12px;
   color: $text-muted;
-  background: $surface-2;
+  background: $bg-card-2;
   border-radius: 8px;
   padding: 2px 8px;
 }
@@ -286,18 +289,18 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
-  color: $text-secondary;
+  color: $text-muted;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   margin-bottom: 12px;
 }
 
 .score-badge {
-  background: $accent-glow;
-  color: $accent;
-  border: 1px solid rgba(108, 142, 255, 0.3);
+  background: $green-light;
+  color: $green;
+  border: 1px solid $green-border;
   border-radius: 20px;
   padding: 2px 10px;
   font-size: 12px;
@@ -308,7 +311,7 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   width: 100%;
   appearance: none;
   height: 5px;
-  background: $surface-2;
+  background: $border;
   border-radius: 4px;
   outline: none;
   cursor: pointer;
@@ -318,14 +321,14 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: $accent;
-    box-shadow: 0 0 10px $accent-glow;
+    background: $green;
+    box-shadow: 0 2px 8px rgba(62,168,122,.35);
     cursor: pointer;
     transition: transform 0.15s, box-shadow 0.15s;
 
     &:hover {
       transform: scale(1.2);
-      box-shadow: 0 0 16px rgba(108, 142, 255, 0.5);
+      box-shadow: 0 4px 14px rgba(62,168,122,.5);
     }
   }
 }
@@ -343,6 +346,7 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   display: flex;
   gap: 12px;
   margin-bottom: 24px;
+  margin-top: 24px;
 }
 
 .btn-suggest {
@@ -351,22 +355,22 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: $accent;
+  background: $red;
   color: #fff;
   border: none;
   border-radius: $radius-sm;
   padding: 13px 28px;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   font-family: $font;
   cursor: pointer;
   transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  box-shadow: 0 4px 18px rgba(108, 142, 255, 0.3);
+  box-shadow: 0 4px 14px rgba(192,57,43,.25);
 
   &:hover:not(:disabled) {
-    background: lighten(#6c8eff, 6%);
+    background: #a93226;
     transform: translateY(-1px);
-    box-shadow: 0 6px 24px rgba(108, 142, 255, 0.45);
+    box-shadow: 0 6px 20px rgba(192,57,43,.35);
   }
 
   &:disabled {
@@ -377,9 +381,9 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
 }
 
 .btn-reset {
-  background: $surface;
+  background: $bg-card;
   color: $text-secondary;
-  border: 1px solid $border;
+  border: 1.5px solid $border;
   border-radius: $radius-sm;
   padding: 13px 20px;
   font-size: 14px;
@@ -388,9 +392,9 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 
   &:hover {
-    background: $surface-2;
+    background: $bg-card-2;
     color: $text-primary;
-    border-color: $border-light;
+    border-color: $border-focus;
   }
 }
 
@@ -404,7 +408,7 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
 .spinner {
   width: 18px;
   height: 18px;
-  border: 2px solid rgba(255, 255, 255, 0.25);
+  border: 2px solid rgba(255,255,255,.3);
   border-top-color: #fff;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
@@ -414,23 +418,21 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   display: inline-block;
   width: 14px;
   height: 14px;
-  border: 2px solid rgba(108, 142, 255, 0.2);
-  border-top-color: $accent;
+  border: 2px solid $green-border;
+  border-top-color: $green;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 // ─── Error ───────────────────────────────────────────────────────
 .error-box {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: $red-bg;
-  border: 1px solid rgba(244, 115, 90, 0.3);
+  background: $red-light;
+  border: 1px solid $red-border;
   border-radius: $radius-sm;
   color: $red;
   padding: 14px 16px;
@@ -462,8 +464,8 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
 }
 
 .results-count {
-  background: $surface-2;
-  border: 1px solid $border;
+  background: $bg-card;
+  border: 1.5px solid $border;
   border-radius: 20px;
   padding: 4px 14px;
   font-size: 13px;
@@ -476,7 +478,7 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   padding: 56px 24px;
   color: $text-muted;
 
-  svg { margin-bottom: 16px; opacity: 0.5; }
+  svg { margin-bottom: 16px; opacity: 0.4; }
   p { font-size: 16px; color: $text-secondary; margin: 0 0 8px; }
   span { font-size: 13px; }
 }
@@ -489,10 +491,11 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
 }
 
 .result-card {
-  background: $surface;
-  border: 1px solid $border;
+  background: $bg-card;
+  border: 1.5px solid $border;
   border-radius: $radius;
   padding: 20px;
+  box-shadow: $shadow-card;
   transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
   animation: fadeUp 0.25s ease both;
 
@@ -501,9 +504,9 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   }
 
   &:hover {
-    border-color: $border-light;
+    border-color: $border-focus;
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
   }
 }
 
@@ -526,14 +529,14 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   font-size: 13px;
   font-weight: 700;
 
-  &.score-high   { background: $green-bg;  color: $green;  border: 1px solid rgba(62, 207, 142, 0.3); }
-  &.score-medium { background: $amber-bg;  color: $amber;  border: 1px solid rgba(245, 166, 35, 0.3); }
-  &.score-low    { background: $red-bg;    color: $red;    border: 1px solid rgba(244, 115, 90, 0.3); }
+  &.score-high   { background: $green-light; color: $green; border: 1px solid $green-border; }
+  &.score-medium { background: $amber-light; color: $amber; border: 1px solid $amber-border; }
+  &.score-low    { background: $red-light;   color: $red;   border: 1px solid $red-border;   }
 }
 
 .score-bar-track {
   height: 5px;
-  background: $surface-2;
+  background: $border;
   border-radius: 4px;
   overflow: hidden;
   margin-bottom: 16px;
@@ -566,10 +569,10 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.5px;
 
   &.matched-label { color: $green; }
   &.missing-label { color: $red;   }
@@ -588,15 +591,15 @@ $font: 'Cairo', 'Segoe UI', sans-serif;
   font-weight: 500;
 
   &.matched {
-    background: $green-bg;
+    background: $green-light;
     color: $green;
-    border: 1px solid rgba(62, 207, 142, 0.25);
+    border: 1px solid $green-border;
   }
 
   &.missing {
-    background: $red-bg;
+    background: $red-light;
     color: $red;
-    border: 1px solid rgba(244, 115, 90, 0.25);
+    border: 1px solid $red-border;
   }
 }
 
