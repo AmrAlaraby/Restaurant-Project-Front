@@ -71,33 +71,70 @@
 }
 
 /* =====================
-   STATS
+   STATS - SAME AS CARDS
 ===================== */
 .stats-row {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   padding: 1rem 2rem;
+}
 
-  .stat-chip {
-    background: #fff;
-    border: 1px solid var(--TB);
-    padding: 0.6rem 1rem;
-    border-radius: 10px;
-    box-shadow: var(--SHADOW);
+.stat-chip {
+  flex: 1;
+  background: #e9e6e2;
+  border-radius: 18px;
 
-    .stat-num {
-      font-size: 1.3rem;
-      font-weight: 700;
-    }
+  padding: 1.2rem 1rem;
 
-    .stat-label {
-      font-size: 0.7rem;
-      color: #9B4437;
-    }
+  text-align: center;
 
-    &.pending   .stat-num { color: var(--R); }
-    &.preparing .stat-num { color: #C0392B; }
-    &.done      .stat-num { color: #2E7D32; }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  border: 2px solid transparent;
+
+  transition: transform 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  .stat-num {
+    font-size: 1.7rem;
+    font-weight: 600;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: #7a766f;
+  }
+}
+
+/* الحالات */
+.stat-chip.pending {
+  border-color: #d68910;
+
+  .stat-num {
+    color: #d68910;
+  }
+}
+
+.stat-chip.preparing {
+  border-color: #c0392b;
+
+  .stat-num {
+    color: #c0392b;
+  }
+}
+
+.stat-chip.done {
+  border-color: #2e7d32;
+
+  .stat-num {
+    color: #2e7d32;
   }
 }
 
