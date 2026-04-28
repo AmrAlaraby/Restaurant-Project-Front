@@ -6,6 +6,7 @@ import { DeliveryService } from '../../../../Core/Services/Delivery-Service/deli
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { Delivery } from '../../../../Core/Models/DeliveryModels/delivery';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ToastService } from '../../../../Core/Services/Toast-Service/toast-service';
 
 @Component({
   selector: 'app-own-deliveries',
@@ -22,7 +23,8 @@ export class OwnDeliveries implements OnInit {
     private deliveryService: DeliveryService,
     private router: Router,
     private authService: AuthService,
-    private SignalRService:SignalRService
+    private SignalRService:SignalRService,
+    private toast: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +43,7 @@ export class OwnDeliveries implements OnInit {
       error: (err) => {
         console.error(err);
         this.loading = false;
+           this.toast.error('Failed to load deliveries');
       },
     });
   }
@@ -50,6 +53,7 @@ export class OwnDeliveries implements OnInit {
       this.SignalRService.startRestaurantUpdatesConnection(token??"");
       this.SignalRService.onRestaurantUpdate("OrderAssignedToDriver",(data :Delivery | null) => {
       this.deliveries.unshift(data);
+       this.toast.success('New delivery assigned!');
     });
   }
 
