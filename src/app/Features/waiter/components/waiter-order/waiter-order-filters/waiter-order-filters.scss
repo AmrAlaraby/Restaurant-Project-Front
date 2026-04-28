@@ -1,30 +1,46 @@
 .filters-container {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    margin-bottom: 16px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 24px;
+
+  margin-right: 12px; /* 👈 المسافة من اليمين */
 }
 
+/* GROUP */
 .tabs {
-    display: flex;
-    gap: 8px;
-    background: #f1ece7;
-    padding: 6px;
-    border-radius: 12px;
+  display: flex;
+  gap: 6px;
+  background: #f3eee9;
+  padding: 6px;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
+/* BUTTON */
 .tab {
-    border: none;
-    background: transparent;
-    padding: 6px 14px;
-    border-radius: 10px;
-    cursor: pointer;
-    color: #8b8178;
-    font-size: 14px;
+  border: none;
+  background: transparent;
+  padding: 6px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  font-size: 12px;
+  font-weight: 500;
+  color: #8b8178;
+
+  transition: all 0.15s ease;
 }
 
+/* HOVER */
+.tab:hover {
+  color: #2d0a08;
+}
+
+/* ACTIVE */
 .tab.active {
-    background: #fff;
-    color: #000;
-    font-weight: 500;
+  background: #fff;
+  color: #2d0a08;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }

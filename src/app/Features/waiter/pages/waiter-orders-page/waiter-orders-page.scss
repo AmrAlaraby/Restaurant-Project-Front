@@ -1,12 +1,240 @@
+.page {
+  padding: 24px; /* 👈 المسافة الأساسية من كل الاتجاهات */
+}
+
+/* HEADER */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
 }
 
 .sub {
-    font-size: 13px;
-    color: #888;
-    margin-top: 4px;
+  font-size: 13px;
+  color: #888;
+  margin-top: 4px;
+}
+
+/* NEW ORDER BUTTON */
+.new-order-btn {
+  background: #c0392b;
+  color: #fff;
+  border: none;
+
+  padding: 7px 16px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.new-order-btn:hover {
+  background: #96281b;
+  transform: translateY(-1px);
+}
+
+.new-order-btn:active {
+  transform: translateY(0);
+}
+
+/* FILTERS (لو موجودة عندك) */
+.filters-container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  gap: 6px;
+  background: #f3eee9;
+  padding: 6px;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.tab {
+  border: none;
+  background: transparent;
+  padding: 6px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  font-size: 12px;
+  font-weight: 500;
+  color: #8b8178;
+
+  transition: all 0.15s ease;
+}
+
+.tab:hover {
+  color: #2d0a08;
+}
+
+.tab.active {
+  background: #fff;
+  color: #2d0a08;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* TABLE CONTAINER */
+.table-container {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+}
+
+/* TABLE HEADER */
+.table-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1.5fr;
+  padding: 16px 18px;
+  align-items: center;
+
+  background: #f3eee9;
+  color: #a08f86;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* TABLE ROW */
+.table-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1.5fr;
+  padding: 16px 18px;
+  align-items: center;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.15s ease;
+  cursor: pointer;
+  background: #fff;
+}
+
+.table-row:hover {
+  background: #faf6f4;
+}
+
+/* ORDER ID */
+.table-row div:first-child {
+  font-weight: 600;
+  color: #2d0a08;
+}
+
+/* TABLE BADGE */
+.table-badge {
+  background: rgba(39, 174, 96, 0.12);
+  color: #1e8449;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* STATUS */
+.status {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.status.received {
+  background: #fdecea;
+  color: #d32f2f;
+}
+
+.status.preparing {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.status.ready {
+  background: #e8f5e9;
+  color: #388e3c;
+}
+
+.status.delivered {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.status.cancelled {
+  background: #eeeeee;
+  color: #616161;
+}
+
+/* TOTAL */
+.table-row div:nth-child(5) {
+  font-weight: 600;
+  color: #2d0a08;
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* VIEW BUTTON */
+.view-btn {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  cursor: pointer;
+  color: #2d0a08;
+  transition: all 0.15s ease;
+}
+
+.view-btn:hover {
+  border-color: #c0392b;
+  color: #c0392b;
+  background: rgba(192, 57, 43, 0.05);
+}
+
+/* ADD BUTTON */
+.add-btn {
+  background: #c0392b;
+  color: #fff;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.add-btn:hover {
+  background: #96281b;
+}
+
+/* ROW STATES */
+.row-delivered {
+  background: #f4fbf5;
+}
+
+.row-cancelled {
+  background: #fdf3f3;
+}
+
+.row-preparing {
+  background: #fff9ed;
 }
