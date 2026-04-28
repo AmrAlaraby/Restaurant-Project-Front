@@ -5,15 +5,14 @@
 }
 
 .page-toolbar {
-  display: flex;
-  justify-content: flex-end;
   padding: 1.5rem 1.5rem 0;
   background: #f5f1ec;
 }
 
 .btn-add {
   height: 38px;
-  padding: 0 20px;
+  padding-block: 0;
+  padding-inline: 20px;
   border: none;
   border-radius: 20px;
   background: #1a1a1a;
@@ -24,4 +23,14 @@
   transition: opacity 0.15s;
 
   &:hover { opacity: 0.8; }
+}
+
+@media (max-width: 480px) {
+  .page-toolbar {
+    padding: 1rem 1rem 0;
+  }
+
+  .btn-add {
+    width: 100%;
+  }
 }

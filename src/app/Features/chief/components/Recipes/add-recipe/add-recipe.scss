@@ -7,6 +7,7 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding-inline: 1rem;
 }
 
 // ── Card ──────────────────────────────────────────────────────
@@ -25,7 +26,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.1rem 1.5rem;
+  padding-block: 1.1rem;
+  padding-inline: 1.5rem;
   border-bottom: 0.5px solid #f0ece5;
 }
 
@@ -51,7 +53,8 @@
 
 // ── Body ──────────────────────────────────────────────────────
 .modal-body {
-  padding: 1.25rem 1.5rem;
+  padding-block: 1.25rem;
+  padding-inline: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -75,7 +78,8 @@
 .field-select,
 .field-input {
   height: 40px;
-  padding: 0 12px;
+  padding-block: 0;
+  padding-inline: 12px;
   border: 0.5px solid #d5d0c8;
   border-radius: 10px;
   background: #faf9f7;
@@ -89,7 +93,7 @@
 }
 
 .field-select {
-  padding-right: 32px;
+  padding-inline-end: 32px;
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
@@ -105,7 +109,8 @@
   background: #fff5f5;
   border: 0.5px solid #f5c6c6;
   border-radius: 8px;
-  padding: 8px 12px;
+  padding-block: 8px;
+  padding-inline: 12px;
   margin: 0;
 }
 
@@ -114,13 +119,15 @@
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  padding: 1rem 1.5rem;
+  padding-block: 1rem;
+  padding-inline: 1.5rem;
   border-top: 0.5px solid #f0ece5;
 }
 
 .btn-cancel {
   height: 38px;
-  padding: 0 18px;
+  padding-block: 0;
+  padding-inline: 18px;
   border: 0.5px solid #d5d0c8;
   border-radius: 20px;
   background: #fff;
@@ -134,7 +141,8 @@
 
 .btn-submit {
   height: 38px;
-  padding: 0 20px;
+  padding-block: 0;
+  padding-inline: 20px;
   border: none;
   border-radius: 20px;
   background: #1a1a1a;
@@ -146,4 +154,14 @@
 
   &:hover:not(:disabled) { opacity: 0.85; }
   &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+// ── Responsive ───────────────────────────────────────────────
+@media (max-width: 480px) {
+  .modal-footer {
+    flex-direction: column-reverse;
+
+    .btn-cancel,
+    .btn-submit { width: 100%; }
+  }
 }

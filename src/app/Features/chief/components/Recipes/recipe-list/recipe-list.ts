@@ -32,6 +32,23 @@ export class RecipeListComponent implements OnInit {
   error              = signal<string | null>(null);
   deletingId         = signal<number | null>(null);
 
+  // ── Accordion ────────────────────────────────────────────────
+  private openGroups = signal<Set<string>>(new Set());
+
+  toggleGroup(menuItem: string): void {
+    const current = new Set(this.openGroups());
+    if (current.has(menuItem)) {
+      current.delete(menuItem);
+    } else {
+      current.add(menuItem);
+    }
+    this.openGroups.set(current);
+  }
+
+  isGroupOpen(menuItem: string): boolean {
+    return this.openGroups().has(menuItem);
+  }
+
   // ── Derived ──────────────────────────────────────────────────
   groupedRecipes = computed(() => {
     const map = new Map<string, RecipesListDTO[]>();
@@ -60,6 +77,8 @@ export class RecipeListComponent implements OnInit {
   loadRecipes(): void {
     this.isLoading.set(true);
     this.error.set(null);
+    // Reset open groups when data reloads
+    this.openGroups.set(new Set());
 
     this.recipesService
       .getRecipes({
@@ -114,11 +133,11 @@ export class RecipeListComponent implements OnInit {
   // ── Helpers ──────────────────────────────────────────────────
   getMenuItemIcon(name: string): string {
     const n = name.toLowerCase();
-    if (n.includes('pizza'))                       return '🍕';
-    if (n.includes('grill') || n.includes('meat')) return '🍖';
-    if (n.includes('salad'))                       return '🥗';
-    if (n.includes('burger'))                      return '🍔';
-    if (n.includes('pasta'))                       return '🍝';
+    if (n.includes('pizza'))                        return '🍕';
+    if (n.includes('grill') || n.includes('meat'))  return '🍖';
+    if (n.includes('salad'))                        return '🥗';
+    if (n.includes('burger'))                       return '🍔';
+    if (n.includes('pasta'))                        return '🍝';
     return '🍽️';
   }
 }
