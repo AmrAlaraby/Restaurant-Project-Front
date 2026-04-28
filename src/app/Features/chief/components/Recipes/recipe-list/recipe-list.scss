@@ -1,4 +1,3 @@
-// ── Page ─────────────────────────────────────────────────────
 .recipes-page {
   padding: 1.5rem;
   background: #f5f1ec;
@@ -8,15 +7,6 @@
   gap: 1.25rem;
 }
 
-// ── Header ───────────────────────────────────────────────────
-.recipes-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
 .recipes-title {
   font-size: 1.5rem;
   font-weight: 500;
@@ -24,27 +14,16 @@
   margin: 0;
 }
 
-// ── Dropdown ─────────────────────────────────────────────────
 .filter-select {
   height: 38px;
-  padding: 0 32px 0 12px;
+  padding-inline: 12px 32px;
   border: 0.5px solid #d5d0c8;
   border-radius: 20px;
-  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E") no-repeat right 12px center;
-  appearance: none;
+  background: #fff;
   font-size: 13px;
-  color: #333;
   cursor: pointer;
-  min-width: 200px;
-  outline: none;
-  transition: border-color 0.15s;
-
-  &:focus {
-    border-color: #999;
-  }
 }
 
-// ── Table Card ───────────────────────────────────────────────
 .table-card {
   background: #fff;
   border-radius: 16px;
@@ -53,104 +32,51 @@
 }
 
 .recipes-table {
-  width: 100%;
   border-collapse: collapse;
   font-size: 14px;
 
-  thead tr {
-    background: #faf9f7;
-    border-bottom: 0.5px solid #eae6de;
-  }
-
   th {
-    text-align: left;
     font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.07em;
     color: #9e9a93;
     padding: 12px 20px;
   }
 
   td {
-    padding: 14px 20px;
+    padding: 13px 20px;
     border-bottom: 0.5px solid #f0ece5;
-    color: #2a2a2a;
-    vertical-align: middle;
-  }
-
-  tr:last-child td { border-bottom: none; }
-
-  tr:hover td {
-    background: #faf9f7;
-    transition: background 0.12s;
   }
 }
 
-// ── Cells ─────────────────────────────────────────────────────
-.menu-item-cell { width: 30%; }
-
-.menu-item-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.action-cell {
+  text-align: end;
+  white-space: nowrap;
 }
 
-.menu-icon {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background: #f0ece5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  flex-shrink: 0;
+/* ✅ Buttons updated to match Add button */
+.btn-edit,
+.btn-delete {
+  height: 38px;
+  padding-inline: 20px;
+  border: none;
+  border-radius: 20px;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
 }
 
-.menu-name  { font-weight: 500; color: #1a1a1a; }
-.ingredient-cell { width: 28%; color: #555; }
-.qty-cell   { width: 20%; color: #777; }
-.unit-cell  { width: 22%; color: #999; font-size: 13px; }
-
-// ── Empty / States ────────────────────────────────────────────
-.empty-cell {
-  text-align: center;
-  color: #aaa;
-  padding: 2.5rem !important;
-  font-size: 14px;
+.btn-edit {
+  margin-inline-end: 8px;
 }
 
-.state-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 2rem;
-  color: #888;
-  font-size: 14px;
-
-  &.error {
-    color: #c0392b;
-    background: #fff5f5;
-    border-radius: 12px;
-    border: 0.5px solid #f5c6c6;
-  }
+.btn-edit:hover,
+.btn-delete:hover:not(:disabled) {
+  opacity: 0.8;
 }
 
-.spinner {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #e0dbd3;
-  border-top-color: #888;
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
-
-// ── Pagination ────────────────────────────────────────────────
-.pagination-wrap {
-  display: flex;
-  justify-content: center;
-  padding-top: 0.5rem;
+.btn-delete:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
