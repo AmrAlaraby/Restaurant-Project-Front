@@ -5,6 +5,7 @@ import { UserInterface } from '../../../../Core/Models/AuthModels/user-interface
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ToastService } from '../../../../Core/Services/Toast-Service/toast-service';
 
 @Component({
   selector: 'app-profile',
@@ -15,10 +16,9 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class Profile implements OnInit {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
+private toast = inject(ToastService);
 
   user = signal<UserInterface | null>(null);
-  saved = signal(false);
-  saveError = signal('');
   loading = signal(true);
 
   form!: FormGroup;
@@ -52,6 +52,7 @@ export class Profile implements OnInit {
       },
       error: () => {
         this.loading.set(false);
+        this.toast.error('Failed to load user');
       },
     });
   }
@@ -78,7 +79,7 @@ export class Profile implements OnInit {
   onSave(): void {
     if (this.form.invalid || !this.user()) return;
 
-    this.saveError.set('');
+   
 
     const v = this.form.value;
     const name = v.name?.trim();
@@ -99,13 +100,12 @@ export class Profile implements OnInit {
       userName: userNameInput ? sanitize(userNameInput) : sanitize(name),
       ...(newPassword ? { newPassword, confirmPassword } : {}),
     };
-    console.log('Sending DTO:', JSON.stringify(dto));
+    
 
     this.authService.updateCurrentUser(this.user()!.email, dto).subscribe({
       next: (updated) => {
         this.user.set(updated);
-        this.saved.set(true);
-        setTimeout(() => this.saved.set(false), 3000);
+        this.toast.success('Profile updated successfully');
       },
       error: (err) => {
         const errBody = err?.error;
@@ -117,8 +117,7 @@ export class Profile implements OnInit {
                 ? errBody.message
                 : JSON.stringify(errBody.message)
               : 'Something went wrong';
-        this.saveError.set(msg);
-      },
+      this.toast.error(msg);      },
     });
   }
 
