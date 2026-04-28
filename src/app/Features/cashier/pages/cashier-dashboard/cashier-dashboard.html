@@ -3,11 +3,11 @@
   <!-- ── Top Bar ─────────────────────────────────────────── -->
   <header class="top-bar">
     <div class="greeting-block">
-      <h1 class="greeting">Good morning, {{ cashierName }} 💳</h1>
+      <h1 class="greeting">Good morning, {{ cashierName }} </h1>
       <p class="sub-info">Cashier Station · {{ branchName }} </p>
     </div>
     <button class="process-btn" routerLink="/cashier/payments">
-      💳 Process Payment
+       Process Payment
     </button>
   </header>
 
@@ -21,7 +21,7 @@
         <span class="section-icon">⏳</span>
         <h2>Awaiting Payment</h2>
       </div>
-      <span class="section-hint">Orders that are ready and need payment</span>
+      <button class="process-btn" (click)="goToOrders()">View All</button>
     </div>
     <app-awaiting-orders-list (onPayNow)="goToPayment($event)"></app-awaiting-orders-list>
   </section>
@@ -33,3 +33,4 @@
   </div>
 
 </div>
+
