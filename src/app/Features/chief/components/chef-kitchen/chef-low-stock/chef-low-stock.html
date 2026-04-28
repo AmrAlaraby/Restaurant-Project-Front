@@ -3,7 +3,7 @@
   <!-- Card Title -->
   <div class="card-title">
     <span class="warning-icon">⚠</span>
-    Low — Request Restock
+    {{ 'CHEF.STOCK.LOW.TITLE' | translate }}
   </div>
 
   <!-- Item List -->
@@ -11,8 +11,8 @@
     <div class="stock-item" *ngFor="let item of stocks">
 
       <div class="item-top">
-        <span class="item-name">{{ item.ingredientName }}</span>
-        <span class="item-qty">{{ item.quantityAvailable }}kg</span>
+        <span class="item-name">{{ getIngredientName(item) }}</span>
+        <span class="item-qty">{{ item.quantityAvailable }} {{ item.unit }}</span>
       </div>
 
       <div class="bar-track">
@@ -23,9 +23,10 @@
       </div>
 
       <div class="item-hint">
-        {{ item.quantityAvailable }} kg remaining
+        {{ item.quantityAvailable }} {{ item.unit }} {{ 'CHEF.STOCK.LOW.REMAINING' | translate }}
+
         <ng-container *ngIf="item.lowThreshold">
-          · Threshold: {{ item.lowThreshold }} kg
+          · {{ 'CHEF.STOCK.LOW.THRESHOLD' | translate }}: {{ item.lowThreshold }} {{ 'COMMON.KG' | translate }}
         </ng-container>
       </div>
 
@@ -37,7 +38,12 @@
     class="restock-btn"
     [class.sent]="requestSent"
     (click)="requestRestock()">
-    {{ requestSent ? '✔ Request Sent!' : 'Request Restock from Manager' }}
+
+    {{ requestSent
+      ? ('CHEF.STOCK.LOW.SENT' | translate)
+      : ('CHEF.STOCK.LOW.REQUEST' | translate)
+    }}
+
   </button>
 
 </div>
@@ -45,5 +51,5 @@
 <!-- No low stock -->
 <div class="all-good" *ngIf="stocks.length === 0">
   <span class="check-icon">✔</span>
-  All ingredients are well stocked!
+  {{ 'CHEF.STOCK.LOW.ALL_GOOD' | translate }}
 </div>

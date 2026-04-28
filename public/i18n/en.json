@@ -722,6 +722,14 @@
     "AVAILABLE": {
       "TITLE": "Available Stock",
       "REMAINING": " remaining"
+    },
+    "LOW": {
+      "TITLE": "Low — Request Restock",
+      "REMAINING": "kg remaining",
+      "THRESHOLD": "Threshold",
+      "REQUEST": "Request Restock from Manager",
+      "SENT": "✔ Request Sent!",
+      "ALL_GOOD": "All ingredients are well stocked!"
     }
   }
 }
