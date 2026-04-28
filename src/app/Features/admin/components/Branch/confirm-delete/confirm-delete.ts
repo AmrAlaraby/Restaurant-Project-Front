@@ -8,11 +8,12 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BranchService } from '../../../../../Core/Services/Branch-Service/branch-service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-confirm-delete',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,TranslatePipe],
   templateUrl: './confirm-delete.html',
   styleUrls: ['./confirm-delete.scss'],
 })

@@ -1,128 +1,146 @@
 <div class="page-wrap">
+
   <!-- Page Header -->
   <div class="page-header">
     <div class="page-header__title">
-      <h2>Delivery Management</h2>
-      <p>Live driver tracking</p>
+      <h2>{{ 'DRIVER.DELIVERIES.TITLE' | translate }}</h2>
+      <p>{{ 'DRIVER.DELIVERIES.SUBTITLE' | translate }}</p>
     </div>
   </div>
 
   <!-- Loading -->
   <div *ngIf="loading" class="loading-wrap">
     <div class="spinner"></div>
-    <span>Loading your deliveries...</span>
+    <span>{{ 'DRIVER.DELIVERIES.LOADING' | translate }}</span>
   </div>
 
   <!-- Empty -->
   <div *ngIf="!loading && deliveries.length === 0" class="empty-state">
-    No deliveries assigned to you.
+    {{ 'DRIVER.DELIVERIES.EMPTY' | translate }}
   </div>
 
   <!-- Cards -->
   <div class="deliveries-list">
-    <div class="delivery-card" *ngFor="let d of deliveries" (click)="openDetails(d.id)">
+
+    <div class="delivery-card"
+         *ngFor="let d of deliveries"
+         (click)="openDetails(d.id)">
+
       <div class="card-main">
-        <!-- Left: ID + order info + address -->
+
+        <!-- Left -->
         <div class="card-left">
           <div class="delivery-id">#D-{{ d.id }}</div>
-          <div class="order-title">Order #{{ d.order.id }}</div>
+
+          <div class="order-title">
+            {{ 'DRIVER.DELIVERIES.ORDER' | translate }} #{{ d.order.id }}
+          </div>
+
           <div class="addr-line">
             <span class="pin"></span>
-            {{ d.deliveryAddress.buildingNumber }} {{ d.deliveryAddress.street }},
+            {{ d.deliveryAddress.buildingNumber }}
+            {{ d.deliveryAddress.street }},
             {{ d.deliveryAddress.city }}
           </div>
         </div>
 
-        <!-- Center: Steps -->
+        <!-- Center -->
         <div class="steps-wrap">
+
           <div class="step">
             <div class="step-circle done">✓</div>
-            <div class="step-label">Assigned</div>
+            <div class="step-label">{{ 'DRIVER.STATUS.ASSIGNED' | translate }}</div>
           </div>
-          <div
-            class="step-connector"
+
+          <div class="step-connector"
             [ngClass]="{
               done:
-                d.deliveryStatus === 'PickedUp' ||
-                d.deliveryStatus === 'OnTheWay' ||
-                d.deliveryStatus === 'Delivered',
-            }"
-          ></div>
-          <div class="step">
-            <div
-              class="step-circle"
-              [ngClass]="{
-                done:
-                  d.deliveryStatus === 'PickedUp' ||
-                  d.deliveryStatus === 'OnTheWay' ||
-                  d.deliveryStatus === 'Delivered',
-                inactive: d.deliveryStatus === 'Assigned',
-              }"
-            >
-              {{
-                d.deliveryStatus === 'PickedUp' ||
-                d.deliveryStatus === 'OnTheWay' ||
-                d.deliveryStatus === 'Delivered'
-                  ? '✓'
-                  : '–'
-              }}
-            </div>
-            <div class="step-label">Picked Up</div>
+                d.deliveryStatus !== 'Assigned'
+            }">
           </div>
-          <div
-            class="step-connector"
-            [ngClass]="{
-              done: d.deliveryStatus === 'OnTheWay' || d.deliveryStatus === 'Delivered',
-            }"
-          ></div>
+
           <div class="step">
-            <div
-              class="step-circle"
+            <div class="step-circle"
+              [ngClass]="{
+                done: d.deliveryStatus !== 'Assigned',
+                inactive: d.deliveryStatus === 'Assigned'
+              }">
+              {{ d.deliveryStatus !== 'Assigned' ? '✓' : '–' }}
+            </div>
+
+            <div class="step-label">
+              {{ 'DRIVER.STATUS.PICKED_UP' | translate }}
+            </div>
+          </div>
+
+          <div class="step-connector"
+            [ngClass]="{
+              done: d.deliveryStatus === 'OnTheWay' || d.deliveryStatus === 'Delivered'
+            }">
+          </div>
+
+          <div class="step">
+            <div class="step-circle"
               [ngClass]="{
                 done: d.deliveryStatus === 'OnTheWay' || d.deliveryStatus === 'Delivered',
-                inactive: d.deliveryStatus === 'Assigned' || d.deliveryStatus === 'PickedUp',
-              }"
-            >
+                inactive: d.deliveryStatus === 'Assigned' || d.deliveryStatus === 'PickedUp'
+              }">
               {{ d.deliveryStatus === 'OnTheWay' || d.deliveryStatus === 'Delivered' ? '✓' : '→' }}
             </div>
-            <div class="step-label">On the Way</div>
+
+            <div class="step-label">
+              {{ 'DRIVER.STATUS.ON_THE_WAY' | translate }}
+            </div>
           </div>
-          <div class="step-connector" [ngClass]="{ done: d.deliveryStatus === 'Delivered' }"></div>
+
+          <div class="step-connector"
+            [ngClass]="{ done: d.deliveryStatus === 'Delivered' }">
+          </div>
+
           <div class="step">
-            <div
-              class="step-circle"
-              [ngClass]="{
-                done: d.deliveryStatus === 'Delivered',
-                inactive: d.deliveryStatus !== 'Delivered',
-              }"
-            >
+            <div class="step-circle"
+              [ngClass]="{ done: d.deliveryStatus === 'Delivered' }">
               {{ d.deliveryStatus === 'Delivered' ? '✓' : '📍' }}
             </div>
-            <div class="step-label">Delivered</div>
+
+            <div class="step-label">
+              {{ 'DRIVER.STATUS.DELIVERED' | translate }}
+            </div>
           </div>
+
         </div>
 
-        <!-- Right: driver + badge + total -->
+        <!-- Right -->
         <div class="card-right">
+
           <div class="driver-email">
-            Driver: <b>{{ d.driverName || 'N/A' }}</b>
+            {{ 'DRIVER.DELIVERIES.DRIVER' | translate }}:
+            <b>{{ d.driverName || ('DRIVER.DELIVERIES.NA' | translate) }}</b>
           </div>
-          <span
-            class="status-badge"
+
+          <span class="status-badge"
             [ngClass]="{
               'badge-assigned': d.deliveryStatus === 'Assigned',
               'badge-pickedup': d.deliveryStatus === 'PickedUp',
               'badge-onway': d.deliveryStatus === 'OnTheWay',
-              'badge-delivered': d.deliveryStatus === 'Delivered',
-            }"
-          >
-            {{ d.deliveryStatus }}
+              'badge-delivered': d.deliveryStatus === 'Delivered'
+            }">
+
+            {{ ('DRIVER.STATUS.' + d.deliveryStatus) | translate }}
+
           </span>
-          <div class="total-amount">EGP {{ d.order.totalAmount }}</div>
-          <div class="cash-collected" *ngIf="d.cashCollected !== null">
-            💵 Collected: <b>EGP {{ d.cashCollected }}</b>
+
+          <div class="total-amount">
+            EGP {{ d.order.totalAmount }}
           </div>
+
+          <div class="cash-collected" *ngIf="d.cashCollected !== null">
+            💵 {{ 'DRIVER.DELIVERIES.COLLECTED' | translate }}:
+            <b>EGP {{ d.cashCollected }}</b>
+          </div>
+
         </div>
+
       </div>
     </div>
   </div>

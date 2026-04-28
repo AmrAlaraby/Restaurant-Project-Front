@@ -1,63 +1,107 @@
 <div class="assign-container">
 
   <div class="assign-header">
-    <div class="assign-title">Assign Delivery</div>
-    <div class="assign-sub">Select a branch, then a delivery, then assign a driver</div>
+    <div class="assign-title">
+      {{ 'ADMIN.ASSIGN_DELIVERY.TITLE' | translate }}
+    </div>
+
+    <div class="assign-sub">
+      {{ 'ADMIN.ASSIGN_DELIVERY.SUBTITLE' | translate }}
+    </div>
   </div>
 
   <div class="assign-form">
 
-    <!-- Select Branch -->
+    <!-- Branch -->
     <div class="form-group">
-      <label class="form-label">Branch</label>
+      <label class="form-label">
+        {{ 'ADMIN.ASSIGN_DELIVERY.BRANCH' | translate }}
+      </label>
+
       <select class="form-select-styled"
               [(ngModel)]="selectedBranch"
               (ngModelChange)="onBranchChange($event)">
-        <option [ngValue]="null">-- Select Branch --</option>
-        <option *ngFor="let b of branches" [ngValue]="b">{{ b.name }}</option>
+
+        <option [ngValue]="null">
+          {{ 'ADMIN.ASSIGN_DELIVERY.SELECT_BRANCH' | translate }}
+        </option>
+
+        <option *ngFor="let b of branches" [ngValue]="b">
+          {{ b.name }}
+        </option>
       </select>
     </div>
 
-    <!-- Select Delivery -->
+    <!-- Delivery -->
     <div class="form-group" *ngIf="selectedBranch">
-      <label class="form-label">Delivery</label>
-      <div *ngIf="loadingDeliveries" class="inline-loading">Loading deliveries...</div>
+      <label class="form-label">
+        {{ 'ADMIN.ASSIGN_DELIVERY.DELIVERY' | translate }}
+      </label>
+
+      <div *ngIf="loadingDeliveries" class="inline-loading">
+        {{ 'ADMIN.ASSIGN_DELIVERY.LOADING_DELIVERIES' | translate }}
+      </div>
+
       <select *ngIf="!loadingDeliveries"
               class="form-select-styled"
               [(ngModel)]="selectedDelivery"
               (ngModelChange)="onDeliveryChange($event)">
-        <option [ngValue]="null">-- Select Delivery --</option>
+
+        <option [ngValue]="null">
+          {{ 'ADMIN.ASSIGN_DELIVERY.SELECT_DELIVERY' | translate }}
+        </option>
+
         <option *ngFor="let d of deliveries" [ngValue]="d">
           Order #{{ d.orderNumber }} — {{ d.deliveryAddress?.city }}
         </option>
       </select>
-      <div *ngIf="!loadingDeliveries && deliveries.length === 0" class="empty-msg">
-        No unassigned deliveries for this branch.
+
+      <div *ngIf="!loadingDeliveries && deliveries.length === 0"
+           class="empty-msg">
+        {{ 'ADMIN.ASSIGN_DELIVERY.NO_DELIVERIES' | translate }}
       </div>
     </div>
 
-    <!-- Select Driver -->
+    <!-- Driver -->
     <div class="form-group" *ngIf="selectedDelivery">
-      <label class="form-label">Driver</label>
-      <div *ngIf="loadingDrivers" class="inline-loading">Loading drivers...</div>
+      <label class="form-label">
+        {{ 'ADMIN.ASSIGN_DELIVERY.DRIVER' | translate }}
+      </label>
+
+      <div *ngIf="loadingDrivers" class="inline-loading">
+        {{ 'ADMIN.ASSIGN_DELIVERY.LOADING_DRIVERS' | translate }}
+      </div>
+
       <select *ngIf="!loadingDrivers"
               class="form-select-styled"
               [(ngModel)]="selectedDriverId">
-        <option value="">-- Select Driver --</option>
+
+        <option value="">
+          {{ 'ADMIN.ASSIGN_DELIVERY.SELECT_DRIVER' | translate }}
+        </option>
+
         <option *ngFor="let driver of drivers" [value]="driver.driverId">
           {{ driver.name }} ({{ driver.branchName }})
         </option>
       </select>
-      <div *ngIf="!loadingDrivers && drivers.length === 0" class="empty-msg">
-        No available drivers for this branch.
+
+      <div *ngIf="!loadingDrivers && drivers.length === 0"
+           class="empty-msg">
+        {{ 'ADMIN.ASSIGN_DELIVERY.NO_DRIVERS' | translate }}
       </div>
     </div>
 
-    <!-- Assign Button -->
+    <!-- Button -->
     <button class="assign-btn"
             (click)="assign()"
             [disabled]="!selectedDriverId || assigning">
-      {{ assigning ? 'Assigning...' : '+ Assign Driver' }}
+
+      {{
+        assigning
+          ? ('ADMIN.ASSIGN_DELIVERY.ASSIGNING' | translate)
+          : ('ADMIN.ASSIGN_DELIVERY.ASSIGN' | translate)
+      }}
+
     </button>
 
   </div>

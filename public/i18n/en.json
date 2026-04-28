@@ -16,7 +16,210 @@
   },
 
   "ADMIN": {
-   
+
+    
+
+    "DELIVERY_DETAILS": {
+  "LOADING": "Loading...",
+  "ORDER": "Order",
+  "BRANCH": "Branch",
+  "INFO": "Delivery Info",
+  "TOTAL": "Total",
+  "CREATED": "Created",
+  "DELIVERED_AT": "Delivered",
+  "CASH_COLLECTED": "Cash Collected",
+  "PEOPLE": "People",
+  "DRIVER": "Driver",
+  "DRIVER_PHONE": "Driver Phone",
+  "CUSTOMER": "Customer",
+  "CUSTOMER_PHONE": "Customer Phone",
+  "NOT_ASSIGNED": "Not Assigned",
+  "ADDRESS": "Delivery Address",
+  "BUILDING": "Building",
+  "STREET": "Street",
+  "CITY": "City",
+  "MARK": "Mark",
+  "ITEMS": "Order Items",
+  "UPDATE_STATUS": "Update Status",
+  "MOVE_TO": "Move to →",
+  "CASH_PLACEHOLDER": "Cash Collected (EGP)",
+  "BACK": "← Back"
+},
+
+    "ASSIGN_DELIVERY": {
+      "TITLE": "Assign Delivery",
+      "SUBTITLE": "Select a branch, then a delivery, then assign a driver",
+      "BRANCH": "Branch",
+      "DELIVERY": "Delivery",
+      "DRIVER": "Driver",
+      "SELECT_BRANCH": "-- Select Branch --",
+      "SELECT_DELIVERY": "-- Select Delivery --",
+      "SELECT_DRIVER": "-- Select Driver --",
+      "LOADING_DELIVERIES": "Loading deliveries...",
+      "LOADING_DRIVERS": "Loading drivers...",
+      "NO_DELIVERIES": "No unassigned deliveries for this branch",
+      "NO_DRIVERS": "No available drivers for this branch",
+      "ASSIGN": "Assign Driver",
+      "ASSIGNING": "Assigning..."
+    },
+
+     "DELIVERIES": {
+      "FILTERS": {
+        "ALL_BRANCHES": "All Branches",
+        "ALL_STATUS": "All Status",
+        "ORDER_ID": "Order ID",
+        "DATE": "Date"
+      },
+      "LOADING": "Loading deliveries...",
+      "DRIVER": "Driver",
+      "NOT_ASSIGNED": "Not Assigned",
+      "CURRENCY": "EGP",
+      "COLLECTED": "Collected",
+      "NO_DATA": "No deliveries found"
+    },
+    "STATUS": {
+      "ASSIGNED": "Assigned",
+      "PICKED_UP": "Picked Up",
+      "ON_THE_WAY": "On the Way",
+      "DELIVERED": "Delivered"
+    },
+
+     "BRANCH_DELETE": {
+      "TITLE": "Delete Branch",
+      "MESSAGE_PART_1": "Are you sure you want to delete",
+      "MESSAGE_PART_2": "This action cannot be undone",
+      "CANCEL": "Cancel",
+      "DELETE": "Yes, Delete",
+      "DELETING": "Deleting...",
+      "ERROR": "An error occurred while deleting"
+    },
+
+    "BRANCH_EDIT": {
+      "BACK": "Back",
+      "EDIT_TITLE": "Edit Branch",
+      "CANCEL": "Cancel",
+      "SAVE": "Save Changes",
+      "SAVING": "Saving...",
+
+      "INFO": "Branch Information",
+
+      "NAME": "Branch Name",
+      "PHONE": "Phone",
+      "BUILDING": "Building Number",
+      "STREET": "Street",
+      "CITY": "City",
+
+      "STATUS": "Status",
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive",
+
+      "SPECIAL_MARK": "Special Mark",
+      "NOTE": "Note",
+      "OPTIONAL": "(optional)",
+
+      "PLACEHOLDERS": {
+        "NAME": "e.g. Downtown Branch",
+        "PHONE": "e.g. +20 100 000 0000",
+        "BUILDING": "e.g. 12",
+        "STREET": "e.g. Tahrir St.",
+        "CITY": "e.g. Cairo",
+        "MARK": "e.g. Near the mall",
+        "NOTE": "Any additional notes..."
+      },
+
+      "ERRORS": {
+        "NAME": "Branch name is required.",
+        "PHONE": "Phone number is required.",
+        "BUILDING": "Building number is required.",
+        "STREET": "Street is required.",
+        "CITY": "City is required"
+      },
+
+      "ERROR": {
+        "RETRY": "Try Again"
+      }
+    },
+
+     "BRANCH_DETAILS": {
+      "BACK": "Branches",
+      "ACTIVE": "ACTIVE",
+      "INACTIVE": "INACTIVE",
+
+      "ACTIVATE": "Activate",
+      "DEACTIVATE": "Deactivate",
+      "EDIT": "Edit Branch",
+      "DELETE": "Delete",
+
+      "BRANCH_INFO": "Branch Info",
+      "ADDRESS": "Address",
+      "PHONE": "Phone",
+      "SPECIAL_MARK": "Special Mark",
+      "NOTE": "Note",
+
+      "QUICK_STATS": "Quick Stats",
+      "TABLES": "Tables",
+      "STAFF": "Staff",
+      "ACTIVE_TABLES": "Active Tables",
+      "OCCUPIED": "Occupied",
+
+      "TABS": {
+        "TABLES": "Tables",
+        "STAFF": "Staff",
+        "STOCK": "Stock"
+      },
+
+      "TABLE": {
+        "OCCUPIED": "Occupied",
+        "FREE": "Free"
+      },
+
+      "STOCK": {
+        "LOW": "Low Stock"
+      },
+
+      "ERROR": {
+        "RETRY": "Try Again"
+      }
+
+  },
+
+    "BRANCHES": {
+      "BACK": "Branches",
+      "NEW_BRANCH": "New Branch",
+      "CANCEL": "Cancel",
+      "CREATE": "Create Branch",
+      "CREATING": "Creating...",
+
+      "BASIC_INFO": "Basic Info",
+      "ADDRESS": "Address",
+
+      "NAME": "Branch Name",
+      "PHONE": "Phone",
+      "SPECIAL_MARK": "Special Mark",
+      "NOTE": "Note",
+
+      "OPTIONAL": "(optional)",
+
+      "NAME_PLACEHOLDER": "e.g. Downtown Branch",
+      "PHONE_PLACEHOLDER": "e.g. +20 100 000 0000",
+      "MARK_PLACEHOLDER": "e.g. Near the mall",
+      "NOTE_PLACEHOLDER": "Any additional notes...",
+
+      "BUILDING": "Building Number",
+      "STREET": "Street",
+      "CITY": "City",
+
+      "BUILDING_PLACEHOLDER": "e.g. 12",
+      "STREET_PLACEHOLDER": "e.g. Tahrir St.",
+      "CITY_PLACEHOLDER": "e.g. Cairo",
+
+      "ERROR_NAME": "Branch name is required.",
+      "ERROR_PHONE": "Phone number is required.",
+      "ERROR_BUILDING": "Building number is required.",
+      "ERROR_STREET": "Street is required.",
+      "ERROR_CITY": "City is required"
+    },
+
     "TABLES": {
       "ORDER_MODAL": {
         "NO_ACTIVE_TITLE": "No active order",
@@ -30,7 +233,7 @@
         "ITEMS": "Items",
         "TOTAL": "Total"
       },
-       "FORM": {
+      "FORM": {
         "EDIT_TITLE": "Edit Table",
         "ADD_TITLE": "Add New Table",
         "EDIT_SUB": "Update the table information",
@@ -198,7 +401,7 @@
         "INSTAPAY": "InstaPay",
         "WALLET": "Wallet"
        }
-      },     
+      },
 
       "MODAL": {
         "NEW_ORDER": "New Order",
@@ -310,42 +513,117 @@
     }
   },
 
-  
+  "DRIVER": {
+    "STATUS": {
+      "Assigned": "Assigned",
+      "PickedUp": "Picked Up",
+      "OnTheWay": "On the Way",
+      "Delivered": "Delivered",
 
+      "ASSIGNED": "Assigned",
+      "PICKED_UP": "Picked Up",
+      "ON_THE_WAY": "On the Way",
+      "DELIVERED": "Delivered"
+    },
+    "DELIVERY_DETAILS": {
+      "LOADING": "Loading...",
+      "ORDER": "Order",
+      "INFO": "Delivery Info",
+      "TOTAL": "Total",
+      "CREATED": "Created",
+      "DELIVERED_AT": "Delivered",
+      "CASH_COLLECTED": "Cash Collected",
+      "PEOPLE": "People",
+      "DRIVER": "Driver",
+      "DRIVER_PHONE": "Driver Phone",
+      "CUSTOMER": "Customer",
+      "CUSTOMER_PHONE": "Customer Phone",
+      "NOT_ASSIGNED": "Not Assigned",
+      "ADDRESS": "Delivery Address",
+      "BUILDING": "Building",
+      "STREET": "Street",
+      "CITY": "City",
+      "MARK": "Mark",
+      "ITEMS": "Order Items",
+      "UPDATE_STATUS": "Update Status",
+      "MOVE_TO": "Move to →",
+      "CASH_PLACEHOLDER": "Cash Collected (EGP)",
+      "BACK": "← Back"
+    },
+      "DELIVERIES": {
+      "TITLE": "Delivery Management",
+      "SUBTITLE": "Live driver tracking",
+      "LOADING": "Loading your deliveries...",
+      "EMPTY": "No deliveries assigned to you.",
+      "ORDER": "Order",
+      "DRIVER": "Driver",
+      "NA": "N/A",
+      "COLLECTED": "Collected"
+    },
+    "STATUS": {
+      "Assigned": "Assigned",
+      "PickedUp": "Picked Up",
+      "OnTheWay": "On the Way",
+      "Delivered": "Delivered",
 
+      "ASSIGNED": "Assigned",
+      "PICKED_UP": "Picked Up",
+      "ON_THE_WAY": "On the Way",
+      "DELIVERED": "Delivered"
+    },
+        "DASHBOARD": {
+      "READY": "Ready to ride",
+      "ZONE": "Nasr City Zone",
+      "LOADING": "Loading your dashboard…",
+      "CASH_COLLECTED": "Cash Collected",
+      "TOTAL_DELIVERED": "Total Delivered",
+      "ACTIVE_TITLE": "Active Delivery",
+      "VIEW_DETAILS": "View Details",
+      "DONE_TITLE": "Done Orders",
+      "EMPTY": "No delivered orders yet",
+      "ORDER": "Order",
+      "ITEMS": "items"
+    },
+    "PROFILE": {
+      "TITLE": "My Profile",
+      "LOADING": "Loading...",
+      "PERSONAL_INFO": "Personal Info",
 
+      "FULL_NAME": "Full Name",
+      "EMAIL": "Email",
+      "USERNAME": "Username (optional)",
+      "NEW_PASSWORD": "New Password (optional)",
+      "CONFIRM_PASSWORD": "Confirm Password",
 
+      "ERROR_NAME": "Name is required",
+      "ERROR_EMAIL": "Valid email is required",
+      "ERROR_PASSWORD_LENGTH": "Minimum 6 characters",
+      "ERROR_PASSWORD_MATCH": "Passwords do not match",
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- "AMR": "350"
+      "SUCCESS": "Changes saved successfully!",
+      "SAVE": "Save Changes",
+      "LOGOUT": "Logout"
+    }
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

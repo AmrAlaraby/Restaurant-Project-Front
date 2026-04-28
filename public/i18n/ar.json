@@ -16,7 +16,208 @@
   },
 
   "ADMIN": {
+
     
+
+    "DELIVERY_DETAILS": {
+  "LOADING": "جاري التحميل...",
+  "ORDER": "الطلب",
+  "BRANCH": "الفرع",
+  "INFO": "معلومات التوصيل",
+  "TOTAL": "الإجمالي",
+  "CREATED": "تاريخ الإنشاء",
+  "DELIVERED_AT": "تم التسليم",
+  "CASH_COLLECTED": "المبلغ المحصل",
+  "PEOPLE": "الأشخاص",
+  "DRIVER": "السائق",
+  "DRIVER_PHONE": "رقم السائق",
+  "CUSTOMER": "العميل",
+  "CUSTOMER_PHONE": "رقم العميل",
+  "NOT_ASSIGNED": "غير مُعيّن",
+  "ADDRESS": "عنوان التوصيل",
+  "BUILDING": "المبنى",
+  "STREET": "الشارع",
+  "CITY": "المدينة",
+  "MARK": "علامة مميزة",
+  "ITEMS": "عناصر الطلب",
+  "UPDATE_STATUS": "تحديث الحالة",
+  "MOVE_TO": "الانتقال إلى →",
+  "CASH_PLACEHOLDER": "المبلغ المحصل (جنيه)",
+  "BACK": "← رجوع"
+},
+
+     "ASSIGN_DELIVERY": {
+      "TITLE": "تعيين توصيل",
+      "SUBTITLE": "اختر الفرع ثم الطلب ثم السائق",
+      "BRANCH": "الفرع",
+      "DELIVERY": "الطلب",
+      "DRIVER": "السائق",
+      "SELECT_BRANCH": "-- اختر الفرع --",
+      "SELECT_DELIVERY": "-- اختر الطلب --",
+      "SELECT_DRIVER": "-- اختر السائق --",
+      "LOADING_DELIVERIES": "جاري تحميل الطلبات...",
+      "LOADING_DRIVERS": "جاري تحميل السائقين...",
+      "NO_DELIVERIES": "لا يوجد طلبات غير معينة لهذا الفرع",
+      "NO_DRIVERS": "لا يوجد سائقين متاحين لهذا الفرع",
+      "ASSIGN": "تعيين السائق",
+      "ASSIGNING": "جاري التعيين..."
+    },
+
+     "DELIVERIES": {
+      "FILTERS": {
+        "ALL_BRANCHES": "كل الفروع",
+        "ALL_STATUS": "كل الحالات",
+        "ORDER_ID": "رقم الطلب",
+        "DATE": "التاريخ"
+      },
+      "LOADING": "جاري تحميل الطلبات...",
+      "DRIVER": "السائق",
+      "NOT_ASSIGNED": "غير معين",
+      "CURRENCY": "ج.م",
+      "COLLECTED": "تم تحصيله",
+      "NO_DATA": "لا يوجد طلبات"
+    },
+    "STATUS": {
+      "ASSIGNED": "تم التعيين",
+      "PICKED_UP": "تم الاستلام",
+      "ON_THE_WAY": "في الطريق",
+      "DELIVERED": "تم التسليم"
+    },
+     "BRANCH_DELETE": {
+      "TITLE": "حذف الفرع",
+      "MESSAGE_PART_1": "هل أنت متأكد أنك تريد حذف",
+      "MESSAGE_PART_2": "هذا الإجراء لا يمكن التراجع عنه",
+      "CANCEL": "إلغاء",
+      "DELETE": "نعم، حذف",
+      "DELETING": "جاري الحذف...",
+      "ERROR": "حدث خطأ أثناء الحذف"
+    },
+
+    "BRANCH_EDIT": {
+      "BACK": "رجوع",
+      "EDIT_TITLE": "تعديل الفرع",
+      "CANCEL": "إلغاء",
+      "SAVE": "حفظ التغييرات",
+      "SAVING": "جاري الحفظ...",
+
+      "INFO": "بيانات الفرع",
+
+      "NAME": "اسم الفرع",
+      "PHONE": "الهاتف",
+      "BUILDING": "رقم المبنى",
+      "STREET": "الشارع",
+      "CITY": "المدينة",
+
+      "STATUS": "الحالة",
+      "ACTIVE": "نشط",
+      "INACTIVE": "غير نشط",
+
+      "SPECIAL_MARK": "علامة مميزة",
+      "NOTE": "ملاحظات",
+      "OPTIONAL": "(اختياري)",
+
+      "PLACEHOLDERS": {
+        "NAME": "مثال: فرع وسط البلد",
+        "PHONE": "مثال: +20 100 000 0000",
+        "BUILDING": "مثال: 12",
+        "STREET": "مثال: شارع التحرير",
+        "CITY": "مثال: القاهرة",
+        "MARK": "مثال: بجوار المول",
+        "NOTE": "أي ملاحظات إضافية..."
+      },
+
+      "ERRORS": {
+        "NAME": "اسم الفرع مطلوب",
+        "PHONE": "رقم الهاتف مطلوب",
+        "BUILDING": "رقم المبنى مطلوب",
+        "STREET": "الشارع مطلوب",
+        "CITY": "المدينة مطلوبة"
+      },
+
+      "ERROR": {
+        "RETRY": "حاول مرة أخرى"
+      }
+    },
+
+     "BRANCH_DETAILS": {
+      "BACK": "الفروع",
+      "ACTIVE": "نشط",
+      "INACTIVE": "غير نشط",
+
+      "ACTIVATE": "تفعيل",
+      "DEACTIVATE": "إلغاء التفعيل",
+      "EDIT": "تعديل الفرع",
+      "DELETE": "حذف",
+
+      "BRANCH_INFO": "بيانات الفرع",
+      "ADDRESS": "العنوان",
+      "PHONE": "الهاتف",
+      "SPECIAL_MARK": "علامة مميزة",
+      "NOTE": "ملاحظات",
+
+      "QUICK_STATS": "إحصائيات سريعة",
+      "TABLES": "الطاولات",
+      "STAFF": "الموظفين",
+      "ACTIVE_TABLES": "طاولات نشطة",
+      "OCCUPIED": "مشغولة",
+
+      "TABS": {
+        "TABLES": "الطاولات",
+        "STAFF": "الموظفين",
+        "STOCK": "المخزون"
+      },
+
+      "TABLE": {
+        "OCCUPIED": "مشغولة",
+        "FREE": "فارغة"
+      },
+
+      "STOCK": {
+        "LOW": "مخزون منخفض"
+      },
+
+      "ERROR": {
+        "RETRY": "حاول مرة أخرى"
+      }
+    },
+
+    "BRANCHES": {
+      "BACK": "الفروع",
+      "NEW_BRANCH": "فرع جديد",
+      "CANCEL": "إلغاء",
+      "CREATE": "إنشاء الفرع",
+      "CREATING": "جاري الإنشاء...",
+
+      "BASIC_INFO": "المعلومات الأساسية",
+      "ADDRESS": "العنوان",
+
+      "NAME": "اسم الفرع",
+      "PHONE": "الهاتف",
+      "SPECIAL_MARK": "علامة مميزة",
+      "NOTE": "ملاحظات",
+
+      "OPTIONAL": "(اختياري)",
+
+      "NAME_PLACEHOLDER": "مثال: فرع وسط البلد",
+      "PHONE_PLACEHOLDER": "مثال: +20 100 000 0000",
+      "MARK_PLACEHOLDER": "مثال: بجوار المول",
+      "NOTE_PLACEHOLDER": "أي ملاحظات إضافية...",
+
+      "BUILDING": "رقم المبنى",
+      "STREET": "الشارع",
+      "CITY": "المدينة",
+
+      "BUILDING_PLACEHOLDER": "مثال: 12",
+      "STREET_PLACEHOLDER": "مثال: شارع التحرير",
+      "CITY_PLACEHOLDER": "مثال: القاهرة",
+
+      "ERROR_NAME": "اسم الفرع مطلوب",
+      "ERROR_PHONE": "رقم الهاتف مطلوب",
+      "ERROR_BUILDING": "رقم المبنى مطلوب",
+      "ERROR_STREET": "الشارع مطلوب",
+      "ERROR_CITY": "المدينة مطلوبة"
+    },
+
     "TABLES": {
        "ORDER_MODAL": {
         "NO_ACTIVE_TITLE": "لا يوجد طلب نشط",
@@ -308,5 +509,101 @@
         }
       }
     }
+  },
+
+  "DRIVER": {
+    "STATUS": {
+      "Assigned": "تم التعيين",
+      "PickedUp": "تم الاستلام",
+      "OnTheWay": "في الطريق",
+      "Delivered": "تم التوصيل",
+
+      "ASSIGNED": "تم التعيين",
+      "PICKED_UP": "تم الاستلام",
+      "ON_THE_WAY": "في الطريق",
+      "DELIVERED": "تم التوصيل"
+    },
+    "DELIVERY_DETAILS": {
+      "LOADING": "جاري التحميل...",
+      "ORDER": "طلب",
+      "INFO": "بيانات التوصيل",
+      "TOTAL": "الإجمالي",
+      "CREATED": "تاريخ الإنشاء",
+      "DELIVERED_AT": "تم التوصيل",
+      "CASH_COLLECTED": "المبلغ المحصل",
+      "PEOPLE": "الأشخاص",
+      "DRIVER": "السائق",
+      "DRIVER_PHONE": "هاتف السائق",
+      "CUSTOMER": "العميل",
+      "CUSTOMER_PHONE": "هاتف العميل",
+      "NOT_ASSIGNED": "غير معين",
+      "ADDRESS": "عنوان التوصيل",
+      "BUILDING": "المبنى",
+      "STREET": "الشارع",
+      "CITY": "المدينة",
+      "MARK": "علامة مميزة",
+      "ITEMS": "عناصر الطلب",
+      "UPDATE_STATUS": "تحديث الحالة",
+      "MOVE_TO": "انتقال إلى →",
+      "CASH_PLACEHOLDER": "المبلغ المحصل (جنيه)",
+      "BACK": "رجوع ←"
+    },
+      "DELIVERIES": {
+      "TITLE": "إدارة التوصيلات",
+      "SUBTITLE": "تتبع مباشر للسائق",
+      "LOADING": "جاري تحميل التوصيلات...",
+      "EMPTY": "لا توجد طلبات مخصصة لك.",
+      "ORDER": "طلب",
+      "DRIVER": "السائق",
+      "NA": "غير متاح",
+      "COLLECTED": "تم تحصيل"
+    },
+    "STATUS": {
+      "Assigned": "تم التعيين",
+      "PickedUp": "تم الاستلام",
+      "OnTheWay": "في الطريق",
+      "Delivered": "تم التوصيل",
+
+      "ASSIGNED": "تم التعيين",
+      "PICKED_UP": "تم الاستلام",
+      "ON_THE_WAY": "في الطريق",
+      "DELIVERED": "تم التوصيل"
+    },
+        "DASHBOARD": {
+      "READY": "جاهز للانطلاق",
+      "ZONE": "منطقة مدينة نصر",
+      "LOADING": "جاري تحميل البيانات...",
+      "CASH_COLLECTED": "المبلغ المحصل",
+      "TOTAL_DELIVERED": "إجمالي التوصيلات",
+      "ACTIVE_TITLE": "توصيل نشط",
+      "VIEW_DETAILS": "عرض التفاصيل",
+      "DONE_TITLE": "الطلبات المنتهية",
+      "EMPTY": "لا توجد طلبات تم تسليمها حتى الآن",
+      "ORDER": "طلب",
+      "ITEMS": "عنصر"
+    },
+
+     "PROFILE": {
+      "TITLE": "الملف الشخصي",
+      "LOADING": "جاري التحميل...",
+      "PERSONAL_INFO": "المعلومات الشخصية",
+
+      "FULL_NAME": "الاسم الكامل",
+      "EMAIL": "البريد الإلكتروني",
+      "USERNAME": "اسم المستخدم (اختياري)",
+      "NEW_PASSWORD": "كلمة مرور جديدة (اختياري)",
+      "CONFIRM_PASSWORD": "تأكيد كلمة المرور",
+
+      "ERROR_NAME": "الاسم مطلوب",
+      "ERROR_EMAIL": "البريد الإلكتروني غير صالح",
+      "ERROR_PASSWORD_LENGTH": "6 أحرف على الأقل",
+      "ERROR_PASSWORD_MATCH": "كلمات المرور غير متطابقة",
+
+      "SUCCESS": "تم حفظ التعديلات بنجاح!",
+      "SAVE": "حفظ التعديلات",
+      "LOGOUT": "تسجيل الخروج"
+    }
+
   }
 }
+

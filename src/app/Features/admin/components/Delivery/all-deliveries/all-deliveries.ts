@@ -11,11 +11,12 @@ import { Pagination } from "../../../../../Shared/Components/pagination/paginati
 import { Branch } from '../../../../../Core/Constants/Api_Urls';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../../../Core/Services/Auth-Service/auth-service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-all-deliveries',
   standalone: true,
-  imports: [CommonModule, FormsModule, Pagination],
+  imports: [CommonModule, FormsModule, Pagination,TranslatePipe],
   templateUrl: './all-deliveries.html',
   styleUrls: ['./all-deliveries.scss'],
 })
@@ -81,13 +82,13 @@ export class AllDeliveries {
       let index = this.deliveries.findIndex(d => d.id === data.id);
       if(index !== -1 && index){
         this.deliveries[index] = data;
-      }     
+      }
     });
     this.SignalRService.onRestaurantUpdate("deliveryUpdated",(data :Delivery) => {
       let index = this.deliveries.findIndex(d => d.id === data.id);
       if(index !== -1 && index){
         this.deliveries[index] = data;
-      }     
+      }
     });
   }
 

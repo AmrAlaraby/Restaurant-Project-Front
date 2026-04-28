@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 
 import { DeliveryService } from '../../../../../Core/Services/Delivery-Service/delivery-service';
 import { Delivery } from '../../../../../Core/Models/DeliveryModels/delivery';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-delivery-details',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,TranslatePipe],
   templateUrl: './delivery-details.html',
   styleUrls: ['./delivery-details.scss']
 })

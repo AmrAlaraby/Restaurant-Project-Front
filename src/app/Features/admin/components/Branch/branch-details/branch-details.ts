@@ -5,12 +5,13 @@ import { BranchStock } from '../../../../../Core/Models/BranchModels/branch-stoc
 import { GetBranch } from '../../../../../Core/Models/BranchModels/get-branch';
 import { BranchService } from '../../../../../Core/Services/Branch-Service/branch-service';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-branch-details',
   standalone: true,
-  imports: [CommonModule, RouterModule, ConfirmDeleteComponent],
+  imports: [CommonModule, RouterModule, ConfirmDeleteComponent,TranslatePipe],
   templateUrl: './branch-details.html',
   styleUrls: ['./branch-details.scss'],
 })

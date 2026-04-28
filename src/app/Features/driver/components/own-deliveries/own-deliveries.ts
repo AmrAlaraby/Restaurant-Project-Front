@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 import { DeliveryService } from '../../../../Core/Services/Delivery-Service/delivery-service';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { Delivery } from '../../../../Core/Models/DeliveryModels/delivery';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-own-deliveries',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,TranslatePipe],
   templateUrl: './own-deliveries.html',
   styleUrls: ['./own-deliveries.scss'],
 })
@@ -21,7 +22,7 @@ export class OwnDeliveries implements OnInit {
     private deliveryService: DeliveryService,
     private router: Router,
     private authService: AuthService,
-    private SignalRService:SignalRService 
+    private SignalRService:SignalRService
   ) {}
 
   ngOnInit(): void {
