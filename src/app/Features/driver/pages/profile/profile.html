@@ -98,15 +98,7 @@
               }
             </div>
 
-            @if (saveError()) {
-              <p class="error-msg">{{ saveError() }}</p>
-            }
-
-            @if (saved()) {
-              <p class="success-msg">
-                {{ 'DRIVER.PROFILE.SUCCESS' | translate }}
-              </p>
-            }
+          
 
             <button type="submit"
                     class="btn-save"
