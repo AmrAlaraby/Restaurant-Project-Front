@@ -780,6 +780,12 @@
     "MY_TABLES": "My Tables",
     "FULL_FLOOR": "Full Floor View →",
     "ACTIVE_ORDERS": "Active Orders"
+  },
+  "KITCHEN": {
+    "TITLE": "Kitchen Status",
+    "SUBTITLE": "Orders ready to be served",
+    "LOADING": "Loading orders...",
+    "EMPTY": "No orders ready to serve"
   }
 }
 }

@@ -1,26 +1,36 @@
 <div class="kitchen-page">
   <div class="page-header">
-    <h1 class="page-title">Kitchen Status</h1>
-    <p class="page-subtitle">Orders ready to be served</p>
+    <h1 class="page-title">
+      {{ 'WAITER.KITCHEN.TITLE' | translate }}
+    </h1>
+    <p class="page-subtitle">
+      {{ 'WAITER.KITCHEN.SUBTITLE' | translate }}
+    </p>
   </div>
 
   @if (loading) {
     <div class="loading-state">
       <div class="spinner"></div>
-      <span>Loading orders...</span>
+      <span>
+        {{ 'WAITER.KITCHEN.LOADING' | translate }}
+      </span>
     </div>
   }
 
   @if (!loading && board) {
     <div class="tickets-list">
       @for (ticket of board.done; track ticket.id) {
-        <app-kitchen-ticket-card [ticket]="ticket" (confirmServed)="onConfirmServed($event)" />
+        <app-kitchen-ticket-card
+          [ticket]="ticket"
+          (confirmServed)="onConfirmServed($event)" />
       }
 
       @if (board.done.length === 0) {
         <div class="empty-state">
           <span class="empty-icon">🍽️</span>
-          <p>No orders ready to serve</p>
+          <p>
+            {{ 'WAITER.KITCHEN.EMPTY' | translate }}
+          </p>
         </div>
       }
     </div>

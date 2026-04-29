@@ -5,10 +5,12 @@ import { TicketStatus } from '../../../../Core/Models/KitchenModels/ticket-statu
 import { KitchenService } from '../../../../Core/Services/Kitchen-Service/kitchen-service';
 import { KitchenTicketCard } from '../../components/kitchen-ticket-card/kitchen-ticket-card';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-kitchen',
-  imports: [CommonModule, KitchenTicketCard],
+  imports: [CommonModule, KitchenTicketCard,TranslatePipe
+  ],
   templateUrl: './kitchen.html',
   styleUrl: './kitchen.scss',
 })
