@@ -12,11 +12,12 @@ import { CreateOrderInterface } from '../../../../Core/Models/OrderModels/create
 import { AddressDto } from '../../../../Core/Models/AuthModels/address-dto';
 import { AddAddressModal } from '../../components/Home/Address-Model/add-address-modal/add-address-modal';
 import { BasketItem } from '../../../../Core/Models/BasketModels/BasketItem';
+import { NutritionModal } from "../../components/Ai/nutrition-modal/nutrition-modal";
 
 @Component({
   selector: 'app-basket-page',
   standalone: true,
-  imports: [FormsModule, AsyncPipe, RouterModule, AddAddressModal],
+  imports: [FormsModule, AsyncPipe, RouterModule, AddAddressModal, NutritionModal],
   templateUrl: './basket-page.html',
   styleUrl: './basket-page.scss',
 })
@@ -176,4 +177,6 @@ export class BasketPage {
       }
     });
   }
+
+  
 }

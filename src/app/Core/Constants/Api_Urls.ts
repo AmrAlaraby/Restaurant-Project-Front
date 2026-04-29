@@ -72,6 +72,9 @@ export const Payment = {
   getAll: `${apiUrl}/payment`,
 };
 
+export const Nutrition = {
+  Calculate: (basketId: string) => `Nutrition/${basketId}/nutrition`
+};
 // hossam 54 75
 
 export const Categories = {
