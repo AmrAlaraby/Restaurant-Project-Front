@@ -64,7 +64,7 @@ export class NutritionModal implements  OnDestroy {
 
     const currentHash = this.generateHash(this.items || []);
 
-    // 🔥 لو الباسكت اتغيرت
+    
     if (currentHash !== this.lastHash) {
       this.result = null;
       this.lastHash = currentHash;
@@ -149,7 +149,7 @@ export class NutritionModal implements  OnDestroy {
     const total = this.result.orderTotals.calories;
     if (total === 0) return 0;
 
-    return Math.min((item.totals.calories / total) * 100, 100);
+    return Math.min((item.totals.calories / 2000) * 100, 100);
   }
 
   getCaloriesDV(r: NutritionResponse): number {
