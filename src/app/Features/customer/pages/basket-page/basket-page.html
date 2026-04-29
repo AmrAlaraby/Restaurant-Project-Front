@@ -125,6 +125,13 @@
             </div>
         </div>
 
+
+        @if (basket$ | async; as b) {
+
+        <app-nutrition-modal [basketId]="b.id" [hasItems]="b.items.length > 0">
+        </app-nutrition-modal>
+
+        }
         <!-- BUTTON -->
         <button class="place-btn" (click)="placeOrder(basket)">
             Place Order
@@ -138,8 +145,6 @@
 
 <!-- MODAL -->
 @if (showAddressModal) {
-  <app-add-address-modal
-    (closed)="onModalClosed()"
-    (addressAdded)="onAddressAdded($event)">
-  </app-add-address-modal>
+<app-add-address-modal (closed)="onModalClosed()" (addressAdded)="onAddressAdded($event)">
+</app-add-address-modal>
 }
