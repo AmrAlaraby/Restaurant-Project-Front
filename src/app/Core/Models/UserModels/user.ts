@@ -5,5 +5,6 @@ export interface User {
   roleId: string;
   branchId?: number | null;
   branchName?: string | null;
+  branchArabicName?: string | null;
   isDeleted: boolean;
 }

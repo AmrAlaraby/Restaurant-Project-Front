@@ -774,6 +774,15 @@
   "SAVING": "جاري الحفظ...",
   "EDIT": "تعديل",
   "DELETE": "حذف"
+},
+"WAITER": {
+  "HOME": {
+    "GREETING": "صباح الخير، {{name}}",
+    "NEW_ORDER": "+ طلب جديد",
+    "MY_TABLES": "طاولاتي",
+    "FULL_FLOOR": "عرض الصالة بالكامل ←",
+    "ACTIVE_ORDERS": "الطلبات النشطة"
+  }
 }
 }
 

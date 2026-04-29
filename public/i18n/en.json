@@ -772,6 +772,15 @@
   "SAVING": "Saving...",
   "EDIT": "Edit",
   "DELETE": "Delete"
+},
+"WAITER": {
+  "HOME": {
+    "GREETING": "Good morning, {{name}}",
+    "NEW_ORDER": "+ New Order",
+    "MY_TABLES": "My Tables",
+    "FULL_FLOOR": "Full Floor View →",
+    "ACTIVE_ORDERS": "Active Orders"
+  }
 }
 }
 
