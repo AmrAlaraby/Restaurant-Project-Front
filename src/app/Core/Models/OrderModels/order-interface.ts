@@ -13,4 +13,5 @@ export interface OrderInterface {
   tableNumber?: string;
   paymentMethod?: string;
   paymentStatus: string;
+  createdAt: string;
 }

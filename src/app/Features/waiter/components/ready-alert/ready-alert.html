@@ -1,1 +1,12 @@
-<p>ready-alert works!</p>
+<div class="ready-alert">
+  <div class="alert-left">
+    <span class="bell">🔔</span>
+    <div class="alert-text">
+      <div class="alert-title">{{ readyOrders.length }} Order{{ readyOrders.length > 1 ? 's' : '' }} Ready to Serve!</div>
+      <div class="alert-sub">{{ getReadyOrdersSummary() }}</div>
+    </div>
+  </div>
+  <button class="view-kitchen-btn" (click)="viewKitchen.emit()">
+    View Kitchen →
+  </button>
+</div>

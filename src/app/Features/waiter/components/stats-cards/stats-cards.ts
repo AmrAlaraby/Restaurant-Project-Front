@@ -6,11 +6,11 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './stats-cards.html',
-  styleUrl: './stats-cards.scss'
+  styleUrl: './stats-cards.scss',
 })
 export class StatsCardsComponent {
-
-  @Input() occupied = 0;
-  @Input() orders = 0;
-
+  @Input() tablesServed   = 0;
+  @Input() activeOrders   = 0;
+  @Input() occupiedTables = 0;
+  @Input() myOrdersTotal  = 0;
 }

@@ -1,36 +1,46 @@
-<div class="home-header">
+<div class="home-page">
 
-  <div class="welcome">
-    <h2>Welcome  , {{ waiterName }}</h2>
-  </div>
+  <!-- ── Top Bar ──────────────────────────────────────── -->
+  <header class="top-bar">
+    <div>
+      <h1 class="greeting">Good morning, {{ waiterName }} </h1>
+      <p class="sub-info">
+        {{ branchName }}
+      </p>
+    </div>
+    <button class="new-order-btn" (click)="goToNewOrder()">
+      + New Order
+    </button>
+  </header>
 
-  <div class="branch-info" *ngIf="branchName">
-    <span class="label">Branch {{branchId}} — </span>
-    <span class="branch-name">{{ branchName }}</span>
-  </div>
-
-</div>
-
-<div class="page">
-
-  <!-- Stats -->
+  <!-- ── Stats ─────────────────────────────────────────── -->
   <app-stats-cards
-    [occupied]="occupiedCount"
-    [orders]="activeOrdersCount">
+    [tablesServed]="tablesServed"
+    [activeOrders]="activeOrdersCount"
+    [occupiedTables]="occupiedCount"
+    [myOrdersTotal]="myOrdersTotal">
   </app-stats-cards>
 
-  <!-- Active Orders (NOW ABOVE TABLES) -->
-  <h2 class="section-title">Active Orders</h2>
+  <!-- ── Ready Alert ───────────────────────────────────── -->
+  <app-ready-alert
+    *ngIf="readyOrders.length > 0"
+    [readyOrders]="readyOrders"
+    (viewKitchen)="goToKitchen()">
+  </app-ready-alert>
 
-  <!-- Tables -->
-  <div class="tables-header">
-    <h3>Tables</h3>
+  <!-- ── My Tables ─────────────────────────────────────── -->
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">My Tables</h2>
+      <button class="link-btn" (click)="goToTables()">Full Floor View →</button>
+    </div>
+    <app-tables-grid [tables]="displayedTables"></app-tables-grid>
+  </section>
 
-    <button class="view-all-btn" (click)="goToTables()">
-      View All →
-    </button>
-  </div>
-
-  <app-tables-grid [tables]="displayedTables"></app-tables-grid>
+  <!-- ── Active Orders ─────────────────────────────────── -->
+  <section class="section">
+    <h2 class="section-title">Active Orders</h2>
+    <app-active-orders [orders]="activeOrders"></app-active-orders>
+  </section>
 
 </div>

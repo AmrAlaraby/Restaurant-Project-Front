@@ -113,6 +113,7 @@ export class CashierDashboard implements OnInit {
       d.getDate() === now.getDate()
     );
   }
+  
 
   loadPaymentSummary() {
     this.paymentService.getAll({ pageIndex: 1, pageSize: 200, status: 'Paid' }).subscribe(res => {

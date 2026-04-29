@@ -11,6 +11,7 @@ export interface OrderFilters {
   paymentStatus?: PaymentStatus | null;
   orderType?: OrderType | null;
   branchId?: number;
+  createdAt?: string;
 }
 
 export interface WaiterOrder {
@@ -20,4 +21,5 @@ export interface WaiterOrder {
   status: OrderStatus;
   itemsCount: number;
   totalAmount: number;
+  createdAt?: string;
 }
