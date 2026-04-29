@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DeliveryService } from '../../../../../Core/Services/Delivery-Service/delivery-service';
+import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 
 @Component({
   selector: 'app-own-deliveries',
@@ -13,7 +14,9 @@ export class OwnDeliveries implements OnInit {
   deliveries: any[] = [];
   loading = false;
 
-  constructor(private deliveryService: DeliveryService) {}
+  constructor(private deliveryService: DeliveryService,
+    private toast: ToastService
+  ) {}
 
   ngOnInit(): void {
     this.loadOwnDeliveries();
@@ -28,8 +31,10 @@ export class OwnDeliveries implements OnInit {
         this.loading = false;
       },
       error: (err) => {
+         this.toast.error('Failed to load own deliveries');
         console.error(err);
         this.loading = false;
+       
       },
     });
   }

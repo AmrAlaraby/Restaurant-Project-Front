@@ -5,6 +5,7 @@ import { DeliveryService } from '../../../../../Core/Services/Delivery-Service/d
 import { TranslatePipe } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
 import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
+import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 
 @Component({
   selector: 'app-assign-delivery',
@@ -29,6 +30,7 @@ export class AssignDelivery implements OnInit {
   constructor(
     private deliveryService: DeliveryService,
     private localizationService: LocalizationService,
+     private toast: ToastService 
   ) {}
 
   ngOnInit(): void {
@@ -59,7 +61,7 @@ export class AssignDelivery implements OnInit {
         this.branches = res;
         console.log('Branches:', this.branches);
       },
-      error: (err) => console.error('Failed to load branches:', err),
+     error: () => this.toast.error('Failed to load branches'),
     });
   }
 
@@ -86,6 +88,7 @@ export class AssignDelivery implements OnInit {
       error: (err) => {
         console.error(err);
         this.loadingDeliveries = false;
+        this.toast.error('Failed to load deliveries');
       },
     });
   }
@@ -109,6 +112,7 @@ export class AssignDelivery implements OnInit {
         this.loadingDrivers = false;
       },
       error: (err) => {
+        this.toast.error('Failed to load drivers');
         console.error(err);
         this.loadingDrivers = false;
       },
@@ -130,7 +134,7 @@ export class AssignDelivery implements OnInit {
 
     this.deliveryService.assignDelivery(dto).subscribe({
       next: () => {
-        alert('Assigned successfully ✅');
+         this.toast.success('Assigned successfully!');
         this.assigning = false;
 
         this.deliveries = this.deliveries.filter(
@@ -142,6 +146,7 @@ export class AssignDelivery implements OnInit {
         this.drivers = [];
       },
       error: (err) => {
+        this.toast.error('Failed to assign delivery');
         console.error(err);
         this.assigning = false;
       },

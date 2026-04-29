@@ -14,6 +14,7 @@ import { AuthService } from '../../../../../Core/Services/Auth-Service/auth-serv
 import { TranslatePipe } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
 import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
+import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 
 @Component({
   selector: 'app-all-deliveries',
@@ -54,7 +55,8 @@ export class AllDeliveries {
     private router: Router,
     private authService: AuthService,
     private SignalRService: SignalRService,
-    private localizationService: LocalizationService
+    private localizationService: LocalizationService,
+     private toast: ToastService 
   ) {}
 
   ngOnInit() {
@@ -87,7 +89,10 @@ export class AllDeliveries {
           this.totalCount = res.count;
           this.loading = false;
         },
-        error: _ => this.loading = false
+        error: () => {
+        this.loading = false;
+        this.toast.error('Failed to load deliveries'); 
+      }
       });
   }
 
@@ -125,7 +130,8 @@ export class AllDeliveries {
       .subscribe({
         next: res => {
           this.branches = res;
-        }
+        },
+        error: () => this.toast.error('Failed to load branches')
       });
   }
 
