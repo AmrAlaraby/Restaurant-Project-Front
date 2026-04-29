@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Pagination } from '../../../../../Shared/Components/pagination/pagination';
 import { IngredientInterface } from '../../../../../Core/Models/MenuItemModels/ingredient-interface';
 import { IngredientsService } from '../../../../../Core/Services/Ingredients-Service/ingredients-Service';
+import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 
 @Component({
   selector: 'app-ingredients',
@@ -27,7 +28,9 @@ export class IngredientsComponent implements OnInit {
   unit: ''
   };
 
-  constructor(private ingredientService: IngredientsService) {}
+  constructor(private ingredientService: IngredientsService,
+    private toast: ToastService
+  ) {}
 
   ngOnInit(): void {
     this.loadData();
@@ -48,6 +51,7 @@ loadData() {
     error: (err) => {
       console.error(err);
       this.loading = false;
+      this.toast.error('Failed to load ingredients');
     }
   });
 }
@@ -75,11 +79,13 @@ onPageChange(page: number) {
   addIngredient() {
     this.ingredientService.create(this.newIngredient).subscribe({
       next: () => {
+         this.toast.success('Ingredient added successfully!');
         this.closeModal();
         this.loadData();
       },
       error: (err) => {
         console.error(err);
+        this.toast.error('Failed to add ingredient');
       }
     });
 
