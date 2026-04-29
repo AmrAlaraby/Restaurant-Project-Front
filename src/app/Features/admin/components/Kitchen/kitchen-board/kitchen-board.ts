@@ -17,6 +17,7 @@ import { TicketStatus } from '../../../../../Core/Models/KitchenModels/ticket-st
 import { OrderDetailsInterface } from '../../../../../Core/Models/OrderModels/order-details-interface';
 import { KitchenTicketStatusDto } from '../../../../../Core/Models/KitchenModels/kitchen-ticket-status-dto';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 
 
 @Component({
@@ -52,7 +53,11 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  constructor(private kitchenService: KitchenService,private AuthService: AuthService,private SignalRService :SignalRService) {}
+  constructor(private kitchenService: KitchenService,private AuthService: AuthService,
+    private SignalRService :SignalRService,
+      private toast: ToastService
+            
+  ) {}
 
   ngOnInit(): void {
     this.loadBoard(this.currentParams);
@@ -86,6 +91,7 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
           this.loading = false;
         },
         error: () => {
+           this.toast.error('Failed to load tickets.');
           this.error = 'Failed to load tickets.';
           this.loading = false;
         },
@@ -106,6 +112,7 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
           this.stationsLoading = false;
         },
         error: () => {
+          this.toast.error('Failed to load stations.');
           this.stationsLoading = false;
         },
       });
@@ -279,7 +286,8 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data) => this.selectedTicket = data,
-        error: () => this.error = 'Failed to load ticket details.',
+         error: () => {this.toast.error('Failed to load ticket details.'),
+                       this.error = 'Failed to load ticket details.'}  
       });
   }
 
@@ -299,6 +307,7 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
           }
         },
         error: () => {
+          this.toast.error('Failed to update ticket status.');
           this.error = 'Failed to update ticket status.';
         },
       });
