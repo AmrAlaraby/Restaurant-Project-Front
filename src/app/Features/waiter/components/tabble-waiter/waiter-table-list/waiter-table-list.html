@@ -4,25 +4,33 @@
   [class.available]="!table.isOccupied"
   (click)="onOpenOrder(table.id)"
 >
-  <h3> {{ table.tableNumber }}</h3>
-
-  <p>Capacity: {{ table.capacity }}</p>
+  <h3>
+    {{ 'WAITER.TABLE.TABLELIST.TITLE' | translate:{ number: table.tableNumber } }}
+  </h3>
 
   <p>
-    Status:
+    {{ 'WAITER.TABLE.TABLELIST.CAPACITY' | translate:{ capacity: table.capacity } }}
+  </p>
+
+  <p>
+    {{ 'WAITER.TABLE.TABLELIST.STATUS.LABEL' | translate }}:
     @if (table.isOccupied) {
-      <span class="occupied-text">Occupied</span>
+      <span class="occupied-text">
+        {{ 'WAITER.TABLE.TABLELIST.STATUS.OCCUPIED' | translate }}
+      </span>
     } @else {
-      <span class="available-text">Available</span>
+      <span class="available-text">
+        {{ 'WAITER.TABLE.TABLELIST.STATUS.AVAILABLE' | translate }}
+      </span>
     }
   </p>
 
   <div class="actions" (click)="$event.stopPropagation()">
     <button (click)="onToggle()">
       @if (table.isOccupied) {
-        Free
+        {{ 'WAITER.TABLE.TABLELIST.BUTTONS.FREE' | translate }}
       } @else {
-        Occupy
+        {{ 'WAITER.TABLE.TABLELIST.BUTTONS.OCCUPY' | translate }}
       }
     </button>
   </div>

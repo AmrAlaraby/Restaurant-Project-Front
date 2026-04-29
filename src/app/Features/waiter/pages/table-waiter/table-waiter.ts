@@ -10,6 +10,9 @@ import { OrderDetails } from '../../../admin/components/Order/order-details/orde
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { UsersService } from '../../../../Core/Services/User-Service/users-service';
 import { TableSearch } from '../../components/tabble-waiter/table-search/table-search';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LocalizationService } from '../../../../Core/Services/Localization-Service/localization-service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-table-waiter',
@@ -19,7 +22,8 @@ import { TableSearch } from '../../components/tabble-waiter/table-search/table-s
     Pagination,
     WaiterTableList,
     TableSearch,
-    OrderDetails
+    OrderDetails,
+    TranslatePipe
   ],
   templateUrl: './table-waiter.html',
   styleUrl: './table-waiter.scss',
@@ -31,7 +35,7 @@ export class TableWaiter implements OnInit {
   private authService = inject(AuthService);
   private usersService = inject(UsersService);
   //=------------branchname----------------
-  branchName?: string;
+  branchNames   = {branchName: '', branchArabicName: ''};
 
 
 
@@ -51,6 +55,10 @@ export class TableWaiter implements OnInit {
   isOccupied?: boolean;
   search?: string;
 
+  constructor(
+        private localizationService: LocalizationService,
+      ) {}
+
  ngOnInit(): void {
   this.authService.getCurrentUser().subscribe({
     next: (user) => {
@@ -60,7 +68,8 @@ export class TableWaiter implements OnInit {
       this.usersService.getBranches().subscribe({
         next: (branches) => {
           const branch = branches.find(b => b.id === this.branchId);
-          this.branchName = branch?.name;
+          this.branchNames.branchName = branch?.name ?? '';
+      this.branchNames.branchArabicName = branch?.arabicName ?? '';
         }
       });
 
@@ -68,7 +77,17 @@ export class TableWaiter implements OnInit {
     },
     error: (err) => console.error(err)
   });
+  this.getCurrentLanguage();
 }
+CurrentLanguage: string = 'en';
+  
+    private destroy$ = new Subject<void>();
+    getCurrentLanguage(): void {
+      this.CurrentLanguage = this.localizationService.getCurrentLang();
+      this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+        this.CurrentLanguage = lang;
+      });
+    }
   loadTables() {
     this.tableService.getTables({
       pageIndex: this.pageIndex,
@@ -129,5 +148,11 @@ export class TableWaiter implements OnInit {
 
     this.pageIndex = 1;
     this.loadTables();
+  }
+  getbranchName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.branchArabicName || item.branchName;
+    }
+    return item.branchName;
   }
 }

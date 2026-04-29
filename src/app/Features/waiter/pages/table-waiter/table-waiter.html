@@ -4,32 +4,28 @@
   <app-table-search 
     (filterChanged)="onFilterChanged($event)">
   </app-table-search>
-<h2 class="branch-title">{{ branchName }}</h2>
+
+  <h2 class="branch-title">
+    {{ getbranchName(branchNames) }}
+  </h2>
 
   <!-- No Data -->
   @if (tables.length === 0) {
-    <p>No Tables Found</p>
+    <p>{{ 'WAITER.TABLE.EMPTY' | translate }}</p>
   }
 
   <!-- Tables -->
-  <!-- @for (table of tables; track table.id) {
-    <app-waiter-table-list
-      [table]="table"
-      (toggle)="onToggle($event)"   
-      (openOrder)="onOpenOrder($event)">
-    </app-waiter-table-list>
-  } -->
-    <div class="tables-grid">
+  <div class="tables-grid">
 
-  @for (table of tables; track table.id) {
-    <app-waiter-table-list
-      [table]="table"
-      (toggle)="onToggle($event)"   
-      (openOrder)="onOpenOrder($event)">
-    </app-waiter-table-list>
-  }
+    @for (table of tables; track table.id) {
+      <app-waiter-table-list
+        [table]="table"
+        (toggle)="onToggle($event)"   
+        (openOrder)="onOpenOrder($event)">
+      </app-waiter-table-list>
+    }
 
-</div>
+  </div>
 
   <!-- Pagination -->
   <app-pagination

@@ -3,13 +3,17 @@
   <!-- ── Top Bar ──────────────────────────────────────── -->
   <header class="top-bar">
     <div>
-      <h1 class="greeting">Good morning, {{ waiterName }} </h1>
+      <h1 class="greeting">
+        {{ 'WAITER.HOME.GREETING' | translate:{ name: waiterName } }}
+      </h1>
+
       <p class="sub-info">
-        {{ branchName }}
+        {{ getbranchName(branchNames) }}
       </p>
     </div>
+
     <button class="new-order-btn" (click)="goToNewOrder()">
-      + New Order
+      {{ 'WAITER.HOME.NEW_ORDER' | translate }}
     </button>
   </header>
 
@@ -31,15 +35,24 @@
   <!-- ── My Tables ─────────────────────────────────────── -->
   <section class="section">
     <div class="section-header">
-      <h2 class="section-title">My Tables</h2>
-      <button class="link-btn" (click)="goToTables()">Full Floor View →</button>
+      <h2 class="section-title">
+        {{ 'WAITER.HOME.MY_TABLES' | translate }}
+      </h2>
+
+      <button class="link-btn" (click)="goToTables()">
+        {{ 'WAITER.HOME.FULL_FLOOR' | translate }}
+      </button>
     </div>
+
     <app-tables-grid [tables]="displayedTables"></app-tables-grid>
   </section>
 
   <!-- ── Active Orders ─────────────────────────────────── -->
   <section class="section">
-    <h2 class="section-title">Active Orders</h2>
+    <h2 class="section-title">
+      {{ 'WAITER.HOME.ACTIVE_ORDERS' | translate }}
+    </h2>
+
     <app-active-orders [orders]="activeOrders"></app-active-orders>
   </section>
 
