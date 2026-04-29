@@ -160,6 +160,8 @@ export class CashierOrdersPage implements OnInit {
   }
 
   onAssignClicked(orderId: number) {
-    this.router.navigate(['/cashier/assign-deliveries', orderId]);
+    this.router.navigate(['/cashier/assign-deliveries'], {
+      queryParams: { orderId }
+    });
   }
 }
