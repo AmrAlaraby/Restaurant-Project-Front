@@ -6,6 +6,7 @@ import { GetBranch } from '../../../../../Core/Models/BranchModels/get-branch';
 import { BranchService } from '../../../../../Core/Services/Branch-Service/branch-service';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 
 
 @Component({
@@ -17,6 +18,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 })
 export class BranchDetailsComponent implements OnInit, OnChanges {
   private branchService = inject(BranchService);
+   private toast         = inject(ToastService);
 
   @Input({ required: true }) branchId!: number;
   @Output() closed = new EventEmitter<void>();
@@ -57,6 +59,7 @@ export class BranchDetailsComponent implements OnInit, OnChanges {
       },
       error: () => {
         this.error.set('Failed to load branch details. Please try again.');
+         this.toast.error('Failed to load branch details. Please try again.');
         this.isLoading.set(false);
       },
     });
@@ -78,8 +81,14 @@ export class BranchDetailsComponent implements OnInit, OnChanges {
     const b = this.branch();
     if (!b) return;
     this.branchService.toggleStatus(b.id).subscribe({
-      next: () => this.loadBranch(),
-      error: () => this.error.set('Failed to toggle branch status.'),
+      next: () => {
+        this.toast.success('Branch status updated!'); 
+        this.loadBranch();
+      },
+     error: () => {
+        this.error.set('Failed to toggle branch status.'); 
+        this.toast.error('Failed to toggle branch status.'); 
+      },
     });
   }
 

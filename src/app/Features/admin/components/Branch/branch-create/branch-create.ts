@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BranchService } from '../../../../../Core/Services/Branch-Service/branch-service';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 
 @Component({
   selector: 'app-branch-create',
@@ -14,6 +15,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class BranchCreateComponent {
   private branchService = inject(BranchService);
   private fb = inject(FormBuilder);
+   private toast         = inject(ToastService);
 
   @Output() closed = new EventEmitter<void>();
   @Output() created = new EventEmitter<void>();
@@ -43,11 +45,13 @@ export class BranchCreateComponent {
     this.branchService.create(this.form.value).subscribe({
       next: () => {
         this.isSaving.set(false);
+         this.toast.success('Branch created successfully!');
         this.created.emit();
         this.closed.emit();
       },
       error: () => {
         this.saveError.set('Failed to create branch. Please try again.');
+        this.toast.error('Failed to create branch. Please try again.'); 
         this.isSaving.set(false);
       },
     });

@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BranchService } from '../../../../../Core/Services/Branch-Service/branch-service';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 
 @Component({
   selector: 'app-branch-edit',
@@ -24,6 +25,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class BranchEditComponent implements OnInit, OnChanges {
   private branchService = inject(BranchService);
   private fb = inject(FormBuilder);
+  private toast         = inject(ToastService);
 
   @Input({ required: true }) branchId!: number;
   @Output() closed = new EventEmitter<void>();
@@ -67,6 +69,7 @@ export class BranchEditComponent implements OnInit, OnChanges {
       },
       error: () => {
         this.error.set('Failed to load branch data. Please try again.');
+         this.toast.error('Failed to load branch data. Please try again.');
         this.isLoading.set(false);
       },
     });
@@ -85,10 +88,12 @@ export class BranchEditComponent implements OnInit, OnChanges {
       next: () => {
         this.isSaving.set(false);
         this.saved.emit(); // ← بس saved، من غير closed
+         this.toast.success('Branch updated successfully!');
       },
       error: () => {
         this.saveError.set('Failed to save changes. Please try again.');
         this.isSaving.set(false);
+         this.toast.error('Failed to save changes. Please try again.');
       },
     });
   }

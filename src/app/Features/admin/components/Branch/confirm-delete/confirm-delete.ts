@@ -9,6 +9,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { BranchService } from '../../../../../Core/Services/Branch-Service/branch-service';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 
 @Component({
   selector: 'app-confirm-delete',
@@ -19,6 +20,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 })
 export class ConfirmDeleteComponent {
   private branchService = inject(BranchService);
+  private toast         = inject(ToastService);
 
   @Input({ required: true }) branchId!: number;
   @Input({ required: true }) branchName!: string;
@@ -37,10 +39,12 @@ export class ConfirmDeleteComponent {
       next: () => {
         this.isDeleting.set(false);
         this.deleted.emit();
+        this.toast.success('Branch deleted successfully!');
       },
       error: () => {
         this.deleteError.set('Failed to delete branch. Please try again.');
         this.isDeleting.set(false);
+        this.toast.error('Failed to delete branch. Please try again.');
       },
     });
   }

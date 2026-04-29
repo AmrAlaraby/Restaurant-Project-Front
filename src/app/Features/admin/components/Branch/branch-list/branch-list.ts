@@ -6,6 +6,7 @@ import { BranchQueryParams } from '../../../../../Core/Models/BranchModels/branc
 import { GetBranch } from '../../../../../Core/Models/BranchModels/get-branch';
 import { BranchService } from '../../../../../Core/Services/Branch-Service/branch-service';
 import { Pagination } from '../../../../../Shared/Components/pagination/pagination';
+import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 
 @Component({
   selector: 'app-branch-list',
@@ -16,7 +17,7 @@ import { Pagination } from '../../../../../Shared/Components/pagination/paginati
 })
 export class BranchListComponent implements OnInit, OnChanges {
   private branchService = inject(BranchService);
-
+ private toast         = inject(ToastService);
   @Input() selectedBranchId: number | null = null;
   @Input() refreshTrigger: number = 0;
   @Output() branchSelected = new EventEmitter<number>();
