@@ -5,6 +5,7 @@ import { BranchStockInterface } from '../../../../../Core/Models/BranchStockMode
 import { TranslatePipe } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
 import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
+import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 
 @Component({
   selector: 'app-chef-low-stock',
@@ -21,6 +22,7 @@ export class ChefLowStockComponent {
 
   constructor(
           private localizationService: LocalizationService,
+          private toast: ToastService
         ) {}
       ngOnInit(): void {
         this.getCurrentLanguage();
@@ -48,6 +50,7 @@ export class ChefLowStockComponent {
 
   requestRestock(): void {
     this.requestSent = true;
+    this.toast.success('Restock request sent!');
     setTimeout(() => (this.requestSent = false), 3000);
   }
   getIngredientName(item: any): string {
