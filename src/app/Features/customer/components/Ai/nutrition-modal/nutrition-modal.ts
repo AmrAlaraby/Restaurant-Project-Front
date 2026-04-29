@@ -35,6 +35,10 @@ export class NutritionModal implements  OnDestroy {
 
   @Input() basketId: string = '';
   @Input() hasItems: boolean = false;
+  @Input() items: any[] = [];
+
+  private lastHash: string = '';
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
@@ -57,6 +61,14 @@ export class NutritionModal implements  OnDestroy {
     }
 
     this.isVisible = true;
+
+    const currentHash = this.generateHash(this.items || []);
+
+    // 🔥 لو الباسكت اتغيرت
+    if (currentHash !== this.lastHash) {
+      this.result = null;
+      this.lastHash = currentHash;
+    }
     this.errorMsg = '';
 
     if (!this.result) {
@@ -85,7 +97,16 @@ export class NutritionModal implements  OnDestroy {
     this.fetchNutrition();
   }
 
-  // ── Core Logic (UNCHANGED ✔️) ──────────────────────────────────────────────
+  private generateHash(items: any[]): string {
+    return JSON.stringify(
+      items.map(i => ({
+        id: i.id,
+        qty: i.quantity
+      }))
+    );
+  }
+
+  // ── Core Logic (UNCHANGED ) ──────────────────────────────────────────────
 
   private fetchNutrition(): void {
     if (!this.basketId) {

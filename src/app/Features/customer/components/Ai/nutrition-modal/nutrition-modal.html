@@ -62,30 +62,30 @@
                     <div class="macros-row">
                         <div class="macro-chip calories">
                             <span class="macro-value">{{ item.totals.calories | number:'1.0-0' }}</span>
-                            <span class="macro-label">kcal</span>
+                            <span class="macro-label"> kcal</span>
                         </div>
 
                         <div class="macro-chip protein">
                             <span class="macro-value">{{ item.totals.protein | number:'1.1-1' }}g</span>
-                            <span class="macro-label">protein</span>
+                            <span class="macro-label"> protein</span>
                         </div>
 
                         <div class="macro-chip carbs">
                             <span class="macro-value">{{ item.totals.carbs | number:'1.1-1' }}g</span>
-                            <span class="macro-label">carbs</span>
+                            <span class="macro-label"> carbs</span>
                         </div>
                     </div>
 
                     <p class="per-unit-note">
-                        Per unit: {{ item.perItem.calories | number:'1.0-0' }} kcal ·
+                        <strong>Per unit:</strong> {{ item.perItem.calories | number:'1.0-0' }} kcal ·
                         {{ item.perItem.protein | number:'1.1-1' }}g protein ·
                         {{ item.perItem.carbs | number:'1.1-1' }}g carbs
                     </p>
 
                     <div class="progress-section">
                         <div class="progress-label">
-                            <span>% of daily calories</span>
-                            <span>{{ calorieProgress(item) | number:'1.0-0' }}%</span>
+                            <span>% of daily calories </span>
+                            <span><strong>{{ calorieProgress(item) | number:'1.0-0' }}</strong> %</span>
                         </div>
 
                         <div class="progress-track">
@@ -98,7 +98,7 @@
                 }
             </div>
 
-            <!-- Order Totals (FIXED 🔥) -->
+            <!-- Order Totals (FIXED ) -->
             <div class="totals-section">
                 <h3 class="section-title">Order Total</h3>
 
