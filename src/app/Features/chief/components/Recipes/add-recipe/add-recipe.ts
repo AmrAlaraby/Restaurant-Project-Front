@@ -12,6 +12,7 @@ import { RecipesService } from '../../../../../Core/Services/Recipe-Service/reci
 import { TranslatePipe } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
 import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
+import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 
 @Component({
   selector: 'app-add-recipe',
@@ -24,6 +25,7 @@ export class AddRecipeComponent implements OnInit {
   private readonly menuItemsService   = inject(MenuItemsService);
   private readonly ingredientsService = inject(IngredientsService);
   private readonly recipesService     = inject(RecipesService);
+   private readonly toast             = inject(ToastService);
 
   // ── Outputs ──────────────────────────────────────────────────
   saved     = output<void>();   // نجح الـ submit → الـ parent يعمل reload
@@ -50,10 +52,12 @@ export class AddRecipeComponent implements OnInit {
   ngOnInit(): void {
     this.menuItemsService.getAll({ pageSize: 100 }).subscribe({
       next: (res) => this.menuItems.set(res.data),
+       error: () => this.toast.error('Failed to load menu items'),
     });
 
     this.ingredientsService.getAll(1, 100).subscribe({
       next: (res) => this.ingredients.set(res.data),
+       error: () => this.toast.error('Failed to load ingredients'),
     });
      this.getCurrentLanguage();
   }
@@ -81,6 +85,7 @@ export class AddRecipeComponent implements OnInit {
     }
 
     this.isSubmitting.set(true);
+     this.toast.success('Recipe added successfully!');
     this.error.set(null);
 
     this.recipesService.addRecipe(this.form).subscribe({
@@ -89,7 +94,9 @@ export class AddRecipeComponent implements OnInit {
         this.saved.emit();
       },
       error: (err) => {
-        this.error.set(err?.error ?? 'Something went wrong.');
+        const msg = err?.error ?? 'Something went wrong.';
+        this.error.set(msg);
+        this.toast.error(msg);
         this.isSubmitting.set(false);
       },
     });

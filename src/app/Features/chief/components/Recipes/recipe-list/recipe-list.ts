@@ -9,6 +9,7 @@ import { Pagination } from '../../../../../Shared/Components/pagination/paginati
 import { TranslatePipe } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
 import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
+import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 
 @Component({
   selector: 'app-recipes',
@@ -20,7 +21,7 @@ import { LocalizationService } from '../../../../../Core/Services/Localization-S
 export class RecipeListComponent implements OnInit, OnDestroy {
   private readonly recipesService = inject(RecipesService);
   private readonly menuItemsService = inject(MenuItemsService);
-
+private readonly toast            = inject(ToastService);
   editRequested = output<RecipesListDTO>();
 
   recipes = signal<RecipesListDTO[]>([]);
@@ -93,7 +94,9 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   loadMenuItems(): void {
     this.menuItemsService
       .getAll({ pageSize: 100 })
-      .subscribe({ next: (res) => this.menuItems.set(res.data) });
+      .subscribe({ next: (res) => this.menuItems.set(res.data) ,
+       error: () => this.toast.error('Failed to load menu items'),
+      });
   }
 
   loadRecipes(): void {
@@ -114,7 +117,8 @@ export class RecipeListComponent implements OnInit, OnDestroy {
           this.isLoading.set(false);
         },
         error: () => {
-          this.error.set('CHEF.RECIPES.LIST.ERROR');
+         this.error.set('CHEF.RECIPES.LIST.ERROR'); 
+        this.toast.error('Failed to load recipes'); 
           this.isLoading.set(false);
         },
       });
@@ -143,9 +147,11 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.recipesService.deleteRecipe(id).subscribe({
       next: () => {
         this.deletingId.set(null);
+        this.toast.success('Recipe deleted successfully!');
         this.loadRecipes();
       },
       error: () => {
+         this.toast.error('Failed to delete recipe');
         this.deletingId.set(null);
       },
     });
