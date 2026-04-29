@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 import { Subject, takeUntil } from 'rxjs';
+import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 
 @Component({
   selector: 'app-kitchen-filter',
@@ -43,14 +44,17 @@ statusOptions = [
 
   private debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
-  constructor(private localizationService: LocalizationService,private kitchenService: KitchenService) {}
+  constructor(private localizationService: LocalizationService,private kitchenService: KitchenService,private toast: ToastService) {}
   CurrentLanguage: string = 'en';
   ngOnInit(): void {
     this.kitchenService.getBranches().subscribe({
       next: (data: BranchDto[]) => {
         this.branches = data;
       },
-      error: (err) => console.error('Failed to load branches', err),
+      error: (err) => {
+        console.error('Failed to load branches', err);
+        this.toast.error('Failed to load branches');
+      }
     });
     this.getCurrentLanguage();
     // تحميل كل الـ stations عند البداية
@@ -79,7 +83,10 @@ private destroy$ = new Subject<void>();
         this.stations = data;
         this.stationsLoaded.emit(data);
       },
-      error: (err) => console.error('Failed to load stations', err),
+      error: (err) => {
+        console.error('Failed to load stations', err);
+        this.toast.error('Failed to load stations');
+      }
     });
   }
 
