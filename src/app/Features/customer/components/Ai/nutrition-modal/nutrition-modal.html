@@ -140,7 +140,7 @@
                             <span class="dv-label">Calories</span>
                             <div class="progress-track">
                                 <div class="progress-fill calories-fill"
-                                    [style.width.%]="Math.min((r.orderTotals.calories / 2000) * 100, 100)">
+                                    [style.width.%]="getCaloriesDV(r)">
                                 </div>
                             </div>
                             <span class="dv-pct">
@@ -152,7 +152,7 @@
                             <span class="dv-label">Protein</span>
                             <div class="progress-track">
                                 <div class="progress-fill protein-fill"
-                                    [style.width.%]="Math.min((r.orderTotals.protein / 50) * 100, 100)">
+                                    [style.width.%]="getProteinDV(r)">
                                 </div>
                             </div>
                             <span class="dv-pct">
@@ -164,7 +164,7 @@
                             <span class="dv-label">Carbs</span>
                             <div class="progress-track">
                                 <div class="progress-fill carbs-fill"
-                                    [style.width.%]="Math.min((r.orderTotals.carbs / 300) * 100, 100)">
+                                    [style.width.%]="getCarbsDV(r)">
                                 </div>
                             </div>
                             <span class="dv-pct">
