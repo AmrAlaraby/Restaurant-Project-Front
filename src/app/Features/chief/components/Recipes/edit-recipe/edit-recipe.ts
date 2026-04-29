@@ -6,6 +6,7 @@ import { RecipesService } from '../../../../../Core/Services/Recipe-Service/reci
 import { TranslatePipe } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
 import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
+import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 
 
 
@@ -18,6 +19,7 @@ import { LocalizationService } from '../../../../../Core/Services/Localization-S
 })
 export class EditRecipeComponent implements OnInit {
   private readonly recipesService = inject(RecipesService);
+    private readonly toast          = inject(ToastService);
 
   // ── Inputs / Outputs ─────────────────────────────────────────
   recipe    = input.required<RecipesListDTO>();
@@ -68,10 +70,13 @@ export class EditRecipeComponent implements OnInit {
       .subscribe({
         next: () => {
           this.isSubmitting.set(false);
+          this.toast.success('Recipe updated successfully!');
           this.saved.emit();
         },
         error: (err) => {
-          this.error.set(err?.error ?? 'Something went wrong.');
+         const msg = err?.error ?? 'Something went wrong.';
+          this.error.set(msg);
+          this.toast.error(msg);
           this.isSubmitting.set(false);
         },
       });
