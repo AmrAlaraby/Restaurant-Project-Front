@@ -19,6 +19,7 @@ import { ChefKitchenFilterComponent } from '../chef-kitchen-filter/chef-kitchen-
 import { OrderDetailsInterface } from '../../../../../Core/Models/OrderModels/order-details-interface';
 import { KitchenTicketStatusDto } from '../../../../../Core/Models/KitchenModels/kitchen-ticket-status-dto';
 import { SignalRService } from '../../../../../Core/Services/SignalR-Service/SignalrService';
+import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 
 @Component({
   selector: 'app-chef-kitchen-board',
@@ -43,7 +44,7 @@ export class ChefKitchenBoardComponent implements OnInit, OnDestroy {
 
   loading = false;
   stationsLoading = false;
-  error: string | null = null;
+ 
 
   currentParams: KitchenTicketQueryParams = {
     branchId: null,
@@ -57,7 +58,8 @@ export class ChefKitchenBoardComponent implements OnInit, OnDestroy {
   constructor(
     private kitchenService: KitchenService,
     private authService: AuthService,
-    private SignalRService :SignalRService
+    private SignalRService :SignalRService,
+    private toast: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -66,15 +68,16 @@ export class ChefKitchenBoardComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (user) => {
 
-          // 👑 ROLE CHECK
+         
           if (user.role !== 'Chef') {
-            this.error = 'Access denied. Chief only.';
+            this.toast.error('Access denied. Chef only.');
+              
             return;
           }
 
           this.currentUser = user;
 
-          // 🟡 NO BRANCH → EMPTY STATE
+          //  NO BRANCH → EMPTY STATE
           if (!user.branchId) {
             this.board = { pending: [], preparing: [], done: [] };
             this.stations = [];
@@ -87,7 +90,7 @@ export class ChefKitchenBoardComponent implements OnInit, OnDestroy {
           this.loadStations(user.branchId);
         },
         error: () => {
-          this.error = 'Failed to load user data.';
+         this.toast.error('Failed to load user data.');
         },
       });
 
@@ -104,7 +107,7 @@ export class ChefKitchenBoardComponent implements OnInit, OnDestroy {
   // =====================
   loadBoard(params: KitchenTicketQueryParams): void {
     this.loading = true;
-    this.error = null;
+    
 
     this.kitchenService.getBoard(params)
       .pipe(takeUntil(this.destroy$))
@@ -114,7 +117,7 @@ export class ChefKitchenBoardComponent implements OnInit, OnDestroy {
           this.loading = false;
         },
         error: () => {
-          this.error = 'Failed to load tickets.';
+          this.toast.error('Failed to load tickets.');
           this.loading = false;
         },
       });
@@ -134,6 +137,7 @@ export class ChefKitchenBoardComponent implements OnInit, OnDestroy {
           this.stationsLoading = false;
         },
         error: () => {
+           this.toast.error('Failed to load stations.');
           this.stationsLoading = false;
         },
       });
@@ -299,7 +303,7 @@ export class ChefKitchenBoardComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data) => this.selectedTicket = data,
-        error: () => this.error = 'Failed to load ticket details.',
+        error: () =>  this.toast.error('Failed to load ticket details.'),
       });
   }
 
@@ -321,7 +325,7 @@ export class ChefKitchenBoardComponent implements OnInit, OnDestroy {
           }
         },
         error: () => {
-          this.error = 'Failed to update ticket status.';
+          this.toast.error('Failed to update ticket status.');
         },
       });
   }
