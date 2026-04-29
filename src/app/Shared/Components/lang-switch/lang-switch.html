@@ -1,10 +1,7 @@
 <div class="lang-switch" (click)="toggleLang()">
-  <div class="switch-track" [class.ar]="currentLang === 'ar'">
-    
-    <div class="switch-thumb"></div>
-
-    <span class="label en">EN</span>
-    <span class="label ar">AR</span>
-
+  <div class="pill" [attr.data-lang]="currentLang">
+    <div class="slider" #slider></div>
+    <div class="seg" [class.active]="currentLang === 'en'" #enSeg>EN</div>
+    <div class="seg" [class.active]="currentLang === 'ar'" #arSeg>AR</div>
   </div>
 </div>
