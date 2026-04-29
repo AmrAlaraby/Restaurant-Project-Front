@@ -13,6 +13,7 @@ import { IngredientsService } from '../../../../../Core/Services/Ingredients-Ser
 import { UpdateMenuItemInterface } from '../../../../../Core/Models/MenuItemModels/update-menu-item-interface';
 import { CreateMenuItemInterface } from '../../../../../Core/Models/MenuItemModels/create-menu-item-interface';
 import { ImageUpload } from '../image-upload/image-upload';
+import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 @Component({
   selector: 'app-menu-item-form',
   standalone: true,
@@ -44,6 +45,7 @@ export class MenuItemForm implements OnInit, OnChanges {
     private menuItemsService: MenuItemsService,
     private categoriesService: CategoryService,
     private ingredientService: IngredientsService,
+    private toast: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -74,6 +76,7 @@ export class MenuItemForm implements OnInit, OnChanges {
       next: (categories) => {
         this.categories = categories;
       },
+       error: () => this.toast.error('Failed to load categories')
     });
   }
 
@@ -82,6 +85,7 @@ export class MenuItemForm implements OnInit, OnChanges {
       next: (response) => {
         this.ingredients = response.data;
       },
+      error: () => this.toast.error('Failed to load ingredients')
     });
   }
 
@@ -114,6 +118,7 @@ export class MenuItemForm implements OnInit, OnChanges {
         });
       },
       error: () => {
+        this.toast.error('Failed to load menu item');
         this.loading = false;
       },
     });
@@ -126,7 +131,7 @@ export class MenuItemForm implements OnInit, OnChanges {
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      
+      this.toast.error('Please fill in all required fields correctly.');
       return;
       
     }
@@ -144,11 +149,13 @@ export class MenuItemForm implements OnInit, OnChanges {
       this.menuItemsService.update(this.menuItemId, updateDto).subscribe({
         next: () => {
           this.loading = false;
+           this.toast.success('Menu item updated successfully!');
           this.formSubmitted.emit();
         },
         error: (error) => {
           console.error(error);
           this.loading = false;
+          this.toast.error('Failed to update menu item');
         },
       });
 
@@ -156,7 +163,7 @@ export class MenuItemForm implements OnInit, OnChanges {
     }
 
     if (!this.selectedImageFile) {
-      alert('Image is required.');
+       this.toast.error('Image is required.');
       this.loading = false;
       return;
     }
@@ -169,11 +176,13 @@ export class MenuItemForm implements OnInit, OnChanges {
     this.menuItemsService.create(createDto).subscribe({
       next: () => {
         this.loading = false;
+        this.toast.success('Menu item created successfully!');
         this.formSubmitted.emit();
       },
       error: (error) => {
         console.error(error);
         this.loading = false;
+        this.toast.error('Failed to create menu item');
       },
     });
   }
