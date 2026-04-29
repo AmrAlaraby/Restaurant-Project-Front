@@ -801,7 +801,34 @@
           "CONFIRM_SERVED": "✓ Confirm Served"
         }
       }
-  }
+  },
+  "TABLE": {
+      "EMPTY": "No Tables Found",
+      "TABLESEARCH": {
+        "PLACEHOLDER": "Search by table number...",
+        "FILTERS": {
+          "ALL": "All status",
+          "OCCUPIED": "Occupied",
+          "AVAILABLE": "Available"
+        },
+        "BUTTONS": {
+          "RESET": "Reset"
+        }
+      },
+      "TABLELIST": {
+        "TITLE": "Table {{number}}",
+        "CAPACITY": "Capacity: {{capacity}}",
+        "STATUS": {
+          "LABEL": "Status",
+          "OCCUPIED": "Occupied",
+          "AVAILABLE": "Available"
+        },
+        "BUTTONS": {
+          "FREE": "Free",
+          "OCCUPY": "Occupy"
+        }
+      }
+    }
 }
 }
 

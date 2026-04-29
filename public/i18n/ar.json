@@ -799,6 +799,33 @@
         }
       }
 
+    },
+    "TABLE": {
+      "EMPTY": "لا توجد طاولات",
+      "TABLESEARCH": {
+        "PLACEHOLDER": "ابحث برقم الطاولة...",
+        "FILTERS": {
+          "ALL": "كل الحالات",
+          "OCCUPIED": "مشغولة",
+          "AVAILABLE": "متاحة"
+        },
+        "BUTTONS": {
+          "RESET": "إعادة تعيين"
+        }
+      },
+      "TABLELIST": {
+        "TITLE": "طاولة {{number}}",
+        "CAPACITY": "السعة: {{capacity}}",
+        "STATUS": {
+          "LABEL": "الحالة",
+          "OCCUPIED": "مشغولة",
+          "AVAILABLE": "متاحة"
+        },
+        "BUTTONS": {
+          "FREE": "تفريغ",
+          "OCCUPY": "إشغال"
+        }
+      }
     }
   }
 }
