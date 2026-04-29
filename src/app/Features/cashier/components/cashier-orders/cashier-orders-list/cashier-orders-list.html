@@ -13,55 +13,61 @@
 
   @for (order of orders; track order.id) {
 
-    <div
-      class="table-row"
-      (click)="onOrderClick(order.id)">
+  <div class="table-row" (click)="onOrderClick(order.id)">
 
-      <div>#{{ order.id }}</div>
+    <div>#{{ order.id }}</div>
 
-      <div>{{ order.orderType }}</div>
+    <div>{{ order.orderType }}</div>
 
-      <div>{{ order.userName }}</div>
+    <div>{{ order.userName }}</div>
 
-      <div>{{ order.itemsCount }}</div>
+    <div>{{ order.itemsCount }}</div>
 
-      <div>
-        <span class="status" [class]="order.status">
-          {{ order.status }}
-        </span>
-      </div>
+    <!-- STATUS -->
+    <div>
+      <span class="badge status" [ngClass]="order.status">
+        {{ formatStatus(order.status) }}
+      </span>
+    </div>
 
-      <div>{{ order.paymentStatus }}</div>
+    <!-- PAYMENT -->
+    <div>
+      <span class="badge payment" [ngClass]="order.paymentStatus">
+        {{ formatStatus(order.paymentStatus) }}
+      </span>
+    </div>
 
-      <div>{{ order.paymentMethod || '-' }}</div>
+    <!-- METHOD -->
+    <div>
+      <span class="badge method">
+        {{ order.paymentMethod || '-' }}
+      </span>
+    </div>
 
-      <div class="actions">
+    <!-- ACTIONS -->
+    <div class="actions">
 
-        @if (isPending(order.paymentStatus )&& order.status !== 'Cancelled' && order.status !== 'Delivered') {
-          <button
-            class="pay-btn"
-            (click)="onPay(order.id, $event)">
-            Pay
-          </button>
-        }
+      @if (isPending(order.paymentStatus ) && order.status !== 'Cancelled' && order.status !== 'Delivered') {
+      <button class="pay-btn" (click)="onPay(order.id, $event)">
+        Pay
+      </button>
+      }
 
-        @if (isDelivery(order.orderType) && order.deliveryStatus == "UnAssigned" && order.status !== 'Delivered') {
-          <button
-            class="assign-btn"
-            (click)="onAssign(order.id, $event)">
-            Assign
-          </button>
-        }
+      @if (isDelivery(order.orderType) && order.deliveryStatus == "UnAssigned" && order.status !== 'Delivered') {
+      <button class="assign-btn" (click)="onAssign(order.id, $event)">
+        Assign
+      </button>
+      }
 
-        <button
-          class="receipt-btn"
-          (click)="onOrderClick(order.id)">
-          Receipt
-        </button>
-
-      </div>
+      <!-- <button
+               class="receipt-btn"
+              (click)="onOrderClick(order.id)">
+              Receipt
+          </button> -->
 
     </div>
+
+  </div>
 
   }
 

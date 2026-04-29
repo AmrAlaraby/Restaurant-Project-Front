@@ -24,11 +24,84 @@
 .table-row {
     border-top: 1px solid #eee;
     cursor: pointer;
+    transition: 0.2s;
 }
 
 .table-row:hover {
     background: #fafafa;
 }
+
+/* BADGES */
+
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+/* STATUS */
+
+.status.Received {
+    background: #fdeaea;
+    color: #e53935;
+}
+
+.status.Preparing {
+    background: #fff4e5;
+    color: #ff9800;
+}
+
+.status.Ready {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status.Delivered {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.status.Cancelled {
+    background: #eeeeee;
+    color: #616161;
+}
+
+/* PAYMENT */
+.status.AwaitingPayment {
+    background: #ede7f6;
+    color: #5e35b1;
+}
+.payment.Pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.payment.Paid {
+    background: #d4edda;
+    color: #155724;
+}
+
+.payment.Failed {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.payment.Refunded {
+    background: #e2e3e5;
+    color: #383d41;
+}
+
+/* METHOD */
+
+.method {
+    background: #f1f3f5;
+    color: #495057;
+}
+
+/* ACTIONS */
 
 .actions {
     display: flex;
@@ -41,6 +114,7 @@
     border: none;
     padding: 4px 10px;
     border-radius: 6px;
+    cursor: pointer;
 }
 
 .assign-btn {
@@ -49,11 +123,5 @@
     border: none;
     padding: 4px 10px;
     border-radius: 6px;
-}
-
-.receipt-btn {
-    background: transparent;
-    border: 1px solid #ccc;
-    padding: 4px 10px;
-    border-radius: 6px;
+    cursor: pointer;
 }
