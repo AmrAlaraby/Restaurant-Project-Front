@@ -4,6 +4,8 @@ export interface BranchStockInterface {
   branchName?: string;
   ingredientId: number;
   ingredientName?: string;
+  ingredientArabicName?: string;
+  unit?: string;
   quantityAvailable: number;
   lowThreshold: number;
 }

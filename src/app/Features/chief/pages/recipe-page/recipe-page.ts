@@ -3,13 +3,14 @@ import { RecipesListDTO } from '../../../../Core/Models/RecipeModels/recipes-lis
 import { AddRecipeComponent } from '../../components/Recipes/add-recipe/add-recipe';
 import { EditRecipeComponent } from '../../components/Recipes/edit-recipe/edit-recipe';
 import { RecipeListComponent } from '../../components/Recipes/recipe-list/recipe-list';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 
 @Component({
   selector: 'app-recipe-list',
   standalone: true,
-  imports: [RecipeListComponent, AddRecipeComponent, EditRecipeComponent],
+  imports: [RecipeListComponent, AddRecipeComponent, EditRecipeComponent, TranslatePipe],
   templateUrl: './recipe-page.html',
   styleUrls: ['./recipe-page.scss'],
 })

@@ -20,6 +20,7 @@ import { OrderDetailsInterface } from '../../../../../Core/Models/OrderModels/or
 import { KitchenTicketStatusDto } from '../../../../../Core/Models/KitchenModels/kitchen-ticket-status-dto';
 import { SignalRService } from '../../../../../Core/Services/SignalR-Service/SignalrService';
 import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-chef-kitchen-board',
@@ -30,6 +31,7 @@ import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-s
     TicketCardComponent,
     TicketDetailsModalComponent,
     ActiveStationsBarComponent,
+    TranslatePipe
   ],
   templateUrl: './chef-kitchen-board.html',
   styleUrls: ['./chef-kitchen-board.scss'],

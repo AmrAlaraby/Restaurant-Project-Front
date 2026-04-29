@@ -586,17 +586,6 @@
   },
 
   "DRIVER": {
-    "STATUS": {
-      "Assigned": "Assigned",
-      "PickedUp": "Picked Up",
-      "OnTheWay": "On the Way",
-      "Delivered": "Delivered",
-
-      "ASSIGNED": "Assigned",
-      "PICKED_UP": "Picked Up",
-      "ON_THE_WAY": "On the Way",
-      "DELIVERED": "Delivered"
-    },
     "DELIVERY_DETAILS": {
       "LOADING": "Loading...",
       "ORDER": "Order",
@@ -676,7 +665,114 @@
       "SAVE": "Save Changes",
       "LOGOUT": "Logout"
     }
+  },
+
+  "CHEF": {
+    "KITCHEN": {
+      "FILTERS": {
+       "TITLE": "Filters",
+       "ORDER_ID": "Order ID",
+       "ORDER_PLACEHOLDER": "e.g. 101",
+       "STATION": "Station",
+       "ALL_STATIONS": "All Stations",
+       "STATUS": "Status",
+       "RESET": "Reset",
+       "PENDING": "pending"
+     },
+     "STATUS": {
+       "ALL": "All",
+       "PENDING": "Pending",
+       "PREPARING": "Preparing",
+       "DONE": "Done"
+     },
+    "STATS": {
+      "PENDING": "Pending Tickets",
+      "PREPARING": "Preparing Now",
+      "DONE": "Done Today"
+    },
+    "COLUMNS": {
+      "PENDING": "Pending",
+      "PREPARING": "Preparing",
+      "DONE": "Done"
+    },
+    "EMPTY": {
+      "PENDING": "No pending tickets",
+      "PREPARING": "No tickets in progress",
+      "DONE": "No completed tickets"
+    },
+    "LOADING": "Loading kitchen board..."
+  },
+  "SIDEBAR": {
+    "KITCHEN": "Kitchen",
+    "KITCHEN_BOARD": "Kitchen Board",
+
+    "INVENTORY": "Inventory",
+    "CHECK_STOCK": "Check Stock",
+    "RECIPES": "Recipes",
+
+    "ACCOUNT": "Account",
+    "PROFILE": "My Profile"
+  },
+   "STOCK": {
+    "TITLE": "Check Stock",
+    "SUBTITLE": "Ingredient availability for your station",
+    "LOADING": "Loading stock...",
+    "SEARCH": "Search ingredient...",
+    "EMPTY": "No stock data found for your branch.",
+    "AVAILABLE": {
+      "TITLE": "Available Stock",
+      "REMAINING": " remaining"
+    },
+    "LOW": {
+      "TITLE": "Low — Request Restock",
+      "REMAINING": "kg remaining",
+      "THRESHOLD": "Threshold",
+      "REQUEST": "Request Restock from Manager",
+      "SENT": "✔ Request Sent!",
+      "ALL_GOOD": "All ingredients are well stocked!"
+    }
+  },
+  "RECIPES": {
+    "ADD": "Add Recipe",
+    "ADD_TITLE": "Add Recipe",
+    "MENU_ITEM": "Menu Item",
+    "INGREDIENT": "Ingredient",
+    "QUANTITY": "Quantity Required",
+    "SELECT_MENU_ITEM": "Select menu item...",
+    "SELECT_INGREDIENT": "Select ingredient...",
+    "QUANTITY_PLACEHOLDER": "e.g. 0.25",
+    "CANCEL": "Cancel",
+    "ADD_BTN": "Add Recipe",
+    "SAVING": "Saving...",
+    "EDIT": {
+      "TITLE": "Edit Quantity",
+      "MENU_ITEM": "Menu Item",
+      "INGREDIENT": "Ingredient",
+      "QUANTITY": "Quantity Required",
+      "BUTTON": "Save Changes"
+    },
+    "LIST": {
+      "TITLE": "Recipes",
+      "ALL_MENU_ITEMS": "All Menu Items",
+      "LOADING": "Loading recipes...",
+      "EMPTY": "No recipes found.",
+      "SINGLE": "ingredient",
+      "PLURAL": "ingredients",
+      "TABLE": {
+        "MENU_ITEM": "Menu Item",
+        "INGREDIENT": "Ingredient",
+        "QTY": "Qty Required",
+        "UNIT": "Unit"
+      }
+    }
   }
+},
+"COMMON": {
+  "CANCEL": "Cancel",
+  "SAVING": "Saving...",
+  "EDIT": "Edit",
+  "DELETE": "Delete"
+}
 }
 
 

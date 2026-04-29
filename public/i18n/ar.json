@@ -585,17 +585,6 @@
   },
 
   "DRIVER": {
-    "STATUS": {
-      "Assigned": "تم التعيين",
-      "PickedUp": "تم الاستلام",
-      "OnTheWay": "في الطريق",
-      "Delivered": "تم التوصيل",
-
-      "ASSIGNED": "تم التعيين",
-      "PICKED_UP": "تم الاستلام",
-      "ON_THE_WAY": "في الطريق",
-      "DELIVERED": "تم التوصيل"
-    },
     "DELIVERY_DETAILS": {
       "LOADING": "جاري التحميل...",
       "ORDER": "طلب",
@@ -677,6 +666,114 @@
       "LOGOUT": "تسجيل الخروج"
     }
 
+  },
+
+  "CHEF": {
+    "KITCHEN": {
+      "FILTERS": {
+        "TITLE": "الفلاتر",
+        "ORDER_ID": "رقم الطلب",
+        "ORDER_PLACEHOLDER": "مثال: 101",
+        "STATION": "المحطة",
+        "ALL_STATIONS": "كل المحطات",
+        "STATUS": "الحالة",
+        "RESET": "إعادة ضبط",
+        "PENDING": "قيد الانتظار"
+      },
+      "STATUS": {
+        "ALL": "الكل",
+        "PENDING": "قيد الانتظار",
+        "PREPARING": "قيد التحضير",
+        "DONE": "تم"
+      },
+    "STATS": {
+      "PENDING": "طلبات قيد الانتظار",
+      "PREPARING": "قيد التحضير",
+      "DONE": "تم الانتهاء اليوم"
+    },
+    "COLUMNS": {
+      "PENDING": "انتظار",
+      "PREPARING": "تحضير",
+      "DONE": "تم"
+    },
+    "EMPTY": {
+      "PENDING": "لا توجد طلبات قيد الانتظار",
+      "PREPARING": "لا توجد طلبات قيد التحضير",
+      "DONE": "لا توجد طلبات مكتملة"
+    },
+    "LOADING": "جاري تحميل لوحة المطبخ..."
+  },
+  "SIDEBAR": {
+    "KITCHEN": "المطبخ",
+    "KITCHEN_BOARD": "لوحة المطبخ",
+
+    "INVENTORY": "المخزون",
+    "CHECK_STOCK": "فحص المخزون",
+    "RECIPES": "الوصفات",
+
+    "ACCOUNT": "الحساب",
+    "PROFILE": "ملفي الشخصي"
+  },
+  "STOCK": {
+    "TITLE": "فحص المخزون",
+    "SUBTITLE": "توفر المكونات في محطتك",
+    "LOADING": "جاري تحميل المخزون...",
+    "SEARCH": "ابحث عن مكون...",
+    "EMPTY": "لا توجد بيانات مخزون لهذا الفرع.",
+    "AVAILABLE": {
+      "TITLE": "المخزون المتاح",
+      "REMAINING": " متبقي"
+    },
+    "LOW": {
+      "TITLE": "منخفض — طلب إعادة التزويد",
+      "REMAINING": "كجم متبقي",
+      "THRESHOLD": "الحد الأدنى",
+      "REQUEST": "طلب إعادة تزويد من المدير",
+      "SENT": "✔ تم إرسال الطلب!",
+      "ALL_GOOD": "كل المكونات متوفرة بشكل جيد!"
+    }
+  },
+  "RECIPES": {
+    "ADD": "إضافة وصفة",
+    "ADD_TITLE": "إضافة وصفة",
+    "MENU_ITEM": "عنصر القائمة",
+    "INGREDIENT": "المكون",
+    "QUANTITY": "الكمية المطلوبة",
+    "SELECT_MENU_ITEM": "اختر عنصر القائمة...",
+    "SELECT_INGREDIENT": "اختر المكون...",
+    "QUANTITY_PLACEHOLDER": "مثال: 0.25",
+    "CANCEL": "إلغاء",
+    "ADD_BTN": "إضافة وصفة",
+    "SAVING": "جارٍ الحفظ...",
+    "EDIT": {
+      "TITLE": "تعديل الكمية",
+      "MENU_ITEM": "عنصر القائمة",
+      "INGREDIENT": "المكون",
+      "QUANTITY": "الكمية المطلوبة",
+      "BUTTON": "حفظ التعديلات"
+    },
+    "LIST": {
+      "TITLE": "الوصفات",
+      "ALL_MENU_ITEMS": "كل عناصر القائمة",
+      "LOADING": "جاري تحميل الوصفات...",
+      "EMPTY": "لا توجد وصفات.",
+      "SINGLE": "مكون",
+      "PLURAL": "مكونات",
+      "TABLE": {
+        "MENU_ITEM": "عنصر القائمة",
+        "INGREDIENT": "المكون",
+        "QTY": "الكمية المطلوبة",
+        "UNIT": "الوحدة"
+      }
+    }
   }
+
+},
+"COMMON": {
+  "CANCEL": "إلغاء",
+  "SAVING": "جاري الحفظ...",
+  "EDIT": "تعديل",
+  "DELETE": "حذف"
+}
 }
 
