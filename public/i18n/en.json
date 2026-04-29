@@ -785,7 +785,22 @@
     "TITLE": "Kitchen Status",
     "SUBTITLE": "Orders ready to be served",
     "LOADING": "Loading orders...",
-    "EMPTY": "No orders ready to serve"
+    "EMPTY": "No orders ready to serve",
+    "KITCHENCARD": {
+        "ORDER": {
+          "TITLE": "Order #{{id}}"
+        },
+        "STATUS": {
+          "READY_SERVE": "READY — SERVE NOW!"
+        },
+        "ITEMS": {
+          "LABEL": "{{station}} items"
+        },
+        "BUTTONS": {
+          "CONFIRMING": "Confirming...",
+          "CONFIRM_SERVED": "✓ Confirm Served"
+        }
+      }
   }
 }
 }

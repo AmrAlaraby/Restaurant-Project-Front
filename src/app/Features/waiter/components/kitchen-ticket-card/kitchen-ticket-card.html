@@ -5,11 +5,16 @@
       <span class="card__ticket-ref">
         #T-{{ ticket.id.toString().padStart(3, '0') }} · {{ ticket.station }}
       </span>
-      <h3 class="card__order-title">Order #{{ ticket.orderId }}</h3>
+
+      <h3 class="card__order-title">
+        {{ 'WAITER.KITCHEN.KITCHENCARD.ORDER.TITLE' | translate:{ id: ticket.orderId } }}
+      </h3>
     </div>
 
     <div class="card__status-badge badge--ready">
-      <span class="badge__label">READY — SERVE NOW!</span>
+      <span class="badge__label">
+        {{ 'WAITER.KITCHEN.KITCHENCARD.STATUS.READY_SERVE' | translate }}
+      </span>
       <span class="badge__icon">🔔</span>
     </div>
   </div>
@@ -18,14 +23,20 @@
   <div class="card__items">
     <span class="item-chip">
       <span class="item-emoji">{{ stationEmoji }}</span>
-      <span class="item-label">{{ ticket.station }} items</span>
+      <span class="item-label">
+        {{ 'WAITER.KITCHEN.KITCHENCARD.ITEMS.LABEL' | translate:{ station: ticket.station } }}
+      </span>
     </span>
   </div>
 
   <!-- Action -->
   <div class="card__actions">
     <button class="btn btn--success" [disabled]="confirming" (click)="onConfirmServed()">
-      {{ confirming ? 'Confirming...' : '✓ Confirm Served' }}
+      {{
+        confirming
+          ? ('WAITER.KITCHEN.KITCHENCARD.BUTTONS.CONFIRMING' | translate)
+          : ('WAITER.KITCHEN.KITCHENCARD.BUTTONS.CONFIRM_SERVED' | translate)
+      }}
     </button>
   </div>
 </div>

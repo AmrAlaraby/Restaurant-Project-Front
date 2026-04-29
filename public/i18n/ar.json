@@ -782,7 +782,23 @@
       "SUBTITLE": "الطلبات الجاهزة للتقديم",
       "LOADING": "جاري تحميل الطلبات...",
       "EMPTY": "لا توجد طلبات جاهزة للتقديم",
-      "CONFIRM_SERVED": "تم التقديم"
+      "CONFIRM_SERVED": "تم التقديم",
+      "KITCHENCARD": {
+        "ORDER": {
+          "TITLE": "طلب رقم {{id}}"
+        },
+        "STATUS": {
+          "READY_SERVE": "جاهز — قدمه فورًا!"
+        },
+        "ITEMS": {
+          "LABEL": "عناصر {{station}}"
+        },
+        "BUTTONS": {
+          "CONFIRMING": "جاري التأكيد...",
+          "CONFIRM_SERVED": "✓ تأكيد التقديم"
+        }
+      }
+
     }
   }
 }
