@@ -9,11 +9,14 @@ import { MenuItemInterface } from '../../../../../Core/Models/MenuItemModels/men
 import { IngredientInterface } from '../../../../../Core/Models/MenuItemModels/ingredient-interface';
 import { MenuItemsService } from '../../../../../Core/Services/Menu-Item-Service/menu-item-service';
 import { RecipesService } from '../../../../../Core/Services/Recipe-Service/recipes-service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Subject, takeUntil } from 'rxjs';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
 @Component({
   selector: 'app-add-recipe',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslatePipe],
   templateUrl: './add-recipe.html',
   styleUrls: ['./add-recipe.scss'],
 })
@@ -41,6 +44,9 @@ export class AddRecipeComponent implements OnInit {
   error        = signal<string | null>(null);
 
   // ── Lifecycle ─────────────────────────────────────────────────
+  constructor(
+          private localizationService: LocalizationService,
+        ) {}
   ngOnInit(): void {
     this.menuItemsService.getAll({ pageSize: 100 }).subscribe({
       next: (res) => this.menuItems.set(res.data),
@@ -49,7 +55,23 @@ export class AddRecipeComponent implements OnInit {
     this.ingredientsService.getAll(1, 100).subscribe({
       next: (res) => this.ingredients.set(res.data),
     });
+     this.getCurrentLanguage();
   }
+
+  CurrentLanguage: string = 'en';
+      
+        private destroy$ = new Subject<void>();
+        getCurrentLanguage(): void {
+          this.CurrentLanguage = this.localizationService.getCurrentLang();
+          this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+            this.CurrentLanguage = lang;
+          });
+        }
+      
+        ngOnDestroy(): void {
+          this.destroy$.next();
+          this.destroy$.complete();
+        }
 
   // ── Actions ───────────────────────────────────────────────────
   submit(): void {
@@ -75,5 +97,19 @@ export class AddRecipeComponent implements OnInit {
 
   cancel(): void {
     this.cancelled.emit();
+  }
+
+  getIngredientName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.arabicName || item.name;
+    }
+    return item.name;
+  }
+
+  getItemName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.arabicName || item.name;
+    }
+    return item.name;
   }
 }

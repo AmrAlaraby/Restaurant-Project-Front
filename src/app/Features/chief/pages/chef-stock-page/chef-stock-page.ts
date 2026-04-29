@@ -7,13 +7,14 @@ import { BranchStockInterface } from '../../../../Core/Models/BranchStockModels/
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { BranchStockService } from '../../../../Core/Services/BranchStock-Service/branch-stock-service';
 import { SignalRService } from '../../../../Core/Services/SignalR-Service/SignalrService';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 
 @Component({
   selector: 'app-chef-stock-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, ChefLowStockComponent, ChefAvailableStockComponent],
+  imports: [CommonModule, FormsModule, ChefLowStockComponent, ChefAvailableStockComponent, TranslatePipe],
   templateUrl: './chef-stock-page.html',
   styleUrl: './chef-stock-page.scss'
 })

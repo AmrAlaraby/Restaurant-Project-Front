@@ -5,11 +5,12 @@ import { KitchenTicketQueryParams } from '../../../../../Core/Models/KitchenMode
 import { ActivePendingStationsDTO } from '../../../../../Core/Models/KitchenModels/active-pending-stations-dto';
 import { TicketStatus } from '../../../../../Core/Models/KitchenModels/ticket-status';
 import { KitchenService } from '../../../../../Core/Services/Kitchen-Service/kitchen-service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-chef-kitchen-filter',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,TranslatePipe],
   templateUrl: './chef-kitchen-filter.html',
   styleUrls: ['./chef-kitchen-filter.scss'],
 })
@@ -27,12 +28,12 @@ export class ChefKitchenFilterComponent implements OnChanges, OnDestroy {
     status: null,
   };
 
-  statusOptions = [
-    { label: 'All', value: null },
-    { label: 'Pending', value: TicketStatus.Pending },
-    { label: 'Preparing', value: TicketStatus.Preparing },
-    { label: 'Done', value: TicketStatus.Done },
-  ];
+statusOptions = [
+  { label: 'CHEF.KITCHEN.STATUS.ALL', value: null },
+  { label: 'CHEF.KITCHEN.STATUS.PENDING', value: TicketStatus.Pending },
+  { label: 'CHEF.KITCHEN.STATUS.PREPARING', value: TicketStatus.Preparing },
+  { label: 'CHEF.KITCHEN.STATUS.DONE', value: TicketStatus.Done },
+];
 
   // debounce timer عشان الـ orderId input متبعتش request على كل ضغطة
   private debounceTimer: ReturnType<typeof setTimeout> | null = null;

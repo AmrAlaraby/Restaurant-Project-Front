@@ -1,11 +1,17 @@
 <div class="recipes-page">
 
   <div class="recipes-header d-flex flex-wrap align-items-center justify-content-between gap-3">
-    <h1 class="recipes-title">Recipes</h1>
+    <h1 class="recipes-title">
+      {{ 'CHEF.RECIPES.LIST.TITLE' | translate }}
+    </h1>
+
     <select class="filter-select" (change)="onMenuItemSelected($any($event.target).value)">
-      <option value="">All Menu Items</option>
+      <option value="">
+        {{ 'CHEF.RECIPES.LIST.ALL_MENU_ITEMS' | translate }}
+      </option>
+
       @for (item of menuItems(); track item.id) {
-        <option [value]="item.id">{{ item.name }}</option>
+        <option [value]="item.id">{{ getItemName(item) }}</option>
       }
     </select>
   </div>
@@ -13,7 +19,9 @@
   @if (isLoading()) {
     <div class="state-box">
       <div class="spinner"></div>
-      <span>Loading recipes...</span>
+      <span>
+        {{ 'CHEF.RECIPES.LIST.LOADING' | translate }}
+      </span>
     </div>
   }
 
@@ -28,18 +36,21 @@
       <table class="recipes-table w-100">
         <thead>
           <tr>
-            <th>MENU ITEM</th>
-            <th>INGREDIENT</th>
-            <th>QTY REQUIRED</th>
-            <th>UNIT</th>
+            <th>{{ 'CHEF.RECIPES.LIST.TABLE.MENU_ITEM' | translate }}</th>
+            <th>{{ 'CHEF.RECIPES.LIST.TABLE.INGREDIENT' | translate }}</th>
+            <th>{{ 'CHEF.RECIPES.LIST.TABLE.QTY' | translate }}</th>
+            <th>{{ 'CHEF.RECIPES.LIST.TABLE.UNIT' | translate }}</th>
             <th></th>
           </tr>
         </thead>
+
         <tbody>
 
           @if (recipes().length === 0) {
             <tr>
-              <td colspan="5" class="empty-cell">No recipes found.</td>
+              <td colspan="5" class="empty-cell">
+                {{ 'CHEF.RECIPES.LIST.EMPTY' | translate }}
+              </td>
             </tr>
           }
 
@@ -48,47 +59,80 @@
             <tr class="group-header-row" (click)="toggleGroup(menuItem)">
               <td colspan="5" class="group-header-cell">
                 <div class="group-header-inner">
+
                   <div class="menu-item-wrap">
                     <span class="menu-icon">{{ getMenuItemIcon(menuItem) }}</span>
-                    <span class="menu-name">{{ menuItem }}</span>
+
+                    <!-- ✅ FIX هنا بس -->
+                    <span class="menu-name">{{ getMenuItemDisplayName(menuItem) }}</span>
+
                     <span class="ingredient-count">
                       {{ groupedRecipes().get(menuItem)!.length }}
-                      {{ groupedRecipes().get(menuItem)!.length === 1 ? 'ingredient' : 'ingredients' }}
+                      {{
+                        groupedRecipes().get(menuItem)!.length === 1
+                          ? ('CHEF.RECIPES.LIST.SINGLE' | translate)
+                          : ('CHEF.RECIPES.LIST.PLURAL' | translate)
+                      }}
                     </span>
                   </div>
+
                   <span class="chevron" [class.open]="isGroupOpen(menuItem)">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M3 5l4 4 4-4"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"/>
                     </svg>
                   </span>
+
                 </div>
               </td>
             </tr>
 
             @if (isGroupOpen(menuItem)) {
               @for (recipe of groupedRecipes().get(menuItem)!; track recipe.ingredientId) {
+
                 <tr class="ingredient-row">
                   <td class="menu-item-cell"></td>
-                  <td class="ingredient-cell">{{ recipe.ingredientName }}</td>
-                  <td class="qty-cell">{{ recipe.quantityRequired }}</td>
-                  <td class="unit-cell">{{ recipe.unit }}</td>
+
+                  <td class="ingredient-cell">
+                    {{ getIngredientName(recipe) }}
+                  </td>
+
+                  <td class="qty-cell">
+                    {{ recipe.quantityRequired }}
+                  </td>
+
+                  <td class="unit-cell">
+                    {{ recipe.unit }}
+                  </td>
 
                   <td class="action-cell">
-                    <button class="btn-edit" (click)="onEditClick(recipe)">Edit</button>
+
+                    <button class="btn-edit" (click)="onEditClick(recipe)">
+                      {{ 'COMMON.EDIT' | translate }}
+                    </button>
 
                     <button
                       class="btn-delete"
                       (click)="onDeleteClick(recipe.ingredientId)"
                       [disabled]="deletingId() === recipe.ingredientId"
                     >
-                      {{ deletingId() === recipe.ingredientId ? '...' : 'Delete' }}
+                      {{
+                        deletingId() === recipe.ingredientId
+                          ? '...'
+                          : ('COMMON.DELETE' | translate)
+                      }}
                     </button>
+
                   </td>
 
                 </tr>
+
               }
             }
+
           }
 
         </tbody>

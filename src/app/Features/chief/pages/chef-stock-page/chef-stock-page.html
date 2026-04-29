@@ -2,14 +2,16 @@
 
   <!-- Header -->
   <div class="stock-header">
-    <h1>Check Stock</h1>
-    <p class="subtitle">Ingredient availability for your station</p>
+    <h1>{{ 'CHEF.STOCK.TITLE' | translate }}</h1>
+    <p class="subtitle">
+      {{ 'CHEF.STOCK.SUBTITLE' | translate }}
+    </p>
   </div>
 
   <!-- Loading -->
   <div class="loading-wrap" *ngIf="loading">
     <div class="spinner"></div>
-    <span>Loading stock...</span>
+    <span>{{ 'CHEF.STOCK.LOADING' | translate }}</span>
   </div>
 
   <!-- Search -->
@@ -18,26 +20,26 @@
     <input
       class="search-input"
       type="text"
-      placeholder="Search ingredient..."
+      [placeholder]="'CHEF.STOCK.SEARCH' | translate"
       [(ngModel)]="searchTerm" />
   </div>
 
-  <!-- Grid: Low + Available side by side -->
+  <!-- Grid -->
   <div class="stock-grid" *ngIf="!loading">
 
-    <!-- Low Stock Card -->
+    <!-- Low Stock -->
     <app-chef-low-stock
       [stocks]="lowStocks">
     </app-chef-low-stock>
 
-    <!-- Available Stock Card -->
+    <!-- Available Stock -->
     <app-chef-available-stock
       [stocks]="availableStocks">
     </app-chef-available-stock>
 
     <!-- Empty state -->
     <div class="empty-state" *ngIf="allStocks.length === 0">
-      <span>No stock data found for your branch.</span>
+      <span>{{ 'CHEF.STOCK.EMPTY' | translate }}</span>
     </div>
 
   </div>

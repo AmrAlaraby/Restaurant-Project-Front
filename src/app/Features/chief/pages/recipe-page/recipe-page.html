@@ -1,10 +1,14 @@
 <div class="recipe-list-page">
 
   <div class="page-toolbar d-flex justify-content-end">
-    <button class="btn-add" (click)="showAddModal.set(true)">+ Add Recipe</button>
+    <button class="btn-add" (click)="showAddModal.set(true)">
+      {{ 'CHEF.RECIPES.ADD' | translate }}
+    </button>
   </div>
 
-  <app-recipes (editRequested)="onEditRequested($event)" />
+  <app-recipes
+    (editRequested)="onEditRequested($event)">
+  </app-recipes>
 
   @if (showAddModal()) {
     <app-add-recipe

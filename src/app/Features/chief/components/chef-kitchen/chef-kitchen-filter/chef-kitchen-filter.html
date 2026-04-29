@@ -1,38 +1,60 @@
 <div class="filter-bar">
+
   <div class="filter-title">
     <span class="filter-icon">⚙</span>
-    <span>FILTERS</span>
+    <span>
+      {{ 'CHEF.KITCHEN.FILTERS.TITLE' | translate }}
+    </span>
   </div>
 
   <div class="filter-fields">
 
+    <!-- Order ID -->
     <div class="field-group">
-      <label>Order ID</label>
+      <label>
+        {{ 'CHEF.KITCHEN.FILTERS.ORDER_ID' | translate }}
+      </label>
       <input
         type="number"
         [(ngModel)]="params.orderId"
         (ngModelChange)="onOrderIdChange()"
-        placeholder="e.g. 101"
+        [placeholder]="'CHEF.KITCHEN.FILTERS.ORDER_PLACEHOLDER' | translate"
         class="field-input"
       />
     </div>
 
-    <!-- Station Dropdown -->
+    <!-- Station -->
     <div class="field-group">
-      <label>Station</label>
-      <select [(ngModel)]="params.station" (ngModelChange)="onFilterChange()" class="field-input">
-        <option [ngValue]="null">All Stations</option>
+      <label>
+        {{ 'CHEF.KITCHEN.FILTERS.STATION' | translate }}
+      </label>
+      <select
+        [(ngModel)]="params.station"
+        (ngModelChange)="onFilterChange()"
+        class="field-input"
+      >
+        <option [ngValue]="null">
+          {{ 'CHEF.KITCHEN.FILTERS.ALL_STATIONS' | translate }}
+        </option>
+
         <option *ngFor="let s of stations" [value]="s.station">
-          {{ s.station }} ({{ s.pendingCount }} pending)
+          {{ s.station }} ({{ s.pendingCount }} {{ 'CHEF.KITCHEN.FILTERS.PENDING' | translate }})
         </option>
       </select>
     </div>
 
+    <!-- Status -->
     <div class="field-group">
-      <label>Status</label>
-      <select [(ngModel)]="params.status" (ngModelChange)="onFilterChange()" class="field-input">
+      <label>
+        {{ 'CHEF.KITCHEN.FILTERS.STATUS' | translate }}
+      </label>
+      <select
+        [(ngModel)]="params.status"
+        (ngModelChange)="onFilterChange()"
+        class="field-input"
+      >
         <option *ngFor="let opt of statusOptions" [ngValue]="opt.value">
-          {{ opt.label }}
+          {{ opt.label | translate }}
         </option>
       </select>
     </div>
@@ -40,6 +62,9 @@
   </div>
 
   <div class="filter-actions">
-    <button class="btn-reset" (click)="onReset()">Reset</button>
+    <button class="btn-reset" (click)="onReset()">
+      {{ 'CHEF.KITCHEN.FILTERS.RESET' | translate }}
+    </button>
   </div>
+
 </div>
