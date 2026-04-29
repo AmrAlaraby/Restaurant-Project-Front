@@ -17,9 +17,9 @@
         [class.available]="item.isAvailable"
         [class.unavailable]="!item.isAvailable"
       >
-        {{ item.isAvailable 
-            ? ('ADMIN.MENU_ITEMS.CARD.AVAILABLE' | translate) 
-            : ('ADMIN.MENU_ITEMS.CARD.UNAVAILABLE' | translate) 
+        {{ item.isAvailable
+            ? ('ADMIN.MENU_ITEMS.CARD.AVAILABLE' | translate)
+            : ('ADMIN.MENU_ITEMS.CARD.UNAVAILABLE' | translate)
         }}
       </span>
     </div>
@@ -42,27 +42,25 @@
     @if (showAdminActions) {
       <div class="actions">
 
-        <!-- VIEW -->
-        <button class="btn-icon view" (click)="onView()">
-          <i class="bi bi-eye"></i>
-        </button>
-
-        <!-- EDIT -->
-        <button class="btn-icon edit" (click)="onEdit()">
-          <i class="bi bi-pencil"></i>
-        </button>
-
-        <!-- SWITCH -->
-        <div class="switch-container" (click)="onToggleAvailability()">
-          <div class="switch" [class.active]="item.isAvailable">
-            <div class="circle"></div>
-          </div>
+        <!-- ROW 1: VIEW + EDIT -->
+        <div class="actions-row">
+          <button class="btn-action view" (click)="onView()">
+            View
+          </button>
+          <button class="btn-action edit" (click)="onEdit()">
+            Edit
+          </button>
         </div>
 
-        <!-- DELETE -->
-        <button class="btn-icon delete" (click)="onDelete()">
-          <i class="bi bi-trash-fill"></i>
-        </button>
+        <!-- ROW 2: TOGGLE + DELETE -->
+        <div class="actions-row">
+          <button class="btn-action toggle" (click)="onToggleAvailability()">
+            Toggle
+          </button>
+          <button class="btn-action delete" (click)="onDelete()">
+            Delete
+          </button>
+        </div>
 
       </div>
     }
