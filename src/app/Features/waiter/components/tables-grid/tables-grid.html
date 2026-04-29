@@ -1,17 +1,8 @@
-<div class="tables">
-
-  <div class="table-card"
-       *ngFor="let t of tables"
-       [class.busy]="t.isOccupied"
-       [class.free]="!t.isOccupied">
-
-    <h3>T{{ t.tableNumber }}</h3>
-
-    <span *ngIf="t.isOccupied">BUSY</span>
-    <span *ngIf="!t.isOccupied">FREE</span>
-
-    <p>Cap: {{ t.capacity }}</p>
-
-  </div>
-
+<div class="tables-grid">
+  <app-waiter-table-list
+    *ngFor="let t of tables"
+    [table]="t"
+    (toggle)="onToggle($event)"
+    (openOrder)="onOpenOrder($event)">
+  </app-waiter-table-list>
 </div>

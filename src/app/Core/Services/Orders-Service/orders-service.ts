@@ -55,6 +55,16 @@ getAllOrders(
   getOrderById(id: number): Observable<OrderDetailsInterface> {
     return this.http.get<OrderDetailsInterface>(Order.getById(id));
   }
+  // New method to get orders for waiter view
+  getAllOrdersForWaiter(params: OrderFilters) {
+    
+    return this.getAllOrders(params).pipe(
+      map((res) => ({
+        ...res,
+        data: res.data.map((o) => this.mapToWaiterOrder(o)),
+      })),
+    );
+  }
 
   getMyOrders(params?: any): Observable<PaginatedResultInterface<OrderInterface>> {
     return this.http.get<PaginatedResultInterface<OrderInterface>>(Order.myOrders, {
@@ -99,20 +109,12 @@ getAllOrders(
       status: order.status as OrderStatus,
       itemsCount: order.orderItems?.length ?? 0,
       totalAmount: order.totalAmount,
+      createdAt: order.createdAt
     };
   }
 
 
 
-  // New method to get orders for waiter view
-  getAllOrdersForWaiter(params: OrderFilters) {
-    return this.getAllOrders(params).pipe(
-      map((res) => ({
-        ...res,
-        data: res.data.map((o) => this.mapToWaiterOrder(o)),
-      })),
-    );
-  }
 
   //--------------------Cashier View Methods -------------------
   private mapToCashierOrder(order: OrderInterface): CashierOrder {

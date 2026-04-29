@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { TableService } from '../../../../Core/Services/Table-Service/table-service';
 import { TableInterface } from '../../../../Core/Models/TableModels/table-interface';
-import { Router } from '@angular/router';
-import { StatsCardsComponent } from '../../components/stats-cards/stats-cards';
-import { TablesGridComponent } from '../../components/tables-grid/tables-grid';
-import { ActiveOrders } from '../../components/active-orders/active-orders';
-import { ReadyAlert } from '../../components/ready-alert/ready-alert';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { UsersService } from '../../../../Core/Services/User-Service/users-service';
 import { UserQueryParams } from '../../../../Core/Models/UserModels/user-query-params';
+import { OrdersService } from '../../../../Core/Services/Orders-Service/orders-service';
+
+import { StatsCardsComponent } from '../../components/stats-cards/stats-cards';
+import { TablesGridComponent } from '../../components/tables-grid/tables-grid';
+import { ActiveOrders} from '../../components/active-orders/active-orders';
+import { ReadyAlertComponent } from '../../components/ready-alert/ready-alert';
 
 @Component({
   selector: 'app-home',
@@ -19,99 +21,128 @@ import { UserQueryParams } from '../../../../Core/Models/UserModels/user-query-p
     CommonModule,
     StatsCardsComponent,
     TablesGridComponent,
+    ActiveOrders,
+    ReadyAlertComponent,
   ],
   templateUrl: './home.html',
-  styleUrl: './home.scss'
+  styleUrl: './home.scss',
 })
 export class HomeComponent implements OnInit {
 
-  tables: TableInterface[] = [];
-  displayedTables: TableInterface[] = []; 
-  orders: any[] = [];
+  // ── user / branch ──────────────────────────────────────
+  waiterName   = '';
+  branchId!:   number;
+  branchName   = '';
+  shiftStart   = '09:00 AM';           // عدّلي لو عندك shift API
 
-  occupiedCount = 0;
-  currentUserId = '';
-  branchId!: number;
-  branchName = '';
+  // ── tables ─────────────────────────────────────────────
+  tables:          TableInterface[] = [];
+  displayedTables: TableInterface[] = [];
+  occupiedCount  = 0;
+  tablesServed   = 0;                  // عدد الطاولات اللي اتخدمت اليوم
+
+  // ── orders ─────────────────────────────────────────────
+  activeOrders:     any[] = [];
   activeOrdersCount = 0;
-  waiterName = '';
+  myOrdersTotal     = 0;
 
-  constructor(private tableService: TableService, 
-              private authService: AuthService,
-              private userService: UsersService,
-              private router: Router
+  // ── ready alert ────────────────────────────────────────
+  readyOrders: any[] = [];             // الأوردرات اللي status = Ready
+
+  constructor(
+    private tableService:  TableService,
+    private authService:   AuthService,
+    private userService:   UsersService,
+    private ordersService: OrdersService,
+    private router:        Router,
   ) {}
 
   ngOnInit(): void {
-    this.loadTables();
     this.loadCurrentUser();
-
   }
+
+  // ── Step 1: get current user ───────────────────────────
   loadCurrentUser() {
     this.authService.getCurrentUser().subscribe(res => {
-      this.currentUserId = res.id;
-      this.loadWaiterData(res.email);
-      this.waiterName = res.name;
+      this.waiterName = res.name ?? res.email;
+      this.loadWaiterBranch(res.email);
     });
   }
-  goToTables() {
-  this.router.navigate(['/waiter/tables']);
-}
-  loadWaiterData(email: string) {
 
-  const params: UserQueryParams = {
-    pageIndex: 1,
-    pageSize: 100
-  };
+  // ── Step 2: get branchId from users list ──────────────
+  loadWaiterBranch(email: string) {
+    const params: UserQueryParams = { pageIndex: 1, pageSize: 100 };
 
-  this.userService.getUsers(params).subscribe(res => {
+    this.userService.getUsers(params).subscribe(res => {
+      const waiter = res.data.find((u: any) => u.email === email);
+      if (!waiter?.branchId) return;
 
-    const waiter = res.data.find(u => u.email === email);
+      this.branchId   = waiter.branchId;
+      this.branchName = waiter.branchName ?? '';
 
-    console.log('Matched waiter:', waiter);
-
-    if (!waiter) {
-      console.error('Waiter not found ❌');
-      return;
-    }
-
-    if (!waiter.branchId) {
-      console.warn('No branch assigned ❌');
-      return;
-    }
-
-    this.branchId = waiter.branchId;
-    this.branchName = waiter.branchName ?? '';
-
-    this.loadTables();
-  });
-}
-
-
-
-
-loadTables() {
-
-  if (!this.branchId) {
-    console.warn('branchId not ready');
-    return;
+      // ── Step 3: load everything in parallel ───────────
+      this.loadTables();
+      this.loadActiveOrders();
+    });
   }
 
-  this.tableService.getTables({
-    pageIndex: 1,
-    pageSize: 100,
-    branchId: this.branchId
-  }).subscribe(res => {
+  // ── Tables ─────────────────────────────────────────────
+  loadTables() {
+    this.tableService.getTables({
+      pageIndex: 1,
+      pageSize:  100,
+      branchId:  this.branchId,
 
-    this.tables = res.data;
+    }).subscribe(res => {
+      this.tables          = res.data;
+      this.displayedTables = res.data.slice(0, 6);
+      this.occupiedCount   = res.data.filter((t: TableInterface) => t.isOccupied).length;
+      this.tablesServed    = res.data.filter((t: TableInterface) => t.isOccupied).length;
+    });
+  }
 
-    console.log('All tables:', this.tables);
+  // ── Active Orders (for this branch) ───────────────────
+  loadActiveOrders() {
+    this.ordersService.getAllOrders({
+      pageIndex: 1,
+      pageSize: 50,
+      branchId: this.branchId
+      
+    }).subscribe(res => {
 
-    this.displayedTables = this.tables.slice(0, 6);
+      // const ordersToday = (res.data ?? [])
+      //   .filter((o: any) => this.isToday(o.createdAt))
+      //   .sort((a: any, b: any) =>
+      //     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      //   );
+      //   console.log(res.data[0]);
+      //   console.log(res.data);
 
-    console.log('Displayed tables:', this.displayedTables);
+      this.activeOrders = res.data ?? [];
+      this.activeOrdersCount = this.activeOrders.length;
+      console.log('Active Orders:', this.activeOrders);
 
-    this.occupiedCount = this.tables.filter(t => t.isOccupied).length;
-  });
-}
+      this.myOrdersTotal = this.activeOrders.reduce(
+        (s: number, o: any) => s + (o.totalAmount ?? 0),
+        0
+      );
+
+      this.readyOrders = this.activeOrders.filter(
+        (o: any) => o.status === 'Ready'
+      );
+    });
+  }
+
+  private isToday(date: string | null): boolean {
+    if (!date) return false;
+
+    const d = new Date(date);
+    const now = new Date();
+
+    return d.toDateString() === now.toDateString();
+  }
+  // ── Navigation ─────────────────────────────────────────
+  goToTables()  { this.router.navigate(['/waiter/tables']); }
+  goToKitchen() { this.router.navigate(['/waiter/kitchen']); }
+  goToNewOrder(){ this.router.navigate(['/waiter/place-order']); }
 }

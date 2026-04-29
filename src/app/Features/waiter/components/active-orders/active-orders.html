@@ -1,13 +1,33 @@
-<div class="orders">
+<div class="orders-list">
 
-  <div class="order-card" *ngFor="let order of orders">
+  <div class="order-card" *ngFor="let order of orders" [ngClass]="'border-' + getStatusColor(order.status)">
 
-    <h4>#{{ order.id }} - Table {{ order.tablenumber }}</h4>
+    <div class="order-top">
+      <div class="order-title">
+        #{{ order.id }} · Table {{ order.tableNumber }} · {{ order.itemsCount }} guests
+      </div>
+      <span class="status-badge" [ngClass]="'badge-' + getStatusColor(order.status)">
+        {{ order.status?.toUpperCase() }}
+      </span>
+    </div>
 
-    <p>Total: {{ order.totalAmount }}</p>
+    <div class="order-items">
+      <span *ngFor="let item of getPreviewItems(order); let last = last">
+        {{ item }}<span *ngIf="!last"> · </span>
+      </span>
+    </div>
 
-    <span>{{ order.status }}</span>
+    <div class="order-footer">
+      <span class="order-meta">
+        🕐 Ordered {{ order.orderedAt ?? 'Just now' }} · EGP {{ order.totalAmount }}
+      </span>
+    </div>
 
+  </div>
+
+  <div class="empty-orders" *ngIf="orders.length === 0">
+    <span>🎉</span>
+    <p>No active orders right now</p>
   </div>
 
 </div>
