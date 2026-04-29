@@ -731,6 +731,19 @@
       "SENT": "✔ Request Sent!",
       "ALL_GOOD": "All ingredients are well stocked!"
     }
+  },
+  "RECIPES": {
+    "ADD": "Add Recipe",
+    "ADD_TITLE": "Add Recipe",
+    "MENU_ITEM": "Menu Item",
+    "INGREDIENT": "Ingredient",
+    "QUANTITY": "Quantity Required",
+    "SELECT_MENU_ITEM": "Select menu item...",
+    "SELECT_INGREDIENT": "Select ingredient...",
+    "QUANTITY_PLACEHOLDER": "e.g. 0.25",
+    "CANCEL": "Cancel",
+    "ADD_BTN": "Add Recipe",
+    "SAVING": "Saving..."
   }
 }
 }

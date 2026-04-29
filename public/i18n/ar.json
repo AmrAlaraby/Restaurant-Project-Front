@@ -732,7 +732,21 @@
       "SENT": "✔ تم إرسال الطلب!",
       "ALL_GOOD": "كل المكونات متوفرة بشكل جيد!"
     }
+  },
+  "RECIPES": {
+    "ADD": "إضافة وصفة",
+    "ADD_TITLE": "إضافة وصفة",
+    "MENU_ITEM": "عنصر القائمة",
+    "INGREDIENT": "المكون",
+    "QUANTITY": "الكمية المطلوبة",
+    "SELECT_MENU_ITEM": "اختر عنصر القائمة...",
+    "SELECT_INGREDIENT": "اختر المكون...",
+    "QUANTITY_PLACEHOLDER": "مثال: 0.25",
+    "CANCEL": "إلغاء",
+    "ADD_BTN": "إضافة وصفة",
+    "SAVING": "جارٍ الحفظ..."
   }
+
 }
 }
 
