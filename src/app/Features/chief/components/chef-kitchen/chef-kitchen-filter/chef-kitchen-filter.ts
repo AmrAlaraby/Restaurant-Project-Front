@@ -6,6 +6,7 @@ import { ActivePendingStationsDTO } from '../../../../../Core/Models/KitchenMode
 import { TicketStatus } from '../../../../../Core/Models/KitchenModels/ticket-status';
 import { KitchenService } from '../../../../../Core/Services/Kitchen-Service/kitchen-service';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 
 @Component({
   selector: 'app-chef-kitchen-filter',
@@ -38,7 +39,9 @@ statusOptions = [
   // debounce timer عشان الـ orderId input متبعتش request على كل ضغطة
   private debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
-  constructor(private kitchenService: KitchenService) {}
+  constructor(private kitchenService: KitchenService,
+    private toast: ToastService
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['branchId'] && this.branchId != null) {
@@ -56,7 +59,7 @@ statusOptions = [
       next: (data) => {
         this.stations = data;
       },
-      error: (err) => console.error('Failed to load stations', err),
+     error: () => this.toast.error('Failed to load stations'),
     });
   }
 
