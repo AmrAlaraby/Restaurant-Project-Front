@@ -4,3 +4,159 @@
   direction: rtl;
   text-align: right;
 }
+// ============================================================
+// RESTAURANT MANAGEMENT SYSTEM — DESIGN TOKENS
+// Extracted from brand reference images
+// Usage: var(--token-name) in all component SCSS files
+// ============================================================
+
+:root {
+  // --- Primary: Deep Crimson Red ---
+  --clr-primary:          #B71C1C;
+  --clr-primary-hover:    #D32F2F;
+  --clr-primary-muted:    #E53935;
+  --clr-primary-tint:     #FFEBEE;
+  --clr-primary-tint-text:#B71C1C;
+  --clr-on-primary:       #FFFFFF;
+
+  // --- Accent: Amber Orange ---
+  --clr-accent:           #E65100;
+  --clr-accent-warm:      #FFA000;
+  --clr-accent-tint:      #FFF8E1;
+  --clr-accent-tint-text: #E65100;
+  --clr-on-accent:        #FFFFFF;
+
+  // --- Neutrals ---
+  --clr-dark:             #212121;
+  --clr-gray-700:         #424242;
+  --clr-gray-500:         #757575;
+  --clr-gray-300:         #E0E0E0;
+  --clr-gray-100:         #F5F5F5;
+
+  // --- Surfaces (light mode) ---
+  --clr-bg:               #FAFAFA;
+  --clr-surface:          #FFFFFF;
+  --clr-surface-warm:     #F5F0EB;
+  --clr-surface-raised:   #FFFFFF;
+  --clr-border:           #E0E0E0;
+  --clr-border-strong:    #BDBDBD;
+
+  // --- Text (light mode) ---
+  --clr-text-primary:     #212121;
+  --clr-text-secondary:   #616161;
+  --clr-text-hint:        #9E9E9E;
+  --clr-text-on-dark:     #F5F5F5;
+
+  // --- Sidebar ---
+  --clr-sidebar-bg:       #212121;
+  --clr-sidebar-text:     #EEEEEE;
+  --clr-sidebar-muted:    #9E9E9E;
+  --clr-sidebar-active-bg:rgba(183, 28, 28, 0.25);
+  --clr-sidebar-active-border: #B71C1C;
+  --clr-sidebar-hover-bg: rgba(255, 255, 255, 0.06);
+
+  // --- Semantic States ---
+  --clr-success:          #2E7D32;
+  --clr-success-bg:       #E8F5E9;
+  --clr-success-text:     #1B5E20;
+  --clr-warning:          #F57F17;
+  --clr-warning-bg:       #FFF8E1;
+  --clr-warning-text:     #E65100;
+  --clr-danger:           #B71C1C;
+  --clr-danger-bg:        #FFEBEE;
+  --clr-danger-text:      #7F0000;
+  --clr-info:             #1565C0;
+  --clr-info-bg:          #E3F2FD;
+  --clr-info-text:        #003c8f;
+
+  // --- Shadows ---
+  --shadow-sm:   0 1px 3px rgba(0,0,0,0.10), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md:   0 4px 12px rgba(0,0,0,0.10), 0 2px 6px rgba(0,0,0,0.06);
+  --shadow-lg:   0 8px 24px rgba(0,0,0,0.12), 0 4px 10px rgba(0,0,0,0.06);
+  --shadow-red:  0 4px 16px rgba(183, 28, 28, 0.22);
+
+  // --- Spacing ---
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  40px;
+
+  // --- Radius ---
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  // --- Typography ---
+  --font-heading: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-body:    'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+
+  // --- Transitions ---
+  --transition-fast:   150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow:   400ms ease;
+}
+
+// ============================================================
+// DARK MODE — toggle via .dark on <body> or <app-root>
+// ============================================================
+
+// ============================================================
+// DARK MODE — applied via .dark class on <body> or <app-root>
+// ============================================================
+
+.dark {
+  // --- Backgrounds (warm dark, not cold gray) ---
+  --clr-sidebar-bg:      #0F0C0B;  // extra dark — أغمق حاجة
+  --clr-bg:              #1A1412;  // page background
+  --clr-surface:         #221A18;  // cards & panels
+  --clr-surface-warm:    #261D1A;  // alternate rows
+  --clr-surface-raised:  #2C201D;  // modals, dropdowns
+  --clr-border:          rgba(255, 255, 255, 0.06);
+  --clr-border-strong:   rgba(255, 255, 255, 0.11);
+
+  // --- Fiery Red Accent ---
+  --clr-accent:          #E53935;  // base — CTAs, brand dot, sidebar border
+  --clr-accent-warm:     #FF6B4A;  // bright fire — active text, icons, highlights
+  --clr-accent-tint:     rgba(229, 57, 53, 0.16); // badge bg, active row
+  --clr-accent-tint-text:#FF6B4A;
+  --clr-on-accent:       #FFFFFF;
+
+  // --- Primary Red (same family, stays solid) ---
+  --clr-primary:         #E53935;
+  --clr-primary-hover:   #EF5350;
+  --clr-primary-tint:    rgba(229, 57, 53, 0.18);
+  --clr-primary-tint-text:#FF8A80;
+
+  // --- Text ---
+  --clr-text-primary:    #F0EAE8;  // warm off-white
+  --clr-text-secondary:  #B0A5A3;  // muted warm
+  --clr-text-hint:       #6B5F5D;  // placeholder / hint
+
+  // --- Sidebar specific ---
+  --clr-sidebar-text:          #6B5F5D;
+  --clr-sidebar-muted:         #3D3230;
+  --clr-sidebar-active-bg:     rgba(229, 57, 53, 0.14);
+  --clr-sidebar-active-border: #E53935;
+  --clr-sidebar-active-text:   #FF6B4A;
+  --clr-sidebar-hover-bg:      rgba(255, 255, 255, 0.04);
+
+  // --- Semantic States ---
+  --clr-success-bg:      rgba(46, 125, 50, 0.18);
+  --clr-success-text:    #81C784;
+  --clr-warning-bg:      rgba(245, 127, 23, 0.15);
+  --clr-warning-text:    #FFB74D;
+  --clr-danger-bg:       rgba(229, 57, 53, 0.18);
+  --clr-danger-text:     #FF8A80;
+  --clr-info-bg:         rgba(21, 101, 192, 0.18);
+  --clr-info-text:       #90CAF9;
+
+  // --- Shadows ---
+  --shadow-sm:  0 1px 4px rgba(0, 0, 0, 0.50);
+  --shadow-md:  0 4px 14px rgba(0, 0, 0, 0.55);
+  --shadow-lg:  0 8px 28px rgba(0, 0, 0, 0.65);
+  --shadow-red: 0 4px 18px rgba(229, 57, 53, 0.35);
+}
