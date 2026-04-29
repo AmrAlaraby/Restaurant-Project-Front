@@ -5,16 +5,16 @@
 
   <!-- Page Header -->
   <div class="page-header">
-    <h1>Stock Management</h1>
-  </div>
+    <div class="header-left">
+      <h1>Stock Management</h1>
+      <p class="subtitle">Manage and track all branch stock</p>
+    </div>
 
-  <!-- Branch Selector -->
-  <div class="branch-selector">
-    <label for="branchSelect">Branch</label>
-
-    <app-branch-selector
-      (branchChanged)="onBranchChange($event)">
-    </app-branch-selector>
+    <div class="header-right">
+      <app-branch-selector
+        (branchChanged)="onBranchChange($event)">
+      </app-branch-selector>
+    </div>
   </div>
 
   <!-- Loading -->
@@ -25,27 +25,22 @@
 
   <!-- Table -->
   <div class="table-card" *ngIf="!loading && filteredStocks.length > 0">
-    <div class="yellow-strip"></div>
 
     <table>
       <thead>
         <tr>
-          <th>Ingredient</th>
-          <th>Available</th>
-          <th>Action</th>
+          <th>INGREDIENT</th>
+          <th>AVAILABLE QTY</th>
+          <th>ACTIONS</th>
         </tr>
       </thead>
 
       <tbody>
         <tr *ngFor="let item of filteredStocks; let i = index">
-       
-          <td>{{ item.ingredientName }}</td>
-          <td>{{ item.quantityAvailable }}</td>
-
-          <td>
-            <button class="btn-save" (click)="viewDetails(item.id)">
-              View
-            </button>
+          <td class="col-ingredient">{{ item.ingredientName }}</td>
+          <td class="col-qty">{{ item.quantityAvailable }}</td>
+          <td class="col-actions">
+            <button class="btn-view" (click)="viewDetails(item.id)">View</button>
           </td>
         </tr>
       </tbody>
@@ -58,15 +53,11 @@
   </div>
 
   <!-- Pagination -->
-  <div class="pagination" *ngIf="!loading && totalCount > 0">
+  <div class="pagination-wrap" *ngIf="!loading && totalCount > 0">
     <div class="pagination-info">
       Showing
-      {{ (pageIndex - 1) * pageSize + 1 }}
-      –
-      {{ (pageIndex - 1) * pageSize + filteredStocks.length }}
-      of
-      {{ totalCount }}
-      items
+      {{ (pageIndex - 1) * pageSize + 1 }}–{{ (pageIndex - 1) * pageSize + filteredStocks.length }}
+      of {{ totalCount }} items
     </div>
 
     <app-pagination
@@ -89,8 +80,6 @@
       <h3>Stock Details</h3>
       <button class="close-btn" (click)="closeModal()">✖</button>
     </div>
-
-    <div class="yellow-strip"></div>
 
     <!-- Body -->
     <div class="modal-body" *ngIf="selectedStock">
