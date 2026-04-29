@@ -128,7 +128,7 @@
 
         @if (basket$ | async; as b) {
 
-        <app-nutrition-modal [basketId]="b.id" [hasItems]="b.items.length > 0">
+        <app-nutrition-modal [basketId]="b.id" [hasItems]="b.items.length > 0" [items]="b.items">
         </app-nutrition-modal>
 
         }
