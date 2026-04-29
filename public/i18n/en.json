@@ -750,12 +750,28 @@
       "INGREDIENT": "Ingredient",
       "QUANTITY": "Quantity Required",
       "BUTTON": "Save Changes"
+    },
+    "LIST": {
+      "TITLE": "Recipes",
+      "ALL_MENU_ITEMS": "All Menu Items",
+      "LOADING": "Loading recipes...",
+      "EMPTY": "No recipes found.",
+      "SINGLE": "ingredient",
+      "PLURAL": "ingredients",
+      "TABLE": {
+        "MENU_ITEM": "Menu Item",
+        "INGREDIENT": "Ingredient",
+        "QTY": "Qty Required",
+        "UNIT": "Unit"
+      }
     }
   }
 },
 "COMMON": {
   "CANCEL": "Cancel",
-  "SAVING": "Saving..."
+  "SAVING": "Saving...",
+  "EDIT": "Edit",
+  "DELETE": "Delete"
 }
 }
 
