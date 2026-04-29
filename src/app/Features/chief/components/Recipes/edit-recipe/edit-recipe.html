@@ -2,7 +2,9 @@
   <div class="modal-card" (click)="$event.stopPropagation()">
 
     <div class="modal-header">
-      <h2 class="modal-title">Edit Quantity</h2>
+      <h2 class="modal-title">
+        {{ 'CHEF.RECIPES.EDIT.TITLE' | translate }}
+      </h2>
       <button class="close-btn" (click)="cancel()">✕</button>
     </div>
 
@@ -10,19 +12,27 @@
 
       <!-- Read-only info -->
       <div class="info-row">
-        <span class="info-label">Menu Item</span>
-        <span class="info-value">{{ recipe().menuItemName }}</span>
+        <span class="info-label">
+          {{ 'CHEF.RECIPES.EDIT.MENU_ITEM' | translate }}
+        </span>
+        <span class="info-value">{{ getItemName(recipe()) }}</span>
       </div>
+
       <div class="info-row">
-        <span class="info-label">Ingredient</span>
-        <span class="info-value">{{ recipe().ingredientName }}</span>
+        <span class="info-label">
+          {{ 'CHEF.RECIPES.EDIT.INGREDIENT' | translate }}
+        </span>
+        <span class="info-value">{{ getIngredientName(recipe()) }}</span>
       </div>
 
       <div class="divider"></div>
 
-      <!-- Editable quantity -->
+      <!-- Quantity -->
       <div class="field">
-        <label class="field-label">Quantity Required ({{ recipe().unit }})</label>
+        <label class="field-label">
+          {{ 'CHEF.RECIPES.EDIT.QUANTITY' | translate }} ({{ recipe().unit }})
+        </label>
+
         <input
           type="number"
           class="field-input"
@@ -34,15 +44,24 @@
       </div>
 
       @if (error()) {
-        <p class="error-msg">⚠️ {{ error() }}</p>
+        <p class="error-msg">
+          ⚠️ {{ error() }}
+        </p>
       }
 
     </div>
 
     <div class="modal-footer">
-      <button class="btn-cancel" (click)="cancel()">Cancel</button>
+      <button class="btn-cancel" (click)="cancel()">
+        {{ 'COMMON.CANCEL' | translate }}
+      </button>
+
       <button class="btn-submit" (click)="submit()" [disabled]="isSubmitting()">
-        @if (isSubmitting()) { Saving... } @else { Save Changes }
+        @if (isSubmitting()) {
+          {{ 'COMMON.SAVING' | translate }}
+        } @else {
+          {{ 'CHEF.RECIPES.EDIT.BUTTON' | translate }}
+        }
       </button>
     </div>
 

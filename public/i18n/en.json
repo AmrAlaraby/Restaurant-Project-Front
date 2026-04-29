@@ -743,8 +743,19 @@
     "QUANTITY_PLACEHOLDER": "e.g. 0.25",
     "CANCEL": "Cancel",
     "ADD_BTN": "Add Recipe",
-    "SAVING": "Saving..."
+    "SAVING": "Saving...",
+    "EDIT": {
+      "TITLE": "Edit Quantity",
+      "MENU_ITEM": "Menu Item",
+      "INGREDIENT": "Ingredient",
+      "QUANTITY": "Quantity Required",
+      "BUTTON": "Save Changes"
+    }
   }
+},
+"COMMON": {
+  "CANCEL": "Cancel",
+  "SAVING": "Saving..."
 }
 }
 

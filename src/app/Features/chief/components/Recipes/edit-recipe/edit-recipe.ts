@@ -3,13 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RecipesListDTO } from '../../../../../Core/Models/RecipeModels/recipes-list-dto';
 import { RecipesService } from '../../../../../Core/Services/Recipe-Service/recipes-service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Subject, takeUntil } from 'rxjs';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
 
 
 @Component({
   selector: 'app-edit-recipe',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslatePipe],
   templateUrl: './edit-recipe.html',
   styleUrls: ['./edit-recipe.scss'],
 })
@@ -26,9 +29,29 @@ export class EditRecipeComponent implements OnInit {
   isSubmitting     = signal(false);
   error            = signal<string | null>(null);
 
+  constructor(
+        private localizationService: LocalizationService,
+      ) {}
+
   ngOnInit(): void {
     this.quantityRequired.set(this.recipe().quantityRequired);
+    this.getCurrentLanguage();
   }
+
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
+    
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 
   // ── Actions ──────────────────────────────────────────────────
   submit(): void {
@@ -56,5 +79,18 @@ export class EditRecipeComponent implements OnInit {
 
   cancel(): void {
     this.cancelled.emit();
+  }
+
+  getIngredientName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.ingredientArabicName || item.ingredientName;
+    }
+    return item.ingredientName;
+  }
+  getItemName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.menuItemArabicName || item.menuItemName;
+    }
+    return item.menuItemName;
   }
 }

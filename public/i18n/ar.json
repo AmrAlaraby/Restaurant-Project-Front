@@ -744,9 +744,20 @@
     "QUANTITY_PLACEHOLDER": "مثال: 0.25",
     "CANCEL": "إلغاء",
     "ADD_BTN": "إضافة وصفة",
-    "SAVING": "جارٍ الحفظ..."
+    "SAVING": "جارٍ الحفظ...",
+    "EDIT": {
+      "TITLE": "تعديل الكمية",
+      "MENU_ITEM": "عنصر القائمة",
+      "INGREDIENT": "المكون",
+      "QUANTITY": "الكمية المطلوبة",
+      "BUTTON": "حفظ التعديلات"
+    }
   }
 
+},
+"COMMON": {
+  "CANCEL": "إلغاء",
+  "SAVING": "جاري الحفظ..."
 }
 }
 
