@@ -775,7 +775,21 @@
       "NEW_ORDER": "+ طلب جديد",
       "MY_TABLES": "طاولاتي",
       "FULL_FLOOR": "عرض الصالة بالكامل ←",
-      "ACTIVE_ORDERS": "الطلبات النشطة"
+      "ACTIVE_ORDERS": "الطلبات النشطة",
+      "STATS": {
+        "TABLES_SERVED": "الطاولات التي تم تقديمها",
+        "ORDERS_ACTIVE": "الطلبات النشطة",
+        "OCCUPIED_TABLES": "الطاولات المشغولة",
+        "MY_ORDERS_TOTAL": "إجمالي طلباتي"
+      },
+      "ACTIVEORDERS": {
+        "CARD": {
+          "TITLE": "#{{id}} · طاولة {{table}} · {{guests}} ضيوف",
+          "META": "تم الطلب منذ {{time}} · {{total}} جنيه",
+          "JUST_NOW": "قليل"
+        },
+        "EMPTY": "لا توجد طلبات نشطة حالياً"
+      }
     },
     "KITCHEN": {
       "TITLE": "حالة المطبخ",

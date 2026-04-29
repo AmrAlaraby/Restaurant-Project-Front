@@ -1,13 +1,20 @@
 <div class="orders-list">
 
-  <div class="order-card" *ngFor="let order of orders" [ngClass]="'border-' + getStatusColor(order.status)">
+  <div class="order-card"
+       *ngFor="let order of orders"
+       [ngClass]="'border-' + getStatusColor(order.status)">
 
     <div class="order-top">
       <div class="order-title">
-        #{{ order.id }} · Table {{ order.tableNumber }} · {{ order.itemsCount }} guests
+        {{ 'WAITER.HOME.ACTIVEORDERS.CARD.TITLE' | translate:{
+          id: order.id??'',
+          table: order.tableNumber??'',
+          guests: order.itemsCount??''
+        } }}
       </div>
+
       <span class="status-badge" [ngClass]="'badge-' + getStatusColor(order.status)">
-        {{ order.status?.toUpperCase() }}
+        {{ "ADMIN.ORDERS.FILTERS."+order.status?.toUpperCase() | translate }}
       </span>
     </div>
 
@@ -19,7 +26,11 @@
 
     <div class="order-footer">
       <span class="order-meta">
-        🕐 Ordered {{ order.orderedAt ?? 'Just now' }} · EGP {{ order.totalAmount }}
+        🕐
+       {{ 'WAITER.HOME.ACTIVEORDERS.CARD.META' | translate:{
+  time: order.orderedAt ?? ('WAITER.HOME.ACTIVEORDERS.CARD.JUST_NOW' | translate),
+  total: order.totalAmount
+} }}
       </span>
     </div>
 
@@ -27,7 +38,7 @@
 
   <div class="empty-orders" *ngIf="orders.length === 0">
     <span>🎉</span>
-    <p>No active orders right now</p>
+    <p>{{ 'WAITER.HOME.ACTIVEORDERS.EMPTY' | translate }}</p>
   </div>
 
 </div>
