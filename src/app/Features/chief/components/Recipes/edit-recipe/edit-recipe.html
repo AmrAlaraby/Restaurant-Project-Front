@@ -1,15 +1,16 @@
 <div class="modal-overlay" (click)="cancel()">
   <div class="modal-card" (click)="$event.stopPropagation()">
-
     <div class="modal-header">
-      <h2 class="modal-title">
-        {{ 'CHEF.RECIPES.EDIT.TITLE' | translate }}
-      </h2>
+      <div class="modal-header__brand">
+        <span class="modal-header__icon">✏️</span>
+        <h2 class="modal-title">
+          {{ 'CHEF.RECIPES.EDIT.TITLE' | translate }}
+        </h2>
+      </div>
       <button class="close-btn" (click)="cancel()">✕</button>
     </div>
 
     <div class="modal-body">
-
       <!-- Read-only info -->
       <div class="info-row">
         <span class="info-label">
@@ -44,11 +45,8 @@
       </div>
 
       @if (error()) {
-        <p class="error-msg">
-          ⚠️ {{ error() }}
-        </p>
+        <p class="error-msg">⚠️ {{ error() }}</p>
       }
-
     </div>
 
     <div class="modal-footer">
@@ -58,12 +56,12 @@
 
       <button class="btn-submit" (click)="submit()" [disabled]="isSubmitting()">
         @if (isSubmitting()) {
+          <span class="btn-submit__spinner"></span>
           {{ 'COMMON.SAVING' | translate }}
         } @else {
           {{ 'CHEF.RECIPES.EDIT.BUTTON' | translate }}
         }
       </button>
     </div>
-
   </div>
 </div>
