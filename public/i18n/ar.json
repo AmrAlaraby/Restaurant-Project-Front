@@ -770,6 +770,38 @@
     "DELETE": "حذف"
   },
   "WAITER": {
+    "PLACEORDER": {
+      "TITLE": "إنشاء طلب جديد",
+      "BUTTONS": {
+        "SENDING": "جاري الإرسال...",
+        "SUBMIT": "إرسال إلى المطبخ 🔥"
+      },
+      "MENULIST": {
+        "PREPTIME": "{{time}} دقيقة",
+        "PRICE": "{{price}} جنيه"
+      },
+      "SUMMARY": {
+        "TITLE": "ملخص الطلب",
+        "EMPTY": "لا توجد عناصر بعد 🍽️",
+        "QTY": "الكمية: {{qty}}",
+        "ITEM_TOTAL": "{{total}} جنيه",
+        "TOTAL": "الإجمالي",
+        "TOTAL_AMOUNT": "{{total}} جنيه"
+      },
+      "PAYMENT": {
+        "TITLE": "طريقة الدفع",
+        "METHODS": {
+          "CASH": "كاش",
+          "CARD": "بطاقة",
+          "INSTAPAY": "إنستاباي",
+          "WALLET": "محفظة"
+        }
+      },
+      "TABLESELECTOR": {
+        "TITLE": "اختر الطاولة",
+        "SEATS": "{{count}} مقاعد"
+      }
+    },
     "ORDERS": {
       "TITLE": "الطلبات",
       "SUBTITLE": "يتم عرض طلبات الفرع الخاص بك فقط",

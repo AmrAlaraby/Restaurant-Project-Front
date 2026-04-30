@@ -1,31 +1,31 @@
 <div class="payment">
 
-  <h4>Payment Method</h4>
+  <h4>{{ 'WAITER.PLACEORDER.PAYMENT.TITLE' | translate }}</h4>
 
   <div class="options">
 
     <button
       [class.active]="method === 'Cash'"
       (click)="select('Cash')">
-      Cash
+      {{ 'WAITER.PLACEORDER.PAYMENT.METHODS.CASH' | translate }}
     </button>
 
     <button
       [class.active]="method === 'Card'"
       (click)="select('Card')">
-      Card
+      {{ 'WAITER.PLACEORDER.PAYMENT.METHODS.CARD' | translate }}
     </button>
 
     <button
       [class.active]="method === 'Instapay'"
       (click)="select('Instapay')">
-      Instapay
+      {{ 'WAITER.PLACEORDER.PAYMENT.METHODS.INSTAPAY' | translate }}
     </button>
 
     <button
       [class.active]="method === 'Wallet'"
       (click)="select('Wallet')">
-      Wallet
+      {{ 'WAITER.PLACEORDER.PAYMENT.METHODS.WALLET' | translate }}
     </button>
 
   </div>

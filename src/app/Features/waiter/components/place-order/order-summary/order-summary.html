@@ -1,9 +1,9 @@
 <div class="summary">
 
-  <h3>Order Summary</h3>
+  <h3>{{ 'WAITER.PLACEORDER.SUMMARY.TITLE' | translate }}</h3>
 
   <div *ngIf="items.length === 0" class="empty">
-    <p>No items yet 🍽️</p>
+    <p>{{ 'WAITER.PLACEORDER.SUMMARY.EMPTY' | translate }}</p>
   </div>
 
   <div class="item" *ngFor="let i of items">
@@ -13,11 +13,18 @@
 
     <!-- INFO -->
     <div class="info">
-      <h4>{{ i.name }}</h4>
+      <h4>{{ getItemName(i) }}</h4>
 
       <div class="meta">
-        <span>Qty: {{ i.quantity }}</span>
-        <span>{{ i.unitPrice * i.quantity }} EGP</span>
+        <span>
+          {{ 'WAITER.PLACEORDER.SUMMARY.QTY' | translate:{ qty: i.quantity } }}
+        </span>
+
+        <span>
+          {{ 'WAITER.PLACEORDER.SUMMARY.ITEM_TOTAL' | translate:{
+            total: (i.unitPrice * i.quantity)
+          } }}
+        </span>
       </div>
     </div>
 
@@ -32,8 +39,10 @@
   <div class="divider"></div>
 
   <div class="total">
-    <span>Total</span>
-    <b>{{ total }} EGP</b>
+    <span>{{ 'WAITER.PLACEORDER.SUMMARY.TOTAL' | translate }}</span>
+    <b>
+      {{ 'WAITER.PLACEORDER.SUMMARY.TOTAL_AMOUNT' | translate:{ total: total } }}
+    </b>
   </div>
 
 </div>

@@ -1,12 +1,14 @@
 <div class="tables">
-  <h4>Select Table</h4>
+  <h4>{{ 'WAITER.PLACEORDER.TABLESELECTOR.TITLE' | translate }}</h4>
 
   <div class="grid">
     @for (t of tables; track $index) {
       <div class="table" [class.active]="t.id === tableId" (click)="selectTable(t.id)">
-        <span>{{ t.tableNumber }} </span>
+        <span>{{ t.tableNumber }}</span>
         <br />
-        <small>{{ t.capacity }} seats</small>
+        <small>
+          {{ 'WAITER.PLACEORDER.TABLESELECTOR.SEATS' | translate:{ count: t.capacity } }}
+        </small>
       </div>
     }
   </div>

@@ -774,6 +774,38 @@
   "DELETE": "Delete"
 },
 "WAITER": {
+  "PLACEORDER": {
+      "TITLE": "Place New Order",
+      "BUTTONS": {
+        "SENDING": "Sending...",
+        "SUBMIT": "Send to Kitchen 🔥"
+      },
+      "MENULIST": {
+        "PREPTIME": "{{time}} min",
+        "PRICE": "EGP {{price}}"
+      },
+       "SUMMARY": {
+        "TITLE": "Order Summary",
+        "EMPTY": "No items yet 🍽️",
+        "QTY": "Qty: {{qty}}",
+        "ITEM_TOTAL": "{{total}} EGP",
+        "TOTAL": "Total",
+        "TOTAL_AMOUNT": "{{total}} EGP"
+      },
+      "PAYMENT": {
+        "TITLE": "Payment Method",
+        "METHODS": {
+          "CASH": "Cash",
+          "CARD": "Card",
+          "INSTAPAY": "Instapay",
+          "WALLET": "Wallet"
+        }
+      },
+      "TABLESELECTOR": {
+        "TITLE": "Select Table",
+        "SEATS": "{{count}} seats"
+      }
+    },
   "ORDERS": {
       "TITLE": "Orders",
       "SUBTITLE": "Only showing orders for your branch",

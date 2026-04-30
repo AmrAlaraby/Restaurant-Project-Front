@@ -1,7 +1,7 @@
 <div class="page">
 
   <div class="header">
-    <h2>Place New Order</h2>
+    <h2>{{ 'WAITER.PLACEORDER.TITLE' | translate }}</h2>
   </div>
 
   <div class="layout">
@@ -11,9 +11,9 @@
 
       <div class="card">
         <app-category-filter
-        [categories]="categories"
-        (select)="onCategoryChange($event)"
-          ></app-category-filter>
+          [categories]="categories"
+          (select)="onCategoryChange($event)">
+        </app-category-filter>
       </div>
 
       <div class="card menu-card">
@@ -34,23 +34,23 @@
 
       <div class="card">
         <app-table-selector
-            [tables]="tables"
-            [(tableId)]="selectedTableId">
+          [tables]="tables"
+          [(tableId)]="selectedTableId">
         </app-table-selector>
       </div>
 
       <div class="card">
         <app-order-summary
-        [items]="orderItems"
-        [total]="total"
-        (remove)="removeItem($event)"
-        (decrease)="decreaseQty($event)">
+          [items]="orderItems"
+          [total]="total"
+          (remove)="removeItem($event)"
+          (decrease)="decreaseQty($event)">
         </app-order-summary>
       </div>
 
       <div class="card">
         <app-payment-selector
-            [(method)]="paymentMethod">
+          [(method)]="paymentMethod">
         </app-payment-selector>
       </div>
 
@@ -59,10 +59,13 @@
         [disabled]="isLoading || orderItems.length === 0"
         (click)="createOrder()">
 
-        {{ isLoading ? 'Sending...' : 'Send to Kitchen 🔥' }}
+        {{
+          isLoading
+            ? ('WAITER.PLACEORDER.BUTTONS.SENDING' | translate)
+            : ('WAITER.PLACEORDER.BUTTONS.SUBMIT' | translate)
+        }}
 
       </button>
-
 
     </div>
 

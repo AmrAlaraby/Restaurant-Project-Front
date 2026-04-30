@@ -5,7 +5,7 @@
     class="cat-btn"
     [class.active]="isActive(undefined)"
     (click)="onSelect(undefined)">
-    All
+    {{ 'WAITER.ORDERS.FILTERS.STATUS.ALL' | translate }}
   </button>
 
   <!-- DYNAMIC CATEGORIES -->
@@ -14,7 +14,7 @@
     class="cat-btn"
     [class.active]="isActive(c.id)"
     (click)="onSelect(c.id)">
-    {{ c.name }}
+    {{ getCategoryName(c) }}
   </button>}
 
 </div>
