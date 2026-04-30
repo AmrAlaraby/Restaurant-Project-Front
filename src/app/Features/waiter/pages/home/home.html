@@ -56,4 +56,11 @@
     <app-active-orders [orders]="activeOrders"></app-active-orders>
   </section>
 
+
+
+<app-pagination [pageIndex]="pageIndex" [pageSize]="pageSize" [totalCount]="totalCount"
+  (pageChanged)="onPageChanged($event)">
+</app-pagination>
+
+
 </div>

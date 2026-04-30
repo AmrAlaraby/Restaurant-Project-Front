@@ -64,7 +64,7 @@ ngOnInit(): void {
     this.categoryService.getAll().subscribe({
       next: (res) => {
         this.categories = res;
-        this.loadMenuItems();
+        
       }
     });
   }
@@ -85,9 +85,11 @@ loadUserAndThenTables(): void {
   }
 
   loadMenuItems(): void {
+    console.log(this.currentUser);
     this.menuService.getAll({
       categoryId: this.selectedCategoryId,
       branchId: this.currentUser.branchId,
+      
       isAvailable: true,
       pageIndex: this.pageIndex,
       pageSize: this.pageSize
