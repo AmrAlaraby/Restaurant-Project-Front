@@ -7,6 +7,7 @@ import { DeliveryService } from '../../../../Core/Services/Delivery-Service/deli
 import { Delivery } from '../../../../Core/Models/DeliveryModels/delivery';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ToastService } from '../../../../Core/Services/Toast-Service/toast-service';
+import { OrdersService } from '../../../../Core/Services/Orders-Service/orders-service';
 
 @Component({
   selector: 'app-delivery-details',
@@ -36,6 +37,7 @@ export class DeliveryDetails {
     private route: ActivatedRoute,
     private service: DeliveryService,
     private router: Router,
+    private ordersService: OrdersService,
      private toast: ToastService
   ) {}
 
@@ -64,38 +66,46 @@ export class DeliveryDetails {
   }
 
   updateStatus() {
-    if (!this.delivery) return;
+  if (!this.delivery) return;
 
-    const next = this.nextStatus();
-    if (!next) return;
+  const next = this.nextStatus();
+  if (!next) return;
 
-    // Validation لو هنروح Delivered
-    if (next === 'Delivered') {
-      const cash = this.updateModel.cashCollected ?? 0;
-      if (cash < this.delivery.order.totalAmount) {
-        this.toast.error(`Min amount is EGP ${this.delivery.order.totalAmount}`);
-        return;
-      }
+  if (next === 'Delivered') {
+    const cash = this.updateModel.cashCollected ?? 0;
+    if (cash < this.delivery.order.totalAmount) {
+      this.toast.error(`Min amount is EGP ${this.delivery.order.totalAmount}`);
+      return;
     }
-
-   
-
-    const body = {
-      status: next,
-      cashCollected: next === 'Delivered' ? this.updateModel.cashCollected : undefined
-    };
-
-    this.service.updateStatus(this.delivery.id, body).subscribe({
-      next: (res) => {
-        this.delivery = res;
-        this.updateModel.cashCollected = undefined;
-        this.toast.success(`Status updated to ${next}`); // ← زود ده
-      },
-      error: () => {
-        this.toast.error('Failed to update status'); // ← زود ده
-      }
-    });
   }
+
+  const body = {
+    status: next,
+    cashCollected: next === 'Delivered' ? this.updateModel.cashCollected : undefined
+  };
+
+  this.service.updateStatus(this.delivery.id, body).subscribe({
+    next: (res) => {
+      this.delivery = res;
+      this.updateModel.cashCollected = undefined;
+      this.toast.success(`Status updated to ${next}`);
+
+      if (next === 'Delivered') {
+        this.ordersService.markAsPaid(res.order.id).subscribe({
+          next: () => this.toast.success('Order marked as paid'),
+          error: (err) => {
+            const message = err.error?.detail || 'Failed to mark order as paid';
+            this.toast.error(message);
+          }
+        });
+      }
+    },
+    error: (err) => {
+      const message = err.error?.detail || 'Failed to update status';
+      this.toast.error(message);
+    }
+  });
+}
 
   goBack() {
     this.router.navigate(['/driver/deliveries']);
