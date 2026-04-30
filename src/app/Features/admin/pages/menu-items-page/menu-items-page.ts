@@ -55,7 +55,7 @@ export class MenuItemsPage implements OnInit {
 
   filters: MenuItemQueryParamsInterface = {
     pageIndex: 1,
-    pageSize: 10,
+    pageSize: 15,
   };
 
   stats: MenuItemsStatsInterface = {
@@ -142,7 +142,7 @@ export class MenuItemsPage implements OnInit {
   resetFilters(): void {
     this.filters = {
       pageIndex: 1,
-      pageSize: 10,
+      pageSize: 15,
     };
 
     this.loadMenuItems();
