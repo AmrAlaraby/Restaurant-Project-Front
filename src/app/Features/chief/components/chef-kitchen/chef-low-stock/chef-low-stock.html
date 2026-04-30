@@ -1,5 +1,4 @@
 <div class="low-stock-card" *ngIf="stocks.length > 0">
-
   <!-- Card Title -->
   <div class="card-title">
     <span class="warning-icon">⚠</span>
@@ -9,43 +8,30 @@
   <!-- Item List -->
   <div class="item-list">
     <div class="stock-item" *ngFor="let item of stocks">
-
       <div class="item-top">
         <span class="item-name">{{ getIngredientName(item) }}</span>
         <span class="item-qty">{{ item.quantityAvailable }} {{ item.unit }}</span>
       </div>
 
       <div class="bar-track">
-        <div
-          class="bar-fill"
-          [style.width.%]="getBarPercent(item)">
-        </div>
+        <div class="bar-fill" [style.width.%]="getBarPercent(item)"></div>
       </div>
 
       <div class="item-hint">
         {{ item.quantityAvailable }} {{ item.unit }} {{ 'CHEF.STOCK.LOW.REMAINING' | translate }}
 
         <ng-container *ngIf="item.lowThreshold">
-          · {{ 'CHEF.STOCK.LOW.THRESHOLD' | translate }}: {{ item.lowThreshold }} {{ 'COMMON.KG' | translate }}
+          · {{ 'CHEF.STOCK.LOW.THRESHOLD' | translate }}: {{ item.lowThreshold }}
+          {{ 'COMMON.KG' | translate }}
         </ng-container>
       </div>
-
     </div>
   </div>
 
   <!-- Restock Button -->
-  <button
-    class="restock-btn"
-    [class.sent]="requestSent"
-    (click)="requestRestock()">
-
-    {{ requestSent
-      ? ('CHEF.STOCK.LOW.SENT' | translate)
-      : ('CHEF.STOCK.LOW.REQUEST' | translate)
-    }}
-
+  <button class="restock-btn" [class.sent]="requestSent" (click)="requestRestock()">
+    {{ requestSent ? ('CHEF.STOCK.LOW.SENT' | translate) : ('CHEF.STOCK.LOW.REQUEST' | translate) }}
   </button>
-
 </div>
 
 <!-- No low stock -->
