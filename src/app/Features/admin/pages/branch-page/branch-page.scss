@@ -1,34 +1,76 @@
-$bg: #ede9e1;
+// ─── Branch Page Layout ───────────────────────────────────────────────────────
+//
+// Layout: two-pane master/detail, mobile-first.
+// Uses only CSS custom properties from styles.scss.
+// Dark mode: .dark class on a parent element — never prefers-color-scheme.
+// Logical properties throughout (no left/right).
+//
+// ─────────────────────────────────────────────────────────────────────────────
 
 .branch-page-layout {
   display: flex;
   min-height: 100vh;
-  background: $bg;
-  transition: all 0.3s ease;
+  background-color: var(--clr-surface-alt);
+  transition: background-color var(--transition-normal);
 
-  // Default: list takes full width
+  .dark & {
+    background-color: var(--clr-surface-alt); // resolved to #2C1400 in dark via styles.scss
+  }
+
+  // ── List Panel ─────────────────────────────────────────────────────────────
   .list-panel {
     flex: 1;
     overflow-y: auto;
-    transition: flex 0.3s ease;
+    background-color: var(--clr-surface);
+    transition:
+      flex var(--transition-normal),
+      background-color var(--transition-normal),
+      border-color var(--transition-normal);
+
+    .dark & {
+      background-color: var(--clr-surface);   // resolved to #1A0A00 in dark
+    }
   }
 
+  // ── Details Panel ──────────────────────────────────────────────────────────
   .details-panel {
     display: none;
     overflow-y: auto;
-    border-left: 1px solid #e0dbd3;
-    animation: slideIn 0.25s ease;
+    background-color: var(--clr-cream);
+    border-inline-start: 1px solid var(--clr-border);
+    animation: slideIn var(--transition-normal);
+    transition:
+      background-color var(--transition-normal),
+      border-color var(--transition-normal);
+
+    .dark & {
+      background-color: var(--clr-cream);     // resolved to #2C1400 in dark
+      border-inline-start-color: var(--clr-border); // resolved to #5D3A1A in dark
+    }
   }
 
-  // When details is open: split layout
+  // ── Has-Details: split layout ───────────────────────────────────────────────
   &.has-details {
+
     .list-panel {
       flex: 0 0 420px;
       min-width: 0;
-      border-right: 1px solid #e0dbd3;
+      border-inline-end: 1px solid var(--clr-border);
+      box-shadow: var(--shadow-sm);
 
-      @media (max-width: 900px) {
+      .dark & {
+        border-inline-end-color: var(--clr-border);
+        box-shadow: var(--shadow-sm);
+      }
+
+      // On narrow viewports hide the list when detail is open
+      @media (max-width: 768px) {
         display: none;
+      }
+
+      // Mid-range: allow list to be narrower
+      @media (min-width: 769px) and (max-width: 900px) {
+        flex: 0 0 300px;
       }
     }
 
@@ -39,10 +81,11 @@ $bg: #ede9e1;
   }
 }
 
+// ── Slide-in animation ────────────────────────────────────────────────────────
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateX(24px);
+    transform: translateX(var(--space-lg)); // 24px via token
   }
   to {
     opacity: 1;
