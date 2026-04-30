@@ -1,6 +1,5 @@
 <div class="recipes-page">
-
-  <div class="recipes-header d-flex flex-wrap align-items-center justify-content-between gap-3">
+  <div class="recipes-header">
     <h1 class="recipes-title">
       {{ 'CHEF.RECIPES.LIST.TITLE' | translate }}
     </h1>
@@ -26,26 +25,25 @@
   }
 
   @if (error()) {
-    <div class="state-box error">
+    <div class="state-box state-box--error">
       <span>⚠️ {{ error() }}</span>
     </div>
   }
 
   @if (!isLoading() && !error()) {
     <div class="table-card">
-      <table class="recipes-table w-100">
+      <table class="recipes-table">
         <thead>
           <tr>
             <th>{{ 'CHEF.RECIPES.LIST.TABLE.MENU_ITEM' | translate }}</th>
             <th>{{ 'CHEF.RECIPES.LIST.TABLE.INGREDIENT' | translate }}</th>
             <th>{{ 'CHEF.RECIPES.LIST.TABLE.QTY' | translate }}</th>
             <th>{{ 'CHEF.RECIPES.LIST.TABLE.UNIT' | translate }}</th>
-            <th></th>
+            <th class="action-cell-header"></th>
           </tr>
         </thead>
 
         <tbody>
-
           @if (recipes().length === 0) {
             <tr>
               <td colspan="5" class="empty-cell">
@@ -55,15 +53,12 @@
           }
 
           @for (menuItem of menuItemNames(); track menuItem) {
-
             <tr class="group-header-row" (click)="toggleGroup(menuItem)">
               <td colspan="5" class="group-header-cell">
                 <div class="group-header-inner">
-
                   <div class="menu-item-wrap">
                     <span class="menu-icon">{{ getMenuItemIcon(menuItem) }}</span>
 
-                    <!-- ✅ FIX هنا بس -->
                     <span class="menu-name">{{ getMenuItemDisplayName(menuItem) }}</span>
 
                     <span class="ingredient-count">
@@ -78,21 +73,21 @@
 
                   <span class="chevron" [class.open]="isGroupOpen(menuItem)">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path d="M3 5l4 4 4-4"
-                            stroke="currentColor"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"/>
+                      <path
+                        d="M3 5l4 4 4-4"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
                     </svg>
                   </span>
-
                 </div>
               </td>
             </tr>
 
             @if (isGroupOpen(menuItem)) {
               @for (recipe of groupedRecipes().get(menuItem)!; track recipe.ingredientId) {
-
                 <tr class="ingredient-row">
                   <td class="menu-item-cell"></td>
 
@@ -109,7 +104,6 @@
                   </td>
 
                   <td class="action-cell">
-
                     <button class="btn-edit" (click)="onEditClick(recipe)">
                       {{ 'COMMON.EDIT' | translate }}
                     </button>
@@ -120,27 +114,20 @@
                       [disabled]="deletingId() === recipe.ingredientId"
                     >
                       {{
-                        deletingId() === recipe.ingredientId
-                          ? '...'
-                          : ('COMMON.DELETE' | translate)
+                        deletingId() === recipe.ingredientId ? '...' : ('COMMON.DELETE' | translate)
                       }}
                     </button>
-
                   </td>
-
                 </tr>
-
               }
             }
-
           }
-
         </tbody>
       </table>
     </div>
 
     @if (count() > pageSize()) {
-      <div class="pagination-wrap d-flex justify-content-center pt-2">
+      <div class="pagination-wrap">
         <app-pagination
           [pageIndex]="pageIndex()"
           [pageSize]="pageSize()"
@@ -150,5 +137,4 @@
       </div>
     }
   }
-
 </div>
