@@ -1,211 +1,186 @@
-// ── Variables ──────────────────────────────────────────────
-$red:        #C41E1E;
-$red-dark:   #a01818;
-$red-light:  #fdf0f0;
-$green:      #2E9E5B;
-$amber:      #F5A623;
-$cream:      #F5F0EB;
-$white:      #ffffff;
-$gray-100:   #f7f7f7;
-$gray-200:   #e5e5e5;
-$gray-400:   #aaaaaa;
-$gray-600:   #666666;
-$gray-800:   #2a2a2a;
+// ─────────────────────────────────────────────────────────────
+//  chef-available-stock  |  available stock card
+//  All values from global design tokens — no hardcoded hex.
+// ─────────────────────────────────────────────────────────────
 
-$radius:     14px;
-$radius-sm:  8px;
-$font:       'Poppins', sans-serif;
-
-// ── Page ───────────────────────────────────────────────────
-.stock-page {
-  font-family: $font;
-  padding: 28px 32px;
-  background: $cream;
-  min-height: 100%;
-  color: $gray-800;
-}
-
-// ── Header ─────────────────────────────────────────────────
-.stock-header {
-  margin-bottom: 24px;
-
-  h1 {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: $gray-800;
-  }
-
-  .subtitle {
-    font-size: .82rem;
-    color: $gray-400;
-    margin-top: 4px;
-  }
-}
-
-// ── Grid: two columns ──────────────────────────────────────
-.stock-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  align-items: start;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-// ── Cards ──────────────────────────────────────────────────
+// ── Card shell ───────────────────────────────────────────────
 .stock-card {
-  background: $white;
-  border-radius: $radius;
-  padding: 22px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, .06);
+  background: var(--clr-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow var(--transition-normal);
 
-  &.low-card {
-    border: 1.5px solid $red;
+  .dark & {
+    background: var(--clr-surface); // token already flips in dark
+    box-shadow: var(--shadow-md);
   }
 
+  // ── Available-card variant ──────────────────────────────
   &.avail-card {
-    border: 1.5px solid $gray-200;
+    border: 1.5px solid var(--clr-cream-dark);
+
+    .dark & {
+      border-color: var(--clr-border);
+    }
+
+    // subtle left accent stripe
+    border-inline-start: 4px solid var(--clr-accent);
+
+    .dark & {
+      border-inline-start-color: var(--clr-accent);
+    }
   }
 }
 
-// ── Card Titles ────────────────────────────────────────────
+// ── Card title ───────────────────────────────────────────────
 .card-title {
-  font-size: .85rem;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
   font-weight: 700;
-  margin-bottom: 18px;
-}
-
-.low-title {
-  color: $red;
-
-  .warning-icon {
-    margin-right: 6px;
-    font-size: .9rem;
-  }
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-block-end: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
 }
 
 .avail-title {
-  color: $gray-600;
+  color: var(--clr-accent-dark);
+
+  .dark & {
+    color: var(--clr-accent-light);
+  }
+
+  // decorative icon beside the title
+  &__icon {
+    color: var(--clr-accent);
+    font-size: 0.75rem;
+    line-height: 1;
+    flex-shrink: 0;
+
+    .dark & {
+      color: var(--clr-accent-light);
+    }
+  }
 }
 
-// ── Item List ──────────────────────────────────────────────
+// ── Item list ────────────────────────────────────────────────
 .item-list {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: var(--space-md);
 }
 
-// ── Single Item ────────────────────────────────────────────
+// ── Single stock row ─────────────────────────────────────────
 .stock-item {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--space-xs);
+
+  // subtle separator between rows (not on last child)
+  &:not(:last-child) {
+    padding-block-end: var(--space-md);
+    border-block-end: 1px solid var(--clr-cream-mid);
+
+    .dark & {
+      border-block-end-color: var(--clr-border);
+    }
+  }
 }
 
+// ── Top row: name + qty ──────────────────────────────────────
 .item-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: var(--space-sm);
 }
 
 .item-name {
-  font-size: .88rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
   font-weight: 600;
-  color: $gray-800;
+  color: var(--clr-text-primary);
+  // allow long ingredient names to wrap gracefully
+  overflow-wrap: break-word;
+  min-width: 0;
+  flex: 1;
+
+  .dark & {
+    color: var(--clr-text-primary);
+  }
 }
 
 .item-qty {
-  font-size: .88rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
   font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
 
-  &.low-qty   { color: $red; }
-  &.avail-qty { color: $green; }
+  &.avail-qty {
+    color: var(--clr-accent-dark);
+    background: var(--clr-cream-mid);
+    padding-block: 2px;
+    padding-inline: var(--space-sm);
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+
+    .dark & {
+      color: var(--clr-accent-light);
+      background: rgba(212, 160, 23, 0.15); // accent at low opacity
+    }
+  }
 }
 
-// ── Progress Bar ───────────────────────────────────────────
+// ── Progress bar ─────────────────────────────────────────────
 .bar-track {
   width: 100%;
   height: 6px;
-  background: $gray-200;
-  border-radius: 99px;
+  background: var(--clr-cream-dark);
+  border-radius: var(--radius-full);
   overflow: hidden;
+
+  .dark & {
+    background: var(--clr-border);
+  }
 }
 
 .bar-fill {
   height: 100%;
-  border-radius: 99px;
-  transition: width .4s ease;
+  border-radius: var(--radius-full);
+  transition: width var(--transition-normal);
+  // color is injected via [style.background] Angular binding
 }
 
-// ── Hint text ──────────────────────────────────────────────
+// ── Hint text ────────────────────────────────────────────────
 .item-hint {
-  font-size: .73rem;
-  color: $gray-400;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: var(--clr-text-hint);
+  // Use logical margin so RTL flips naturally
+  margin-inline-start: 0;
 
-  &.low-hint {
-    color: $gray-600;
+  .dark & {
+    color: var(--clr-text-hint);
   }
 }
 
-// ── Divider inside card ────────────────────────────────────
-.item-divider {
-  height: 1px;
-  background: $gray-100;
-  margin: 4px 0;
-}
-
-// ── Restock Button ─────────────────────────────────────────
-.restock-btn {
-  margin-top: 22px;
-  width: 100%;
-  padding: 11px 0;
-  background: $red;
-  color: $white;
-  border: none;
-  border-radius: $radius-sm;
-  font-family: $font;
-  font-size: .82rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background .2s ease;
-
-  &:hover {
-    background: $red-dark;
+// ─────────────────────────────────────────────────────────────
+//  Responsive
+// ─────────────────────────────────────────────────────────────
+@media (max-width: 768px) {
+  .stock-card {
+    padding: var(--space-md);
   }
-}
 
-// ── Empty State ────────────────────────────────────────────
-.empty-state {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 48px;
-  color: $gray-400;
-  font-size: .9rem;
-  font-weight: 500;
-}
+  .item-name {
+    font-size: 0.82rem;
+  }
 
-// ── Loading ────────────────────────────────────────────────
-.loading-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 48px 0;
-  color: $gray-400;
-  font-size: .85rem;
-}
-
-.spinner {
-  width: 26px;
-  height: 26px;
-  border: 3px solid $gray-200;
-  border-top-color: $red;
-  border-radius: 50%;
-  animation: spin .8s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
+  .item-qty.avail-qty {
+    font-size: 0.75rem;
+  }
 }

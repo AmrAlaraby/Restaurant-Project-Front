@@ -1,5 +1,4 @@
 <div class="kds-root">
-
   <!-- Header -->
   <header class="kds-header">
     <div class="header-right">
@@ -18,37 +17,35 @@
     ></app-chef-kitchen-filter>
   </div>
 
- 
-
   <!-- Stats -->
   <div class="stats-row">
-
-    <div class="stat-card pending">
+    <div class="stat-card stat-pending">
+      <span class="stat-icon" aria-hidden="true">⏳</span>
       <div class="stat-num">{{ totalPending }}</div>
       <div class="stat-label">
         {{ 'CHEF.KITCHEN.STATS.PENDING' | translate }}
       </div>
     </div>
 
-    <div class="stat-card preparing">
+    <div class="stat-card stat-preparing">
+      <span class="stat-icon" aria-hidden="true">🔥</span>
       <div class="stat-num">{{ totalPreparing }}</div>
       <div class="stat-label">
         {{ 'CHEF.KITCHEN.STATS.PREPARING' | translate }}
       </div>
     </div>
 
-    <div class="stat-card done">
+    <div class="stat-card stat-done">
+      <span class="stat-icon" aria-hidden="true">✔</span>
       <div class="stat-num">{{ totalDone }}</div>
       <div class="stat-label">
         {{ 'CHEF.KITCHEN.STATS.DONE' | translate }}
       </div>
     </div>
-
   </div>
 
   <!-- Board -->
   <div class="kds-board" *ngIf="!loading; else loadingTpl">
-
     <!-- PENDING -->
     <div class="board-column col-pending">
       <div class="col-header">
@@ -120,7 +117,6 @@
         </div>
       </div>
     </div>
-
   </div>
 
   <!-- Loading -->
@@ -138,5 +134,4 @@
     (close)="onCloseModal()"
     (statusUpdate)="onStatusUpdate($event)"
   ></app-ticket-details-modal>
-
 </div>

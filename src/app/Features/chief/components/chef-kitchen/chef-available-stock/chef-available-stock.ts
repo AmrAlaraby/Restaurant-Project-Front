@@ -11,32 +11,29 @@ import { LocalizationService } from '../../../../../Core/Services/Localization-S
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './chef-available-stock.html',
-  styleUrl: './chef-available-stock.scss'
+  styleUrl: './chef-available-stock.scss',
 })
 export class ChefAvailableStockComponent {
-
   @Input() stocks: BranchStockInterface[] = [];
 
-  constructor(
-        private localizationService: LocalizationService,
-      ) {}
-    ngOnInit(): void {
-      this.getCurrentLanguage();
-    }
-    CurrentLanguage: string = 'en';
-    
-      private destroy$ = new Subject<void>();
-      getCurrentLanguage(): void {
-        this.CurrentLanguage = this.localizationService.getCurrentLang();
-        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
-          this.CurrentLanguage = lang;
-        });
-      }
-    
-      ngOnDestroy(): void {
-        this.destroy$.next();
-        this.destroy$.complete();
-      }
+  constructor(private localizationService: LocalizationService) {}
+  ngOnInit(): void {
+    this.getCurrentLanguage();
+  }
+  CurrentLanguage: string = 'en';
+
+  private destroy$ = new Subject<void>();
+  getCurrentLanguage(): void {
+    this.CurrentLanguage = this.localizationService.getCurrentLang();
+    this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+      this.CurrentLanguage = lang;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   getBarPercent(item: BranchStockInterface): number {
     if (!item.lowThreshold || item.lowThreshold === 0) return 100;

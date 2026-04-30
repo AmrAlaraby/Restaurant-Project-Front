@@ -1,34 +1,36 @@
 <div class="stock-card avail-card" *ngIf="stocks.length > 0">
-
   <div class="card-title avail-title">
+    <span class="avail-title__icon" aria-hidden="true">✦</span>
     {{ 'CHEF.STOCK.AVAILABLE.TITLE' | translate }}
   </div>
 
   <div class="item-list">
     <div class="stock-item" *ngFor="let item of stocks">
-
       <div class="item-top">
         <span class="item-name">{{ getIngredientName(item) }}</span>
         <span class="item-qty avail-qty">
-          {{ item.quantityAvailable }} {{ item.unit }}
+          {{ item.quantityAvailable }}&thinsp;{{ item.unit }}
         </span>
       </div>
 
-      <div class="bar-track">
+      <div
+        class="bar-track"
+        role="progressbar"
+        [attr.aria-valuenow]="getBarPercent(item)"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
         <div
           class="bar-fill"
           [style.width.%]="getBarPercent(item)"
-          [style.background]="getBarColor(item)">
-        </div>
+          [style.background]="getBarColor(item)"
+        ></div>
       </div>
 
       <div class="item-hint">
-        {{ item.quantityAvailable }}
-        {{ item.unit }}
+        {{ item.quantityAvailable }}&thinsp;{{ item.unit }}
         {{ 'CHEF.STOCK.AVAILABLE.REMAINING' | translate }}
       </div>
-
     </div>
   </div>
-
 </div>
