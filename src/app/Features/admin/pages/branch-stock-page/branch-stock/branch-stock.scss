@@ -135,53 +135,364 @@
   color: var(--clr-text-hint);
 }
 
-/* ── TABLE CARD ──────────────────────────────────── */
-.table-card {
+/* ═══════════════════════════════════════════════════════════════════
+   ELEGANT TABLE STYLES — Clean, Modern, Professional
+   Minimalist Red & Gold Accents
+═══════════════════════════════════════════════════════════════════ */
+
+/* ── TABLE CONTAINER ────────────────────────────────────────────── */
+.table-container {
   background: var(--clr-surface);
   border-radius: var(--radius-lg);
+  border: 1px solid var(--clr-border);
   overflow: hidden;
-  border: 1.5px solid var(--clr-border);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-normal);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  .dark & {
+    background: var(--clr-surface);
+    border-color: var(--clr-border);
+  }
 }
 
-/* ── TABLE ───────────────────────────────────────── */
+/* ── SCROLL WRAPPER ─────────────────────────────────────────────── */
+.table-scroll {
+  overflow-x: auto;
+  
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: var(--clr-border);
+    border-radius: var(--radius-full);
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--clr-primary);
+    border-radius: var(--radius-full);
+    
+    .dark & {
+      background: var(--clr-accent);
+    }
+  }
+}
+
+/* ── TABLE ─────────────────────────────────────────────────────── */
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 480px;
+  font-family: var(--font-body);
+  min-width: 600px;
 }
 
-/* ── THEAD ───────────────────────────────────────── */
-thead tr {
-  background: var(--clr-cream);
-  border-bottom: 1px solid var(--clr-border);
-
+/* ── HEADER ────────────────────────────────────────────────────── */
+thead {
+  tr {
+    background: var(--clr-gray-100);
+    border-bottom: 1px solid var(--clr-border);
+    
+    .dark & {
+      background: var(--clr-surface-warm);
+      border-bottom-color: var(--clr-border);
+    }
+  }
+  
   th {
     padding: 14px var(--space-md);
-    font-family: var(--font-heading);
-    font-size: 10px;
+    font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     color: var(--clr-text-hint);
     text-align: left;
+    white-space: nowrap;
+    
+    &:last-child {
+      text-align: right;
+    }
   }
 }
 
-/* ── TBODY ───────────────────────────────────────── */
-tbody tr {
-  border-bottom: 1px solid var(--clr-cream-mid);
-  transition: background 0.15s;
-
-  &:hover {
-    background: var(--clr-cream);
+/* ── BODY ──────────────────────────────────────────────────────── */
+tbody {
+  tr {
+    border-bottom: 1px solid var(--clr-border);
+    transition: background var(--transition-fast);
+    
+    &:hover {
+      background: var(--clr-gray-100);
+      
+      .dark & {
+        background: var(--clr-surface-warm);
+      }
+    }
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  
+  td {
+    padding: 14px var(--space-md);
+    font-size: 0.875rem;
+    color: var(--clr-text-primary);
+    
+    &:last-child {
+      text-align: right;
+    }
   }
 }
 
-td {
-  padding: var(--space-md);
-  font-size: 14px;
+/* ── COLUMN STYLES ───────────────────────────────────────────────── */
+.col-name {
+  font-weight: 600;
+  color: var(--clr-primary);
+  
+  .dark & {
+    color: var(--clr-accent);
+  }
+}
+
+.col-quantity {
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+.col-price {
+  font-weight: 700;
+  color: var(--clr-primary);
+  
+  .dark & {
+    color: var(--clr-accent);
+  }
+}
+
+/* ── BADGES ─────────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: var(--clr-gray-100);
+  color: var(--clr-text-secondary);
+  border: 1px solid var(--clr-border);
+  
+  .dark & {
+    background: var(--clr-surface-warm);
+    color: var(--clr-text-secondary);
+    border-color: var(--clr-border);
+  }
+}
+
+.badge-danger {
+  background: var(--clr-danger-bg);
+  color: var(--clr-danger);
+  border-color: var(--clr-danger);
+  
+  .dark & {
+    background: var(--clr-danger-bg);
+    color: var(--clr-danger);
+  }
+}
+
+.badge-success {
+  background: var(--clr-success-bg);
+  color: var(--clr-success);
+  border-color: var(--clr-success);
+  
+  .dark & {
+    background: var(--clr-success-bg);
+    color: var(--clr-success);
+  }
+}
+
+/* ── ACTION BUTTONS ─────────────────────────────────────────────── */
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.btn-action {
+  background: transparent;
+  border: none;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  
+  &.btn-edit {
+    color: var(--clr-info);
+    background: var(--clr-info-bg);
+    
+    &:hover {
+      background: var(--clr-info);
+      color: white;
+      transform: translateY(-1px);
+    }
+    
+    .dark & {
+      background: rgba(21, 101, 192, 0.2);
+      color: var(--clr-info);
+      
+      &:hover {
+        background: var(--clr-info);
+        color: white;
+      }
+    }
+  }
+  
+  &.btn-delete {
+    color: var(--clr-danger);
+    background: var(--clr-danger-bg);
+    
+    &:hover {
+      background: var(--clr-danger);
+      color: white;
+      transform: translateY(-1px);
+    }
+    
+    .dark & {
+      background: rgba(229, 57, 53, 0.2);
+      color: var(--clr-danger);
+      
+      &:hover {
+        background: var(--clr-danger);
+        color: white;
+      }
+    }
+  }
+  
+  &.btn-view {
+    color: var(--clr-primary);
+    background: rgba(192, 57, 43, 0.1);
+    
+    &:hover {
+      background: var(--clr-primary);
+      color: white;
+      transform: translateY(-1px);
+    }
+    
+    .dark & {
+      background: rgba(212, 160, 23, 0.15);
+      color: var(--clr-accent);
+      
+      &:hover {
+        background: var(--clr-accent);
+        color: var(--clr-text-on-accent);
+      }
+    }
+  }
+}
+
+/* ── PAGINATION ─────────────────────────────────────────────────── */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  border-top: 1px solid var(--clr-border);
+  background: var(--clr-surface);
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  
+  .dark & {
+    background: var(--clr-surface);
+    border-top-color: var(--clr-border);
+  }
+}
+
+.pagination-info {
+  font-size: 0.813rem;
+  color: var(--clr-text-hint);
+}
+
+.pagination-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.pagination-btn {
+  padding: 6px 12px;
+  border: 1px solid var(--clr-border);
+  background: var(--clr-surface);
   color: var(--clr-text-primary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.813rem;
+  transition: all var(--transition-fast);
+  
+  &:hover:not(:disabled) {
+    background: var(--clr-primary);
+    color: white;
+    border-color: var(--clr-primary);
+  }
+  
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  
+  &.active {
+    background: var(--clr-primary);
+    color: white;
+    border-color: var(--clr-primary);
+    
+    .dark & {
+      background: var(--clr-accent);
+      border-color: var(--clr-accent);
+      color: var(--clr-text-on-accent);
+    }
+  }
+  
+  .dark & {
+    background: var(--clr-surface);
+    border-color: var(--clr-border);
+    color: var(--clr-text-primary);
+    
+    &:hover:not(:disabled) {
+      background: var(--clr-accent);
+      border-color: var(--clr-accent);
+      color: var(--clr-text-on-accent);
+    }
+  }
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  thead th,
+  tbody td {
+    padding: 10px var(--space-sm);
+  }
+  
+  .btn-action {
+    padding: 4px 8px;
+    font-size: 0.6875rem;
+  }
+  
+  .pagination {
+    padding: var(--space-sm);
+  }
+}
+
+/* ── ANIMATIONS ─────────────────────────────────────────────────── */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 /* ── COLUMNS ─────────────────────────────────────── */
