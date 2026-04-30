@@ -1,82 +1,692 @@
+// ============================================================================
+// RECIPE LIST COMPONENT STYLESHEET
+// Brand: Warm Red-and-Gold Restaurant Theme
+// Features: Responsive, Logical Properties, Dark Mode Support
+// ============================================================================
+
+// ============================================================================
+// PAGE CONTAINER
+// ============================================================================
+
 .recipes-page {
-  padding: 1.5rem;
-  background: #f5f1ec;
+  padding: var(--space-md);
+  background: var(--clr-surface);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: var(--space-lg);
+
+  .dark & {
+    background: var(--clr-surface);
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--space-sm);
+    gap: var(--space-md);
+  }
+}
+
+// ============================================================================
+// HEADER & FILTER SECTION
+// ============================================================================
+
+.recipes-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-sm);
+  }
 }
 
 .recipes-title {
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: #1a1a1a;
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--clr-primary);
   margin: 0;
+  flex-shrink: 0;
+
+  .dark & {
+    color: var(--clr-accent-light);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 }
 
 .filter-select {
-  height: 38px;
-  padding-inline: 12px 32px;
-  border: 0.5px solid #d5d0c8;
-  border-radius: 20px;
-  background: #fff;
-  font-size: 13px;
+  height: 44px;
+  padding-inline: 16px 40px;
+  border: 2px solid var(--clr-border);
+  border-radius: var(--radius-full);
+  background: var(--clr-surface);
+  color: var(--clr-text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
+  transition: all var(--transition-fast);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23C0392B' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-inline-end: 40px;
+  appearance: none;
+
+  .dark & {
+    background-color: var(--clr-surface);
+    color: var(--clr-text-primary);
+    border-color: var(--clr-border);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23F0C040' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  }
+
+  &:hover {
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.1);
+  }
+
+  .dark &:hover {
+    border-color: var(--clr-accent-light);
+    box-shadow: 0 0 0 3px rgba(240, 192, 64, 0.15);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 0 4px rgba(192, 57, 43, 0.15);
+  }
+
+  .dark &:focus {
+    border-color: var(--clr-accent-light);
+    box-shadow: 0 0 0 4px rgba(240, 192, 64, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 40px;
+    font-size: 13px;
+  }
 }
+
+// ============================================================================
+// STATE BOXES (LOADING, ERROR)
+// ============================================================================
+
+.state-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding: var(--space-xl);
+  background: var(--clr-surface-alt);
+  border: 2px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  color: var(--clr-text-secondary);
+  font-size: 16px;
+  min-height: 200px;
+  text-align: center;
+  transition: all var(--transition-normal);
+
+  .dark & {
+    background: var(--clr-surface-alt);
+    border-color: var(--clr-border);
+    color: var(--clr-text-secondary);
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--space-lg);
+    min-height: 160px;
+    font-size: 14px;
+    gap: var(--space-sm);
+  }
+}
+
+.state-box--error {
+  background: var(--clr-danger-bg);
+  border-color: var(--clr-danger);
+  color: var(--clr-danger);
+
+  .dark & {
+    background: var(--clr-danger-bg);
+    border-color: var(--clr-primary-light);
+    color: var(--clr-primary-light);
+  }
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 4px solid var(--clr-border);
+  border-top-color: var(--clr-primary);
+  border-radius: var(--radius-full);
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+
+  .dark & {
+    border-color: rgba(192, 57, 43, 0.3);
+    border-top-color: var(--clr-accent-light);
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ============================================================================
+// TABLE CARD & LAYOUT
+// ============================================================================
 
 .table-card {
-  background: #fff;
-  border-radius: 16px;
-  border: 0.5px solid #e5e1da;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
   overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+
+  .dark & {
+    background: var(--clr-surface);
+    border-color: var(--clr-border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (max-width: 768px) {
+    border-radius: var(--radius-md);
+  }
 }
 
+// ============================================================================
+// TABLE STYLES
+// ============================================================================
+
 .recipes-table {
+  width: 100%;
   border-collapse: collapse;
+  font-family: var(--font-body);
   font-size: 14px;
 
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
+}
+
+.recipes-table thead {
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+
+  .dark & {
+    background: rgba(192, 57, 43, 0.9);
+    color: var(--clr-text-on-primary);
+  }
+
   th {
-    font-size: 11px;
-    color: #9e9a93;
-    padding: 12px 20px;
+    padding: var(--space-md);
+    text-align: start;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all var(--transition-fast);
+
+    @media (max-width: 768px) {
+      padding: var(--space-sm) var(--space-md);
+      font-size: 11px;
+    }
+  }
+}
+
+.action-cell-header {
+  text-align: end;
+  padding-inline-end: var(--space-lg);
+
+  @media (max-width: 768px) {
+    padding-inline-end: var(--space-md);
+  }
+}
+
+.recipes-table tbody {
+  background: var(--clr-surface);
+
+  .dark & {
+    background: var(--clr-surface);
   }
 
   td {
-    padding: 13px 20px;
-    border-bottom: 0.5px solid #f0ece5;
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--clr-border);
+    color: var(--clr-text-primary);
+    transition: all var(--transition-fast);
+
+    .dark & {
+      border-color: var(--clr-border);
+      color: var(--clr-text-primary);
+    }
+
+    @media (max-width: 768px) {
+      padding: var(--space-sm) var(--space-md);
+    }
   }
 }
+
+.recipes-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+// ============================================================================
+// EMPTY STATE
+// ============================================================================
+
+.empty-cell {
+  text-align: center;
+  padding: var(--space-xl) var(--space-md) !important;
+  color: var(--clr-text-hint);
+  font-size: 16px;
+  font-weight: 500;
+
+  .dark & {
+    color: var(--clr-text-hint);
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--space-lg) var(--space-md) !important;
+    font-size: 14px;
+  }
+}
+
+// ============================================================================
+// GROUP HEADER ROW (MENU ITEMS)
+// ============================================================================
+
+.group-header-row {
+  background: linear-gradient(
+    to right,
+    var(--clr-primary),
+    var(--clr-primary-light)
+  );
+  cursor: pointer;
+  transition: all var(--transition-fast);
+
+  .dark & {
+    background: linear-gradient(
+      to right,
+      rgba(192, 57, 43, 0.85),
+      rgba(231, 76, 60, 0.8)
+    );
+  }
+
+  &:hover {
+    background: linear-gradient(
+      to right,
+      var(--clr-primary-dark),
+      var(--clr-primary)
+    );
+
+    .dark & {
+      background: linear-gradient(
+        to right,
+        rgba(192, 57, 43, 0.95),
+        rgba(231, 76, 60, 0.9)
+      );
+    }
+  }
+
+  td {
+    border-bottom: none;
+    padding: var(--space-lg) var(--space-md) !important;
+    color: var(--clr-text-on-primary);
+
+    .dark & {
+      color: var(--clr-text-on-primary);
+    }
+
+    @media (max-width: 768px) {
+      padding: var(--space-md) var(--space-sm) !important;
+    }
+  }
+}
+
+.group-header-cell {
+  user-select: none;
+}
+
+.group-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  min-height: 24px;
+}
+
+.menu-item-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex: 1;
+  min-width: 0;
+}
+
+.menu-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
+}
+
+.menu-name {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--clr-text-on-primary);
+  word-break: break-word;
+
+  .dark & {
+    color: var(--clr-text-on-primary);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+}
+
+.ingredient-count {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: rgba(255, 248, 240, 0.25);
+  color: var(--clr-text-on-primary);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  .dark & {
+    background: rgba(255, 248, 240, 0.15);
+    color: var(--clr-text-on-primary);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+}
+
+.chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--clr-text-on-primary);
+  transition: transform var(--transition-fast);
+  width: 24px;
+  height: 24px;
+
+  svg {
+    stroke: currentColor;
+  }
+
+  &.open {
+    transform: rotate(180deg);
+  }
+
+  @media (max-width: 768px) {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+// ============================================================================
+// INGREDIENT ROWS
+// ============================================================================
+
+.ingredient-row {
+  background: var(--clr-surface);
+  transition: all var(--transition-fast);
+
+  .dark & {
+    background: var(--clr-surface);
+  }
+
+  &:hover {
+    background: var(--clr-surface-alt);
+
+    .dark & {
+      background: var(--clr-surface-alt);
+    }
+  }
+
+  td {
+    vertical-align: middle;
+  }
+}
+
+.menu-item-cell {
+  width: 20px;
+  padding-inline-start: var(--space-lg) !important;
+
+  @media (max-width: 768px) {
+    padding-inline-start: var(--space-md) !important;
+  }
+}
+
+.ingredient-cell {
+  font-weight: 500;
+  color: var(--clr-text-primary);
+
+  .dark & {
+    color: var(--clr-text-primary);
+  }
+
+  @media (max-width: 768px) {
+    max-width: 150px;
+    word-break: break-word;
+  }
+}
+
+.qty-cell {
+  text-align: center;
+  color: var(--clr-text-secondary);
+  font-weight: 500;
+  min-width: 60px;
+
+  .dark & {
+    color: var(--clr-text-secondary);
+  }
+
+  @media (max-width: 768px) {
+    min-width: 50px;
+    font-size: 12px;
+  }
+}
+
+.unit-cell {
+  text-align: center;
+  color: var(--clr-text-secondary);
+  font-size: 13px;
+  min-width: 60px;
+
+  .dark & {
+    color: var(--clr-text-secondary);
+  }
+
+  @media (max-width: 768px) {
+    min-width: 50px;
+    font-size: 12px;
+  }
+}
+
+// ============================================================================
+// ACTION CELLS & BUTTONS
+// ============================================================================
 
 .action-cell {
   text-align: end;
   white-space: nowrap;
+  padding-inline-end: var(--space-lg) !important;
+
+  @media (max-width: 768px) {
+    padding-inline-end: var(--space-md) !important;
+  }
 }
 
-/* ✅ Buttons updated to match Add button */
 .btn-edit,
 .btn-delete {
-  height: 38px;
-  padding-inline: 20px;
+  height: 36px;
+  padding-inline: 16px;
   border: none;
-  border-radius: 20px;
-  background: #1a1a1a;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 500;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.15s;
+  transition: all var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:focus {
+    outline: none;
+  }
+
+  @media (max-width: 768px) {
+    height: 32px;
+    padding-inline: 12px;
+    font-size: 11px;
+  }
 }
 
 .btn-edit {
-  margin-inline-end: 8px;
+  background: var(--clr-accent);
+  color: var(--clr-text-on-accent);
+  margin-inline-end: var(--space-sm);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .dark & {
+    background: var(--clr-accent);
+    color: var(--clr-text-on-accent);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  &:hover:not(:disabled) {
+    background: var(--clr-accent-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(192, 57, 43, 0.15);
+
+    .dark & {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(192, 57, 43, 0.1);
+
+    .dark & {
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &:focus-visible:not(:disabled) {
+    outline: 2px solid var(--clr-accent);
+    outline-offset: 2px;
+
+    .dark & {
+      outline-color: var(--clr-accent-light);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
-.btn-edit:hover,
-.btn-delete:hover:not(:disabled) {
-  opacity: 0.8;
+.btn-delete {
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .dark & {
+    background: var(--clr-primary);
+    color: var(--clr-text-on-primary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  &:hover:not(:disabled) {
+    background: var(--clr-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(192, 57, 43, 0.25);
+
+    .dark & {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(192, 57, 43, 0.15);
+
+    .dark & {
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &:focus-visible:not(:disabled) {
+    outline: 2px solid var(--clr-primary);
+    outline-offset: 2px;
+
+    .dark & {
+      outline-color: var(--clr-accent-light);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
-.btn-delete:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+// ============================================================================
+// PAGINATION
+// ============================================================================
+
+.pagination-wrap {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-lg) var(--space-md);
+  background: var(--clr-surface);
+
+  .dark & {
+    background: var(--clr-surface);
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--space-md);
+  }
+}
+
+// ============================================================================
+// UTILITY CLASSES (from Bootstrap)
+// ============================================================================
+
+.w-100 {
+  width: 100%;
+}
+
+.pt-2 {
+  padding-top: var(--space-sm);
 }
