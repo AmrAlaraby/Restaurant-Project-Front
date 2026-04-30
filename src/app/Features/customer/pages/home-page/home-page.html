@@ -1,57 +1,44 @@
 <div class="home-page">
-
   <!-- ===================== HERO ===================== -->
   <section class="hero">
+    <div class="hero-image">
+      <div class="hero-img-placeholder">
+        <img src="/images/Burger.jpg" alt="Burger" />
+      </div>
+    </div>
     <div class="hero-container">
       <div class="hero-content">
         <div class="hero-badge">Fastest Delivery & Easy Pickup</div>
-        <h1 class="hero-title">
-          Kings <span class="hero-highlight">Burger</span>
-        </h1>
+        <h1 class="hero-title">Justice <span class="hero-highlight">Burger</span></h1>
         <p class="hero-desc">
-          Good food always brought right to you, We are delivering all your orders quickly. We make your meal exciting.
+          Good food always brought right to you. We are delivering all your orders quickly and make
+          your meal exciting.
         </p>
         <div class="hero-actions">
-          <button class="btn-hero-primary" (click)="goToBrowse()">
-            View Our Menu
-          </button>
-          <div class="hero-rating">
-            <div class="stars">★★★★★</div>
-            <span>4.8 (2.3k reviews)</span>
-          </div>
-        </div>
-        <div class="hero-discount">
-          <div class="discount-badge">
-            <span class="discount-pct">20%</span>
-            <span class="discount-label">OFF</span>
-          </div>
-          <span class="discount-text">Get 20% discount on your first order!</span>
-        </div>
-      </div>
-      <div class="hero-image">
-        <div class="hero-img-bg"></div>
-        <div class="hero-img-placeholder">
-          <span>🍔</span>
+          <button class="btn-hero-primary" (click)="goToBrowse()">View Our Menu</button>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ===================== ACTIVE ORDERS ===================== -->
-  @for (item of ActiveOrders; track item.id) {
+   <div class="active">
+    @for (item of ActiveOrders; track item.id) {
     <div class="active-order-banner" (click)="onTrackDelivery(item.id)">
       <div class="active-order-icon">🚴</div>
       <div class="active-order-info">
         <div class="active-order-title">Order #{{ item.id }} is {{ item.status }}</div>
         @if (item.delivery?.driverName) {
-          <div class="active-order-sub">{{ item.delivery?.driverName }} is delivering · {{ item.delivery?.deliveryStatus }}</div>
+          <div class="active-order-sub">
+            {{ item.delivery?.driverName }} is delivering · {{ item.delivery?.deliveryStatus }}
+          </div>
         }
       </div>
-      <div class="active-order-track">
-        Track <span>→</span>
-      </div>
+      <div class="active-order-track">Track <span>→</span></div>
     </div>
   }
+   </div>
+
 
   <!-- ===================== ABOUT ===================== -->
   <section class="about-section">
@@ -61,15 +48,23 @@
 
       <div class="about-grid">
         <div class="about-images">
-          <div class="about-img-main">🍽️</div>
+          <div class="about-img-main">
+            <img src="/images/plate.jpg" alt="Plate" />
+          </div>
           <div class="about-img-secondary">
-            <div class="about-img-sm">🥗</div>
-            <div class="about-img-sm">🍕</div>
+            <div class="about-img-sm">
+              <img src="/images/Pizza.jpg" alt="Pizza" />
+            </div>
+            <div class="about-img-sm">
+              <img src="/images/vegetables.jpg" alt="Vegetables" />
+            </div>
           </div>
         </div>
         <div class="about-features">
           <p class="about-desc">
-            We specialize in great-tasting food made with fresh, high-quality ingredients. Our passion for food and commitment to excellence makes us the perfect choice for any occasion.
+            We specialize in great-tasting food made with fresh, high-quality ingredients. Our
+            passion for food and commitment to excellence makes us the perfect choice for any
+            occasion.
           </p>
           <div class="about-feature-list">
             <div class="about-feature">
@@ -104,24 +99,28 @@
   <!-- ===================== HOW WE WORK ===================== -->
   <section class="how-section">
     <div class="section-container">
+      <div class="how-header">
+        <div class="section-eyebrow light">Easy Order In 3 Steps</div>
+        <h2 class="section-title light how-title-glow">How We Work</h2>
+        <a class="how-more" (click)="goToBrowse()">More Details →</a>
+      </div>
       <div class="how-inner">
-        <div class="how-left">
-          <div class="section-eyebrow light">Easy Order In 3 Steps</div>
-          <h2 class="section-title light">How We Work</h2>
-          <a class="how-more" (click)="goToBrowse()">More Details →</a>
-        </div>
         <div class="how-steps">
           <div class="how-step">
             <div class="step-num">01</div>
             <div class="step-icon">🔍</div>
             <div class="step-title">Explore Menu</div>
-            <div class="step-desc">Browse through our wide range of food categories and discover your favorites</div>
+            <div class="step-desc">
+              Browse through our wide range of food categories and discover your favorites
+            </div>
           </div>
           <div class="how-step">
             <div class="step-num">02</div>
             <div class="step-icon">🍽️</div>
             <div class="step-title">Choose a Dish</div>
-            <div class="step-desc">Select your favorite dishes and customize them to your liking</div>
+            <div class="step-desc">
+              Select your favorite dishes and customize them to your liking
+            </div>
           </div>
           <div class="how-step">
             <div class="step-num">03</div>
@@ -130,7 +129,9 @@
             <div class="step-desc">Place your order and track it in real-time until it arrives</div>
           </div>
         </div>
-        <div class="how-img">🍔</div>
+        <div class="how-img">
+          <img src="/images/Burger3.jpg" alt="Burger" />
+        </div>
       </div>
     </div>
   </section>
@@ -147,12 +148,18 @@
   <!-- ===================== CTA ===================== -->
   <section class="cta-section">
     <div class="section-container">
-      <h2 class="cta-title">What are you craving?</h2>
-      <p class="cta-desc">Explore our full menu and find your perfect meal</p>
-      <button class="btn-hero-primary" (click)="goToBrowse()">Browse Menu →</button>
+      <div class="cta-inner">
+        <div class="cta-tag">Order Now</div>
+        <h2 class="cta-title">What are you <span>craving?</span></h2>
+        <p class="cta-desc">
+          From juicy burgers to crispy fries — your next favorite meal is just one click away.
+        </p>
+        <div class="cta-actions">
+          <button class="btn-cta-primary" (click)="goToBrowse()">Browse Menu →</button>
+        </div>
+      </div>
     </div>
   </section>
 
   <app-cart-bar></app-cart-bar>
-
 </div>
