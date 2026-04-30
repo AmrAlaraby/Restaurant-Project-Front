@@ -4,11 +4,12 @@ import { OrdersService } from '../../../../Core/Services/Orders-Service/orders-s
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
+import { Pagination } from "../../../../Shared/Components/pagination/pagination";
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-awaiting-payments',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, Pagination],
   templateUrl: './awaiting-payments.html',
   styleUrl: './awaiting-payments.scss',
 })
@@ -17,13 +18,20 @@ export class AwaitingPayments implements OnInit {
   orders: CashierOrder[] = [];
   searchText = '';
   selectedOrderId!: number;
+  pageIndex = 1;
+  pageSize = 10;
+  totalCount = 0;
 
+  private branchId!: number;
   @Output() onSelect = new EventEmitter<number>();
 
   constructor(private orderService: OrdersService, private authService: AuthService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.loadOrders();
+    this.authService.getCurrentUser().subscribe(user => {
+      this.branchId = user.branchId;
+      this.loadOrders();
+    
 
     this.route.queryParams.subscribe(params => {
       const orderId = params['orderId'];
@@ -35,16 +43,21 @@ export class AwaitingPayments implements OnInit {
   }
 
 
-  loadOrders() {
-    this.orderService.getAllOrdersForCashier({
-      pageIndex: 1,
-      pageSize: 20,
-      paymentStatus: 'Pending',
-     
-   
-    }).subscribe(res => {
-      this.orders = res.data;
-    });
+loadOrders() {
+  this.orderService.getAllOrdersForCashier({
+    pageIndex: this.pageIndex,
+    pageSize: this.pageSize,
+    paymentStatus: 'Pending',
+    branchId: this.branchId,
+    // search: this.searchText // 👈 هنا المهم
+  }).subscribe(res => {
+    this.orders = res.data;
+    this.totalCount = res.count;
+  });
+}
+  onPageChanged(page: number) {
+    this.pageIndex = page;
+    this.loadOrders();
   }
 
   get filteredOrders(): CashierOrder[] {

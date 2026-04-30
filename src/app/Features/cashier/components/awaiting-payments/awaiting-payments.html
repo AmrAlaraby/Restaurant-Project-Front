@@ -24,3 +24,9 @@
   </div>
 
 </div>
+<app-pagination
+  [pageIndex]="pageIndex"
+  [pageSize]="pageSize"
+  [totalCount]="totalCount"
+  (pageChanged)="onPageChanged($event)">
+</app-pagination>
