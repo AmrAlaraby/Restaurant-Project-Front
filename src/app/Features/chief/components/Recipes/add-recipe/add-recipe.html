@@ -1,31 +1,34 @@
 <div class="modal-overlay" (click)="cancel()">
   <div class="modal-card" (click)="$event.stopPropagation()">
-
     <div class="modal-header">
-      <h2 class="modal-title">
-        {{ 'CHEF.RECIPES.ADD_TITLE' | translate }}
-      </h2>
+      <div class="modal-header__brand">
+        <span class="modal-header__icon">🍽️</span>
+        <h2 class="modal-title">
+          {{ 'CHEF.RECIPES.ADD_TITLE' | translate }}
+        </h2>
+      </div>
 
       <button class="close-btn" (click)="cancel()">✕</button>
     </div>
 
     <div class="modal-body">
-
       <!-- Menu Item -->
       <div class="field">
         <label class="field-label">
           {{ 'CHEF.RECIPES.MENU_ITEM' | translate }}
         </label>
 
-        <select class="field-select" [(ngModel)]="form.menuItemId">
-          <option [value]="0" disabled>
-            {{ 'CHEF.RECIPES.SELECT_MENU_ITEM' | translate }}
-          </option>
+        <div class="field-select-wrapper">
+          <select class="field-select" [(ngModel)]="form.menuItemId">
+            <option [value]="0" disabled>
+              {{ 'CHEF.RECIPES.SELECT_MENU_ITEM' | translate }}
+            </option>
 
-          @for (item of menuItems(); track item.id) {
-            <option [value]="item.id">{{ getItemName(item) }}</option>
-          }
-        </select>
+            @for (item of menuItems(); track item.id) {
+              <option [value]="item.id">{{ getItemName(item) }}</option>
+            }
+          </select>
+        </div>
       </div>
 
       <!-- Ingredient -->
@@ -34,15 +37,17 @@
           {{ 'CHEF.RECIPES.INGREDIENT' | translate }}
         </label>
 
-        <select class="field-select" [(ngModel)]="form.ingredientId">
-          <option [value]="0" disabled>
-            {{ 'CHEF.RECIPES.SELECT_INGREDIENT' | translate }}
-          </option>
+        <div class="field-select-wrapper">
+          <select class="field-select" [(ngModel)]="form.ingredientId">
+            <option [value]="0" disabled>
+              {{ 'CHEF.RECIPES.SELECT_INGREDIENT' | translate }}
+            </option>
 
-          @for (ing of ingredients(); track ing.id) {
-            <option [value]="ing.id">{{ getIngredientName(ing) }}</option>
-          }
-        </select>
+            @for (ing of ingredients(); track ing.id) {
+              <option [value]="ing.id">{{ getIngredientName(ing) }}</option>
+            }
+          </select>
+        </div>
       </div>
 
       <!-- Quantity -->
@@ -65,29 +70,21 @@
       @if (error()) {
         <p class="error-msg">⚠️ {{ error() }}</p>
       }
-
     </div>
 
     <div class="modal-footer">
-
       <button class="btn-cancel" (click)="cancel()">
         {{ 'CHEF.RECIPES.CANCEL' | translate }}
       </button>
 
-      <button
-        class="btn-submit"
-        (click)="submit()"
-        [disabled]="isSubmitting()">
-
+      <button class="btn-submit" (click)="submit()" [disabled]="isSubmitting()">
         @if (isSubmitting()) {
+          <span class="btn-submit__spinner"></span>
           {{ 'CHEF.RECIPES.SAVING' | translate }}
         } @else {
           {{ 'CHEF.RECIPES.ADD_BTN' | translate }}
         }
-
       </button>
-
     </div>
-
   </div>
 </div>
