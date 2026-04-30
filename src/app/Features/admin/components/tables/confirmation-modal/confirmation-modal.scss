@@ -1,113 +1,182 @@
-:host {
-  --primary: #C0392B;
-  --primary-dark: #96281B;
-  --bg: #FDF5F5;
-  --card: #FFFFFF;
-  --text: #2D0A08;
-  --muted: #9B4437;
-  --border: rgba(192, 57, 43, 0.15);
-  --shadow: 0 10px 30px rgba(192, 57, 43, 0.15);
-}
+/* ═══════════════════════════════════════════════════════════
+   CONFIRMATION MODAL — SCSS
+   Design System: warm red-and-gold brand
+   Dark mode via .dark class only
+═══════════════════════════════════════════════════════════ */
 
-/* =========================
-   BACKDROP
-========================= */
+/* ── BACKDROP ───────────────────────────────────────────── */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(45, 10, 8, 0.55);
+  background: color-mix(in srgb, var(--clr-text-primary) 55%, transparent);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
-  animation: fadeIn .2s ease;
+  z-index: 9999;
+  animation: fadeIn var(--transition-fast);
+
+  .dark & {
+    background: rgba(0, 0, 0, 0.72);
+  }
 }
 
-/* =========================
-   BOX
-========================= */
+/* ── MODAL BOX ──────────────────────────────────────────── */
 .modal-box {
   width: 400px;
-  max-width: 90%;
-  background: var(--card);
-  border-radius: 16px;
-  padding: 22px;
+  max-width: 90vw;
+  background: var(--clr-surface);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg) var(--space-lg) var(--space-md);
   text-align: center;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  animation: pop .25s ease;
+  border: 1.5px solid var(--clr-border);
+  box-shadow: var(--shadow-lg);
+  animation: pop var(--transition-normal);
+
+  .dark & {
+    background: var(--clr-surface);
+    border-color: var(--clr-border);
+    box-shadow: var(--shadow-lg);
+  }
 }
 
-/* =========================
-   MESSAGE
-========================= */
+/* ── ICON WRAP ──────────────────────────────────────────── */
+.modal-icon-wrap {
+  display: flex;
+  justify-content: center;
+  margin-block-end: var(--space-md);
+}
+
+.icon-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.is-error {
+    background: var(--clr-warning-bg);
+    color: var(--clr-warning);
+
+    .dark & {
+      background: var(--clr-warning-bg);
+      color: var(--clr-warning);
+    }
+  }
+
+  &.is-confirm {
+    background: var(--clr-danger-bg);
+    color: var(--clr-primary);
+
+    .dark & {
+      background: var(--clr-danger-bg);
+      color: var(--clr-primary-light);
+    }
+  }
+}
+
+/* ── MESSAGE ────────────────────────────────────────────── */
 .modal-box p {
-  font-size: 15px;
-  color: var(--text);
-  margin-bottom: 20px;
-  line-height: 1.5;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--clr-text-primary);
+  margin-block-end: var(--space-lg);
+  line-height: 1.6;
+
+  .dark & {
+    color: var(--clr-text-primary);
+  }
 }
 
-/* =========================
-   ACTIONS
-========================= */
+/* ── ACTIONS ────────────────────────────────────────────── */
 .actions {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
 }
 
-/* =========================
-   BUTTONS
-========================= */
-button {
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-weight: 600;
+/* ── BUTTONS ────────────────────────────────────────────── */
+.btn-confirm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px var(--space-lg);
+  border-radius: var(--radius-md);
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
   border: none;
   cursor: pointer;
-  transition: .2s;
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+  box-shadow: var(--shadow-sm);
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast);
+
+  &:hover {
+    background: var(--clr-primary-dark);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  .dark & {
+    background: var(--clr-primary);
+    color: var(--clr-text-on-primary);
+
+    &:hover {
+      background: var(--clr-primary-dark);
+    }
+  }
 }
 
-/* YES */
-button:first-child {
-  background: var(--primary);
-  color: #fff;
+.btn-cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px var(--space-lg);
+  border-radius: var(--radius-md);
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
+  border: 1.5px solid var(--clr-border);
+  cursor: pointer;
+  background: var(--clr-surface-alt);
+  color: var(--clr-primary);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+
+  &:hover {
+    background: var(--clr-danger-bg);
+    border-color: var(--clr-primary);
+    transform: translateY(-1px);
+  }
+
+  .dark & {
+    background: var(--clr-surface-alt);
+    border-color: var(--clr-border);
+    color: var(--clr-primary-light);
+
+    &:hover {
+      background: var(--clr-danger-bg);
+      border-color: var(--clr-primary-light);
+    }
+  }
 }
 
-button:first-child:hover {
-  background: var(--primary-dark);
-  transform: translateY(-1px);
-}
-
-/* CANCEL */
-button:last-child {
-  background: #fff;
-  border: 1px solid rgba(192, 57, 43, 0.3);
-  color: var(--primary);
-}
-
-button:last-child:hover {
-  background: #FDECEA;
-}
-
-/* ERROR MODE (OK button only) */
-:host-context(.error) button {
-  width: 100%;
-  background: var(--primary);
-  color: #fff;
-}
-
-
-/* =========================
-   ANIMATION
-========================= */
+/* ── ANIMATIONS ─────────────────────────────────────────── */
 @keyframes fadeIn {
   from { opacity: 0; }
-  to { opacity: 1; }
+  to   { opacity: 1; }
 }
 
 @keyframes pop {
-  from { transform: scale(.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from { transform: scale(0.9); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
 }

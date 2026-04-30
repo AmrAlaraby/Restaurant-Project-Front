@@ -1,128 +1,218 @@
-:host {
-  --primary: #C0392B;
-  --primary-dark: #96281B;
-  --text: #2D0A08;
-  --muted: #9B4437;
-}
+/* ═══════════════════════════════════════════════════════════
+   TABLE CARD — SCSS
+   Design System: warm red-and-gold brand
+   Dark mode via .dark class only
+═══════════════════════════════════════════════════════════ */
 
+/* ── CARD BASE ──────────────────────────────────────────── */
 .table-card {
-  background: #fff;
-  border-radius: 14px;
-  border: 1.5px solid rgba(192, 57, 43, 0.2);
-  padding: 1.2rem 1rem 1rem;
+  background: var(--clr-surface);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--clr-border);
+  padding: var(--space-md) var(--space-md) var(--space-sm);
   cursor: pointer;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   min-height: 200px;
-  transition: border-color 0.15s, transform 0.12s, box-shadow 0.15s;
+  transition:
+    border-color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  .dark & {
+    background: var(--clr-surface);
+    border-color: var(--clr-border);
+  }
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(192, 57, 43, 0.12);
+    box-shadow: var(--shadow-md);
   }
 
+  /* ── Status variants ── */
   &.available {
-    background: #E1F5EE;
-    border-color: #1D9E75;
+    background: var(--clr-success-bg);
+    border-color: var(--clr-success);
+
+    .dark & {
+      background: var(--clr-success-bg);
+      border-color: var(--clr-success);
+    }
   }
 
   &.occupied {
-    background: #FAECE7;
-    border-color: #C0392B;
+    background: var(--clr-danger-bg);
+    border-color: var(--clr-primary);
+
+    .dark & {
+      background: var(--clr-danger-bg);
+      border-color: var(--clr-primary);
+    }
   }
 }
 
-/* ── Center content ── */
+/* ── CARD CENTER ────────────────────────────────────────── */
 .card-center {
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 1;
-  gap: 6px;
+  gap: var(--space-xs);
 }
 
 h3 {
-  font-size: 26px;
-  font-weight: 500;
+  font-family: var(--font-heading);
+  font-size: 1.625rem;
+  font-weight: 800;
   font-style: italic;
-  color: var(--text);
-  margin: 0 0 10px;
+  color: var(--clr-text-primary);
+  margin: 0 0 var(--space-sm);
   text-align: center;
+  letter-spacing: -0.02em;
+
+  .dark & {
+    color: var(--clr-text-primary);
+  }
 }
 
-/* ── Badges ── */
+/* ── BADGE PILL ─────────────────────────────────────────── */
 .badge-pill {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  font-size: 10px;
+  gap: var(--space-xs);
+  font-family: var(--font-body);
+  font-size: 0.625rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  padding: 4px 12px;
-  border-radius: 999px;
+  letter-spacing: 0.08em;
+  padding: 4px var(--space-sm);
+  border-radius: var(--radius-full);
   text-transform: uppercase;
 }
 
 .badge-dot {
   width: 5px;
   height: 5px;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
 }
 
 .badge-available {
-  background: #9FE1CB;
-  color: #085041;
+  background: var(--clr-success-bg);
+  color: var(--clr-success);
+  border: 1px solid var(--clr-success);
 
-  .badge-dot { background: #1D9E75; }
+  .badge-dot {
+    background: var(--clr-success);
+  }
+
+  .dark & {
+    background: var(--clr-success-bg);
+    color: var(--clr-success);
+    border-color: var(--clr-success);
+  }
 }
 
 .badge-occupied {
-  background: #F7C1C1;
-  color: #791F1F;
+  background: var(--clr-danger-bg);
+  color: var(--clr-primary);
+  border: 1px solid var(--clr-primary-light);
 
-  .badge-dot { background: #C0392B; }
+  .badge-dot {
+    background: var(--clr-primary);
+  }
+
+  .dark & {
+    background: var(--clr-danger-bg);
+    color: var(--clr-primary-light);
+    border-color: var(--clr-primary-light);
+  }
 }
 
-/* ── Cap info ── */
+/* ── CAPACITY INFO ──────────────────────────────────────── */
 .cap-info {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 2px;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  color: var(--clr-text-hint);
+  margin-block-start: 2px;
+
+  .dark & {
+    color: var(--clr-text-hint);
+  }
 }
 
-/* ── Actions ── */
+/* ── CARD ACTIONS ───────────────────────────────────────── */
 .card-actions {
   display: flex;
-  gap: 6px;
-  border-top: 1px solid rgba(192, 57, 43, 0.1);
-  padding-top: 10px;
-  margin-top: auto;
+  gap: var(--space-xs);
+  border-block-start: 1px solid var(--clr-border);
+  padding-block-start: var(--space-sm);
+  margin-block-start: auto;
+
+  .dark & {
+    border-block-start-color: var(--clr-border);
+  }
 
   button {
     flex: 1;
-    padding: 7px 4px;
-    font-size: 11px;
+    padding: 7px var(--space-xs);
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
     font-weight: 600;
-    border: 1px solid rgba(192, 57, 43, 0.2);
-    border-radius: 8px;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-sm);
     background: transparent;
-    color: var(--muted);
+    color: var(--clr-text-hint);
     cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: all 0.12s;
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast),
+      border-color var(--transition-fast);
+
+    .dark & {
+      border-color: var(--clr-border);
+      color: var(--clr-text-hint);
+    }
 
     &:hover {
-      background: #FDF5F5;
-      color: var(--primary);
-      border-color: var(--primary);
+      background: var(--clr-cream-mid);
+      color: var(--clr-primary);
+      border-color: var(--clr-primary);
+
+      .dark & {
+        background: var(--clr-cream-mid);
+        color: var(--clr-primary-light);
+        border-color: var(--clr-primary-light);
+      }
     }
   }
 
-  .btn-del:hover {
-    background: rgba(192, 57, 43, 0.1);
-    color: var(--primary-dark);
-    border-color: rgba(192, 57, 43, 0.4);
+  .btn-del {
+    &:hover {
+      background: var(--clr-danger-bg);
+      color: var(--clr-primary-dark);
+      border-color: var(--clr-primary);
+
+      .dark & {
+        background: var(--clr-danger-bg);
+        color: var(--clr-primary-light);
+        border-color: var(--clr-primary-light);
+      }
+    }
+  }
+
+  .btn-toggle {
+    &:hover {
+      background: var(--clr-accent);
+      color: var(--clr-text-on-accent);
+      border-color: var(--clr-accent);
+
+      .dark & {
+        background: var(--clr-accent-dark);
+        color: var(--clr-text-on-accent);
+        border-color: var(--clr-accent-dark);
+      }
+    }
   }
 }
