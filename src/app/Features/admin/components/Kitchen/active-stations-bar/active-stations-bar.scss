@@ -1,87 +1,196 @@
+// ─── Bar Shell ────────────────────────────────────────────────────────────────
 .stations-bar {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: var(--space-md);
   flex-wrap: wrap;
-  background: #FFFFFF;
-  border: 1px solid rgba(192, 57, 43, 0.13);
-  border-radius: 12px;
-  padding: 10px 16px;
-  box-shadow: 0 2px 8px rgba(192, 57, 43, 0.06);
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding-block: var(--space-sm);
+  padding-inline: var(--space-md);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-fast);
 
-  .bar-label {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: #9B4437;
-    font-weight: 600;
-    text-transform: uppercase;
-    white-space: nowrap;
+  .dark & {
+    background: var(--clr-surface);
+    border-color: var(--clr-border);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+// ─── Label ────────────────────────────────────────────────────────────────────
+.bar-label {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-secondary);
+  white-space: nowrap;
+  padding-inline-end: var(--space-sm);
+  border-inline-end: 1.5px solid var(--clr-border);
+
+  .dark & {
+    color: var(--clr-text-secondary);
+    border-inline-end-color: var(--clr-border);
+  }
+}
+
+// ─── Loading ──────────────────────────────────────────────────────────────────
+.stations-loading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+
+  &__dot {
+    width: 5px;
+    height: 5px;
+    border-radius: var(--radius-full);
+    background: var(--clr-primary);
+    animation: dot-pulse 1.2s ease-in-out infinite;
+
+    .dark & {
+      background: var(--clr-primary-light);
+    }
+
+    &:nth-child(2) { animation-delay: 0.2s; }
+    &:nth-child(3) { animation-delay: 0.4s; }
   }
 
-  .stations-loading {
-    .pulse {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      color: #9B4437;
-      animation: blink 1.2s infinite;
+  &__text {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--clr-text-hint);
+    margin-inline-start: var(--space-xs);
+
+    .dark & {
+      color: var(--clr-text-hint);
+    }
+  }
+}
+
+@keyframes dot-pulse {
+  0%, 80%, 100% { opacity: 0.25; transform: scale(0.8); }
+  40%           { opacity: 1;    transform: scale(1);   }
+}
+
+// ─── Stations List ────────────────────────────────────────────────────────────
+.stations-list {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+// ─── Station Chip ─────────────────────────────────────────────────────────────
+.station-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: var(--clr-cream);
+  border: 1.5px solid var(--clr-cream-dark);
+  border-radius: var(--radius-full);
+  padding-block: 4px;
+  padding-inline: var(--space-md);
+  font-family: var(--font-body);
+  cursor: default;
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  .dark & {
+    background: var(--clr-cream);
+    border-color: var(--clr-cream-dark);
+  }
+
+  &:hover {
+    border-color: var(--clr-accent);
+    box-shadow: 0 2px 8px rgba(212, 160, 23, 0.18);
+
+    .dark & {
+      border-color: var(--clr-accent-dark);
+      box-shadow: 0 2px 8px rgba(160, 120, 16, 0.25);
     }
   }
 
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.3; }
+  &.has-pending {
+    background: var(--clr-danger-bg);
+    border-color: var(--clr-primary);
+
+    .dark & {
+      background: var(--clr-danger-bg);
+      border-color: var(--clr-primary-light);
+    }
+
+    &:hover {
+      box-shadow: 0 2px 8px rgba(192, 57, 43, 0.2);
+
+      .dark & {
+        box-shadow: 0 2px 10px rgba(231, 76, 60, 0.25);
+      }
+    }
+  }
+}
+
+// ─── Station Name ─────────────────────────────────────────────────────────────
+.station-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--clr-text-primary);
+
+  .dark & {
+    color: var(--clr-text-primary);
   }
 
-  .stations-list {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
+  .station-chip.has-pending & {
+    color: var(--clr-primary-dark);
 
-    .station-chip {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: #FFF5F5;
-      border: 1px solid rgba(192, 57, 43, 0.15);
-      border-radius: 999px;
-      padding: 5px 14px;
-      font-family: 'DM Sans', sans-serif;
-      transition: border-color 0.2s, box-shadow 0.2s;
-
-      &:hover {
-        border-color: rgba(192, 57, 43, 0.35);
-        box-shadow: 0 2px 6px rgba(192, 57, 43, 0.08);
-      }
-
-      &.has-pending {
-        border-color: #C0392B;
-        background: #FDECEA;
-      }
-
-      .station-name {
-        font-size: 12px;
-        color: #2D0A08;
-        font-weight: 500;
-      }
-
-      .pending-badge {
-        background: #C0392B;
-        color: #fff;
-        font-size: 10px;
-        font-weight: 700;
-        padding: 1px 7px;
-        border-radius: 999px;
-        min-width: 1.2rem;
-        text-align: center;
-      }
+    .dark & {
+      color: var(--clr-primary-light);
     }
+  }
+}
 
-    .no-stations {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      color: #9B4437;
-      font-weight: 500;
-    }
+// ─── Pending Badge ────────────────────────────────────────────────────────────
+.pending-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding-inline: 5px;
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  line-height: 1;
+  animation: badge-pop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+
+  .dark & {
+    background: var(--clr-primary-light);
+    color: var(--clr-text-on-primary);
+  }
+}
+
+@keyframes badge-pop {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+// ─── Empty State ──────────────────────────────────────────────────────────────
+.no-stations {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--clr-text-hint);
+  font-style: italic;
+
+  .dark & {
+    color: var(--clr-text-hint);
   }
 }
