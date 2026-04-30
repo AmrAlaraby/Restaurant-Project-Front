@@ -793,6 +793,23 @@
           "DELIVERY": "Delivery",
           "PICKUP": "Pickup"
         }
+      },
+       "LIST": {
+        "HEADER": {
+          "ORDER": "Order",
+          "TABLE": "Table",
+          "ITEMS": "Items",
+          "STATUS": "Status",
+          "TOTAL": "Total",
+          "ACTIONS": "Actions"
+        },
+        "ITEMS_COUNT": "{{count}} items",
+        "CURRENCY": "EGP",
+        "NA": "N/A",
+        "BUTTONS": {
+          "VIEW": "View",
+          "ADD_ITEM": "Add Item"
+        }
       }
     },
   "HOME": {

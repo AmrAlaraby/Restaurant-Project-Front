@@ -789,6 +789,23 @@
           "DELIVERY": "توصيل",
           "PICKUP": "استلام"
         }
+      },
+       "LIST": {
+        "HEADER": {
+          "ORDER": "الطلب",
+          "TABLE": "الطاولة",
+          "ITEMS": "العناصر",
+          "STATUS": "الحالة",
+          "TOTAL": "الإجمالي",
+          "ACTIONS": "الإجراءات"
+        },
+        "ITEMS_COUNT": "{{count}} عنصر",
+        "CURRENCY": "جنيه",
+        "NA": "غير متوفر",
+        "BUTTONS": {
+          "VIEW": "عرض",
+          "ADD_ITEM": "إضافة عنصر"
+        }
       }
     },
     "HOME": {
