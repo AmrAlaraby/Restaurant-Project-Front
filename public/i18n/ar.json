@@ -1000,6 +1000,115 @@
     }
   },
   "CASHIER": {
+    "DELIVERIES": {
+      "DETAILS": {
+        "LOADING": "جاري التحميل...",
+
+        "HEADER": {
+          "ORDER": "طلب",
+          "BRANCH": "الفرع",
+          "STATUS": {
+            "Assigned": "تم التعيين",
+            "PickedUp": "تم الاستلام",
+            "OnTheWay": "في الطريق",
+            "Delivered": "تم التوصيل"
+          }
+        },
+
+        "STEPS": {
+          "ASSIGNED": "تم التعيين",
+          "PICKED_UP": "تم الاستلام",
+          "ON_THE_WAY": "في الطريق",
+          "DELIVERED": "تم التوصيل"
+        },
+
+        "INFO": {
+          "TITLE": "معلومات التوصيل",
+          "TOTAL": "الإجمالي",
+          "CREATED": "تاريخ الإنشاء",
+          "DELIVERED": "تاريخ التوصيل",
+          "CASH_COLLECTED": "المبلغ المحصل"
+        },
+
+        "PEOPLE": {
+          "TITLE": "الأشخاص",
+          "DRIVER": "السائق",
+          "DRIVER_PHONE": "رقم السائق",
+          "CUSTOMER": "العميل",
+          "CUSTOMER_PHONE": "رقم العميل",
+          "NOT_ASSIGNED": "غير معين"
+        },
+
+        "ADDRESS": {
+          "TITLE": "عنوان التوصيل",
+          "BUILDING": "رقم المبنى",
+          "STREET": "الشارع",
+          "CITY": "المدينة",
+          "MARK": "علامة مميزة"
+        },
+
+        "ITEMS": {
+          "TITLE": "عناصر الطلب"
+        },
+
+        "BUTTONS": {
+          "BACK": "رجوع"
+        }
+      },
+      "HEADER": {
+        "TITLE": "الطلبات المُرسلة",
+        "BACK_BUTTON": "← رجوع",
+        "SUBTITLE": "{{branch}} · {{count}} طلب"
+      },
+
+      "FILTERS": {
+        "ORDER_ID_PLACEHOLDER": "رقم الطلب",
+        "STATUS_ALL": "كل الحالات",
+        "STATUS_ASSIGNED": "تم التعيين",
+        "STATUS_PICKED_UP": "تم الاستلام",
+        "STATUS_ON_THE_WAY": "في الطريق",
+        "STATUS_DELIVERED": "تم التوصيل"
+      },
+
+      "LOADING": {
+        "TEXT": "جاري تحميل الطلبات..."
+      },
+
+      "EMPTY": {
+        "TITLE": "لا توجد طلبات مُرسلة حتى الآن.",
+        "SUBTITLE": "الطلبات التي تقوم بإرسالها ستظهر هنا."
+      },
+
+      "ROW": {
+        "ORDER": "طلب رقم #{{id}}",
+        "UNASSIGNED": "غير مُعيّن",
+        "AMOUNT": "ج.م {{amount}}"
+      },
+      "TITLE": "تعيين الطلبات للتوصيل",
+      "SUBTITLE": "طلبات جاهزة للتوصيل",
+      "AWAITING_DRIVER": "في انتظار سائق",
+      "BUTTON_VIEW_DISPATCHED": "عرض الطلبات المُرسلة →",
+      "PLACEHOLDER_SEARCH": "ابحث برقم الطلب...",
+      "LOADING_TEXT": "جاري تحميل الطلبات...",
+
+      "EMPTY_TITLE_NO_ORDER": "لا يوجد طلب.",
+      "EMPTY_TITLE_ALL": "تم إرسال جميع الطلبات!",
+      "EMPTY_SUB_NO_ORDER": "جرّب رقم طلب مختلف.",
+      "EMPTY_SUB_ALL": "لا توجد طلبات في انتظار سائق حالياً.",
+
+      "ORDER_TITLE": "طلب رقم #{{id}}",
+      "CUSTOMER": "عميل",
+      "COD": "عند الاستلام",
+
+      "FIELD_ASSIGN_DRIVER": "تعيين سائق",
+      "FIELD_CONFIRM_ADDRESS": "تأكيد العنوان",
+      "OPTION_SELECT_DRIVER": "— اختر سائق —",
+
+      "STATUS_READY": "جاهز للإرسال",
+
+      "BUTTON_DISPATCH": "إرسال السائق",
+      "BUTTON_DISPATCHING": "جاري الإرسال..."
+    },
     "DASHBOARD": {
       "GREETING": "صباح الخير، {{name}}",
       "SUBINFO": "محطة الكاشير · {{branch}}",

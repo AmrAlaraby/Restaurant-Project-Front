@@ -1002,6 +1002,115 @@
     }
 },
  "CASHIER": {
+  "DELIVERIES": {
+    "DETAILS": {
+        "LOADING": "Loading...",
+
+        "HEADER": {
+          "ORDER": "Order",
+          "BRANCH": "Branch",
+          "STATUS": {
+            "Assigned": "Assigned",
+            "PickedUp": "Picked Up",
+            "OnTheWay": "On the Way",
+            "Delivered": "Delivered"
+          }
+        },
+
+        "STEPS": {
+          "ASSIGNED": "Assigned",
+          "PICKED_UP": "Picked Up",
+          "ON_THE_WAY": "On the Way",
+          "DELIVERED": "Delivered"
+        },
+
+        "INFO": {
+          "TITLE": "Delivery Info",
+          "TOTAL": "Total",
+          "CREATED": "Created",
+          "DELIVERED": "Delivered",
+          "CASH_COLLECTED": "Cash Collected"
+        },
+
+        "PEOPLE": {
+          "TITLE": "People",
+          "DRIVER": "Driver",
+          "DRIVER_PHONE": "Driver Phone",
+          "CUSTOMER": "Customer",
+          "CUSTOMER_PHONE": "Customer Phone",
+          "NOT_ASSIGNED": "Not Assigned"
+        },
+
+        "ADDRESS": {
+          "TITLE": "Delivery Address",
+          "BUILDING": "Building",
+          "STREET": "Street",
+          "CITY": "City",
+          "MARK": "Mark"
+        },
+
+        "ITEMS": {
+          "TITLE": "Order Items"
+        },
+
+        "BUTTONS": {
+          "BACK": "Back"
+        }
+      },
+    "HEADER": {
+        "TITLE": "Dispatched Orders",
+        "BACK_BUTTON": "← Back",
+        "SUBTITLE": "{{branch}} · {{count}} order{{plural}}"
+      },
+
+      "FILTERS": {
+        "ORDER_ID_PLACEHOLDER": "Order ID",
+        "STATUS_ALL": "All Statuses",
+        "STATUS_ASSIGNED": "Assigned",
+        "STATUS_PICKED_UP": "Picked Up",
+        "STATUS_ON_THE_WAY": "On the Way",
+        "STATUS_DELIVERED": "Delivered"
+      },
+
+      "LOADING": {
+        "TEXT": "Loading orders..."
+      },
+
+      "EMPTY": {
+        "TITLE": "No dispatched orders yet.",
+        "SUBTITLE": "Orders you dispatch will appear here."
+      },
+
+      "ROW": {
+        "ORDER": "Order #{{id}}",
+        "UNASSIGNED": "Unassigned",
+        "AMOUNT": "EGP {{amount}}"
+      },
+      "TITLE": "Assign Deliveries",
+      "SUBTITLE": "Orders ready for delivery",
+      "AWAITING_DRIVER": "awaiting driver",
+      "BUTTON_VIEW_DISPATCHED": "View dispatched orders →",
+      "PLACEHOLDER_SEARCH": "Search by Order ID...",
+      "LOADING_TEXT": "Loading orders...",
+
+      "EMPTY_TITLE_NO_ORDER": "No order found.",
+      "EMPTY_TITLE_ALL": "All orders dispatched!",
+      "EMPTY_SUB_NO_ORDER": "Try a different Order ID.",
+      "EMPTY_SUB_ALL": "No orders are awaiting a driver right now.",
+
+      "ORDER_TITLE": "Order #{{id}}",
+      "CUSTOMER": "Customer",
+      "COD": "COD",
+
+      "FIELD_ASSIGN_DRIVER": "ASSIGN DRIVER",
+      "FIELD_CONFIRM_ADDRESS": "CONFIRM ADDRESS",
+      "OPTION_SELECT_DRIVER": "— Select driver —",
+
+      "STATUS_READY": "READY TO DISPATCH",
+
+      "BUTTON_DISPATCH": "Dispatch Driver",
+      "BUTTON_DISPATCHING": "Dispatching..."
+    },
     "DASHBOARD": {
       "GREETING": "Good morning, {{name}}",
       "SUBINFO": "Cashier Station · {{branch}}",

@@ -1,6 +1,7 @@
+<!-- Loading -->
 <div *ngIf="loading" class="loading-wrap">
   <div class="spinner"></div>
-  <span>Loading...</span>
+  <span>{{ 'CASHIER.DELIVERIES.DETAILS.LOADING' | translate }}</span>
 </div>
 
 <div *ngIf="delivery" class="details-wrap">
@@ -8,8 +9,16 @@
   <!-- Header -->
   <div class="details-header">
     <div>
-      <div class="details-title">Order #{{ delivery.order.id }}</div>
-      <div class="details-sub">{{ delivery.order.branchName }}</div>
+
+      <div class="details-title">
+        {{ 'CASHIER.DELIVERIES.DETAILS.HEADER.ORDER' | translate }}
+        #{{ delivery.order.id }}
+      </div>
+
+      <div class="details-sub">
+        {{ getBranchName(delivery.order) }}
+      </div>
+
     </div>
 
     <span class="status-badge"
@@ -19,15 +28,20 @@
             'badge-onway':     delivery.deliveryStatus === 'OnTheWay',
             'badge-delivered': delivery.deliveryStatus === 'Delivered'
           }">
-      {{ delivery.deliveryStatus }}
+
+      {{ 'CASHIER.DELIVERIES.DETAILS.HEADER.STATUS.' + delivery.deliveryStatus | translate }}
+
     </span>
   </div>
 
   <!-- Steps -->
   <div class="steps-wrap">
+
     <div class="step">
       <div class="step-circle done">✓</div>
-      <div class="step-label">Assigned</div>
+      <div class="step-label">
+        {{ 'CASHIER.DELIVERIES.DETAILS.STEPS.ASSIGNED' | translate }}
+      </div>
     </div>
 
     <div class="step-connector"
@@ -39,9 +53,14 @@
              'done': delivery.deliveryStatus !== 'Assigned',
              'inactive': delivery.deliveryStatus === 'Assigned'
            }">
+
         {{ delivery.deliveryStatus !== 'Assigned' ? '✓' : '–' }}
+
       </div>
-      <div class="step-label">Picked Up</div>
+
+      <div class="step-label">
+        {{ 'CASHIER.DELIVERIES.DETAILS.STEPS.PICKED_UP' | translate }}
+      </div>
     </div>
 
     <div class="step-connector"
@@ -54,9 +73,14 @@
              'active': delivery.deliveryStatus === 'OnTheWay',
              'inactive': delivery.deliveryStatus !== 'OnTheWay' && delivery.deliveryStatus !== 'Delivered'
            }">
+
         {{ delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered' ? '✓' : '→' }}
+
       </div>
-      <div class="step-label">On the Way</div>
+
+      <div class="step-label">
+        {{ 'CASHIER.DELIVERIES.DETAILS.STEPS.ON_THE_WAY' | translate }}
+      </div>
     </div>
 
     <div class="step-connector"
@@ -68,100 +92,116 @@
              'done': delivery.deliveryStatus === 'Delivered',
              'inactive': delivery.deliveryStatus !== 'Delivered'
            }">
+
         {{ delivery.deliveryStatus === 'Delivered' ? '✓' : '📍' }}
+
       </div>
-      <div class="step-label">Delivered</div>
+
+      <div class="step-label">
+        {{ 'CASHIER.DELIVERIES.DETAILS.STEPS.DELIVERED' | translate }}
+      </div>
     </div>
+
   </div>
 
   <!-- GRID -->
   <div class="details-grid">
 
-    <!-- Delivery Info -->
+    <!-- INFO -->
     <div class="info-card">
-      <div class="card-title">Delivery Info</div>
+      <div class="card-title">
+        {{ 'CASHIER.DELIVERIES.DETAILS.INFO.TITLE' | translate }}
+      </div>
 
       <div class="info-row">
-        <span>Total</span>
+        <span>{{ 'CASHIER.DELIVERIES.DETAILS.INFO.TOTAL' | translate }}</span>
         <b class="red">EGP {{ delivery.order.totalAmount }}</b>
       </div>
 
       <div class="info-row">
-        <span>Created</span>
+        <span>{{ 'CASHIER.DELIVERIES.DETAILS.INFO.CREATED' | translate }}</span>
         <b>{{ delivery.createdAt | date:'dd/MM/yyyy hh:mm a' }}</b>
       </div>
 
       <div class="info-row" *ngIf="delivery.deliveredAt">
-        <span>Delivered</span>
+        <span>{{ 'CASHIER.DELIVERIES.DETAILS.INFO.DELIVERED' | translate }}</span>
         <b>{{ delivery.deliveredAt | date:'dd/MM/yyyy hh:mm a' }}</b>
       </div>
 
       <div class="info-row" *ngIf="delivery.cashCollected !== null">
-        <span>Cash Collected</span>
+        <span>{{ 'CASHIER.DELIVERIES.DETAILS.INFO.CASH_COLLECTED' | translate }}</span>
         <b>EGP {{ delivery.cashCollected }}</b>
       </div>
     </div>
 
-    <!-- People -->
+    <!-- PEOPLE -->
     <div class="info-card">
-      <div class="card-title">People</div>
+      <div class="card-title">
+        {{ 'CASHIER.DELIVERIES.DETAILS.PEOPLE.TITLE' | translate }}
+      </div>
 
       <div class="info-row">
-        <span>Driver</span>
-        <b>{{ delivery.driverName || 'Not Assigned' }}</b>
+        <span>{{ 'CASHIER.DELIVERIES.DETAILS.PEOPLE.DRIVER' | translate }}</span>
+        <b>
+          {{ delivery.driverName || ('CASHIER.DELIVERIES.DETAILS.PEOPLE.NOT_ASSIGNED' | translate) }}
+        </b>
       </div>
 
       <div class="info-row" *ngIf="delivery.driverNumber">
-        <span>Driver Phone</span>
-        <a class="phone-link" href="tel:{{ delivery.driverNumber }}">
+        <span>{{ 'CASHIER.DELIVERIES.DETAILS.PEOPLE.DRIVER_PHONE' | translate }}</span>
+        <a class="phone-link" [href]="'tel:' + delivery.driverNumber">
           📞 {{ delivery.driverNumber }}
         </a>
       </div>
 
       <div class="info-row">
-        <span>Customer</span>
+        <span>{{ 'CASHIER.DELIVERIES.DETAILS.PEOPLE.CUSTOMER' | translate }}</span>
         <b>{{ delivery.customerName || '—' }}</b>
       </div>
 
       <div class="info-row" *ngIf="delivery.customerPhoneNumber">
-        <span>Customer Phone</span>
-        <a class="phone-link" href="tel:{{ delivery.customerPhoneNumber }}">
+        <span>{{ 'CASHIER.DELIVERIES.DETAILS.PEOPLE.CUSTOMER_PHONE' | translate }}</span>
+        <a class="phone-link" [href]="'tel:' + delivery.customerPhoneNumber">
           📞 {{ delivery.customerPhoneNumber }}
         </a>
       </div>
     </div>
 
-    <!-- Address -->
+    <!-- ADDRESS -->
     <div class="info-card address-card">
-      <div class="card-title">Delivery Address</div>
+      <div class="card-title">
+        {{ 'CASHIER.DELIVERIES.DETAILS.ADDRESS.TITLE' | translate }}
+      </div>
 
       <div class="info-row">
-        <span>Building</span>
+        <span>{{ 'CASHIER.DELIVERIES.DETAILS.ADDRESS.BUILDING' | translate }}</span>
         <b>{{ delivery.deliveryAddress.buildingNumber }}</b>
       </div>
 
       <div class="info-row">
-        <span>Street</span>
+        <span>{{ 'CASHIER.DELIVERIES.DETAILS.ADDRESS.STREET' | translate }}</span>
         <b>{{ delivery.deliveryAddress.street }}</b>
       </div>
 
       <div class="info-row">
-        <span>City</span>
+        <span>{{ 'CASHIER.DELIVERIES.DETAILS.ADDRESS.CITY' | translate }}</span>
         <b>{{ delivery.deliveryAddress.city }}</b>
       </div>
 
       <div class="info-row" *ngIf="delivery.deliveryAddress.specialMark">
-        <span>Mark</span>
+        <span>{{ 'CASHIER.DELIVERIES.DETAILS.ADDRESS.MARK' | translate }}</span>
         <b>{{ delivery.deliveryAddress.specialMark }}</b>
       </div>
     </div>
 
-    <!-- Items -->
+    <!-- ITEMS -->
     <div class="items-card items-side">
-      <div class="card-title">Order Items</div>
+      <div class="card-title">
+        {{ 'CASHIER.DELIVERIES.DETAILS.ITEMS.TITLE' | translate }}
+      </div>
 
       <div class="item-row" *ngFor="let item of delivery.order.items">
-        <span class="item-name">{{ item.menuItemName }}</span>
+        <span class="item-name">{{ getItemName(item) }}</span>
         <span class="item-qty">x{{ item.quantity }}</span>
         <span class="item-price">EGP {{ item.total }}</span>
       </div>
@@ -169,6 +209,9 @@
 
   </div>
 
-  <button class="back-btn" (click)="goBack()">← Back</button>
+  <!-- BACK -->
+  <button class="back-btn" (click)="goBack()">
+    ← {{ 'CASHIER.DELIVERIES.DETAILS.BUTTONS.BACK' | translate }}
+  </button>
 
 </div>
