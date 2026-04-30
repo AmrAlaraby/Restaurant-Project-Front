@@ -770,6 +770,27 @@
     "DELETE": "حذف"
   },
   "WAITER": {
+    "ORDERS": {
+      "TITLE": "الطلبات",
+      "SUBTITLE": "يتم عرض طلبات الفرع الخاص بك فقط",
+      "BUTTON_NEW_ORDER": "+ طلب جديد",
+      "FILTERS": {
+        "STATUS": {
+          "ALL": "الكل",
+          "RECEIVED": "تم الاستلام",
+          "PREPARING": "قيد التحضير",
+          "READY": "جاهز",
+          "DELIVERED": "تم التسليم",
+          "CANCELLED": "ملغي"
+        },
+        "TYPE": {
+          "ALL": "كل الأنواع",
+          "DINEIN": "داخل المطعم",
+          "DELIVERY": "توصيل",
+          "PICKUP": "استلام"
+        }
+      }
+    },
     "HOME": {
       "GREETING": "صباح الخير، {{name}}",
       "NEW_ORDER": "+ طلب جديد",

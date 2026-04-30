@@ -1,18 +1,17 @@
 <div class="page">
 
   <div class="header">
-  <div>
-    <h2>Orders</h2>
-    <p class="sub">
-      Only showing orders for your branch
-    </p>
+    <div>
+      <h2>{{ 'WAITER.ORDERS.TITLE' | translate }}</h2>
+      <p class="sub">
+        {{ 'WAITER.ORDERS.SUBTITLE' | translate }}
+      </p>
+    </div>
+
+    <button class="new-order-btn" (click)="goToNewOrder()">
+      {{ 'WAITER.ORDERS.BUTTON_NEW_ORDER' | translate }}
+    </button>
   </div>
-
-  <button class="new-order-btn" (click)="goToNewOrder()">
-    + New Order
-  </button>
-</div>
-
 
   <app-waiter-order-filters
     [hideTypeFilter]="true"
@@ -26,15 +25,17 @@
   </app-waiter-orders-list>
 
   <app-pagination
-  [pageIndex]="filters.pageIndex"
-  [pageSize]="filters.pageSize"
-  [totalCount]="totalCount"
-  (pageChanged)="onPageChanged($event)">
-</app-pagination>
-@if (isModalOpen) {
-  <app-order-details
-    [orderId]="selectedOrderId"
-    (close)="closeModal()">
-  </app-order-details>
-}
+    [pageIndex]="filters.pageIndex"
+    [pageSize]="filters.pageSize"
+    [totalCount]="totalCount"
+    (pageChanged)="onPageChanged($event)">
+  </app-pagination>
+
+  @if (isModalOpen) {
+    <app-order-details
+      [orderId]="selectedOrderId"
+      (close)="closeModal()">
+    </app-order-details>
+  }
+
 </div>

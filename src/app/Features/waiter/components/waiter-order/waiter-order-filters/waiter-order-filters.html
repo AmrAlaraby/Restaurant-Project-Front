@@ -8,23 +8,26 @@
         class="tab"
         [class.active]="activeStatus === tab.value"
         (click)="selectStatus(tab.value)">
-        {{ tab.label }}
+        {{ ('WAITER.ORDERS.FILTERS.STATUS.' + (tab.label.toUpperCase())) | translate }}
       </button>
     }
 
   </div>
 
   <!-- TYPE -->
-@if (!hideTypeFilter) {
-<div class="tabs">
+  @if (!hideTypeFilter) {
+    <div class="tabs">
 
-  @for (tab of typeTabs; track tab.label) {
-  <button class="tab" [class.active]="activeType === tab.value" (click)="selectType(tab.value)">
-    {{ tab.label }}
-  </button>
+      @for (tab of typeTabs; track tab.label) {
+        <button
+          class="tab"
+          [class.active]="activeType === tab.value"
+          (click)="selectType(tab.value)">
+          {{ ('WAITER.ORDERS.FILTERS.TYPE.' + (tab.value?.toUpperCase() ?? 'ALL') ) | translate }}
+        </button>
+      }
+
+    </div>
   }
-
-</div>
-}
 
 </div>

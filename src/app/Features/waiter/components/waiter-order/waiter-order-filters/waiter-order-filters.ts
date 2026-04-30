@@ -1,10 +1,12 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { OrderFilters, OrderStatus, OrderType } from '../../../../../Core/Models/OrderModels/waiter-order.model';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-waiter-order-filters',
   standalone: true,
+  imports: [TranslatePipe],
   templateUrl: './waiter-order-filters.html',
   styleUrls: ['./waiter-order-filters.scss']
 })
