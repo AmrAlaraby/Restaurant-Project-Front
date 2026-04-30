@@ -17,6 +17,7 @@ import { ReadyAlertComponent } from '../../components/ready-alert/ready-alert';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
 import { LocalizationService } from '../../../../Core/Services/Localization-Service/localization-service';
+import { Pagination } from "../../../../Shared/Components/pagination/pagination";
 
 @Component({
   selector: 'app-home',
@@ -27,8 +28,9 @@ import { LocalizationService } from '../../../../Core/Services/Localization-Serv
     TablesGridComponent,
     ActiveOrders,
     ReadyAlertComponent,
-    TranslatePipe
-  ],
+    TranslatePipe,
+    Pagination
+],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
@@ -124,26 +126,29 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  pageIndex = 1;
+  pageSize = 10;
+  totalCount = 0;
+
   // ── Active Orders (for this branch) ───────────────────
   loadActiveOrders() {
     this.ordersService.getAllOrders({
-      pageIndex: 1,
-      pageSize: 50,
+      pageIndex: this.pageIndex,
+      pageSize: this.pageSize,
       branchId: this.branchId
-      
     }).subscribe(res => {
 
-      // const ordersToday = (res.data ?? [])
-      //   .filter((o: any) => this.isToday(o.createdAt))
-      //   .sort((a: any, b: any) =>
-      //     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      //   );
-      //   console.log(res.data[0]);
-      //   console.log(res.data);
+      const allOrders = res.data ?? [];
 
-      this.activeOrders = res.data ?? [];
+      this.activeOrders = allOrders.filter(
+        (o: any) =>
+          o.status === 'Received' ||
+          o.status === 'Preparing' ||
+          o.status === 'Ready'
+      );
+
+      this.totalCount = res.count;
       this.activeOrdersCount = this.activeOrders.length;
-      console.log('Active Orders:', this.activeOrders);
 
       this.myOrdersTotal = this.activeOrders.reduce(
         (s: number, o: any) => s + (o.totalAmount ?? 0),
@@ -154,6 +159,12 @@ export class HomeComponent implements OnInit {
         (o: any) => o.status === 'Ready'
       );
     });
+  }
+
+
+  onPageChanged(page: number) {
+    this.pageIndex = page;
+    this.loadActiveOrders();
   }
 
   private isToday(date: string | null): boolean {
