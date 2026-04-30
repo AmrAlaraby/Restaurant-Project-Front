@@ -24,7 +24,9 @@ export class IngredientsComponent implements OnInit {
   showModal = false;
 
   newIngredient = {
+
   name: '',
+  arabicName: '',
   unit: ''
   };
 
@@ -73,7 +75,7 @@ onPageChange(page: number) {
 
   closeModal() {
     this.showModal = false;
-    this.newIngredient = { name: '', unit: '' };
+    this.newIngredient = { name: '', arabicName: '', unit: '' };
   }
 
   addIngredient() {
