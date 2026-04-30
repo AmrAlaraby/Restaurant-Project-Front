@@ -2,14 +2,14 @@
 
   <div class="layout">
 
-    <!-- LEFT (Reuse) -->
+    <!-- LEFT -->
     <div class="left-panel">
 
       <div class="card">
         <app-category-filter
-        [categories]="categories"
-        (select)="onCategoryChange($event)"
-          ></app-category-filter>
+          [categories]="categories"
+          (select)="onCategoryChange($event)">
+        </app-category-filter>
       </div>
 
       <div class="card menu-card">
@@ -26,7 +26,7 @@
     </div>
 
     <!-- RIGHT -->
-      <div class="right-panel">
+    <div class="right-panel">
 
       <!-- ORDER TYPE -->
       <div class="card">
@@ -46,13 +46,13 @@
         </div>
 
         <div class="card">
-        <app-order-summary
-        [items]="orderItems"
-        [total]="total"
-        (remove)="removeItem($event)"
-        (decrease)="decreaseQty($event)">
-        </app-order-summary>
-      </div>
+          <app-order-summary
+            [items]="orderItems"
+            [total]="total"
+            (remove)="removeItem($event)"
+            (decrease)="decreaseQty($event)">
+          </app-order-summary>
+        </div>
 
       </ng-container>
 
@@ -60,112 +60,103 @@
       <ng-container *ngIf="orderType === 'PickUp'">
 
         <div class="card">
-        <app-order-summary
-        [items]="orderItems"
-        [total]="total"
-        (remove)="removeItem($event)"
-        (decrease)="decreaseQty($event)">
-        </app-order-summary>
-      </div>
+          <app-order-summary
+            [items]="orderItems"
+            [total]="total"
+            (remove)="removeItem($event)"
+            (decrease)="decreaseQty($event)">
+          </app-order-summary>
+        </div>
 
       </ng-container>
 
       <!-- DELIVERY -->
-<ng-container *ngIf="orderType === 'Delivery'">
+      <ng-container *ngIf="orderType === 'Delivery'">
 
-  <!-- SEARCH -->
-  <div class="card">
-    <app-customer-search
-      (select)="onCustomerSelected($event)">
-    </app-customer-search>
-  </div>
+        <div class="card">
+          <app-customer-search
+            (select)="onCustomerSelected($event)">
+          </app-customer-search>
+        </div>
 
-  <!-- CUSTOMER -->
-  <div class="card" *ngIf="selectedCustomer">
+        <div class="card" *ngIf="selectedCustomer">
+          <h4>{{ selectedCustomer.name }}</h4>
+          <p>{{ selectedCustomer.phoneNumber }}</p>
+        </div>
 
-    <h4>{{ selectedCustomer.name }}</h4>
-    <p>{{ selectedCustomer.phoneNumber }}</p>
+        <div class="card" *ngIf="selectedCustomer">
+          <app-address-selector
+            [addresses]="selectedCustomer.addresses"
+            [selected]="selectedAddress"
+            (select)="onAddressSelected($event)"
+            (add)="addAddress($event)">
+          </app-address-selector>
+        </div>
 
-  </div>
+        <div class="card">
+          <app-order-summary
+            [items]="orderItems"
+            [total]="total"
+            (remove)="removeItem($event)"
+            (decrease)="decreaseQty($event)">
+          </app-order-summary>
+        </div>
 
-  <!-- ADDRESSES -->
-  <div class="card" *ngIf="selectedCustomer">
+      </ng-container>
 
-    <app-address-selector
-      [addresses]="selectedCustomer.addresses"
-      [selected]="selectedAddress"
-      (select)="onAddressSelected($event)"
-      (add)="addAddress($event)">
-    </app-address-selector>
+      <!-- PAYMENT -->
+      <div class="card">
 
-  </div>
+        <h4>{{ 'CASHIER.CREATE_ORDER.PAYMENT' | translate }}</h4>
 
+        <div class="payments">
 
+          <button
+            *ngFor="let p of ['Cash','Card','Instapay','Wallet']"
+            [class.active]="paymentMethod === p"
+            (click)="paymentMethod = p">
 
-<!-- SUMMARY -->
-<div class="card">
+            {{ ('CASHIER.CREATE_ORDER.METHOD.' + p) | translate }}
 
-<app-order-summary
-        [items]="orderItems"
-        [total]="total"
-        (remove)="removeItem($event)"
-        (decrease)="decreaseQty($event)">
-        </app-order-summary>
+          </button>
 
-</div>
+        </div>
 
+      </div>
 
-</ng-container>
+      <!-- MARK AS PAID -->
+      <div *ngIf="lastOrderId" style="display:flex; gap:8px; margin-top:8px;">
 
-          <!-- PAYMENT -->
-<div class="card">
+        <button
+          class="submit-btn"
+          (click)="markAsPaid()">
 
-  <h4>Payment</h4>
+          {{ 'CASHIER.CREATE_ORDER.MARK_PAID' | translate }}
 
-  <div class="payments">
+        </button>
 
-    <button
-      *ngFor="let p of ['Cash','Card','Instapay','Wallet']"
-      [class.active]="paymentMethod === p"
-      (click)="paymentMethod = p">
+        <button
+          style="padding:14px 18px; border:none; border-radius:10px; background:#eee; cursor:pointer;"
+          (click)="lastOrderId = undefined">
 
-      {{ p }}
+          {{ 'CASHIER.CREATE_ORDER.CANCEL' | translate }}
 
-    </button>
+        </button>
 
-  </div>
+      </div>
 
-</div>
+      <!-- SUBMIT -->
+      <button
+        class="submit-btn"
+        [disabled]="!canSubmit() || submitting"
+        (click)="submitOrder()">
 
-<!-- MARK AS PAID -->
-<div *ngIf="lastOrderId" style="display: flex; gap: 8px; margin-top: 8px;">
+        {{ submitting
+          ? ('CASHIER.CREATE_ORDER.PROCESSING' | translate)
+          : ('CASHIER.CREATE_ORDER.CREATE' | translate)
+        }}
 
-  <button
-    class="submit-btn"
-    style="background: #2980b9;"
-    (click)="markAsPaid()">
-    Mark as Paid
-  </button>
-
-  <button
-    style="padding: 14px 18px; border: none; border-radius: 10px; background: #eee; cursor: pointer; font-size: 16px;"
-    (click)="lastOrderId = undefined">
-    ✕
-  </button>
-
-</div>
-<!-- SUBMIT -->
-<button
-  class="submit-btn"
-  [disabled]="!canSubmit() || submitting"
-  (click)="submitOrder()">
-
-  {{ submitting ? 'Processing...' : 'Create Order' }}
-
-</button>
-
-
-
+      </button>
 
     </div>
 

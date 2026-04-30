@@ -1228,7 +1228,60 @@
         "PAY": "Pay",
         "ASSIGN": "Assign Driver"
       }
-  }
+  },
+  "CREATE_ORDER": {
+      "TITLE": "Create Order",
+      "ORDER_TYPE": "Order Type",
+
+      "PAYMENT": "Payment",
+
+      "METHOD": {
+        "Cash": "Cash",
+        "Card": "Card",
+        "Instapay": "Instapay",
+        "Wallet": "Wallet"
+      },
+      "TYPE": {
+        "DineIn": "Dine In",
+        "Delivery": "Delivery",
+        "Pickup": "Pickup"
+      },
+
+      "CUSTOMER_NAME": "Customer Name",
+      "PHONE": "Phone Number",
+
+      "ADDRES": "Addresses",
+      "ADD_ADDRESS": "Add Address",
+
+      "SUMMARY": "Order Summary",
+
+      "CREATE": "Create Order",
+      "PROCESSING": "Processing...",
+      "MARK_PAID": "Mark as Paid",
+      "CANCEL": "Cancel",
+      "CUSTOMER_SEARCH": {
+      "PLACEHOLDER": "Search by phone...",
+      "LOADING": "Searching...",
+      "RESULT_PHONE": "Phone",
+      "RESULT_NAME": "Name",
+      "NO_RESULTS_ADD": "+ Add Customer",
+      "ADD_FORM_NAME": "Customer Name",
+      "SAVE": "Save Customer",
+      "SAVING": "Saving..."
+    },
+    "ADDRESS": {
+      "TITLE": "Addresses",
+      "ADD": "+ Add Address",
+      "FORM": {
+        "BUILDING_NUMBER": "Building Number",
+        "STREET": "Street",
+        "CITY": "City",
+        "NOTE": "Note",
+        "SPECIAL_MARK": "Special Mark",
+        "SAVE": "Save"
+      }
+    }
+    }
   }
 }
 

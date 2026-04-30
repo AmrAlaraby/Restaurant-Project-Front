@@ -1226,6 +1226,59 @@
         "PAY": "ادفع",
         "ASSIGN": "تعيين مندوب"
       }
+    },
+    "CREATE_ORDER": {
+      "TITLE": "إنشاء طلب",
+      "ORDER_TYPE": "نوع الطلب",
+
+      "PAYMENT": "الدفع",
+
+      "METHOD": {
+        "Cash": "كاش",
+        "Card": "بطاقة",
+        "Instapay": "إنستاباي",
+        "Wallet": "محفظة"
+      },
+      "TYPE": {
+        "DineIn": "داخل المطعم",
+        "Delivery": "توصيل",
+        "Pickup": "استلام"
+      },
+
+      "CUSTOMER_NAME": "اسم العميل",
+      "PHONE": "رقم الهاتف",
+
+      "ADDRES": "العناوين",
+      "ADD_ADDRESS": "إضافة عنوان",
+
+      "SUMMARY": "ملخص الطلب",
+
+      "CREATE": "إنشاء الطلب",
+      "PROCESSING": "جاري المعالجة...",
+      "MARK_PAID": "تأكيد الدفع",
+      "CANCEL": "إلغاء",
+      "CUSTOMER_SEARCH": {
+      "PLACEHOLDER": "ابحث برقم الهاتف...",
+      "LOADING": "جاري البحث...",
+      "RESULT_PHONE": "رقم الهاتف",
+      "RESULT_NAME": "الاسم",
+      "NO_RESULTS_ADD": "+ إضافة عميل",
+      "ADD_FORM_NAME": "اسم العميل",
+      "SAVE": "حفظ العميل",
+      "SAVING": "جاري الحفظ..."
+    },
+    "ADDRESS": {
+      "TITLE": "العناوين",
+      "ADD": "+ إضافة عنوان",
+      "FORM": {
+        "BUILDING_NUMBER": "رقم المبنى",
+        "STREET": "الشارع",
+        "CITY": "المدينة",
+        "NOTE": "ملاحظة",
+        "SPECIAL_MARK": "علامة مميزة",
+        "SAVE": "حفظ"
+      }
+    }
     }
   }
   

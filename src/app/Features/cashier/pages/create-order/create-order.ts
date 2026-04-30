@@ -26,10 +26,11 @@ import { AddressSelector } from "../../components/create-order/address-selector/
 import { CreateOrderInterface } from '../../../../Core/Models/OrderModels/create-order-interface';
 import { OrderAddressInterface } from '../../../../Core/Models/OrderModels/order-address-interface';
 import { ToastService } from '../../../../Core/Services/Toast-Service/toast-service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-order',
-  imports: [CategoryFilter, MenuList, OrderSummary, TableSelector, OrderTypeSelector, CommonModule, CustomerSearch, AddressSelector],
+  imports: [CategoryFilter, MenuList, OrderSummary, TableSelector, OrderTypeSelector, CommonModule, CustomerSearch, AddressSelector, TranslatePipe],
   templateUrl: './create-order.html',
   styleUrl: './create-order.scss',
 })
