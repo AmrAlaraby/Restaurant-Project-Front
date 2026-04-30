@@ -1000,6 +1000,64 @@
     }
   },
   "CASHIER": {
+    "PROFILE": {
+      "PAGE": {
+        "TITLE": "ملفي الشخصي"
+      },
+
+      "LOADING": {
+        "TEXT": "جاري التحميل..."
+      },
+
+      "CARD": {
+        "ROLE": "الدور"
+      },
+
+      "SECTION": {
+        "PERSONAL_INFO": "المعلومات الشخصية"
+      },
+
+      "FIELDS": {
+        "FULL_NAME": {
+          "LABEL": "الاسم الكامل",
+          "PLACEHOLDER": "الاسم الكامل",
+          "ERROR": "الاسم مطلوب"
+        },
+
+        "EMAIL": {
+          "LABEL": "البريد الإلكتروني",
+          "PLACEHOLDER": "البريد الإلكتروني",
+          "ERROR": "بريد إلكتروني صحيح مطلوب"
+        },
+
+        "USERNAME": {
+          "LABEL": "اسم المستخدم (اختياري)",
+          "PLACEHOLDER": "اسم المستخدم"
+        },
+
+        "NEW_PASSWORD": {
+          "LABEL": "كلمة المرور الجديدة (اختياري)",
+          "PLACEHOLDER": "كلمة المرور الجديدة",
+          "ERROR_MIN": "الحد الأدنى 6 أحرف"
+        },
+
+        "CONFIRM_PASSWORD": {
+          "LABEL": "تأكيد كلمة المرور",
+          "PLACEHOLDER": "تأكيد كلمة المرور",
+          "ERROR_MISMATCH": "كلمات المرور غير متطابقة"
+        }
+      },
+
+      "MESSAGES": {
+        "SAVE_ERROR": "حدث خطأ ما",
+        "SAVE_SUCCESS": "✓ تم حفظ التغييرات بنجاح!"
+      },
+
+      "BUTTONS": {
+        "SAVE": "حفظ التغييرات",
+        "LOGOUT": "تسجيل الخروج"
+      }
+    },
     "DELIVERIES": {
       "DETAILS": {
         "LOADING": "جاري التحميل...",

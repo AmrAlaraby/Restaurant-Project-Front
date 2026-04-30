@@ -1002,6 +1002,65 @@
     }
 },
  "CASHIER": {
+  "PROFILE": {
+      "PAGE": {
+        "TITLE": "My Profile"
+      },
+
+      "LOADING": {
+        "TEXT": "Loading..."
+      },
+
+      "CARD": {
+        "ROLE": "role"
+      },
+
+      "SECTION": {
+        "PERSONAL_INFO": "Personal Info"
+      },
+
+      "FIELDS": {
+        "FULL_NAME": {
+          "LABEL": "FULL NAME",
+          "PLACEHOLDER": "Full Name",
+          "ERROR": "Name is required"
+        },
+
+        "EMAIL": {
+          "LABEL": "EMAIL",
+          "PLACEHOLDER": "Email",
+          "ERROR": "Valid email is required"
+        },
+
+        "USERNAME": {
+          "LABEL": "USERNAME (optional)",
+          "PLACEHOLDER": "Username"
+        },
+
+        "NEW_PASSWORD": {
+          "LABEL": "NEW PASSWORD (optional)",
+          "PLACEHOLDER": "New Password",
+          "ERROR_MIN": "Minimum 6 characters"
+        },
+
+        "CONFIRM_PASSWORD": {
+          "LABEL": "CONFIRM PASSWORD",
+          "PLACEHOLDER": "Confirm Password",
+          "ERROR_MISMATCH": "Passwords do not match"
+        }
+      },
+
+      "MESSAGES": {
+        "SAVE_ERROR": "Something went wrong",
+        "SAVE_SUCCESS": "✓ Changes saved successfully!"
+      },
+
+      "BUTTONS": {
+        "SAVE": "Save Changes",
+        "LOGOUT": "Logout"
+      }
+    }
+,
   "DELIVERIES": {
     "DETAILS": {
         "LOADING": "Loading...",
