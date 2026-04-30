@@ -8,6 +8,7 @@ import { DeliveryService } from '../../../../Core/Services/Delivery-Service/deli
 import { UsersService } from '../../../../Core/Services/User-Service/users-service';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -17,6 +18,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './home-page.scss',
 })
 export class HomePage implements OnInit, OnDestroy {
+  private router = inject(Router);
   private deliveryService = inject(DeliveryService);
   private usersService = inject(UsersService);
   private authService = inject(AuthService);
@@ -43,6 +45,7 @@ export class HomePage implements OnInit, OnDestroy {
   branchLabel = computed(() => this.driver()?.branchName || 'Branch 1');
 
   private pollSub?: Subscription; // kept for future polling if needed
+
 
   // ─────────────────────────────────────────────────────────────────
   ngOnInit(): void {
@@ -167,7 +170,8 @@ export class HomePage implements OnInit, OnDestroy {
     const delivery = this.activeDelivery();
     if (!delivery) return;
     console.log('View delivery:', delivery.id);
-    // TODO: router.navigate(['/delivery', delivery.id])
+    this.router.navigate(['driver/deliveries', delivery.id]);
+
   }
 
   // ─── Helpers ─────────────────────────────────────────────────────
