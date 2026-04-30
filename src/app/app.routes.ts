@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { OwnDeliveries } from './Features/driver/components/own-deliveries/own-deliveries';
 import { DeliveryDetails } from './Features/driver/components/delivery-details/delivery-details';
 import { WaiterLayout } from './Features/waiter/pages/waiter-layout/waiter-layout';
+import { roleGuard } from './Core/guards/role-guard';
 
 export const routes: Routes = [
   {
@@ -12,6 +13,10 @@ export const routes: Routes = [
 
   {
     path: 'admin',
+
+    canActivate: [roleGuard],
+    data: { roles: ['Admin'] },
+
     loadComponent: () => import('./Features/admin/pages/layout/layout').then((m) => m.Layout),
 
     children: [
@@ -106,6 +111,10 @@ export const routes: Routes = [
 
   {
     path: 'waiter',
+
+    canActivate: [roleGuard],
+    data: { roles: ['Waiter'] },
+
     loadComponent: () =>
       import('./Features/waiter/pages/waiter-layout/waiter-layout').then((m) => m.WaiterLayout),
     children: [
@@ -159,30 +168,12 @@ export const routes: Routes = [
     ],
   },
 
-  //amr 100 -150
-  //hossam 151 - 200
-  //Areej 201 - 250
-  //Arwa 251 - 300
-  //mahmoud 301 - 350
-  //mustafa 351 - 400
-
-  // {
-  //   path: '',
-  //   loadComponent: () =>
-  //     import('./Features/admin/pages/branch-page/branch-page').then(
-  //       (m) => m.BranchPageComponent
-  //     ),
-  // },
-
-  //amr 100 -150
-  //hossam 151 - 200
-  //Areej 201 - 250
-  //Arwa 251 - 300
-  //mahmoud 301 - 350
-  //mustafa 351 - 400
-
   {
     path: 'cashier',
+
+    canActivate: [roleGuard],
+    data: { roles: ['Cashier'] },
+
     loadComponent: () =>
       import('./Features/cashier/pages/cashier-layout/cashier-layout').then((m) => m.CashierLayout),
     children: [
@@ -242,6 +233,10 @@ export const routes: Routes = [
 
   {
     path: 'driver',
+
+    canActivate: [roleGuard],
+    data: { roles: ['Driver'] },
+
     loadComponent: () =>
       import('./Features/driver/pages/driver-layout/driver-layout').then((m) => m.DriverLayout),
     children: [
@@ -283,6 +278,10 @@ export const routes: Routes = [
   },
   {
     path: 'chief',
+
+    canActivate: [roleGuard],
+    data: { roles: ['Chef'] },
+
     loadComponent: () =>
       import('./Features/chief/pages/chef-layout/chef-layout').then((m) => m.ChefLayout),
     children: [
@@ -323,6 +322,10 @@ export const routes: Routes = [
   },
   {
     path: 'customer',
+
+    canActivate: [roleGuard],
+    data: { roles: ['Customer'] },
+
     loadComponent: () =>
       import('./Features/customer/pages/customer-layout/customer-layout').then(
         (m) => m.CustomerLayout,
@@ -386,9 +389,10 @@ export const routes: Routes = [
       {
         path: 'order-success',
         loadComponent: () =>
-          import('./Features/customer/components/order-success/order-success')
-            .then(m => m.OrderSuccess)
-      }
+          import('./Features/customer/components/order-success/order-success').then(
+            (m) => m.OrderSuccess,
+          ),
+      },
       //Areej
       //Arwa
 
