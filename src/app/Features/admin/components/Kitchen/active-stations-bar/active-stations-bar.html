@@ -1,23 +1,26 @@
 <div class="stations-bar">
+
   <div class="bar-label">
     {{ 'ADMIN.KITCHEN.STATIONS.ACTIVE' | translate }}
   </div>
 
   <div class="stations-loading" *ngIf="loading">
-    <span class="pulse">
+    <span class="stations-loading__dot"></span>
+    <span class="stations-loading__dot"></span>
+    <span class="stations-loading__dot"></span>
+    <span class="stations-loading__text">
       {{ 'ADMIN.KITCHEN.STATIONS.LOADING' | translate }}
     </span>
   </div>
 
   <div class="stations-list" *ngIf="!loading">
+
     <div
       class="station-chip"
       *ngFor="let s of stations"
       [class.has-pending]="s.pendingCount && s.pendingCount > 0"
     >
-      <span class="station-name">
-        {{ s.station }}
-      </span>
+      <span class="station-name">{{ s.station }}</span>
 
       <span
         class="pending-badge"
@@ -30,5 +33,7 @@
     <div class="no-stations" *ngIf="stations.length === 0">
       {{ 'ADMIN.KITCHEN.STATIONS.EMPTY' | translate }}
     </div>
+
   </div>
+
 </div>
