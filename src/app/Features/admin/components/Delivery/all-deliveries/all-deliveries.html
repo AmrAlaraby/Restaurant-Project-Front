@@ -1,15 +1,13 @@
-<!-- 🔥 FILTERS -->
+<!-- FILTERS -->
 <div class="filters-bar">
 
   <div class="filter-item">
     <select class="filter-select"
             [(ngModel)]="filters.branchId"
             (change)="applyFilters()">
-
       <option [ngValue]="null">
         {{ 'ADMIN.DELIVERIES.FILTERS.ALL_BRANCHES' | translate }}
       </option>
-
       <option *ngFor="let b of branches" [ngValue]="b.id">
         {{ getBranchName(b) }}
       </option>
@@ -20,13 +18,11 @@
     <select class="filter-select"
             [(ngModel)]="filters.status"
             (change)="applyFilters()">
-
       <option [ngValue]="null">
         {{ 'ADMIN.DELIVERIES.FILTERS.ALL_STATUS' | translate }}
       </option>
-
       <option *ngFor="let s of statuses" [ngValue]="s">
-        {{ s | translate}}
+        {{ s | translate }}
       </option>
     </select>
   </div>
@@ -64,7 +60,6 @@
 
     <div class="row-main">
       <div class="row-title">Order #{{ d.order.id }}</div>
-
       <div class="row-addr">
         <span class="pin"></span>
         {{ d.deliveryAddress.buildingNumber }}
@@ -75,50 +70,28 @@
 
     <!-- Steps -->
     <div class="steps-wrap">
-      <div class="step">
-        <div class="step-circle done">✓</div>
-        <div class="step-label">
-          {{ 'ADMIN.STATUS.ASSIGNED' | translate }}
+      <ng-container *ngFor="let stepKey of stepKeys; let i = index">
+        <div class="step">
+          <div class="step-circle" [ngClass]="getStepClass(d.deliveryStatus, i)">
+            {{ getStepIcon(d.deliveryStatus, i) }}
+          </div>
+          <div class="step-label">{{ stepKey | translate }}</div>
         </div>
-      </div>
-
-      <div class="step-connector"></div>
-
-      <div class="step">
-        <div class="step-circle">–</div>
-        <div class="step-label">
-          {{ 'ADMIN.STATUS.PICKED_UP' | translate }}
-        </div>
-      </div>
-
-      <div class="step-connector"></div>
-
-      <div class="step">
-        <div class="step-circle">→</div>
-        <div class="step-label">
-          {{ 'ADMIN.STATUS.ON_THE_WAY' | translate }}
-        </div>
-      </div>
-
-      <div class="step-connector"></div>
-
-      <div class="step">
-        <div class="step-circle">📍</div>
-        <div class="step-label">
-          {{ 'ADMIN.STATUS.DELIVERED' | translate }}
-        </div>
-      </div>
+        <div class="step-connector"
+             *ngIf="i < stepKeys.length - 1"
+             [ngClass]="{'done': statusToIndex[d.deliveryStatus] > i}"></div>
+      </ng-container>
     </div>
 
     <div class="row-right">
-
       <div class="driver-name">
         {{ 'ADMIN.DELIVERIES.DRIVER' | translate }}:
         <b>{{ d.driverName || ('ADMIN.DELIVERIES.NOT_ASSIGNED' | translate) }}</b>
       </div>
 
-      <span class="status-badge">
-        {{  "ADMIN.STATUS."+d.deliveryStatus.toUpperCase() | translate }}
+      <span class="status-badge"
+            [ngClass]="'badge-' + d.deliveryStatus.toLowerCase()">
+        {{ "ADMIN.STATUS." + d.deliveryStatus.toUpperCase() | translate }}
       </span>
 
       <div class="row-price">
@@ -129,8 +102,8 @@
         💵 {{ 'ADMIN.DELIVERIES.COLLECTED' | translate }}:
         <b>{{ 'ADMIN.DELIVERIES.CURRENCY' | translate }} {{ d.cashCollected }}</b>
       </div>
-
     </div>
+
   </div>
 
   <div *ngIf="deliveries.length === 0" class="empty-state">

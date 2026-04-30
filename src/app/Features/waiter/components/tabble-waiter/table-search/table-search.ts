@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Subject, debounceTime } from 'rxjs';
 import { BranchService } from '../../../../../Core/Services/Branch-Service/branch-service';
 import { Branch } from '../../../../../Core/Models/BranchModels/branch-interface';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 
@@ -10,7 +11,7 @@ import { Branch } from '../../../../../Core/Models/BranchModels/branch-interface
 @Component({
   selector: 'app-table-search',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,TranslatePipe],
   templateUrl: './table-search.html',
   styleUrls: ['./table-search.scss'],
 })

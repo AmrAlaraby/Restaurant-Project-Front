@@ -2,22 +2,32 @@
 
   <div class="stat-card border-red">
     <div class="stat-value red">{{ tablesServed }}</div>
-    <div class="stat-label">Tables Served</div>
+    <div class="stat-label">
+      {{ 'WAITER.HOME.STATS.TABLES_SERVED' | translate }}
+    </div>
   </div>
 
   <div class="stat-card border-orange">
     <div class="stat-value orange">{{ activeOrders }}</div>
-    <div class="stat-label">Orders Active</div>
+    <div class="stat-label">
+      {{ 'WAITER.HOME.STATS.ORDERS_ACTIVE' | translate }}
+    </div>
   </div>
 
   <div class="stat-card border-red">
     <div class="stat-value red">{{ occupiedTables }}</div>
-    <div class="stat-label">Occupied Tables</div>
+    <div class="stat-label">
+      {{ 'WAITER.HOME.STATS.OCCUPIED_TABLES' | translate }}
+    </div>
   </div>
 
   <div class="stat-card border-green">
-    <div class="stat-value green">EGP {{ myOrdersTotal | number }}</div>
-    <div class="stat-label">My Orders Total</div>
+    <div class="stat-value green">
+      EGP {{ myOrdersTotal | number }}
+    </div>
+    <div class="stat-label">
+      {{ 'WAITER.HOME.STATS.MY_ORDERS_TOTAL' | translate }}
+    </div>
   </div>
 
 </div>

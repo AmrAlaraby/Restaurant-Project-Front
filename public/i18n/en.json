@@ -772,6 +772,77 @@
   "SAVING": "Saving...",
   "EDIT": "Edit",
   "DELETE": "Delete"
+},
+"WAITER": {
+  "HOME": {
+    "GREETING": "Good morning, {{name}}",
+    "NEW_ORDER": "+ New Order",
+    "MY_TABLES": "My Tables",
+    "FULL_FLOOR": "Full Floor View →",
+    "ACTIVE_ORDERS": "Active Orders",
+    "STATS": {
+        "TABLES_SERVED": "Tables Served",
+        "ORDERS_ACTIVE": "Orders Active",
+        "OCCUPIED_TABLES": "Occupied Tables",
+        "MY_ORDERS_TOTAL": "My Orders Total"
+      },
+       "ACTIVEORDERS": {
+        "CARD": {
+          "TITLE": "#{{id}} · Table {{table}} · {{guests}} guests",
+          "META": "Ordered {{time}} · EGP {{total}}",
+          "JUST_NOW": "Just now"
+        },
+        "EMPTY": "No active orders right now"
+      }
+  },
+  "KITCHEN": {
+    "TITLE": "Kitchen Status",
+    "SUBTITLE": "Orders ready to be served",
+    "LOADING": "Loading orders...",
+    "EMPTY": "No orders ready to serve",
+    "KITCHENCARD": {
+        "ORDER": {
+          "TITLE": "Order #{{id}}"
+        },
+        "STATUS": {
+          "READY_SERVE": "READY — SERVE NOW!"
+        },
+        "ITEMS": {
+          "LABEL": "{{station}} items"
+        },
+        "BUTTONS": {
+          "CONFIRMING": "Confirming...",
+          "CONFIRM_SERVED": "✓ Confirm Served"
+        }
+      }
+  },
+  "TABLE": {
+      "EMPTY": "No Tables Found",
+      "TABLESEARCH": {
+        "PLACEHOLDER": "Search by table number...",
+        "FILTERS": {
+          "ALL": "All status",
+          "OCCUPIED": "Occupied",
+          "AVAILABLE": "Available"
+        },
+        "BUTTONS": {
+          "RESET": "Reset"
+        }
+      },
+      "TABLELIST": {
+        "TITLE": "Table {{number}}",
+        "CAPACITY": "Capacity: {{capacity}}",
+        "STATUS": {
+          "LABEL": "Status",
+          "OCCUPIED": "Occupied",
+          "AVAILABLE": "Available"
+        },
+        "BUTTONS": {
+          "FREE": "Free",
+          "OCCUPY": "Occupy"
+        }
+      }
+    }
 }
 }
 

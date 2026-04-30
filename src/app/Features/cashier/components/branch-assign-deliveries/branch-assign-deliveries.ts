@@ -5,6 +5,7 @@ import { UnAssignedDelivery } from '../../../../Core/Models/DeliveryModels/un-as
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { DeliveryService } from '../../../../Core/Services/Delivery-Service/delivery-service';
 import { BranchAssignedDeliveries } from '../branch-assigned-deliveries/branch-assigned-deliveries';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-branch-assign-deliveries',
@@ -34,17 +35,28 @@ export class BranchAssignDeliveries implements OnInit {
   constructor(
     private deliveryService: DeliveryService,
     private authService: AuthService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.authService.getCurrentUser().subscribe({
       next: (user) => {
-        this.branchId   = user?.branchId   ?? 0;
+        this.branchId = user?.branchId ?? 0;
         this.branchName = user?.branchName ?? '';
+
         this.loadOrders();
         this.loadDrivers();
       },
       error: (err) => console.error('Failed to get current user:', err),
+    });
+
+    this.route.queryParams.subscribe(params => {
+      const orderId = params['orderId'];
+
+      if (orderId) {
+        this.filterOrderId = +orderId;
+        this.applyOrderFilter();
+      }
     });
   }
 
@@ -63,6 +75,10 @@ export class BranchAssignDeliveries implements OnInit {
         });
 
         this.applyOrderFilter();
+
+        if (this.filterOrderId) {
+          this.applyOrderFilter();
+        }
         this.loading = false;
       },
       error: (err) => {

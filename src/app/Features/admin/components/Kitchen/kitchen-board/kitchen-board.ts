@@ -56,7 +56,7 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
   constructor(private kitchenService: KitchenService,private AuthService: AuthService,
     private SignalRService :SignalRService,
       private toast: ToastService
-            
+
   ) {}
 
   ngOnInit(): void {
@@ -124,9 +124,9 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
   listenToOrderUpdates() {
             let token = this.AuthService.getAccessToken();
       this.SignalRService.startRestaurantUpdatesConnection(token??"");
-  
-      
-      this.SignalRService.onRestaurantUpdate("OrderCreated",(data : OrderDetailsInterface) => {  
+
+
+      this.SignalRService.onRestaurantUpdate("OrderCreated",(data : OrderDetailsInterface) => {
         // Adding Tickets in the data data.kitchenTickets to the start of the pending list if the order matches the current filters
         debugger;
         if(this.currentParams.branchId && data.branchId !== this.currentParams.branchId) return;
@@ -143,11 +143,10 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
             completedAt: null
           });
           });
-       
-        
+
+
       });
       this.SignalRService.onRestaurantUpdate("OrderUpdated",(data : OrderDetailsInterface) => {   
-        debugger;
   if(this.currentParams.branchId && data.branchId !== this.currentParams.branchId) return;
 
   // remove deleted tickets
@@ -186,7 +185,7 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
   });
 
 });
-      this.SignalRService.onRestaurantUpdate("OrderCancelled",(data : OrderDetailsInterface) => {   
+      this.SignalRService.onRestaurantUpdate("OrderCancelled",(data : OrderDetailsInterface) => {
         // remove all tickets with order Id from the board
         debugger;
         if(this.currentParams.branchId && data.branchId !== this.currentParams.branchId) return;
@@ -204,13 +203,13 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
     // find ticket
     if ((ticket = this.board.pending.find(t => t.id === data.id))) {
       currentList = this.board.pending;
-    } 
+    }
     else if ((ticket = this.board.preparing.find(t => t.id === data.id))) {
       currentList = this.board.preparing;
-    } 
+    }
     else if ((ticket = this.board.done.find(t => t.id === data.id))) {
       currentList = this.board.done;
-    } 
+    }
     else {
       return;
     }
@@ -287,7 +286,7 @@ export class KitchenBoardComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (data) => this.selectedTicket = data,
          error: () => {this.toast.error('Failed to load ticket details.'),
-                       this.error = 'Failed to load ticket details.'}  
+                       this.error = 'Failed to load ticket details.'}
       });
   }
 

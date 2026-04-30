@@ -6,103 +6,101 @@
       }
     },
     "PAGINATION": {
-    "SHOWING": "عرض الصفحة {{pageIndex}} من {{totalPages}} ({{totalCount}} عنصر)",
-    "PREV": "السابق",
-    "NEXT": "التالي"
-  },
-  "NOTIFICATION":{
-    "NONOTIFICATION": "لا توجد إشعارات"
-  }
+      "SHOWING": "عرض الصفحة {{pageIndex}} من {{totalPages}} ({{totalCount}} عنصر)",
+      "PREV": "السابق",
+      "NEXT": "التالي"
+    },
+    "NOTIFICATION": {
+      "NONOTIFICATION": "لا توجد إشعارات"
+    }
   },
 
   "ADMIN": {
-     
     "MENU_ITEMS": {
       "CARD": {
-      "AVAILABLE": "متاح",
-      "UNAVAILABLE": "غير متاح",
-      "CURRENCY": "جنيه",
-      "MIN": "دقيقة"
-    },
+        "AVAILABLE": "متاح",
+        "UNAVAILABLE": "غير متاح",
+        "CURRENCY": "جنيه",
+        "MIN": "دقيقة"
+      },
       "IMAGE": {
-      "LABEL": "صورة العنصر",
-      "DRAG_DROP": "اسحب الصورة وضعها هنا",
-      "OR_BROWSE": "أو اضغط بالأسفل للاختيار",
-      "BROWSE": "اختيار صورة"
+        "LABEL": "صورة العنصر",
+        "DRAG_DROP": "اسحب الصورة وضعها هنا",
+        "OR_BROWSE": "أو اضغط بالأسفل للاختيار",
+        "BROWSE": "اختيار صورة"
+      },
+      "PAGE": {
+        "TITLE": "إدارة عناصر المنيو",
+        "ADD_NEW": "إضافة عنصر جديد"
+      },
+      "FORM": {
+        "CREATE_TITLE": "إضافة عنصر جديد",
+        "EDIT_TITLE": "تعديل عنصر",
+        "CREATE_SUBTITLE": "إضافة عنصر جديد إلى المنيو",
+        "EDIT_SUBTITLE": "تحديث بيانات العنصر"
+      },
+      "DELETE": {
+        "TITLE": "حذف عنصر",
+        "MESSAGE": "هل أنت متأكد من حذف هذا العنصر؟ لا يمكن التراجع عن هذا الإجراء.",
+        "CANCEL": "إلغاء",
+        "CONFIRM": "حذف"
+      },
+      "DETAILS": {
+        "TITLE": "تفاصيل العنصر",
+        "NAME": "الاسم",
+        "PRICE": "السعر",
+        "CATEGORY": "الفئة",
+        "PREP_TIME": "وقت التحضير",
+        "STATUS": "الحالة",
+        "RECIPES_TITLE": "الوصفات / المكونات"
+      }
     },
-    "PAGE": {
-      "TITLE": "إدارة عناصر المنيو",
-      "ADD_NEW": "إضافة عنصر جديد"
-    },
-    "FORM": {
-      "CREATE_TITLE": "إضافة عنصر جديد",
-      "EDIT_TITLE": "تعديل عنصر",
-      "CREATE_SUBTITLE": "إضافة عنصر جديد إلى المنيو",
-      "EDIT_SUBTITLE": "تحديث بيانات العنصر"
-    },
-    "DELETE": {
-      "TITLE": "حذف عنصر",
-      "MESSAGE": "هل أنت متأكد من حذف هذا العنصر؟ لا يمكن التراجع عن هذا الإجراء.",
-      "CANCEL": "إلغاء",
-      "CONFIRM": "حذف"
-    },
-    "DETAILS": {
-      "TITLE": "تفاصيل العنصر",
-      "NAME": "الاسم",
-      "PRICE": "السعر",
-      "CATEGORY": "الفئة",
-      "PREP_TIME": "وقت التحضير",
-      "STATUS": "الحالة",
-      "RECIPES_TITLE": "الوصفات / المكونات"
-    }
-  },
 
-     "DELIVERY": {
-    "PAGE": {
-      "TITLE": "إدارة التوصيل",
-      "SUBTITLE": "تتبع السائقين بشكل مباشر",
-      "ASSIGN_DRIVER": "تعيين سائق"
+    "DELIVERY": {
+      "PAGE": {
+        "TITLE": "إدارة التوصيل",
+        "SUBTITLE": "تتبع السائقين بشكل مباشر",
+        "ASSIGN_DRIVER": "تعيين سائق"
+      },
+      "STATS": {
+        "TOTAL_ORDERS": "إجمالي الطلبات",
+        "ON_THE_WAY": "في الطريق",
+        "PICKED_UP": "تم الاستلام",
+        "DELIVERED": "تم التوصيل"
+      },
+      "TABS": {
+        "ALL": "كل الطلبات"
+      }
     },
-    "STATS": {
-      "TOTAL_ORDERS": "إجمالي الطلبات",
-      "ON_THE_WAY": "في الطريق",
-      "PICKED_UP": "تم الاستلام",
-      "DELIVERED": "تم التوصيل"
-    },
-    "TABS": {
-      "ALL": "كل الطلبات"
-    }
-  },
-    
 
     "DELIVERY_DETAILS": {
-  "LOADING": "جاري التحميل...",
-  "ORDER": "الطلب",
-  "BRANCH": "الفرع",
-  "INFO": "معلومات التوصيل",
-  "TOTAL": "الإجمالي",
-  "CREATED": "تاريخ الإنشاء",
-  "DELIVERED_AT": "تم التسليم",
-  "CASH_COLLECTED": "المبلغ المحصل",
-  "PEOPLE": "الأشخاص",
-  "DRIVER": "السائق",
-  "DRIVER_PHONE": "رقم السائق",
-  "CUSTOMER": "العميل",
-  "CUSTOMER_PHONE": "رقم العميل",
-  "NOT_ASSIGNED": "غير مُعيّن",
-  "ADDRESS": "عنوان التوصيل",
-  "BUILDING": "المبنى",
-  "STREET": "الشارع",
-  "CITY": "المدينة",
-  "MARK": "علامة مميزة",
-  "ITEMS": "عناصر الطلب",
-  "UPDATE_STATUS": "تحديث الحالة",
-  "MOVE_TO": "الانتقال إلى →",
-  "CASH_PLACEHOLDER": "المبلغ المحصل (جنيه)",
-  "BACK": "← رجوع"
-},
+      "LOADING": "جاري التحميل...",
+      "ORDER": "الطلب",
+      "BRANCH": "الفرع",
+      "INFO": "معلومات التوصيل",
+      "TOTAL": "الإجمالي",
+      "CREATED": "تاريخ الإنشاء",
+      "DELIVERED_AT": "تم التسليم",
+      "CASH_COLLECTED": "المبلغ المحصل",
+      "PEOPLE": "الأشخاص",
+      "DRIVER": "السائق",
+      "DRIVER_PHONE": "رقم السائق",
+      "CUSTOMER": "العميل",
+      "CUSTOMER_PHONE": "رقم العميل",
+      "NOT_ASSIGNED": "غير مُعيّن",
+      "ADDRESS": "عنوان التوصيل",
+      "BUILDING": "المبنى",
+      "STREET": "الشارع",
+      "CITY": "المدينة",
+      "MARK": "علامة مميزة",
+      "ITEMS": "عناصر الطلب",
+      "UPDATE_STATUS": "تحديث الحالة",
+      "MOVE_TO": "الانتقال إلى →",
+      "CASH_PLACEHOLDER": "المبلغ المحصل (جنيه)",
+      "BACK": "← رجوع"
+    },
 
-     "ASSIGN_DELIVERY": {
+    "ASSIGN_DELIVERY": {
       "TITLE": "تعيين توصيل",
       "SUBTITLE": "اختر الفرع ثم الطلب ثم السائق",
       "BRANCH": "الفرع",
@@ -119,7 +117,7 @@
       "ASSIGNING": "جاري التعيين..."
     },
 
-     "DELIVERIES": {
+    "DELIVERIES": {
       "FILTERS": {
         "ALL_BRANCHES": "كل الفروع",
         "ALL_STATUS": "كل الحالات",
@@ -139,7 +137,7 @@
       "ON_THE_WAY": "في الطريق",
       "DELIVERED": "تم التسليم"
     },
-     "BRANCH_DELETE": {
+    "BRANCH_DELETE": {
       "TITLE": "حذف الفرع",
       "MESSAGE_PART_1": "هل أنت متأكد أنك تريد حذف",
       "MESSAGE_PART_2": "هذا الإجراء لا يمكن التراجع عنه",
@@ -195,7 +193,7 @@
       }
     },
 
-     "BRANCH_DETAILS": {
+    "BRANCH_DETAILS": {
       "BACK": "الفروع",
       "ACTIVE": "نشط",
       "INACTIVE": "غير نشط",
@@ -283,7 +281,7 @@
         "AVAILABLE": "متاحة",
         "RESET": "إعادة ضبط"
       },
-       "CARD": {
+      "CARD": {
         "OCCUPIED": "مشغولة",
         "AVAILABLE": "متاحة",
         "CAPACITY": "السعة",
@@ -292,7 +290,7 @@
         "EDIT": "تعديل",
         "DELETE": "حذف"
       },
-       "ORDER_MODAL": {
+      "ORDER_MODAL": {
         "NO_ACTIVE_TITLE": "لا يوجد طلب نشط",
         "NO_ACTIVE_SUBTITLE": "لا يوجد طلب نشط",
         "NO_ORDER_TITLE": "لا يوجد طلب بعد",
@@ -326,93 +324,92 @@
           "TABLE_NUMBER_REQUIRED": "رقم الطاولة مطلوب",
           "TABLE_NUMBER_PATTERN": "يجب أن يبدأ بـ T متبوعًا برقمين أو 3 أرقام"
         }
-      }
-,
-       "MODAL": {
-    "YES": "نعم",
-    "NO": "لا",
-    "OK": "حسناً",
-    "CANCEL": "إلغاء",
-    "MESSAGE": "هل أنت متأكد أنك تريد حذف الطاولة؟"
-  },
-  "TITLE": "إدارة الطاولات",
-  "SUBTITLE": "متابعة وإدارة جميع طاولات المطعم",
+      },
+      "MODAL": {
+        "YES": "نعم",
+        "NO": "لا",
+        "OK": "حسناً",
+        "CANCEL": "إلغاء",
+        "MESSAGE": "هل أنت متأكد أنك تريد حذف الطاولة؟"
+      },
+      "TITLE": "إدارة الطاولات",
+      "SUBTITLE": "متابعة وإدارة جميع طاولات المطعم",
 
-  "STATUS": {
-    "AVAILABLE": "متاحة",
-    "OCCUPIED": "مشغولة"
-  },
+      "STATUS": {
+        "AVAILABLE": "متاحة",
+        "OCCUPIED": "مشغولة"
+      },
 
-  "ACTIONS": {
-    "ADD_TABLE": "إضافة طاولة"
-  },
+      "ACTIONS": {
+        "ADD_TABLE": "إضافة طاولة"
+      },
 
-  "EMPTY": "لا توجد طاولات"
-},
-"KITCHEN": {
-    "STATS": {
-      "PENDING": "قيد الانتظار",
-      "PREPARING": "قيد التحضير",
-      "DONE": "تم"
+      "EMPTY": "لا توجد طاولات"
     },
+    "KITCHEN": {
+      "STATS": {
+        "PENDING": "قيد الانتظار",
+        "PREPARING": "قيد التحضير",
+        "DONE": "تم"
+      },
 
-    "BOARD": {
-      "NO_PENDING": "لا توجد طلبات معلقة",
-      "NO_PREPARING": "لا توجد طلبات قيد التنفيذ",
-      "NO_DONE": "لا توجد طلبات مكتملة"
-    },
+      "BOARD": {
+        "NO_PENDING": "لا توجد طلبات معلقة",
+        "NO_PREPARING": "لا توجد طلبات قيد التنفيذ",
+        "NO_DONE": "لا توجد طلبات مكتملة"
+      },
 
-    "LOADING": "جاري تحميل لوحة المطبخ…",
+      "LOADING": "جاري تحميل لوحة المطبخ…",
 
-    "FILTERS": {
-      "TITLE": "الفلاتر",
-      "BRANCH": "الفرع",
-      "ALL_BRANCHES": "كل الفروع",
-      "ORDER_ID": "رقم الطلب",
-      "STATION": "المحطة",
-      "ALL_STATIONS": "كل المحطات",
-      "STATUS": "الحالة",
-      "RESET": "إعادة ضبط"
-    },
+      "FILTERS": {
+        "TITLE": "الفلاتر",
+        "BRANCH": "الفرع",
+        "ALL_BRANCHES": "كل الفروع",
+        "ORDER_ID": "رقم الطلب",
+        "STATION": "المحطة",
+        "ALL_STATIONS": "كل المحطات",
+        "STATUS": "الحالة",
+        "RESET": "إعادة ضبط"
+      },
 
-    "TICKET": {
-      "ORDER": "الطلب",
-      "STATION": "المحطة",
-      "STARTED": "بدأ",
-      "DONE": "انتهى",
-      "TIME": "الوقت",
-      "DETAILS": "تفاصيل"
-    },
+      "TICKET": {
+        "ORDER": "الطلب",
+        "STATION": "المحطة",
+        "STARTED": "بدأ",
+        "DONE": "انتهى",
+        "TIME": "الوقت",
+        "DETAILS": "تفاصيل"
+      },
 
-    "MODAL": {
-      "TICKET": "تذكرة",
-      "ORDER": "الطلب",
-      "STATION": "المحطة",
-      "STATUS": "الحالة",
-      "STARTED_AT": "بدأ في",
-      "COMPLETED_AT": "انتهى في",
-      "ORDER_ITEMS": "عناصر الطلب",
-      "NO_ITEMS": "لا توجد عناصر",
-      "CLOSE": "إغلاق"
-    },
+      "MODAL": {
+        "TICKET": "تذكرة",
+        "ORDER": "الطلب",
+        "STATION": "المحطة",
+        "STATUS": "الحالة",
+        "STARTED_AT": "بدأ في",
+        "COMPLETED_AT": "انتهى في",
+        "ORDER_ITEMS": "عناصر الطلب",
+        "NO_ITEMS": "لا توجد عناصر",
+        "CLOSE": "إغلاق"
+      },
 
-    "STATIONS": {
-      "ACTIVE": "المحطات النشطة",
-      "LOADING": "جاري التحميل…",
-      "EMPTY": "لا توجد محطات نشطة"
-    },
+      "STATIONS": {
+        "ACTIVE": "المحطات النشطة",
+        "LOADING": "جاري التحميل…",
+        "EMPTY": "لا توجد محطات نشطة"
+      },
       "STATUS": {
         "ALL": "الكل",
-    "PENDING": "قيد الانتظار",
-    "PREPARING": "جاري التحضير",
-    "DONE": "تم"
-  },
-  "ACTIONS": {
-    "START_PREPARING": "ابدأ التحضير",
-    "MARK_DONE": "تم التحضير"
-  }
-  },
-     "ORDERS": {
+        "PENDING": "قيد الانتظار",
+        "PREPARING": "جاري التحضير",
+        "DONE": "تم"
+      },
+      "ACTIONS": {
+        "START_PREPARING": "ابدأ التحضير",
+        "MARK_DONE": "تم التحضير"
+      }
+    },
+    "ORDERS": {
       "BREADCRUMB": "الرئيسية / الطلبات",
       "TITLE": "إدارة الطلبات",
       "NEW_ORDER": "طلب جديد",
@@ -467,11 +464,11 @@
       },
       "ENUMS": {
         "PAYMENT_METHOD": {
-        "CASH": "نقدي",
-        "CARD": "بطاقة",
-        "INSTAPAY": "إنستا باي",
-        "WALLET": "محفظة إلكترونية"
-          }
+          "CASH": "نقدي",
+          "CARD": "بطاقة",
+          "INSTAPAY": "إنستا باي",
+          "WALLET": "محفظة إلكترونية"
+        }
       },
 
       "MODAL": {
@@ -500,7 +497,6 @@
         "SELECT_ITEM": "اختر عنصر",
 
         "ADD_ITEM": "إضافة عنصر"
-
       }
     },
     "HOME": {
@@ -610,7 +606,7 @@
       "CASH_PLACEHOLDER": "المبلغ المحصل (جنيه)",
       "BACK": "رجوع ←"
     },
-      "DELIVERIES": {
+    "DELIVERIES": {
       "TITLE": "إدارة التوصيلات",
       "SUBTITLE": "تتبع مباشر للسائق",
       "LOADING": "جاري تحميل التوصيلات...",
@@ -631,7 +627,7 @@
       "ON_THE_WAY": "في الطريق",
       "DELIVERED": "تم التوصيل"
     },
-        "DASHBOARD": {
+    "DASHBOARD": {
       "READY": "جاهز للانطلاق",
       "ZONE": "منطقة مدينة نصر",
       "LOADING": "جاري تحميل البيانات...",
@@ -645,7 +641,7 @@
       "ITEMS": "عنصر"
     },
 
-     "PROFILE": {
+    "PROFILE": {
       "TITLE": "الملف الشخصي",
       "LOADING": "جاري التحميل...",
       "PERSONAL_INFO": "المعلومات الشخصية",
@@ -665,7 +661,6 @@
       "SAVE": "حفظ التعديلات",
       "LOGOUT": "تسجيل الخروج"
     }
-
   },
 
   "CHEF": {
@@ -686,94 +681,165 @@
         "PREPARING": "قيد التحضير",
         "DONE": "تم"
       },
-    "STATS": {
-      "PENDING": "طلبات قيد الانتظار",
-      "PREPARING": "قيد التحضير",
-      "DONE": "تم الانتهاء اليوم"
+      "STATS": {
+        "PENDING": "طلبات قيد الانتظار",
+        "PREPARING": "قيد التحضير",
+        "DONE": "تم الانتهاء اليوم"
+      },
+      "COLUMNS": {
+        "PENDING": "انتظار",
+        "PREPARING": "تحضير",
+        "DONE": "تم"
+      },
+      "EMPTY": {
+        "PENDING": "لا توجد طلبات قيد الانتظار",
+        "PREPARING": "لا توجد طلبات قيد التحضير",
+        "DONE": "لا توجد طلبات مكتملة"
+      },
+      "LOADING": "جاري تحميل لوحة المطبخ..."
     },
-    "COLUMNS": {
-      "PENDING": "انتظار",
-      "PREPARING": "تحضير",
-      "DONE": "تم"
-    },
-    "EMPTY": {
-      "PENDING": "لا توجد طلبات قيد الانتظار",
-      "PREPARING": "لا توجد طلبات قيد التحضير",
-      "DONE": "لا توجد طلبات مكتملة"
-    },
-    "LOADING": "جاري تحميل لوحة المطبخ..."
-  },
-  "SIDEBAR": {
-    "KITCHEN": "المطبخ",
-    "KITCHEN_BOARD": "لوحة المطبخ",
+    "SIDEBAR": {
+      "KITCHEN": "المطبخ",
+      "KITCHEN_BOARD": "لوحة المطبخ",
 
-    "INVENTORY": "المخزون",
-    "CHECK_STOCK": "فحص المخزون",
-    "RECIPES": "الوصفات",
+      "INVENTORY": "المخزون",
+      "CHECK_STOCK": "فحص المخزون",
+      "RECIPES": "الوصفات",
 
-    "ACCOUNT": "الحساب",
-    "PROFILE": "ملفي الشخصي"
-  },
-  "STOCK": {
-    "TITLE": "فحص المخزون",
-    "SUBTITLE": "توفر المكونات في محطتك",
-    "LOADING": "جاري تحميل المخزون...",
-    "SEARCH": "ابحث عن مكون...",
-    "EMPTY": "لا توجد بيانات مخزون لهذا الفرع.",
-    "AVAILABLE": {
-      "TITLE": "المخزون المتاح",
-      "REMAINING": " متبقي"
+      "ACCOUNT": "الحساب",
+      "PROFILE": "ملفي الشخصي"
     },
-    "LOW": {
-      "TITLE": "منخفض — طلب إعادة التزويد",
-      "REMAINING": "كجم متبقي",
-      "THRESHOLD": "الحد الأدنى",
-      "REQUEST": "طلب إعادة تزويد من المدير",
-      "SENT": "✔ تم إرسال الطلب!",
-      "ALL_GOOD": "كل المكونات متوفرة بشكل جيد!"
-    }
-  },
-  "RECIPES": {
-    "ADD": "إضافة وصفة",
-    "ADD_TITLE": "إضافة وصفة",
-    "MENU_ITEM": "عنصر القائمة",
-    "INGREDIENT": "المكون",
-    "QUANTITY": "الكمية المطلوبة",
-    "SELECT_MENU_ITEM": "اختر عنصر القائمة...",
-    "SELECT_INGREDIENT": "اختر المكون...",
-    "QUANTITY_PLACEHOLDER": "مثال: 0.25",
-    "CANCEL": "إلغاء",
-    "ADD_BTN": "إضافة وصفة",
-    "SAVING": "جارٍ الحفظ...",
-    "EDIT": {
-      "TITLE": "تعديل الكمية",
+    "STOCK": {
+      "TITLE": "فحص المخزون",
+      "SUBTITLE": "توفر المكونات في محطتك",
+      "LOADING": "جاري تحميل المخزون...",
+      "SEARCH": "ابحث عن مكون...",
+      "EMPTY": "لا توجد بيانات مخزون لهذا الفرع.",
+      "AVAILABLE": {
+        "TITLE": "المخزون المتاح",
+        "REMAINING": " متبقي"
+      },
+      "LOW": {
+        "TITLE": "منخفض — طلب إعادة التزويد",
+        "REMAINING": "كجم متبقي",
+        "THRESHOLD": "الحد الأدنى",
+        "REQUEST": "طلب إعادة تزويد من المدير",
+        "SENT": "✔ تم إرسال الطلب!",
+        "ALL_GOOD": "كل المكونات متوفرة بشكل جيد!"
+      }
+    },
+    "RECIPES": {
+      "ADD": "إضافة وصفة",
+      "ADD_TITLE": "إضافة وصفة",
       "MENU_ITEM": "عنصر القائمة",
       "INGREDIENT": "المكون",
       "QUANTITY": "الكمية المطلوبة",
-      "BUTTON": "حفظ التعديلات"
-    },
-    "LIST": {
-      "TITLE": "الوصفات",
-      "ALL_MENU_ITEMS": "كل عناصر القائمة",
-      "LOADING": "جاري تحميل الوصفات...",
-      "EMPTY": "لا توجد وصفات.",
-      "SINGLE": "مكون",
-      "PLURAL": "مكونات",
-      "TABLE": {
+      "SELECT_MENU_ITEM": "اختر عنصر القائمة...",
+      "SELECT_INGREDIENT": "اختر المكون...",
+      "QUANTITY_PLACEHOLDER": "مثال: 0.25",
+      "CANCEL": "إلغاء",
+      "ADD_BTN": "إضافة وصفة",
+      "SAVING": "جارٍ الحفظ...",
+      "EDIT": {
+        "TITLE": "تعديل الكمية",
         "MENU_ITEM": "عنصر القائمة",
         "INGREDIENT": "المكون",
-        "QTY": "الكمية المطلوبة",
-        "UNIT": "الوحدة"
+        "QUANTITY": "الكمية المطلوبة",
+        "BUTTON": "حفظ التعديلات"
+      },
+      "LIST": {
+        "TITLE": "الوصفات",
+        "ALL_MENU_ITEMS": "كل عناصر القائمة",
+        "LOADING": "جاري تحميل الوصفات...",
+        "EMPTY": "لا توجد وصفات.",
+        "SINGLE": "مكون",
+        "PLURAL": "مكونات",
+        "TABLE": {
+          "MENU_ITEM": "عنصر القائمة",
+          "INGREDIENT": "المكون",
+          "QTY": "الكمية المطلوبة",
+          "UNIT": "الوحدة"
+        }
+      }
+    }
+  },
+  "COMMON": {
+    "CANCEL": "إلغاء",
+    "SAVING": "جاري الحفظ...",
+    "EDIT": "تعديل",
+    "DELETE": "حذف"
+  },
+  "WAITER": {
+    "HOME": {
+      "GREETING": "صباح الخير، {{name}}",
+      "NEW_ORDER": "+ طلب جديد",
+      "MY_TABLES": "طاولاتي",
+      "FULL_FLOOR": "عرض الصالة بالكامل ←",
+      "ACTIVE_ORDERS": "الطلبات النشطة",
+      "STATS": {
+        "TABLES_SERVED": "الطاولات التي تم تقديمها",
+        "ORDERS_ACTIVE": "الطلبات النشطة",
+        "OCCUPIED_TABLES": "الطاولات المشغولة",
+        "MY_ORDERS_TOTAL": "إجمالي طلباتي"
+      },
+      "ACTIVEORDERS": {
+        "CARD": {
+          "TITLE": "#{{id}} · طاولة {{table}} · {{guests}} ضيوف",
+          "META": "تم الطلب منذ {{time}} · {{total}} جنيه",
+          "JUST_NOW": "قليل"
+        },
+        "EMPTY": "لا توجد طلبات نشطة حالياً"
+      }
+    },
+    "KITCHEN": {
+      "TITLE": "حالة المطبخ",
+      "SUBTITLE": "الطلبات الجاهزة للتقديم",
+      "LOADING": "جاري تحميل الطلبات...",
+      "EMPTY": "لا توجد طلبات جاهزة للتقديم",
+      "CONFIRM_SERVED": "تم التقديم",
+      "KITCHENCARD": {
+        "ORDER": {
+          "TITLE": "طلب رقم {{id}}"
+        },
+        "STATUS": {
+          "READY_SERVE": "جاهز — قدمه فورًا!"
+        },
+        "ITEMS": {
+          "LABEL": "عناصر {{station}}"
+        },
+        "BUTTONS": {
+          "CONFIRMING": "جاري التأكيد...",
+          "CONFIRM_SERVED": "✓ تأكيد التقديم"
+        }
+      }
+
+    },
+    "TABLE": {
+      "EMPTY": "لا توجد طاولات",
+      "TABLESEARCH": {
+        "PLACEHOLDER": "ابحث برقم الطاولة...",
+        "FILTERS": {
+          "ALL": "كل الحالات",
+          "OCCUPIED": "مشغولة",
+          "AVAILABLE": "متاحة"
+        },
+        "BUTTONS": {
+          "RESET": "إعادة تعيين"
+        }
+      },
+      "TABLELIST": {
+        "TITLE": "طاولة {{number}}",
+        "CAPACITY": "السعة: {{capacity}}",
+        "STATUS": {
+          "LABEL": "الحالة",
+          "OCCUPIED": "مشغولة",
+          "AVAILABLE": "متاحة"
+        },
+        "BUTTONS": {
+          "FREE": "تفريغ",
+          "OCCUPY": "إشغال"
+        }
       }
     }
   }
-
-},
-"COMMON": {
-  "CANCEL": "إلغاء",
-  "SAVING": "جاري الحفظ...",
-  "EDIT": "تعديل",
-  "DELETE": "حذف"
 }
-}
-

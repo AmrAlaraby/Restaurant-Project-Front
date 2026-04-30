@@ -10,7 +10,7 @@ import { Category } from '../../../../../Core/Models/CategoryModels/Category ';
   styleUrl: './category-list.scss',
 })
 export class CategoryList {
-private categoryService = inject(CategoryService);
+  private categoryService = inject(CategoryService);
   private router = inject(Router);
 
   categories: Category[] = [];
@@ -27,16 +27,15 @@ private categoryService = inject(CategoryService);
     });
   }
 
-  getIcon(name: string): string {
-  const map: any = {
-    burgers: '🍔',
-    pizza: '🍕',
-    drinks: '🥤',
-    desserts: '🧁',
-    grills: '🍖',
-    salads: '🥗'
-  };
-
-  return map[name.toLowerCase()] || '🍽️';
-}
+  getImage(name: string): string {
+    const map: { [key: string]: string } = {
+      burgers: '/images/categories/Burger4.jpg',
+      pizza: '/images/categories/pizza.jpg',
+      drinks: '/images/categories/drinks2.jpg',
+      desserts: '/images/categories/dessert2.webp',
+      grills: '/images/categories/grills2.jpg',
+      salads: '/images/categories/Salad2.jpg',
+    };
+    return map[name.toLowerCase()] || 'public/images/categories/default.png';
+  }
 }

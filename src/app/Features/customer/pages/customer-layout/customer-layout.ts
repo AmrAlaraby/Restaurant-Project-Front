@@ -184,4 +184,6 @@ export class CustomerLayout implements OnInit {
       error: (err) => console.log(err),
     });
   }
+
+  
 }

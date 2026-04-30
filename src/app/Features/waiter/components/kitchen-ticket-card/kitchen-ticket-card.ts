@@ -2,10 +2,11 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { OrderKitchenTicketDTO } from '../../../../Core/Models/KitchenModels/order-kitchen-ticket-dto';
 import { TicketStatus } from '../../../../Core/Models/KitchenModels/ticket-status';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-kitchen-ticket-card',
-  imports: [CommonModule],
+  imports: [CommonModule,TranslatePipe],
   templateUrl: './kitchen-ticket-card.html',
   styleUrl: './kitchen-ticket-card.scss',
 })

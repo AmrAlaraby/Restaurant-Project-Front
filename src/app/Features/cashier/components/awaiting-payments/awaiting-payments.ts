@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { Pagination } from "../../../../Shared/Components/pagination/pagination";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-awaiting-payments',
@@ -24,12 +25,20 @@ export class AwaitingPayments implements OnInit {
   private branchId!: number;
   @Output() onSelect = new EventEmitter<number>();
 
-  constructor(private orderService: OrdersService, private authService: AuthService) {}
+  constructor(private orderService: OrdersService, private authService: AuthService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.authService.getCurrentUser().subscribe(user => {
       this.branchId = user.branchId;
       this.loadOrders();
+    
+
+    this.route.queryParams.subscribe(params => {
+      const orderId = params['orderId'];
+
+      if (orderId) {
+        this.searchText = orderId.toString();
+      }
     });
   }
 

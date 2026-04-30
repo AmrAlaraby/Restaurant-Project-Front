@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TableInterface } from '../../../../../Core/Models/TableModels/table-interface';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-waiter-table-list',
   standalone: true,
+  imports: [TranslatePipe],
   templateUrl: './waiter-table-list.html',
   styleUrl: './waiter-table-list.scss',
 })

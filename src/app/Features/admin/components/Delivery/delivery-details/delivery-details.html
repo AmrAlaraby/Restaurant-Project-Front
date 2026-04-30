@@ -11,7 +11,6 @@
       <div class="details-title">
         {{ 'DRIVER.DELIVERY_DETAILS.ORDER' | translate }} #{{ delivery.order.id }}
       </div>
-
       <div class="details-sub">
         {{ delivery.order.branchName }}
       </div>
@@ -30,31 +29,17 @@
 
   <!-- Progress Steps -->
   <div class="steps-wrap">
-    <div class="step">
-      <div class="step-circle done">✓</div>
-      <div class="step-label">Assigned</div>
-    </div>
-
-    <div class="step-connector"></div>
-
-    <div class="step">
-      <div class="step-circle">–</div>
-      <div class="step-label">Picked Up</div>
-    </div>
-
-    <div class="step-connector"></div>
-
-    <div class="step">
-      <div class="step-circle">→</div>
-      <div class="step-label">On the Way</div>
-    </div>
-
-    <div class="step-connector"></div>
-
-    <div class="step">
-      <div class="step-circle">📍</div>
-      <div class="step-label">Delivered</div>
-    </div>
+    <ng-container *ngFor="let step of steps; let i = index">
+      <div class="step">
+        <div class="step-circle" [ngClass]="getStepClass(i)">
+          {{ getStepIcon(i) }}
+        </div>
+        <div class="step-label">{{ step }}</div>
+      </div>
+      <div class="step-connector"
+           *ngIf="i < steps.length - 1"
+           [ngClass]="{'done': currentStepIndex > i}"></div>
+    </ng-container>
   </div>
 
   <div class="details-grid">
@@ -64,22 +49,18 @@
       <div class="card-title">
         {{ 'DRIVER.DELIVERY_DETAILS.INFO' | translate }}
       </div>
-
       <div class="info-row">
         <span>{{ 'DRIVER.DELIVERY_DETAILS.TOTAL' | translate }}</span>
         <b class="red">EGP {{ delivery.order.totalAmount }}</b>
       </div>
-
       <div class="info-row">
         <span>{{ 'DRIVER.DELIVERY_DETAILS.CREATED' | translate }}</span>
         <b>{{ delivery.createdAt | date:'dd/MM/yyyy hh:mm a' }}</b>
       </div>
-
       <div class="info-row" *ngIf="delivery.deliveredAt">
         <span>{{ 'DRIVER.DELIVERY_DETAILS.DELIVERED_AT' | translate }}</span>
         <b>{{ delivery.deliveredAt | date:'dd/MM/yyyy hh:mm a' }}</b>
       </div>
-
       <div class="info-row" *ngIf="delivery.cashCollected !== null">
         <span>{{ 'DRIVER.DELIVERY_DETAILS.CASH_COLLECTED' | translate }}</span>
         <b>EGP {{ delivery.cashCollected }}</b>
@@ -91,24 +72,20 @@
       <div class="card-title">
         {{ 'DRIVER.DELIVERY_DETAILS.PEOPLE' | translate }}
       </div>
-
       <div class="info-row">
         <span>{{ 'DRIVER.DELIVERY_DETAILS.DRIVER' | translate }}</span>
         <b>{{ delivery.driverName || ('DRIVER.DELIVERY_DETAILS.NOT_ASSIGNED' | translate) }}</b>
       </div>
-
       <div class="info-row" *ngIf="delivery.driverNumber">
         <span>{{ 'DRIVER.DELIVERY_DETAILS.DRIVER_PHONE' | translate }}</span>
         <a class="phone-link" href="tel:{{ delivery.driverNumber }}">
           📞 {{ delivery.driverNumber }}
         </a>
       </div>
-
       <div class="info-row">
         <span>{{ 'DRIVER.DELIVERY_DETAILS.CUSTOMER' | translate }}</span>
         <b>{{ delivery.customerName || '—' }}</b>
       </div>
-
       <div class="info-row" *ngIf="delivery.customerPhoneNumber">
         <span>{{ 'DRIVER.DELIVERY_DETAILS.CUSTOMER_PHONE' | translate }}</span>
         <a class="phone-link" href="tel:{{ delivery.customerPhoneNumber }}">
@@ -122,22 +99,18 @@
       <div class="card-title">
         {{ 'DRIVER.DELIVERY_DETAILS.ADDRESS' | translate }}
       </div>
-
       <div class="info-row">
         <span>{{ 'DRIVER.DELIVERY_DETAILS.BUILDING' | translate }}</span>
         <b>{{ delivery.deliveryAddress.buildingNumber }}</b>
       </div>
-
       <div class="info-row">
         <span>{{ 'DRIVER.DELIVERY_DETAILS.STREET' | translate }}</span>
         <b>{{ delivery.deliveryAddress.street }}</b>
       </div>
-
       <div class="info-row">
         <span>{{ 'DRIVER.DELIVERY_DETAILS.CITY' | translate }}</span>
         <b>{{ delivery.deliveryAddress.city }}</b>
       </div>
-
       <div class="info-row" *ngIf="delivery.deliveryAddress.specialMark">
         <span>{{ 'DRIVER.DELIVERY_DETAILS.MARK' | translate }}</span>
         <b>{{ delivery.deliveryAddress.specialMark }}</b>
@@ -151,7 +124,6 @@
     <div class="card-title">
       {{ 'DRIVER.DELIVERY_DETAILS.ITEMS' | translate }}
     </div>
-
     <div class="item-row" *ngFor="let item of delivery.order.items">
       <span class="item-name">{{ item.menuItemName }}</span>
       <span class="item-qty">x{{ item.quantity }}</span>
@@ -164,15 +136,14 @@
     <div class="card-title">
       {{ 'DRIVER.DELIVERY_DETAILS.UPDATE_STATUS' | translate }}
     </div>
-
     <div *ngIf="nextStatus() === 'Delivered'" class="cash-wrap">
       <input type="number"
              class="form-input-styled"
              [placeholder]="'DRIVER.DELIVERY_DETAILS.CASH_PLACEHOLDER' | translate"
              [(ngModel)]="updateModel.cashCollected" />
+      <span *ngIf="cashError" class="cash-error">{{ cashError }}</span>
     </div>
-
-    <button class="update-btn">
+    <button class="update-btn" (click)="updateStatus()">
       {{ 'DRIVER.DELIVERY_DETAILS.MOVE_TO' | translate }}
       <b>{{ nextStatus() }}</b>
     </button>

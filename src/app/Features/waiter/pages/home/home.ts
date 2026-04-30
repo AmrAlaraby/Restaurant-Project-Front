@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -13,6 +14,9 @@ import { StatsCardsComponent } from '../../components/stats-cards/stats-cards';
 import { TablesGridComponent } from '../../components/tables-grid/tables-grid';
 import { ActiveOrders} from '../../components/active-orders/active-orders';
 import { ReadyAlertComponent } from '../../components/ready-alert/ready-alert';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Subject, takeUntil } from 'rxjs';
+import { LocalizationService } from '../../../../Core/Services/Localization-Service/localization-service';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +27,7 @@ import { ReadyAlertComponent } from '../../components/ready-alert/ready-alert';
     TablesGridComponent,
     ActiveOrders,
     ReadyAlertComponent,
+    TranslatePipe
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
@@ -32,7 +37,7 @@ export class HomeComponent implements OnInit {
   // ── user / branch ──────────────────────────────────────
   waiterName   = '';
   branchId!:   number;
-  branchName   = '';
+  branchNames   = {branchName: '', branchArabicName: ''};
   shiftStart   = '09:00 AM';           // عدّلي لو عندك shift API
 
   // ── tables ─────────────────────────────────────────────
@@ -55,11 +60,28 @@ export class HomeComponent implements OnInit {
     private userService:   UsersService,
     private ordersService: OrdersService,
     private router:        Router,
+    private localizationService: LocalizationService,
   ) {}
 
   ngOnInit(): void {
     this.loadCurrentUser();
+    this.getCurrentLanguage();
   }
+
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
+    
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 
   // ── Step 1: get current user ───────────────────────────
   loadCurrentUser() {
@@ -78,7 +100,8 @@ export class HomeComponent implements OnInit {
       if (!waiter?.branchId) return;
 
       this.branchId   = waiter.branchId;
-      this.branchName = waiter.branchName ?? '';
+      this.branchNames.branchName = waiter.branchName ?? '';
+      this.branchNames.branchArabicName = waiter.branchArabicName ?? '';
 
       // ── Step 3: load everything in parallel ───────────
       this.loadTables();
@@ -145,4 +168,11 @@ export class HomeComponent implements OnInit {
   goToTables()  { this.router.navigate(['/waiter/tables']); }
   goToKitchen() { this.router.navigate(['/waiter/kitchen']); }
   goToNewOrder(){ this.router.navigate(['/waiter/place-order']); }
+
+  getbranchName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.branchArabicName || item.branchName;
+    }
+    return item.branchName;
+  }
 }

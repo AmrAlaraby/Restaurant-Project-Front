@@ -38,6 +38,14 @@ export class CashierOrdersList {
   }
 
 isPending(status?: string): boolean {
-  return status === 'Pending';
+  return status === 'Pending' || status === 'AwaitingPayment';
 }
+
+  formatStatus(text?: string): string {
+    if (!text) return '';
+
+    return text
+      .replace(/([a-z])([A-Z])/g, '$1 $2') // AwaitingPayment → Awaiting Payment
+      .replace('Pending', 'Pending'); // optional future tweak
+  }
 }
