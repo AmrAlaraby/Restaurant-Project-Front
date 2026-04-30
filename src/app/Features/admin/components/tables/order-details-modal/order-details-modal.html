@@ -18,10 +18,12 @@
         </div>
 
         <div class="no-order">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect width="40" height="40" rx="20" fill="#f5f4f0"/>
-            <path d="M13 15h14M13 20h10M13 25h7" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+          <div class="no-order-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <rect width="40" height="40" rx="20" fill="currentColor" opacity="0.1"/>
+              <path d="M13 15h14M13 20h10M13 25h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
 
           <p class="no-order-title">
             {{ 'ADMIN.TABLES.ORDER_MODAL.NO_ORDER_TITLE' | translate }}
@@ -32,8 +34,8 @@
           </p>
         </div>
 
-        <div class="modal-footer" style="justify-content: flex-end;">
-          <button class="close-main-btn" (click)="onClose()">
+        <div class="modal-footer">
+          <button class="btn-secondary" (click)="onClose()">
             {{ 'ADMIN.TABLES.ORDER_MODAL.CLOSE' | translate }}
           </button>
         </div>
@@ -52,7 +54,6 @@
         </div>
 
         <div class="modal-meta">
-
           <div class="meta-chip">
             <span class="meta-label">
               {{ 'ADMIN.TABLES.ORDER_MODAL.CUSTOMER' | translate }}
@@ -64,7 +65,6 @@
             <span class="meta-label">
               {{ 'ADMIN.TABLES.ORDER_MODAL.STATUS' | translate }}
             </span>
-
             <span class="meta-value">
               <span class="status-badge"
                     [class.status-pending]="order.status === 'pending'"
@@ -73,7 +73,6 @@
               </span>
             </span>
           </div>
-
         </div>
 
         <div class="items-section">
@@ -81,26 +80,28 @@
             {{ 'ADMIN.TABLES.ORDER_MODAL.ITEMS' | translate }}
           </p>
 
-          @for (item of order.items; track item.name) {
-            <div class="item-row">
-              <div style="display:flex;align-items:center;">
-                <span class="item-name">{{ getItemName(item) }}</span>
-                <span class="item-qty">×{{ item.quantity }}</span>
+          <div class="items-list">
+            @for (item of order.items; track item.name) {
+              <div class="item-row">
+                <div class="item-info">
+                  <span class="item-name">{{ getItemName(item) }}</span>
+                  <span class="item-qty">×{{ item.quantity }}</span>
+                </div>
+                <span class="item-price">{{ item.price }}</span>
               </div>
-              <span class="item-price">{{ item.price }}</span>
-            </div>
-          }
+            }
+          </div>
         </div>
 
         <div class="modal-footer">
-          <div>
+          <div class="total-section">
             <p class="total-label">
               {{ 'ADMIN.TABLES.ORDER_MODAL.TOTAL' | translate }}
             </p>
             <p class="total-amount">{{ order.totalAmount }}</p>
           </div>
 
-          <button class="close-main-btn" (click)="onClose()">
+          <button class="btn-primary" (click)="onClose()">
             {{ 'ADMIN.TABLES.ORDER_MODAL.CLOSE' | translate }}
           </button>
         </div>
