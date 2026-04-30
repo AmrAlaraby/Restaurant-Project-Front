@@ -770,6 +770,163 @@
     "DELETE": "حذف"
   },
   "WAITER": {
+    "LAYOUT": {
+      "TOPBAR": {
+        "TITLE": {
+          "HOME": "لوحة التحكم",
+          "ORDERS": "إدارة الطلبات",
+          "KITCHEN": "المطبخ",
+          "TABLES": "إدارة الطاولات",
+          "DELIVERIES": "التوصيل",
+          "PAYMENTS": "المدفوعات",
+          "MENU": "قائمة الطعام",
+          "STOCK": "المخزون",
+          "CATEGORIES": "التصنيفات",
+          "USERS": "المستخدمين",
+          "BRANCHES": "الفروع",
+          "REPORTS": "التقارير",
+          "SETTINGS": "الإعدادات",
+          "PROFILE": "ملفي الشخصي",
+          "PLACEORDER": "إنشاء طلب جديد",
+          "DEFAULT": "لوحة التحكم"
+        }
+      },
+      "SIDEBAR": {
+        "FLOOR": {
+          "TITLE": "الطابق",
+          "LINKS": {
+            "HOME": "الرئيسية",
+            "TABLES": "الطاولات",
+            "ORDERS": "الطلبات"
+          }
+        },
+        "SERVICE": {
+          "TITLE": "الخدمة",
+          "LINKS": {
+            "NEW_ORDER": "طلب جديد",
+            "KITCHEN_STATUS": "حالة المطبخ"
+          }
+        },
+        "ACCOUNT": {
+          "TITLE": "الحساب",
+          "LINKS": {
+            "PROFILE": "ملفي الشخصي"
+          }
+        }
+      }
+    },
+    "PROFILE": {
+      "TITLE": "ملفي الشخصي",
+      "LOADING": "جاري التحميل...",
+      "SECTIONS": {
+        "PERSONAL_INFO": "البيانات الشخصية"
+      },
+      "FIELDS": {
+        "NAME": {
+          "LABEL": "الاسم بالكامل",
+          "PLACEHOLDER": "الاسم بالكامل"
+        },
+        "EMAIL": {
+          "LABEL": "البريد الإلكتروني",
+          "PLACEHOLDER": "البريد الإلكتروني"
+        },
+        "USERNAME": {
+          "LABEL": "اسم المستخدم (اختياري)",
+          "PLACEHOLDER": "اسم المستخدم"
+        },
+        "NEW_PASSWORD": {
+          "LABEL": "كلمة مرور جديدة (اختياري)",
+          "PLACEHOLDER": "كلمة مرور جديدة"
+        },
+        "CONFIRM_PASSWORD": {
+          "LABEL": "تأكيد كلمة المرور",
+          "PLACEHOLDER": "تأكيد كلمة المرور"
+        }
+      },
+      "ERRORS": {
+        "NAME_REQUIRED": "الاسم مطلوب",
+        "EMAIL_REQUIRED": "يرجى إدخال بريد إلكتروني صحيح",
+        "PASSWORD_MIN": "يجب ألا تقل عن 6 أحرف",
+        "PASSWORD_MISMATCH": "كلمتا المرور غير متطابقتين"
+      },
+      "SUCCESS": {
+        "SAVED": "✓ تم حفظ التغييرات بنجاح!"
+      },
+      "BUTTONS": {
+        "SAVE": "حفظ التغييرات",
+        "LOGOUT": "تسجيل الخروج"
+      }
+    },
+    "PLACEORDER": {
+      "TITLE": "إنشاء طلب جديد",
+      "BUTTONS": {
+        "SENDING": "جاري الإرسال...",
+        "SUBMIT": "إرسال إلى المطبخ 🔥"
+      },
+      "MENULIST": {
+        "PREPTIME": "{{time}} دقيقة",
+        "PRICE": "{{price}} جنيه"
+      },
+      "SUMMARY": {
+        "TITLE": "ملخص الطلب",
+        "EMPTY": "لا توجد عناصر بعد 🍽️",
+        "QTY": "الكمية: {{qty}}",
+        "ITEM_TOTAL": "{{total}} جنيه",
+        "TOTAL": "الإجمالي",
+        "TOTAL_AMOUNT": "{{total}} جنيه"
+      },
+      "PAYMENT": {
+        "TITLE": "طريقة الدفع",
+        "METHODS": {
+          "CASH": "كاش",
+          "CARD": "بطاقة",
+          "INSTAPAY": "إنستاباي",
+          "WALLET": "محفظة"
+        }
+      },
+      "TABLESELECTOR": {
+        "TITLE": "اختر الطاولة",
+        "SEATS": "{{count}} مقاعد"
+      }
+    },
+    "ORDERS": {
+      "TITLE": "الطلبات",
+      "SUBTITLE": "يتم عرض طلبات الفرع الخاص بك فقط",
+      "BUTTON_NEW_ORDER": "+ طلب جديد",
+      "FILTERS": {
+        "STATUS": {
+          "ALL": "الكل",
+          "RECEIVED": "تم الاستلام",
+          "PREPARING": "قيد التحضير",
+          "READY": "جاهز",
+          "DELIVERED": "تم التسليم",
+          "CANCELLED": "ملغي"
+        },
+        "TYPE": {
+          "ALL": "كل الأنواع",
+          "DINEIN": "داخل المطعم",
+          "DELIVERY": "توصيل",
+          "PICKUP": "استلام"
+        }
+      },
+       "LIST": {
+        "HEADER": {
+          "ORDER": "الطلب",
+          "TABLE": "الطاولة",
+          "ITEMS": "العناصر",
+          "STATUS": "الحالة",
+          "TOTAL": "الإجمالي",
+          "ACTIONS": "الإجراءات"
+        },
+        "ITEMS_COUNT": "{{count}} عنصر",
+        "CURRENCY": "جنيه",
+        "NA": "غير متوفر",
+        "BUTTONS": {
+          "VIEW": "عرض",
+          "ADD_ITEM": "إضافة عنصر"
+        }
+      }
+    },
     "HOME": {
       "GREETING": "صباح الخير، {{name}}",
       "NEW_ORDER": "+ طلب جديد",

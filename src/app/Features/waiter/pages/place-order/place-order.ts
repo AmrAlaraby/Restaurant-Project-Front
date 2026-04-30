@@ -16,10 +16,11 @@ import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service
 import { TableService } from '../../../../Core/Services/Table-Service/table-service';
 import { CreateOrderInterface } from '../../../../Core/Models/OrderModels/create-order-interface';
 import { ActivatedRoute } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-place-order',
-  imports: [TableSelector, CategoryFilter, MenuList, OrderSummary, PaymentSelector],
+  imports: [TableSelector, CategoryFilter, MenuList, OrderSummary, PaymentSelector,TranslatePipe],
   templateUrl: './place-order.html',
   styleUrl: './place-order.scss',
 })
@@ -147,6 +148,7 @@ loadUserAndThenTables(): void {
 
     
     name: item.name,
+    arabicName: item.arabicName,
     imageUrl: item.imageUrl
   } as any);
 }

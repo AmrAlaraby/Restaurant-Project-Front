@@ -774,6 +774,163 @@
   "DELETE": "Delete"
 },
 "WAITER": {
+  "LAYOUT": {
+      "TOPBAR": {
+        "TITLE": {
+          "HOME": "Dashboard",
+          "ORDERS": "Order Management",
+          "KITCHEN": "Kitchen Display",
+          "TABLES": "Table Management",
+          "DELIVERIES": "Deliveries",
+          "PAYMENTS": "Payments",
+          "MENU": "Menu Items",
+          "STOCK": "Stock",
+          "CATEGORIES": "Categories",
+          "USERS": "Users",
+          "BRANCHES": "Branches",
+          "REPORTS": "Reports",
+          "SETTINGS": "Settings",
+          "PROFILE": "My Profile",
+          "PLACEORDER": "Place New Order",
+          "DEFAULT": "Dashboard"
+        }
+      },
+      "SIDEBAR": {
+        "FLOOR": {
+          "TITLE": "Floor",
+          "LINKS": {
+            "HOME": "Home",
+            "TABLES": "Tables",
+            "ORDERS": "Orders"
+          }
+        },
+        "SERVICE": {
+          "TITLE": "Service",
+          "LINKS": {
+            "NEW_ORDER": "New Order",
+            "KITCHEN_STATUS": "Kitchen Status"
+          }
+        },
+        "ACCOUNT": {
+          "TITLE": "Account",
+          "LINKS": {
+            "PROFILE": "My Profile"
+          }
+        }
+      }
+    },
+  "PROFILE": {
+      "TITLE": "My Profile",
+      "LOADING": "Loading...",
+      "SECTIONS": {
+        "PERSONAL_INFO": "Personal Info"
+      },
+      "FIELDS": {
+        "NAME": {
+          "LABEL": "Full Name",
+          "PLACEHOLDER": "Full Name"
+        },
+        "EMAIL": {
+          "LABEL": "Email",
+          "PLACEHOLDER": "Email"
+        },
+        "USERNAME": {
+          "LABEL": "Username (optional)",
+          "PLACEHOLDER": "Username"
+        },
+        "NEW_PASSWORD": {
+          "LABEL": "New Password (optional)",
+          "PLACEHOLDER": "New Password"
+        },
+        "CONFIRM_PASSWORD": {
+          "LABEL": "Confirm Password",
+          "PLACEHOLDER": "Confirm Password"
+        }
+      },
+      "ERRORS": {
+        "NAME_REQUIRED": "Name is required",
+        "EMAIL_REQUIRED": "Valid email is required",
+        "PASSWORD_MIN": "Minimum 6 characters",
+        "PASSWORD_MISMATCH": "Passwords do not match"
+      },
+      "SUCCESS": {
+        "SAVED": "✓ Changes saved successfully!"
+      },
+      "BUTTONS": {
+        "SAVE": "Save Changes",
+        "LOGOUT": "Logout"
+      }
+    },
+  "PLACEORDER": {
+      "TITLE": "Place New Order",
+      "BUTTONS": {
+        "SENDING": "Sending...",
+        "SUBMIT": "Send to Kitchen 🔥"
+      },
+      "MENULIST": {
+        "PREPTIME": "{{time}} min",
+        "PRICE": "EGP {{price}}"
+      },
+       "SUMMARY": {
+        "TITLE": "Order Summary",
+        "EMPTY": "No items yet 🍽️",
+        "QTY": "Qty: {{qty}}",
+        "ITEM_TOTAL": "{{total}} EGP",
+        "TOTAL": "Total",
+        "TOTAL_AMOUNT": "{{total}} EGP"
+      },
+      "PAYMENT": {
+        "TITLE": "Payment Method",
+        "METHODS": {
+          "CASH": "Cash",
+          "CARD": "Card",
+          "INSTAPAY": "Instapay",
+          "WALLET": "Wallet"
+        }
+      },
+      "TABLESELECTOR": {
+        "TITLE": "Select Table",
+        "SEATS": "{{count}} seats"
+      }
+    },
+  "ORDERS": {
+      "TITLE": "Orders",
+      "SUBTITLE": "Only showing orders for your branch",
+      "BUTTON_NEW_ORDER": "+ New Order",
+      "FILTERS": {
+        "STATUS": {
+          "ALL": "All",
+          "RECEIVED": "Received",
+          "PREPARING": "Preparing",
+          "READY": "Ready",
+          "DELIVERED": "Delivered",
+          "CANCELLED": "Cancelled"
+        },
+        "TYPE": {
+          "ALL": "All Types",
+          "DINEIN": "Dine In",
+          "DELIVERY": "Delivery",
+          "PICKUP": "Pickup"
+        }
+      },
+       "LIST": {
+        "HEADER": {
+          "ORDER": "Order",
+          "TABLE": "Table",
+          "ITEMS": "Items",
+          "STATUS": "Status",
+          "TOTAL": "Total",
+          "ACTIONS": "Actions"
+        },
+        "ITEMS_COUNT": "{{count}} items",
+        "CURRENCY": "EGP",
+        "NA": "N/A",
+        "BUTTONS": {
+          "VIEW": "View",
+          "ADD_ITEM": "Add Item"
+        }
+      }
+    },
   "HOME": {
     "GREETING": "Good morning, {{name}}",
     "NEW_ORDER": "+ New Order",

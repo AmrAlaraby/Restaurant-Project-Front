@@ -5,9 +5,15 @@
     <img [src]="item.imageUrl" />
 
     <div class="info">
-      <h4>{{ item.name }}</h4>
-      <p>{{ item.prepTimeMinutes }} min</p>
-      <span>EGP {{ item.price }}</span>
+      <h4>{{ getItemName(item) }}</h4>
+
+      <p>
+        {{ 'WAITER.PLACEORDER.MENULIST.PREPTIME' | translate:{ time: item.prepTimeMinutes } }}
+      </p>
+
+      <span>
+        {{ 'WAITER.PLACEORDER.MENULIST.PRICE' | translate:{ price: item.price } }}
+      </span>
     </div>
 
   </div>

@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TableInterface } from '../../../../../Core/Models/TableModels/table-interface';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-table-selector',
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: './table-selector.html',
   styleUrl: './table-selector.scss',
 })

@@ -1,52 +1,56 @@
 <div class="table-container">
 
   <div class="table-header">
-    <div>ORDER</div>
-    <div>TABLE</div>
-    <div>ITEMS</div>
-    <div>STATUS</div>
-    <div>TOTAL</div>
-    <div>ACTIONS</div>
+    <div>{{ 'WAITER.ORDERS.LIST.HEADER.ORDER' | translate }}</div>
+    <div>{{ 'WAITER.ORDERS.LIST.HEADER.TABLE' | translate }}</div>
+    <div>{{ 'WAITER.ORDERS.LIST.HEADER.ITEMS' | translate }}</div>
+    <div>{{ 'WAITER.ORDERS.LIST.HEADER.STATUS' | translate }}</div>
+    <div>{{ 'WAITER.ORDERS.LIST.HEADER.TOTAL' | translate }}</div>
+    <div>{{ 'WAITER.ORDERS.LIST.HEADER.ACTIONS' | translate }}</div>
   </div>
 
   @for (order of orders; track order.id) {
 
     <div
-  class="table-row"
-  [ngClass]="getRowClass(order.status)"
-  (click)="onOrderClick(order.id)">
+      class="table-row"
+      [ngClass]="getRowClass(order.status)"
+      (click)="onOrderClick(order.id)">
 
       <div>#{{ order.id }}</div>
 
       <div>
         <span class="table-badge">
-          {{ order.tableNumber || 'N/A' }}
+          {{ order.tableNumber || ('WAITER.ORDERS.LIST.NA' | translate) }}
         </span>
       </div>
 
-      <div>{{ order.itemsCount }} items</div>
+      <div>
+        {{ 'WAITER.ORDERS.LIST.ITEMS_COUNT' | translate:{ count: order.itemsCount } }}
+      </div>
 
       <div>
         <span class="status" [class]="order.status">
-          {{ order.status }}
+          {{ ('WAITER.ORDERS.FILTERS.STATUS.' + order.status?.toUpperCase()) | translate }}
         </span>
       </div>
 
-      <div>{{ order.totalAmount }} EGP</div>
+      <div>
+        {{ order.totalAmount }} {{ 'WAITER.ORDERS.LIST.CURRENCY' | translate }}
+      </div>
 
       <div class="actions">
 
-    <button
-  class="view-btn"
-  (click)="onViewClick(order.id, $event)">
-  View
-</button>
+        <button
+          class="view-btn"
+          (click)="onViewClick(order.id, $event)">
+          {{ 'WAITER.ORDERS.LIST.BUTTONS.VIEW' | translate }}
+        </button>
 
         @if (isReceived(order.status)) {
           <button
             class="add-btn"
             (click)="onAddItem(order.id, $event)">
-            Add Item
+            {{ 'WAITER.ORDERS.LIST.BUTTONS.ADD_ITEM' | translate }}
           </button>
         }
 

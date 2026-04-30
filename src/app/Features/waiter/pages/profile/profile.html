@@ -1,8 +1,12 @@
 <div class="page">
-  <h1 class="page-title">My Profile</h1>
+  <h1 class="page-title">
+    {{ 'WAITER.PROFILE.TITLE' | translate }}
+  </h1>
 
   @if (loading()) {
-    <div class="loading">Loading...</div>
+    <div class="loading">
+      {{ 'WAITER.PROFILE.LOADING' | translate }}
+    </div>
   }
 
   @if (!loading() && user()) {
@@ -14,71 +18,79 @@
           <div class="avatar">{{ getInitials(user()!.name) }}</div>
           <h2>{{ user()!.name }}</h2>
           <p class="role">{{ user()!.role }}</p>
-          <!--
-            <div class="stats">
-              <div class="stat">
-                <span class="stat-val orders">{{ shiftInfo.totalOrders }}</span>
-                <span class="stat-lbl">Orders</span>
-              </div>
-            <div class="stat">
-              <span class="stat-val sales"
-                >EGP {{ shiftInfo.totalSales / 1000 | number: '1.0-0' }}K</span
-              >
-              <span class="stat-lbl">Total Sales</span>
-            </div>
-            <div class="stat">
-              <span class="stat-val rating">⭐ {{ shiftInfo.rating }}</span>
-              <span class="stat-lbl">Rating</span>
-            </div>
-          </div>
-          -->
         </div>
       </div>
 
       <!-- RIGHT COLUMN -->
       <div class="col-right">
         <div class="card form-card">
-          <h3 class="section-title">Personal Info</h3>
+          <h3 class="section-title">
+            {{ 'WAITER.PROFILE.SECTIONS.PERSONAL_INFO' | translate }}
+          </h3>
 
           <form [formGroup]="form" (ngSubmit)="onSave()">
             <div class="field">
-              <label>FULL NAME</label>
-              <input formControlName="name" type="text" placeholder="Full Name" />
+              <label>{{ 'WAITER.PROFILE.FIELDS.NAME.LABEL' | translate }}</label>
+              <input
+                formControlName="name"
+                type="text"
+                [placeholder]="'WAITER.PROFILE.FIELDS.NAME.PLACEHOLDER' | translate"
+              />
               @if (form.get('name')?.invalid && form.get('name')?.touched) {
-                <span class="field-error">Name is required</span>
+                <span class="field-error">
+                  {{ 'WAITER.PROFILE.ERRORS.NAME_REQUIRED' | translate }}
+                </span>
               }
             </div>
 
             <div class="field">
-              <label>EMAIL</label>
-              <input formControlName="email" type="email" placeholder="Email" />
+              <label>{{ 'WAITER.PROFILE.FIELDS.EMAIL.LABEL' | translate }}</label>
+              <input
+                formControlName="email"
+                type="email"
+                [placeholder]="'WAITER.PROFILE.FIELDS.EMAIL.PLACEHOLDER' | translate"
+              />
               @if (form.get('email')?.invalid && form.get('email')?.touched) {
-                <span class="field-error">Valid email is required</span>
+                <span class="field-error">
+                  {{ 'WAITER.PROFILE.ERRORS.EMAIL_REQUIRED' | translate }}
+                </span>
               }
             </div>
 
             <div class="field">
-              <label>USERNAME (optional)</label>
-              <input formControlName="userName" type="text" placeholder="Username" />
+              <label>{{ 'WAITER.PROFILE.FIELDS.USERNAME.LABEL' | translate }}</label>
+              <input
+                formControlName="userName"
+                type="text"
+                [placeholder]="'WAITER.PROFILE.FIELDS.USERNAME.PLACEHOLDER' | translate"
+              />
             </div>
 
             <div class="field">
-              <label>NEW PASSWORD (optional)</label>
-              <input formControlName="newPassword" type="password" placeholder="New Password" />
+              <label>{{ 'WAITER.PROFILE.FIELDS.NEW_PASSWORD.LABEL' | translate }}</label>
+              <input
+                formControlName="newPassword"
+                type="password"
+                [placeholder]="'WAITER.PROFILE.FIELDS.NEW_PASSWORD.PLACEHOLDER' | translate"
+              />
               @if (form.get('newPassword')?.errors?.['minlength']) {
-                <span class="field-error">Minimum 6 characters</span>
+                <span class="field-error">
+                  {{ 'WAITER.PROFILE.ERRORS.PASSWORD_MIN' | translate }}
+                </span>
               }
             </div>
 
             <div class="field">
-              <label>CONFIRM PASSWORD</label>
+              <label>{{ 'WAITER.PROFILE.FIELDS.CONFIRM_PASSWORD.LABEL' | translate }}</label>
               <input
                 formControlName="confirmPassword"
                 type="password"
-                placeholder="Confirm Password"
+                [placeholder]="'WAITER.PROFILE.FIELDS.CONFIRM_PASSWORD.PLACEHOLDER' | translate"
               />
               @if (form.errors?.['passwordMismatch'] && form.get('confirmPassword')?.touched) {
-                <span class="field-error">Passwords do not match</span>
+                <span class="field-error">
+                  {{ 'WAITER.PROFILE.ERRORS.PASSWORD_MISMATCH' | translate }}
+                </span>
               }
             </div>
 
@@ -87,13 +99,19 @@
             }
 
             @if (saved()) {
-              <p class="success-msg">✓ Changes saved successfully!</p>
+              <p class="success-msg">
+                {{ 'WAITER.PROFILE.SUCCESS.SAVED' | translate }}
+              </p>
             }
 
-            <button type="submit" class="btn-save" [disabled]="form.invalid">Save Changes</button>
+            <button type="submit" class="btn-save" [disabled]="form.invalid">
+              {{ 'WAITER.PROFILE.BUTTONS.SAVE' | translate }}
+            </button>
           </form>
 
-          <button class="btn-logout" (click)="onLogout()">Logout</button>
+          <button class="btn-logout" (click)="onLogout()">
+            {{ 'WAITER.PROFILE.BUTTONS.LOGOUT' | translate }}
+          </button>
         </div>
       </div>
     </div>

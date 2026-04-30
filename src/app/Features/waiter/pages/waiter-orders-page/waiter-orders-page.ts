@@ -9,6 +9,7 @@ import { OrderDetails } from '../../../admin/components/Order/order-details/orde
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { Router } from '@angular/router';
 import { SignalRService } from '../../../../Core/Services/SignalR-Service/SignalrService';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-waiter-orders-page',
@@ -18,7 +19,8 @@ import { SignalRService } from '../../../../Core/Services/SignalR-Service/Signal
     WaiterOrderFilters,
     WaiterOrdersList,
     Pagination,
-    OrderDetails
+    OrderDetails,
+    TranslatePipe
   ],
   templateUrl: './waiter-orders-page.html',
   styleUrls: ['./waiter-orders-page.scss']
