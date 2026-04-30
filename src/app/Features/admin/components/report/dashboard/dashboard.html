@@ -97,28 +97,56 @@
   <!-- ── CHARTS ROW ── -->
   <div class="charts-row">
 
-    <!-- Revenue List -->
+    <!-- Revenue Trends — sparkline -->
     <div class="card">
       <div class="card-header">
         <div>
           <div class="card-title">
             {{ 'ADMIN.HOME.REVENUE.TITLE' | translate }}
           </div>
+          <div class="card-sub" *ngIf="revenue.length > 0">
+            {{ revenue[revenue.length - 1]?.date | date:'mediumDate' }}
+            &nbsp;·&nbsp;
+            <span class="rev-highlight">{{ revenue[revenue.length - 1]?.totalRevenue | currency:'EGP':'symbol':'1.0-0' }}</span>
+          </div>
         </div>
       </div>
+
       <div class="empty-state" *ngIf="revenue.length === 0">
         <i class="fas fa-chart-line"></i>
-        <p>
-          {{ 'ADMIN.HOME.REVENUE.EMPTY' | translate }}
-        </p>
+        <p>{{ 'ADMIN.HOME.REVENUE.EMPTY' | translate }}</p>
       </div>
-      <div class="rev-list" *ngIf="revenue.length > 0">
-        <div class="rev-item" *ngFor="let r of revenue">
-          <div class="rev-date">
-            <i class="fas fa-calendar-day"></i>
-            {{ r.date | date:'mediumDate' }}
+
+      <!-- Sparkline SVG -->
+      <div class="spark-wrap" *ngIf="revenue.length > 0">
+        <svg class="spark-svg" viewBox="0 0 300 90" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stop-color="#C8102E" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="#C8102E" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path class="spark-area"
+            [attr.d]="getSparkAreaPath()"
+            fill="url(#sparkGrad)"/>
+          <path class="spark-line"
+            [attr.d]="getSparkLinePath()"
+            fill="none" stroke="#C8102E" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle *ngFor="let r of revenue; let i = index"
+            [attr.cx]="getSparkX(i)"
+            [attr.cy]="getSparkY(r.totalRevenue)"
+            r="3" fill="#fff" stroke="#C8102E" stroke-width="1.5" class="spark-dot"/>
+        </svg>
+
+        <!-- summary list below sparkline -->
+        <div class="rev-list spark-list">
+          <div class="rev-item" *ngFor="let r of revenue">
+            <div class="rev-date">
+              <i class="fas fa-calendar-day"></i>
+              {{ r.date | date:'mediumDate' }}
+            </div>
+            <div class="rev-amount">{{ r.totalRevenue | currency:'EGP':'symbol':'1.0-0' }}</div>
           </div>
-          <div class="rev-amount">{{ r.totalRevenue | currency:'EGP':'symbol':'1.0-0' }}</div>
         </div>
       </div>
     </div>
@@ -132,53 +160,77 @@
           </div>
         </div>
       </div>
-      <div class="orders-grid">
-        <div class="order-card dine">
-          <div class="oc-icon"><i class="fas fa-concierge-bell"></i></div>
-          <div class="oc-label">
-            {{ 'ADMIN.HOME.ORDERS.DINE_IN' | translate }}
+      <!-- ── Donut + Legend side by side ── -->
+      <div class="donut-flex-wrapper">
+
+        <div class="donut-wrapper">
+          <svg viewBox="0 0 120 120" class="donut-svg">
+            <circle cx="60" cy="60" r="48" fill="none" stroke="#EDEDED" stroke-width="16" />
+            <circle *ngIf="dineInPercent > 0"
+              cx="60" cy="60" r="48" fill="none" stroke="#C8102E" stroke-width="16"
+              [attr.stroke-dasharray]="dineInCircumference + ' ' + circumference"
+              [attr.stroke-dashoffset]="dineInOffset"
+              transform="rotate(-90 60 60)" class="donut-segment"/>
+            <circle *ngIf="pickupPercent > 0"
+              cx="60" cy="60" r="48" fill="none" stroke="#F4B400" stroke-width="16"
+              [attr.stroke-dasharray]="pickupCircumference + ' ' + circumference"
+              [attr.stroke-dashoffset]="pickupOffset"
+              transform="rotate(-90 60 60)" class="donut-segment"/>
+            <circle *ngIf="deliveryPercent > 0"
+              cx="60" cy="60" r="48" fill="none" stroke="#15803d" stroke-width="16"
+              [attr.stroke-dasharray]="deliveryCircumference + ' ' + circumference"
+              [attr.stroke-dashoffset]="deliveryOffset"
+              transform="rotate(-90 60 60)" class="donut-segment"/>
+          </svg>
+          <div class="donut-center-text">
+            <div class="donut-total">{{ totalOrders }}</div>
+            <div class="donut-total-label">orders</div>
           </div>
-          <div class="oc-val">{{ orders?.dineInCount ?? 0 }}</div>
         </div>
-        <div class="order-card pick">
-          <div class="oc-icon"><i class="fas fa-shopping-bag"></i></div>
-          <div class="oc-label">
-            {{ 'ADMIN.HOME.ORDERS.PICKUP' | translate }}
-          </div>
-          <div class="oc-val">{{ orders?.pickupCount ?? 0 }}</div>
+
+        <!-- Legend rows -->
+        <div class="donut-legend" *ngIf="orders">
+          <ng-container *ngIf="(orders.dineInCount + orders.pickupCount + orders.deliveryCount) as total">
+
+            <div class="legend-item dine-item">
+              <span class="legend-dot dine-dot"></span>
+              <span class="legend-label">{{ 'ADMIN.HOME.ORDERS.DINE_IN' | translate }}</span>
+              <div class="legend-right">
+                <span class="legend-numbers dine-num">{{ orders.dineInCount }}</span>
+                <span class="legend-percent">{{ ((orders.dineInCount / total) * 100) | number:'1.0-0' }}%</span>
+              </div>
+            </div>
+            <div class="legend-bar-track">
+              <div class="legend-bar-fill dine" [style.width.%]="(orders.dineInCount / total) * 100"></div>
+            </div>
+
+            <div class="legend-item pickup-item">
+              <span class="legend-dot pickup-dot"></span>
+              <span class="legend-label">{{ 'ADMIN.HOME.ORDERS.PICKUP' | translate }}</span>
+              <div class="legend-right">
+                <span class="legend-numbers pick-num">{{ orders.pickupCount }}</span>
+                <span class="legend-percent">{{ ((orders.pickupCount / total) * 100) | number:'1.0-0' }}%</span>
+              </div>
+            </div>
+            <div class="legend-bar-track">
+              <div class="legend-bar-fill pick" [style.width.%]="(orders.pickupCount / total) * 100"></div>
+            </div>
+
+            <div class="legend-item delivery-item">
+              <span class="legend-dot delivery-dot"></span>
+              <span class="legend-label">{{ 'ADMIN.HOME.ORDERS.DELIVERY' | translate }}</span>
+              <div class="legend-right">
+                <span class="legend-numbers del-num">{{ orders.deliveryCount }}</span>
+                <span class="legend-percent">{{ ((orders.deliveryCount / total) * 100) | number:'1.0-0' }}%</span>
+              </div>
+            </div>
+            <div class="legend-bar-track">
+              <div class="legend-bar-fill del" [style.width.%]="(orders.deliveryCount / total) * 100"></div>
+            </div>
+
+          </ng-container>
         </div>
-        <div class="order-card del">
-          <div class="oc-icon"><i class="fas fa-motorcycle"></i></div>
-          <div class="oc-label">
-            {{ 'ADMIN.HOME.ORDERS.DELIVERY' | translate }}
-          </div>
-          <div class="oc-val">{{ orders?.deliveryCount ?? 0 }}</div>
-        </div>
-      </div>
-      <div class="order-bars" *ngIf="orders">
-        <ng-container *ngIf="(orders.dineInCount + orders.pickupCount + orders.deliveryCount) as total">
-          <div class="order-bar-row">
-            <span class="bar-label">
-              {{ 'ADMIN.HOME.ORDERS.DINE_IN' | translate }}
-            </span>
-            <div class="bar-track"><div class="bar-fill dine" [style.width.%]="(orders.dineInCount / total) * 100"></div></div>
-            <span class="bar-pct">{{ ((orders.dineInCount / total) * 100) | number:'1.0-0' }}%</span>
-          </div>
-          <div class="order-bar-row">
-            <span class="bar-label">
-              {{ 'ADMIN.HOME.ORDERS.PICKUP' | translate }}
-            </span>
-            <div class="bar-track"><div class="bar-fill pick" [style.width.%]="(orders.pickupCount / total) * 100"></div></div>
-            <span class="bar-pct">{{ ((orders.pickupCount / total) * 100) | number:'1.0-0' }}%</span>
-          </div>
-          <div class="order-bar-row">
-            <span class="bar-label">
-              {{ 'ADMIN.HOME.ORDERS.DELIVERY' | translate }}
-            </span>
-            <div class="bar-track"><div class="bar-fill del" [style.width.%]="(orders.deliveryCount / total) * 100"></div></div>
-            <span class="bar-pct">{{ ((orders.deliveryCount / total) * 100) | number:'1.0-0' }}%</span>
-          </div>
-        </ng-container>
+
       </div>
     </div>
 
@@ -222,33 +274,59 @@
 
         <!-- ── WEEKLY REVENUE CHART ── -->
 <div class="card weekly-chart">
-
   <div class="card-header">
-    <div class="card-title">Weekly Revenue</div>
+    <div>
+      <div class="card-title">Weekly Revenue</div>
+      <div class="card-sub">Last 7 days</div>
+    </div>
   </div>
 
-  <div class="chart-container">
+  <div class="wc-area" *ngIf="dailyRevenue.length > 0">
+    <!-- SVG line chart -->
+    <svg class="wc-svg" viewBox="0 0 560 160" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#C8102E" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#C8102E" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
 
-    <div class="chart-bars">
-      <div class="bar"
-           *ngFor="let item of dailyRevenue"
-           [style.height.%]="(item.totalRevenue / maxRevenue) * 100">
+      <!-- area fill -->
+      <path class="wc-area-path"
+        [attr.d]="getAreaPath()"
+        fill="url(#revGrad)" />
 
-        <div class="bar-value">
+      <!-- line -->
+      <path class="wc-line-path"
+        [attr.d]="getLinePath()"
+        fill="none" stroke="#C8102E" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+
+      <!-- dots + value labels -->
+      <ng-container *ngFor="let item of dailyRevenue; let i = index">
+        <circle
+          [attr.cx]="getDotX(i)"
+          [attr.cy]="getDotY(item.totalRevenue)"
+          r="4" fill="#fff" stroke="#C8102E" stroke-width="2.5" class="wc-dot"/>
+        <text
+          [attr.x]="getDotX(i)"
+          [attr.y]="getDotY(item.totalRevenue) - 10"
+          text-anchor="middle"
+          class="wc-val-label">
           {{ item.totalRevenue | currency:'EGP':'symbol':'1.0-0' }}
-        </div>
+        </text>
+      </ng-container>
+    </svg>
 
-      </div>
+    <!-- X axis labels -->
+    <div class="wc-labels">
+      <span *ngFor="let item of dailyRevenue">{{ getDayLabel(item.date) }}</span>
     </div>
-
-    <div class="chart-labels">
-      <div *ngFor="let item of dailyRevenue">
-        {{ getDayLabel(item.date) }}
-      </div>
-    </div>
-
   </div>
 
+  <div class="empty-state" *ngIf="dailyRevenue.length === 0">
+    <i class="fas fa-chart-line"></i>
+    <p>No revenue data</p>
+  </div>
 </div>
 
     <!-- Inventory Usage -->
