@@ -4,6 +4,7 @@ import { forkJoin } from 'rxjs';
 import { OrdersService } from '../../../../../../src/app/Core/Services/Orders-Service/orders-service';
 import { Pagination } from "../../../../Shared/Components/pagination/pagination";
 import { Router } from '@angular/router';
+import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 
 export interface DashboardOrder {
   id: number;
@@ -43,10 +44,13 @@ export class AwaitingOrdersListComponent implements OnInit {
     soup: '🍜',
   };
 
-  constructor(private orderService: OrdersService , private router:Router) {}
-
+  constructor(private orderService: OrdersService , private router:Router ,  private authService: AuthService) {}
+  private branchId!: number;
   ngOnInit() {
+  this.authService.getCurrentUser().subscribe(user => {
+    this.branchId = user.branchId;
     this.loadOrders();
+  });
   }
 
   // ── Load Orders with Pagination ─────────────
@@ -57,7 +61,9 @@ export class AwaitingOrdersListComponent implements OnInit {
     this.orderService.getAllOrdersForCashier({
       pageIndex: this.pageIndex,
       pageSize: this.pageSize,
-      paymentStatus: 'Pending'
+      paymentStatus: 'Pending',
+      branchId: this.branchId,
+      
     }).subscribe({
       next: res => {
         const rawOrders = res.data ?? [];

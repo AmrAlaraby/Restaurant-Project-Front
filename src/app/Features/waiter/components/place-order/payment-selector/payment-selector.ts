@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class PaymentSelector {
   @Input() method: string = 'Cash';
+  
   @Output() methodChange = new EventEmitter<string>();
 
   select(method: string): void {

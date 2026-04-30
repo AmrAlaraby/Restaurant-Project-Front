@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { OrdersService } from '../../../../Core/Services/Orders-Service/orders-service';
 import { PaymentService } from '../../../../Core/Services/Payment-Service/payment-service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-payment-terminal',
@@ -22,25 +23,59 @@ export class PaymentTerminal implements OnChanges {
 
   constructor(
     private orderService: OrdersService,
-    private paymentService: PaymentService
-  ) {}
+    private paymentService: PaymentService,
+    private route: ActivatedRoute
 
+  ) {}
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   throw new Error('Method not implemented.');
+  // }
+  urlOrderId?: number;
+
+  
   ngOnChanges() {
     if (this.orderId) {
-      this.loadOrder();
+      // this.loadOrder();
       this.amountReceived = 0;
       this.paymentSuccess = false;
     } else {
       this.order = null;
       this.paymentSuccess = false;
     }
+    this.tryLoadOrder();
+
+  }
+  get activeOrderId(): number {
+    return this.orderId || this.urlOrderId!;
   }
 
-  loadOrder() {
-    this.orderService.getOrderById(this.orderId).subscribe(res => {
-      this.order = res;
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      const id = params['orderId'];
+      if (id) {
+        this.urlOrderId = +id;
+        this.tryLoadOrder();
+      }
     });
   }
+
+  tryLoadOrder() {
+    const id = this.orderId || this.urlOrderId;
+
+    if (!id) return;
+
+    this.orderService.getOrderById(id).subscribe(res => {
+      this.order = res;
+      this.amountReceived = 0;
+      this.paymentSuccess = false;
+    });
+  }
+
+  // loadOrder() {
+  //   this.orderService.getOrderById(this.orderId).subscribe(res => {
+  //     this.order = res;
+  //   });
+  // }
 
   // Payment method comes from backend via order.payment.paymentMethod
   get isCash(): boolean {
@@ -61,7 +96,10 @@ export class PaymentTerminal implements OnChanges {
 
     if (method === 'Cash') {
 
-      this.paymentService.confirmCash(this.orderId, this.order.totalAmount).subscribe({
+      this.paymentService.confirmCash(
+        this.activeOrderId,
+        this.order.totalAmount
+      ).subscribe({
         
         next: () => this.handleSuccess(),
         error: () => { this.isLoading = false; }
@@ -71,7 +109,7 @@ export class PaymentTerminal implements OnChanges {
 
     } else if (method === 'Card') {
 
-      this.paymentService.pay(this.orderId).subscribe({
+      this.paymentService.pay(this.activeOrderId).subscribe({
         next: (res) => {
           window.open(res.iframeUrl, '_blank');
           this.handleSuccess();
