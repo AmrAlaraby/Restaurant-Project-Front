@@ -1113,6 +1113,69 @@
         },
         "EMPTY": "اختر طلب لبدء عملية الدفع"
       }
+    },
+    "TRANSACTIONS": {
+      "TITLE": "سجل المعاملات",
+      "SUBTITLE": "كل عمليات الدفع خلال ورديتك",
+      "BRANCH": "الفرع",
+
+      "BUTTON_EXPORT": "تصدير CSV",
+      "BUTTON_RETRY": "إعادة المحاولة",
+
+      "PLACEHOLDER_ORDER_ID": "رقم الطلب...",
+
+      "STATUS_ALL": "كل الحالات",
+      "STATUS_PAID": "مدفوع",
+      "STATUS_PENDING": "قيد الانتظار",
+      "STATUS_REFUNDED": "مرتجع",
+      "STATUS_FAILED": "فشل",
+
+      "LOADING": "جاري تحميل المعاملات...",
+      "EMPTY": "لا توجد معاملات",
+
+      "TABLE": {
+        "TIME": "الوقت",
+        "ORDER": "الطلب",
+        "METHOD": "طريقة الدفع",
+        "AMOUNT": "المبلغ",
+        "STATUS": "الحالة"
+      },
+
+      "PAGINATION": "عرض {{from}} إلى {{to}} من {{total}} معاملة",
+      "ERROR_USER": "تعذر تحميل بيانات المستخدم",
+      "ERROR_LOAD": "فشل تحميل المعاملات، حاول مرة أخرى",
+
+      "CSV": {
+        "ORDER": "الطلب",
+        "METHOD": "طريقة الدفع",
+        "AMOUNT": "المبلغ (جنيه)",
+        "STATUS": "الحالة",
+        "DATE": "تاريخ الدفع"
+      },
+
+      "FILTER": {
+        "ALL": "الكل",
+        "CASH": "كاش",
+        "CARD": "كارت",
+        "INSTAPAY": "إنستاباي",
+        "WALLET": "محفظة"
+      },
+      "NO_TIME": "—",
+      "CURRENCY": "جنيه",
+
+      "METHOD": {
+        "CASH": "كاش",
+        "CARD": "كارت",
+        "INSTAPAY": "إنستاباي",
+        "WALLET": "محفظة"
+      },
+
+      "STATUS": {
+        "PAID": "مدفوع",
+        "PENDING": "قيد الانتظار",
+        "REFUNDED": "مرتجع",
+        "FAILED": "فشل"
+      }
     }
   }
 

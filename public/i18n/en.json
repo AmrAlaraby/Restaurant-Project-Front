@@ -1115,6 +1115,69 @@
         },
         "EMPTY": "Select an order to begin payment"
       }
+    },
+    "TRANSACTIONS": {
+      "TITLE": "Transaction Log",
+      "SUBTITLE": "All payments processed during your shift",
+      "BRANCH": "Branch",
+
+      "BUTTON_EXPORT": "Export CSV",
+      "BUTTON_RETRY": "Retry",
+
+      "PLACEHOLDER_ORDER_ID": "Order ID...",
+
+      "STATUS_ALL": "All Statuses",
+      "STATUS_PAID": "Paid",
+      "STATUS_PENDING": "Pending",
+      "STATUS_REFUNDED": "Refunded",
+      "STATUS_FAILED": "Failed",
+
+      "LOADING": "Loading transactions...",
+      "EMPTY": "No transactions found",
+
+      "TABLE": {
+        "TIME": "Time",
+        "ORDER": "Order",
+        "METHOD": "Method",
+        "AMOUNT": "Amount",
+        "STATUS": "Status"
+      },
+
+      "PAGINATION": "Showing {{from}}–{{to}} of {{total}} transactions",
+      "ERROR_USER": "Could not load user info.",
+      "ERROR_LOAD": "Failed to load transactions. Please try again.",
+
+      "CSV": {
+        "ORDER": "Order",
+        "METHOD": "Method",
+        "AMOUNT": "Amount (EGP)",
+        "STATUS": "Status",
+        "DATE": "Paid At"
+      },
+
+      "FILTER": {
+        "ALL": "All",
+        "CASH": "Cash",
+        "CARD": "Card",
+        "INSTAPAY": "InstaPay",
+        "WALLET": "Wallet"
+      },
+      "NO_TIME": "—",
+      "CURRENCY": "EGP",
+
+      "METHOD": {
+        "CASH": "Cash",
+        "CARD": "Card",
+        "INSTAPAY": "InstaPay",
+        "WALLET": "Wallet"
+      },
+
+      "STATUS": {
+        "PAID": "Paid",
+        "PENDING": "Pending",
+        "REFUNDED": "Refunded",
+        "FAILED": "Failed"
+      }
     }
   }
 }

@@ -1,28 +1,37 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule, DecimalPipe, DatePipe, UpperCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { finalize, Subject, debounceTime, distinctUntilChanged } from 'rxjs';
+import { finalize, Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 import { UserInterface } from '../../../../Core/Models/AuthModels/user-interface';
 import { PaymentDto } from '../../../../Core/Models/PaymentModels/payment-dto';
 import { PaymentQueryParams } from '../../../../Core/Models/PaymentModels/payment-query-params';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { PaymentService } from '../../../../Core/Services/Payment-Service/payment-service';
 import { Pagination } from '../../../../Shared/Components/pagination/pagination';
-
-
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { LocalizationService } from '../../../../Core/Services/Localization-Service/localization-service';
 
 export type FilterType = 'All' | 'Cash' | 'Card' | 'InstaPay' | 'Wallet';
 
 @Component({
   selector: 'app-transaction-log',
   standalone: true,
-  imports: [CommonModule, FormsModule, Pagination, DecimalPipe, DatePipe, UpperCasePipe],
+  imports: [
+    CommonModule,
+    FormsModule,
+    Pagination,
+    DecimalPipe,
+    DatePipe,
+    TranslatePipe
+  ],
   templateUrl: './transaction-log.html',
   styleUrls: ['./transaction-log.scss'],
 })
 export class TransactionLogComponent implements OnInit {
+
   private authService    = inject(AuthService);
   private paymentService = inject(PaymentService);
+  private translate      = inject(TranslateService);
 
   private orderIdDebounce$ = new Subject<number | null>();
 
@@ -40,13 +49,20 @@ export class TransactionLogComponent implements OnInit {
   readonly pageSize = 5;
   readonly filterOptions: FilterType[] = ['All', 'Cash', 'Card', 'InstaPay', 'Wallet'];
 
+  constructor(
+        private localizationService: LocalizationService,
+      ) {}
+
   ngOnInit(): void {
-    // debounce orderId input — waits 400ms before firing request
-    this.orderIdDebounce$.pipe(debounceTime(400), distinctUntilChanged()).subscribe((val) => {
-      this.orderIdFilter.set(val);
-      this.pageIndex.set(1);
-      this.loadPayments();
-    });
+
+    // debounce search
+    this.orderIdDebounce$
+      .pipe(debounceTime(400), distinctUntilChanged())
+      .subscribe((val) => {
+        this.orderIdFilter.set(val);
+        this.pageIndex.set(1);
+        this.loadPayments();
+      });
 
     this.authService.getCurrentUser().subscribe({
       next: (user) => {
@@ -54,12 +70,26 @@ export class TransactionLogComponent implements OnInit {
         this.loadPayments();
       },
       error: () => {
-        this.error.set('Could not load user info.');
+        this.error.set(this.translate.instant('CASHIER.TRANSACTIONS.ERROR_USER'));
         this.loading.set(false);
       },
     });
+    this.getCurrentLanguage();
   }
-
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
+    
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
   loadPayments(): void {
     const user = this.currentUser();
     if (!user) return;
@@ -68,29 +98,27 @@ export class TransactionLogComponent implements OnInit {
     this.error.set(null);
 
     const filter = this.activeFilter();
+
     const params: PaymentQueryParams = {
       pageIndex: this.pageIndex(),
-      pageSize:  this.pageSize,
-      branchId:  user.branchId,   // ← فلتر الفرع من الكاشير اللي عامل login
+      pageSize: this.pageSize,
+      branchId: user.branchId,
     };
 
-    // method filter
     if (filter !== 'All') params.method = filter;
-
-    // status filter (من الـ select)
     if (this.statusFilter()) params.status = this.statusFilter();
-
-    // orderId filter
     if (this.orderIdFilter() != null) params.orderId = this.orderIdFilter()!;
 
     this.paymentService.getAll(params)
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe({
-        next:  (res) => {
+        next: (res) => {
           this.payments.set(res.data);
           this.totalCount.set(res.count);
         },
-        error: () => this.error.set('Failed to load transactions. Please try again.'),
+        error: () => {
+          this.error.set(this.translate.instant('CASHIER.TRANSACTIONS.ERROR_LOAD'));
+        },
       });
   }
 
@@ -118,7 +146,14 @@ export class TransactionLogComponent implements OnInit {
   }
 
   exportCSV(): void {
-    const headers = ['Order', 'Method', 'Amount (EGP)', 'Status', 'Paid At'];
+    const headers = [
+      this.translate.instant('CASHIER.TRANSACTIONS.CSV.ORDER'),
+      this.translate.instant('CASHIER.TRANSACTIONS.CSV.METHOD'),
+      this.translate.instant('CASHIER.TRANSACTIONS.CSV.AMOUNT'),
+      this.translate.instant('CASHIER.TRANSACTIONS.CSV.STATUS'),
+      this.translate.instant('CASHIER.TRANSACTIONS.CSV.DATE')
+    ];
+
     const rows = this.payments().map((tx) => [
       `#${tx.orderId}`,
       tx.paymentMethod,
@@ -126,10 +161,16 @@ export class TransactionLogComponent implements OnInit {
       tx.paymentStatus,
       tx.paidAt ?? '—',
     ]);
+
     const csv  = [headers, ...rows].map((r) => r.join(',')).join('\n');
     const blob = new Blob([csv], { type: 'text/csv' });
     const url  = URL.createObjectURL(blob);
-    const a    = Object.assign(document.createElement('a'), { href: url, download: 'transactions.csv' });
+
+    const a = Object.assign(document.createElement('a'), {
+      href: url,
+      download: 'transactions.csv'
+    });
+
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -137,7 +178,11 @@ export class TransactionLogComponent implements OnInit {
   // ── helpers ──
   tabIcon(f: FilterType): string {
     const map: Record<FilterType, string> = {
-      All: '', Cash: '💵', Card: '💳', InstaPay: '🔷', Wallet: '👛',
+      All: '',
+      Cash: '💵',
+      Card: '💳',
+      InstaPay: '🔷',
+      Wallet: '👛',
     };
     return map[f];
   }
@@ -168,5 +213,12 @@ export class TransactionLogComponent implements OnInit {
 
   min(a: number, b: number): number {
     return Math.min(a, b);
+  }
+
+  getBranchName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.branchArabicName || item.branchName || this.translate.instant('CASHIER.TRANSACTIONS.BRANCH');
+    }
+    return item.branchName || this.translate.instant('CASHIER.TRANSACTIONS.BRANCH');
   }
 }
