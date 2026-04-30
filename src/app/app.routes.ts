@@ -280,7 +280,7 @@ export const routes: Routes = [
     path: 'chief',
 
     canActivate: [roleGuard],
-    data: { roles: ['Chief'] },
+    data: { roles: ['Chef'] },
 
     loadComponent: () =>
       import('./Features/chief/pages/chef-layout/chef-layout').then((m) => m.ChefLayout),
