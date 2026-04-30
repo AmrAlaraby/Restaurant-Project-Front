@@ -774,6 +774,51 @@
   "DELETE": "Delete"
 },
 "WAITER": {
+  "LAYOUT": {
+      "TOPBAR": {
+        "TITLE": {
+          "HOME": "Dashboard",
+          "ORDERS": "Order Management",
+          "KITCHEN": "Kitchen Display",
+          "TABLES": "Table Management",
+          "DELIVERIES": "Deliveries",
+          "PAYMENTS": "Payments",
+          "MENU": "Menu Items",
+          "STOCK": "Stock",
+          "CATEGORIES": "Categories",
+          "USERS": "Users",
+          "BRANCHES": "Branches",
+          "REPORTS": "Reports",
+          "SETTINGS": "Settings",
+          "PROFILE": "My Profile",
+          "PLACEORDER": "Place New Order",
+          "DEFAULT": "Dashboard"
+        }
+      },
+      "SIDEBAR": {
+        "FLOOR": {
+          "TITLE": "Floor",
+          "LINKS": {
+            "HOME": "Home",
+            "TABLES": "Tables",
+            "ORDERS": "Orders"
+          }
+        },
+        "SERVICE": {
+          "TITLE": "Service",
+          "LINKS": {
+            "NEW_ORDER": "New Order",
+            "KITCHEN_STATUS": "Kitchen Status"
+          }
+        },
+        "ACCOUNT": {
+          "TITLE": "Account",
+          "LINKS": {
+            "PROFILE": "My Profile"
+          }
+        }
+      }
+    },
   "PROFILE": {
       "TITLE": "My Profile",
       "LOADING": "Loading...",

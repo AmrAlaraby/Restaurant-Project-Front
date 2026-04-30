@@ -770,6 +770,51 @@
     "DELETE": "حذف"
   },
   "WAITER": {
+    "LAYOUT": {
+      "TOPBAR": {
+        "TITLE": {
+          "HOME": "لوحة التحكم",
+          "ORDERS": "إدارة الطلبات",
+          "KITCHEN": "المطبخ",
+          "TABLES": "إدارة الطاولات",
+          "DELIVERIES": "التوصيل",
+          "PAYMENTS": "المدفوعات",
+          "MENU": "قائمة الطعام",
+          "STOCK": "المخزون",
+          "CATEGORIES": "التصنيفات",
+          "USERS": "المستخدمين",
+          "BRANCHES": "الفروع",
+          "REPORTS": "التقارير",
+          "SETTINGS": "الإعدادات",
+          "PROFILE": "ملفي الشخصي",
+          "PLACEORDER": "إنشاء طلب جديد",
+          "DEFAULT": "لوحة التحكم"
+        }
+      },
+      "SIDEBAR": {
+        "FLOOR": {
+          "TITLE": "الطابق",
+          "LINKS": {
+            "HOME": "الرئيسية",
+            "TABLES": "الطاولات",
+            "ORDERS": "الطلبات"
+          }
+        },
+        "SERVICE": {
+          "TITLE": "الخدمة",
+          "LINKS": {
+            "NEW_ORDER": "طلب جديد",
+            "KITCHEN_STATUS": "حالة المطبخ"
+          }
+        },
+        "ACCOUNT": {
+          "TITLE": "الحساب",
+          "LINKS": {
+            "PROFILE": "ملفي الشخصي"
+          }
+        }
+      }
+    },
     "PROFILE": {
       "TITLE": "ملفي الشخصي",
       "LOADING": "جاري التحميل...",

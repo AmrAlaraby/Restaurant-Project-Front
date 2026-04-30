@@ -1,8 +1,15 @@
 <div class="layout">
 
   <!-- SIDEBAR -->
-  <app-sidebar [sections]="sidebarData" [class.open]="isOpen" prefix="waiter" [isOpen]="isOpen"
-    [AvatarLetters]="AvatarLetters" [UserName]="UserName" [UserRole]="UserRole" (close)="closeSidebar()">
+  <app-sidebar
+    [sections]="sidebarData"
+    [class.open]="isOpen"
+    prefix="waiter"
+    [isOpen]="isOpen"
+    [AvatarLetters]="AvatarLetters"
+    [UserName]="UserName"
+    [UserRole]="UserRole"
+    (close)="closeSidebar()">
   </app-sidebar>
 
   <!-- CONTENT -->
@@ -16,16 +23,15 @@
       </button>
 
       <div class="title">
-        {{topbarTitle}}
+        {{ 'WAITER.LAYOUT.TOPBAR.TITLE.' + (topbarTitleKey || 'DEFAULT') | translate }}
       </div>
 
       <div class="topbar-right">
         <app-lang-switch></app-lang-switch>
-        <!-- <app-notification-bell [notifications]="notifications"></app-notification-bell> -->
         <app-notification-bell></app-notification-bell>
 
         <div class="avatar">
-          {{AvatarLetters}}
+          {{ AvatarLetters }}
         </div>
       </div>
 
