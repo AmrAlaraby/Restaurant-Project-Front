@@ -1,101 +1,199 @@
+/* ═══════════════════════════════════════════════════════════════════
+   MENU ITEM DETAILS — SCSS
+   Brand: Deep Crimson + Warm Gold · Dark mode via .dark class
+═══════════════════════════════════════════════════════════════════ */
+
 .details-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  font-family: var(--font-body);
 }
 
+// ── IMAGE ──────────────────────────────────────────────────────────
 .image-wrapper {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .details-image {
-    width: 320px;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 18px;
-    border: 1px solid rgba(192, 57, 43, 0.13);
+  width: 320px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--clr-border);
+  box-shadow: var(--shadow-md);
+  display: block;
+
+  .dark & {
+    border-color: var(--clr-border);
+    box-shadow: var(--shadow-md);
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    height: 180px;
+  }
 }
 
+// ── DETAILS GRID ───────────────────────────────────────────────────
 .details-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-md);
 }
 
 .detail-card {
-    background: #FFF5F5;
-    border-radius: 14px;
-    padding: 1rem;
-    border: 1px solid rgba(192, 57, 43, 0.1);
+  background: var(--clr-cream);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  border: 1.5px solid var(--clr-border);
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
 
-    span {
-        display: block;
-        font-size: 0.85rem;
-        color: #9B4437;
-        margin-bottom: 0.35rem;
-    }
+  .dark & {
+    background: var(--clr-cream);
+    border-color: var(--clr-border);
+  }
 
-    strong {
-        font-size: 1rem;
-        color: #2D0A08;
+  &:hover {
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+  }
+
+  span {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--clr-text-hint);
+    margin-block-end: var(--space-xs);
+
+    .dark & {
+      color: var(--clr-text-hint);
     }
+  }
+
+  strong {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--clr-text-primary);
+
+    .dark & {
+      color: var(--clr-text-primary);
+    }
+  }
 }
 
+// ── RECIPES SECTION ────────────────────────────────────────────────
 .recipes-section {
-    h5 {
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: #2D0A08;
-    }
-}
-
-.recipes-table {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.recipe-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.85rem 1rem;
-    border-radius: 12px;
-    background: #FFF5F5;
-    border: 1px solid rgba(192, 57, 43, 0.1);
-    color: #2D0A08;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }
 
 .recipes-toggle {
-    width: 100%;
-    border: 1px solid rgba(192, 57, 43, 0.13);
-    background: #FFF5F5;
-    border-radius: 14px;
-    padding: 1rem 1.25rem;
+  width: 100%;
+  border: 1.5px solid var(--clr-border);
+  background: var(--clr-cream);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--clr-text-primary);
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .dark & {
+    background: var(--clr-cream);
+    border-color: var(--clr-border);
+    color: var(--clr-text-primary);
+  }
 
-    font-weight: 700;
-    font-size: 1rem;
-    color: #2D0A08;
+  &:hover {
+    background: var(--clr-cream-mid);
+    border-color: var(--clr-primary);
+    box-shadow: var(--shadow-sm);
 
-    cursor: pointer;
-    transition: 0.25s ease;
-
-    &:hover {
-        background: #FDECEA;
-        border-color: rgba(192, 57, 43, 0.3);
+    .dark & {
+      background: var(--clr-cream-mid);
+      border-color: var(--clr-accent);
+      box-shadow: var(--shadow-sm);
     }
+  }
 }
 
 .arrow {
-    font-size: 0.9rem;
-    color: #9B4437;
-    transition: 0.25s ease;
+  font-size: 12px;
+  color: var(--clr-accent);
+  transition: transform var(--transition-fast);
+
+  .dark & {
+    color: var(--clr-accent);
+  }
 }
 
+// ── RECIPES TABLE ──────────────────────────────────────────────────
 .recipes-table {
-    margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-block-start: var(--space-xs);
+}
+
+.recipe-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--clr-surface);
+  border: 1.5px solid var(--clr-border);
+  font-size: 14px;
+  color: var(--clr-text-primary);
+  transition: background var(--transition-fast);
+
+  .dark & {
+    background: var(--clr-surface);
+    border-color: var(--clr-border);
+    color: var(--clr-text-primary);
+  }
+
+  &:hover {
+    background: var(--clr-cream);
+
+    .dark & {
+      background: var(--clr-cream);
+    }
+  }
+
+  span {
+    font-weight: 500;
+    color: var(--clr-text-primary);
+
+    .dark & {
+      color: var(--clr-text-primary);
+    }
+  }
+
+  strong {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--clr-text-secondary);
+    background: var(--clr-cream-mid);
+    padding: 2px 10px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+
+    .dark & {
+      color: var(--clr-text-secondary);
+      background: var(--clr-cream-mid);
+    }
+  }
 }
