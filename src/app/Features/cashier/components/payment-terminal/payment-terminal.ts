@@ -3,10 +3,11 @@ import { OrdersService } from '../../../../Core/Services/Orders-Service/orders-s
 import { PaymentService } from '../../../../Core/Services/Payment-Service/payment-service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-payment-terminal',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, TranslatePipe],
   templateUrl: './payment-terminal.html',
   styleUrl: './payment-terminal.scss',
 })

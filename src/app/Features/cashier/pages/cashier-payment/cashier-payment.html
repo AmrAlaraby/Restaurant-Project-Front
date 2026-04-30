@@ -1,6 +1,8 @@
 <div class="payment-page">
 
-  <h1 class="page-title">Payment Terminal</h1>
+  <h1 class="page-title">
+    {{ 'CASHIER.PAYMENT.TITLE' | translate }}
+  </h1>
 
   <div class="payment-layout">
 
@@ -9,7 +11,10 @@
 
       <!-- Find Order (Awaiting Payments) -->
       <div class="card">
-        <div class="card-label">FIND ORDER</div>
+        <div class="card-label">
+          {{ 'CASHIER.PAYMENT.SECTIONS.FIND_ORDER' | translate }}
+        </div>
+
         <app-awaiting-payments
           (onSelect)="onOrderSelected($event)">
         </app-awaiting-payments>
@@ -17,7 +22,10 @@
 
       <!-- Bill Preview -->
       <div class="card">
-        <div class="card-label">BILL PREVIEW</div>
+        <div class="card-label">
+          {{ 'CASHIER.PAYMENT.SECTIONS.BILL_PREVIEW' | translate }}
+        </div>
+
         <app-bill-preview
           [orderId]="selectedOrderId">
         </app-bill-preview>
@@ -35,4 +43,4 @@
 
   </div>
 
-</div>ث
+</div>

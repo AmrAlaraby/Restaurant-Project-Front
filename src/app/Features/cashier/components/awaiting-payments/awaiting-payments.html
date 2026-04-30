@@ -5,10 +5,13 @@
     <input
       type="text"
       [(ngModel)]="searchText"
-      placeholder="Order # or Table #"
+      [placeholder]="'CASHIER.PAYMENT.AWAITING_PAYMENTS.SEARCH.PLACEHOLDER' | translate"
       class="search-input"
     />
-    <button class="load-btn" (click)="loadOrders()">Load</button>
+
+    <button class="load-btn" (click)="loadOrders()">
+      {{ 'CASHIER.PAYMENT.AWAITING_PAYMENTS.SEARCH.BUTTON_LOAD' | translate }}
+    </button>
   </div>
 
   <!-- Order Chips -->
@@ -19,11 +22,12 @@
       [class.active]="selectedOrderId === order.id"
       (click)="select(order.id)"
     >
-      {{ getOrderLabel(order) }} · #{{ order.id }}
+      {{ getOrderLabel(order) | translate }} · #{{ order.id }}
     </button>
   </div>
 
 </div>
+
 <app-pagination
   [pageIndex]="pageIndex"
   [pageSize]="pageSize"

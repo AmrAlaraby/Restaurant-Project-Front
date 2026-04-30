@@ -1057,6 +1057,62 @@
           "REFUNDED": "مسترد"
         }
       }
+    },
+    "PAYMENT": {
+      "TITLE": "واجهة الدفع",
+      "SECTIONS": {
+        "FIND_ORDER": "ابحث عن طلب",
+        "BILL_PREVIEW": "معاينة الفاتورة"
+      },
+      "AWAITING_PAYMENTS": {
+        "SEARCH": {
+          "PLACEHOLDER": "رقم الطلب أو رقم الطاولة",
+          "BUTTON_LOAD": "تحميل"
+        },
+        "LABELS": {
+          "TABLE": "طاولة",
+          "DELIVERY": "دليفري",
+          "ORDER": "طلب"
+        }
+      },
+      "BILL_PREVIEW": {
+        "ORDER_NUMBER": "طلب #{{id}}",
+        "PAYMENT_METHOD": "طريقة الدفع",
+        "ITEM_PRICE": "‏{{price}} جنيه",
+        "TOTAL": "الإجمالي",
+        "TOTAL_AMOUNT": "‏{{amount}} جنيه",
+        "EMPTY": "اختر طلب لعرض الفاتورة",
+        "LABELS": {
+          "TABLE": "طاولة",
+          "DELIVERY": "دليفري",
+          "PICKUP": "استلام",
+          "ORDER": "طلب"
+        }
+      },
+      "TERMINAL": {
+        "SUCCESS": {
+          "TITLE": "تم تأكيد الدفع!",
+          "SUBTITLE": "طلب #{{id}} · {{amount}} جنيه · {{method}}"
+        },
+        "SECTIONS": {
+          "PAYMENT_METHOD": "طريقة الدفع"
+        },
+        "TOTAL_DUE": "الإجمالي المطلوب",
+        "AMOUNT_RECEIVED": "المبلغ المستلم",
+        "CHANGE_DUE": "الباقي",
+        "PLACEHOLDERS": {
+          "AMOUNT": "0"
+        },
+        "WARNINGS": {
+          "INSUFFICIENT_AMOUNT": "المبلغ المستلم أقل من الإجمالي المطلوب"
+        },
+        "BUTTONS": {
+          "CONFIRM": "تأكيد الدفع",
+          "PROCESSING": "جاري المعالجة...",
+          "REFUND": "إرجاع المبلغ"
+        },
+        "EMPTY": "اختر طلب لبدء عملية الدفع"
+      }
     }
   }
 

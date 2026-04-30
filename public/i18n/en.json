@@ -1059,6 +1059,62 @@
           "REFUNDED": "Refunded"
         }
       }
+    },
+    "PAYMENT": {
+      "TITLE": "Payment Terminal",
+      "SECTIONS": {
+        "FIND_ORDER": "Find Order",
+        "BILL_PREVIEW": "Bill Preview"
+      },
+       "AWAITING_PAYMENTS": {
+        "SEARCH": {
+          "PLACEHOLDER": "Order # or Table #",
+          "BUTTON_LOAD": "Load"
+        },
+        "LABELS": {
+          "TABLE": "Table",
+          "DELIVERY": "Delivery",
+          "ORDER": "Order"
+        }
+      },
+      "BILL_PREVIEW": {
+        "ORDER_NUMBER": "Order #{{id}}",
+        "PAYMENT_METHOD": "Payment Method",
+        "ITEM_PRICE": "EGP {{price}}",
+        "TOTAL": "Total",
+        "TOTAL_AMOUNT": "EGP {{amount}}",
+        "EMPTY": "Select an order to preview the bill",
+        "LABELS": {
+          "TABLE": "Table",
+          "DELIVERY": "Delivery",
+          "PICKUP": "Pickup",
+          "ORDER": "Order"
+        }
+      },
+      "TERMINAL": {
+        "SUCCESS": {
+          "TITLE": "Payment Confirmed!",
+          "SUBTITLE": "Order #{{id}} · EGP {{amount}} · {{method}}"
+        },
+        "SECTIONS": {
+          "PAYMENT_METHOD": "Payment Method"
+        },
+        "TOTAL_DUE": "Total Due",
+        "AMOUNT_RECEIVED": "Amount Received",
+        "CHANGE_DUE": "Change Due",
+        "PLACEHOLDERS": {
+          "AMOUNT": "0"
+        },
+        "WARNINGS": {
+          "INSUFFICIENT_AMOUNT": "Amount received is less than total due"
+        },
+        "BUTTONS": {
+          "CONFIRM": "Confirm Payment",
+          "PROCESSING": "Processing...",
+          "REFUND": "Issue Refund"
+        },
+        "EMPTY": "Select an order to begin payment"
+      }
     }
   }
 }

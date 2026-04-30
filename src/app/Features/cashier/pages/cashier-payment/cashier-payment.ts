@@ -3,10 +3,11 @@ import { AwaitingPayments } from "../../components/awaiting-payments/awaiting-pa
 import { PaymentTerminal } from "../../components/payment-terminal/payment-terminal";
 import { BillPreview } from "../../components/bill-preview/bill-preview";
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-cashier-payment',
-  imports: [AwaitingPayments, PaymentTerminal, BillPreview, CommonModule],
+  imports: [AwaitingPayments, PaymentTerminal, BillPreview, CommonModule, TranslatePipe],
   templateUrl: './cashier-payment.html',
   styleUrl: './cashier-payment.scss',
 })
