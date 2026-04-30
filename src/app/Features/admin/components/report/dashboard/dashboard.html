@@ -33,7 +33,12 @@
   <!-- ── STAT CARDS ── -->
   <div class="stats-row">
     <div class="stat-card">
-      <div class="stat-icon red"><i class="fas fa-chart-line"></i></div>
+      <div class="stat-icon red">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M3 17l6-6 4 4 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14 3h7v7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
       <div>
         <div class="stat-label">
           {{ 'ADMIN.HOME.STATS.TODAY_SALE' | translate }}
@@ -42,7 +47,13 @@
       </div>
     </div>
     <div class="stat-card">
-      <div class="stat-icon yellow"><i class="fas fa-chart-bar"></i></div>
+      <!-- <div class="stat-icon yellow"><i class="fas fa-chart-bar"></i></div> -->
+       <div class="stat-icon yellow">
+        <svg viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/>
+          <path d="M16 3v4M8 3v4M3 11h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
       <div>
         <div class="stat-label">
           {{ 'ADMIN.HOME.STATS.ORDERS_TODAY' | translate }}
@@ -51,7 +62,12 @@
       </div>
     </div>
     <div class="stat-card">
-      <div class="stat-icon green"><i class="fas fa-chart-area"></i></div>
+      <!-- <div class="stat-icon green"><i class="fas fa-chart-area"></i></div> -->
+       <div class="stat-icon green">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M4 19V5M10 19V9M16 19V13M22 19V3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
       <div>
         <div class="stat-label">
           {{ 'ADMIN.HOME.STATS.AVG_ORDER' | translate }}
@@ -60,7 +76,15 @@
       </div>
     </div>
     <div class="stat-card">
-      <div class="stat-icon blue"><i class="fas fa-exclamation-triangle"></i></div>
+      <!-- <div class="stat-icon blue"><i class="fas fa-exclamation-triangle"></i></div> -->
+        <div class="stat-icon blue">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 9v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="12" cy="17" r="1" fill="currentColor"/>
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+                  stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
       <div>
         <div class="stat-label">
           {{ 'ADMIN.HOME.STATS.LOW_STOCK' | translate }}
@@ -158,6 +182,8 @@
       </div>
     </div>
 
+
+
   </div>
 
   <!-- ── BOTTOM ROW ── -->
@@ -193,6 +219,37 @@
         </div>
       </div>
     </div>
+
+        <!-- ── WEEKLY REVENUE CHART ── -->
+<div class="card weekly-chart">
+
+  <div class="card-header">
+    <div class="card-title">Weekly Revenue</div>
+  </div>
+
+  <div class="chart-container">
+
+    <div class="chart-bars">
+      <div class="bar"
+           *ngFor="let item of dailyRevenue"
+           [style.height.%]="(item.totalRevenue / maxRevenue) * 100">
+
+        <div class="bar-value">
+          {{ item.totalRevenue | currency:'EGP':'symbol':'1.0-0' }}
+        </div>
+
+      </div>
+    </div>
+
+    <div class="chart-labels">
+      <div *ngFor="let item of dailyRevenue">
+        {{ getDayLabel(item.date) }}
+      </div>
+    </div>
+
+  </div>
+
+</div>
 
     <!-- Inventory Usage -->
     <div class="card span-2">
@@ -235,5 +292,6 @@
     </div>
 
   </div>
+  
 
 </div>

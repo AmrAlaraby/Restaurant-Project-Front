@@ -142,6 +142,7 @@ export const Reports = {
   ordersByType: `${apiUrl}/Reports/orders-by-type`,
   topItems: `${apiUrl}/Reports/top-items`,
   inventoryUsage: `${apiUrl}/Reports/inventory-usage`,
+  dailyRevenue: `${apiUrl}/Reports/daily-revenue`,
 };
 
 // Amr 118 138

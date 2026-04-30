@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-awaiting-payments',
+  standalone: true,
   imports: [CommonModule, FormsModule, Pagination],
   templateUrl: './awaiting-payments.html',
   styleUrl: './awaiting-payments.scss',
@@ -23,38 +24,47 @@ export class AwaitingPayments implements OnInit {
   totalCount = 0;
 
   private branchId!: number;
+
   @Output() onSelect = new EventEmitter<number>();
 
-  constructor(private orderService: OrdersService, private authService: AuthService, private route: ActivatedRoute) {}
+  constructor(
+    private orderService: OrdersService,
+    private authService: AuthService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
+
     this.authService.getCurrentUser().subscribe(user => {
       this.branchId = user.branchId;
+
       this.loadOrders();
-    
 
-    this.route.queryParams.subscribe(params => {
-      const orderId = params['orderId'];
+      this.route.queryParams.subscribe(params => {
+        const orderId = params['orderId'];
 
-      if (orderId) {
-        this.searchText = orderId.toString();
-      }
+        if (orderId) {
+          this.searchText = orderId.toString();
+        }
+      });
+
+    });
+
+  }
+
+  loadOrders() {
+    this.orderService.getAllOrdersForCashier({
+      pageIndex: this.pageIndex,
+      pageSize: this.pageSize,
+      paymentStatus: 'Pending',
+      branchId: this.branchId,
+      // search: this.searchText
+    }).subscribe(res => {
+      this.orders = res.data;
+      this.totalCount = res.count;
     });
   }
 
-
-loadOrders() {
-  this.orderService.getAllOrdersForCashier({
-    pageIndex: this.pageIndex,
-    pageSize: this.pageSize,
-    paymentStatus: 'Pending',
-    branchId: this.branchId,
-    // search: this.searchText // 👈 هنا المهم
-  }).subscribe(res => {
-    this.orders = res.data;
-    this.totalCount = res.count;
-  });
-}
   onPageChanged(page: number) {
     this.pageIndex = page;
     this.loadOrders();
@@ -62,7 +72,9 @@ loadOrders() {
 
   get filteredOrders(): CashierOrder[] {
     if (!this.searchText.trim()) return this.orders;
+
     const q = this.searchText.toLowerCase();
+
     return this.orders.filter(o =>
       o.id.toString().includes(q) ||
       o.orderType?.toLowerCase().includes(q)
@@ -70,7 +82,6 @@ loadOrders() {
   }
 
   getOrderLabel(order: CashierOrder): string {
-    
     if (order.orderType === 'DineIn') return `Table ${order.orderType ?? ''}`;
     if (order.orderType === 'Delivery') return 'Delivery';
     return order.orderType ?? 'Order';
