@@ -89,7 +89,7 @@ export class PaymentTerminal implements OnChanges {
   }
 
   private handleSuccess() {
-    // ✅ تحديث الـ status محلياً فوراً
+    
     if (this.order?.payment) {
       this.order.payment.paymentStatus = 'Paid';
       this.order.payment.paidAmount = this.amountReceived;
