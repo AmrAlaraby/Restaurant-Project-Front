@@ -770,6 +770,48 @@
     "DELETE": "حذف"
   },
   "WAITER": {
+    "PROFILE": {
+      "TITLE": "ملفي الشخصي",
+      "LOADING": "جاري التحميل...",
+      "SECTIONS": {
+        "PERSONAL_INFO": "البيانات الشخصية"
+      },
+      "FIELDS": {
+        "NAME": {
+          "LABEL": "الاسم بالكامل",
+          "PLACEHOLDER": "الاسم بالكامل"
+        },
+        "EMAIL": {
+          "LABEL": "البريد الإلكتروني",
+          "PLACEHOLDER": "البريد الإلكتروني"
+        },
+        "USERNAME": {
+          "LABEL": "اسم المستخدم (اختياري)",
+          "PLACEHOLDER": "اسم المستخدم"
+        },
+        "NEW_PASSWORD": {
+          "LABEL": "كلمة مرور جديدة (اختياري)",
+          "PLACEHOLDER": "كلمة مرور جديدة"
+        },
+        "CONFIRM_PASSWORD": {
+          "LABEL": "تأكيد كلمة المرور",
+          "PLACEHOLDER": "تأكيد كلمة المرور"
+        }
+      },
+      "ERRORS": {
+        "NAME_REQUIRED": "الاسم مطلوب",
+        "EMAIL_REQUIRED": "يرجى إدخال بريد إلكتروني صحيح",
+        "PASSWORD_MIN": "يجب ألا تقل عن 6 أحرف",
+        "PASSWORD_MISMATCH": "كلمتا المرور غير متطابقتين"
+      },
+      "SUCCESS": {
+        "SAVED": "✓ تم حفظ التغييرات بنجاح!"
+      },
+      "BUTTONS": {
+        "SAVE": "حفظ التغييرات",
+        "LOGOUT": "تسجيل الخروج"
+      }
+    },
     "PLACEORDER": {
       "TITLE": "إنشاء طلب جديد",
       "BUTTONS": {

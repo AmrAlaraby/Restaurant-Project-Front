@@ -774,6 +774,48 @@
   "DELETE": "Delete"
 },
 "WAITER": {
+  "PROFILE": {
+      "TITLE": "My Profile",
+      "LOADING": "Loading...",
+      "SECTIONS": {
+        "PERSONAL_INFO": "Personal Info"
+      },
+      "FIELDS": {
+        "NAME": {
+          "LABEL": "Full Name",
+          "PLACEHOLDER": "Full Name"
+        },
+        "EMAIL": {
+          "LABEL": "Email",
+          "PLACEHOLDER": "Email"
+        },
+        "USERNAME": {
+          "LABEL": "Username (optional)",
+          "PLACEHOLDER": "Username"
+        },
+        "NEW_PASSWORD": {
+          "LABEL": "New Password (optional)",
+          "PLACEHOLDER": "New Password"
+        },
+        "CONFIRM_PASSWORD": {
+          "LABEL": "Confirm Password",
+          "PLACEHOLDER": "Confirm Password"
+        }
+      },
+      "ERRORS": {
+        "NAME_REQUIRED": "Name is required",
+        "EMAIL_REQUIRED": "Valid email is required",
+        "PASSWORD_MIN": "Minimum 6 characters",
+        "PASSWORD_MISMATCH": "Passwords do not match"
+      },
+      "SUCCESS": {
+        "SAVED": "✓ Changes saved successfully!"
+      },
+      "BUTTONS": {
+        "SAVE": "Save Changes",
+        "LOGOUT": "Logout"
+      }
+    },
   "PLACEORDER": {
       "TITLE": "Place New Order",
       "BUTTONS": {
