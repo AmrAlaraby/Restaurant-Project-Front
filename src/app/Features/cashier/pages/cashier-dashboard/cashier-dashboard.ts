@@ -10,10 +10,14 @@ import { AwaitingOrdersListComponent } from '../../components/awaiting-orders-li
 import { PaymentMethodsSummaryComponent } from '../../components/payment-methods-summary/payment-methods-summary';
 import { RecentTransactionsComponent } from '../../components/recent-transactions/recent-transactions';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Subject, takeUntil } from 'rxjs';
+import { LocalizationService } from '../../../../Core/Services/Localization-Service/localization-service';
 
 export interface DashboardStat {
   value: string;
   label: string;
+  // arabicLabel?: string; 
   accent: 'green' | 'red' | 'green2' | 'red2';
 }
 
@@ -41,6 +45,7 @@ export interface RecentTransaction {
     AwaitingOrdersListComponent,
     PaymentMethodsSummaryComponent,
     RecentTransactionsComponent,
+    TranslatePipe
   ],
   templateUrl: './cashier-dashboard.html',
   styleUrl: './cashier-dashboard.scss',
@@ -49,6 +54,7 @@ export class CashierDashboard implements OnInit {
   currentUserId = '';
   cashierName = '';
   branchName = '';
+  branchArabicName?:string = '';
 
   stats: DashboardStat[] = [];
   paymentSummary: PaymentMethodSummary[] = [];
@@ -58,6 +64,7 @@ export class CashierDashboard implements OnInit {
     private paymentService: PaymentService,
     private router: Router,
     private authService: AuthService,
+    private localizationService: LocalizationService,
   ) {}
 
   ngOnInit() {
@@ -65,12 +72,24 @@ export class CashierDashboard implements OnInit {
     this.loadPaymentSummary();
     this.loadRecentTransactions();
     this.loadCurrentUser();
+    this.getCurrentLanguage();
   }
+
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
     loadCurrentUser() {
     this.authService.getCurrentUser().subscribe(res => {
       this.currentUserId = res.id;
       this.cashierName = res.name;
       this.branchName = res.branchName || 'Branch 1';
+      this.branchArabicName = res.branchArabicName ;
       
     });
   }
@@ -92,11 +111,27 @@ export class CashierDashboard implements OnInit {
       const refunded = todayPayments.filter(p => p.paymentStatus === 'Refunded').length;
 
       this.stats = [
-        { value: `EGP ${collected.toLocaleString()}`, label: 'Collected Today', accent: 'green' },
-        { value: `${pending}`,   label: 'Pending Payments',   accent: 'red' },
-        { value: `${processed}`, label: 'Payments Processed', accent: 'green2' },
-        { value: `${refunded}`,  label: 'Refunds Issued',     accent: 'red2' },
-      ];
+  {
+    value: `EGP ${collected.toLocaleString()}`,
+    label: 'CASHIER.DASHBOARD.HOME.STATS.COLLECTED_TODAY',
+    accent: 'green'
+  },
+  {
+    value: `${pending}`,
+    label: 'CASHIER.DASHBOARD.HOME.STATS.PENDING_PAYMENTS',
+    accent: 'red'
+  },
+  {
+    value: `${processed}`,
+    label: 'CASHIER.DASHBOARD.HOME.STATS.PAYMENTS_PROCESSED',
+    accent: 'green2'
+  },
+  {
+    value: `${refunded}`,
+    label: 'CASHIER.DASHBOARD.HOME.STATS.REFUNDS_ISSUED',
+    accent: 'red2'
+  }
+];
     });
   }
    goToOrders() {
@@ -158,5 +193,13 @@ export class CashierDashboard implements OnInit {
       return this.isToday(p.createdAt);
     }
     return false;
+  }
+
+  getBranchName(): string {
+    
+    if (this.CurrentLanguage === 'ar') {
+      return this.branchArabicName || this.branchName ;
+    }
+    return this.branchName ;
   }
 }

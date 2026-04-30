@@ -7,6 +7,7 @@ export interface Order {
   totalAmount: number;
   itemsCount: number;
   branchName: string | null;
+  branchArabicName: string | null;
   createdAt: string;
   items: OrderItem[];
   calculatedTotal: number;

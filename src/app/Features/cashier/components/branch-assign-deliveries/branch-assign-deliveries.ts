@@ -6,11 +6,12 @@ import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service
 import { DeliveryService } from '../../../../Core/Services/Delivery-Service/delivery-service';
 import { BranchAssignedDeliveries } from '../branch-assigned-deliveries/branch-assigned-deliveries';
 import { ActivatedRoute } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-branch-assign-deliveries',
   standalone: true,
-  imports: [CommonModule, FormsModule, BranchAssignedDeliveries],
+  imports: [CommonModule, FormsModule, BranchAssignedDeliveries,TranslatePipe],
   templateUrl: './branch-assign-deliveries.html',
   styleUrls: ['./branch-assign-deliveries.scss'],
 })

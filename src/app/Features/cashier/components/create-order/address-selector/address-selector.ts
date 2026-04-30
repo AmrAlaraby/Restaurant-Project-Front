@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DeliveryAddress } from './../../../../../Core/Models/UserModels/delivery-address';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-address-selector',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslatePipe],
   templateUrl: './address-selector.html',
   styleUrl: './address-selector.scss',
 })

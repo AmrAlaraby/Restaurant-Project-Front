@@ -1,7 +1,7 @@
 <div class="page">
 
   <div class="header">
-    <h2>Orders</h2>
+    <h2>{{ 'CASHIER.ORDERS.TITLE' | translate }}</h2>
   </div>
 
   <div class="controls-row">
@@ -12,7 +12,7 @@
     </app-waiter-order-filters>
 
     <button class="new-order-btn" (click)="goToNewOrder()">
-      + New Order
+      {{ 'CASHIER.ORDERS.BUTTON_NEW_ORDER' | translate }}
     </button>
 
   </div>

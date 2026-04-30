@@ -1,4 +1,3 @@
-
 <div class="orders-list">
   <div
     class="order-card"
@@ -8,28 +7,41 @@
     <!-- Left: icon + info -->
     <div class="order-left">
       <span class="order-type-icon">{{ getTypeIcon(order) }}</span>
+
       <div class="order-info">
         <div class="order-title">
-          Order #{{ order.id }} · {{ getTypeLabel(order) }} · {{ order.userName }}
+          {{ 'CASHIER.DASHBOARD.AWAITING_PAYMENTS.CARD.TITLE' | translate:{
+            id: order.id,
+            type: getTypeLabel(order),
+            user: order.userName
+          } }}
         </div>
+
         <div class="order-items">
           <span *ngFor="let item of order.previewItems; let last = last">
-            {{ item.emoji }} {{ item.name }} ×{{ item.quantity }}<span *ngIf="!last"> · </span>
+            {{ item.emoji }} {{ getItemName(item) }} ×{{ item.quantity }}
+            <span *ngIf="!last"> · </span>
           </span>
-          <span *ngIf="order.extraLabel" class="extra-label">· {{ order.extraLabel }}</span>
+
+          <span *ngIf="order.extraLabel" class="extra-label">
+            · {{ order.extraLabel }}
+          </span>
         </div>
       </div>
     </div>
 
     <!-- Right: amount + action -->
     <div class="order-right">
-      <div class="order-amount">EGP {{ order.totalAmount }}</div>
+      <div class="order-amount">
+        {{ 'CASHIER.DASHBOARD.AWAITING_PAYMENTS.CARD.AMOUNT' | translate:{ amount: order.totalAmount } }}
+      </div>
+
       <button
         class="action-btn"
         [ngClass]="getActionClass(order)"
         (click)="onAction(order)"
       >
-        {{ getActionLabel(order) }}
+        {{ getActionLabel(order) | translate }}
       </button>
     </div>
   </div>
@@ -37,7 +49,7 @@
   <!-- Empty State -->
   <div class="empty-state" *ngIf="orders.length === 0 && !loading">
     <span>🎉</span>
-    <p>No orders awaiting payment</p>
+    <p>{{ 'CASHIER.DASHBOARD.AWAITING_PAYMENTS.EMPTY' | translate }}</p>
   </div>
 
   <!-- Loading -->
@@ -45,6 +57,7 @@
     <div class="spinner"></div>
   </div>
 </div>
+
 <app-pagination
   [pageIndex]="pageIndex"
   [pageSize]="pageSize"

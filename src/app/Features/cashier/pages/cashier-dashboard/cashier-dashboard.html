@@ -3,11 +3,17 @@
   <!-- ── Top Bar ─────────────────────────────────────────── -->
   <header class="top-bar">
     <div class="greeting-block">
-      <h1 class="greeting">Good morning, {{ cashierName }} </h1>
-      <p class="sub-info">Cashier Station · {{ branchName }} </p>
+      <h1 class="greeting">
+        {{ 'CASHIER.DASHBOARD.GREETING' | translate:{ name: cashierName } }}
+      </h1>
+
+      <p class="sub-info">
+        {{ 'CASHIER.DASHBOARD.SUBINFO' | translate:{ branch: getBranchName() } }}
+      </p>
     </div>
+
     <button class="process-btn" routerLink="/cashier/payments">
-       Process Payment
+      {{ 'CASHIER.DASHBOARD.BUTTONS.PROCESS_PAYMENT' | translate }}
     </button>
   </header>
 
@@ -16,21 +22,34 @@
 
   <!-- ── Awaiting Payment List ───────────────────────────── -->
   <section class="section">
+
     <div class="section-header">
       <div class="section-title">
         <span class="section-icon">⏳</span>
-        <h2>Awaiting Payment</h2>
+        <h2>{{ 'CASHIER.DASHBOARD.SECTIONS.AWAITING_PAYMENT' | translate }}</h2>
       </div>
-      <button class="process-btn" (click)="goToOrders()">View All</button>
+
+      <button class="process-btn" (click)="goToOrders()">
+        {{ 'CASHIER.DASHBOARD.BUTTONS.VIEW_ALL' | translate }}
+      </button>
     </div>
-    <app-awaiting-orders-list (onPayNow)="goToPayment($event)"></app-awaiting-orders-list>
+
+    <app-awaiting-orders-list (onPayNow)="goToPayment($event)">
+    </app-awaiting-orders-list>
+
   </section>
 
   <!-- ── Bottom Row ──────────────────────────────────────── -->
   <div class="bottom-row">
-    <app-payment-methods-summary [summary]="paymentSummary"></app-payment-methods-summary>
-    <app-recent-transactions [transactions]="recentTransactions"></app-recent-transactions>
+
+    <app-payment-methods-summary
+      [summary]="paymentSummary">
+    </app-payment-methods-summary>
+
+    <app-recent-transactions
+      [transactions]="recentTransactions">
+    </app-recent-transactions>
+
   </div>
 
 </div>
-

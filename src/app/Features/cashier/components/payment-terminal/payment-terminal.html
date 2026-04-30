@@ -3,37 +3,50 @@
   <!-- ✅ Success Banner -->
   <div class="success-banner" *ngIf="paymentSuccess">
     <div class="success-icon-wrap">✅</div>
+
     <div>
-      <div class="success-title">Payment Confirmed!</div>
+      <div class="success-title">
+        {{ 'CASHIER.PAYMENT.TERMINAL.SUCCESS.TITLE' | translate }}
+      </div>
+
       <div class="success-sub">
-        Order #{{ order.id }} · EGP {{ order.totalAmount }} · {{ order.payment?.paymentMethod }}
+        {{
+          'CASHIER.PAYMENT.TERMINAL.SUCCESS.SUBTITLE' | translate:{
+            id: order.id,
+            amount: order.totalAmount,
+            method: (('CASHIER.DASHBOARD.PAYMENT_METHODS.METHODS.' + order.payment?.paymentMethod?.toUpperCase()) | translate)
+          }
+        }}
       </div>
     </div>
   </div>
 
-  <!-- Payment Method (read-only — comes from backend) -->
+  <!-- Payment Method -->
   <div class="section" *ngIf="!paymentSuccess">
-    <div class="section-label">PAYMENT METHOD</div>
+    <div class="section-label">
+      {{ 'CASHIER.PAYMENT.TERMINAL.SECTIONS.PAYMENT_METHOD' | translate }}
+    </div>
+
     <div class="methods-grid">
 
       <div class="method-btn" [class.active]="order.payment?.paymentMethod === 'Cash'">
         <span class="method-icon">💵</span>
-        <span>Cash</span>
+        <span>{{ 'CASHIER.DASHBOARD.PAYMENT_METHODS.METHODS.CASH' | translate }}</span>
       </div>
 
       <div class="method-btn" [class.active]="order.payment?.paymentMethod === 'Card'">
         <span class="method-icon">💳</span>
-        <span>Card</span>
+        <span>{{ 'CASHIER.DASHBOARD.PAYMENT_METHODS.METHODS.CARD' | translate }}</span>
       </div>
 
       <div class="method-btn" [class.active]="order.payment?.paymentMethod === 'InstaPay'">
         <span class="method-icon">📱</span>
-        <span>InstaPay</span>
+        <span>{{ 'CASHIER.DASHBOARD.PAYMENT_METHODS.METHODS.INSTAPAY' | translate }}</span>
       </div>
 
       <div class="method-btn" [class.active]="order.payment?.paymentMethod === 'Wallet'">
         <span class="method-icon">👛</span>
-        <span>Wallet</span>
+        <span>{{ 'CASHIER.DASHBOARD.PAYMENT_METHODS.METHODS.WALLET' | translate }}</span>
       </div>
 
     </div>
@@ -43,35 +56,46 @@
   <div class="section amounts-row" *ngIf="!paymentSuccess">
 
     <div class="amount-box">
-      <div class="section-label">TOTAL DUE</div>
-      <div class="total-due">EGP {{ order.totalAmount }}</div>
+      <div class="section-label">
+        {{ 'CASHIER.PAYMENT.TERMINAL.TOTAL_DUE' | translate }}
+      </div>
+
+      <div class="total-due">
+        {{ 'CASHIER.PAYMENT.BILL_PREVIEW.TOTAL_AMOUNT' | translate:{ amount: order.totalAmount } }}
+      </div>
     </div>
 
-    <!-- Amount Received — only shown for Cash -->
+    <!-- Amount Received -->
     <div class="amount-box" *ngIf="isCash">
-      <div class="section-label">AMOUNT RECEIVED</div>
+      <div class="section-label">
+        {{ 'CASHIER.PAYMENT.TERMINAL.AMOUNT_RECEIVED' | translate }}
+      </div>
+
       <input
         type="number"
         class="amount-input"
         [(ngModel)]="amountReceived"
         min="0"
-        placeholder="0"
+        [placeholder]="'CASHIER.PAYMENT.TERMINAL.PLACEHOLDERS.AMOUNT' | translate"
       />
     </div>
 
   </div>
 
-  <!-- Change Due — Cash only -->
+  <!-- Change Due -->
   <div class="change-row" *ngIf="isCash && !paymentSuccess">
-    <span class="change-label">Change Due</span>
+    <span class="change-label">
+      {{ 'CASHIER.PAYMENT.TERMINAL.CHANGE_DUE' | translate }}
+    </span>
+
     <span class="change-value" [class.negative]="change < 0">
-      EGP {{ change | number:'1.2-2' }}
+      {{ 'CASHIER.PAYMENT.BILL_PREVIEW.TOTAL_AMOUNT' | translate:{ amount: (change | number:'1.2-2') } }}
     </span>
   </div>
 
-  <!-- Warning if not enough cash -->
+  <!-- Warning -->
   <div class="warning-msg" *ngIf="isCash && amountReceived > 0 && change < 0 && !paymentSuccess">
-    ⚠️ Amount received is less than total due
+    {{ 'CASHIER.PAYMENT.TERMINAL.WARNINGS.INSUFFICIENT_AMOUNT' | translate }}
   </div>
 
   <!-- Confirm Button -->
@@ -81,13 +105,18 @@
     [disabled]="isLoading || paymentSuccess || (isCash && amountReceived < order.totalAmount)"
     *ngIf="!paymentSuccess"
   >
-    <span *ngIf="!isLoading">✅ Confirm Payment</span>
-    <span *ngIf="isLoading">Processing...</span>
+    <span *ngIf="!isLoading">
+      {{ 'CASHIER.PAYMENT.TERMINAL.BUTTONS.CONFIRM' | translate }}
+    </span>
+
+    <span *ngIf="isLoading">
+      {{ 'CASHIER.PAYMENT.TERMINAL.BUTTONS.PROCESSING' | translate }}
+    </span>
   </button>
 
   <!-- Refund Button -->
   <button class="refund-btn" (click)="issueRefund()" *ngIf="!paymentSuccess">
-    ↩ Issue Refund
+    {{ 'CASHIER.PAYMENT.TERMINAL.BUTTONS.REFUND' | translate }}
   </button>
 
 </div>
@@ -95,5 +124,5 @@
 <!-- Empty State -->
 <div class="terminal-empty" *ngIf="!order">
   <div class="empty-icon">🧾</div>
-  <p>Select an order to begin payment</p>
+  <p>{{ 'CASHIER.PAYMENT.TERMINAL.EMPTY' | translate }}</p>
 </div>

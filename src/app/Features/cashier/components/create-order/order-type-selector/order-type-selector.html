@@ -3,19 +3,19 @@
   <button
     [class.active]="type === 'DineIn'"
     (click)="select('DineIn')">
-    Dine In
+    {{ 'CASHIER.CREATE_ORDER.TYPE.DineIn' | translate }}
   </button>
 
   <button
     [class.active]="type === 'PickUp'"
     (click)="select('PickUp')">
-    Pick Up
+    {{ 'CASHIER.CREATE_ORDER.TYPE.Pickup' | translate }}
   </button>
 
   <button
     [class.active]="type === 'Delivery'"
     (click)="select('Delivery')">
-    Delivery
+    {{ 'CASHIER.CREATE_ORDER.TYPE.Delivery' | translate }}
   </button>
 
 </div>

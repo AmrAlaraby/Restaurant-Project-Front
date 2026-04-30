@@ -6,11 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { Pagination } from "../../../../Shared/Components/pagination/pagination";
 import { ActivatedRoute } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-awaiting-payments',
   standalone: true,
-  imports: [CommonModule, FormsModule, Pagination],
+  imports: [CommonModule, FormsModule, Pagination, TranslatePipe],
   templateUrl: './awaiting-payments.html',
   styleUrl: './awaiting-payments.scss',
 })
@@ -81,11 +82,17 @@ export class AwaitingPayments implements OnInit {
     );
   }
 
-  getOrderLabel(order: CashierOrder): string {
-    if (order.orderType === 'DineIn') return `Table ${order.orderType ?? ''}`;
-    if (order.orderType === 'Delivery') return 'Delivery';
-    return order.orderType ?? 'Order';
+getOrderLabel(order: CashierOrder): string {
+  if (order.orderType === 'DineIn') {
+    return 'CASHIER.PAYMENT.AWAITING_PAYMENTS.LABELS.TABLE';
   }
+
+  if (order.orderType === 'Delivery') {
+    return 'CASHIER.PAYMENT.AWAITING_PAYMENTS.LABELS.DELIVERY';
+  }
+
+  return 'CASHIER.PAYMENT.AWAITING_PAYMENTS.LABELS.ORDER';
+}
 
   select(orderId: number) {
     this.selectedOrderId = orderId;

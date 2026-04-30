@@ -5,10 +5,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CustomerInterface } from '../../../../../Core/Models/UserModels/customer-interface';
 import { CreateCustomerInterface } from '../../../../../Core/Models/UserModels/create-customer-interface';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-customer-search',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslatePipe],
   templateUrl: './customer-search.html',
   styleUrl: './customer-search.scss',
 })

@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RecentTransaction } from '../../pages/cashier-dashboard/cashier-dashboard';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-recent-transactions',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './recent-transactions.html',
   styleUrl: './recent-transactions.scss',
 })

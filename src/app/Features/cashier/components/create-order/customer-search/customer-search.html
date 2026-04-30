@@ -3,14 +3,14 @@
   <!-- INPUT -->
   <input
     type="text"
-    placeholder="Search by phone..."
+    [placeholder]="'CASHIER.CREATE_ORDER.CUSTOMER_SEARCH.PLACEHOLDER' | translate"
     [(ngModel)]="searchTerm"
     (input)="onInput(searchTerm)"
   />
 
   <!-- LOADING -->
   <div *ngIf="loading" class="loading">
-    Searching...
+    {{ 'CASHIER.CREATE_ORDER.CUSTOMER_SEARCH.LOADING' | translate }}
   </div>
 
   <!-- RESULTS -->
@@ -32,7 +32,7 @@
   <div *ngIf="!loading && results.length === 0 && searchTerm && !showAddForm">
 
     <button class="add-btn" (click)="openAddForm()">
-      + Add Customer
+      {{ 'CASHIER.CREATE_ORDER.CUSTOMER_SEARCH.NO_RESULTS_ADD' | translate }}
     </button>
 
   </div>
@@ -42,7 +42,7 @@
 
     <input
       type="text"
-      placeholder="Customer Name"
+      [placeholder]="'CASHIER.CREATE_ORDER.CUSTOMER_SEARCH.ADD_FORM_NAME' | translate"
       [(ngModel)]="newCustomerName"
     />
 
@@ -51,7 +51,10 @@
       [disabled]="adding"
       (click)="createCustomer()">
 
-      {{ adding ? 'Saving...' : 'Save Customer' }}
+      {{ adding
+        ? ('CASHIER.CREATE_ORDER.CUSTOMER_SEARCH.SAVING' | translate)
+        : ('CASHIER.CREATE_ORDER.CUSTOMER_SEARCH.SAVE' | translate)
+      }}
 
     </button>
 
