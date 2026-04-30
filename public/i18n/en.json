@@ -1002,6 +1002,37 @@
     }
 },
  "CASHIER": {
+  "LAYOUT": {
+
+      "TOPBAR": {
+        "DEFAULT_TITLE": "Cashier"
+      },
+
+      "SIDEBAR": {
+
+        "CASHIER": "CASHIER",
+
+        "HOME": "Home",
+        "PROCESS_PAYMENT": "Process Payment",
+        "TRANSACTIONS": "Transactions",
+        "ORDERS": "Orders",
+
+        "SERVICE": {
+          "TITLE": "Service",
+          "NEW_ORDER": "New Order"
+        },
+
+        "DELIVERY": {
+          "TITLE": "Delivery",
+          "ASSIGN_DRIVERS": "Assign Drivers"
+        },
+
+        "ACCOUNT": {
+          "TITLE": "Account",
+          "MY_PROFILE": "My Profile"
+        }
+      }
+    },
   "PROFILE": {
       "PAGE": {
         "TITLE": "My Profile"

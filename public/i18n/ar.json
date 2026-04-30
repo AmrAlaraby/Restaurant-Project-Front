@@ -1000,6 +1000,37 @@
     }
   },
   "CASHIER": {
+    "LAYOUT": {
+
+      "TOPBAR": {
+        "DEFAULT_TITLE": "الكاشير"
+      },
+
+      "SIDEBAR": {
+
+        "CASHIER": "الكاشير",
+
+        "HOME": "الرئيسية",
+        "PROCESS_PAYMENT": "إجراء الدفع",
+        "TRANSACTIONS": "المعاملات",
+        "ORDERS": "الطلبات",
+
+        "SERVICE": {
+          "TITLE": "الخدمات",
+          "NEW_ORDER": "طلب جديد"
+        },
+
+        "DELIVERY": {
+          "TITLE": "التوصيل",
+          "ASSIGN_DRIVERS": "تعيين السائقين"
+        },
+
+        "ACCOUNT": {
+          "TITLE": "الحساب",
+          "MY_PROFILE": "الملف الشخصي"
+        }
+      }
+    },
     "PROFILE": {
       "PAGE": {
         "TITLE": "ملفي الشخصي"
