@@ -9,6 +9,7 @@ import { RevenueDTO } from '../../Models/ReportModels/revenue-model';
 import { OrdersByTypeDTO } from '../../Models/ReportModels/orders-by-type-model';
 import { TopItemsDTO } from '../../Models/ReportModels/top-items-model';
 import { InventoryUsageDTO } from '../../Models/ReportModels/inventory-usage-model';
+import { DailyRevenueDTO } from '../../Models/ReportModels/DailyRevenueDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -47,4 +48,12 @@ export class ReportService {
   getInventoryUsage(): Observable<InventoryUsageDTO[]> {
     return this.http.get<InventoryUsageDTO[]>(Reports.inventoryUsage);
   }
+  
+  // Daily Revenue
+  getDailyRevenue(branchId?: number) {
+  return this.http.get<DailyRevenueDTO[]>(
+    Reports.dailyRevenue,
+    { params: { branchId: branchId ?? '' } }
+  );
+}
 }

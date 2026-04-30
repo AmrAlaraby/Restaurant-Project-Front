@@ -8,6 +8,7 @@ import { InventoryUsageDTO } from '../../../../../Core/Models/ReportModels/inven
 import { ReportService } from '../../../../../Core/Services/Report-Service/report-service';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
+import { DailyRevenueDTO } from '../../../../../Core/Models/ReportModels/DailyRevenueDTO';
 
 
 @Component({
@@ -18,7 +19,8 @@ import { LocalizationService } from '../../../../../Core/Services/Localization-S
   styleUrls: ['./dashboard.scss']
 })
 export class DashboardComponent implements OnInit {
-
+  
+  dailyRevenue: DailyRevenueDTO[] = [];
   dashboard?: DashboardDTO;
   revenue: RevenueDTO[] = [];
   orders?: OrdersByTypeDTO;
@@ -26,7 +28,8 @@ export class DashboardComponent implements OnInit {
   inventory: InventoryUsageDTO[] = [];
   CurrentLanguage: string = 'en';
 
-  constructor(private reportService: ReportService,private localizationService:LocalizationService) {}
+  constructor(private reportService: ReportService,
+    private localizationService:LocalizationService) {}
 
   ngOnInit(): void {
     this.loadData();
@@ -104,6 +107,13 @@ export class DashboardComponent implements OnInit {
         console.error('Response body:', err.error);
       }
     });
+
+    this.reportService.getDailyRevenue().subscribe({
+      next: res => {
+        this.dailyRevenue = res;
+      }
+    });
+
   }
   getIngredientName(item: any): string {
     if (this.CurrentLanguage === 'ar') {
@@ -117,4 +127,14 @@ export class DashboardComponent implements OnInit {
     }
     return item.name;
   }
+
+  getDayLabel(date: string): string {
+    return new Date(date).toLocaleDateString('en-US', {
+      weekday: 'short'
+    });
+  }
+
+  get maxRevenue() {
+  return Math.max(...this.dailyRevenue.map(x => x.totalRevenue), 1);
+}
 }
