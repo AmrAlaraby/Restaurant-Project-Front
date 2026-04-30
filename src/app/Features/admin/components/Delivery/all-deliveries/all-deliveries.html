@@ -1,4 +1,4 @@
-<!-- 🔥 FILTERS -->
+<!-- FILTERS -->
 <div class="filters-bar">
 
   <div class="filter-item">
@@ -70,31 +70,17 @@
 
     <!-- Steps -->
     <div class="steps-wrap">
-      <div class="step">
-        <div class="step-circle done">✓</div>
-        <div class="step-label">{{ 'ADMIN.STATUS.ASSIGNED' | translate }}</div>
-      </div>
-
-      <div class="step-connector"></div>
-
-      <div class="step">
-        <div class="step-circle">–</div>
-        <div class="step-label">{{ 'ADMIN.STATUS.PICKED_UP' | translate }}</div>
-      </div>
-
-      <div class="step-connector"></div>
-
-      <div class="step">
-        <div class="step-circle">→</div>
-        <div class="step-label">{{ 'ADMIN.STATUS.ON_THE_WAY' | translate }}</div>
-      </div>
-
-      <div class="step-connector"></div>
-
-      <div class="step">
-        <div class="step-circle">📍</div>
-        <div class="step-label">{{ 'ADMIN.STATUS.DELIVERED' | translate }}</div>
-      </div>
+      <ng-container *ngFor="let stepKey of stepKeys; let i = index">
+        <div class="step">
+          <div class="step-circle" [ngClass]="getStepClass(d.deliveryStatus, i)">
+            {{ getStepIcon(d.deliveryStatus, i) }}
+          </div>
+          <div class="step-label">{{ stepKey | translate }}</div>
+        </div>
+        <div class="step-connector"
+             *ngIf="i < stepKeys.length - 1"
+             [ngClass]="{'done': statusToIndex[d.deliveryStatus] > i}"></div>
+      </ng-container>
     </div>
 
     <div class="row-right">
