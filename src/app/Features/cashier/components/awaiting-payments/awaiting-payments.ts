@@ -30,17 +30,21 @@ export class AwaitingPayments implements OnInit {
   ngOnInit() {
     this.authService.getCurrentUser().subscribe(user => {
       this.branchId = user.branchId;
-      this.loadOrders();
-    
 
-    this.route.queryParams.subscribe(params => {
-      const orderId = params['orderId'];
+      this.route.queryParams.subscribe(params => {
+        const orderId = params['orderId'];
 
-      if (orderId) {
-        this.searchText = orderId.toString();
-      }
+        if (orderId) {
+          this.searchText = orderId.toString();
+        }
+
+        this.loadOrders(); 
+      });
     });
   }
+    
+  
+
 
 
 loadOrders() {
