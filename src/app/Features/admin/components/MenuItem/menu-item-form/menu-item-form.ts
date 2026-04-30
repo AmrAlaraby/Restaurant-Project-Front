@@ -61,14 +61,57 @@ export class MenuItemForm implements OnInit, OnChanges {
   }
   initializeForm(): void {
     this.form = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(150)]],
-      arabicName: ['', [Validators.required, Validators.maxLength(150)]],
-      price: [null, [Validators.required, Validators.min(0.01)]],
-      prepTimeMinutes: [null, [Validators.required, Validators.min(1)]],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3), 
+          Validators.maxLength(150),
+        ],
+      ],
+
+      arabicName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(150),
+        ],
+      ],
+
+      price: [
+        null,
+        [
+          Validators.required,
+          Validators.min(1),
+          Validators.max(999999.99), 
+        ],
+      ],
+
+      prepTimeMinutes: [
+        null,
+        [
+          Validators.required,
+          Validators.min(1),
+          Validators.max(300),
+        ],
+      ],
+
       categoryId: [null, Validators.required],
+
       isAvailable: [true],
-      recipes: this.fb.array([]),
+
+      recipes: this.fb.array([], Validators.required), 
     });
+    // this.form = this.fb.group({
+    //   name: ['', [Validators.required, Validators.maxLength(150)]],
+    //   arabicName: ['', [Validators.required, Validators.maxLength(150)]],
+    //   price: [null, [Validators.required, Validators.min(0.01)]],
+    //   prepTimeMinutes: [null, [Validators.required, Validators.min(1)]],
+    //   categoryId: [null, Validators.required],
+    //   isAvailable: [true],
+    //   recipes: this.fb.array([]),
+    // });
   }
 
   loadCategories(): void {
@@ -161,12 +204,17 @@ export class MenuItemForm implements OnInit, OnChanges {
 
       return;
     }
+    if (this.hasDuplicateIngredients()) {
+      this.toast.error('Duplicate ingredients are not allowed');
+      return;
+    }
 
     if (!this.selectedImageFile) {
        this.toast.error('Image is required.');
       this.loading = false;
       return;
     }
+
 
     const createDto: CreateMenuItemInterface = {
       ...formValue,
@@ -199,12 +247,31 @@ export class MenuItemForm implements OnInit, OnChanges {
     this.recipes.push(
       this.fb.group({
         ingredientId: [null, Validators.required],
-        quantityRequired: [null, [Validators.required, Validators.min(0.01)]],
-      }),
+
+        quantityRequired: [
+          null,
+          [
+            Validators.required,
+            Validators.min(0.001),
+            Validators.max(9999),
+          ],
+        ],
+      })
     );
+    // this.recipes.push(
+    //   this.fb.group({
+    //     ingredientId: [null, Validators.required],
+    //     quantityRequired: [null, [Validators.required, Validators.min(0.01)]],
+    //   }),
+    // );
   }
 
   removeRecipe(index: number): void {
     this.recipes.removeAt(index);
+  }
+
+  hasDuplicateIngredients(): boolean {
+    const ids = this.recipes.value.map((r: any) => r.ingredientId);
+    return new Set(ids).size !== ids.length;
   }
 }

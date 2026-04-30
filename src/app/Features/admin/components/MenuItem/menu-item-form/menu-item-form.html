@@ -1,96 +1,169 @@
-<!------------------------------- Menu Item Form ---------------------------->
 <div class="menu-item-form-page">
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="menu-item-form">
+
     <div class="row g-4">
+
+      <!-- Name -->
       <div class="col-md-6">
         <label class="form-label">Name</label>
         <input type="text" class="form-control" formControlName="name" />
+
+        @if (form.get('name')?.touched && form.get('name')?.invalid) {
+        @if (form.get('name')?.errors?.['required']) {
+        <small class="error">Name is required</small>
+        }
+        @if (form.get('name')?.errors?.['minlength']) {
+        <small class="error">Minimum 3 characters</small>
+        }
+        @if (form.get('name')?.errors?.['maxlength']) {
+        <small class="error">Maximum 150 characters</small>
+        }
+        }
       </div>
 
+      <!-- Arabic Name -->
       <div class="col-md-6">
         <label class="form-label">Arabic Name</label>
         <input type="text" class="form-control" formControlName="arabicName" />
+
+        @if (form.get('arabicName')?.touched && form.get('arabicName')?.invalid) {
+        @if (form.get('arabicName')?.errors?.['required']) {
+        <small class="error">Arabic Name is required</small>
+        }
+        @if (form.get('arabicName')?.errors?.['minlength']) {
+        <small class="error">Minimum 3 characters</small>
+        }
+        @if (form.get('arabicName')?.errors?.['maxlength']) {
+        <small class="error">Maximum 150 characters</small>
+        }
+        }
       </div>
 
+      <!-- Price -->
       <div class="col-md-6">
         <label class="form-label">Price</label>
         <input type="number" class="form-control" formControlName="price" />
+
+        @if (form.get('price')?.touched && form.get('price')?.invalid) {
+        <small class="error">Enter valid price (1 → 999999.99)</small>
+        }
       </div>
 
+      <!-- Prep Time -->
       <div class="col-md-6">
-        <label class="form-label">Prep Time (Minutes)</label>
+        <label class="form-label">Prep Time</label>
         <input type="number" class="form-control" formControlName="prepTimeMinutes" />
+
+        @if (form.get('prepTimeMinutes')?.touched && form.get('prepTimeMinutes')?.invalid) {
+        <small class="error">Enter valid time (1 → 300)</small>
+        }
       </div>
 
+      <!-- Category -->
       <div class="col-md-6">
         <label class="form-label">Category</label>
+
         <select class="form-select" formControlName="categoryId">
           <option [ngValue]="null">Select Category</option>
 
-          <option *ngFor="let category of categories" [ngValue]="category.id">
+          @for (category of categories; track category.id) {
+          <option [ngValue]="category.id">
             {{ category.name }}
           </option>
+          }
         </select>
+
+        @if (form.get('categoryId')?.touched && form.get('categoryId')?.invalid) {
+        <small class="error">Category is required</small>
+        }
       </div>
 
-      <div class="col-md-6" *ngIf="isEditMode">
+      @if (isEditMode) {
+      <div class="col-md-6">
         <label class="form-label">Availability</label>
-
         <select class="form-select" formControlName="isAvailable">
           <option [ngValue]="true">Available</option>
           <option [ngValue]="false">Unavailable</option>
         </select>
       </div>
+      }
+
     </div>
 
-<!----------------------------- Recipes Section ----------------------->
+    <!-- Recipes -->
     <div class="recipes-section mt-4">
+
       <div class="recipes-header">
         <h5>Recipes</h5>
 
-        <button type="button" class="btn-add-recipe" (click)="addRecipe()">+ Add Recipe</button>
+        <button type="button" class="btn-add-recipe" (click)="addRecipe()">
+          + Add Recipe
+        </button>
       </div>
 
+      @if (recipes.length === 0) {
+      <small class="error">At least one recipe is required</small>
+      }
+
+      @if (hasDuplicateIngredients()) {
+      <small class="error">Duplicate ingredients are not allowed</small>
+      }
+
       <div formArrayName="recipes">
-        <div
-          class="recipe-row"
-          *ngFor="let recipe of recipes.controls; let i = index"
-          [formGroupName]="i"
-        >
+
+        @for (recipe of recipes.controls; track $index; let i = $index) {
+
+        <div class="recipe-row" [formGroupName]="i">
+
           <select class="form-select" formControlName="ingredientId">
             <option [ngValue]="null">Select Ingredient</option>
 
-            <option *ngFor="let ingredient of ingredients" [ngValue]="ingredient.id">
+            @for (ingredient of ingredients; track ingredient.id) {
+            <option [ngValue]="ingredient.id">
               {{ ingredient.name }} ({{ ingredient.unit }})
             </option>
+            }
           </select>
 
-          <input
-            type="number"
-            class="form-control"
-            formControlName="quantityRequired"
-            placeholder="Quantity"
-          />
+          @if (recipe.get('ingredientId')?.touched && recipe.get('ingredientId')?.invalid) {
+          <small class="error">Ingredient is required</small>
+          }
 
-          <button type="button" class="btn-remove-recipe" (click)="removeRecipe(i)">Remove</button>
+          <input type="number" class="form-control" formControlName="quantityRequired" placeholder="Quantity" />
+
+          @if (recipe.get('quantityRequired')?.touched && recipe.get('quantityRequired')?.invalid) {
+          <small class="error">Min: 0.001</small>
+          }
+
+          <button type="button" class="btn-remove-recipe" (click)="removeRecipe(i)">
+            Remove
+          </button>
+
         </div>
+
+        }
+
       </div>
-    </div>
-<!------------------------- Image Upload Section ---------------------------->
 
+    </div>
+
+    <!-- IMAGE -->
     <div class="mt-4">
-      <app-image-upload
-        [currentImageUrl]="currentImageUrl"
-        (imageSelected)="onImageSelected($event)"
-      />
+      <app-image-upload [currentImageUrl]="currentImageUrl" (imageSelected)="onImageSelected($event)" />
+
+      @if (!selectedImageFile && !isEditMode && form.touched) {
+      <small class="error">Image is required</small>
+      }
     </div>
 
+    <!-- ACTIONS -->
     <div class="form-actions">
       <button type="button" class="btn-cancel" (click)="onCancel()">Cancel</button>
 
-      <button type="submit" class="btn-submit">
+      <button type="submit" class="btn-submit" [disabled]="form.invalid || hasDuplicateIngredients()">
         {{ isEditMode ? 'Update Item' : 'Create Item' }}
       </button>
     </div>
+
   </form>
 </div>
