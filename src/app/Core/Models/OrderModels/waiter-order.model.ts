@@ -12,6 +12,7 @@ export interface OrderFilters {
   orderType?: OrderType | null;
   branchId?: number;
   createdAt?: string;
+  
 }
 
 export interface WaiterOrder {
