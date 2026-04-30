@@ -2,7 +2,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WaiterOrderFilters } from '../../../waiter/components/waiter-order/waiter-order-filters/waiter-order-filters';
 import { Pagination } from '../../../../Shared/Components/pagination/pagination';
-import { OrderDetails } from '../../../admin/components/Order/order-details/order-details';
 import { OrdersService } from '../../../../Core/Services/Orders-Service/orders-service';
 import { CashierOrder } from '../../../../Core/Models/OrderModels/cashier-order.model';
 import { OrderFilters } from '../../../../Core/Models/OrderModels/waiter-order.model';
@@ -11,12 +10,13 @@ import { CashierOrdersList } from '../../components/cashier-orders/cashier-order
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { SignalRService } from '../../../../Core/Services/SignalR-Service/SignalrService';
 import { DeliveryService } from '../../../../Core/Services/Delivery-Service/delivery-service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-cashier-orders-page',
   standalone: true,
-  imports: [CommonModule, WaiterOrderFilters, Pagination, OrderDetails, CashierOrdersList],
+  imports: [CommonModule, WaiterOrderFilters, Pagination, CashierOrdersList,TranslatePipe],
   templateUrl: './cashier-orders-page.html',
   styleUrls: ['./cashier-orders-page.scss'],
 })

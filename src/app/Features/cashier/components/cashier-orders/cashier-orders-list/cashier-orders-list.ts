@@ -1,13 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CashierOrder } from '../../../../../Core/Models/OrderModels/cashier-order.model';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 
 @Component({
   selector: 'app-cashier-orders-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './cashier-orders-list.html',
   styleUrls: ['./cashier-orders-list.scss']
 })

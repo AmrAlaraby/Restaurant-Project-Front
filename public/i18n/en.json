@@ -1178,7 +1178,57 @@
         "REFUNDED": "Refunded",
         "FAILED": "Failed"
       }
-    }
+    },
+    "ORDERS": {
+    "TITLE": "Orders",
+    "BUTTON_NEW_ORDER": "+ New Order",
+          "LIST": {
+        "HEADER": {
+          "ORDER": "Order",
+          "TYPE": "Type",
+          "WAITER": "Waiter",
+          "ITEMS": "Items",
+          "STATUS": "Status",
+          "PAYMENT": "Payment",
+          "METHOD": "Method",
+          "ACTIONS": "Actions"
+        }
+      },
+
+      "TYPE": {
+        "DineIn": "Dine In",
+        "Delivery": "Delivery",
+        "Pickup": "Pickup"
+      },
+
+      "STATUS": {
+        "AwaitingPayment": "AwaitingPayment ",
+        "Received": "Received",
+        "Preparing": "Preparing",
+        "Ready": "Ready",
+        "Delivered": "Delivered",
+        "Cancelled": "Cancelled"
+      },
+
+      "PAYMENT_STATUS": {
+        "Paid": "Paid",
+        "Pending": "Pending",
+        "Failed": "Failed",
+        "Refunded": "Refunded"
+      },
+
+      "PAYMENT_METHOD": {
+        "Cash": "Cash",
+        "Card": "Card",
+        "InstaPay": "InstaPay",
+        "Wallet": "Wallet"
+      },
+
+      "ACTIONS": {
+        "PAY": "Pay",
+        "ASSIGN": "Assign Driver"
+      }
+  }
   }
 }
 

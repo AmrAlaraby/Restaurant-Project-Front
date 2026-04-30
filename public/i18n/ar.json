@@ -1176,7 +1176,58 @@
         "REFUNDED": "مرتجع",
         "FAILED": "فشل"
       }
+    },
+    "ORDERS": {
+    "TITLE": "الطلبات",
+    "BUTTON_NEW_ORDER": "+ طلب جديد",
+     "LIST": {
+        "HEADER": {
+          "ORDER": "الطلب",
+          "TYPE": "النوع",
+          "WAITER": "النادل",
+          "ITEMS": "العناصر",
+          "STATUS": "الحالة",
+          "PAYMENT": "الدفع",
+          "METHOD": "الطريقة",
+          "ACTIONS": "الإجراءات"
+        }
+      },
+
+      "TYPE": {
+        "DineIn": "داخل المطعم",
+        "Delivery": "توصيل",
+        "Pickup": "استلام"
+      },
+
+      "STATUS": {
+        "AwaitingPayment": "في انتظار الدفع",
+        "Received": "تم الاستلام",
+        "Preparing": "جاري التحضير",
+        "Ready": "جاهز",
+        "Delivered": "تم التسليم",
+        "Cancelled": "ملغي"
+      },
+
+      "PAYMENT_STATUS": {
+        "Paid": "مدفوع",
+        "Pending": "قيد الانتظار",
+        "Failed": "فشل",
+        "Refunded": "مسترجع"
+      },
+
+      "PAYMENT_METHOD": {
+        "Cash": "كاش",
+        "Card": "بطاقة",
+        "InstaPay": "إنستاباي",
+        "Wallet": "محفظة"
+      },
+
+      "ACTIONS": {
+        "PAY": "ادفع",
+        "ASSIGN": "تعيين مندوب"
+      }
     }
   }
+  
 
 }

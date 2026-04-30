@@ -1,69 +1,75 @@
 <div class="table-container">
 
   <div class="table-header">
-    <div>ORDER</div>
-    <div>TYPE</div>
-    <div>WAITER</div>
-    <div>ITEMS</div>
-    <div>STATUS</div>
-    <div>PAYMENT</div>
-    <div>METHOD</div>
-    <div>ACTIONS</div>
+    <div>{{ 'CASHIER.ORDERS.LIST.HEADER.ORDER' | translate }}</div>
+    <div>{{ 'CASHIER.ORDERS.LIST.HEADER.TYPE' | translate }}</div>
+    <div>{{ 'CASHIER.ORDERS.LIST.HEADER.WAITER' | translate }}</div>
+    <div>{{ 'CASHIER.ORDERS.LIST.HEADER.ITEMS' | translate }}</div>
+    <div>{{ 'CASHIER.ORDERS.LIST.HEADER.STATUS' | translate }}</div>
+    <div>{{ 'CASHIER.ORDERS.LIST.HEADER.PAYMENT' | translate }}</div>
+    <div>{{ 'CASHIER.ORDERS.LIST.HEADER.METHOD' | translate }}</div>
+    <div>{{ 'CASHIER.ORDERS.LIST.HEADER.ACTIONS' | translate }}</div>
   </div>
 
   @for (order of orders; track order.id) {
 
   <div class="table-row" (click)="onOrderClick(order.id)">
 
+    <!-- ORDER -->
     <div>#{{ order.id }}</div>
 
-    <div>{{ order.orderType }}</div>
+    <!-- TYPE -->
+    <div>
+      {{ ('CASHIER.ORDERS.TYPE.' + order.orderType) | translate }}
+    </div>
 
+    <!-- WAITER -->
     <div>{{ order.userName }}</div>
 
+    <!-- ITEMS -->
     <div>{{ order.itemsCount }}</div>
 
     <!-- STATUS -->
     <div>
       <span class="badge status" [ngClass]="order.status">
-        {{ formatStatus(order.status) }}
+        {{ ('CASHIER.ORDERS.STATUS.' + order.status) | translate }}
       </span>
     </div>
 
-    <!-- PAYMENT -->
+    <!-- PAYMENT STATUS -->
     <div>
       <span class="badge payment" [ngClass]="order.paymentStatus">
-        {{ formatStatus(order.paymentStatus) }}
+        {{ ('CASHIER.ORDERS.PAYMENT_STATUS.' + order.paymentStatus) | translate }}
       </span>
     </div>
 
-    <!-- METHOD -->
+    <!-- PAYMENT METHOD -->
     <div>
       <span class="badge method">
-        {{ order.paymentMethod || '-' }}
+        {{ order.paymentMethod 
+            ? (('CASHIER.ORDERS.PAYMENT_METHOD.' + order.paymentMethod) | translate)
+            : '-' }}
       </span>
     </div>
 
     <!-- ACTIONS -->
     <div class="actions">
 
-      @if (isPending(order.paymentStatus ) && order.status !== 'Cancelled' && order.status !== 'Delivered') {
-      <button class="pay-btn" (click)="onPay(order.id, $event)">
-        Pay
-      </button>
+      @if (isPending(order.paymentStatus) 
+          && order.status !== 'Cancelled' 
+          && order.status !== 'Delivered') {
+        <button class="pay-btn" (click)="onPay(order.id, $event)">
+          {{ 'CASHIER.ORDERS.ACTIONS.PAY' | translate }}
+        </button>
       }
 
-      @if (isDelivery(order.orderType) && order.deliveryStatus == "UnAssigned" && order.status !== 'Delivered') {
-      <button class="assign-btn" (click)="onAssign(order.id, $event)">
-        Assign
-      </button>
+      @if (isDelivery(order.orderType) 
+          && order.deliveryStatus == 'UnAssigned' 
+          && order.status !== 'Delivered') {
+        <button class="assign-btn" (click)="onAssign(order.id, $event)">
+          {{ 'CASHIER.ORDERS.ACTIONS.ASSIGN' | translate }}
+        </button>
       }
-
-      <!-- <button
-               class="receipt-btn"
-              (click)="onOrderClick(order.id)">
-              Receipt
-          </button> -->
 
     </div>
 
