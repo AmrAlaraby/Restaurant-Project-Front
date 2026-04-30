@@ -1,164 +1,308 @@
+// ─── Ticket Card — Apple-grade refinement ────────────────────────────────────
+//
+// Dark mode: .dark class only — never prefers-color-scheme.
+// Logical properties throughout — RTL-safe.
+// Zero hardcoded hex — only CSS custom properties from styles.scss.
+//
+// ─────────────────────────────────────────────────────────────────────────────
+
+@keyframes tc-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes tc-scale-in {
+  0%   { opacity: 0; transform: scale(.55); }
+  65%  { transform: scale(1.13); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+
+// ─── Card Shell ───────────────────────────────────────────────────────────────
+
 .ticket-card {
-  background: #fff;
-
-  border-radius: 10px;
-
-  padding: 1rem;
-
-  border-left: 4px solid transparent;
-
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-  font-family: 'DM Sans', sans-serif;
-
+  background-color: var(--clr-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--clr-border);
+  border-inline-start: 3px solid transparent;
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
   cursor: default;
+  opacity: 0;
+  animation: tc-fade-up .4s ease forwards;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    border-color var(--transition-fast),
+    background-color var(--transition-normal);
 
-  border: 1px solid rgba(192, 57, 43, 0.12);
-
-  box-shadow: 0 2px 8px rgba(192,57,43,0.05);
+  .dark & {
+    background-color: var(--clr-surface);
+    border-color: var(--clr-border);
+    box-shadow: var(--shadow-md);
+  }
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(192,57,43,0.12);
+    box-shadow: var(--shadow-md);
+    border-inline-start-width: 4px;
+
+    .dark & { box-shadow: var(--shadow-lg); }
   }
 
-  /* =====================
-     STATUS BORDER
-  ===================== */
-  &.status-0 { border-left-color: #C0392B; }  // Pending
-  &.status-1 { border-left-color: #C0392B; }  // Preparing
-  &.status-2 { border-left-color: #2E7D32; opacity: 0.85; } // Done
+  &:active { transform: scale(.99) translateY(0); }
 
-  /* =====================
-     HEADER
-  ===================== */
-  .ticket-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.8rem;
+  // ── Status accent ───────────────────────────────────────────────────────────
 
-    .ticket-id {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #2D0A08;
-      letter-spacing: 0.04em;
-    }
+  &.status-0 {
+    border-inline-start-color: var(--clr-warning);
 
-    .status-badge {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      padding: 0.25rem 0.6rem;
-      border-radius: 20px;
+    .dark & { border-inline-start-color: var(--clr-warning); }
+  }
 
-      &.badge-0 {
-        background: rgba(192, 57, 43, 0.12);
-        color: #C0392B;
-      }
+  &.status-1 {
+    border-inline-start-color: var(--clr-primary);
 
-      &.badge-1 {
-        background: rgba(230, 74, 25, 0.12);
-        color: #C0392B;
-      }
+    .dark & { border-inline-start-color: var(--clr-primary-light); }
+  }
 
-      &.badge-2 {
-        background: rgba(46, 125, 50, 0.12);
-        color: #2E7D32;
-      }
+  &.status-2 {
+    border-inline-start-color: var(--clr-success);
+    opacity: .85;
+
+    .dark & { border-inline-start-color: var(--clr-success); }
+  }
+}
+
+
+// ─── Header ───────────────────────────────────────────────────────────────────
+
+.ticket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.ticket-id {
+  font-family: var(--font-heading);
+  font-size: .95rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--clr-text-primary);
+  transition: color var(--transition-normal);
+
+  .dark & { color: var(--clr-text-primary); }
+}
+
+
+// ─── Status Badge ─────────────────────────────────────────────────────────────
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  padding-block: 3px;
+  padding-inline: var(--space-sm);
+  border-radius: var(--radius-full);
+  animation: tc-scale-in .4s cubic-bezier(.34, 1.56, .64, 1) both;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+
+  &::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: var(--radius-full);
+    background-color: currentColor;
+    flex-shrink: 0;
+  }
+
+  &.badge-0 {
+    background-color: var(--clr-warning-bg);
+    color: var(--clr-warning);
+
+    .dark & {
+      background-color: var(--clr-warning-bg);
+      color: var(--clr-warning);
     }
   }
 
-  /* =====================
-     META
-  ===================== */
-  .ticket-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-    margin-bottom: 1rem;
+  &.badge-1 {
+    background-color: var(--clr-danger-bg);
+    color: var(--clr-primary);
 
-    .meta-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .meta-label {
-        font-size: 0.65rem;
-        color: #9B4437;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .meta-value {
-        font-size: 0.85rem;
-        color: #2D0A08;
-
-        &.station-name {
-          color: #C0392B;
-          font-weight: 700;
-        }
-
-        &.time-warn {
-          color: #C0392B;
-          font-weight: 700;
-        }
-      }
+    .dark & {
+      background-color: var(--clr-danger-bg);
+      color: var(--clr-primary-light);
     }
   }
 
-  /* =====================
-     ACTIONS
-  ===================== */
-  .ticket-actions {
-    display: flex;
-    gap: 0.5rem;
+  &.badge-2 {
+    background-color: var(--clr-success-bg);
+    color: var(--clr-success);
 
-    button {
-      flex: 1;
+    .dark & {
+      background-color: var(--clr-success-bg);
+      color: var(--clr-success);
+    }
+  }
+}
 
-      padding: 0.5rem;
 
-      border: none;
-      border-radius: 8px;
+// ─── Meta ─────────────────────────────────────────────────────────────────────
 
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
+.ticket-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-block-end: var(--space-xs);
+}
 
-      cursor: pointer;
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
 
-      transition: all 0.2s ease;
+.meta-label {
+  font-size: .6rem;
+  font-weight: 700;
+  color: var(--clr-text-hint);
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color var(--transition-normal);
 
-      &:active {
-        transform: scale(0.97);
-      }
+  .dark & { color: var(--clr-text-hint); }
+}
+
+.meta-value {
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--clr-text-primary);
+  text-align: end;
+  letter-spacing: -.01em;
+  transition: color var(--transition-normal);
+
+  .dark & { color: var(--clr-text-primary); }
+
+  &.station-name {
+    color: var(--clr-accent-dark);
+    font-weight: 700;
+
+    .dark & { color: var(--clr-accent-light); }
+  }
+
+  &.time-warn {
+    color: var(--clr-primary);
+    font-weight: 700;
+
+    .dark & { color: var(--clr-primary-light); }
+  }
+}
+
+
+// ─── Actions ──────────────────────────────────────────────────────────────────
+
+.ticket-actions {
+  display: flex;
+  gap: var(--space-xs);
+
+  button {
+    flex: 1;
+    padding-block: var(--space-sm);
+    padding-inline: var(--space-xs);
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    cursor: pointer;
+    -webkit-font-smoothing: antialiased;
+    transition:
+      background-color var(--transition-fast),
+      color var(--transition-fast),
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast),
+      transform var(--transition-fast);
+
+    &:active { transform: scale(.96); }
+  }
+}
+
+.btn-details {
+  background-color: var(--clr-cream-mid);
+  color: var(--clr-text-secondary);
+  border: 1.5px solid var(--clr-border) !important;
+
+  &:hover {
+    background-color: var(--clr-cream-dark);
+    color: var(--clr-text-primary);
+    border-color: var(--clr-accent) !important;
+  }
+
+  .dark & {
+    background-color: var(--clr-cream);
+    color: var(--clr-text-secondary);
+    border-color: var(--clr-border) !important;
+
+    &:hover {
+      background-color: var(--clr-cream-mid);
+      color: var(--clr-text-primary);
+      border-color: var(--clr-accent-dark) !important;
+    }
+  }
+}
+
+.btn-advance {
+  background-color: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+  box-shadow: var(--shadow-sm);
+
+  &:hover {
+    background-color: var(--clr-primary-dark);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+
+  &:active { transform: scale(.96) translateY(0); }
+
+  .status-2 & {
+    background-color: var(--clr-success);
+    box-shadow: none;
+    cursor: default;
+
+    &:hover {
+      background-color: var(--clr-success);
+      box-shadow: none;
+      transform: none;
     }
 
-    .btn-details {
-      background: #FDF5F5;
-      color: #9B4437;
+    .dark & { background-color: var(--clr-success); }
+  }
 
-      border: 1px solid rgba(192, 57, 43, 0.15);
+  .dark & {
+    background-color: var(--clr-primary);
+    color: var(--clr-text-on-primary);
+    box-shadow: var(--shadow-md);
 
-      &:hover {
-        background: #FDECEA;
-        color: #C0392B;
-        border-color: rgba(192, 57, 43, 0.3);
-      }
-    }
-
-    .btn-advance {
-      background: #C0392B;
-      color: #fff;
-
-      box-shadow: 0 2px 8px rgba(192,57,43,0.15);
-
-      &:hover {
-        background: #96281B;
-        box-shadow: 0 4px 14px rgba(192,57,43,0.25);
-      }
+    &:hover {
+      background-color: var(--clr-primary-dark);
+      box-shadow: var(--shadow-lg);
     }
   }
 }
