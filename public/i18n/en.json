@@ -1000,7 +1000,67 @@
         }
       }
     }
-}
+},
+ "CASHIER": {
+    "DASHBOARD": {
+      "GREETING": "Good morning, {{name}}",
+      "SUBINFO": "Cashier Station · {{branch}}",
+      "BUTTONS": {
+        "PROCESS_PAYMENT": "Process Payment",
+        "VIEW_ALL": "View All"
+      },
+      "SECTIONS": {
+        "AWAITING_PAYMENT": "Awaiting Payment"
+      },
+      "HOME": {
+        "STATS": {
+          "COLLECTED_TODAY": "Collected Today",
+          "PENDING_PAYMENTS": "Pending Payments",
+          "PAYMENTS_PROCESSED": "Payments Processed",
+          "REFUNDS_ISSUED": "Refunds Issued"
+        }
+      },
+       "AWAITING_PAYMENTS": {
+        "CARD": {
+          "TITLE": "Order #{{id}} · {{type}} · {{user}}",
+          "AMOUNT": "EGP {{amount}}"
+        },
+        "EMPTY": "No orders awaiting payment",
+        "ACTIONS": {
+          "ASSIGN_DRIVER": "Assign Driver",
+          "PAY_NOW": "Pay Now"
+        }
+      },
+      "PAYMENT_METHODS": {
+        "TITLE": "Payment Methods — Today",
+        "AMOUNT": "EGP {{amount}} · {{count}} txns",
+        "EMPTY": "No transactions today",
+        "METHODS": {
+          "CASH": "Cash",
+          "CARD": "Card",
+          "INSTAPAY": "Instapay",
+          "WALLET": "Wallet"
+        }
+      },
+      "RECENT_TRANSACTIONS": {
+        "TITLE": "Recent Transactions",
+        "HEADER": {
+          "ORDER": "Order",
+          "METHOD": "Method",
+          "AMOUNT": "Amount",
+          "STATUS": "Status"
+        },
+        "AMOUNT": "EGP {{amount}}",
+        "EMPTY": "No transactions yet",
+        "STATUS": {
+          "PAID": "Paid",
+          "PENDING": "Pending",
+          "FAILED": "Failed",
+          "REFUNDED": "Refunded"
+        }
+      }
+    }
+  }
 }
 
 

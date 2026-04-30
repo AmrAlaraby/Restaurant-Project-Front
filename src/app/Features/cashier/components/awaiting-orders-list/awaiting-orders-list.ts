@@ -1,9 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subject, takeUntil } from 'rxjs';
 import { OrdersService } from '../../../../../../src/app/Core/Services/Orders-Service/orders-service';
 import { Pagination } from "../../../../Shared/Components/pagination/pagination";
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LocalizationService } from '../../../../Core/Services/Localization-Service/localization-service';
+
 
 export interface DashboardOrder {
   id: number;
@@ -18,7 +21,7 @@ export interface DashboardOrder {
 @Component({
   selector: 'app-awaiting-orders-list',
   standalone: true,
-  imports: [CommonModule, Pagination],
+  imports: [CommonModule, Pagination, TranslatePipe],
   templateUrl: './awaiting-orders-list.html',
   styleUrl: './awaiting-orders-list.scss',
 })
@@ -43,11 +46,31 @@ export class AwaitingOrdersListComponent implements OnInit {
     soup: '🍜',
   };
 
-  constructor(private orderService: OrdersService , private router:Router) {}
+  constructor(
+     private orderService: OrdersService ,
+     private router:Router,
+     private localizationService: LocalizationService,
+    ) {}
 
   ngOnInit() {
     this.loadOrders();
+    this.getCurrentLanguage();
   }
+
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
+    
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 
   // ── Load Orders with Pagination ─────────────
   loadOrders() {
@@ -77,6 +100,7 @@ export class AwaitingOrdersListComponent implements OnInit {
             this.orders = details.map((detail: any, index: number) => {
               const o = rawOrders[index];
               const items = detail.orderItems ?? [];
+              
 
               return {
                 id: o.id,
@@ -87,6 +111,7 @@ export class AwaitingOrdersListComponent implements OnInit {
                 previewItems: items.slice(0, 3).map((item: any) => ({
                   emoji: this.getEmoji(item.menuItemName ?? item.name ?? ''),
                   name: item.menuItemName ?? item.name ?? '',
+                  arabicName: item.arabicMenuItemName ?? '',
                   quantity: item.quantity,
                 })),
                 extraLabel: o.orderType === 'Delivery' ? 'COD' : undefined,
@@ -143,8 +168,10 @@ export class AwaitingOrdersListComponent implements OnInit {
   }
 
   getActionLabel(order: DashboardOrder): string {
-    return order.orderType === 'Delivery' ? 'Assign Driver' : 'Pay Now';
-  }
+  return order.orderType === 'Delivery'
+    ? 'CASHIER.DASHBOARD.AWAITING_PAYMENTS.ACTIONS.ASSIGN_DRIVER'
+    : 'CASHIER.DASHBOARD.AWAITING_PAYMENTS.ACTIONS.PAY_NOW';
+}
 
   getActionClass(order: DashboardOrder): string {
     return order.orderType === 'Delivery' ? 'btn-outline' : 'btn-primary';
@@ -159,5 +186,11 @@ export class AwaitingOrdersListComponent implements OnInit {
     }
 
     return '🍽️';
+  }
+  getItemName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.arabicName || item.name;
+    }
+    return item.name;
   }
 }

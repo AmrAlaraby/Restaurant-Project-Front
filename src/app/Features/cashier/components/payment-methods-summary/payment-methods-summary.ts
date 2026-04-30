@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PaymentMethodSummary } from '../../pages/cashier-dashboard/cashier-dashboard';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-payment-methods-summary',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './payment-methods-summary.html',
   styleUrl: './payment-methods-summary.scss',
 })

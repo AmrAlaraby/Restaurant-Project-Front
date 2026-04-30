@@ -998,5 +998,66 @@
         }
       }
     }
+  },
+  "CASHIER": {
+    "DASHBOARD": {
+      "GREETING": "صباح الخير، {{name}}",
+      "SUBINFO": "محطة الكاشير · {{branch}}",
+      "BUTTONS": {
+        "PROCESS_PAYMENT": "تنفيذ الدفع",
+        "VIEW_ALL": "عرض الكل"
+      },
+      "SECTIONS": {
+        "AWAITING_PAYMENT": "في انتظار الدفع"
+      },
+      "HOME": {
+        "STATS": {
+          "COLLECTED_TODAY": "المحصّل اليوم",
+          "PENDING_PAYMENTS": "المدفوعات المعلقة",
+          "PAYMENTS_PROCESSED": "المدفوعات المنفذة",
+          "REFUNDS_ISSUED": "المبالغ المستردة"
+        }
+      },
+      "AWAITING_PAYMENTS": {
+        "CARD": {
+          "TITLE": "طلب #{{id}} · {{type}} · {{user}}",
+          "AMOUNT": "‏{{amount}} جنيه"
+        },
+        "EMPTY": "لا توجد طلبات في انتظار الدفع",
+        "ACTIONS": {
+          "ASSIGN_DRIVER": "تعيين سائق",
+          "PAY_NOW": "ادفع الآن"
+        }
+      },
+      "PAYMENT_METHODS": {
+        "TITLE": "طرق الدفع — اليوم",
+        "AMOUNT": "‏{{amount}} جنيه · {{count}} عملية",
+        "EMPTY": "لا توجد معاملات اليوم",
+        "METHODS": {
+          "CASH": "كاش",
+          "CARD": "بطاقة",
+          "INSTAPAY": "إنستاباي",
+          "WALLET": "محفظة"
+        }
+      },
+      "RECENT_TRANSACTIONS": {
+        "TITLE": "أحدث المعاملات",
+        "HEADER": {
+          "ORDER": "الطلب",
+          "METHOD": "طريقة الدفع",
+          "AMOUNT": "المبلغ",
+          "STATUS": "الحالة"
+        },
+        "AMOUNT": "‏{{amount}} جنيه",
+        "EMPTY": "لا توجد معاملات بعد",
+        "STATUS": {
+          "PAID": "مدفوع",
+          "PENDING": "قيد الانتظار",
+          "FAILED": "فشل",
+          "REFUNDED": "مسترد"
+        }
+      }
+    }
   }
+
 }

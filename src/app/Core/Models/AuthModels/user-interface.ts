@@ -5,4 +5,5 @@ export interface UserInterface {
   role: string;
   branchId: number;
   branchName?: string;
+  branchArabicName?: string;
 }
