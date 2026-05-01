@@ -986,7 +986,8 @@
           "PREPARING": "قيد التحضير",
           "READY": "جاهز",
           "DELIVERED": "تم التسليم",
-          "CANCELLED": "ملغي"
+          "CANCELLED": "ملغي",
+          "AWAITINGPAYMENT": "في انتظار الدفع"
         },
         "TYPE": {
           "ALL": "كل الأنواع",
