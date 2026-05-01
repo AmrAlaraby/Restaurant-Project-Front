@@ -1,5 +1,18 @@
 {
   "CUSTOMER": {
+    "MENU": {
+    "SEARCH": "ابحث عن الطعام...",
+
+    "CATEGORIES": {
+      "ALL": "الكل"
+    },
+
+    "SORT": {
+      "DEFAULT": "افتراضي",
+      "LOW_TO_HIGH": "من الأقل إلى الأعلى",
+      "HIGH_TO_LOW": "من الأعلى إلى الأقل"
+    }
+  },
     "AI": {
     "SUGGESTER": {
       "HEADER": {

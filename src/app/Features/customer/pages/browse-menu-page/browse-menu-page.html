@@ -2,10 +2,13 @@
 
     <!-- search -->
     <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Search food..." [formControl]="searchControl" />
+        <input type="text"
+               class="form-control"
+               [placeholder]="'CUSTOMER.MENU.SEARCH' | translate"
+               [formControl]="searchControl" />
     </div>
 
-    <!-- categories + sort (same row) -->
+    <!-- categories + sort -->
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
 
         <!-- categories -->
@@ -15,7 +18,9 @@
                 [class.btn-dark]="selectedCategoryId === null"
                 [class.btn-outline-dark]="selectedCategoryId !== null"
                 (click)="selectCategory(null)">
-                All
+
+                {{ 'CUSTOMER.MENU.CATEGORIES.ALL' | translate }}
+
             </button>
 
             @for (cat of categories; track cat.id) {
@@ -23,7 +28,9 @@
                 [class.btn-dark]="selectedCategoryId === cat.id"
                 [class.btn-outline-dark]="selectedCategoryId !== cat.id"
                 (click)="selectCategory(cat.id)">
-                {{ cat.name }}
+
+                {{ getCategoryName(cat) }}
+
             </button>
             }
 
@@ -32,16 +39,28 @@
         <!-- sort -->
         <div class="d-flex gap-2">
 
-            <button class="sort-btn" [class.active]="sort === 0" (click)="changeSort(0)">
-                🔥 Default
+            <button class="sort-btn"
+                    [class.active]="sort === 0"
+                    (click)="changeSort(0)">
+
+                🔥 {{ 'CUSTOMER.MENU.SORT.DEFAULT' | translate }}
+
             </button>
 
-            <button class="sort-btn" [class.active]="sort === 1" (click)="changeSort(1)">
-                💰 Low to High
+            <button class="sort-btn"
+                    [class.active]="sort === 1"
+                    (click)="changeSort(1)">
+
+                💰 {{ 'CUSTOMER.MENU.SORT.LOW_TO_HIGH' | translate }}
+
             </button>
 
-            <button class="sort-btn" [class.active]="sort === 2" (click)="changeSort(2)">
-                💸 High to Low
+            <button class="sort-btn"
+                    [class.active]="sort === 2"
+                    (click)="changeSort(2)">
+
+                💸 {{ 'CUSTOMER.MENU.SORT.HIGH_TO_LOW' | translate }}
+
             </button>
 
         </div>
