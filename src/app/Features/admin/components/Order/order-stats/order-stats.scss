@@ -1,43 +1,119 @@
-:host {
-  --red: #C0392B;
-  --radius: 14px;
-}
-
+// ─── Stats Bar ────────────────────────────────────────────────────────────────
 .stats-bar {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  margin-bottom: 28px;
-}
+  margin-block-end: 24px;
 
-.stat-card {
-  background: #FFFFFF;
-  border-radius: var(--radius);
-  padding: 18px 20px;
-  border: 1px solid rgba(192, 57, 43, 0.13);
-  border-top: 2.5px solid var(--red);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  transition: box-shadow 0.2s;
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-  &:hover {
-    box-shadow: 0 4px 14px rgba(192, 57, 43, 0.1);
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
   }
 }
 
-h6,
-.label {
-  font-size: 0.85rem;
-  font-weight: 400;
-  color: #9B4437;
-  margin: 0;
+// ─── Stat Card ────────────────────────────────────────────────────────────────
+.stat-card {
+  position: relative;
+  background: linear-gradient(180deg, #ffffff 0%, #fcfcfc 100%);
+  border-radius: 16px;
+  padding: 18px 20px;
+  border: 1px solid #f1f1f1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: hidden;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s ease;
+
+  // subtle inner highlight
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+  }
+
+  // accent line
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    border-radius: 16px 16px 0 0;
+    background: var(--clr-primary);
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  }
 }
 
+// ─── Dynamic Colors per Card Type ─────────────────────────────────────────────
+.stat-card.total::before {
+  background: #e63946;
+}
+
+.stat-card.delivered::before {
+  background: #2a9d8f;
+}
+
+.stat-card.preparing::before {
+  background: #f4a261;
+}
+
+.stat-card.cancelled::before {
+  background: #e76f51;
+}
+
+// ─── Label ────────────────────────────────────────────────────────────────────
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #9aa0a6;
+}
+
+// ─── Value ────────────────────────────────────────────────────────────────────
 .val {
-  font-size: 1.8rem;
+  font-size: 28px;
   font-weight: 700;
-  color: #2D0A08;
+  letter-spacing: -0.5px;
+  color: #1f1f1f;
   line-height: 1;
-  margin: 0;
+}
+
+// ─── Dynamic Value Colors (match status) ─────────────────────────────────────
+.stat-card.total .val {
+  color: #e63946;
+}
+
+.stat-card.delivered .val {
+  color: #2a9d8f;
+}
+
+.stat-card.preparing .val {
+  color: #f4a261;
+}
+
+.stat-card.cancelled .val {
+  color: #e76f51;
+}
+
+// ─── Optional icon style ──────────────────────────────────────────────────────
+.stat-icon {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  font-size: 22px;
+  opacity: 0.08;
 }

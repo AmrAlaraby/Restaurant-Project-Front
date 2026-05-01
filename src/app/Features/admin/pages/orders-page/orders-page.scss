@@ -1,52 +1,122 @@
-:host {
-  --red: #C0392B;
-  --red-dark: #96281B;
-  --gray-600: #9B4437;
-  --black: #2D0A08;
-  --cream: #FDF5F5;
+// ─── Page Shell ───────────────────────────────────────────────────────────────
+// Dark mode: .dark class only.
+// Logical properties throughout — RTL-safe.
+// Zero hardcoded hex — only CSS custom properties from styles.scss.
+// ─────────────────────────────────────────────────────────────────────────────
+
+@keyframes ps-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
+// ─── Page ─────────────────────────────────────────────────────────────────────
 .page {
   max-width: 1280px;
-  margin: auto;
-  padding: 28px 32px 60px;
-  background: var(--cream);
+  margin-inline: auto;
+  padding-block: var(--space-lg) 60px;
+  padding-inline: var(--space-xl);
+  background-color: var(--clr-bg);
   min-height: 100vh;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color var(--transition-normal);
+
+  .dark & { background-color: var(--clr-bg); }
+
+  @media (max-width: 768px) {
+    padding-block: var(--space-md) var(--space-xl);
+    padding-inline: var(--space-md);
+  }
 }
 
+// ─── Breadcrumb ───────────────────────────────────────────────────────────────
 .breadcrumb {
-  font-size: .8rem;
-  color: var(--gray-600);
-  margin-bottom: 20px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--clr-text-hint);
+  margin-block-end: var(--space-md);
+  letter-spacing: 0.01em;
+  animation: ps-fade-up 0.3s ease both;
+
+  .dark & { color: var(--clr-text-hint); }
 }
 
+// ─── Page Header ──────────────────────────────────────────────────────────────
 .page-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 28px;
-}
-
-.page-title h1 {
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: var(--black);
-}
-
-.btn-new {
-  display: flex;
   align-items: center;
-  gap: 8px;
-  background: var(--red);
-  color: white;
-  border-radius: 8px;
-  padding: 10px 20px;
+  gap: var(--space-md);
+  margin-block-end: var(--space-lg);
+  animation: ps-fade-up 0.35s ease both;
+  animation-delay: 0.04s;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+// ─── Page Title ───────────────────────────────────────────────────────────────
+.page-title {
+
+  h1 {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--clr-text-primary);
+
+    .dark & { color: var(--clr-text-primary); }
+
+    @media (max-width: 768px) { font-size: 1.4rem; }
+  }
+}
+
+// ─── New Button ───────────────────────────────────────────────────────────────
+.btn-new {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background-color: var(--clr-primary);
+  color: var(--clr-on-primary);
+  border-radius: var(--radius-md);
+  padding-block: var(--space-sm);
+  padding-inline: var(--space-lg);
   border: none;
   cursor: pointer;
-  font-weight: 500;
-  transition: .2s;
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: var(--shadow-red);
+  transition:
+    background-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+
+  .dark & {
+    background-color: var(--clr-primary);
+    color: var(--clr-on-primary);
+    box-shadow: var(--shadow-red);
+  }
 
   &:hover {
-    background: var(--red-dark);
+    background-color: var(--clr-primary-hover);
+    box-shadow: 0 6px 20px rgba(183, 28, 28, 0.32);
     transform: translateY(-1px);
+
+    .dark & {
+      background-color: var(--clr-primary-hover);
+      box-shadow: 0 6px 22px rgba(229, 57, 53, 0.42);
+    }
+  }
+
+  &:active {
+    transform: scale(0.97) translateY(0);
+    box-shadow: var(--shadow-red);
   }
 }
