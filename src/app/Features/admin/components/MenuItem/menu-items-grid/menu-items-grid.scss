@@ -1,4 +1,103 @@
-@media (min-width: 1200px) {
+/* ═══════════════════════════════════════════════════════════════════
+   MENU ITEMS GRID — SCSS
+   Brand: Deep Crimson + Warm Gold · Dark mode via .dark class
+═══════════════════════════════════════════════════════════════════ */
+
+// ── LOADING STATE ──────────────────────────────────────────────────
+.loading-state {
+  text-align: center;
+  padding: 72px var(--space-lg);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--clr-text-hint);
+  font-family: var(--font-body);
+  background: var(--clr-surface);
+  border: 1.5px dashed var(--clr-border);
+  border-radius: var(--radius-lg);
+  margin-block-end: var(--space-lg);
+
+  .dark & {
+    color: var(--clr-text-hint);
+    background: var(--clr-surface);
+    border-color: var(--clr-border);
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--clr-cream-dark);
+    border-top-color: var(--clr-primary);
+    border-radius: 50%;
+    animation: grid-spin 0.75s linear infinite;
+    margin-inline: auto;
+    margin-block-end: var(--space-md);
+
+    .dark & {
+      border-color: var(--clr-cream-dark);
+      border-top-color: var(--clr-accent);
+    }
+  }
+}
+
+@keyframes grid-spin {
+  to { transform: rotate(360deg); }
+}
+
+// ── EMPTY STATE ────────────────────────────────────────────────────
+.empty-state {
+  text-align: center;
+  padding: 72px var(--space-lg);
+  background: var(--clr-surface);
+  border: 1.5px dashed var(--clr-border);
+  border-radius: var(--radius-lg);
+  margin-block-end: var(--space-lg);
+
+  .dark & {
+    background: var(--clr-surface);
+    border-color: var(--clr-border);
+  }
+
+  h5 {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--clr-text-secondary);
+    margin-block-end: var(--space-xs);
+
+    .dark & {
+      color: var(--clr-text-secondary);
+    }
+  }
+
+  p {
+    font-size: 13px;
+    color: var(--clr-text-hint);
+    margin: 0;
+
+    .dark & {
+      color: var(--clr-text-hint);
+    }
+  }
+}
+
+// ── CARD GRID ──────────────────────────────────────────────────────
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-lg);
+  margin-block-start: var(--space-md);
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}@media (min-width: 1200px) {
     .col-xl-2-4 {
         width: 20%;
     }
