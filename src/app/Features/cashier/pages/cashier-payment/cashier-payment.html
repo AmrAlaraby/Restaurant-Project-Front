@@ -1,46 +1,41 @@
 <div class="payment-page">
-
-  <h1 class="page-title">
-    {{ 'CASHIER.PAYMENT.TITLE' | translate }}
-  </h1>
+  <header class="page-header">
+    <h1 class="page-title">
+      {{ 'CASHIER.PAYMENT.TITLE' | translate }}
+    </h1>
+    <div class="page-title-accent" aria-hidden="true"></div>
+  </header>
 
   <div class="payment-layout">
-
     <!-- LEFT COLUMN -->
     <div class="left-col">
-
       <!-- Find Order (Awaiting Payments) -->
       <div class="card">
         <div class="card-label">
+          <span class="card-label-bar" aria-hidden="true"></span>
           {{ 'CASHIER.PAYMENT.SECTIONS.FIND_ORDER' | translate }}
         </div>
 
-        <app-awaiting-payments
-          (onSelect)="onOrderSelected($event)">
-        </app-awaiting-payments>
+        <app-awaiting-payments (onSelect)="onOrderSelected($event)"> </app-awaiting-payments>
       </div>
 
       <!-- Bill Preview -->
       <div class="card">
         <div class="card-label">
+          <span class="card-label-bar" aria-hidden="true"></span>
           {{ 'CASHIER.PAYMENT.SECTIONS.BILL_PREVIEW' | translate }}
         </div>
 
-        <app-bill-preview
-          [orderId]="selectedOrderId">
-        </app-bill-preview>
+        <app-bill-preview [orderId]="selectedOrderId"> </app-bill-preview>
       </div>
-
     </div>
 
     <!-- RIGHT COLUMN -->
     <div class="right-col">
-      <app-payment-terminal
-        [orderId]="selectedOrderId"
-        (paymentConfirmed)="onPaymentConfirmed()">
-      </app-payment-terminal>
+      <div class="terminal-card">
+        <app-payment-terminal [orderId]="selectedOrderId" (paymentConfirmed)="onPaymentConfirmed()">
+        </app-payment-terminal>
+      </div>
     </div>
-
   </div>
-
 </div>

@@ -1,82 +1,211 @@
+// ============================================================
+//  cashier-layout.scss
+//  Brand: Warm Red & Gold  |  Dark-mode via .dark class only
+//  Uses CSS custom properties from global styles.scss
+// ============================================================
+
+// ─── Root layout ────────────────────────────────────────────
 .layout {
   display: flex;
   height: 100vh;
   width: 100%;
   overflow: visible; // 🔥 مهم
+  background-color: var(--clr-surface-alt);
+
+  .dark & {
+    background-color: var(--clr-surface-alt); // dark token is #2C1400
+  }
 }
 
-/* SIDEBAR */
+// ─── Sidebar host ───────────────────────────────────────────
 app-sidebar {
   width: 240px;
   flex-shrink: 0;
+  // Sidebar internal colours are driven by --clr-sidebar-* tokens
+  // defined in styles.scss — no overrides needed here.
 }
 
-/* CONTENT */
+// ─── App shell ──────────────────────────────────────────────
 .app-shell {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow: visible; // 🔥 مهم
+  min-width: 0; // prevent flex blowout
 }
 
-/* TOPBAR */
+// ─── Topbar ─────────────────────────────────────────────────
 .topbar {
   height: 65px;
-  background: #fff;
-  border-bottom: 1px solid #eee;
+  background-color: var(--clr-surface);
+  border-block-end: 1px solid var(--clr-border);
+  box-shadow: var(--shadow-sm);
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  padding: 0 20px;
+  padding-inline: var(--space-lg);
 
   position: relative; // 🔥 مهم
   z-index: 100; // 🔥 مهم
+
+  transition:
+    background-color var(--transition-normal),
+    border-color var(--transition-normal),
+    box-shadow var(--transition-normal);
+
+  .dark & {
+    background-color: var(--clr-surface); // dark token is #1A0A00
+    border-block-end-color: var(--clr-border); // dark token is #5D3A1A
+    box-shadow: var(--shadow-sm);
+  }
 }
 
+// ─── Topbar · right cluster ─────────────────────────────────
 .topbar-right {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-sm);
 }
 
-/* BUTTON */
-.hamburger {
-  font-size: 22px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  display: none;
-}
-
+// ─── Topbar · page title ────────────────────────────────────
 .title {
-  font-size: 18px;
-  font-weight: 600;
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--clr-text-primary);
+
+  // Gold underline accent
+  position: relative;
+  padding-block-end: 2px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-start: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, var(--clr-accent), var(--clr-accent-light));
+    border-radius: var(--radius-full);
+    opacity: 0.7;
+  }
+
+  .dark & {
+    color: var(--clr-text-primary); // dark token is #FFF8F0
+  }
 }
 
-/* AVATAR */
+// ─── Hamburger button ───────────────────────────────────────
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  width: 38px;
+  height: 38px;
+  padding: var(--space-xs);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--clr-cream);
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  &:hover {
+    background-color: var(--clr-cream-mid);
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--clr-primary) 12%, transparent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--clr-accent);
+    outline-offset: 2px;
+  }
+
+  .dark & {
+    background-color: var(--clr-cream); // dark token is #2C1400
+    border-color: var(--clr-border); // dark token is #5D3A1A
+
+    &:hover {
+      background-color: var(--clr-cream-mid);
+      border-color: var(--clr-primary-light);
+    }
+  }
+}
+
+.hamburger__line {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: var(--radius-full);
+  background-color: var(--clr-text-primary);
+  transition: background-color var(--transition-fast);
+
+  .dark & {
+    background-color: var(--clr-text-primary); // dark token is #FFF8F0
+  }
+}
+
+// ─── Avatar ─────────────────────────────────────────────────
 .avatar {
   width: 38px;
   height: 38px;
-  border-radius: 50%;
-  background: #c62828;
-  color: #fff;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary-dark));
+  color: var(--clr-text-on-primary);
+  border: 2px solid var(--clr-accent);
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  font-weight: 600;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--clr-primary) 35%, transparent);
+  cursor: default;
+  user-select: none;
+
+  transition:
+    box-shadow var(--transition-fast),
+    border-color var(--transition-fast);
+
+  &:hover {
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--clr-primary) 45%, transparent);
+    border-color: var(--clr-accent-light);
+  }
+
+  .dark & {
+    background: linear-gradient(135deg, var(--clr-primary-dark), var(--clr-primary));
+    color: var(--clr-text-on-primary);
+    border-color: var(--clr-accent);
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--clr-primary) 50%, transparent);
+  }
 }
 
-/* MAIN */
+// ─── Main content area ──────────────────────────────────────
 .main-content {
   flex: 1;
   overflow: visible; // 🔥 بدل auto
+  background-color: var(--clr-surface-alt);
+
+  .dark & {
+    background-color: var(--clr-surface-alt); // dark token is #2C1400
+  }
 }
 
-/* MOBILE */
+// ─── Mobile ─────────────────────────────────────────────────
 @media (max-width: 768px) {
   .layout {
     display: block;
@@ -84,14 +213,15 @@ app-sidebar {
 
   app-sidebar {
     position: fixed;
-    left: 0;
-    top: 0;
+    inset-block-start: 0;
+    inset-inline-start: 0;
     height: 100%;
     z-index: 1000;
     transform: translateX(-100%);
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-normal);
   }
 
+  // RTL-safe open state (Angular adds .open class)
   app-sidebar.open {
     transform: translateX(0);
   }
@@ -102,5 +232,23 @@ app-sidebar {
 
   .hamburger {
     display: flex;
+  }
+
+  .topbar {
+    padding-inline: var(--space-md);
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+}
+
+// ─── RTL support ─────────────────────────────────────────────
+// When dir="rtl" is on a parent, the sidebar slides in from the right.
+[dir='rtl'] app-sidebar {
+  transform: translateX(100%);
+
+  &.open {
+    transform: translateX(0);
   }
 }

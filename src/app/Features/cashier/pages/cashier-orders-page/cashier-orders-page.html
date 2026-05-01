@@ -1,34 +1,30 @@
 <div class="page">
-
   <div class="header">
     <h2>{{ 'CASHIER.ORDERS.TITLE' | translate }}</h2>
   </div>
 
   <div class="controls-row">
-
-    <app-waiter-order-filters
-      [hideTypeFilter]="false"
-      (filtersChanged)="onFiltersChanged($event)">
+    <app-waiter-order-filters [hideTypeFilter]="false" (filtersChanged)="onFiltersChanged($event)">
     </app-waiter-order-filters>
 
     <button class="new-order-btn" (click)="goToNewOrder()">
       {{ 'CASHIER.ORDERS.BUTTON_NEW_ORDER' | translate }}
     </button>
-
   </div>
 
   <app-cashier-orders-list
     [orders]="orders"
     (orderClicked)="onOrderClicked($event)"
     (payClicked)="onPayClicked($event)"
-    (assignClicked)="onAssignClicked($event)">
+    (assignClicked)="onAssignClicked($event)"
+  >
   </app-cashier-orders-list>
 
   <app-pagination
     [pageIndex]="filters.pageIndex"
     [pageSize]="filters.pageSize"
     [totalCount]="totalCount"
-    (pageChanged)="onPageChanged($event)">
+    (pageChanged)="onPageChanged($event)"
+  >
   </app-pagination>
-
 </div>

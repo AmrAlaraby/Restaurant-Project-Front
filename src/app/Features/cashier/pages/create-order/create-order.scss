@@ -1,103 +1,364 @@
-.page {
-  padding: 20px;
-  background: #f5f1ec;
+// ============================================================
+//  create-order — Component Styles
+//  Brand: deep crimson · warm gold · cream/off-white surfaces
+//  Dark mode: .dark class on parent (never prefers-color-scheme)
+//  Logical properties used throughout (inline-start/end)
+// ============================================================
 
+// ------------------------------------
+// Page shell
+// ------------------------------------
+.page {
+  padding: var(--space-lg);
+  background: var(--clr-surface-alt);
   height: 100vh;
   overflow: hidden;
+
+  .dark & {
+    background: var(--clr-surface-alt); // resolves to #2C1400
+  }
+
+  @media (max-width: 768px) {
+    height: auto;
+    overflow: visible;
+    padding: var(--space-md);
+  }
 }
 
-/* GRID */
+// ------------------------------------
+// Two-column grid layout
+// ------------------------------------
 .layout {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 20px;
-
-
+  gap: var(--space-lg);
   height: 100%;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
 }
 
-/* PANELS */
+// ------------------------------------
+// Left panel
+// ------------------------------------
 .left-panel {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-
+  gap: var(--space-md);
   overflow: hidden;
 }
+
+// ------------------------------------
+// Right panel — scrollable
+// ------------------------------------
 .right-panel {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-
+  gap: var(--space-md);
   overflow-y: auto;
+  padding-inline-end: var(--space-xs);
 
-  padding-right: 4px;
+  // Custom scrollbar — light
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--clr-cream-dark);
+    border-radius: var(--radius-full);
+
+    .dark & {
+      background: var(--clr-cream-dark); // resolves to #5D3A1A
+    }
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--clr-accent-dark);
+
+    .dark & {
+      background: var(--clr-accent);
+    }
+  }
+
+  @media (max-width: 768px) {
+    overflow-y: visible;
+    padding-inline-end: 0;
+  }
 }
 
-.right-panel::-webkit-scrollbar {
-  width: 6px;
-}
-
-.right-panel::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 10px;
-}
-
-.right-panel::-webkit-scrollbar-thumb:hover {
-  background: #aaa;
-}
-
+// ------------------------------------
+// Generic card
+// ------------------------------------
 .card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 16px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  background: var(--clr-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  border: 1px solid var(--clr-border);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-normal);
+
+  .dark & {
+    background: var(--clr-surface); // resolves to #1A0A00
+    border-color: var(--clr-border); // resolves to #5D3A1A
+    box-shadow: var(--shadow-sm);
+  }
 }
 
 .menu-card {
   min-height: 500px;
+  flex: 1;
+  overflow: hidden;
 }
 
-/* DELIVERY PLACEHOLDER */
-.delivery-placeholder {
-  text-align: center;
-  color: #888;
-  padding: 30px;
+// ------------------------------------
+// Customer info card (delivery)
+// ------------------------------------
+.customer-info-card {
+  border-inline-start: 3px solid var(--clr-accent);
+  background: var(--clr-cream);
+
+  .dark & {
+    background: var(--clr-cream); // resolves to #2C1400
+    border-inline-start-color: var(--clr-accent-light);
+  }
 }
 
-/* PAYMENT */
+.customer-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--clr-text-primary);
+  margin: 0 0 var(--space-xs);
+
+  .dark & {
+    color: var(--clr-text-primary); // resolves to #FFF8F0
+  }
+}
+
+.customer-phone {
+  font-size: 0.875rem;
+  color: var(--clr-text-secondary);
+  margin: 0;
+
+  .dark & {
+    color: var(--clr-text-secondary); // resolves to #F5C9A0
+  }
+}
+
+// ------------------------------------
+// Section label (payment heading)
+// ------------------------------------
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-heading);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--clr-text-hint);
+  margin-block-end: var(--space-md);
+  padding-block-end: var(--space-sm);
+  border-block-end: 1px dashed var(--clr-cream-dark);
+
+  .dark & {
+    color: var(--clr-text-hint); // resolves to #C4956A
+    border-block-end-color: var(--clr-cream-dark); // resolves to #5D3A1A
+  }
+}
+
+.section-label-bar {
+  display: inline-block;
+  width: 3px;
+  height: 14px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(to bottom, var(--clr-accent), var(--clr-accent-dark));
+  flex-shrink: 0;
+
+  .dark & {
+    background: linear-gradient(to bottom, var(--clr-accent-light), var(--clr-accent));
+  }
+}
+
+// ------------------------------------
+// Payment method buttons
+// ------------------------------------
+.payment-card {
+  // inherits .card styles
+}
+
 .payments {
   display: flex;
-  gap: 8px;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
 }
 
-.payments button {
+.payment-btn {
   flex: 1;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  background: #eee;
+  min-width: 72px;
+  padding: var(--space-sm) var(--space-xs);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--clr-border);
+  background: var(--clr-cream-mid);
+  color: var(--clr-text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
   cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  .dark & {
+    background: var(--clr-cream-mid); // resolves to #3D1E00
+    border-color: var(--clr-border); // resolves to #5D3A1A
+    color: var(--clr-text-secondary); // resolves to #F5C9A0
+  }
+
+  &:hover:not(.active) {
+    background: var(--clr-cream-dark);
+    border-color: var(--clr-accent);
+    color: var(--clr-text-primary);
+
+    .dark & {
+      background: var(--clr-cream-dark); // resolves to #5D3A1A
+      border-color: var(--clr-accent);
+      color: var(--clr-text-primary); // resolves to #FFF8F0
+    }
+  }
+
+  &.active {
+    background: var(--clr-primary);
+    border-color: var(--clr-primary-dark);
+    color: var(--clr-text-on-primary);
+    box-shadow: 0 2px 8px rgba(192, 57, 43, 0.35);
+
+    .dark & {
+      background: var(--clr-primary);
+      border-color: var(--clr-primary-light);
+      color: var(--clr-text-on-primary);
+      box-shadow: 0 2px 12px rgba(192, 57, 43, 0.55);
+    }
+  }
 }
 
-.payments button.active {
-  background: #c0392b;
-  color: white;
+// ------------------------------------
+// Action row (mark-as-paid + cancel)
+// ------------------------------------
+.action-row {
+  display: flex;
+  gap: var(--space-sm);
+  margin-block-start: var(--space-xs);
 }
 
-/* SUBMIT BUTTON */
+// ------------------------------------
+// Submit / primary CTA button
+// ------------------------------------
 .submit-btn {
   width: 100%;
-  padding: 14px;
+  padding: var(--space-md);
   border: none;
-  border-radius: 10px;
-  background: #27ae60;
-  color: white;
-  font-size: 16px;
+  border-radius: var(--radius-md);
+  background: var(--clr-success);
+  color: var(--clr-text-on-primary);
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    box-shadow var(--transition-fast),
+    opacity var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+
+  .dark & {
+    background: var(--clr-success);
+    box-shadow: 0 2px 12px rgba(39, 174, 96, 0.4);
+    color: var(--clr-text-on-primary);
+  }
+
+  &:hover:not(:disabled) {
+    background: #219a52; // slightly darker success — only safe hardcode-free alt is inline; stays semantic green
+    box-shadow: 0 4px 14px rgba(39, 174, 96, 0.45);
+
+    .dark & {
+      box-shadow: 0 4px 18px rgba(39, 174, 96, 0.55);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  // "Mark as Paid" variant — gold accent
+  &--paid {
+    background: var(--clr-accent);
+    color: var(--clr-text-on-accent);
+    box-shadow: 0 2px 8px rgba(212, 160, 23, 0.35);
+
+    .dark & {
+      background: var(--clr-accent);
+      color: var(--clr-text-on-accent);
+      box-shadow: 0 2px 12px rgba(212, 160, 23, 0.45);
+    }
+
+    &:hover:not(:disabled) {
+      background: var(--clr-accent-light);
+      box-shadow: 0 4px 14px rgba(212, 160, 23, 0.5);
+
+      .dark & {
+        box-shadow: 0 4px 18px rgba(212, 160, 23, 0.6);
+      }
+    }
+  }
 }
 
-.submit-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+// ------------------------------------
+// Cancel button
+// ------------------------------------
+.cancel-btn {
+  flex-shrink: 0;
+  padding: var(--space-md) var(--space-lg);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  background: var(--clr-cream-mid);
+  color: var(--clr-text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+
+  .dark & {
+    background: var(--clr-cream-mid); // resolves to #3D1E00
+    border-color: var(--clr-border); // resolves to #5D3A1A
+    color: var(--clr-text-secondary); // resolves to #F5C9A0
+  }
+
+  &:hover {
+    background: var(--clr-danger-bg);
+    border-color: var(--clr-danger);
+    color: var(--clr-danger);
+
+    .dark & {
+      background: var(--clr-danger-bg); // resolves to #2C0A0A
+      border-color: var(--clr-danger);
+      color: var(--clr-primary-light);
+    }
+  }
 }
