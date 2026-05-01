@@ -1,22 +1,32 @@
 <div class="recipe-list-page">
-
-  <div class="page-toolbar d-flex justify-content-end">
-    <button class="btn-add" (click)="showAddModal.set(true)">
-      {{ 'CHEF.RECIPES.ADD' | translate }}
+  <!-- TOOLBAR -->
+  <div class="page-toolbar">
+    <button class="btn-add" (click)="showAddModal.set(true)" aria-label="Add new recipe">
+      <svg
+        class="btn-icon"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+      <span class="btn-label">{{ 'CHEF.RECIPES.ADD' | translate }}</span>
     </button>
   </div>
 
-  <app-recipes
-    (editRequested)="onEditRequested($event)">
-  </app-recipes>
+  <!-- RECIPES LIST -->
+  <app-recipes (editRequested)="onEditRequested($event)"> </app-recipes>
 
+  <!-- ADD RECIPE MODAL -->
   @if (showAddModal()) {
-    <app-add-recipe
-      (saved)="onSaved()"
-      (cancelled)="showAddModal.set(false)"
-    />
+    <app-add-recipe (saved)="onSaved()" (cancelled)="showAddModal.set(false)" />
   }
 
+  <!-- EDIT RECIPE MODAL -->
   @if (selectedRecipe()) {
     <app-edit-recipe
       [recipe]="selectedRecipe()!"
@@ -24,5 +34,4 @@
       (cancelled)="selectedRecipe.set(null)"
     />
   }
-
 </div>
