@@ -1,4 +1,89 @@
 {
+  "CUSTOMER": {
+    "ORDER_STATUS": {
+      "RECEIVED": "تم الاستلام",
+        "PREPARING": "قيد التحضير",
+        "READY": "جاهز",
+        "DELIVERED": "تم التوصيل",
+        "CANCELLED": "ملغي",
+        "AWAITINGPAYMENT": "في انتظار الدفع"
+    },
+    "DELIVERY_STATUS": {
+      "ASSIGNED": "تم التعيين",
+      "UNASSIGNED": "لم يتم التعيين",
+      "PICKED_UP": "تم الاستلام",
+      "ON_THE_WAY": "في الطريق",
+      "DELIVERED": "تم التسليم"
+    },
+    "HOME": {
+      "CART_BAR": {
+        "VIEW_CART": "عرض السلة",
+        "CURRENCY": "ج.م"
+      },
+      "MENU_ITEM": {
+        "BUTTON_ADD": "إضافة",
+        "MIN": "دقيقة",
+        "CURRENCY": "ج.م"
+      },
+      "POPULARC": {
+        "MOST_POPULAR": "الأكثر طلبًا",
+        "SEE_ALL": "عرض الكل"
+      },
+      "HERO": {
+        "BADGE": "أسرع توصيل واستلام بسهولة",
+        "TITLE": "جاستس",
+        "HIGHLIGHT": "برجر",
+        "DESCRIPTION": "أكل طازج دايمًا لحد عندك. بنوصل طلبك بسرعة ونخلي تجربتك ممتعة.",
+        "BUTTON_VIEW_MENU": "عرض المنيو"
+      },
+      "ACTIVE": {
+        "ORDER_STATUS": "الطلب رقم {{id}} حالته {{status}}",
+        "DRIVER_STATUS": "{{driver}} في الطريق · {{status}}",
+        "TRACK": "تتبع"
+      },
+      "ABOUT": {
+        "EYEBROW": "عن المطعم",
+        "TITLE": "المكان المثالي لتجربة مميزة",
+        "DESCRIPTION": "بنقدم أكل بطعم رائع بمكونات طازة وجودة عالية. شغفنا بالأكل بيخلينا اختيارك الأفضل.",
+        "FEATURE_ONLINE_TITLE": "طلب أونلاين",
+        "FEATURE_ONLINE_DESC": "اطلب من بيتك بكل سهولة",
+        "FEATURE_HEALTHY_TITLE": "أكل صحي 100%",
+        "FEATURE_HEALTHY_DESC": "مكونات طازة دايمًا"
+      },
+      "CATEGORIES": {
+        "EYEBROW": "اللي بنقدمه",
+        "TITLE": "اختار فئة"
+      },
+      "HOW": {
+        "EYEBROW": "اطلب بسهولة في 3 خطوات",
+        "TITLE": "إزاي بنشتغل",
+        "MORE": "تفاصيل أكتر",
+        "STEP1": {
+          "TITLE": "استكشف المنيو",
+          "DESC": "شوف كل الأصناف واختار اللي يعجبك"
+        },
+        "STEP2": {
+          "TITLE": "اختار أكلك",
+          "DESC": "حدد وجبتك وعدلها زي ما تحب"
+        },
+        "STEP3": {
+          "TITLE": "أكد الطلب",
+          "DESC": "اطلب وتابع لحد ما يوصلك"
+        }
+      },
+      "POPULAR": {
+        "EYEBROW": "المنيو",
+        "TITLE": "أشهر الأكلات"
+      },
+      "CTA": {
+        "TAG": "اطلب دلوقتي",
+        "TITLE": "نفسك في إيه",
+        "HIGHLIGHT": "النهارده؟",
+        "DESCRIPTION": "من البرجر للبطاطس — أكلك المفضل على بعد خطوة.",
+        "BUTTON": "تصفح المنيو"
+      }
+    }
+  },
   "SHARED": {
     "SIDEBAR": {
       "USER": {
@@ -133,6 +218,7 @@
     },
     "STATUS": {
       "ASSIGNED": "تم التعيين",
+      "UNASSIGNED": "لم يتم التعيين",
       "PICKED_UP": "تم الاستلام",
       "ON_THE_WAY": "في الطريق",
       "DELIVERED": "تم التسليم"

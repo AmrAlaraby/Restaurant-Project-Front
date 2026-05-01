@@ -4,9 +4,9 @@
 
 <div class="cart-bar" (click)="goToCart()">
 
-    🛒 View Cart
+    🛒 {{ 'CUSTOMER.HOME.CART_BAR.VIEW_CART' | translate }}
     ({{ getCount(basket) }})
-    - EGP {{ getTotal(basket) }}
+    - {{ 'CUSTOMER.HOME.CART_BAR.CURRENCY' | translate }} {{ getTotal(basket) }}
 
 </div>
 

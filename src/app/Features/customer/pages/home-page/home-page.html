@@ -8,43 +8,64 @@
     </div>
     <div class="hero-container">
       <div class="hero-content">
-        <div class="hero-badge">Fastest Delivery & Easy Pickup</div>
-        <h1 class="hero-title">Justice <span class="hero-highlight">Burger</span></h1>
+        <div class="hero-badge">
+          {{ 'CUSTOMER.HOME.HERO.BADGE' | translate }}
+        </div>
+        <h1 class="hero-title">
+          {{ 'CUSTOMER.HOME.HERO.TITLE' | translate }}
+          <span class="hero-highlight">
+            {{ 'CUSTOMER.HOME.HERO.HIGHLIGHT' | translate }}
+          </span>
+        </h1>
         <p class="hero-desc">
-          Good food always brought right to you. We are delivering all your orders quickly and make
-          your meal exciting.
+          {{ 'CUSTOMER.HOME.HERO.DESCRIPTION' | translate }}
         </p>
         <div class="hero-actions">
-          <button class="btn-hero-primary" (click)="goToBrowse()">View Our Menu</button>
+          <button class="btn-hero-primary" (click)="goToBrowse()">
+            {{ 'CUSTOMER.HOME.HERO.BUTTON_VIEW_MENU' | translate }}
+          </button>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ===================== ACTIVE ORDERS ===================== -->
-   <div class="active">
+  <div class="active">
     @for (item of ActiveOrders; track item.id) {
     <div class="active-order-banner" (click)="onTrackDelivery(item.id)">
       <div class="active-order-icon">🚴</div>
       <div class="active-order-info">
-        <div class="active-order-title">Order #{{ item.id }} is {{ item.status }}</div>
+        <div class="active-order-title">
+          {{ 'CUSTOMER.HOME.ACTIVE.ORDER_STATUS' | translate:{
+  id: item.id,
+  status: ('CUSTOMER.ORDER_STATUS.' + item.status.toUpperCase()) | translate
+} }}
+        </div>
         @if (item.delivery?.driverName) {
-          <div class="active-order-sub">
-            {{ item.delivery?.driverName }} is delivering · {{ item.delivery?.deliveryStatus }}
-          </div>
+        <div class="active-order-sub">
+          {{ 'CUSTOMER.HOME.ACTIVE.DRIVER_STATUS' | translate:{
+  driver: item.delivery?.driverName,
+  status: ('CUSTOMER.DELIVERY_STATUS.' + item.delivery?.deliveryStatus?.toUpperCase()) | translate
+} }}
+        </div>
         }
       </div>
-      <div class="active-order-track">Track <span>→</span></div>
+      <div class="active-order-track">
+        {{ 'CUSTOMER.HOME.ACTIVE.TRACK' | translate }} <span>→</span>
+      </div>
     </div>
-  }
-   </div>
-
+    }
+  </div>
 
   <!-- ===================== ABOUT ===================== -->
   <section class="about-section">
     <div class="section-container">
-      <div class="section-eyebrow">About The Food Restaurant</div>
-      <h2 class="section-title">Perfect Place For An Exceptional Experience</h2>
+      <div class="section-eyebrow">
+        {{ 'CUSTOMER.HOME.ABOUT.EYEBROW' | translate }}
+      </div>
+      <h2 class="section-title">
+        {{ 'CUSTOMER.HOME.ABOUT.TITLE' | translate }}
+      </h2>
 
       <div class="about-grid">
         <div class="about-images">
@@ -60,28 +81,38 @@
             </div>
           </div>
         </div>
+
         <div class="about-features">
           <p class="about-desc">
-            We specialize in great-tasting food made with fresh, high-quality ingredients. Our
-            passion for food and commitment to excellence makes us the perfect choice for any
-            occasion.
+            {{ 'CUSTOMER.HOME.ABOUT.DESCRIPTION' | translate }}
           </p>
+
           <div class="about-feature-list">
             <div class="about-feature">
               <div class="feature-icon">🌐</div>
               <div>
-                <div class="feature-title">Online Food Ordering</div>
-                <div class="feature-desc">Order from the comfort of your home</div>
+                <div class="feature-title">
+                  {{ 'CUSTOMER.HOME.ABOUT.FEATURE_ONLINE_TITLE' | translate }}
+                </div>
+                <div class="feature-desc">
+                  {{ 'CUSTOMER.HOME.ABOUT.FEATURE_ONLINE_DESC' | translate }}
+                </div>
               </div>
             </div>
+
             <div class="about-feature">
               <div class="feature-icon">🥦</div>
               <div>
-                <div class="feature-title">100% Healthy Food</div>
-                <div class="feature-desc">Fresh ingredients, always</div>
+                <div class="feature-title">
+                  {{ 'CUSTOMER.HOME.ABOUT.FEATURE_HEALTHY_TITLE' | translate }}
+                </div>
+                <div class="feature-desc">
+                  {{ 'CUSTOMER.HOME.ABOUT.FEATURE_HEALTHY_DESC' | translate }}
+                </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -90,8 +121,12 @@
   <!-- ===================== CATEGORIES ===================== -->
   <section class="categories-section">
     <div class="section-container">
-      <div class="section-eyebrow">What We Serve</div>
-      <h2 class="section-title">Choose a Category</h2>
+      <div class="section-eyebrow">
+        {{ 'CUSTOMER.HOME.CATEGORIES.EYEBROW' | translate }}
+      </div>
+      <h2 class="section-title">
+        {{ 'CUSTOMER.HOME.CATEGORIES.TITLE' | translate }}
+      </h2>
       <app-category-list></app-category-list>
     </div>
   </section>
@@ -100,35 +135,55 @@
   <section class="how-section">
     <div class="section-container">
       <div class="how-header">
-        <div class="section-eyebrow light">Easy Order In 3 Steps</div>
-        <h2 class="section-title light how-title-glow">How We Work</h2>
-        <a class="how-more" (click)="goToBrowse()">More Details →</a>
+        <div class="section-eyebrow light">
+          {{ 'CUSTOMER.HOME.HOW.EYEBROW' | translate }}
+        </div>
+        <h2 class="section-title light how-title-glow">
+          {{ 'CUSTOMER.HOME.HOW.TITLE' | translate }}
+        </h2>
+        <a class="how-more" (click)="goToBrowse()">
+          {{ 'CUSTOMER.HOME.HOW.MORE' | translate }} →
+        </a>
       </div>
+
       <div class="how-inner">
         <div class="how-steps">
+
           <div class="how-step">
             <div class="step-num">01</div>
             <div class="step-icon">🔍</div>
-            <div class="step-title">Explore Menu</div>
+            <div class="step-title">
+              {{ 'CUSTOMER.HOME.HOW.STEP1.TITLE' | translate }}
+            </div>
             <div class="step-desc">
-              Browse through our wide range of food categories and discover your favorites
+              {{ 'CUSTOMER.HOME.HOW.STEP1.DESC' | translate }}
             </div>
           </div>
+
           <div class="how-step">
             <div class="step-num">02</div>
             <div class="step-icon">🍽️</div>
-            <div class="step-title">Choose a Dish</div>
+            <div class="step-title">
+              {{ 'CUSTOMER.HOME.HOW.STEP2.TITLE' | translate }}
+            </div>
             <div class="step-desc">
-              Select your favorite dishes and customize them to your liking
+              {{ 'CUSTOMER.HOME.HOW.STEP2.DESC' | translate }}
             </div>
           </div>
+
           <div class="how-step">
             <div class="step-num">03</div>
             <div class="step-icon">📦</div>
-            <div class="step-title">Place Order</div>
-            <div class="step-desc">Place your order and track it in real-time until it arrives</div>
+            <div class="step-title">
+              {{ 'CUSTOMER.HOME.HOW.STEP3.TITLE' | translate }}
+            </div>
+            <div class="step-desc">
+              {{ 'CUSTOMER.HOME.HOW.STEP3.DESC' | translate }}
+            </div>
           </div>
+
         </div>
+
         <div class="how-img">
           <img src="/images/Burger3.jpg" alt="Burger" />
         </div>
@@ -136,11 +191,15 @@
     </div>
   </section>
 
-  <!-- ===================== POPULAR ITEMS ===================== -->
+  <!-- ===================== POPULAR ===================== -->
   <section class="popular-section">
     <div class="section-container">
-      <div class="section-eyebrow">Our Menu</div>
-      <h2 class="section-title">Fast Food Menus</h2>
+      <div class="section-eyebrow">
+        {{ 'CUSTOMER.HOME.POPULAR.EYEBROW' | translate }}
+      </div>
+      <h2 class="section-title">
+        {{ 'CUSTOMER.HOME.POPULAR.TITLE' | translate }}
+      </h2>
       <app-popular-items></app-popular-items>
     </div>
   </section>
@@ -149,13 +208,20 @@
   <section class="cta-section">
     <div class="section-container">
       <div class="cta-inner">
-        <div class="cta-tag">Order Now</div>
-        <h2 class="cta-title">What are you <span>craving?</span></h2>
+        <div class="cta-tag">
+          {{ 'CUSTOMER.HOME.CTA.TAG' | translate }}
+        </div>
+        <h2 class="cta-title">
+          {{ 'CUSTOMER.HOME.CTA.TITLE' | translate }}
+          <span>{{ 'CUSTOMER.HOME.CTA.HIGHLIGHT' | translate }}</span>
+        </h2>
         <p class="cta-desc">
-          From juicy burgers to crispy fries — your next favorite meal is just one click away.
+          {{ 'CUSTOMER.HOME.CTA.DESCRIPTION' | translate }}
         </p>
         <div class="cta-actions">
-          <button class="btn-cta-primary" (click)="goToBrowse()">Browse Menu →</button>
+          <button class="btn-cta-primary" (click)="goToBrowse()">
+            {{ 'CUSTOMER.HOME.CTA.BUTTON' | translate }} →
+          </button>
         </div>
       </div>
     </div>
