@@ -1,5 +1,4 @@
 <div class="bac-wrap">
-
   <!-- Assigned Deliveries Tab -->
   <app-branch-assigned-deliveries
     *ngIf="viewAssigned"
@@ -8,7 +7,6 @@
 
   <!-- Assign Page -->
   <div class="bac-page" *ngIf="!viewAssigned">
-
     <!-- Header -->
     <div class="bac-header">
       <div class="bac-header-left">
@@ -55,37 +53,34 @@
       </div>
 
       <div class="bac-empty-title">
-        {{ filterOrderId
-          ? ('CASHIER.DELIVERIES.EMPTY_TITLE_NO_ORDER' | translate)
-          : ('CASHIER.DELIVERIES.EMPTY_TITLE_ALL' | translate)
+        {{
+          filterOrderId
+            ? ('CASHIER.DELIVERIES.EMPTY_TITLE_NO_ORDER' | translate)
+            : ('CASHIER.DELIVERIES.EMPTY_TITLE_ALL' | translate)
         }}
       </div>
 
       <div class="bac-empty-sub">
-        {{ filterOrderId
-          ? ('CASHIER.DELIVERIES.EMPTY_SUB_NO_ORDER' | translate)
-          : ('CASHIER.DELIVERIES.EMPTY_SUB_ALL' | translate)
+        {{
+          filterOrderId
+            ? ('CASHIER.DELIVERIES.EMPTY_SUB_NO_ORDER' | translate)
+            : ('CASHIER.DELIVERIES.EMPTY_SUB_ALL' | translate)
         }}
       </div>
 
-      <button *ngIf="!filterOrderId"
-              class="bac-link-btn mt-12"
-              (click)="viewAssigned = true">
+      <button *ngIf="!filterOrderId" class="bac-link-btn mt-12" (click)="viewAssigned = true">
         {{ 'CASHIER.DELIVERIES.BUTTON_VIEW_DISPATCHED' | translate }}
       </button>
     </div>
 
     <!-- Orders List -->
     <div class="bac-list" *ngIf="!loading && filteredOrders.length > 0">
-
       <div class="bac-order-card" *ngFor="let order of filteredOrders">
-
         <!-- Card Top -->
         <div class="bac-card-top">
           <div class="bac-order-info">
-
             <div class="bac-order-title">
-              {{ 'CASHIER.DELIVERIES.ORDER_TITLE' | translate:{ id: order.orderNumber } }}
+              {{ 'CASHIER.DELIVERIES.ORDER_TITLE' | translate: { id: order.orderNumber } }}
               <span class="bac-order-customer">
                 — {{ order.userName || ('CASHIER.DELIVERIES.CUSTOMER' | translate) }}
               </span>
@@ -99,7 +94,6 @@
                 EGP {{ order.order?.totalAmount }} {{ 'CASHIER.DELIVERIES.COD' | translate }}
               </span>
             </div>
-
           </div>
 
           <span class="bac-status-badge badge-ready">
@@ -109,7 +103,6 @@
 
         <!-- Assign Row -->
         <div class="bac-assign-row">
-
           <div class="bac-field">
             <div class="bac-field-label">
               {{ 'CASHIER.DELIVERIES.FIELD_ASSIGN_DRIVER' | translate }}
@@ -122,9 +115,7 @@
 
               <option *ngFor="let driver of drivers" [value]="driver.driverId">
                 {{ driver.name }}
-                <ng-container *ngIf="driver.status === 'Online'">
-                  · Online
-                </ng-container>
+                <ng-container *ngIf="driver.status === 'Online'"> · Online </ng-container>
               </option>
             </select>
           </div>
@@ -134,19 +125,21 @@
               {{ 'CASHIER.DELIVERIES.FIELD_CONFIRM_ADDRESS' | translate }}
             </div>
 
-            <input class="bac-input"
-                   type="text"
-                   [(ngModel)]="confirmedAddresses[order.deliveryId]" />
+            <input
+              class="bac-input"
+              type="text"
+              [(ngModel)]="confirmedAddresses[order.deliveryId]"
+            />
           </div>
-
         </div>
 
         <!-- Dispatch Button -->
         <div class="bac-card-footer">
-          <button class="bac-dispatch-btn"
-                  (click)="dispatch(order)"
-                  [disabled]="!selectedDrivers[order.deliveryId] || dispatching[order.deliveryId]">
-
+          <button
+            class="bac-dispatch-btn"
+            (click)="dispatch(order)"
+            [disabled]="!selectedDrivers[order.deliveryId] || dispatching[order.deliveryId]"
+          >
             <span *ngIf="!dispatching[order.deliveryId]">
               🚀 {{ 'CASHIER.DELIVERIES.BUTTON_DISPATCH' | translate }}
             </span>
@@ -154,14 +147,9 @@
             <span *ngIf="dispatching[order.deliveryId]">
               {{ 'CASHIER.DELIVERIES.BUTTON_DISPATCHING' | translate }}
             </span>
-
           </button>
         </div>
-
       </div>
-
     </div>
-
   </div>
-
 </div>
