@@ -2,64 +2,74 @@
 
   <!-- Delivery Address -->
   <div class="info-card">
+
     <div class="card-header">
       <span class="card-icon">📍</span>
-      <div class="card-title">Delivery Address</div>
+      <div class="card-title">
+        {{ 'CUSTOMER.TRACK_DELIVERY.INFO_GRID.DELIVERY_ADDRESS' | translate }}
+      </div>
     </div>
 
     <div class="info-row">
-      <span>Building</span>
+      <span>{{ 'CUSTOMER.TRACK_DELIVERY.INFO_GRID.BUILDING' | translate }}</span>
       <b>{{ address().buildingNumber }}</b>
     </div>
+
     <div class="info-row">
-      <span>Street</span>
+      <span>{{ 'CUSTOMER.TRACK_DELIVERY.INFO_GRID.STREET' | translate }}</span>
       <b>{{ address().street }}</b>
     </div>
+
     <div class="info-row">
-      <span>City</span>
+      <span>{{ 'CUSTOMER.TRACK_DELIVERY.INFO_GRID.CITY' | translate }}</span>
       <b>{{ address().city }}</b>
     </div>
 
     @if (address().specialMark) {
       <div class="info-row">
-        <span>Landmark</span>
+        <span>{{ 'CUSTOMER.TRACK_DELIVERY.INFO_GRID.LANDMARK' | translate }}</span>
         <b>{{ address().specialMark }}</b>
       </div>
     }
 
     @if (address().note) {
       <div class="info-row">
-        <span>Note</span>
+        <span>{{ 'CUSTOMER.TRACK_DELIVERY.INFO_GRID.NOTE' | translate }}</span>
         <b>{{ address().note }}</b>
       </div>
     }
+
   </div>
 
   <!-- Order Summary -->
   <div class="info-card">
+
     <div class="card-header">
       <span class="card-icon">🧾</span>
-      <div class="card-title">Order Summary</div>
+      <div class="card-title">
+        {{ 'CUSTOMER.TRACK_DELIVERY.INFO_GRID.ORDER_SUMMARY' | translate }}
+      </div>
     </div>
 
     @for (item of items(); track $index) {
       <div class="info-row">
-        <span>{{ item.menuItemName }} ×{{ item.quantity }}</span>
-        <b>EGP {{ item.total }}</b>
+        <span>{{ getItemName(item) }} ×{{ item.quantity }}</span>
+        <b>{{ 'CUSTOMER.ORDERS.TABLE.EGP' | translate }} {{ item.total }}</b>
       </div>
     }
 
     <div class="info-row total-row">
-      <span>Total</span>
-      <b class="total-amount">EGP {{ totalAmount() }}</b>
+      <span>{{ 'CUSTOMER.TRACK_DELIVERY.INFO_GRID.TOTAL' | translate }}</span>
+      <b class="total-amount">{{ 'CUSTOMER.ORDERS.TABLE.EGP' | translate }} {{ totalAmount() }}</b>
     </div>
 
     @if (cashCollected()) {
       <div class="info-row">
-        <span>Cash Collected</span>
-        <b>EGP {{ cashCollected() }}</b>
+        <span>{{ 'CUSTOMER.TRACK_DELIVERY.INFO_GRID.CASH_COLLECTED' | translate }}</span>
+        <b>{{ 'CUSTOMER.ORDERS.TABLE.EGP' | translate }} {{ cashCollected() }}</b>
       </div>
     }
+
   </div>
 
 </div>

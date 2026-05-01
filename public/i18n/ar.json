@@ -1,5 +1,97 @@
 {
   "CUSTOMER": {
+    "TRACK_DELIVERY": {
+      "INFO_GRID": {
+        "DELIVERY_ADDRESS": "عنوان التوصيل",
+        "BUILDING": "المبنى",
+        "STREET": "الشارع",
+        "CITY": "المدينة",
+        "LANDMARK": "علامة مميزة",
+        "NOTE": "ملاحظة",
+
+        "ORDER_SUMMARY": "ملخص الطلب",
+        "TOTAL": "الإجمالي",
+        "CASH_COLLECTED": "المبلغ المحصل نقداً"
+      },
+      "DRIVERS": {
+        "YOUR_DRIVER": "السائق الخاص بك",
+        "ON_THE_WAY": "في الطريق إليك",
+        "CALL": "اتصال",
+        "MESSAGE": "رسالة",
+        "FINDING_TITLE": "جاري البحث عن سائق",
+        "FINDING_SUB": "سيتم تعيين سائق قريباً"
+      },
+      "TIMELINE_UI": {
+      "TITLE": "حالة الطلب",
+      "STEP_COUNT": "الخطوة {{current}} من {{total}}",
+      "NOW": "الآن"
+    },
+      "TIMELINEOPJ": {
+      "Placed": {
+        "LABEL": "تم إنشاء الطلب",
+        "DONE": "تم تأكيد طلبك",
+        "ACTIVE": "في انتظار التأكيد...",
+        "PENDING": "انتظار..."
+      },
+      "Assigned": {
+        "LABEL": "قيد التحضير",
+        "DONE": "بدأ المطبخ في تجهيز الطلب",
+        "ACTIVE": "يتم تحضير الطلب الآن",
+        "PENDING": "انتظار..."
+      },
+      "PickedUp": {
+        "LABEL": "تم الاستلام",
+        "DONE": "قام {{driver}} باستلام الطلب",
+        "ACTIVE": "{{driver}} يقوم باستلام الطلب",
+        "PENDING": "في انتظار الاستلام..."
+      },
+      "OnTheWay": {
+        "LABEL": "في الطريق",
+        "DONE": "السائق في طريقه إليك",
+        "ACTIVE": "السائق متجه إلى عنوانك",
+        "PENDING": "لم يبدأ بعد..."
+      },
+      "Delivered": {
+        "LABEL": "تم التوصيل",
+        "DONE": "تم توصيل الطلب بنجاح 🎉",
+        "ACTIVE": "تم التوصيل",
+        "PENDING": "الوصول قريبًا"
+      }
+    },
+
+    "DEFAULTS": {
+      "DRIVER": "السائق"
+    },
+      "HEADER": {
+      "BACK": "رجوع",
+      "TITLE": "تتبع التوصيل",
+      "ORDER": "طلب رقم {{id}}",
+      "LIVE": "مباشر"
+    },
+    "LOADING": "جاري تتبع طلبك...",
+    "NOT_FOUND": "لم يتم العثور على التوصيل.",
+    "BACK": "رجوع",
+    "Now": "الان",
+
+    "DRIVER": {
+      "CALL": "اتصال",
+      "MESSAGE": "رسالة"
+    },
+
+    "TIMELINE": {
+      "ASSIGNED": "تم التعيين",
+      "PICKED_UP": "تم الاستلام",
+      "ON_THE_WAY": "في الطريق",
+      "DELIVERED": "تم التوصيل"
+    },
+
+    "INFO": {
+      "TOTAL": "الإجمالي",
+      "CASH_COLLECTED": "المبلغ المحصل",
+      "ADDRESS": "عنوان التوصيل",
+      "ITEMS": "العناصر"
+    }
+  },
     "ORDERS": {
       "TABLE": {
       "HEADER": {

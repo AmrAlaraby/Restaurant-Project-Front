@@ -7,36 +7,61 @@
     </div>
 
     <div class="driver-info">
-      <div class="driver-label">YOUR DRIVER</div>
-      <div class="driver-name">{{ driverName() }}</div>
+
+      <div class="driver-label">
+        {{ 'CUSTOMER.TRACK_DELIVERY.DRIVERS.YOUR_DRIVER' | translate }}
+      </div>
+
+      <div class="driver-name">
+        {{ driverName() }}
+      </div>
+
       <div class="driver-status">
         <span class="status-dot"></span>
-        On the way to you
+        {{ 'CUSTOMER.TRACK_DELIVERY.DRIVERS.ON_THE_WAY' | translate }}
       </div>
+
     </div>
 
     <div class="driver-actions">
+
       <button class="action-btn call-btn"
               (click)="call.emit()"
               [disabled]="!driverPhone()">
+
         <span>📞</span>
-        Call
+        {{ 'CUSTOMER.TRACK_DELIVERY.DRIVERS.CALL' | translate }}
+
       </button>
+
       <button class="action-btn msg-btn"
               (click)="message.emit()"
               [disabled]="!driverPhone()">
+
         <span>💬</span>
-        Message
+        {{ 'CUSTOMER.TRACK_DELIVERY.DRIVERS.MESSAGE' | translate }}
+
       </button>
+
     </div>
 
   </div>
 } @else {
   <div class="no-driver-card">
+
     <div class="no-driver-icon">🕐</div>
+
     <div class="no-driver-text">
-      <div class="no-driver-title">Finding your driver</div>
-      <div class="no-driver-sub">A driver will be assigned shortly</div>
+
+      <div class="no-driver-title">
+        {{ 'CUSTOMER.TRACK_DELIVERY.DRIVERS.FINDING_TITLE' | translate }}
+      </div>
+
+      <div class="no-driver-sub">
+        {{ 'CUSTOMER.TRACK_DELIVERY.DRIVERS.FINDING_SUB' | translate }}
+      </div>
+
     </div>
+
   </div>
 }

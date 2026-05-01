@@ -2,7 +2,7 @@
 @if (loading()) {
   <div class="loading-wrap">
     <div class="spinner"></div>
-    <span>Tracking your order...</span>
+    <span>{{ 'CUSTOMER.TRACK_DELIVERY.LOADING' | translate }}</span>
   </div>
 }
 
@@ -12,7 +12,7 @@
 
     <app-track-delivery-header
       [orderId]="delivery()!.order.id"
-      [branchName]="delivery()!.order.branchName ?? null"
+      [branchName]="delivery()!.order"
       (back)="goBack()"
     />
 
@@ -40,9 +40,9 @@
 
 <!-- Not found -->
 @if (!loading() && !delivery()) {
-  <div class="empty-state">
-    <div class="empty-icon">📦</div>
-    <p>Delivery not found.</p>
-    <button class="back-btn" (click)="goBack()">← Go Back</button>
-  </div>
+  <p>{{ 'CUSTOMER.TRACK_DELIVERY.NOT_FOUND' | translate }}</p>
+
+<button class="back-btn" (click)="goBack()">
+  ← {{ 'CUSTOMER.TRACK_DELIVERY.BACK' | translate }}
+</button>
 }

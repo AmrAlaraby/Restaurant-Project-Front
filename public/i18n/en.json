@@ -1,5 +1,99 @@
 {
   "CUSTOMER": {
+    "TRACK_DELIVERY": {
+      "INFO_GRID": {
+        "DELIVERY_ADDRESS": "Delivery Address",
+        "BUILDING": "Building",
+        "STREET": "Street",
+        "CITY": "City",
+        "LANDMARK": "Landmark",
+        "NOTE": "Note",
+
+        "ORDER_SUMMARY": "Order Summary",
+        "TOTAL": "Total",
+        "CASH_COLLECTED": "Cash Collected"
+      },
+      "DRIVERS": {
+        "YOUR_DRIVER": "Your Driver",
+        "ON_THE_WAY": "On the way to you",
+        "CALL": "Call",
+        "MESSAGE": "Message",
+        "FINDING_TITLE": "Finding your driver",
+        "FINDING_SUB": "A driver will be assigned shortly"
+      }
+,
+      "TIMELINE_UI": {
+      "TITLE": "Order Progress",
+      "STEP_COUNT": "Step {{current}} of {{total}}",
+      "NOW": "Now"
+    },
+      "TIMELINEOPJ": {
+      "Placed": {
+        "LABEL": "Order Placed",
+        "DONE": "Your order was confirmed",
+        "ACTIVE": "Waiting for confirmation...",
+        "PENDING": "Waiting..."
+      },
+      "Assigned": {
+        "LABEL": "Being Prepared",
+        "DONE": "Kitchen started your order",
+        "ACTIVE": "Kitchen is preparing your order",
+        "PENDING": "Waiting..."
+      },
+      "PickedUp": {
+        "LABEL": "Picked Up",
+        "DONE": "{{driver}} picked up your order",
+        "ACTIVE": "{{driver}} is picking up your order",
+        "PENDING": "Waiting for pickup..."
+      },
+      "OnTheWay": {
+        "LABEL": "On The Way",
+        "DONE": "Driver headed to your address",
+        "ACTIVE": "Driver is heading to your address",
+        "PENDING": "Not yet..."
+      },
+      "Delivered": {
+        "LABEL": "Delivered",
+        "DONE": "Order delivered successfully! 🎉",
+        "ACTIVE": "Order delivered!",
+        "PENDING": "Estimated arrival soon"
+      }
+    },
+
+    "DEFAULTS": {
+      "DRIVER": "Your driver"
+    },
+      "HEADER": {
+      "BACK": "Back",
+      "TITLE": "Track Delivery",
+      "ORDER": "Order #{{id}}",
+      "LIVE": "Live"
+    },
+    "LOADING": "Tracking your order...",
+    "NOT_FOUND": "Delivery not found.",
+    "BACK": "Go Back",
+    "Now": "Now",
+
+    "DRIVER": {
+      "CALL": "Call",
+      "MESSAGE": "Message"
+    },
+
+    "TIMELINE": {
+      "ASSIGNED": "Assigned",
+      "PICKED_UP": "Picked Up",
+      "ON_THE_WAY": "On The Way",
+      "DELIVERED": "Delivered"
+    },
+
+    "INFO": {
+      "TOTAL": "Total",
+      "CASH_COLLECTED": "Cash Collected",
+      "ADDRESS": "Delivery Address",
+      "ITEMS": "Items"
+    }
+  }
+,
     "ORDERS": {
       "TABLE": {
       "HEADER": {

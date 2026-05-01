@@ -1,22 +1,28 @@
 <div class="header-wrap">
   <button class="back-btn" (click)="back.emit()">
-    <span class="back-arrow">←</span>
-    <span>Back</span>
-  </button>
+  <span class="back-arrow">←</span>
+  <span>{{ 'CUSTOMER.TRACK_DELIVERY.HEADER.BACK' | translate }}</span>
+</button>
 
   <div class="header-text">
-    <h1 class="page-title">Track Delivery</h1>
+    <h1 class="page-title">
+  {{ 'CUSTOMER.TRACK_DELIVERY.HEADER.TITLE' | translate }}
+</h1>
     <p class="page-sub">
-      Order <span class="order-num">#{{ orderId().toString().padStart(4,'0') }}</span>
-      @if (branchName()) {
-        <span class="branch-sep">·</span>
-        <span class="branch-name">{{ branchName() }}</span>
-      }
-    </p>
+  {{
+    'CUSTOMER.TRACK_DELIVERY.HEADER.ORDER'
+      | translate:{ id: orderId().toString().padStart(4,'0') }
+  }}
+
+  @if (branchName()) {
+    <span class="branch-sep">·</span>
+    <span class="branch-name">{{ getBranchName(branchName()) }}</span>
+  }
+</p>
   </div>
 
   <div class="header-badge">
-    <span class="pulse-dot"></span>
-    Live
-  </div>
+  <span class="pulse-dot"></span>
+  {{ 'CUSTOMER.TRACK_DELIVERY.HEADER.LIVE' | translate }}
+</div>
 </div>
