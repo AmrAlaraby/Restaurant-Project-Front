@@ -3,6 +3,7 @@ import { LoginRequestInterface } from '../../../../Core/Models/AuthModels/login-
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { Router, RouterLink } from '@angular/router';
+import { environment } from '../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-login',
@@ -87,10 +88,10 @@ export class Login {
   }
 
   loginWithGoogle() {
-    window.location.href = 'https://localhost:7232/api/Auth/external-login?provider=Google';
+    window.location.href = environment.apiUrl + '/Auth/external-login?provider=Google';
   }
 
   loginWithFacebook() {
-    window.location.href = 'https://localhost:7232/api/Auth/external-login?provider=Facebook';
+    window.location.href = environment.apiUrl + '/Auth/external-login?provider=Facebook';
   }
 }
