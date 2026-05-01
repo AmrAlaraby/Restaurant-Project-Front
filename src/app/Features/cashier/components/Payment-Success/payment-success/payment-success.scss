@@ -1,40 +1,42 @@
 // payment-success.component.scss
-// RMS Brand Colors extracted from screenshot
-$color-bg: #fdf6f0;          // warm cream/beige background
-$color-green: #2d6a4f;       // dark green (Calculate Nutrition btn)
-$color-green-light: #40916c; // lighter green accent
-$color-red: #c0392b;         // deep red (Place Order btn, cart icon)
-$color-red-light: #e74c3c;   // lighter red
-$color-white: #ffffff;
-$color-text-dark: #1a1a1a;
-$color-text-muted: #6b6b6b;
-$color-gold: #f9c74f;        // accent gold for confetti
+// All colours via CSS custom properties — no hardcoded hex values.
 
-// ─── Page wrapper ───────────────────────────────────────────────────
+// ─── Page wrapper ───────────────────────────────────────────────────────────
 .page-wrapper {
   min-height: 100vh;
-  background: $color-bg;
+  background: var(--clr-cream);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1rem;
+  padding-block: var(--space-xl);
+  padding-inline: var(--space-md);
   position: relative;
   overflow: hidden;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-family: var(--font-body);
 
-  // Subtle background texture
+  .dark & {
+    background: var(--clr-surface);
+  }
+
+  // Subtle radial glow — brand colours only
   &::before {
     content: '';
     position: fixed;
     inset: 0;
     background:
-      radial-gradient(ellipse at 20% 20%, rgba($color-green, 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 80%, rgba($color-red, 0.05) 0%, transparent 50%);
+      radial-gradient(ellipse at 20% 20%, rgba(192, 57, 43, 0.07) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(212, 160, 23, 0.06) 0%, transparent 50%);
     pointer-events: none;
+
+    .dark & {
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(192, 57, 43, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(212, 160, 23, 0.1) 0%, transparent 50%);
+    }
   }
 }
 
-// ─── Confetti ────────────────────────────────────────────────────────
+// ─── Confetti ───────────────────────────────────────────────────────────────
 .confetti-container {
   position: fixed;
   inset: 0;
@@ -46,37 +48,51 @@ $color-gold: #f9c74f;        // accent gold for confetti
 .confetti-piece {
   position: absolute;
   top: -20px;
-  left: calc(var(--i) * 5.2%);
+  inset-inline-start: calc(var(--i) * 5.2%);
   width: 8px;
   height: 16px;
   background: var(--color);
-  border-radius: 2px;
+  border-radius: var(--radius-sm);
   opacity: 0;
   animation: confetti-fall 3.5s ease-in var(--delay) forwards;
   transform-origin: center;
 }
 
 @keyframes confetti-fall {
-  0%   { opacity: 1; transform: translateY(0) rotate(0deg); }
-  100% { opacity: 0; transform: translateY(110vh) rotate(720deg); }
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(110vh) rotate(720deg);
+  }
 }
 
-// ─── Card ────────────────────────────────────────────────────────────
+// ─── Card ───────────────────────────────────────────────────────────────────
 .success-card {
   position: relative;
   z-index: 1;
-  background: $color-white;
-  border-radius: 24px;
+  background: var(--clr-surface);
+  border-radius: var(--radius-xl);
   width: 100%;
   max-width: 480px;
   box-shadow:
-    0 4px 6px rgba(0,0,0,0.04),
-    0 20px 60px rgba($color-green, 0.12),
-    0 0 0 1px rgba($color-green, 0.08);
+    var(--shadow-md),
+    0 0 0 1px var(--clr-border);
   overflow: hidden;
   opacity: 0;
   transform: translateY(40px) scale(0.97);
-  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition:
+    opacity 0.6s var(--transition-normal),
+    transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  .dark & {
+    background: var(--clr-surface-alt);
+    box-shadow:
+      var(--shadow-lg),
+      0 0 0 1px var(--clr-border);
+  }
 
   &.visible {
     opacity: 1;
@@ -84,43 +100,52 @@ $color-gold: #f9c74f;        // accent gold for confetti
   }
 }
 
-// ─── Header Band ─────────────────────────────────────────────────────
+// ─── Header Band ────────────────────────────────────────────────────────────
 .card-header-band {
-  background: linear-gradient(135deg, $color-green 0%, $color-green-light 100%);
-  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, var(--clr-primary-dark) 0%, var(--clr-primary) 100%);
+  padding-block: var(--space-md);
+  padding-inline: var(--space-lg);
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  .brand-tag {
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: $color-white;
-    letter-spacing: 0.1em;
-  }
-
-  .order-tag {
-    font-size: 0.8rem;
-    color: rgba(white, 0.75);
-    font-weight: 500;
-    background: rgba(white, 0.15);
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-  }
+  // No dark override needed — deep red works on both themes
 }
 
-// ─── Checkmark ───────────────────────────────────────────────────────
+.brand-tag {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--clr-text-on-primary);
+  letter-spacing: 0.1em;
+}
+
+.order-tag {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.15);
+  padding-block: var(--space-xs);
+  padding-inline: var(--space-sm);
+  border-radius: var(--radius-full);
+}
+
+// ─── Checkmark ──────────────────────────────────────────────────────────────
 .checkmark-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 2rem auto 0;
+  margin-block-start: var(--space-xl);
+  margin-block-end: 0;
+  margin-inline: auto;
   position: relative;
   width: 100px;
   height: 100px;
   opacity: 0;
   transform: scale(0.3);
-  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition:
+    opacity 0.5s var(--transition-normal),
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 
   &.pop {
     opacity: 1;
@@ -136,29 +161,43 @@ $color-gold: #f9c74f;        // accent gold for confetti
 
 .outer-ring {
   inset: -12px;
-  border: 2px solid rgba($color-green, 0.2);
+  border: 2px solid rgba(192, 57, 43, 0.2);
+
+  .dark & {
+    border-color: rgba(192, 57, 43, 0.35);
+  }
 }
 
 .inner-ring {
   inset: -4px;
-  border: 2px solid rgba($color-green, 0.35);
+  border: 2px solid rgba(192, 57, 43, 0.35);
   animation-delay: 1.3s;
+
+  .dark & {
+    border-color: rgba(192, 57, 43, 0.5);
+  }
 }
 
 @keyframes pulse-ring {
-  0%   { transform: scale(1); opacity: 1; }
-  100% { transform: scale(1.3); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
 }
 
 .checkmark-icon {
   width: 100px;
   height: 100px;
-  background: linear-gradient(135deg, $color-green, $color-green-light);
+  background: linear-gradient(135deg, var(--clr-primary-dark), var(--clr-primary));
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 32px rgba($color-green, 0.4);
+  box-shadow: var(--shadow-lg);
   position: relative;
   z-index: 1;
 
@@ -181,53 +220,79 @@ $color-gold: #f9c74f;        // accent gold for confetti
 }
 
 @keyframes draw-circle {
-  to { stroke-dashoffset: 0; }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 @keyframes draw-check {
-  to { stroke-dashoffset: 0; }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
-// ─── Card Body ───────────────────────────────────────────────────────
+// ─── Card Body ──────────────────────────────────────────────────────────────
 .card-body {
-  padding: 1.5rem 2rem;
+  padding-block: var(--space-lg);
+  padding-inline: var(--space-xl);
   text-align: center;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition:
+    opacity 0.5s var(--transition-normal),
+    transform 0.5s var(--transition-normal);
 
   &.visible {
     opacity: 1;
     transform: translateY(0);
   }
+
+  @media (max-width: 520px) {
+    padding-inline: var(--space-md);
+  }
 }
 
 .success-title {
-  font-size: 1.9rem;
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 5vw, 1.9rem);
   font-weight: 800;
-  color: $color-text-dark;
-  margin: 0 0 0.4rem;
+  color: var(--clr-text-primary);
+  margin: 0 0 var(--space-xs);
   line-height: 1.2;
+
+  .dark & {
+    color: var(--clr-text-primary);
+  }
 }
 
 .success-subtitle {
+  font-family: var(--font-body);
   font-size: 1rem;
-  color: $color-green;
   font-weight: 600;
-  margin: 0 0 1.5rem;
+  color: var(--clr-primary);
+  margin: 0 0 var(--space-lg);
+
+  .dark & {
+    color: var(--clr-primary-light);
+  }
 }
 
-// ─── Divider ─────────────────────────────────────────────────────────
+// ─── Divider ────────────────────────────────────────────────────────────────
 .divider {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin: 0 0 1.5rem;
+  gap: var(--space-sm);
+  margin-block-end: var(--space-lg);
 
-  &::before, &::after {
+  &::before,
+  &::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba($color-green, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, var(--clr-cream-dark), transparent);
+
+    .dark & {
+      background: linear-gradient(90deg, transparent, var(--clr-border), transparent);
+    }
   }
 
   .divider-icon {
@@ -235,143 +300,210 @@ $color-gold: #f9c74f;        // accent gold for confetti
   }
 }
 
-// ─── Order Details ───────────────────────────────────────────────────
+// ─── Order Details ───────────────────────────────────────────────────────────
 .order-details {
-  background: $color-bg;
-  border-radius: 16px;
-  padding: 1rem 1.25rem;
-  margin-bottom: 1.25rem;
-  border: 1px solid rgba($color-green, 0.1);
+  background: var(--clr-cream);
+  border-radius: var(--radius-md);
+  padding-block: var(--space-sm);
+  padding-inline: var(--space-md);
+  margin-block-end: var(--space-md);
+  border: 1px solid var(--clr-cream-dark);
+
+  .dark & {
+    background: var(--clr-cream-mid);
+    border-color: var(--clr-border);
+  }
 }
 
 .detail-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px dashed rgba($color-green, 0.1);
+  padding-block: var(--space-sm);
+  border-block-end: 1px dashed var(--clr-cream-dark);
+
+  .dark & {
+    border-block-end-color: var(--clr-border);
+  }
 
   &:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+    border-block-end: none;
+    padding-block-end: 0;
   }
 
   &:first-child {
-    padding-top: 0;
+    padding-block-start: 0;
   }
 }
 
 .detail-label {
+  font-family: var(--font-body);
   font-size: 0.85rem;
-  color: $color-text-muted;
   font-weight: 500;
+  color: var(--clr-text-secondary);
+
+  .dark & {
+    color: var(--clr-text-secondary);
+  }
 }
 
 .detail-value {
+  font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 700;
-  color: $color-text-dark;
+  color: var(--clr-text-primary);
+
+  .dark & {
+    color: var(--clr-text-primary);
+  }
 
   &.highlight {
-    color: $color-green;
+    color: var(--clr-primary);
     font-size: 1rem;
+
+    .dark & {
+      color: var(--clr-primary-light);
+    }
   }
 }
 
 .status-badge {
-  background: rgba($color-green, 0.1);
-  color: $color-green;
-  padding: 0.2rem 0.75rem;
-  border-radius: 20px;
+  background: var(--clr-success-bg);
+  color: var(--clr-success);
+  padding-block: 0.2rem;
+  padding-inline: var(--space-sm);
+  border-radius: var(--radius-full);
   font-size: 0.8rem;
+  font-weight: 700;
+
+  .dark & {
+    background: var(--clr-success-bg);
+    color: var(--clr-success);
+  }
 }
 
 .tracking-note {
+  font-family: var(--font-body);
   font-size: 0.82rem;
-  color: $color-text-muted;
+  color: var(--clr-text-secondary);
   margin: 0;
-  padding: 0.75rem 1rem;
-  background: rgba($color-gold, 0.1);
-  border-radius: 10px;
-  border-left: 3px solid $color-gold;
-  text-align: left;
+  padding-block: var(--space-sm);
+  padding-inline: var(--space-md);
+  background: var(--clr-warning-bg);
+  border-radius: var(--radius-sm);
+  border-inline-start: 3px solid var(--clr-accent);
+  text-align: start;
+
+  .dark & {
+    background: var(--clr-warning-bg);
+    color: var(--clr-text-secondary);
+    border-inline-start-color: var(--clr-accent);
+  }
 }
 
-// ─── Card Footer ─────────────────────────────────────────────────────
+// ─── Card Footer ─────────────────────────────────────────────────────────────
 .card-footer {
-  padding: 0 1.5rem 2rem;
+  padding-block-start: 0;
+  padding-block-end: var(--space-xl);
+  padding-inline: var(--space-lg);
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition:
+    opacity 0.5s var(--transition-normal),
+    transform 0.5s var(--transition-normal);
 
   &.visible {
     opacity: 1;
     transform: translateY(0);
   }
+
+  @media (max-width: 520px) {
+    padding-inline: var(--space-md);
+    padding-block-end: var(--space-lg);
+  }
 }
 
-// ─── CTA Button ──────────────────────────────────────────────────────
+// ─── CTA Button ──────────────────────────────────────────────────────────────
 .menu-btn {
   width: 100%;
-  padding: 1rem 1.5rem;
-  background: linear-gradient(135deg, $color-red 0%, $color-red-light 100%);
-  color: $color-white;
+  padding-block: var(--space-md);
+  padding-inline: var(--space-lg);
+  background: linear-gradient(135deg, var(--clr-primary-dark) 0%, var(--clr-primary) 100%);
+  color: var(--clr-text-on-primary);
   border: none;
-  border-radius: 14px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-heading);
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  font-family: inherit;
-  box-shadow: 0 6px 24px rgba($color-red, 0.35);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  gap: var(--space-sm);
+  box-shadow: var(--shadow-md);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
   position: relative;
   overflow: hidden;
 
+  // Sheen overlay on hover
   &::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(white, 0.15), transparent);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent);
     opacity: 0;
-    transition: opacity 0.2s ease;
+    transition: opacity var(--transition-fast);
   }
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 32px rgba($color-red, 0.45);
-    &::before { opacity: 1; }
+    box-shadow: var(--shadow-lg);
+
+    &::before {
+      opacity: 1;
+    }
   }
 
   &:active {
     transform: translateY(0);
-    box-shadow: 0 4px 16px rgba($color-red, 0.3);
+    box-shadow: var(--shadow-sm);
   }
 
-  .btn-icon { font-size: 1.2rem; }
-  .btn-text { flex: 1; text-align: center; }
-  .btn-arrow { font-size: 1rem; opacity: 0.8; }
+  .btn-icon {
+    font-size: 1.2rem;
+  }
+  .btn-text {
+    flex: 1;
+    text-align: center;
+  }
+  .btn-arrow {
+    font-size: 1rem;
+    opacity: 0.8;
+  }
 }
 
+// ─── Countdown hint ──────────────────────────────────────────────────────────
 .countdown-hint {
   text-align: center;
+  font-family: var(--font-body);
   font-size: 0.78rem;
-  color: $color-text-muted;
-  margin: 0.85rem 0 0;
+  color: var(--clr-text-hint);
+  margin-block-start: var(--space-sm);
+  margin-block-end: 0;
+
+  .dark & {
+    color: var(--clr-text-hint);
+  }
 
   strong {
-    color: $color-green;
+    font-family: var(--font-heading);
     font-size: 1rem;
-  }
-}
+    color: var(--clr-accent);
 
-// ─── Responsive ──────────────────────────────────────────────────────
-@media (max-width: 520px) {
-  .success-card { border-radius: 20px; margin: 0 0.5rem; }
-  .card-body { padding: 1.25rem 1.25rem; }
-  .card-footer { padding: 0 1.25rem 1.5rem; }
-  .success-title { font-size: 1.5rem; }
+    .dark & {
+      color: var(--clr-accent-light);
+    }
+  }
 }
