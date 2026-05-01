@@ -1,63 +1,54 @@
 <div class="search">
-
   <!-- INPUT -->
-  <input
-    type="text"
-    [placeholder]="'CASHIER.CREATE_ORDER.CUSTOMER_SEARCH.PLACEHOLDER' | translate"
-    [(ngModel)]="searchTerm"
-    (input)="onInput(searchTerm)"
-  />
+  <div class="input-wrap">
+    <span class="search-icon">🔍</span>
+    <input
+      class="search-input"
+      type="text"
+      [placeholder]="'CASHIER.CREATE_ORDER.CUSTOMER_SEARCH.PLACEHOLDER' | translate"
+      [(ngModel)]="searchTerm"
+      (input)="onInput(searchTerm)"
+    />
+  </div>
 
   <!-- LOADING -->
   <div *ngIf="loading" class="loading">
+    <span class="loading-dot"></span>
+    <span class="loading-dot"></span>
+    <span class="loading-dot"></span>
     {{ 'CASHIER.CREATE_ORDER.CUSTOMER_SEARCH.LOADING' | translate }}
   </div>
 
   <!-- RESULTS -->
   <div *ngIf="results.length > 0" class="dropdown">
-
-    <div
-      class="item"
-      *ngFor="let user of results"
-      (click)="selectCustomer(user)">
-
-      <span>{{ user.phoneNumber }}</span>
-      <small>{{ user.name }}</small>
-
+    <div class="item" *ngFor="let user of results" (click)="selectCustomer(user)">
+      <span class="item-phone">{{ user.phoneNumber }}</span>
+      <small class="item-name">{{ user.name }}</small>
     </div>
-
   </div>
 
   <!-- NO RESULTS -->
-  <div *ngIf="!loading && results.length === 0 && searchTerm && !showAddForm">
-
+  <div *ngIf="!loading && results.length === 0 && searchTerm && !showAddForm" class="no-results">
     <button class="add-btn" (click)="openAddForm()">
-      {{ 'CASHIER.CREATE_ORDER.CUSTOMER_SEARCH.NO_RESULTS_ADD' | translate }}
+      + {{ 'CASHIER.CREATE_ORDER.CUSTOMER_SEARCH.NO_RESULTS_ADD' | translate }}
     </button>
-
   </div>
 
   <!-- ADD FORM -->
   <div *ngIf="showAddForm" class="add-form">
-
     <input
+      class="search-input"
       type="text"
       [placeholder]="'CASHIER.CREATE_ORDER.CUSTOMER_SEARCH.ADD_FORM_NAME' | translate"
       [(ngModel)]="newCustomerName"
     />
 
-    <button
-      class="save-btn"
-      [disabled]="adding"
-      (click)="createCustomer()">
-
-      {{ adding
-        ? ('CASHIER.CREATE_ORDER.CUSTOMER_SEARCH.SAVING' | translate)
-        : ('CASHIER.CREATE_ORDER.CUSTOMER_SEARCH.SAVE' | translate)
+    <button class="save-btn" [disabled]="adding" (click)="createCustomer()">
+      {{
+        adding
+          ? ('CASHIER.CREATE_ORDER.CUSTOMER_SEARCH.SAVING' | translate)
+          : ('CASHIER.CREATE_ORDER.CUSTOMER_SEARCH.SAVE' | translate)
       }}
-
     </button>
-
   </div>
-
 </div>

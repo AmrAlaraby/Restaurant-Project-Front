@@ -1,71 +1,164 @@
+// ─────────────────────────────────────────────
+// Summary Card — wrapper
+// ─────────────────────────────────────────────
 .summary-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  background: var(--clr-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--clr-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+
+  .dark & {
+    background: var(--clr-surface-alt);
+    border-color: var(--clr-border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--space-md);
+  }
 }
 
+// ─────────────────────────────────────────────
+// Card title
+// ─────────────────────────────────────────────
 .card-title {
-  font-size: 16px;
+  font-family: var(--font-heading);
+  font-size: 15px;
   font-weight: 700;
-  color: #1a1a1a;
-  margin: 0 0 20px;
+  letter-spacing: 0.02em;
+  color: var(--clr-text-primary);
+  margin: 0;
+
+  .dark & {
+    color: var(--clr-text-primary);
+  }
 }
 
+// ─────────────────────────────────────────────
+// Methods list
+// ─────────────────────────────────────────────
 .methods-list {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: var(--space-md);
 }
 
+// ─────────────────────────────────────────────
+// Method row — 2-col grid with progress spanning full width
+// ─────────────────────────────────────────────
 .method-row {
   display: grid;
   grid-template-columns: 1fr auto;
-  grid-template-rows: auto 6px;
-  row-gap: 8px;
-  column-gap: 12px;
+  grid-template-rows: auto 8px;
+  row-gap: var(--space-sm);
+  column-gap: var(--space-sm);
+  align-items: center;
+
+  // Subtle separator between rows
+  & + & {
+    padding-block-start: var(--space-sm);
+    border-block-start: 1px solid var(--clr-cream-mid);
+
+    .dark & {
+      border-block-start-color: var(--clr-border);
+    }
+  }
 }
 
+// ─────────────────────────────────────────────
+// Left — icon + name
+// ─────────────────────────────────────────────
 .method-left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-sm);
+  min-width: 0; // allows text truncation inside flex
 }
 
 .method-icon {
   font-size: 20px;
+  line-height: 1;
+  flex-shrink: 0;
+  // emoji colours come from the OS; no colour override needed
 }
 
 .method-name {
-  font-size: 14px;
+  font-family: var(--font-body);
+  font-size: 13px;
   font-weight: 600;
-  color: #333;
+  color: var(--clr-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  .dark & {
+    color: var(--clr-text-primary);
+  }
+}
+
+// ─────────────────────────────────────────────
+// Right — amount / count
+// ─────────────────────────────────────────────
+.method-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .method-amount {
-  font-size: 13px;
-  color: #888;
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--clr-text-hint);
   white-space: nowrap;
+
+  .dark & {
+    color: var(--clr-text-hint);
+  }
 }
 
+// ─────────────────────────────────────────────
+// Progress bar
+// ─────────────────────────────────────────────
 .progress-bar-wrap {
   grid-column: 1 / -1;
-  height: 6px;
-  background: #f0ebe5;
-  border-radius: 99px;
+  height: 8px;
+  background: var(--clr-cream-mid);
+  border-radius: var(--radius-full);
   overflow: hidden;
+
+  .dark & {
+    background: var(--clr-cream-dark);
+  }
 }
 
 .progress-bar-fill {
   height: 100%;
-  border-radius: 99px;
-  transition: width 0.6s ease;
+  border-radius: var(--radius-full);
+  // background is set inline via [style.background]="m.color"
+  // so we only supply transition and a fallback
+  background: var(--clr-primary);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 4px; // always show a sliver even at ~0 %
 }
 
+// ─────────────────────────────────────────────
+// Empty state
+// ─────────────────────────────────────────────
 .empty-summary {
-  color: #ccc;
+  font-family: var(--font-body);
   font-size: 14px;
+  color: var(--clr-text-hint);
   text-align: center;
-  padding: 20px;
+  padding-block: var(--space-lg);
+  padding-inline: var(--space-md);
+
+  .dark & {
+    color: var(--clr-text-hint);
+  }
 }

@@ -5,32 +5,40 @@
 
   <div class="methods-list">
     <div class="method-row" *ngFor="let m of summary">
-
       <div class="method-left">
-        <span class="method-icon">{{ m.icon }}</span>
+        <span class="method-icon" aria-hidden="true">{{ m.icon }}</span>
 
         <span class="method-name">
-          {{ ('CASHIER.DASHBOARD.PAYMENT_METHODS.METHODS.' + m.method?.toUpperCase()) | translate }}
+          {{ 'CASHIER.DASHBOARD.PAYMENT_METHODS.METHODS.' + m.method?.toUpperCase() | translate }}
         </span>
       </div>
 
       <div class="method-right">
         <span class="method-amount">
-          {{ 'CASHIER.DASHBOARD.PAYMENT_METHODS.AMOUNT' | translate:{
-            amount: (m.amount | number),
-            count: m.count
-          } }}
+          {{
+            'CASHIER.DASHBOARD.PAYMENT_METHODS.AMOUNT'
+              | translate
+                : {
+                    amount: (m.amount | number),
+                    count: m.count,
+                  }
+          }}
         </span>
       </div>
 
-      <div class="progress-bar-wrap">
+      <div
+        class="progress-bar-wrap"
+        role="progressbar"
+        [attr.aria-valuenow]="getPercent(m)"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
         <div
           class="progress-bar-fill"
           [style.width.%]="getPercent(m)"
           [style.background]="m.color"
         ></div>
       </div>
-
     </div>
   </div>
 

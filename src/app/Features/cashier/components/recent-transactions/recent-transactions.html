@@ -3,45 +3,52 @@
     {{ 'CASHIER.DASHBOARD.RECENT_TRANSACTIONS.TITLE' | translate }}
   </h3>
 
-  <table class="txn-table" *ngIf="transactions.length > 0">
-    <thead>
-      <tr>
-        <th>{{ 'CASHIER.DASHBOARD.RECENT_TRANSACTIONS.HEADER.ORDER' | translate }}</th>
-        <th>{{ 'CASHIER.DASHBOARD.RECENT_TRANSACTIONS.HEADER.METHOD' | translate }}</th>
-        <th>{{ 'CASHIER.DASHBOARD.RECENT_TRANSACTIONS.HEADER.AMOUNT' | translate }}</th>
-        <th>{{ 'CASHIER.DASHBOARD.RECENT_TRANSACTIONS.HEADER.STATUS' | translate }}</th>
-      </tr>
-    </thead>
+  <div class="table-scroll" *ngIf="transactions.length > 0">
+    <table class="txn-table">
+      <thead>
+        <tr>
+          <th scope="col">
+            {{ 'CASHIER.DASHBOARD.RECENT_TRANSACTIONS.HEADER.ORDER' | translate }}
+          </th>
+          <th scope="col">
+            {{ 'CASHIER.DASHBOARD.RECENT_TRANSACTIONS.HEADER.METHOD' | translate }}
+          </th>
+          <th scope="col">
+            {{ 'CASHIER.DASHBOARD.RECENT_TRANSACTIONS.HEADER.AMOUNT' | translate }}
+          </th>
+          <th scope="col">
+            {{ 'CASHIER.DASHBOARD.RECENT_TRANSACTIONS.HEADER.STATUS' | translate }}
+          </th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <tr *ngFor="let txn of transactions">
+      <tbody>
+        <tr *ngFor="let txn of transactions">
+          <td class="txn-order">#{{ txn.orderId }}</td>
 
-        <td class="txn-order">#{{ txn.orderId }}</td>
-
-        <td class="txn-method">
-          <span class="method-icon">{{ getMethodIcon(txn.method) }}</span>
-          {{
-            ('CASHIER.DASHBOARD.PAYMENT_METHODS.METHODS.' + txn.method?.toUpperCase())
-            | translate
-          }}
-        </td>
-
-        <td class="txn-amount">
-          {{ 'CASHIER.DASHBOARD.RECENT_TRANSACTIONS.AMOUNT' | translate:{ amount: txn.amount } }}
-        </td>
-
-        <td>
-          <span class="status-pill" [ngClass]="getStatusClass(txn.status)">
+          <td class="txn-method">
+            <span class="method-icon" aria-hidden="true">{{ getMethodIcon(txn.method) }}</span>
             {{
-              ('CASHIER.DASHBOARD.RECENT_TRANSACTIONS.STATUS.' + txn.status?.toUpperCase())
-              | translate
+              'CASHIER.DASHBOARD.PAYMENT_METHODS.METHODS.' + txn.method?.toUpperCase() | translate
             }}
-          </span>
-        </td>
+          </td>
 
-      </tr>
-    </tbody>
-  </table>
+          <td class="txn-amount">
+            {{ 'CASHIER.DASHBOARD.RECENT_TRANSACTIONS.AMOUNT' | translate: { amount: txn.amount } }}
+          </td>
+
+          <td>
+            <span class="status-pill" [ngClass]="getStatusClass(txn.status)">
+              {{
+                'CASHIER.DASHBOARD.RECENT_TRANSACTIONS.STATUS.' + txn.status?.toUpperCase()
+                  | translate
+              }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <div class="empty-txn" *ngIf="transactions.length === 0">
     {{ 'CASHIER.DASHBOARD.RECENT_TRANSACTIONS.EMPTY' | translate }}

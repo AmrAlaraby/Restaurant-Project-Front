@@ -1,18 +1,25 @@
 <!-- payment-success.component.html -->
 <div class="page-wrapper">
-
   <!-- Floating confetti particles -->
-  <div class="confetti-container">
-    <span class="confetti-piece" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"
-          [style.--i]="i"
-          [style.--delay]="(i * 0.15) + 's'"
-          [style.--color]="i % 3 === 0 ? '#2d6a4f' : i % 2 === 0 ? '#c0392b' : '#f9c74f'">
+  <div class="confetti-container" aria-hidden="true">
+    <span
+      class="confetti-piece"
+      *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]"
+      [style.--i]="i"
+      [style.--delay]="i * 0.15 + 's'"
+      [style.--color]="
+        i % 3 === 0
+          ? 'var(--clr-accent)'
+          : i % 2 === 0
+            ? 'var(--clr-primary)'
+            : 'var(--clr-accent-light)'
+      "
+    >
     </span>
   </div>
 
   <!-- Main card -->
   <div class="success-card" [class.visible]="showContent">
-
     <!-- Top decorative band -->
     <div class="card-header-band">
       <span class="brand-tag">RMS</span>
@@ -24,9 +31,15 @@
       <div class="checkmark-ring inner-ring"></div>
       <div class="checkmark-icon">
         <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle class="checkmark-circle" cx="26" cy="26" r="24" stroke="white" stroke-width="2"/>
-          <path class="checkmark-path" d="M14.5 26.5L22 34L37.5 18.5" stroke="white" stroke-width="3.5"
-                stroke-linecap="round" stroke-linejoin="round"/>
+          <circle class="checkmark-circle" cx="26" cy="26" r="24" stroke="white" stroke-width="2" />
+          <path
+            class="checkmark-path"
+            d="M14.5 26.5L22 34L37.5 18.5"
+            stroke="white"
+            stroke-width="3.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </div>
     </div>
@@ -64,7 +77,5 @@
         Redirecting to the menu in <strong>{{ countdown }}</strong> seconds
       </p>
     </div>
-
   </div>
-
 </div>
