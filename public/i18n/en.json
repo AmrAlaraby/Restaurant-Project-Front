@@ -1,5 +1,58 @@
 {
   "CUSTOMER": {
+    "NUTRITION": {
+      "KCAL": "kcal",
+      "CALCULATE": "Calculate Nutrition",
+      "TITLE": "Nutrition Analysis",
+      "SUBTITLE": "AI-powered breakdown of your order",
+      "CALCULATING": "Analyzing your order...",
+      "CALCULATING_SUB": "Our AI nutritionist is calculating your meal",
+      "ERROR": "Something went wrong",
+      "TRY_AGAIN": "Try Again",
+      "PER_ITEM": "Per Item",
+      "ORDER_TOTAL": "Order Total",
+      "DAILY": "Daily Recommended Values",
+      "CALORIES": "Calories (kcal)",
+      "PROTEIN": "Protein",
+      "CARBS": "Carbs",
+      "DAILY_CALORIES": "Calories",
+      "DAILY_PROTEIN": "Protein",
+      "DAILY_CARBS": "Carbs",
+      "DISCLAIMER": "* Values are AI-estimated based on ingredients."
+    },
+    "ADDRESS_MODAL": {
+      "TITLE": "Add New Address",
+      "BUILDING": "Building Number",
+      "STREET": "Street",
+      "CITY": "City",
+      "NOTE": "Note",
+      "SPECIAL_MARK": "Special Mark",
+      "CANCEL": "Cancel",
+      "SAVE": "Save Address",
+      "SAVING": "Saving..."
+    },
+
+    "EACH": "each",
+    "BASKET": {
+      "TITLE": "My Cart",
+      "ITEMS": "Items",
+      "ORDER_TYPE": "Order Type",
+      "DELIVERY": "Delivery",
+      "PICKUP": "Pickup",
+      "DELIVERY_ADDRESS": "Delivery Address",
+      "ADD_ADDRESS": "Add new address",
+
+      "ORDER_SUMMARY": "Order Summary",
+      "SUBTOTAL": "Subtotal",
+      "DELIVERY_FEE": "Delivery fee",
+      "TOTAL": "Total",
+
+      "PAYMENT_METHOD": "Payment Method",
+      "CARD": "Card",
+      "CASH": "Cash",
+
+      "PLACE_ORDER": "Place Order"
+    },
     "TRACK_DELIVERY": {
       "INFO_GRID": {
         "DELIVERY_ADDRESS": "Delivery Address",

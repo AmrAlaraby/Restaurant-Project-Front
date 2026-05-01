@@ -1,5 +1,57 @@
 {
   "CUSTOMER": {
+    "NUTRITION": {
+      "KCAL": "سعرة",
+      "CALCULATE": "احسب تغذية طلبك",
+      "TITLE": "تحليل التغذية",
+      "SUBTITLE": "تحليل ذكي لطلبك باستخدام الذكاء الاصطناعي",
+      "CALCULATING": "جاري تحليل طلبك...",
+      "CALCULATING_SUB": "خبير التغذية الذكي يقوم بحساب وجبتك",
+      "ERROR": "حدث خطأ ما",
+      "TRY_AGAIN": "إعادة المحاولة",
+      "PER_ITEM": "لكل عنصر",
+      "ORDER_TOTAL": "إجمالي الطلب",
+      "DAILY": "النسب اليومية الموصى بها",
+      "CALORIES": "السعرات الحرارية",
+      "PROTEIN": "البروتين",
+      "CARBS": "الكربوهيدرات",
+      "DAILY_CALORIES": "السعرات",
+      "DAILY_PROTEIN": "البروتين",
+      "DAILY_CARBS": "الكربوهيدرات",
+      "DISCLAIMER": "* القيم تقديرية باستخدام الذكاء الاصطناعي."
+    },
+    "ADDRESS_MODAL": {
+      "TITLE": "إضافة عنوان جديد",
+      "BUILDING": "رقم المبنى",
+      "STREET": "الشارع",
+      "CITY": "المدينة",
+      "NOTE": "ملاحظة",
+      "SPECIAL_MARK": "علامة مميزة",
+      "CANCEL": "إلغاء",
+      "SAVE": "حفظ العنوان",
+      "SAVING": "جاري الحفظ..."
+    },
+    "EACH": "للواحد",
+    "BASKET": {
+      "TITLE": "سلة المشتريات",
+      "ITEMS": "العناصر",
+      "ORDER_TYPE": "نوع الطلب",
+      "DELIVERY": "توصيل",
+      "PICKUP": "استلام",
+      "DELIVERY_ADDRESS": "عنوان التوصيل",
+      "ADD_ADDRESS": "إضافة عنوان جديد",
+
+      "ORDER_SUMMARY": "ملخص الطلب",
+      "SUBTOTAL": "الإجمالي الفرعي",
+      "DELIVERY_FEE": "رسوم التوصيل",
+      "TOTAL": "الإجمالي",
+
+      "PAYMENT_METHOD": "طريقة الدفع",
+      "CARD": "بطاقة",
+      "CASH": "نقدي",
+
+      "PLACE_ORDER": "إتمام الطلب"
+    },
     "TRACK_DELIVERY": {
       "INFO_GRID": {
         "DELIVERY_ADDRESS": "عنوان التوصيل",

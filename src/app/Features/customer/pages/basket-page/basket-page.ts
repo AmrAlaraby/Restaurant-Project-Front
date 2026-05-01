@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { Basket } from '../../../../Core/Models/BasketModels/Basket';
 import { BasketService } from '../../../../Core/Services/Basket-Service/baskets-service';
 import { AsyncPipe } from '@angular/common';
@@ -13,11 +13,20 @@ import { AddressDto } from '../../../../Core/Models/AuthModels/address-dto';
 import { AddAddressModal } from '../../components/Home/Address-Model/add-address-modal/add-address-modal';
 import { BasketItem } from '../../../../Core/Models/BasketModels/BasketItem';
 import { NutritionModal } from "../../components/Ai/nutrition-modal/nutrition-modal";
+import { TranslatePipe } from '@ngx-translate/core';
+import { LocalizationService } from '../../../../Core/Services/Localization-Service/localization-service';
 
 @Component({
   selector: 'app-basket-page',
   standalone: true,
-  imports: [FormsModule, AsyncPipe, RouterModule, AddAddressModal, NutritionModal],
+  imports: [
+    FormsModule, 
+    AsyncPipe, 
+    RouterModule, 
+    AddAddressModal, 
+    NutritionModal,
+    TranslatePipe,
+  ],
   templateUrl: './basket-page.html',
   styleUrl: './basket-page.scss',
 })
@@ -34,6 +43,7 @@ export class BasketPage {
   showAddressModal = false;
 
   constructor(
+    private localizationService: LocalizationService,
     private basketService: BasketService,
     private ordersService: OrdersService,
     private paymentService: PaymentService,
@@ -45,7 +55,23 @@ export class BasketPage {
     this.basket$ = this.basketService.basket$;
     this.basketService.loadBasket();
     this.loadUserAddresses();
+    this.getCurrentLanguage();
   }
+
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
+    
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 
   // =========================
   // Basket Actions
@@ -177,6 +203,11 @@ export class BasketPage {
       }
     });
   }
-
+  getItemName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.arabicName || item.name;
+    }
+    return item.name;
+  }
   
 }

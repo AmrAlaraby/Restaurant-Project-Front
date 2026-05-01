@@ -6,11 +6,12 @@ import { DecimalPipe } from '@angular/common';
 import { NutritionService } from '../../../../../Core/Services/Ai-Service/NutritionServices/nutrition-ai-service';
 import { NutritionItem } from '../../../../../Core/Models/NutritionModels/NutritionItem';
 import { NutritionResponse } from '../../../../../Core/Models/NutritionModels/NutritionResponse';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-nutrition-modal',
   standalone: true, // ✅ مهم
-  imports: [DecimalPipe],
+  imports: [DecimalPipe,TranslatePipe],
   templateUrl: './nutrition-modal.html',
   styleUrl: './nutrition-modal.scss',
 })
