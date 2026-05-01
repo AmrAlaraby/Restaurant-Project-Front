@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { UpdateCustomerAddressDTO } from '../../../../../../Core/Models/UserModels/update-customer-address-dto';
 import { AuthService } from '../../../../../../Core/Services/Auth-Service/auth-service';
 import { AddressDto } from '../../../../../../Core/Models/AuthModels/address-dto';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-address-modal',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,TranslatePipe],
   templateUrl: './add-address-modal.html',
   styleUrl: './add-address-modal.scss'
 })

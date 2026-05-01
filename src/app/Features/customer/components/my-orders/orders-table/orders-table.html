@@ -2,12 +2,12 @@
   <table class="orders-table">
     <thead>
       <tr>
-        <th>ORDER</th>
-        <th>ITEMS</th>
-        <th>TYPE</th>
-        <th>DATE</th>
-        <th>TOTAL</th>
-        <th>STATUS</th>
+        <th>{{ 'CUSTOMER.ORDERS.TABLE.HEADER.ORDER' | translate }}</th>
+        <th>{{ 'CUSTOMER.ORDERS.TABLE.HEADER.ITEMS' | translate }}</th>
+        <th>{{ 'CUSTOMER.ORDERS.TABLE.HEADER.TYPE' | translate }}</th>
+        <th>{{ 'CUSTOMER.ORDERS.TABLE.HEADER.DATE' | translate }}</th>
+        <th>{{ 'CUSTOMER.ORDERS.TABLE.HEADER.TOTAL' | translate }}</th>
+        <th>{{ 'CUSTOMER.ORDERS.TABLE.HEADER.STATUS' | translate }}</th>
         <th></th>
       </tr>
     </thead>
@@ -15,33 +15,38 @@
     <tbody>
       @for (order of orders(); track order.id) {
         <tr [class.active-row]="order.status !== 'Delivered' && order.status !== 'Cancelled'">
-
-         <td class="order-id">#{{ order.id.toString().padStart(4, '0') }}</td>
+          <td class="order-id">#{{ order.id.toString().padStart(4, '0') }}</td>
 
           <td>
-            {{ order.orderItems?.length ?? 0 }}
-            item{{ (order.orderItems?.length ?? 0) !== 1 ? 's' : '' }}
+            {{
+              (order.orderItems?.length ?? 0) === 1
+                ? ('CUSTOMER.ORDERS.TABLE.ITEM_COUNT' | translate: { count: 1 })
+                : ('CUSTOMER.ORDERS.TABLE.ITEMS_COUNT'
+                  | translate: { count: order.orderItems?.length ?? 0 })
+            }}
           </td>
 
           <td>
             <span class="type-badge" [ngClass]="getTypeBadgeClass(order.orderType)">
-              {{ order.orderType === 'DineIn' ? 'DINE-IN' : order.orderType | uppercase }}
+              {{ 'CUSTOMER.ORDERS.ORDER_TYPE.' + order.orderType | translate }}
             </span>
           </td>
 
           <td>{{ formatDate(order.createdAt ?? order.date) }}</td>
 
-          <td class="order-total">EGP {{ order.totalAmount }}</td>
+          <td class="order-total">
+            {{ 'CUSTOMER.ORDERS.TABLE.EGP' | translate }} {{ order.totalAmount }}
+          </td>
 
           <td>
             <span class="status-badge" [ngClass]="getStatusBadgeClass(order.status)">
-              {{ order.status | uppercase }}
+              {{ 'CUSTOMER.ORDERS.ACTIVE_CARD.STATUS.' + order.status | translate }}
             </span>
           </td>
 
           <td>
             <button class="reorder-btn" (click)="onReorder(order.id)">
-              Reorder
+              {{ 'CUSTOMER.ORDERS.TABLE.REORDER' | translate }}
             </button>
           </td>
         </tr>

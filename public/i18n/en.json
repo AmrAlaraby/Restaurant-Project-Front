@@ -1,5 +1,266 @@
 {
   "CUSTOMER": {
+    "ADDRESSES": {
+      "PLACEHOLDERS": {
+        "BUILDING": "e.g. 15",
+        "STREET": "e.g. El-Nasr St",
+        "CITY": "e.g. Cairo",
+        "NOTE": "e.g. Ring bell twice",
+        "MARK": "e.g. Apt 5, Floor 3"
+      },
+      "TITLE": "My Addresses",
+      "ADD_NEW": "Add New Address",
+      "SEARCH_PLACEHOLDER": "Search by city, street, building…",
+      "CLEAR": "Clear search",
+      "NO_MATCH": "No addresses match \"{{query}}\"",
+      "NO_DATA": "No addresses saved yet.",
+      "LATEST": "LATEST",
+      "EDIT": "Edit",
+      "DELETE": "Delete",
+      "ADD_TITLE": "Add New Address",
+      "EDIT_TITLE": "Edit Address",
+      "BUILDING": "Building Number",
+      "STREET": "Street",
+      "CITY": "City",
+      "NOTE": "Delivery Note",
+      "MARK": "Special Mark",
+      "CANCEL": "Cancel",
+      "SAVE_ADD": "Add Address",
+      "SAVE_EDIT": "Save Changes",
+      "DELETE_TITLE": "Delete Address?",
+      "DELETE_MESSAGE": "Are you sure you want to delete this address? This action cannot be undone.",
+      "CANCELD": "No, Keep It",
+      "CONFIRM_DELETE": "Yes, Delete"
+    },
+    "PROFILE": {
+      "TITLE": "My Profile",
+      "LOADING": "Loading...",
+      "PERSONAL_INFO": "Personal Info",
+      "FULL_NAME": "Full Name",
+      "EMAIL": "Email",
+      "USERNAME": "Username (optional)",
+      "NEW_PASSWORD": "New Password (optional)",
+      "CONFIRM_PASSWORD": "Confirm Password",
+      "NAME_REQUIRED": "Name is required",
+      "EMAIL_REQUIRED": "Valid email is required",
+      "MIN_PASSWORD": "Minimum 6 characters",
+      "PASSWORD_MISMATCH": "Passwords do not match",
+      "SAVE": "Save Changes",
+      "LOGOUT": "Logout",
+      "SAVED_SUCCESS": "Changes saved successfully!"
+    },
+    "NUTRITION": {
+      "KCAL": "kcal",
+      "CALCULATE": "Calculate Nutrition",
+      "TITLE": "Nutrition Analysis",
+      "SUBTITLE": "AI-powered breakdown of your order",
+      "CALCULATING": "Analyzing your order...",
+      "CALCULATING_SUB": "Our AI nutritionist is calculating your meal",
+      "ERROR": "Something went wrong",
+      "TRY_AGAIN": "Try Again",
+      "PER_ITEM": "Per Item",
+      "ORDER_TOTAL": "Order Total",
+      "DAILY": "Daily Recommended Values",
+      "CALORIES": "Calories (kcal)",
+      "PROTEIN": "Protein",
+      "CARBS": "Carbs",
+      "DAILY_CALORIES": "Calories",
+      "DAILY_PROTEIN": "Protein",
+      "DAILY_CARBS": "Carbs",
+      "DISCLAIMER": "* Values are AI-estimated based on ingredients."
+    },
+    "ADDRESS_MODAL": {
+      "TITLE": "Add New Address",
+      "BUILDING": "Building Number",
+      "STREET": "Street",
+      "CITY": "City",
+      "NOTE": "Note",
+      "SPECIAL_MARK": "Special Mark",
+      "CANCEL": "Cancel",
+      "SAVE": "Save Address",
+      "SAVING": "Saving..."
+    },
+
+    "EACH": "each",
+    "BASKET": {
+      "TITLE": "My Cart",
+      "ITEMS": "Items",
+      "ORDER_TYPE": "Order Type",
+      "DELIVERY": "Delivery",
+      "PICKUP": "Pickup",
+      "DELIVERY_ADDRESS": "Delivery Address",
+      "ADD_ADDRESS": "Add new address",
+
+      "ORDER_SUMMARY": "Order Summary",
+      "SUBTOTAL": "Subtotal",
+      "DELIVERY_FEE": "Delivery fee",
+      "TOTAL": "Total",
+
+      "PAYMENT_METHOD": "Payment Method",
+      "CARD": "Card",
+      "CASH": "Cash",
+
+      "PLACE_ORDER": "Place Order"
+    },
+    "TRACK_DELIVERY": {
+      "INFO_GRID": {
+        "DELIVERY_ADDRESS": "Delivery Address",
+        "BUILDING": "Building",
+        "STREET": "Street",
+        "CITY": "City",
+        "LANDMARK": "Landmark",
+        "NOTE": "Note",
+
+        "ORDER_SUMMARY": "Order Summary",
+        "TOTAL": "Total",
+        "CASH_COLLECTED": "Cash Collected"
+      },
+      "DRIVERS": {
+        "YOUR_DRIVER": "Your Driver",
+        "ON_THE_WAY": "On the way to you",
+        "CALL": "Call",
+        "MESSAGE": "Message",
+        "FINDING_TITLE": "Finding your driver",
+        "FINDING_SUB": "A driver will be assigned shortly"
+      }
+,
+      "TIMELINE_UI": {
+      "TITLE": "Order Progress",
+      "STEP_COUNT": "Step {{current}} of {{total}}",
+      "NOW": "Now"
+    },
+      "TIMELINEOPJ": {
+      "Placed": {
+        "LABEL": "Order Placed",
+        "DONE": "Your order was confirmed",
+        "ACTIVE": "Waiting for confirmation...",
+        "PENDING": "Waiting..."
+      },
+      "Assigned": {
+        "LABEL": "Being Prepared",
+        "DONE": "Kitchen started your order",
+        "ACTIVE": "Kitchen is preparing your order",
+        "PENDING": "Waiting..."
+      },
+      "PickedUp": {
+        "LABEL": "Picked Up",
+        "DONE": "{{driver}} picked up your order",
+        "ACTIVE": "{{driver}} is picking up your order",
+        "PENDING": "Waiting for pickup..."
+      },
+      "OnTheWay": {
+        "LABEL": "On The Way",
+        "DONE": "Driver headed to your address",
+        "ACTIVE": "Driver is heading to your address",
+        "PENDING": "Not yet..."
+      },
+      "Delivered": {
+        "LABEL": "Delivered",
+        "DONE": "Order delivered successfully! 🎉",
+        "ACTIVE": "Order delivered!",
+        "PENDING": "Estimated arrival soon"
+      }
+    },
+
+    "DEFAULTS": {
+      "DRIVER": "Your driver"
+    },
+      "HEADER": {
+      "BACK": "Back",
+      "TITLE": "Track Delivery",
+      "ORDER": "Order #{{id}}",
+      "LIVE": "Live"
+    },
+    "LOADING": "Tracking your order...",
+    "NOT_FOUND": "Delivery not found.",
+    "BACK": "Go Back",
+    "Now": "Now",
+
+    "DRIVER": {
+      "CALL": "Call",
+      "MESSAGE": "Message"
+    },
+
+    "TIMELINE": {
+      "ASSIGNED": "Assigned",
+      "PICKED_UP": "Picked Up",
+      "ON_THE_WAY": "On The Way",
+      "DELIVERED": "Delivered"
+    },
+
+    "INFO": {
+      "TOTAL": "Total",
+      "CASH_COLLECTED": "Cash Collected",
+      "ADDRESS": "Delivery Address",
+      "ITEMS": "Items"
+    }
+  }
+,
+    "ORDERS": {
+      "TABLE": {
+      "HEADER": {
+        "ORDER": "Order",
+        "ITEMS": "Items",
+        "TYPE": "Type",
+        "DATE": "Date",
+        "TOTAL": "Total",
+        "STATUS": "Status"
+      },
+
+      "EGP": "EGP",
+
+      "ITEM_COUNT": "{{count}} item",
+      "ITEMS_COUNT": "{{count}} items",
+
+      "REORDER": "Reorder"
+    },
+       "ACTIVE_CARD": {
+      "ITEMS_COUNT": "{{count}} items",
+      "TRACK": "Tap to track in real time →",
+
+      "STATUS": {
+        "Received": "Received",
+        "Preparing": "Preparing",
+        "Ready": "Ready",
+        "OnTheWay": "On The Way 🚗",
+        "Delivered": "Delivered",
+        "Cancelled": "Cancelled",
+        "AwaitingPayment": "Awaiting Payment"
+      },
+
+      "STEPS": {
+        "Received": "Received",
+        "Preparing": "Preparing",
+        "Ready": "Ready",
+        "OnTheWay": "On The Way",
+        "Delivered": "Delivered"
+      }
+    },
+    "NO_ORDERS": "You have no orders yet. Start exploring our menu and place your first order!",
+    "ORDER_TYPE": {
+"Delivery": "Delivery",
+"Pickup": "Pickup",
+"DineIn": "Dine In"
+    },
+      "HEADER": {
+      "TITLE": "My Orders",
+      "SUBTITLE": "Your recent orders"
+    },
+    "LOADING": "Loading your orders..."
+  },
+    "MENU": {
+    "SEARCH": "Search food...",
+
+    "CATEGORIES": {
+      "ALL": "All"
+    },
+
+    "SORT": {
+      "DEFAULT": "Default",
+      "LOW_TO_HIGH": "Low to High",
+      "HIGH_TO_LOW": "High to Low"
+    }
+  },
      "AI": {
     "SUGGESTER": {
       "HEADER": {
@@ -886,6 +1147,9 @@
   }
 },
 "COMMON": {
+  "VALIDATION": {
+      "REQUIRED": "Required"
+    },
   "CANCEL": "Cancel",
   "SAVING": "Saving...",
   "EDIT": "Edit",

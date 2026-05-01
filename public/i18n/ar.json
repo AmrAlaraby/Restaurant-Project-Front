@@ -1,5 +1,265 @@
 {
   "CUSTOMER": {
+    "ADDRESSES": {
+      "PLACEHOLDERS": {
+        "BUILDING": "مثال: 15",
+        "STREET": "مثال: شارع النصر",
+        "CITY": "مثال: القاهرة",
+        "NOTE": "مثال: رن الجرس مرتين",
+        "MARK": "مثال: شقة 5، الدور 3"
+      },
+      "TITLE": "عناويني",
+      "ADD_NEW": "إضافة عنوان جديد",
+      "SEARCH_PLACEHOLDER": "ابحث بالمدينة أو الشارع أو رقم المبنى…",
+      "CLEAR": "مسح البحث",
+      "NO_MATCH": "لا يوجد عناوين مطابقة لـ \"{{query}}\"",
+      "NO_DATA": "لا يوجد عناوين محفوظة حتى الآن",
+      "LATEST": "الأحدث",
+      "EDIT": "تعديل",
+      "DELETE": "حذف",
+       "ADD_TITLE": "إضافة عنوان جديد",
+      "EDIT_TITLE": "تعديل العنوان",
+      "BUILDING": "رقم المبنى",
+      "STREET": "الشارع",
+      "CITY": "المدينة",
+      "NOTE": "ملاحظة التوصيل",
+      "MARK": "علامة مميزة",
+      "CANCEL": "إلغاء",
+      "SAVE_ADD": "إضافة العنوان",
+      "SAVE_EDIT": "حفظ التعديلات",
+      "DELETE_TITLE": "حذف العنوان؟",
+      "DELETE_MESSAGE": "هل أنت متأكد أنك تريد حذف هذا العنوان؟ لا يمكن التراجع عن هذا الإجراء.",
+      "CANCELD": "لا، الإبقاء عليه",
+      "CONFIRM_DELETE": "نعم، احذف"
+      
+    },
+    "PROFILE": {
+      "TITLE": "ملفي الشخصي",
+      "LOADING": "جاري التحميل...",
+      "PERSONAL_INFO": "المعلومات الشخصية",
+      "FULL_NAME": "الاسم الكامل",
+      "EMAIL": "البريد الإلكتروني",
+      "USERNAME": "اسم المستخدم (اختياري)",
+      "NEW_PASSWORD": "كلمة مرور جديدة (اختياري)",
+      "CONFIRM_PASSWORD": "تأكيد كلمة المرور",
+      "NAME_REQUIRED": "الاسم مطلوب",
+      "EMAIL_REQUIRED": "يجب إدخال بريد إلكتروني صحيح",
+      "MIN_PASSWORD": "الحد الأدنى 6 أحرف",
+      "PASSWORD_MISMATCH": "كلمات المرور غير متطابقة",
+      "SAVE": "حفظ التغييرات",
+      "LOGOUT": "تسجيل الخروج",
+      "SAVED_SUCCESS": "تم حفظ التغييرات بنجاح!"
+    },
+    "NUTRITION": {
+      "KCAL": "سعرة",
+      "CALCULATE": "احسب تغذية طلبك",
+      "TITLE": "تحليل التغذية",
+      "SUBTITLE": "تحليل ذكي لطلبك باستخدام الذكاء الاصطناعي",
+      "CALCULATING": "جاري تحليل طلبك...",
+      "CALCULATING_SUB": "خبير التغذية الذكي يقوم بحساب وجبتك",
+      "ERROR": "حدث خطأ ما",
+      "TRY_AGAIN": "إعادة المحاولة",
+      "PER_ITEM": "لكل عنصر",
+      "ORDER_TOTAL": "إجمالي الطلب",
+      "DAILY": "النسب اليومية الموصى بها",
+      "CALORIES": "السعرات الحرارية",
+      "PROTEIN": "البروتين",
+      "CARBS": "الكربوهيدرات",
+      "DAILY_CALORIES": "السعرات",
+      "DAILY_PROTEIN": "البروتين",
+      "DAILY_CARBS": "الكربوهيدرات",
+      "DISCLAIMER": "* القيم تقديرية باستخدام الذكاء الاصطناعي."
+    },
+    "ADDRESS_MODAL": {
+      "TITLE": "إضافة عنوان جديد",
+      "BUILDING": "رقم المبنى",
+      "STREET": "الشارع",
+      "CITY": "المدينة",
+      "NOTE": "ملاحظة",
+      "SPECIAL_MARK": "علامة مميزة",
+      "CANCEL": "إلغاء",
+      "SAVE": "حفظ العنوان",
+      "SAVING": "جاري الحفظ..."
+    },
+    "EACH": "للواحد",
+    "BASKET": {
+      "TITLE": "سلة المشتريات",
+      "ITEMS": "العناصر",
+      "ORDER_TYPE": "نوع الطلب",
+      "DELIVERY": "توصيل",
+      "PICKUP": "استلام",
+      "DELIVERY_ADDRESS": "عنوان التوصيل",
+      "ADD_ADDRESS": "إضافة عنوان جديد",
+
+      "ORDER_SUMMARY": "ملخص الطلب",
+      "SUBTOTAL": "الإجمالي الفرعي",
+      "DELIVERY_FEE": "رسوم التوصيل",
+      "TOTAL": "الإجمالي",
+
+      "PAYMENT_METHOD": "طريقة الدفع",
+      "CARD": "بطاقة",
+      "CASH": "نقدي",
+
+      "PLACE_ORDER": "إتمام الطلب"
+    },
+    "TRACK_DELIVERY": {
+      "INFO_GRID": {
+        "DELIVERY_ADDRESS": "عنوان التوصيل",
+        "BUILDING": "المبنى",
+        "STREET": "الشارع",
+        "CITY": "المدينة",
+        "LANDMARK": "علامة مميزة",
+        "NOTE": "ملاحظة",
+
+        "ORDER_SUMMARY": "ملخص الطلب",
+        "TOTAL": "الإجمالي",
+        "CASH_COLLECTED": "المبلغ المحصل نقداً"
+      },
+      "DRIVERS": {
+        "YOUR_DRIVER": "السائق الخاص بك",
+        "ON_THE_WAY": "في الطريق إليك",
+        "CALL": "اتصال",
+        "MESSAGE": "رسالة",
+        "FINDING_TITLE": "جاري البحث عن سائق",
+        "FINDING_SUB": "سيتم تعيين سائق قريباً"
+      },
+      "TIMELINE_UI": {
+      "TITLE": "حالة الطلب",
+      "STEP_COUNT": "الخطوة {{current}} من {{total}}",
+      "NOW": "الآن"
+    },
+      "TIMELINEOPJ": {
+      "Placed": {
+        "LABEL": "تم إنشاء الطلب",
+        "DONE": "تم تأكيد طلبك",
+        "ACTIVE": "في انتظار التأكيد...",
+        "PENDING": "انتظار..."
+      },
+      "Assigned": {
+        "LABEL": "قيد التحضير",
+        "DONE": "بدأ المطبخ في تجهيز الطلب",
+        "ACTIVE": "يتم تحضير الطلب الآن",
+        "PENDING": "انتظار..."
+      },
+      "PickedUp": {
+        "LABEL": "تم الاستلام",
+        "DONE": "قام {{driver}} باستلام الطلب",
+        "ACTIVE": "{{driver}} يقوم باستلام الطلب",
+        "PENDING": "في انتظار الاستلام..."
+      },
+      "OnTheWay": {
+        "LABEL": "في الطريق",
+        "DONE": "السائق في طريقه إليك",
+        "ACTIVE": "السائق متجه إلى عنوانك",
+        "PENDING": "لم يبدأ بعد..."
+      },
+      "Delivered": {
+        "LABEL": "تم التوصيل",
+        "DONE": "تم توصيل الطلب بنجاح 🎉",
+        "ACTIVE": "تم التوصيل",
+        "PENDING": "الوصول قريبًا"
+      }
+    },
+
+    "DEFAULTS": {
+      "DRIVER": "السائق"
+    },
+      "HEADER": {
+      "BACK": "رجوع",
+      "TITLE": "تتبع التوصيل",
+      "ORDER": "طلب رقم {{id}}",
+      "LIVE": "مباشر"
+    },
+    "LOADING": "جاري تتبع طلبك...",
+    "NOT_FOUND": "لم يتم العثور على التوصيل.",
+    "BACK": "رجوع",
+    "Now": "الان",
+
+    "DRIVER": {
+      "CALL": "اتصال",
+      "MESSAGE": "رسالة"
+    },
+
+    "TIMELINE": {
+      "ASSIGNED": "تم التعيين",
+      "PICKED_UP": "تم الاستلام",
+      "ON_THE_WAY": "في الطريق",
+      "DELIVERED": "تم التوصيل"
+    },
+
+    "INFO": {
+      "TOTAL": "الإجمالي",
+      "CASH_COLLECTED": "المبلغ المحصل",
+      "ADDRESS": "عنوان التوصيل",
+      "ITEMS": "العناصر"
+    }
+  },
+    "ORDERS": {
+      "TABLE": {
+      "HEADER": {
+        "ORDER": "الطلب",
+        "ITEMS": "العناصر",
+        "TYPE": "النوع",
+        "DATE": "التاريخ",
+        "TOTAL": "الإجمالي",
+        "STATUS": "الحالة"
+      },
+
+      "EGP": "جنيه",
+
+      "ITEM_COUNT": "{{count}} عنصر",
+      "ITEMS_COUNT": "{{count}} عناصر",
+
+      "REORDER": "إعادة الطلب"
+    },
+      "ACTIVE_CARD": {
+      "ITEMS_COUNT": "{{count}} عنصر",
+      "TRACK": "اضغط لتتبع الطلب مباشرة →",
+
+      "STATUS": {
+        "Received": "تم الاستلام",
+        "Preparing": "قيد التحضير",
+        "Ready": "جاهز",
+        "OnTheWay": "في الطريق 🚗",
+        "Delivered": "تم التوصيل",
+        "Cancelled": "تم الإلغاء",
+        "AwaitingPayment": "في انتظار الدفع"
+      },
+
+      "STEPS": {
+        "Received": "تم الاستلام",
+        "Preparing": "قيد التحضير",
+        "Ready": "جاهز",
+        "OnTheWay": "في الطريق",
+        "Delivered": "تم التوصيل"
+      }
+
+    },
+    "NO_ORDERS": "لا توجد طلبات بعد",
+    "ORDER_TYPE": {
+      "Delivery": "توصيل",
+      "Pickup": "استلام",
+      "DineIn": "داخل المطعم"
+    },
+     "HEADER": {
+      "TITLE": "طلباتي",
+      "SUBTITLE": "طلباتك الأخيرة"
+    },
+    "LOADING": "جاري تحميل طلباتك..."
+  },
+    "MENU": {
+    "SEARCH": "ابحث عن الطعام...",
+
+    "CATEGORIES": {
+      "ALL": "الكل"
+    },
+
+    "SORT": {
+      "DEFAULT": "افتراضي",
+      "LOW_TO_HIGH": "من الأقل إلى الأعلى",
+      "HIGH_TO_LOW": "من الأعلى إلى الأقل"
+    }
+  },
     "AI": {
     "SUGGESTER": {
       "HEADER": {
@@ -884,6 +1144,9 @@
     }
   },
   "COMMON": {
+    "VALIDATION": {
+      "REQUIRED": "مطلوب"
+    },
     "CANCEL": "إلغاء",
     "SAVING": "جاري الحفظ...",
     "EDIT": "تعديل",

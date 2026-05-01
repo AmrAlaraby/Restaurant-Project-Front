@@ -1,101 +1,123 @@
 <div class="page">
-  <h1 class="page-title">My Profile</h1>
+
+  <h1 class="page-title">
+    {{ 'CUSTOMER.PROFILE.TITLE' | translate }}
+  </h1>
 
   @if (loading()) {
-    <div class="loading">Loading...</div>
+    <div class="loading">
+      {{ 'CUSTOMER.PROFILE.LOADING' | translate }}
+    </div>
   }
 
   @if (!loading() && user()) {
     <div class="grid">
-      <!-- LEFT COLUMN -->
+
+      <!-- LEFT -->
       <div class="col-left">
-        <!-- Profile Card -->
         <div class="card profile-card">
-          <div class="avatar">{{ getInitials(user()!.name) }}</div>
+
+          <div class="avatar">
+            {{ getInitials(user()!.name) }}
+          </div>
+
           <h2>{{ user()!.name }}</h2>
           <p class="role">{{ user()!.role }}</p>
-          <!--
-            <div class="stats">
-              <div class="stat">
-                <span class="stat-val orders">{{ shiftInfo.totalOrders }}</span>
-                <span class="stat-lbl">Orders</span>
-              </div>
-            <div class="stat">
-              <span class="stat-val sales"
-                >EGP {{ shiftInfo.totalSales / 1000 | number: '1.0-0' }}K</span
-              >
-              <span class="stat-lbl">Total Sales</span>
-            </div>
-            <div class="stat">
-              <span class="stat-val rating">⭐ {{ shiftInfo.rating }}</span>
-              <span class="stat-lbl">Rating</span>
-            </div>
-          </div>
-          -->
+
         </div>
       </div>
 
-      <!-- RIGHT COLUMN -->
+      <!-- RIGHT -->
       <div class="col-right">
         <div class="card form-card">
-          <h3 class="section-title">Personal Info</h3>
+
+          <h3 class="section-title">
+            {{ 'CUSTOMER.PROFILE.PERSONAL_INFO' | translate }}
+          </h3>
 
           <form [formGroup]="form" (ngSubmit)="onSave()">
+
+            <!-- NAME -->
             <div class="field">
-              <label>FULL NAME</label>
-              <input formControlName="name" type="text" placeholder="Full Name" />
+              <label>{{ 'CUSTOMER.PROFILE.FULL_NAME' | translate }}</label>
+              <input formControlName="name" type="text" />
+
               @if (form.get('name')?.invalid && form.get('name')?.touched) {
-                <span class="field-error">Name is required</span>
+                <span class="field-error">
+                  {{ 'CUSTOMER.PROFILE.NAME_REQUIRED' | translate }}
+                </span>
               }
             </div>
 
+            <!-- EMAIL -->
             <div class="field">
-              <label>EMAIL</label>
-              <input formControlName="email" type="email" placeholder="Email" />
+              <label>{{ 'CUSTOMER.PROFILE.EMAIL' | translate }}</label>
+              <input formControlName="email" type="email" />
+
               @if (form.get('email')?.invalid && form.get('email')?.touched) {
-                <span class="field-error">Valid email is required</span>
+                <span class="field-error">
+                  {{ 'CUSTOMER.PROFILE.EMAIL_REQUIRED' | translate }}
+                </span>
               }
             </div>
 
+            <!-- USERNAME -->
             <div class="field">
-              <label>USERNAME (optional)</label>
-              <input formControlName="userName" type="text" placeholder="Username" />
+              <label>{{ 'CUSTOMER.PROFILE.USERNAME' | translate }}</label>
+              <input formControlName="userName" type="text" />
             </div>
 
+            <!-- PASSWORD -->
             <div class="field">
-              <label>NEW PASSWORD (optional)</label>
-              <input formControlName="newPassword" type="password" placeholder="New Password" />
+              <label>{{ 'CUSTOMER.PROFILE.NEW_PASSWORD' | translate }}</label>
+              <input formControlName="newPassword" type="password" />
+
               @if (form.get('newPassword')?.errors?.['minlength']) {
-                <span class="field-error">Minimum 6 characters</span>
+                <span class="field-error">
+                  {{ 'CUSTOMER.PROFILE.MIN_PASSWORD' | translate }}
+                </span>
               }
             </div>
 
+            <!-- CONFIRM -->
             <div class="field">
-              <label>CONFIRM PASSWORD</label>
-              <input
-                formControlName="confirmPassword"
-                type="password"
-                placeholder="Confirm Password"
-              />
-              @if (form.errors?.['passwordMismatch'] && form.get('confirmPassword')?.touched) {
-                <span class="field-error">Passwords do not match</span>
+              <label>{{ 'CUSTOMER.PROFILE.CONFIRM_PASSWORD' | translate }}</label>
+              <input formControlName="confirmPassword" type="password" />
+
+              @if (form.errors?.['passwordMismatch'] &&
+                   form.get('confirmPassword')?.touched) {
+                <span class="field-error">
+                  {{ 'CUSTOMER.PROFILE.PASSWORD_MISMATCH' | translate }}
+                </span>
               }
             </div>
 
+            <!-- MESSAGES -->
             @if (saveError()) {
               <p class="error-msg">{{ saveError() }}</p>
             }
 
             @if (saved()) {
-              <p class="success-msg">✓ Changes saved successfully!</p>
+              <p class="success-msg">
+                {{ 'CUSTOMER.PROFILE.SAVED_SUCCESS' | translate }}
+              </p>
             }
 
-            <button type="submit" class="btn-save" [disabled]="form.invalid">Save Changes</button>
+            <!-- SAVE -->
+            <button type="submit" class="btn-save" [disabled]="form.invalid">
+              {{ 'CUSTOMER.PROFILE.SAVE' | translate }}
+            </button>
+
           </form>
 
-          <button class="btn-logout" (click)="onLogout()">Logout</button>
+          <!-- LOGOUT -->
+          <button class="btn-logout" (click)="onLogout()">
+            {{ 'CUSTOMER.PROFILE.LOGOUT' | translate }}
+          </button>
+
         </div>
       </div>
+
     </div>
   }
 </div>

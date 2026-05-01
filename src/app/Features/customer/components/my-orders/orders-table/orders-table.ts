@@ -1,9 +1,10 @@
 import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-orders-table',
-  imports: [CommonModule],
+  imports: [CommonModule,TranslatePipe],
   templateUrl: './orders-table.html',
   styleUrl: './orders-table.scss',
 })

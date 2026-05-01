@@ -1,11 +1,20 @@
 <div class="timeline-card">
 
   <div class="timeline-header">
-    <div class="timeline-label">ORDER PROGRESS</div>
-    <div class="timeline-step-count">
-      Step {{ currentIndex() + 1 }} of {{ steps().length }}
-    </div>
+  <div class="timeline-label">
+    {{ 'CUSTOMER.TRACK_DELIVERY.TIMELINE_UI.TITLE' | translate }}
   </div>
+
+  <div class="timeline-step-count">
+    {{
+      'CUSTOMER.TRACK_DELIVERY.TIMELINE_UI.STEP_COUNT'
+        | translate:{
+            current: currentIndex() + 1,
+            total: steps().length
+          }
+    }}
+  </div>
+</div>
 
   <!-- Progress bar -->
   <div class="progress-bar-wrap">
@@ -41,19 +50,24 @@
         <!-- Right: content -->
         <div class="timeline-content">
           <div class="tl-title" [class.tl-title-active]="getStepState(i) === 'active'">
-            {{ step.label }}
+  {{ step.label | translate }}
 
-            @if (getStepState(i) === 'active') {
-              <span class="you-are-here">● Now</span>
-            }
-          </div>
+  @if (getStepState(i) === 'active') {
+    <span class="you-are-here">
+      ● {{ 'CUSTOMER.TRACK_DELIVERY.TIMELINE_UI.NOW' | translate }}
+    </span>
+  }
+</div>
 
           <div class="tl-desc">
-            @if (formatTime(step.timestamp)) {
-              <span class="tl-time">{{ formatTime(step.timestamp) }} — </span>
-            }
-            {{ getStepDesc(step, i) }}
-          </div>
+
+  @if (formatTime(step.timestamp)) {
+    <span class="tl-time">{{ formatTime(step.timestamp) }} — </span>
+  }
+
+  {{ getStepDesc(step, i) | translate }}
+
+</div>
         </div>
 
       </div>

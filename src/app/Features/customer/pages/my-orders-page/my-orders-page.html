@@ -2,9 +2,10 @@
 @if (loading()) {
   <div class="loading-wrap">
     <div class="spinner"></div>
-    <span>Loading your orders...</span>
+    <span>{{ 'CUSTOMER.ORDERS.LOADING' | translate }}</span>
   </div>
 } @else {
+
   <div class="page-wrap">
 
     <app-orders-header />
@@ -12,18 +13,19 @@
     @if (activeOrder()) {
       <app-active-order-card
         [order]="activeOrder()"
-        (track)="onTrackDelivery($event)"
-      />
+        (track)="onTrackDelivery($event)">
+      </app-active-order-card>
     }
 
     @if (orders().length > 0) {
       <app-orders-table
         [orders]="orders()"
-        (reorder)="reorder($event)"
-      />
+        (reorder)="reorder($event)">
+      </app-orders-table>
     } @else {
       <app-orders-empty-state />
     }
 
   </div>
+
 }

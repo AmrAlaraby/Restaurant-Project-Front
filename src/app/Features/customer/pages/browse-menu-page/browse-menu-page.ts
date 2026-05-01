@@ -4,7 +4,7 @@ import { MenuItemInterface } from '../../../../Core/Models/MenuItemModels/menu-i
 import { MenuItemsService } from '../../../../Core/Services/Menu-Item-Service/menu-item-service';
 import { Pagination } from "../../../../Shared/Components/pagination/pagination";
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Observable, Subject, takeUntil } from 'rxjs';
 import { Category } from '../../../../Core/Models/CategoryModels/Category ';
 import { CategoryService } from '../../../../Core/Services/Categories-Service/categories-service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,11 +13,14 @@ import { Basket } from '../../../../Core/Models/BasketModels/Basket';
 import { AsyncPipe } from '@angular/common';
 import { CartBar } from "../../components/cart-bar/cart-bar";
 import { BranchStateService } from '../../../../Core/Services/Branch-Service/branch-state-service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LocalizationService } from '../../../../Core/Services/Localization-Service/localization-service';
+
 
 @Component({
   selector: 'app-browse-menu-page',
   standalone: true,
-  imports: [CustomerMenuItemCard, Pagination, ReactiveFormsModule, AsyncPipe, CartBar],
+  imports: [CustomerMenuItemCard, Pagination, ReactiveFormsModule, TranslatePipe, CartBar],
   templateUrl: './browse-menu-page.html',
   styleUrls: ['./browse-menu-page.scss'],
 })
@@ -29,7 +32,8 @@ export class BrowseMenuPage implements OnInit {
 
   constructor(
     private basketService: BasketService,
-    private branchState: BranchStateService
+    private branchState: BranchStateService,
+    private localizationService: LocalizationService,
   ) { }
   private router = inject(Router);
   basket$!: Observable<Basket | null>;
@@ -72,7 +76,23 @@ export class BrowseMenuPage implements OnInit {
     });
 
     this.handleSearch();
+    this.getCurrentLanguage();
   }
+
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
+    
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 
   goToCart() {
     console.log('GO TO CART');
@@ -135,5 +155,12 @@ export class BrowseMenuPage implements OnInit {
 
   getTotal(basket: Basket): number {
     return basket.items.reduce((s, i) => s + i.price * i.quantity, 0);
+  }
+
+  getCategoryName(item: any): string {
+   if (this.CurrentLanguage === 'ar') {
+      return item.arabicName || item.name;
+    }
+    return item.name;
   }
 }

@@ -9,10 +9,19 @@ import { TrackDeliveryHeader } from "../../components/track-delivery/track-deliv
 import { TrackDriverCard } from "../../components/track-delivery/track-driver-card/track-driver-card";
 import { TrackTimeline } from "../../components/track-delivery/track-time-line/track-time-line";
 import { TrackInfoGrid } from "../../components/track-delivery/track-info-grid/track-info-grid";
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-track-delivery-page',
-  imports: [FormsModule, CommonModule, TrackDeliveryHeader, TrackDriverCard, TrackTimeline, TrackInfoGrid],
+  imports: [
+    FormsModule, 
+    CommonModule, 
+    TrackDeliveryHeader, 
+    TrackDriverCard, 
+    TrackTimeline, 
+    TrackInfoGrid,
+    TranslatePipe
+  ],
   templateUrl: './track-delivery-page.html',
   styleUrl: './track-delivery-page.scss',
 })
@@ -20,6 +29,7 @@ export class TrackDeliveryPage implements OnInit {
    private route           = inject(ActivatedRoute);
   private router          = inject(Router);
   private deliveryService = inject(DeliveryService);
+  private translate     = inject(TranslateService);
  
   loading  = signal(true);
   delivery = signal<Delivery | null>(null);
@@ -37,51 +47,55 @@ export class TrackDeliveryPage implements OnInit {
   }
  
   get steps(): TimelineStep[] {
-    const d      = this.delivery();
-    const driver = d?.driverName || 'Your driver';
-    return [
-      {
-        key: 'Placed',
-        label: 'Order Placed',
-        doneDesc: 'Your order was confirmed',
-        activeDesc: 'Waiting for confirmation...',
-        pendingDesc: 'Waiting...',
-        timestamp: d?.order?.createdAt ?? null,
-      },
-      {
-        key: 'Assigned',
-        label: 'Being Prepared',
-        doneDesc: 'Kitchen started your order',
-        activeDesc: 'Kitchen is preparing your order',
-        pendingDesc: 'Waiting...',
-        timestamp: d?.createdAt ?? null,
-      },
-      {
-        key: 'PickedUp',
-        label: 'Picked Up',
-        doneDesc: `${driver} picked up your order`,
-        activeDesc: `${driver} is picking up your order`,
-        pendingDesc: 'Waiting for pickup...',
-        timestamp: null,
-      },
-      {
-        key: 'OnTheWay',
-        label: 'On the Way',
-        doneDesc: 'Driver headed to your address',
-        activeDesc: 'Driver is heading to your address',
-        pendingDesc: 'Not yet...',
-        timestamp: null,
-      },
-      {
-        key: 'Delivered',
-        label: 'Delivered',
-        doneDesc: 'Order delivered successfully! 🎉',
-        activeDesc: 'Order delivered!',
-        pendingDesc: 'Estimated arrival soon',
-        timestamp: d?.deliveredAt ?? null,
-      },
-    ];
-  }
+  const d = this.delivery();
+
+  const driver =
+    d?.driverName ||
+    this.translate.instant('CUSTOMER.TRACK_DELIVERY.DEFAULTS.DRIVER');
+
+  return [
+    {
+      key: 'Placed',
+      label: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.Placed.LABEL',
+      doneDesc: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.Placed.DONE',
+      activeDesc: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.Placed.ACTIVE',
+      pendingDesc: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.Placed.PENDING',
+      timestamp: d?.order?.createdAt ?? null,
+    },
+    {
+      key: 'Assigned',
+      label: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.Assigned.LABEL',
+      doneDesc: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.Assigned.DONE',
+      activeDesc: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.Assigned.ACTIVE',
+      pendingDesc: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.Assigned.PENDING',
+      timestamp: d?.createdAt ?? null,
+    },
+    {
+      key: 'PickedUp',
+      label: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.PickedUp.LABEL',
+      doneDesc: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.PickedUp.DONE',
+      activeDesc: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.PickedUp.ACTIVE',
+      pendingDesc: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.PickedUp.PENDING',
+      timestamp: null,
+    },
+    {
+      key: 'OnTheWay',
+      label: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.OnTheWay.LABEL',
+      doneDesc: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.OnTheWay.DONE',
+      activeDesc: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.OnTheWay.ACTIVE',
+      pendingDesc: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.OnTheWay.PENDING',
+      timestamp: null,
+    },
+    {
+      key: 'Delivered',
+      label: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.Delivered.LABEL',
+      doneDesc: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.Delivered.DONE',
+      activeDesc: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.Delivered.ACTIVE',
+      pendingDesc: 'CUSTOMER.TRACK_DELIVERY.TIMELINEOPJ.Delivered.PENDING',
+      timestamp: d?.deliveredAt ?? null,
+    },
+  ];
+}
  
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));

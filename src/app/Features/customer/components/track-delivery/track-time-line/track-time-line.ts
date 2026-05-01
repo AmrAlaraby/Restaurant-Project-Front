@@ -1,10 +1,11 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TimelineStep } from '../../../../../Core/Models/DeliveryModels/track-delivery-types';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-track-timeline',
-  imports: [CommonModule],
+  imports: [CommonModule,TranslatePipe],
   templateUrl: './track-time-line.html',
   styleUrl: './track-time-line.scss',
 })

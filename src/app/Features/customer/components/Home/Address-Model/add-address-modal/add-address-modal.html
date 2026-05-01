@@ -2,45 +2,51 @@
 
 <div class="address-modal">
 
-    <div class="modal-header">
-        <h4>Add New Address</h4>
-        <button class="close-btn" (click)="close()">✕</button>
+  <div class="modal-header">
+    <h4>{{ 'CUSTOMER.ADDRESS_MODAL.TITLE' | translate }}</h4>
+    <button class="close-btn" (click)="close()">✕</button>
+  </div>
+
+  <div class="modal-body">
+
+    <div class="field">
+      <label>{{ 'CUSTOMER.ADDRESS_MODAL.BUILDING' | translate }} *</label>
+      <input type="number" [(ngModel)]="form.buildingNumber" />
     </div>
 
-    <div class="modal-body">
-
-        <div class="field">
-            <label>Building Number *</label>
-            <input type="number" [(ngModel)]="form.buildingNumber" />
-        </div>
-
-        <div class="field">
-            <label>Street *</label>
-            <input type="text" [(ngModel)]="form.street" />
-        </div>
-
-        <div class="field">
-            <label>City *</label>
-            <input type="text" [(ngModel)]="form.city" />
-        </div>
-
-        <div class="field">
-            <label>Note</label>
-            <input type="text" [(ngModel)]="form.note" />
-        </div>
-
-        <div class="field">
-            <label>Special Mark</label>
-            <input type="text" [(ngModel)]="form.specialMark" />
-        </div>
-
+    <div class="field">
+      <label>{{ 'CUSTOMER.ADDRESS_MODAL.STREET' | translate }} *</label>
+      <input type="text" [(ngModel)]="form.street" />
     </div>
 
-    <div class="modal-footer">
-        <button (click)="close()">Cancel</button>
-        <button (click)="submit()" [disabled]="loading">
-            {{ loading ? 'Saving...' : 'Save Address' }}
-        </button>
+    <div class="field">
+      <label>{{ 'CUSTOMER.ADDRESS_MODAL.CITY' | translate }} *</label>
+      <input type="text" [(ngModel)]="form.city" />
     </div>
+
+    <div class="field">
+      <label>{{ 'CUSTOMER.ADDRESS_MODAL.NOTE' | translate }}</label>
+      <input type="text" [(ngModel)]="form.note" />
+    </div>
+
+    <div class="field">
+      <label>{{ 'CUSTOMER.ADDRESS_MODAL.SPECIAL_MARK' | translate }}</label>
+      <input type="text" [(ngModel)]="form.specialMark" />
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button (click)="close()">
+      {{ 'CUSTOMER.ADDRESS_MODAL.CANCEL' | translate }}
+    </button>
+
+    <button (click)="submit()" [disabled]="loading">
+      {{ loading 
+        ? ('CUSTOMER.ADDRESS_MODAL.SAVING' | translate) 
+        : ('CUSTOMER.ADDRESS_MODAL.SAVE' | translate) 
+      }}
+    </button>
+  </div>
 
 </div>

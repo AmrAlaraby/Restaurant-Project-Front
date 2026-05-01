@@ -1,187 +1,142 @@
 <!-- Trigger Button -->
 <button class="btn-nutrition" (click)="open()">
-    <span class="btn-icon">🥗</span>
-    <span>Calculate Nutrition</span>
+  <span class="btn-icon">🥗</span>
+  <span>{{ 'CUSTOMER.NUTRITION.CALCULATE' | translate }}</span>
 </button>
 
 <!-- Modal -->
 <div class="nutrition-overlay" [class.visible]="isVisible" (click)="close()">
-    <div class="nutrition-modal" (click)="$event.stopPropagation()">
-
-        <!-- Header -->
-        <div class="modal-header">
-            <div class="header-left">
-                <span class="header-icon">🥗</span>
-                <div>
-                    <h2 class="modal-title">Nutrition Analysis</h2>
-                    <p class="modal-subtitle">AI-powered breakdown of your order</p>
-                </div>
-            </div>
-            <button class="btn-close-modal" (click)="close()">✕</button>
+  <div class="nutrition-modal" (click)="$event.stopPropagation()">
+    <!-- Header -->
+    <div class="modal-header">
+      <div class="header-left">
+        <span class="header-icon">🥗</span>
+        <div>
+          <h2 class="modal-title">
+            {{ 'CUSTOMER.NUTRITION.TITLE' | translate }}
+          </h2>
+          <p class="modal-subtitle">
+            {{ 'CUSTOMER.NUTRITION.SUBTITLE' | translate }}
+          </p>
         </div>
-
-        <!-- Loading -->
-        @if (isLoading) {
-        <div class="modal-body">
-            <div class="loading-state">
-                <div class="spinner"></div>
-                <p class="loading-text">Analyzing your order...</p>
-                <p class="loading-sub">Our AI nutritionist is calculating your meal</p>
-            </div>
-        </div>
-        }
-
-        <!-- Error -->
-        @if (!isLoading && errorMsg) {
-        <div class="modal-body">
-            <div class="error-state">
-                <span class="error-icon">⚠️</span>
-                <p class="error-text">{{ errorMsg }}</p>
-                <button class="btn-retry" (click)="retry()">Try Again</button>
-            </div>
-        </div>
-        }
-
-        <!-- Results -->
-        @if (!isLoading && !errorMsg && result; as r) {
-
-        <div class="modal-body">
-
-            <!-- Items -->
-            <div class="items-section">
-                <h3 class="section-title">Per Item</h3>
-
-                @for (item of r.items; track item.itemName) {
-                <div class="item-card">
-
-                    <div class="item-header">
-                        <span class="item-name">{{ item.itemName }}</span>
-                        <span class="item-qty">x{{ item.quantity }}</span>
-                    </div>
-
-                    <div class="macros-row">
-                        <div class="macro-chip calories">
-                            <span class="macro-value">{{ item.totals.calories | number:'1.0-0' }}</span>
-                            <span class="macro-label"> kcal</span>
-                        </div>
-
-                        <div class="macro-chip protein">
-                            <span class="macro-value">{{ item.totals.protein | number:'1.1-1' }}g</span>
-                            <span class="macro-label"> protein</span>
-                        </div>
-
-                        <div class="macro-chip carbs">
-                            <span class="macro-value">{{ item.totals.carbs | number:'1.1-1' }}g</span>
-                            <span class="macro-label"> carbs</span>
-                        </div>
-                    </div>
-
-                    <p class="per-unit-note">
-                        <strong>Per unit:</strong> {{ item.perItem.calories | number:'1.0-0' }} kcal ·
-                        {{ item.perItem.protein | number:'1.1-1' }}g protein ·
-                        {{ item.perItem.carbs | number:'1.1-1' }}g carbs
-                    </p>
-
-                    <div class="progress-section">
-                        <div class="progress-label">
-                            <span>% of daily calories </span>
-                            <span><strong>{{ calorieProgress(item) | number:'1.0-0' }}</strong> %</span>
-                        </div>
-
-                        <div class="progress-track">
-                            <div class="progress-fill calories-fill" [style.width.%]="calorieProgress(item)">
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                }
-            </div>
-
-            <!-- Order Totals (FIXED ) -->
-            <div class="totals-section">
-                <h3 class="section-title">Order Total</h3>
-
-                <div class="totals-card">
-                    <div class="total-row">
-
-                        <div class="total-item">
-                            <span class="total-value calories-color">
-                                {{ r.orderTotals.calories | number:'1.0-0' }}
-                            </span>
-                            <span class="total-label">Calories (kcal)</span>
-                        </div>
-
-                        <div class="total-divider"></div>
-
-                        <div class="total-item">
-                            <span class="total-value protein-color">
-                                {{ r.orderTotals.protein | number:'1.1-1' }}g
-                            </span>
-                            <span class="total-label">Protein</span>
-                        </div>
-
-                        <div class="total-divider"></div>
-
-                        <div class="total-item">
-                            <span class="total-value carbs-color">
-                                {{ r.orderTotals.carbs | number:'1.1-1' }}g
-                            </span>
-                            <span class="total-label">Carbs</span>
-                        </div>
-
-                    </div>
-
-                    <!-- Daily values -->
-                    <div class="daily-values">
-                        <p class="daily-title">% of Daily Recommended Values</p>
-
-                        <div class="dv-row">
-                            <span class="dv-label">Calories</span>
-                            <div class="progress-track">
-                                <div class="progress-fill calories-fill"
-                                    [style.width.%]="getCaloriesDV(r)">
-                                </div>
-                            </div>
-                            <span class="dv-pct">
-                                {{ (r.orderTotals.calories / 2000 * 100) | number:'1.0-0' }}%
-                            </span>
-                        </div>
-
-                        <div class="dv-row">
-                            <span class="dv-label">Protein</span>
-                            <div class="progress-track">
-                                <div class="progress-fill protein-fill"
-                                    [style.width.%]="getProteinDV(r)">
-                                </div>
-                            </div>
-                            <span class="dv-pct">
-                                {{ (r.orderTotals.protein / 50 * 100) | number:'1.0-0' }}%
-                            </span>
-                        </div>
-
-                        <div class="dv-row">
-                            <span class="dv-label">Carbs</span>
-                            <div class="progress-track">
-                                <div class="progress-fill carbs-fill"
-                                    [style.width.%]="getCarbsDV(r)">
-                                </div>
-                            </div>
-                            <span class="dv-pct">
-                                {{ (r.orderTotals.carbs / 300 * 100) | number:'1.0-0' }}%
-                            </span>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <p class="disclaimer">
-                * Values are AI-estimated based on ingredients.
-            </p>
-
-        </div>
-        }
-
+      </div>
+      <button class="btn-close-modal" (click)="close()">✕</button>
     </div>
+
+    <!-- Loading -->
+    @if (isLoading) {
+      <div class="modal-body">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p class="loading-text">
+            {{ 'CUSTOMER.NUTRITION.CALCULATING' | translate }}
+          </p>
+          <p class="loading-sub">
+            {{ 'CUSTOMER.NUTRITION.CALCULATING_SUB' | translate }}
+          </p>
+        </div>
+      </div>
+    }
+
+    <!-- Error -->
+    @if (!isLoading && errorMsg) {
+      <div class="modal-body">
+        <div class="error-state">
+          <span class="error-icon">⚠️</span>
+          <p class="error-text">
+            {{ 'CUSTOMER.NUTRITION.ERROR' | translate }}
+          </p>
+          <button class="btn-retry" (click)="retry()">
+            {{ 'CUSTOMER.NUTRITION.TRY_AGAIN' | translate }}
+          </button>
+        </div>
+      </div>
+    }
+
+    <!-- Results -->
+    @if (!isLoading && !errorMsg && result; as r) {
+      <div class="modal-body">
+        <!-- Items -->
+        <div class="items-section">
+          <h3 class="section-title">
+            {{ 'CUSTOMER.NUTRITION.PER_ITEM' | translate }}
+          </h3>
+
+          @for (item of r.items; track item.itemName) {
+            <div class="item-card">
+              <div class="item-header">
+                <span class="item-name">{{ item.itemName }}</span>
+                <span class="item-qty">x{{ item.quantity }}</span>
+              </div>
+
+              <div class="macros-row">
+                <div class="macro-chip calories">
+                  <span class="macro-value">
+                    {{ item.totals.calories | number: '1.0-0' }}
+                  </span>
+                  <span class="macro-label">
+                    {{ 'CUSTOMER.NUTRITION.KCAL' | translate }}
+                  </span>
+                </div>
+
+                <div class="macro-chip protein">
+                  <span class="macro-value"> {{ item.totals.protein | number: '1.1-1' }}g </span>
+                  <span class="macro-label">
+                    {{ 'CUSTOMER.NUTRITION.PROTEIN' | translate }}
+                  </span>
+                </div>
+
+                <div class="macro-chip carbs">
+                  <span class="macro-value"> {{ item.totals.carbs | number: '1.1-1' }}g </span>
+                  <span class="macro-label">
+                    {{ 'CUSTOMER.NUTRITION.CARBS' | translate }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+
+        <!-- Order Totals -->
+        <div class="totals-section">
+          <h3 class="section-title">
+            {{ 'CUSTOMER.NUTRITION.ORDER_TOTAL' | translate }}
+          </h3>
+
+          <div class="totals-card">
+            <div class="total-item">
+              <span class="total-value calories-color">
+                {{ r.orderTotals.calories | number: '1.0-0' }}
+              </span>
+              <span class="total-label">
+                {{ 'CUSTOMER.NUTRITION.CALORIES' | translate }}
+              </span>
+            </div>
+
+            <div class="total-item">
+              <span class="total-value protein-color">
+                {{ r.orderTotals.protein | number: '1.1-1' }}g
+              </span>
+              <span class="total-label">
+                {{ 'CUSTOMER.NUTRITION.PROTEIN' | translate }}
+              </span>
+            </div>
+
+            <div class="total-item">
+              <span class="total-value carbs-color">
+                {{ r.orderTotals.carbs | number: '1.1-1' }}g
+              </span>
+              <span class="total-label">
+                {{ 'CUSTOMER.NUTRITION.CARBS' | translate }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <p class="disclaimer">
+          {{ 'CUSTOMER.NUTRITION.DISCLAIMER' | translate }}
+        </p>
+      </div>
+    }
+  </div>
 </div>
