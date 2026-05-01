@@ -1,111 +1,206 @@
+// payment-terminal.component.scss
+// All colours via CSS custom properties — no hardcoded hex values.
+
+// ─── Terminal wrapper ────────────────────────────────────────────────────────
 .terminal {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 24px;
+  background: var(--clr-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  gap: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--clr-border);
+
+  .dark & {
+    background: var(--clr-surface-alt);
+    border-color: var(--clr-border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--space-md);
+    gap: var(--space-md);
+  }
 }
 
-/* ── Empty State ─────────────────────────────────────────── */
+// ─── Empty state ─────────────────────────────────────────────────────────────
 .terminal-empty {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 60px 24px;
+  background: var(--clr-surface);
+  border-radius: var(--radius-lg);
+  padding-block: 60px;
+  padding-inline: var(--space-lg);
   text-align: center;
-  color: #bbb;
+  color: var(--clr-text-hint);
+  font-family: var(--font-body);
   font-size: 14px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--clr-border);
+
+  .dark & {
+    background: var(--clr-surface-alt);
+    color: var(--clr-text-hint);
+    border-color: var(--clr-border);
+    box-shadow: var(--shadow-sm);
+  }
 
   .empty-icon {
     font-size: 40px;
-    margin-bottom: 12px;
+    margin-block-end: var(--space-sm);
+    line-height: 1;
+  }
+
+  p {
+    margin: 0;
   }
 }
 
-/* ── Success Banner ──────────────────────────────────────── */
+// ─── Success Banner ──────────────────────────────────────────────────────────
 .success-banner {
   display: flex;
   align-items: center;
-  gap: 16px;
-  background: #f0fdf4;
-  border: 1.5px solid #86efac;
-  border-radius: 14px;
-  padding: 20px 24px;
+  gap: var(--space-md);
+  background: var(--clr-success-bg);
+  border: 1.5px solid var(--clr-success);
+  border-radius: var(--radius-md);
+  padding-block: var(--space-md);
+  padding-inline: var(--space-lg);
   animation: fadeIn 0.4s ease;
 
-  .success-icon-wrap {
-    font-size: 36px;
-    flex-shrink: 0;
+  .dark & {
+    background: var(--clr-success-bg);
+    border-color: var(--clr-success);
   }
 
-  .success-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: #15803d;
-    margin-bottom: 4px;
+  @media (max-width: 768px) {
+    padding-inline: var(--space-md);
+    flex-direction: column;
+    text-align: center;
   }
+}
 
-  .success-sub {
-    font-size: 13px;
-    color: #4ade80;
-    font-weight: 500;
+.success-icon-wrap {
+  font-size: 36px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.success-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  min-width: 0;
+}
+
+.success-title {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--clr-success);
+
+  .dark & {
+    color: var(--clr-success);
+  }
+}
+
+.success-sub {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--clr-text-secondary);
+
+  .dark & {
+    color: var(--clr-text-secondary);
   }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-8px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* ── Section Label ───────────────────────────────────────── */
+// ─── Section wrapper ─────────────────────────────────────────────────────────
 .section {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-sm);
 }
 
 .section-label {
+  font-family: var(--font-body);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.1em;
-  color: #999;
   text-transform: uppercase;
+  color: var(--clr-text-hint);
+
+  .dark & {
+    color: var(--clr-text-hint);
+  }
 }
 
-/* ── Payment Methods (read-only) ─────────────────────────── */
+// ─── Payment methods grid (read-only indicator) ───────────────────────────────
 .methods-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: var(--space-sm);
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .method-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 16px 8px;
-  background: #fafafa;
-  border: 1.5px solid #eee;
-  border-radius: 12px;
+  gap: var(--space-sm);
+  padding-block: var(--space-md);
+  padding-inline: var(--space-sm);
+  background: var(--clr-cream);
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
   font-size: 13px;
   font-weight: 500;
-  color: #aaa;
+  color: var(--clr-text-hint);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+
+  .dark & {
+    background: var(--clr-cream-mid);
+    border-color: var(--clr-border);
+    color: var(--clr-text-hint);
+  }
 
   .method-icon {
     font-size: 24px;
     filter: grayscale(1);
     opacity: 0.5;
+    transition:
+      filter var(--transition-fast),
+      opacity var(--transition-fast);
   }
 
-  // Active = payment method from backend
   &.active {
-    background: #fdf5f4;
-    border-color: #c0392b;
-    color: #c0392b;
+    background: var(--clr-danger-bg);
+    border-color: var(--clr-primary);
+    color: var(--clr-primary);
     font-weight: 600;
+
+    .dark & {
+      background: var(--clr-danger-bg);
+      border-color: var(--clr-primary);
+      color: var(--clr-primary-light);
+    }
 
     .method-icon {
       filter: none;
@@ -114,118 +209,215 @@
   }
 }
 
-/* ── Amounts ─────────────────────────────────────────────── */
+// ─── Amounts row ─────────────────────────────────────────────────────────────
 .amounts-row {
   flex-direction: row !important;
-  gap: 16px;
+  gap: var(--space-md);
   align-items: flex-start;
+
+  @media (max-width: 768px) {
+    flex-direction: column !important;
+  }
 
   .amount-box {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--space-sm);
+    min-width: 0;
   }
 }
 
 .total-due {
-  font-size: 30px;
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 4vw, 30px);
   font-weight: 800;
-  color: #c0392b;
+  color: var(--clr-primary);
+  line-height: 1.1;
+
+  .dark & {
+    color: var(--clr-primary-light);
+  }
 }
 
 .amount-input {
   width: 100%;
   height: 50px;
-  background: #f0ebe5;
-  border: none;
-  border-radius: 10px;
+  background: var(--clr-cream-mid);
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-heading);
   font-size: 18px;
   font-weight: 600;
-  text-align: right;
-  padding: 0 16px;
-  color: #333;
+  text-align: end;
+  padding-block: 0;
+  padding-inline: var(--space-md);
+  color: var(--clr-text-primary);
   outline: none;
   box-sizing: border-box;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  .dark & {
+    background: var(--clr-cream-dark);
+    border-color: var(--clr-border);
+    color: var(--clr-text-primary);
+  }
 
   &:focus {
-    box-shadow: 0 0 0 2px #c0392b44;
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.15);
+
+    .dark & {
+      box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.25);
+    }
+  }
+
+  // Remove browser number spinners
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  &[type='number'] {
+    -moz-appearance: textfield;
   }
 }
 
-/* ── Change Due ──────────────────────────────────────────── */
+// ─── Change due row ──────────────────────────────────────────────────────────
 .change-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #f7f3ef;
-  border-radius: 10px;
-  padding: 14px 18px;
+  background: var(--clr-cream);
+  border: 1px solid var(--clr-cream-dark);
+  border-radius: var(--radius-md);
+  padding-block: var(--space-sm);
+  padding-inline: var(--space-md);
+
+  .dark & {
+    background: var(--clr-cream-mid);
+    border-color: var(--clr-border);
+  }
 }
 
 .change-label {
+  font-family: var(--font-body);
   font-size: 14px;
-  color: #888;
+  font-weight: 500;
+  color: var(--clr-text-secondary);
+
+  .dark & {
+    color: var(--clr-text-secondary);
+  }
 }
 
 .change-value {
+  font-family: var(--font-heading);
   font-size: 18px;
   font-weight: 700;
-  color: #c0392b;
+  color: var(--clr-primary);
+
+  .dark & {
+    color: var(--clr-primary-light);
+  }
 
   &.negative {
-    color: #e74c3c;
+    color: var(--clr-danger);
+
+    .dark & {
+      color: var(--clr-primary-light);
+    }
   }
 }
 
-/* ── Warning ─────────────────────────────────────────────── */
+// ─── Warning message ─────────────────────────────────────────────────────────
 .warning-msg {
-  background: #fff8e1;
-  border: 1px solid #ffe082;
-  border-radius: 8px;
-  padding: 10px 14px;
+  background: var(--clr-warning-bg);
+  border: 1px solid var(--clr-warning);
+  border-radius: var(--radius-sm);
+  padding-block: var(--space-sm);
+  padding-inline: var(--space-md);
+  font-family: var(--font-body);
   font-size: 13px;
-  color: #b45309;
   font-weight: 500;
+  color: var(--clr-warning);
+
+  .dark & {
+    background: var(--clr-warning-bg);
+    border-color: var(--clr-warning);
+    color: var(--clr-warning);
+  }
 }
 
-/* ── Buttons ─────────────────────────────────────────────── */
+// ─── Confirm button ───────────────────────────────────────────────────────────
 .confirm-btn {
   width: 100%;
   height: 54px;
-  background: #c0392b;
-  color: #fff;
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-heading);
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s;
+  transition:
+    background var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+
+  // No dark override needed — crimson reads well on both themes
 
   &:hover:not(:disabled) {
-    background: #a93226;
+    background: var(--clr-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
   }
 
   &:disabled {
-    opacity: 0.5;
+    opacity: 0.45;
     cursor: not-allowed;
   }
 }
 
+// ─── Refund button ────────────────────────────────────────────────────────────
 .refund-btn {
   width: 100%;
   height: 44px;
   background: transparent;
-  color: #c0392b;
-  border: 1.5px solid #e0d8d5;
-  border-radius: 12px;
+  color: var(--clr-primary);
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+
+  .dark & {
+    color: var(--clr-primary-light);
+    border-color: var(--clr-border);
+  }
 
   &:hover {
-    background: #fdf5f4;
-    border-color: #c0392b;
+    background: var(--clr-danger-bg);
+    border-color: var(--clr-primary);
+    color: var(--clr-primary);
+
+    .dark & {
+      background: var(--clr-danger-bg);
+      border-color: var(--clr-primary);
+      color: var(--clr-primary-light);
+    }
   }
 }

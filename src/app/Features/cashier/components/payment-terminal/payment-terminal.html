@@ -1,21 +1,24 @@
 <div class="terminal" *ngIf="order">
-
   <!-- ✅ Success Banner -->
   <div class="success-banner" *ngIf="paymentSuccess">
-    <div class="success-icon-wrap">✅</div>
+    <div class="success-icon-wrap" aria-hidden="true">✅</div>
 
-    <div>
+    <div class="success-content">
       <div class="success-title">
         {{ 'CASHIER.PAYMENT.TERMINAL.SUCCESS.TITLE' | translate }}
       </div>
 
       <div class="success-sub">
         {{
-          'CASHIER.PAYMENT.TERMINAL.SUCCESS.SUBTITLE' | translate:{
-            id: order.id,
-            amount: order.totalAmount,
-            method: (('CASHIER.DASHBOARD.PAYMENT_METHODS.METHODS.' + order.payment?.paymentMethod?.toUpperCase()) | translate)
-          }
+          'CASHIER.PAYMENT.TERMINAL.SUCCESS.SUBTITLE'
+            | translate
+              : {
+                  id: order.id,
+                  amount: order.totalAmount,
+                  method:
+                    ('CASHIER.DASHBOARD.PAYMENT_METHODS.METHODS.' +
+                      order.payment?.paymentMethod?.toUpperCase() | translate),
+                }
         }}
       </div>
     </div>
@@ -28,40 +31,37 @@
     </div>
 
     <div class="methods-grid">
-
       <div class="method-btn" [class.active]="order.payment?.paymentMethod === 'Cash'">
-        <span class="method-icon">💵</span>
+        <span class="method-icon" aria-hidden="true">💵</span>
         <span>{{ 'CASHIER.DASHBOARD.PAYMENT_METHODS.METHODS.CASH' | translate }}</span>
       </div>
 
       <div class="method-btn" [class.active]="order.payment?.paymentMethod === 'Card'">
-        <span class="method-icon">💳</span>
+        <span class="method-icon" aria-hidden="true">💳</span>
         <span>{{ 'CASHIER.DASHBOARD.PAYMENT_METHODS.METHODS.CARD' | translate }}</span>
       </div>
 
       <div class="method-btn" [class.active]="order.payment?.paymentMethod === 'InstaPay'">
-        <span class="method-icon">📱</span>
+        <span class="method-icon" aria-hidden="true">📱</span>
         <span>{{ 'CASHIER.DASHBOARD.PAYMENT_METHODS.METHODS.INSTAPAY' | translate }}</span>
       </div>
 
       <div class="method-btn" [class.active]="order.payment?.paymentMethod === 'Wallet'">
-        <span class="method-icon">👛</span>
+        <span class="method-icon" aria-hidden="true">👛</span>
         <span>{{ 'CASHIER.DASHBOARD.PAYMENT_METHODS.METHODS.WALLET' | translate }}</span>
       </div>
-
     </div>
   </div>
 
   <!-- Amounts Row -->
   <div class="section amounts-row" *ngIf="!paymentSuccess">
-
     <div class="amount-box">
       <div class="section-label">
         {{ 'CASHIER.PAYMENT.TERMINAL.TOTAL_DUE' | translate }}
       </div>
 
       <div class="total-due">
-        {{ 'CASHIER.PAYMENT.BILL_PREVIEW.TOTAL_AMOUNT' | translate:{ amount: order.totalAmount } }}
+        {{ 'CASHIER.PAYMENT.BILL_PREVIEW.TOTAL_AMOUNT' | translate: { amount: order.totalAmount } }}
       </div>
     </div>
 
@@ -79,7 +79,6 @@
         [placeholder]="'CASHIER.PAYMENT.TERMINAL.PLACEHOLDERS.AMOUNT' | translate"
       />
     </div>
-
   </div>
 
   <!-- Change Due -->
@@ -89,7 +88,10 @@
     </span>
 
     <span class="change-value" [class.negative]="change < 0">
-      {{ 'CASHIER.PAYMENT.BILL_PREVIEW.TOTAL_AMOUNT' | translate:{ amount: (change | number:'1.2-2') } }}
+      {{
+        'CASHIER.PAYMENT.BILL_PREVIEW.TOTAL_AMOUNT'
+          | translate: { amount: (change | number: '1.2-2') }
+      }}
     </span>
   </div>
 
@@ -118,11 +120,10 @@
   <button class="refund-btn" (click)="issueRefund()" *ngIf="!paymentSuccess">
     {{ 'CASHIER.PAYMENT.TERMINAL.BUTTONS.REFUND' | translate }}
   </button>
-
 </div>
 
 <!-- Empty State -->
 <div class="terminal-empty" *ngIf="!order">
-  <div class="empty-icon">🧾</div>
+  <div class="empty-icon" aria-hidden="true">🧾</div>
   <p>{{ 'CASHIER.PAYMENT.TERMINAL.EMPTY' | translate }}</p>
 </div>
