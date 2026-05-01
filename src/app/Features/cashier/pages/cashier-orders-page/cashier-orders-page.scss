@@ -1,51 +1,152 @@
+// ============================================================
+//  cashier-orders-page.scss
+//  Brand: Warm Red & Gold  |  Dark-mode via .dark class only
+//  Uses CSS custom properties from global styles.scss
+// ============================================================
+
+// ─── Page shell ─────────────────────────────────────────────
 .page {
-  padding: 24px; /* 👈 رجعنا المسافة من كل الاتجاهات */
+  padding-block: var(--space-lg);
+  padding-inline: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  background-color: var(--clr-surface-alt);
+  min-height: 100%;
+
+  .dark & {
+    background-color: var(--clr-surface-alt); // dark: #2C1400
+  }
 }
 
-/* ── HEADER ── */
+// ─── Header ─────────────────────────────────────────────────
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
   flex-wrap: nowrap;
+
+  h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+    font-weight: 800;
+    color: var(--clr-text-primary);
+    margin: 0;
+    letter-spacing: -0.02em;
+
+    // Accent underline
+    position: relative;
+    padding-block-end: var(--space-xs);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset-block-end: 0;
+      inset-inline-start: 0;
+      width: 2.5rem;
+      height: 3px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(to right, var(--clr-primary), var(--clr-accent));
+    }
+
+    .dark & {
+      color: var(--clr-text-primary); // dark: #FFF8F0
+    }
+  }
 }
 
-/* ── CONTROLS ROW ── */
+// ─── Controls row ───────────────────────────────────────────
 .controls-row {
   display: flex;
-  align-items: center; /* نفس المستوى */
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-/* ── NEW ORDER BUTTON ── */
-.new-order-btn {
-  margin-left: auto;
-
-  background: #e53935;
-  color: white;
-  border: none;
-
-  height: 40px;
-  padding: 0 16px;
-
-  border-radius: 10px;
-  cursor: pointer;
-
-  display: flex;
   align-items: center;
-  justify-content: center;
-
-  font-size: 14px;
-  font-weight: 500;
-
-  transform: translateY(-14px); /* 👈 رفع بسيط جدًا */
+  gap: var(--space-md);
+  flex-wrap: wrap;
 }
 
-/* ── FILTER COMPONENT ── */
+// ─── Filter component host ──────────────────────────────────
 app-waiter-order-filters {
   display: flex;
   align-items: center;
   height: 40px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+// ─── New Order button ───────────────────────────────────────
+.new-order-btn {
+  margin-inline-start: auto;
+  flex-shrink: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+
+  height: 40px;
+  padding-inline: var(--space-md);
+  border: none;
+  border-radius: var(--radius-md);
+
+  background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary-dark));
+  color: var(--clr-text-on-primary);
+
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  cursor: pointer;
+
+  box-shadow: 0 3px 12px color-mix(in srgb, var(--clr-primary) 32%, transparent);
+  transition:
+    background var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+
+  &:hover {
+    background: linear-gradient(135deg, var(--clr-primary-dark), var(--clr-primary-dark));
+    box-shadow: 0 5px 18px color-mix(in srgb, var(--clr-primary) 42%, transparent);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px color-mix(in srgb, var(--clr-primary) 25%, transparent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--clr-accent);
+    outline-offset: 3px;
+  }
+
+  .dark & {
+    background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary-dark));
+    color: var(--clr-text-on-primary);
+    box-shadow: 0 3px 14px color-mix(in srgb, var(--clr-primary) 48%, transparent);
+  }
+}
+
+// ─── Responsive ─────────────────────────────────────────────
+@media (max-width: 768px) {
+  .page {
+    padding-block: var(--space-md);
+    padding-inline: var(--space-md);
+    gap: var(--space-sm);
+  }
+
+  .controls-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  app-waiter-order-filters {
+    height: auto;
+    width: 100%;
+  }
+
+  .new-order-btn {
+    margin-inline-start: 0;
+    width: 100%;
+    height: 44px;
+  }
 }

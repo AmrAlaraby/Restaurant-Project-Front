@@ -1,41 +1,44 @@
 <div class="layout">
-
   <!-- SIDEBAR -->
-  <app-sidebar [sections]="sidebarData" [class.open]="isOpen" prefix="cashier" [isOpen]="isOpen"
-    [AvatarLetters]="AvatarLetters" [UserName]="UserName" [UserRole]="UserRole" (close)="closeSidebar()">
+  <app-sidebar
+    [sections]="sidebarData"
+    [class.open]="isOpen"
+    prefix="cashier"
+    [isOpen]="isOpen"
+    [AvatarLetters]="AvatarLetters"
+    [UserName]="UserName"
+    [UserRole]="UserRole"
+    (close)="closeSidebar()"
+  >
   </app-sidebar>
 
   <!-- CONTENT -->
   <div class="app-shell">
-
     <!-- TOPBAR -->
     <header class="topbar">
-      
-
-      <button class="hamburger" (click)="openSidebar()">
-        ☰
+      <button class="hamburger" (click)="openSidebar()" aria-label="Open menu">
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
       </button>
 
       <div class="title">
-        {{topbarTitle | translate}}
+        {{ topbarTitle | translate }}
       </div>
 
       <div class="topbar-right">
         <app-lang-switch></app-lang-switch>
         <app-notification-bell [notifications]="notifications"></app-notification-bell>
 
-        <div class="avatar">
-          {{AvatarLetters}}
+        <div class="avatar" aria-label="User avatar">
+          {{ AvatarLetters }}
         </div>
       </div>
-
     </header>
 
     <!-- PAGE -->
     <main class="main-content">
       <router-outlet></router-outlet>
     </main>
-
   </div>
-
 </div>

@@ -1,5 +1,39 @@
 {
   "CUSTOMER": {
+     "AI": {
+    "SUGGESTER": {
+      "HEADER": {
+        "TITLE": "AI Recipe Suggester",
+        "SUBTITLE": "Select available ingredients and the system will suggest the best matching dishes"
+      },
+
+      "INPUT": {
+        "LABEL": "Available Ingredients",
+        "ADD": "Add Ingredient",
+        "SEARCH": "Search ingredient...",
+        "LOADING": "Loading...",
+        "HINT": "Click \"Add Ingredient\" to select your available ingredients"
+      },
+
+      "ACTIONS": {
+        "FIND": "Find Recipes",
+        "SEARCHING": "Searching...",
+        "RESET": "Reset"
+      },
+
+      "RESULTS": {
+        "TITLE": "Results",
+        "DISHES": "dishes",
+        "EMPTY_TITLE": "No recipes match your ingredients",
+        "EMPTY_SUB": "Try lowering the match score or adding more ingredients"
+      },
+
+      "INGREDIENTS": {
+        "MATCHED": "Matched",
+        "MISSING": "Missing"
+      }
+    }
+  },
     "ORDER_STATUS": {
       "Pending": "Pending",
       "Confirmed": "Confirmed",
@@ -988,7 +1022,8 @@
           "PREPARING": "Preparing",
           "READY": "Ready",
           "DELIVERED": "Delivered",
-          "CANCELLED": "Cancelled"
+          "CANCELLED": "Cancelled",
+          "AWAITINGPAYMENT": "Awaiting Payment"
         },
         "TYPE": {
           "ALL": "All Types",

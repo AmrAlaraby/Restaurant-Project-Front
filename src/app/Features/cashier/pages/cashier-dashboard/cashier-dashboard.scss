@@ -1,100 +1,254 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap');
+// ============================================================
+//  cashier-dashboard.scss
+//  Brand: Warm Red & Gold  |  Dark-mode via .dark class only
+//  Uses CSS custom properties from global styles.scss
+// ============================================================
 
 :host {
   display: block;
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-body);
 }
 
+// ─── Dashboard shell ────────────────────────────────────────
 .dashboard {
   min-height: 100vh;
-  background: #f5f0eb;
-  padding: 32px 36px;
+  background-color: var(--clr-surface-alt);
+  padding-block: var(--space-xl);
+  padding-inline: var(--space-xl);
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: var(--space-lg);
+
+  .dark & {
+    background-color: var(--clr-surface-alt); // dark: #2C1400
+  }
 }
 
-/* ── Top Bar ─────────────────────────────────────────────── */
+// ─── Top Bar ────────────────────────────────────────────────
 .top-bar {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+// ─── Greeting block ─────────────────────────────────────────
+.greeting-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
 }
 
 .greeting {
-  font-size: 26px;
+  font-family: var(--font-heading);
+  font-size: clamp(1.375rem, 3vw, 1.75rem);
   font-weight: 800;
-  color: #1a1a1a;
-  margin: 0 0 4px;
-  letter-spacing: -0.5px;
-}
-
-.sub-info {
-  font-size: 13px;
-  color: #999;
+  color: var(--clr-text-primary);
   margin: 0;
-}
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 
-.process-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  height: 46px;
-  padding: 0 24px;
-  background: #c0392b;
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 700;
-  font-family: 'DM Sans', sans-serif;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
+  // Subtle gold shimmer on first word via a gradient mask trick
+  // (non-critical enhancement — degrades gracefully)
+  background: linear-gradient(100deg, var(--clr-text-primary) 60%, var(--clr-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 
-  &:hover {
-    background: #a93226;
-    transform: translateY(-1px);
+  .dark & {
+    background: linear-gradient(
+      100deg,
+      var(--clr-text-primary) 60%,
+      // dark: #FFF8F0
+      var(--clr-accent-light) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }
 
-/* ── Section ─────────────────────────────────────────────── */
+.sub-info {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--clr-text-hint);
+  margin: 0;
+
+  .dark & {
+    color: var(--clr-text-hint); // dark: #C4956A
+  }
+}
+
+// ─── Primary CTA button ─────────────────────────────────────
+.process-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+
+  height: 46px;
+  padding-inline: var(--space-lg);
+
+  background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary-dark));
+  color: var(--clr-text-on-primary);
+  border: none;
+  border-radius: var(--radius-md);
+
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  cursor: pointer;
+
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--clr-primary) 35%, transparent);
+  transition:
+    background var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+
+  &:hover {
+    background: linear-gradient(135deg, var(--clr-primary-dark), var(--clr-primary-dark));
+    box-shadow: 0 6px 20px color-mix(in srgb, var(--clr-primary) 45%, transparent);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--clr-primary) 30%, transparent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--clr-accent);
+    outline-offset: 3px;
+  }
+
+  // ── Outline variant (used for "View All") ──────────────────
+  &--outline {
+    background: transparent;
+    color: var(--clr-primary);
+    border: 1.5px solid var(--clr-primary);
+    box-shadow: none;
+
+    &:hover {
+      background: color-mix(in srgb, var(--clr-primary) 8%, transparent);
+      box-shadow: none;
+      transform: translateY(-1px);
+    }
+
+    .dark & {
+      color: var(--clr-primary-light);
+      border-color: var(--clr-primary-light);
+      background: transparent;
+
+      &:hover {
+        background: color-mix(in srgb, var(--clr-primary-light) 12%, transparent);
+      }
+    }
+  }
+
+  .dark & {
+    background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary-dark));
+    color: var(--clr-text-on-primary);
+    box-shadow: 0 4px 18px color-mix(in srgb, var(--clr-primary) 50%, transparent);
+  }
+}
+
+// ─── Section wrapper ────────────────────────────────────────
 .section {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: var(--space-md);
 }
 
+// ─── Section header ─────────────────────────────────────────
 .section-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
 }
 
+// ─── Section title ──────────────────────────────────────────
 .section-title {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-sm);
 
   h2 {
-    font-size: 18px;
+    font-family: var(--font-heading);
+    font-size: 1.125rem;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--clr-text-primary);
     margin: 0;
+
+    .dark & {
+      color: var(--clr-text-primary); // dark: #FFF8F0
+    }
   }
 
   .section-icon {
-    font-size: 20px;
+    font-size: 1.25rem;
+    line-height: 1;
+    // Gold ring around the icon
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background-color: var(--clr-cream-mid);
+    border: 1px solid var(--clr-border);
+
+    .dark & {
+      background-color: var(--clr-cream-mid); // dark: #3D1E00
+      border-color: var(--clr-border); // dark: #5D3A1A
+    }
   }
 }
 
 .section-hint {
-  font-size: 13px;
-  color: #aaa;
+  font-size: 0.8125rem;
+  color: var(--clr-text-hint);
+
+  .dark & {
+    color: var(--clr-text-hint); // dark: #C4956A
+  }
 }
 
-/* ── Bottom Row ──────────────────────────────────────────── */
+// ─── Bottom row ─────────────────────────────────────────────
 .bottom-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: var(--space-lg);
+}
+
+// ─── Responsive ─────────────────────────────────────────────
+@media (max-width: 768px) {
+  .dashboard {
+    padding-block: var(--space-lg);
+    padding-inline: var(--space-md);
+    gap: var(--space-md);
+  }
+
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .process-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .bottom-row {
+    grid-template-columns: 1fr;
+  }
 }
