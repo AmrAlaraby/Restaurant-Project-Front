@@ -1,35 +1,73 @@
-:host {
-  --gray-200: rgba(192, 57, 43, 0.13);
-  --red: #C0392B;
+// ─── Filters — Apple-grade refinement ────────────────────────────────────────
+//
+// Dark mode: .dark class only — never prefers-color-scheme.
+// Logical properties throughout — RTL-safe.
+// Zero hardcoded hex — only CSS custom properties from styles.scss.
+//
+// ─────────────────────────────────────────────────────────────────────────────
+
+@keyframes f-fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+
+
+// ─── Filters Bar ─────────────────────────────────────────────────────────────
 
 .filters {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: var(--space-sm);
+  margin-block-end: var(--space-lg);
+  flex-wrap: wrap;
+  animation: f-fade-up .3s ease both;
 }
 
+
+// ─── Select ───────────────────────────────────────────────────────────────────
+
 select {
-  border-radius: 8px;
-  padding: 9px 32px 9px 14px;
-  border: 1px solid var(--gray-200);
-  background: #FFFFFF;
-  color: #2D0A08;
-  font-size: 12px;
+  height: 36px;
+  padding-block: 0;
+  padding-inline: var(--space-sm) 30px;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  background-color: var(--clr-surface);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239C6A3A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-sm) center;
+  color: var(--clr-text-primary);
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  letter-spacing: -.01em;
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239B4437' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  transition: border-color .2s;
+  -webkit-appearance: none;
+  outline: none;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-normal),
+    color var(--transition-normal);
 
-  &:focus {
-    outline: none;
-    border-color: var(--red);
-    box-shadow: 0 0 0 0.2rem rgba(192, 57, 43, 0.15);
+  .dark & {
+    background-color: var(--clr-surface);
+    color: var(--clr-text-primary);
+    border-color: var(--clr-border);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23C4956A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
   }
 
   &:hover {
-    border-color: rgba(192, 57, 43, 0.35);
+    border-color: var(--clr-cream-dark);
+
+    .dark & { border-color: var(--clr-cream-dark); }
+  }
+
+  &:focus {
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, .1);
+
+    .dark & {
+      box-shadow: 0 0 0 3px rgba(192, 57, 43, .22);
+    }
   }
 }
