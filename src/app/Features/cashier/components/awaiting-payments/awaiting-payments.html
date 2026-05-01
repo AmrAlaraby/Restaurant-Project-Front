@@ -1,5 +1,4 @@
 <div class="awaiting-payments">
-
   <!-- Search Input -->
   <div class="search-bar">
     <input
@@ -25,12 +24,12 @@
       {{ getOrderLabel(order) | translate }} · #{{ order.id }}
     </button>
   </div>
-
 </div>
 
 <app-pagination
   [pageIndex]="pageIndex"
   [pageSize]="pageSize"
   [totalCount]="totalCount"
-  (pageChanged)="onPageChanged($event)">
+  (pageChanged)="onPageChanged($event)"
+>
 </app-pagination>

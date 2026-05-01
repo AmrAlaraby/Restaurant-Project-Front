@@ -5,11 +5,9 @@
 </div>
 
 <div *ngIf="delivery" class="details-wrap">
-
   <!-- Header -->
   <div class="details-header">
-    <div>
-
+    <div class="header-text">
       <div class="details-title">
         {{ 'CASHIER.DELIVERIES.DETAILS.HEADER.ORDER' | translate }}
         #{{ delivery.order.id }}
@@ -18,25 +16,23 @@
       <div class="details-sub">
         {{ getBranchName(delivery.order) }}
       </div>
-
     </div>
 
-    <span class="status-badge"
-          [ngClass]="{
-            'badge-assigned':  delivery.deliveryStatus === 'Assigned',
-            'badge-pickedup':  delivery.deliveryStatus === 'PickedUp',
-            'badge-onway':     delivery.deliveryStatus === 'OnTheWay',
-            'badge-delivered': delivery.deliveryStatus === 'Delivered'
-          }">
-
+    <span
+      class="status-badge"
+      [ngClass]="{
+        'badge-assigned': delivery.deliveryStatus === 'Assigned',
+        'badge-pickedup': delivery.deliveryStatus === 'PickedUp',
+        'badge-onway': delivery.deliveryStatus === 'OnTheWay',
+        'badge-delivered': delivery.deliveryStatus === 'Delivered',
+      }"
+    >
       {{ 'CASHIER.DELIVERIES.DETAILS.HEADER.STATUS.' + delivery.deliveryStatus | translate }}
-
     </span>
   </div>
 
   <!-- Steps -->
   <div class="steps-wrap">
-
     <div class="step">
       <div class="step-circle done">✓</div>
       <div class="step-label">
@@ -44,69 +40,71 @@
       </div>
     </div>
 
-    <div class="step-connector"
-         [ngClass]="{'done': delivery.deliveryStatus !== 'Assigned'}"></div>
+    <div class="step-connector" [ngClass]="{ done: delivery.deliveryStatus !== 'Assigned' }"></div>
 
     <div class="step">
-      <div class="step-circle"
-           [ngClass]="{
-             'done': delivery.deliveryStatus !== 'Assigned',
-             'inactive': delivery.deliveryStatus === 'Assigned'
-           }">
-
+      <div
+        class="step-circle"
+        [ngClass]="{
+          done: delivery.deliveryStatus !== 'Assigned',
+          inactive: delivery.deliveryStatus === 'Assigned',
+        }"
+      >
         {{ delivery.deliveryStatus !== 'Assigned' ? '✓' : '–' }}
-
       </div>
-
       <div class="step-label">
         {{ 'CASHIER.DELIVERIES.DETAILS.STEPS.PICKED_UP' | translate }}
       </div>
     </div>
 
-    <div class="step-connector"
-         [ngClass]="{'done': delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered'}"></div>
+    <div
+      class="step-connector"
+      [ngClass]="{
+        done: delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered',
+      }"
+    ></div>
 
     <div class="step">
-      <div class="step-circle"
-           [ngClass]="{
-             'done': delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered',
-             'active': delivery.deliveryStatus === 'OnTheWay',
-             'inactive': delivery.deliveryStatus !== 'OnTheWay' && delivery.deliveryStatus !== 'Delivered'
-           }">
-
-        {{ delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered' ? '✓' : '→' }}
-
+      <div
+        class="step-circle"
+        [ngClass]="{
+          done: delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered',
+          active: delivery.deliveryStatus === 'OnTheWay',
+          inactive:
+            delivery.deliveryStatus !== 'OnTheWay' && delivery.deliveryStatus !== 'Delivered',
+        }"
+      >
+        {{
+          delivery.deliveryStatus === 'OnTheWay' || delivery.deliveryStatus === 'Delivered'
+            ? '✓'
+            : '→'
+        }}
       </div>
-
       <div class="step-label">
         {{ 'CASHIER.DELIVERIES.DETAILS.STEPS.ON_THE_WAY' | translate }}
       </div>
     </div>
 
-    <div class="step-connector"
-         [ngClass]="{'done': delivery.deliveryStatus === 'Delivered'}"></div>
+    <div class="step-connector" [ngClass]="{ done: delivery.deliveryStatus === 'Delivered' }"></div>
 
     <div class="step">
-      <div class="step-circle"
-           [ngClass]="{
-             'done': delivery.deliveryStatus === 'Delivered',
-             'inactive': delivery.deliveryStatus !== 'Delivered'
-           }">
-
+      <div
+        class="step-circle"
+        [ngClass]="{
+          done: delivery.deliveryStatus === 'Delivered',
+          inactive: delivery.deliveryStatus !== 'Delivered',
+        }"
+      >
         {{ delivery.deliveryStatus === 'Delivered' ? '✓' : '📍' }}
-
       </div>
-
       <div class="step-label">
         {{ 'CASHIER.DELIVERIES.DETAILS.STEPS.DELIVERED' | translate }}
       </div>
     </div>
-
   </div>
 
   <!-- GRID -->
   <div class="details-grid">
-
     <!-- INFO -->
     <div class="info-card">
       <div class="card-title">
@@ -115,17 +113,17 @@
 
       <div class="info-row">
         <span>{{ 'CASHIER.DELIVERIES.DETAILS.INFO.TOTAL' | translate }}</span>
-        <b class="red">EGP {{ delivery.order.totalAmount }}</b>
+        <b class="amount-highlight">EGP {{ delivery.order.totalAmount }}</b>
       </div>
 
       <div class="info-row">
         <span>{{ 'CASHIER.DELIVERIES.DETAILS.INFO.CREATED' | translate }}</span>
-        <b>{{ delivery.createdAt | date:'dd/MM/yyyy hh:mm a' }}</b>
+        <b>{{ delivery.createdAt | date: 'dd/MM/yyyy hh:mm a' }}</b>
       </div>
 
       <div class="info-row" *ngIf="delivery.deliveredAt">
         <span>{{ 'CASHIER.DELIVERIES.DETAILS.INFO.DELIVERED' | translate }}</span>
-        <b>{{ delivery.deliveredAt | date:'dd/MM/yyyy hh:mm a' }}</b>
+        <b>{{ delivery.deliveredAt | date: 'dd/MM/yyyy hh:mm a' }}</b>
       </div>
 
       <div class="info-row" *ngIf="delivery.cashCollected !== null">
@@ -143,7 +141,9 @@
       <div class="info-row">
         <span>{{ 'CASHIER.DELIVERIES.DETAILS.PEOPLE.DRIVER' | translate }}</span>
         <b>
-          {{ delivery.driverName || ('CASHIER.DELIVERIES.DETAILS.PEOPLE.NOT_ASSIGNED' | translate) }}
+          {{
+            delivery.driverName || ('CASHIER.DELIVERIES.DETAILS.PEOPLE.NOT_ASSIGNED' | translate)
+          }}
         </b>
       </div>
 
@@ -206,12 +206,10 @@
         <span class="item-price">EGP {{ item.total }}</span>
       </div>
     </div>
-
   </div>
 
   <!-- BACK -->
   <button class="back-btn" (click)="goBack()">
     ← {{ 'CASHIER.DELIVERIES.DETAILS.BUTTONS.BACK' | translate }}
   </button>
-
 </div>

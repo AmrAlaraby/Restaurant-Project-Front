@@ -1,211 +1,394 @@
-$red: #C0392B;
-$red-light: #FDECEA;
-$white: #fff;
-$border: #e8e8e8;
-$text: #1a1a1a;
-$muted: #999;
-$bg: #f7f5f3;
+/* ═══════════════════════════════════════════════════════════
+   Branch Assign Deliveries — Brand-aligned SCSS
+   • Uses only CSS custom properties from styles.scss
+   • Logical properties (inline-start/end) instead of left/right
+   • Dark mode via .dark parent class (never prefers-color-scheme)
+   • Mobile-first responsive
+   ═══════════════════════════════════════════════════════════ */
 
-// ─── Page ────────────────────────────────────────────────────
-.bac-page {
-  padding: 32px 36px;
-  box-sizing: border-box;
+/* ── Page wrapper ────────────────────────────────────────── */
+.bac-wrap {
+  display: contents; // transparent wrapper — layout owned by children
 }
-// ─── Header ──────────────────────────────────────────────────
+
+.bac-page {
+  padding-block: var(--space-xl);
+  padding-inline: var(--space-xl);
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    padding-block: var(--space-lg);
+    padding-inline: var(--space-md);
+  }
+}
+
+/* ── Header ──────────────────────────────────────────────── */
 .bac-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-block-end: var(--space-lg);
   flex-wrap: wrap;
-  gap: 10px;
+  gap: var(--space-sm);
 
   .bac-title {
+    font-family: var(--font-heading);
     font-size: 22px;
     font-weight: 700;
-    color: $text;
-    margin-bottom: 4px;
+    color: var(--clr-text-primary);
+    margin-block-end: var(--space-xs);
+
+    .dark & {
+      color: var(--clr-text-primary);
+    }
   }
 
   .bac-sub {
+    font-family: var(--font-body);
     font-size: 13px;
-    color: $muted;
+    color: var(--clr-text-hint);
+
+    .dark & {
+      color: var(--clr-text-hint);
+    }
   }
 
   .bac-awaiting {
-    color: $text;
+    color: var(--clr-text-primary);
     font-weight: 500;
+
+    .dark & {
+      color: var(--clr-text-primary);
+    }
   }
 }
 
-// ─── Link Button ──────────────────────────────────────────────
+/* ── Link / outline button ───────────────────────────────── */
 .bac-link-btn {
   background: transparent;
-  border: 1.5px solid $border;
-  border-radius: 8px;
-  padding: 8px 16px;
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  padding-block: var(--space-sm);
+  padding-inline: var(--space-md);
+  font-family: var(--font-body);
   font-size: 13px;
   font-weight: 500;
-  color: #555;
+  color: var(--clr-text-secondary);
   cursor: pointer;
-  transition: border-color 0.2s, color 0.2s;
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast);
   white-space: nowrap;
 
+  .dark & {
+    border-color: var(--clr-border);
+    color: var(--clr-text-secondary);
+  }
+
   &:hover {
-    border-color: $red;
-    color: $red;
+    border-color: var(--clr-primary);
+    color: var(--clr-primary);
+
+    .dark & {
+      border-color: var(--clr-primary-light);
+      color: var(--clr-primary-light);
+    }
   }
 
   &.mt-12 {
-    margin-top: 12px;
+    margin-block-start: var(--space-sm);
   }
 }
 
-// ─── Loading ─────────────────────────────────────────────────
+/* ── Search bar ──────────────────────────────────────────── */
+.bac-search-wrap {
+  position: relative;
+  margin-block-end: var(--space-lg);
+  max-width: 280px;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
+
+  .bac-search-input {
+    width: 100%;
+    padding-block: var(--space-sm);
+    padding-inline-start: var(--space-md);
+    padding-inline-end: 38px;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--clr-text-primary);
+    background: var(--clr-surface);
+    outline: none;
+    box-sizing: border-box;
+    transition:
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
+
+    .dark & {
+      background: var(--clr-surface);
+      color: var(--clr-text-primary);
+      border-color: var(--clr-border);
+    }
+
+    &:focus {
+      border-color: var(--clr-primary);
+      box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.08);
+
+      .dark & {
+        border-color: var(--clr-primary-light);
+        box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.12);
+      }
+    }
+
+    /* hide number spin arrows */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+    -moz-appearance: textfield;
+  }
+
+  .bac-search-icon {
+    position: absolute;
+    inset-inline-end: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    pointer-events: none;
+  }
+}
+
+/* ── Loading ─────────────────────────────────────────────── */
 .bac-loading {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 48px 0;
+  gap: var(--space-sm);
+  padding-block: 48px;
   justify-content: center;
-  color: $muted;
+  font-family: var(--font-body);
   font-size: 14px;
+  color: var(--clr-text-hint);
+
+  .dark & {
+    color: var(--clr-text-hint);
+  }
 
   .spinner {
     width: 20px;
     height: 20px;
-    border: 2px solid $border;
-    border-top-color: $red;
-    border-radius: 50%;
+    border: 2px solid var(--clr-border);
+    border-top-color: var(--clr-primary);
+    border-radius: var(--radius-full);
     animation: bac-spin 0.7s linear infinite;
+
+    .dark & {
+      border-color: var(--clr-border);
+      border-top-color: var(--clr-primary-light);
+    }
   }
 }
 
 @keyframes bac-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-// ─── Empty State ─────────────────────────────────────────────
+/* ── Empty State ─────────────────────────────────────────── */
 .bac-empty {
   text-align: center;
-  padding: 56px 24px;
-  color: $muted;
+  padding-block: 56px;
+  padding-inline: var(--space-lg);
+  color: var(--clr-text-hint);
+
+  .dark & {
+    color: var(--clr-text-hint);
+  }
 
   .bac-empty-icon {
     font-size: 40px;
-    margin-bottom: 12px;
+    margin-block-end: var(--space-sm);
+    line-height: 1;
   }
 
   .bac-empty-title {
+    font-family: var(--font-heading);
     font-size: 17px;
     font-weight: 600;
-    color: $text;
-    margin-bottom: 6px;
+    color: var(--clr-text-primary);
+    margin-block-end: var(--space-xs);
+
+    .dark & {
+      color: var(--clr-text-primary);
+    }
   }
 
   .bac-empty-sub {
+    font-family: var(--font-body);
     font-size: 13px;
-    color: $muted;
+    color: var(--clr-text-hint);
+
+    .dark & {
+      color: var(--clr-text-hint);
+    }
   }
 }
 
-// ─── Orders List ─────────────────────────────────────────────
+/* ── Orders list ─────────────────────────────────────────── */
 .bac-list {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
-// ─── Order Card ──────────────────────────────────────────────
+/* ── Order Card ──────────────────────────────────────────── */
 .bac-order-card {
-  background: $white;
-  border: 1px solid $border;
-  border-radius: 14px;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding-block: var(--space-sm);
+  padding-inline: var(--space-md);
+  transition: box-shadow var(--transition-fast);
 
-  padding: 8px 12px; /* 👈 كان 18px 22px (صغرناه) */
-
-  transition: box-shadow 0.2s;
-
-  &:hover {
-    box-shadow: 0 4px 18px rgba(192, 57, 43, 0.08);
+  .dark & {
+    background: var(--clr-surface);
+    border-color: var(--clr-border);
   }
 
-  &.card-ready  { border-left: 4px solid $red; }
-  &.card-kitchen { border-left: 4px solid #1565c0; }
+  &:hover {
+    box-shadow: var(--shadow-md);
+
+    .dark & {
+      box-shadow: var(--shadow-md);
+    }
+  }
+
+  &.card-ready {
+    border-inline-start: 4px solid var(--clr-primary);
+
+    .dark & {
+      border-inline-start-color: var(--clr-primary-light);
+    }
+  }
+
+  &.card-kitchen {
+    border-inline-start: 4px solid var(--clr-info);
+
+    .dark & {
+      border-inline-start-color: var(--clr-info);
+    }
+  }
 }
 
-// ─── Card Top ────────────────────────────────────────────────
+/* ── Card Top ────────────────────────────────────────────── */
 .bac-card-top {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: var(--space-sm);
+  margin-block-end: var(--space-md);
   flex-wrap: wrap;
 
   .bac-order-title {
+    font-family: var(--font-heading);
     font-size: 15px;
     font-weight: 600;
-    color: $text;
-    margin-bottom: 5px;
+    color: var(--clr-text-primary);
+    margin-block-end: var(--space-xs);
+
+    .dark & {
+      color: var(--clr-text-primary);
+    }
 
     .bac-order-customer {
       font-weight: 400;
-      color: $muted;
+      color: var(--clr-text-hint);
+
+      .dark & {
+        color: var(--clr-text-hint);
+      }
     }
   }
 
   .bac-order-meta {
+    font-family: var(--font-body);
     font-size: 12px;
-    color: $muted;
+    color: var(--clr-text-hint);
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: var(--space-xs);
+
+    .dark & {
+      color: var(--clr-text-hint);
+    }
   }
 
   .bac-pin {
     display: inline-block;
     width: 7px;
     height: 7px;
-    border-radius: 50%;
-    background: $red;
+    border-radius: var(--radius-full);
+    background: var(--clr-primary);
     flex-shrink: 0;
+
+    .dark & {
+      background: var(--clr-primary-light);
+    }
   }
 
   .bac-cod {
     font-weight: 500;
-    color: $text;
+    color: var(--clr-text-primary);
+
+    .dark & {
+      color: var(--clr-text-primary);
+    }
   }
 }
 
-// ─── Status Badge ────────────────────────────────────────────
+/* ── Status Badge ────────────────────────────────────────── */
 .bac-status-badge {
+  font-family: var(--font-body);
   font-size: 11px;
   font-weight: 700;
-  padding: 4px 12px;
-  border-radius: 6px;
+  padding-block: var(--space-xs);
+  padding-inline: var(--space-sm);
+  border-radius: var(--radius-sm);
   letter-spacing: 0.5px;
   text-transform: uppercase;
   white-space: nowrap;
   flex-shrink: 0;
 
   &.badge-ready {
-    background: #e8f5e9;
-    color: #2e7d32;
+    background: var(--clr-success-bg);
+    color: var(--clr-success);
+
+    .dark & {
+      background: var(--clr-success-bg);
+      color: var(--clr-success);
+    }
   }
 
   &.badge-kitchen {
-    background: #fff3e0;
-    color: #e65100;
+    background: var(--clr-warning-bg);
+    color: var(--clr-warning);
+
+    .dark & {
+      background: var(--clr-warning-bg);
+      color: var(--clr-warning);
+    }
   }
 }
 
-// ─── Assign Row ──────────────────────────────────────────────
+/* ── Assign Row ──────────────────────────────────────────── */
 .bac-assign-row {
   display: grid;
   grid-template-columns: 1fr 1.6fr;
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: var(--space-md);
+  margin-block-end: var(--space-md);
 
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
@@ -215,130 +398,142 @@ $bg: #f7f5f3;
 .bac-field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--space-xs);
 
   .bac-field-label {
+    font-family: var(--font-body);
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.5px;
-    color: $muted;
     text-transform: uppercase;
+    color: var(--clr-text-hint);
+
+    .dark & {
+      color: var(--clr-text-hint);
+    }
   }
 }
 
-// ─── Select ──────────────────────────────────────────────────
+/* ── Select ──────────────────────────────────────────────── */
 .bac-select {
   width: 100%;
-  padding: 10px 38px 10px 14px;
-  border: 1px solid $border;
-  border-radius: 8px;
+  padding-block: var(--space-sm);
+  padding-inline-start: var(--space-md);
+  padding-inline-end: 38px;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
   font-size: 14px;
-  color: $text;
-  background: $white;
+  color: var(--clr-text-primary);
+  background-color: var(--clr-surface);
   outline: none;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239C6A3A' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
   cursor: pointer;
 
+  .dark & {
+    background-color: var(--clr-surface);
+    color: var(--clr-text-primary);
+    border-color: var(--clr-border);
+  }
+
   &:focus {
-    border-color: $red;
+    border-color: var(--clr-primary);
     box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.08);
+
+    .dark & {
+      border-color: var(--clr-primary-light);
+      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.12);
+    }
   }
 }
 
-// ─── Address Input ───────────────────────────────────────────
+/* ── Address Input ───────────────────────────────────────── */
 .bac-input {
   width: 100%;
-  padding: 10px 14px;
-  border: 1px solid $border;
-  border-radius: 8px;
+  padding-block: var(--space-sm);
+  padding-inline: var(--space-md);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
   font-size: 14px;
-  color: $text;
-  background: #f9f9f9;
+  color: var(--clr-text-primary);
+  background: var(--clr-surface-alt);
   outline: none;
   box-sizing: border-box;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background var(--transition-fast);
+
+  .dark & {
+    background: var(--clr-surface-alt);
+    color: var(--clr-text-primary);
+    border-color: var(--clr-border);
+  }
 
   &:focus {
-    border-color: $red;
+    border-color: var(--clr-primary);
     box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.08);
-    background: $white;
+    background: var(--clr-surface);
+
+    .dark & {
+      border-color: var(--clr-primary-light);
+      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.12);
+      background: var(--clr-surface);
+    }
   }
 }
 
-// ─── Card Footer ─────────────────────────────────────────────
+/* ── Card Footer ─────────────────────────────────────────── */
 .bac-card-footer {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 4px;
+  padding-block-start: var(--space-xs);
 }
 
-// ─── Dispatch Button ─────────────────────────────────────────
+/* ── Dispatch Button ─────────────────────────────────────── */
 .bac-dispatch-btn {
-  background: $red;
-  color: $white;
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
   border: none;
-  border-radius: 8px;
-  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  padding-block: var(--space-sm);
+  padding-inline: var(--space-lg);
+  font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast);
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-sm);
+
+  .dark & {
+    background: var(--clr-primary);
+    color: var(--clr-text-on-primary);
+  }
 
   &:hover:not(:disabled) {
-    background: #96281b;
+    background: var(--clr-primary-dark);
     transform: translateY(-1px);
+
+    .dark & {
+      background: var(--clr-primary-dark);
+    }
   }
 
   &:disabled {
     opacity: 0.45;
     cursor: not-allowed;
     transform: none;
-  }
-}
-
-// ─── Search Bar ───────────────────────────────────────────────
-.bac-search-wrap {
-  position: relative;
-  margin-bottom: 20px;
-  max-width: 280px;
-
-  .bac-search-input {
-    width: 100%;
-    padding: 10px 38px 10px 14px;
-    border: 1px solid $border;
-    border-radius: 8px;
-    font-size: 14px;
-    color: $text;
-    background: $white;
-    outline: none;
-    box-sizing: border-box;
-    transition: border-color 0.2s, box-shadow 0.2s;
-
-    &:focus {
-      border-color: $red;
-      box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.08);
-    }
-
-    // hide number arrows
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button { -webkit-appearance: none; }
-    -moz-appearance: textfield;
-  }
-
-  .bac-search-icon {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 14px;
-    pointer-events: none;
   }
 }

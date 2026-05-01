@@ -1,74 +1,162 @@
+/* ═══════════════════════════════════════════════════════════
+   Awaiting Payments — Brand-aligned SCSS
+   • Uses only CSS custom properties from styles.scss
+   • Logical properties (inline-start/end) instead of left/right
+   • Dark mode via .dark parent class (never prefers-color-scheme)
+   • Mobile-first responsive
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Wrapper ─────────────────────────────────────────────── */
 .awaiting-payments {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--space-md);
 }
 
+/* ── Search Bar ──────────────────────────────────────────── */
 .search-bar {
   display: flex;
-  gap: 10px;
+  gap: var(--space-sm);
   align-items: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
 
 .search-input {
   flex: 1;
   height: 44px;
-  border: none;
-  border-radius: 10px;
-  background: #f0ebe5;
-  padding: 0 16px;
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  background: var(--clr-cream-mid);
+  padding-inline: var(--space-md);
+  font-family: var(--font-body);
   font-size: 14px;
-  color: #333;
+  color: var(--clr-text-primary);
   outline: none;
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  .dark & {
+    background: var(--clr-cream-mid);
+    border-color: var(--clr-border);
+    color: var(--clr-text-primary);
+  }
 
   &::placeholder {
-    color: #aaa;
+    color: var(--clr-text-hint);
+
+    .dark & {
+      color: var(--clr-text-hint);
+    }
+  }
+
+  &:focus {
+    border-color: var(--clr-primary);
+    background: var(--clr-surface);
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.12);
+
+    .dark & {
+      background: var(--clr-surface);
+      border-color: var(--clr-primary-light);
+      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.15);
+    }
   }
 }
 
+/* ── Load Button ─────────────────────────────────────────── */
 .load-btn {
   height: 44px;
-  padding: 0 22px;
-  background: #c0392b;
-  color: #fff;
+  padding-inline: var(--space-lg);
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
   border: none;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background var(--transition-fast);
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  .dark & {
+    background: var(--clr-primary);
+    color: var(--clr-text-on-primary);
+  }
 
   &:hover {
-    background: #a93226;
+    background: var(--clr-primary-dark);
+
+    .dark & {
+      background: var(--clr-primary-dark);
+    }
+  }
+
+  &:active {
+    background: var(--clr-primary-dark);
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 }
 
+/* ── Order Chips ─────────────────────────────────────────── */
 .order-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: var(--space-sm);
 }
 
 .chip {
-  padding: 8px 16px;
-  background: #f0ebe5;
+  padding-block: var(--space-xs);
+  padding-inline: var(--space-md);
+  background: var(--clr-cream-mid);
   border: 1.5px solid transparent;
-  border-radius: 20px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
   font-size: 13px;
   font-weight: 500;
-  color: #444;
+  color: var(--clr-text-secondary);
   cursor: pointer;
-  transition: all 0.2s;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+
+  .dark & {
+    background: var(--clr-cream-mid);
+    color: var(--clr-text-secondary);
+    border-color: transparent;
+  }
 
   &:hover {
-    border-color: #c0392b33;
-    background: #fdf5f4;
+    border-color: var(--clr-cream-dark);
+    background: var(--clr-danger-bg);
+    color: var(--clr-text-primary);
+
+    .dark & {
+      background: var(--clr-danger-bg);
+      border-color: var(--clr-cream-dark);
+      color: var(--clr-text-primary);
+    }
   }
 
   &.active {
-    background: #fdf5f4;
-    border-color: #c0392b;
-    color: #c0392b;
+    background: var(--clr-danger-bg);
+    border-color: var(--clr-primary);
+    color: var(--clr-primary);
     font-weight: 600;
+
+    .dark & {
+      background: var(--clr-danger-bg);
+      border-color: var(--clr-primary-light);
+      color: var(--clr-primary-light);
+    }
   }
 }

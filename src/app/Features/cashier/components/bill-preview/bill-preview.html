@@ -1,10 +1,9 @@
 <div class="bill" *ngIf="order; else empty">
-
   <!-- Header -->
   <div class="bill-header">
     <div>
       <div class="order-number">
-        {{ 'CASHIER.PAYMENT.BILL_PREVIEW.ORDER_NUMBER' | translate:{ id: order.id } }}
+        {{ 'CASHIER.PAYMENT.BILL_PREVIEW.ORDER_NUMBER' | translate: { id: order.id } }}
       </div>
 
       <div class="order-meta">
@@ -13,10 +12,7 @@
     </div>
 
     <span class="status-badge" [ngClass]="getStatusClass()">
-      {{
-        ('ADMIN.ORDERS.FILTERS.' + order.status?.toUpperCase())
-        | translate
-      }}
+      {{ 'ADMIN.ORDERS.FILTERS.' + order.status?.toUpperCase() | translate }}
     </span>
   </div>
 
@@ -31,8 +27,8 @@
     <span class="pm-badge">
       {{ getMethodIcon() }}
       {{
-        ('CASHIER.DASHBOARD.PAYMENT_METHODS.METHODS.' + order.payment.paymentMethod?.toUpperCase())
-        | translate
+        'CASHIER.DASHBOARD.PAYMENT_METHODS.METHODS.' + order.payment.paymentMethod?.toUpperCase()
+          | translate
       }}
     </span>
   </div>
@@ -46,9 +42,13 @@
       </div>
 
       <span class="item-price">
-        {{ 'CASHIER.PAYMENT.BILL_PREVIEW.ITEM_PRICE' | translate:{
-          price: (item.unitPrice * item.quantity | number:'1.2-2')
-        } }}
+        {{
+          'CASHIER.PAYMENT.BILL_PREVIEW.ITEM_PRICE'
+            | translate
+              : {
+                  price: (item.unitPrice * item.quantity | number: '1.2-2'),
+                }
+        }}
       </span>
     </div>
   </div>
@@ -62,12 +62,15 @@
     </span>
 
     <span class="total-amount">
-      {{ 'CASHIER.PAYMENT.BILL_PREVIEW.TOTAL_AMOUNT' | translate:{
-        amount: (order.totalAmount | number:'1.2-2')
-      } }}
+      {{
+        'CASHIER.PAYMENT.BILL_PREVIEW.TOTAL_AMOUNT'
+          | translate
+            : {
+                amount: (order.totalAmount | number: '1.2-2'),
+              }
+      }}
     </span>
   </div>
-
 </div>
 
 <ng-template #empty>
