@@ -1,4 +1,88 @@
 {
+  "CUSTOMER": {
+    "ORDER_STATUS": {
+      "Pending": "Pending",
+      "Confirmed": "Confirmed",
+      "Preparing": "Preparing",
+      "Ready": "Ready",
+      "Completed": "Completed",
+      "Cancelled": "Cancelled"
+    },
+    "DELIVERY_STATUS": {
+      "Assigned": "Assigned",
+      "PickedUp": "Picked Up",
+      "OnTheWay": "On the Way",
+      "Delivered": "Delivered"
+    },
+    "HOME": {
+      "CART_BAR": {
+        "VIEW_CART": "View Cart",
+        "CURRENCY": "EGP"
+      },
+      "MENU_ITEM": {
+        "BUTTON_ADD": "Add",
+        "MIN": "min",
+        "CURRENCY": "EGP"
+      },
+      "POPULARC": {
+        "MOST_POPULAR": "Most Popular",
+        "SEE_ALL": "See All"
+      },
+      "HERO": {
+        "BADGE": "Fastest Delivery & Easy Pickup",
+        "TITLE": "Justice",
+        "HIGHLIGHT": "Burger",
+        "DESCRIPTION": "Good food always brought right to you. We deliver your orders quickly and make your meal exciting.",
+        "BUTTON_VIEW_MENU": "View Our Menu"
+      },
+      "ACTIVE": {
+        "ORDER_STATUS": "Order #{{id}} is {{status}}",
+        "DRIVER_STATUS": "{{driver}} is delivering · {{status}}",
+        "TRACK": "Track"
+      },
+      "ABOUT": {
+        "EYEBROW": "About The Food Restaurant",
+        "TITLE": "Perfect Place For An Exceptional Experience",
+        "DESCRIPTION": "We specialize in great-tasting food made with fresh, high-quality ingredients. Our passion for food makes us the perfect choice for any occasion.",
+        "FEATURE_ONLINE_TITLE": "Online Food Ordering",
+        "FEATURE_ONLINE_DESC": "Order from the comfort of your home",
+        "FEATURE_HEALTHY_TITLE": "100% Healthy Food",
+        "FEATURE_HEALTHY_DESC": "Fresh ingredients, always"
+      },
+      "CATEGORIES": {
+        "EYEBROW": "What We Serve",
+        "TITLE": "Choose a Category"
+      },
+      "HOW": {
+        "EYEBROW": "Easy Order In 3 Steps",
+        "TITLE": "How We Work",
+        "MORE": "More Details",
+        "STEP1": {
+          "TITLE": "Explore Menu",
+          "DESC": "Browse our food categories and discover your favorites"
+        },
+        "STEP2": {
+          "TITLE": "Choose a Dish",
+          "DESC": "Select and customize your favorite meals"
+        },
+        "STEP3": {
+          "TITLE": "Place Order",
+          "DESC": "Place your order and track it in real-time"
+        }
+      },
+      "POPULAR": {
+        "EYEBROW": "Our Menu",
+        "TITLE": "Fast Food Menus"
+      },
+      "CTA": {
+        "TAG": "Order Now",
+        "TITLE": "What are you",
+        "HIGHLIGHT": "craving?",
+        "DESCRIPTION": "From burgers to fries — your next favorite meal is one click away.",
+        "BUTTON": "Browse Menu"
+      }
+    }
+  },
   "SHARED": {
     "SIDEBAR": {
       "USER": {

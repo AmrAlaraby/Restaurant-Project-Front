@@ -7,18 +7,24 @@
     <div class="card-body">
 
         <div class="info">
-            <h6 class="title">{{ item.name }}</h6>
+            <h6 class="title">{{ getItemName(item) }}</h6>
 
             <div class="meta">
-                <span>{{ item.category }}</span>
-                <span>• {{ item.prepTimeMinutes }} min</span>
+                <span>{{ getCategoryName(item) }}</span>
+                <span>
+                  • {{ item.prepTimeMinutes }}
+                  {{ 'CUSTOMER.HOME.MENU_ITEM.MIN' | translate }}
+                </span>
             </div>
 
-            <p class="price">EGP {{ item.price }}</p>
+            <p class="price">
+              {{ 'CUSTOMER.HOME.MENU_ITEM.CURRENCY' | translate }}
+              {{ item.price }}
+            </p>
         </div>
 
         <button class="add-btn" (click)="addToCart(item)">
-            + Add
+            + {{ 'CUSTOMER.HOME.MENU_ITEM.BUTTON_ADD' | translate }}
         </button>
 
     </div>

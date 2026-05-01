@@ -8,10 +8,11 @@ import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service
 import { SignalRService } from '../../../../Core/Services/SignalR-Service/SignalrService';
 import { Delivery } from '../../../../Core/Models/DeliveryModels/delivery';
 import { CartBar } from '../../components/cart-bar/cart-bar';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home-page',
-  imports: [CategoryList, PopularItems, CartBar],
+  imports: [CategoryList, PopularItems, CartBar, TranslatePipe],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
 })

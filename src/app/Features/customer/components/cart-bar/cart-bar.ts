@@ -5,12 +5,13 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Basket } from '../../../../Core/Models/BasketModels/Basket';
 import { BasketService } from '../../../../Core/Services/Basket-Service/baskets-service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-cart-bar',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [AsyncPipe,TranslatePipe],
   templateUrl: './cart-bar.html',
   styleUrl: './cart-bar.scss'
 })

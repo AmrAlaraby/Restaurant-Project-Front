@@ -4,11 +4,12 @@ import { MenuItemInterface } from '../../../../../Core/Models/MenuItemModels/men
 import { MenuItemsService } from '../../../../../Core/Services/Menu-Item-Service/menu-item-service';
 import { CustomerMenuItemCard } from "../Browse-Menu/customer-menu-item-card/customer-menu-item-card";
 import { BranchStateService } from '../../../../../Core/Services/Branch-Service/branch-state-service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-popular-items',
   standalone: true,
-  imports: [CustomerMenuItemCard],
+  imports: [CustomerMenuItemCard, TranslatePipe],
   templateUrl: './popular-items.html',
   styleUrl: './popular-items.scss',
 })

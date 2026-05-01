@@ -2,6 +2,8 @@ import { Component, inject } from '@angular/core';
 import { CategoryService } from '../../../../../Core/Services/Categories-Service/categories-service';
 import { Router } from '@angular/router';
 import { Category } from '../../../../../Core/Models/CategoryModels/Category ';
+import { Subject, takeUntil } from 'rxjs';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
 @Component({
   selector: 'app-category-list',
@@ -15,11 +17,31 @@ export class CategoryList {
 
   categories: Category[] = [];
 
+  constructor(
+        private localizationService: LocalizationService,
+      ) {}
+
   ngOnInit() {
     this.categoryService.getAll().subscribe(res => {
       this.categories = res;
     });
+    this.getCurrentLanguage();
   }
+
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
+    
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 
   goToCategory(categoryId: number) {
     this.router.navigate(['/customer/browse-menu'], {
@@ -37,5 +59,13 @@ export class CategoryList {
       salads: '/images/categories/Salad2.jpg',
     };
     return map[name.toLowerCase()] || 'public/images/categories/default.png';
+  }
+  getCategoryName(item: any): string {
+    // console.log(item);
+    
+    if (this.CurrentLanguage === 'ar') {
+      return item.arabicName || item.name;
+    }
+    return item.name;
   }
 }
