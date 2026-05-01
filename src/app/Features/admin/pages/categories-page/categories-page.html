@@ -23,6 +23,13 @@
           formControlName="name"
           placeholder="e.g. Appetizers, Desserts…"
         />
+        <label class="field-label">Arabic Name</label>
+        <input
+          class="field-input"
+          type="text"
+          formControlName="arabicName"
+          placeholder="e.g. Appetizers, Desserts…"
+        />
       </div>
 
       <div class="modal-divider"></div>
@@ -85,13 +92,22 @@
 
     <form [formGroup]="editForm" (ngSubmit)="submitEdit()">
       <div class="field-group">
-        <label class="field-label">Category Name</label>
+        <label class="field-label">Name</label>
         <input
           class="field-input"
           type="text"
           formControlName="name"
           placeholder="Category name"
         />
+
+        <label class="field-label">Arabic Name</label>
+        <input
+          class="field-input"
+          type="text"
+          formControlName="arabicName"
+          placeholder="Arabic name"
+        />
+        
       </div>
 
       <div class="modal-divider"></div>
@@ -109,14 +125,11 @@
 <div class="page">
 
   <!-- Breadcrumb -->
-  <nav class="breadcrumb">
-    Home / <span>Categories</span>
-  </nav>
+
 
   <!-- Header -->
   <div class="page-header">
     <div class="page-header__title">
-      <p class="page-eyebrow">Management</p>
       <h1 class="page-title">Menu Categories</h1>
     </div>
     <button class="btn-add" type="button" (click)="openAddModal()">
@@ -176,7 +189,7 @@
     <div class="table-row" *ngFor="let cat of categories">
 
       <div class="cat-name">
-        <span class="cat-icon">{{ getCategoryIcon(cat.name) }}</span>
+        <!-- <span class="cat-icon">{{ getCategoryIcon(cat.name) }}</span> -->
         {{ cat.name }}
       </div>
 
