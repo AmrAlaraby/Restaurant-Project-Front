@@ -1,26 +1,26 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Router, NavigationEnd, RouterOutlet, RouterModule } from '@angular/router';
-import { filter } from 'rxjs';
+import { Router, RouterOutlet, RouterModule } from '@angular/router';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { NotificationService } from '../../../../Core/Services/Notification-Service/NotificatoinService';
 import { SignalRService } from '../../../../Core/Services/SignalR-Service/SignalrService';
 import { ToastService } from '../../../../Core/Services/Toast-Service/toast-service';
 import { NotificationBell } from '../../../../Shared/Components/notification-bell/notification-bell';
 import { LangSwitchComponent } from '../../../../Shared/Components/lang-switch/lang-switch';
-import { CartIcon } from '../../components/cart-icon/cart-icon';
 import { BranchStateService } from '../../../../Core/Services/Branch-Service/branch-state-service';
 import { BranchSelector } from '../../components/branch-selector/branch-selector';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-customer-layout',
-  imports: [RouterOutlet, RouterModule, NotificationBell, CartIcon, BranchSelector, LangSwitchComponent],
+  imports: [RouterOutlet, RouterModule, NotificationBell, BranchSelector, LangSwitchComponent],
   templateUrl: './customer-layout.html',
   styleUrl: './customer-layout.scss',
 })
 export class CustomerLayout implements OnInit {
   isOpen = false;
   isScrolled = false;
+  avatarOpen = false;
+
   UserName = '';
   AvatarLetters = '';
   UserRole = '';
@@ -53,53 +53,6 @@ export class CustomerLayout implements OnInit {
                   <circle cx="12" cy="13" r="5"/><circle cx="12" cy="13" r="2"/>
                   <path d="M4 3v6"/><path d="M6 3v6"/><path d="M5 9v6"/>
                   <path d="M20 3c-2 2-2 6 0 8"/><path d="M20 11v4"/>
-                </svg>`,
-        },
-      ],
-    },
-    {
-      title: 'My Orders',
-      links: [
-        {
-          title: 'My Orders',
-          route: 'my-orders',
-          icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="6" y="4" width="12" height="16" rx="2"/>
-                  <path d="M9 4h6v2H9z"/>
-                  <path d="M9 10l1.5 1.5L13 9"/>
-                  <line x1="9" y1="13" x2="15" y2="13"/>
-                  <line x1="9" y1="16" x2="13" y2="16"/>
-                </svg>`,
-        },
-        {
-          title: 'Cart',
-          route: 'basket',
-          icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 5h2l2.5 10h10l2-7H7"/>
-                  <circle cx="10" cy="18" r="1.8"/>
-                  <circle cx="17" cy="18" r="1.8"/>
-                </svg>`,
-        },
-      ],
-    },
-    {
-      title: 'Account',
-      links: [
-        {
-          title: 'My Profile',
-          route: 'profile',
-          icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="8" r="3"/>
-                  <path d="M4 19c0-3 3.5-5 8-5s8 2 8 5"/>
-                </svg>`,
-        },
-        {
-          title: 'Addresses',
-          route: 'saved-addresses',
-          icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/>
-                  <path d="M12 13a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
-                  <path d="M12 13c-2 3-4 5-4 7"/>
                 </svg>`,
         },
       ],
@@ -138,8 +91,10 @@ export class CustomerLayout implements OnInit {
     this.notificationService.getMyNotifications().subscribe((res) => (this.notifications = res));
   }
 
-  goToProfile() {
-    this.router.navigate(['/customer/profile']);
+  logout() {
+    this.avatarOpen = false;
+    this.authService.logout();
+    this.router.navigate(['/auth/login']);
   }
 
   openSidebar() {
@@ -159,6 +114,10 @@ export class CustomerLayout implements OnInit {
 
   @HostListener('document:keydown.escape')
   onEsc() {
+    if (this.avatarOpen) {
+      this.avatarOpen = false;
+      return;
+    }
     if (this.isOpen) this.closeSidebar();
   }
 
@@ -184,6 +143,4 @@ export class CustomerLayout implements OnInit {
       error: (err) => console.log(err),
     });
   }
-
-  
 }
