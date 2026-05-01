@@ -1,41 +1,47 @@
-<div
-  *ngIf="totalPages > 1"
-  class="pagination-wrapper"
->
+<div *ngIf="totalPages > 1" class="pagination-wrapper">
 
   <div class="pagination-info">
     {{ 'SHARED.PAGINATION.SHOWING' | translate : {
-  pageIndex: pageIndex,
-  totalPages: totalPages,
-  totalCount: totalCount
-} }}
+      pageIndex: pageIndex,
+      totalPages: totalPages,
+      totalCount: totalCount
+    } }}
   </div>
 
   <div class="pagination-controls">
 
+    <!-- Prev -->
     <button
-      class="btn-page"
+      class="btn-page btn-nav"
       [disabled]="pageIndex === 1"
       (click)="changePage(pageIndex - 1)"
+      [attr.aria-label]="'SHARED.PAGINATION.PREV' | translate"
     >
-      {{ 'SHARED.PAGINATION.PREV' | translate }}
+      &#8249;
     </button>
 
-    <button
-      *ngFor="let page of pages"
-      class="btn-page"
-      [class.active]="page === pageIndex"
-      (click)="changePage(page)"
-    >
-      {{ page }}
-    </button>
+    <!-- Page Numbers -->
+    <ng-container *ngFor="let page of pages">
+      <span *ngIf="page === -1" class="page-ellipsis">…</span>
+      <button
+        *ngIf="page !== -1"
+        class="btn-page btn-num"
+        [class.active]="page === pageIndex"
+        (click)="changePage(page)"
+        [attr.aria-current]="page === pageIndex ? 'page' : null"
+      >
+        {{ page }}
+      </button>
+    </ng-container>
 
+    <!-- Next -->
     <button
-      class="btn-page"
+      class="btn-page btn-nav"
       [disabled]="pageIndex === totalPages"
       (click)="changePage(pageIndex + 1)"
+      [attr.aria-label]="'SHARED.PAGINATION.NEXT' | translate"
     >
-      {{ 'SHARED.PAGINATION.NEXT' | translate }}
+      &#8250;
     </button>
 
   </div>
