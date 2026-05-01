@@ -112,7 +112,7 @@ export const routes: Routes = [
           import('./Features/admin/pages/AdminPayment-Page/admin-payment/admin-payment').then(
             (m) => m.AdminPayment,
           ),
-      }
+      },
     ],
   },
 
@@ -306,7 +306,7 @@ export const routes: Routes = [
       {
         path: 'profile',
         loadComponent: () =>
-          import('./Features/waiter/pages/profile/profile').then((m) => m.Profile),
+          import('./Features/chief/pages/profile/profile').then((m) => m.Profile),
       },
 
       {
