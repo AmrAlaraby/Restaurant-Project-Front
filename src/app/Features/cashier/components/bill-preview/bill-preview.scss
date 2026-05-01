@@ -1,7 +1,16 @@
+/* ═══════════════════════════════════════════════════════════
+   Bill Preview — Brand-aligned SCSS
+   • Uses only CSS custom properties from styles.scss
+   • Logical properties (inline-start/end) instead of left/right
+   • Dark mode via .dark parent class (never prefers-color-scheme)
+   • Mobile-first responsive
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Bill wrapper ────────────────────────────────────────── */
 .bill {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--space-md);
 }
 
 /* ── Header ──────────────────────────────────────────────── */
@@ -9,25 +18,37 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--space-sm);
 }
 
 .order-number {
+  font-family: var(--font-heading);
   font-size: 17px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--clr-text-primary);
+
+  .dark & {
+    color: var(--clr-text-primary);
+  }
 }
 
 .order-meta {
+  font-family: var(--font-body);
   font-size: 13px;
-  color: #888;
-  margin-top: 2px;
+  color: var(--clr-text-hint);
+  margin-block-start: 2px;
+
+  .dark & {
+    color: var(--clr-text-hint);
+  }
 }
 
 /* ── Status Badges ───────────────────────────────────────── */
 .status-badge {
-  padding: 4px 12px;
-  border-radius: 20px;
+  padding-block: var(--space-xs);
+  padding-inline: var(--space-sm);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -36,18 +57,84 @@
   flex-shrink: 0;
 }
 
-.badge-ready       { background: #dcfce7; color: #15803d; }
-.badge-awaiting    { background: #fef9c3; color: #854d0e; }
-.badge-paid        { background: #dbeafe; color: #1d4ed8; }
-.badge-preparing   { background: #ffedd5; color: #9a3412; }
-.badge-delivered   { background: #f3e8ff; color: #6b21a8; }
-.badge-cancelled   { background: #fee2e2; color: #b91c1c; }
-.badge-default     { background: #f3f4f6; color: #6b7280; }
+.badge-ready {
+  background: var(--clr-success-bg);
+  color: var(--clr-success);
+
+  .dark & {
+    background: var(--clr-success-bg);
+    color: var(--clr-success);
+  }
+}
+
+.badge-awaiting {
+  background: var(--clr-warning-bg);
+  color: var(--clr-warning);
+
+  .dark & {
+    background: var(--clr-warning-bg);
+    color: var(--clr-warning);
+  }
+}
+
+.badge-paid {
+  background: var(--clr-info-bg);
+  color: var(--clr-info);
+
+  .dark & {
+    background: var(--clr-info-bg);
+    color: var(--clr-info);
+  }
+}
+
+.badge-preparing {
+  background: var(--clr-warning-bg);
+  color: var(--clr-text-secondary);
+
+  .dark & {
+    background: var(--clr-warning-bg);
+    color: var(--clr-text-secondary);
+  }
+}
+
+.badge-delivered {
+  background: var(--clr-cream-mid);
+  color: var(--clr-accent-dark);
+
+  .dark & {
+    background: var(--clr-cream-mid);
+    color: var(--clr-accent-light);
+  }
+}
+
+.badge-cancelled {
+  background: var(--clr-danger-bg);
+  color: var(--clr-danger);
+
+  .dark & {
+    background: var(--clr-danger-bg);
+    color: var(--clr-primary-light);
+  }
+}
+
+.badge-default {
+  background: var(--clr-cream-mid);
+  color: var(--clr-text-hint);
+
+  .dark & {
+    background: var(--clr-cream-mid);
+    color: var(--clr-text-hint);
+  }
+}
 
 /* ── Divider ─────────────────────────────────────────────── */
 .bill-divider {
   height: 1px;
-  background: #f0ebe5;
+  background: var(--clr-border);
+
+  .dark & {
+    background: var(--clr-border);
+  }
 }
 
 /* ── Payment Method ──────────────────────────────────────── */
@@ -55,71 +142,112 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: var(--space-sm);
 }
 
 .pm-label {
+  font-family: var(--font-body);
   font-size: 12px;
-  color: #aaa;
   font-weight: 500;
+  color: var(--clr-text-hint);
+
+  .dark & {
+    color: var(--clr-text-hint);
+  }
 }
 
 .pm-badge {
+  font-family: var(--font-body);
   font-size: 13px;
   font-weight: 600;
-  color: #555;
-  background: #f5f0eb;
-  padding: 4px 12px;
-  border-radius: 20px;
+  color: var(--clr-text-secondary);
+  background: var(--clr-cream-mid);
+  padding-block: var(--space-xs);
+  padding-inline: var(--space-sm);
+  border-radius: var(--radius-full);
+
+  .dark & {
+    background: var(--clr-cream-mid);
+    color: var(--clr-text-secondary);
+  }
 }
 
 /* ── Items List ──────────────────────────────────────────── */
 .items-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-sm);
 }
 
 .item-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 14px;
-  background: #faf8f5;
-  border-radius: 10px;
+  padding-block: var(--space-sm);
+  padding-inline: var(--space-md);
+  background: var(--clr-surface-alt);
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast);
+
+  .dark & {
+    background: var(--clr-surface-alt);
+  }
 
   &:hover {
-    background: #f5f0eb;
+    background: var(--clr-cream-mid);
+
+    .dark & {
+      background: var(--clr-cream-mid);
+    }
   }
 }
 
 .item-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-sm);
 }
 
 .item-qty {
+  font-family: var(--font-body);
   font-size: 12px;
   font-weight: 700;
-  color: #c0392b;
-  background: #fdf5f4;
-  border: 1px solid #f5c6c0;
-  border-radius: 6px;
-  padding: 2px 8px;
+  color: var(--clr-primary);
+  background: var(--clr-danger-bg);
+  border: 1px solid var(--clr-cream-dark);
+  border-radius: var(--radius-sm);
+  padding-block: 2px;
+  padding-inline: var(--space-sm);
   min-width: 32px;
   text-align: center;
+
+  .dark & {
+    color: var(--clr-primary-light);
+    background: var(--clr-danger-bg);
+    border-color: var(--clr-border);
+  }
 }
 
 .item-name {
+  font-family: var(--font-body);
   font-size: 14px;
-  color: #333;
   font-weight: 500;
+  color: var(--clr-text-primary);
+
+  .dark & {
+    color: var(--clr-text-primary);
+  }
 }
 
 .item-price {
+  font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
-  color: #555;
+  color: var(--clr-text-secondary);
+
+  .dark & {
+    color: var(--clr-text-secondary);
+  }
 }
 
 /* ── Total ───────────────────────────────────────────────── */
@@ -127,32 +255,51 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: var(--space-sm);
 }
 
 .total-label {
+  font-family: var(--font-heading);
   font-size: 15px;
   font-weight: 600;
-  color: #333;
+  color: var(--clr-text-primary);
+
+  .dark & {
+    color: var(--clr-text-primary);
+  }
 }
 
 .total-amount {
+  font-family: var(--font-heading);
   font-size: 20px;
   font-weight: 800;
-  color: #c0392b;
+  color: var(--clr-primary);
+  letter-spacing: -0.02em;
+
+  .dark & {
+    color: var(--clr-primary-light);
+  }
 }
 
-/* ── Empty ───────────────────────────────────────────────── */
+/* ── Empty State ─────────────────────────────────────────── */
 .bill-empty {
   text-align: center;
-  padding: 30px 0;
-  color: #ccc;
+  padding-block: var(--space-lg);
+  color: var(--clr-text-hint);
+
+  .dark & {
+    color: var(--clr-text-hint);
+  }
 
   .bill-empty-icon {
     font-size: 36px;
-    margin-bottom: 10px;
+    margin-block-end: var(--space-sm);
+    line-height: 1;
   }
 
   p {
+    font-family: var(--font-body);
     font-size: 13px;
+    margin: 0;
   }
 }
