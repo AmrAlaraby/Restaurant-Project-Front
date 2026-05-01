@@ -1,0 +1,238 @@
+// ── Keyframes ─────────────────────────────────────────────────
+
+@keyframes card-rise {
+    from {
+        opacity: 0;
+        transform: translateY(32px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes ring-draw {
+    from {
+        stroke-dashoffset: 340;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes check-draw {
+    from {
+        stroke-dashoffset: 60;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(1.3);
+        opacity: 0;
+    }
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// ── Page ──────────────────────────────────────────────────────
+.success-page {
+    min-block-size: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg);
+    background: var(--clr-cream);
+
+    .dark & {
+        background: var(--clr-surface);
+    }
+}
+
+// ── Card ──────────────────────────────────────────────────────
+.success-card {
+    background: var(--clr-surface);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--clr-border);
+    box-shadow: var(--shadow-lg);
+    padding-block: var(--space-xl);
+    padding-inline: var(--space-xl);
+    max-inline-size: 380px;
+    inline-size: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    text-align: center;
+    animation: card-rise 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+
+    .dark & {
+        background: var(--clr-surface-alt);
+        border-color: var(--clr-border);
+    }
+}
+
+// ── Check circle ──────────────────────────────────────────────
+.check-wrapper {
+    position: relative;
+    inline-size: 100px;
+    block-size: 100px;
+    animation: float 3.5s ease-in-out 1.2s infinite;
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset: -6px;
+        border-radius: 50%;
+        border: 2px solid var(--clr-success);
+        animation: pulse-ring 2s ease-out 1.3s infinite;
+    }
+}
+
+.check-ring {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    transform: rotate(-90deg);
+
+    .ring-bg {
+        fill: none;
+        stroke: var(--clr-success-bg);
+        stroke-width: 6;
+    }
+
+    .ring-fill {
+        fill: none;
+        stroke: var(--clr-success);
+        stroke-width: 6;
+        stroke-linecap: round;
+        stroke-dasharray: 340;
+        stroke-dashoffset: 340;
+        animation: ring-draw 0.8s cubic-bezier(0.65, 0, 0.35, 1) 0.4s both;
+    }
+}
+
+.check-icon {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    padding: 26px;
+
+    .check-mark {
+        fill: none;
+        stroke: var(--clr-success);
+        stroke-width: 5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 60;
+        stroke-dashoffset: 60;
+        animation: check-draw 0.4s cubic-bezier(0.65, 0, 0.35, 1) 1.15s both;
+    }
+}
+
+// ── Text ──────────────────────────────────────────────────────
+.success-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--clr-text-primary);
+    margin: 0;
+    animation: slide-up 0.45s ease 0.85s both;
+
+    .dark & {
+        color: var(--clr-text-primary);
+    }
+}
+
+.success-subtitle {
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--clr-text-hint);
+    margin: 0;
+    line-height: 1.6;
+    animation: slide-up 0.45s ease 1s both;
+
+    .dark & {
+        color: var(--clr-text-hint);
+    }
+}
+
+// ── Button ────────────────────────────────────────────────────
+.back-btn {
+    inline-size: 100%;
+    background: var(--clr-primary);
+    color: var(--clr-text-on-primary);
+    border: none;
+    padding-block: 13px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-block-start: var(--space-xs);
+    transition:
+        background var(--transition-fast),
+        transform var(--transition-fast);
+    animation: slide-up 0.45s ease 1.15s both;
+
+    &:hover {
+        background: var(--clr-primary-dark);
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+
+    .dark & {
+        background: var(--clr-primary);
+        color: var(--clr-text-on-primary);
+
+        &:hover {
+            background: var(--clr-primary-dark);
+        }
+    }
+}
+
+// ── Responsive ────────────────────────────────────────────────
+@media (max-width: 480px) {
+    .success-card {
+        padding-block: var(--space-lg);
+        padding-inline: var(--space-md);
+    }
+}
