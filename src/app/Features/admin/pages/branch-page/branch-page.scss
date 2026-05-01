@@ -7,17 +7,31 @@
 //
 // ─────────────────────────────────────────────────────────────────────────────
 
+@keyframes bl-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(var(--space-lg));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+// ─── Layout ───────────────────────────────────────────────────────────────────
+
 .branch-page-layout {
   display: flex;
   min-height: 100vh;
-  background-color: var(--clr-surface-alt);
+  background-color: var(--clr-surface);
   transition: background-color var(--transition-normal);
 
-  .dark & {
-    background-color: var(--clr-surface-alt); // resolved to #2C1400 in dark via styles.scss
-  }
+  .dark & { background-color: var(--clr-surface); }
 
-  // ── List Panel ─────────────────────────────────────────────────────────────
+
+  // ── List Panel ───────────────────────────────────────────────────────────────
+
   .list-panel {
     flex: 1;
     overflow-y: auto;
@@ -27,29 +41,31 @@
       background-color var(--transition-normal),
       border-color var(--transition-normal);
 
-    .dark & {
-      background-color: var(--clr-surface);   // resolved to #1A0A00 in dark
-    }
+    .dark & { background-color: var(--clr-surface); }
   }
 
-  // ── Details Panel ──────────────────────────────────────────────────────────
+
+  // ── Details Panel ─────────────────────────────────────────────────────────────
+
   .details-panel {
     display: none;
     overflow-y: auto;
-    background-color: var(--clr-cream);
+    background-color: var(--clr-surface);
     border-inline-start: 1px solid var(--clr-border);
-    animation: slideIn var(--transition-normal);
+    animation: bl-slide-in var(--transition-normal);
     transition:
       background-color var(--transition-normal),
       border-color var(--transition-normal);
 
     .dark & {
-      background-color: var(--clr-cream);     // resolved to #2C1400 in dark
-      border-inline-start-color: var(--clr-border); // resolved to #5D3A1A in dark
+      background-color: var(--clr-surface);
+      border-inline-start-color: var(--clr-border);
     }
   }
 
-  // ── Has-Details: split layout ───────────────────────────────────────────────
+
+  // ── Has-Details: split layout ─────────────────────────────────────────────────
+
   &.has-details {
 
     .list-panel {
@@ -63,12 +79,10 @@
         box-shadow: var(--shadow-sm);
       }
 
-      // On narrow viewports hide the list when detail is open
       @media (max-width: 768px) {
         display: none;
       }
 
-      // Mid-range: allow list to be narrower
       @media (min-width: 769px) and (max-width: 900px) {
         flex: 0 0 300px;
       }
@@ -78,17 +92,5 @@
       display: block;
       flex: 1;
     }
-  }
-}
-
-// ── Slide-in animation ────────────────────────────────────────────────────────
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(var(--space-lg)); // 24px via token
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
   }
 }
