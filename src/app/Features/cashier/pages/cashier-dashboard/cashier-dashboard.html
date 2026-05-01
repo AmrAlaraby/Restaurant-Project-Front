@@ -1,14 +1,13 @@
 <div class="dashboard">
-
   <!-- ── Top Bar ─────────────────────────────────────────── -->
   <header class="top-bar">
     <div class="greeting-block">
       <h1 class="greeting">
-        {{ 'CASHIER.DASHBOARD.GREETING' | translate:{ name: cashierName } }}
+        {{ 'CASHIER.DASHBOARD.GREETING' | translate: { name: cashierName } }}
       </h1>
 
       <p class="sub-info">
-        {{ 'CASHIER.DASHBOARD.SUBINFO' | translate:{ branch: getBranchName() } }}
+        {{ 'CASHIER.DASHBOARD.SUBINFO' | translate: { branch: getBranchName() } }}
       </p>
     </div>
 
@@ -22,34 +21,24 @@
 
   <!-- ── Awaiting Payment List ───────────────────────────── -->
   <section class="section">
-
     <div class="section-header">
       <div class="section-title">
         <span class="section-icon">⏳</span>
         <h2>{{ 'CASHIER.DASHBOARD.SECTIONS.AWAITING_PAYMENT' | translate }}</h2>
       </div>
 
-      <button class="process-btn" (click)="goToOrders()">
+      <button class="process-btn process-btn--outline" (click)="goToOrders()">
         {{ 'CASHIER.DASHBOARD.BUTTONS.VIEW_ALL' | translate }}
       </button>
     </div>
 
-    <app-awaiting-orders-list (onPayNow)="goToPayment($event)">
-    </app-awaiting-orders-list>
-
+    <app-awaiting-orders-list (onPayNow)="goToPayment($event)"> </app-awaiting-orders-list>
   </section>
 
   <!-- ── Bottom Row ──────────────────────────────────────── -->
   <div class="bottom-row">
+    <app-payment-methods-summary [summary]="paymentSummary"> </app-payment-methods-summary>
 
-    <app-payment-methods-summary
-      [summary]="paymentSummary">
-    </app-payment-methods-summary>
-
-    <app-recent-transactions
-      [transactions]="recentTransactions">
-    </app-recent-transactions>
-
+    <app-recent-transactions [transactions]="recentTransactions"> </app-recent-transactions>
   </div>
-
 </div>
