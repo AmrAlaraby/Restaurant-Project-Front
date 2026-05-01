@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validator
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { RegisterationRequestInterface } from '../../../../Core/Models/AuthModels/registeration-request-interface';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ import { RegisterationRequestInterface } from '../../../../Core/Models/AuthModel
   styleUrl: './register.scss',
 })
 export class Register {
-  registerForm!: FormGroup; 
+  registerForm!: FormGroup;
   isSubmitting = signal(false);
   serverError = signal<string | null>(null);
 
@@ -61,13 +62,13 @@ export class Register {
         this.isSubmitting.set(false);
         this.router.navigate(['/']);
         console.log(res);
-        
+
       },
       error: (err) => {
         this.isSubmitting.set(false);
         this.serverError.set(err?.error || 'Registration failed');
         console.log(err);
-        
+
       }
     });
   }
@@ -81,12 +82,12 @@ export class Register {
 
 loginWithGoogle() {
   window.location.href =
-    'https://localhost:7232/api/Auth/external-login?provider=Google';
+    environment.apiUrl + '/Auth/external-login?provider=Google';
 }
 
 loginWithFacebook() {
   window.location.href =
-    'https://localhost:7232/api/Auth/external-login?provider=Facebook';
+    environment.apiUrl + '/Auth/external-login?provider=Facebook';
 }
 
 }
