@@ -28,3 +28,11 @@
   >
   </app-pagination>
 </div>
+
+@if (isModalOpen) {
+    <app-order-details
+      [orderId]="selectedOrderId"
+      (close)="closeModal()">
+    </app-order-details>
+  }
+
