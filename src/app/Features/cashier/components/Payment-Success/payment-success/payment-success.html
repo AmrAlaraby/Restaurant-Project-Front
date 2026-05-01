@@ -1,0 +1,70 @@
+<!-- payment-success.component.html -->
+<div class="page-wrapper">
+
+  <!-- Floating confetti particles -->
+  <div class="confetti-container">
+    <span class="confetti-piece" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"
+          [style.--i]="i"
+          [style.--delay]="(i * 0.15) + 's'"
+          [style.--color]="i % 3 === 0 ? '#2d6a4f' : i % 2 === 0 ? '#c0392b' : '#f9c74f'">
+    </span>
+  </div>
+
+  <!-- Main card -->
+  <div class="success-card" [class.visible]="showContent">
+
+    <!-- Top decorative band -->
+    <div class="card-header-band">
+      <span class="brand-tag">RMS</span>
+    </div>
+
+    <!-- Animated checkmark -->
+    <div class="checkmark-wrapper" [class.pop]="showCheckmark">
+      <div class="checkmark-ring outer-ring"></div>
+      <div class="checkmark-ring inner-ring"></div>
+      <div class="checkmark-icon">
+        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle class="checkmark-circle" cx="26" cy="26" r="24" stroke="white" stroke-width="2"/>
+          <path class="checkmark-path" d="M14.5 26.5L22 34L37.5 18.5" stroke="white" stroke-width="3.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Text content -->
+    <div class="card-body" [class.visible]="showDetails">
+      <h1 class="success-title">Payment Successful! 🎉</h1>
+      <p class="success-subtitle">Your order is on its way</p>
+
+      <div class="divider">
+        <span class="divider-icon">🍔</span>
+      </div>
+
+      <div class="order-details">
+        <div class="detail-row">
+          <span class="detail-label">Payment Method</span>
+          <span class="detail-value">💳 Card via Paymob</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Status</span>
+          <span class="detail-value status-badge">✅ Confirmed</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Button -->
+    <div class="card-footer" [class.visible]="showButton">
+      <button class="menu-btn" (click)="goToMenu()">
+        <span class="btn-icon">🍽️</span>
+        <span class="btn-text">Browse Menu — Order Again!</span>
+        <span class="btn-arrow">→</span>
+      </button>
+
+      <p class="countdown-hint" *ngIf="countdown > 0">
+        Redirecting to the menu in <strong>{{ countdown }}</strong> seconds
+      </p>
+    </div>
+
+  </div>
+
+</div>
