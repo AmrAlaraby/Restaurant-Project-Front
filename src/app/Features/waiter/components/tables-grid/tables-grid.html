@@ -1,8 +1,5 @@
 <div class="tables-grid">
-  <app-waiter-table-list
-    *ngFor="let t of tables"
-    [table]="t"
-    (toggle)="onToggle($event)"
+  <app-waiter-table-list *ngFor="let table of tables" [table]="table" [isHome]="isHome" (toggle)="onToggle($event)"
     (openOrder)="onOpenOrder($event)">
   </app-waiter-table-list>
 </div>

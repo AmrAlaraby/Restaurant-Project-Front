@@ -990,7 +990,8 @@
         "STATUS": {
           "LABEL": "الحالة",
           "OCCUPIED": "مشغولة",
-          "AVAILABLE": "متاحة"
+          "AVAILABLE": "متاحة",
+          "ACTIVE_ORDER": "يوجد طلب نشط"
         },
         "BUTTONS": {
           "FREE": "تفريغ",

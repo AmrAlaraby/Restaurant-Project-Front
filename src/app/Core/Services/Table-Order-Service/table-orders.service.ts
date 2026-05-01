@@ -4,6 +4,7 @@ import { Observable, map } from 'rxjs';
 import { TableOrderInterface } from '../../Models/TableModels/table-order-interface';
 import { OrderDetailsDTO } from '../../Models/TableModels/order-dto.interface';
 import { TableOrders, Order as OrderApi } from '../../Constants/Api_Urls';
+import { TableOrderDTO } from '../../Models/TableModels/table-order-dto.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,9 @@ export class TableOrdersService {
     return this.http.get<{ orderId: number }[]>(TableOrders.getAll, { params });
   }
 
- 
+  getAllTableOrders(): Observable<TableOrderDTO[]> {
+    return this.http.get<TableOrderDTO[]>(TableOrders.getAll);
+  }
   getOrderDetails(orderId: number): Observable<TableOrderInterface> {
     return this.http.get<OrderDetailsDTO>(OrderApi.getById(orderId)).pipe(
       map((res) => ({

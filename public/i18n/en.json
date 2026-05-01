@@ -992,7 +992,8 @@
         "STATUS": {
           "LABEL": "Status",
           "OCCUPIED": "Occupied",
-          "AVAILABLE": "Available"
+          "AVAILABLE": "Available",
+          "ACTIVE_ORDER": "Has Active Order"
         },
         "BUTTONS": {
           "FREE": "Free",

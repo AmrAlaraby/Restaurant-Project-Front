@@ -1,37 +1,49 @@
-<div
-  class="table-card"
-  [class.occupied]="table.isOccupied"
-  [class.available]="!table.isOccupied"
-  (click)="onOpenOrder(table.id)"
->
-  <h3>
+<div class="table-card" [class.occupied]="table.isOccupied" [class.available]="!table.isOccupied"
+  (click)="onOpenOrder(table.id)">
+
+  <div class="table-number">
     {{ 'WAITER.TABLE.TABLELIST.TITLE' | translate:{ number: table.tableNumber } }}
-  </h3>
-
-  <p>
-    {{ 'WAITER.TABLE.TABLELIST.CAPACITY' | translate:{ capacity: table.capacity } }}
-  </p>
-
-  <p>
-    {{ 'WAITER.TABLE.TABLELIST.STATUS.LABEL' | translate }}:
-    @if (table.isOccupied) {
-      <span class="occupied-text">
-        {{ 'WAITER.TABLE.TABLELIST.STATUS.OCCUPIED' | translate }}
-      </span>
-    } @else {
-      <span class="available-text">
-        {{ 'WAITER.TABLE.TABLELIST.STATUS.AVAILABLE' | translate }}
-      </span>
-    }
-  </p>
-
-  <div class="actions" (click)="$event.stopPropagation()">
-    <button (click)="onToggle()">
-      @if (table.isOccupied) {
-        {{ 'WAITER.TABLE.TABLELIST.BUTTONS.FREE' | translate }}
-      } @else {
-        {{ 'WAITER.TABLE.TABLELIST.BUTTONS.OCCUPY' | translate }}
-      }
-    </button>
   </div>
+
+  <div class="table-meta">
+    <span class="capacity-badge">
+      👤 {{ table.capacity }}
+    </span>
+
+    <span class="occupation-badge" [class.occupied]="table.isOccupied">
+      @if (table.isOccupied) {
+      {{ 'WAITER.TABLE.TABLELIST.STATUS.OCCUPIED' | translate }}
+      } @else {
+      {{ 'WAITER.TABLE.TABLELIST.STATUS.AVAILABLE' | translate }}
+      }
+    </span>
+  </div>
+
+  @if (!isHome) {
+  <div class="actions" (click)="$event.stopPropagation()">
+
+    @if (table.isOccupied && table.hasActiveOrder) {
+
+
+  <div class="active-order-label">
+    <span>{{ 'WAITER.TABLE.TABLELIST.STATUS.ACTIVE_ORDER' | translate }}</span>
+  </div>
+
+    } @else {
+
+    
+    <button class="toggle-btn" (click)="onToggle()">
+
+      @if (table.isOccupied) {
+      {{ 'WAITER.TABLE.TABLELIST.BUTTONS.FREE' | translate }}
+      } @else {
+      {{ 'WAITER.TABLE.TABLELIST.BUTTONS.OCCUPY' | translate }}
+      }
+
+    </button>
+
+    }
+
+  </div>
+  }
 </div>

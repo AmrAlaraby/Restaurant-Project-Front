@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableInterface } from '../../../../Core/Models/TableModels/table-interface';
 import { Router } from '@angular/router';
@@ -14,15 +14,18 @@ import { WaiterTableList } from '../tabble-waiter/waiter-table-list/waiter-table
 })
 export class TablesGridComponent {
   @Input() tables: TableInterface[] = [];
-
+  @Output() toggle = new EventEmitter<number>();
+  @Output() openOrder = new EventEmitter<number>();
+  @Output() tableClick = new EventEmitter<TableInterface>();
+  @Input() isHome: boolean = false;
+  
   constructor(private router: Router) {}
 
   onToggle(tableId: number) {
-    // لو عندك table service بيعمل toggle استخدميه هنا
-    console.log('Toggle table:', tableId);
+    this.toggle.emit(tableId);
   }
 
   onOpenOrder(tableId: number) {
-    this.router.navigate(['/waiter/tables', tableId]);
+    this.openOrder.emit(tableId);
   }
 }
