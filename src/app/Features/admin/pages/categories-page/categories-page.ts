@@ -44,8 +44,15 @@ export class CategoriesPage implements OnInit {
 
   // ✅ INIT FORM (FIX)
   private initForm(): void {
-    this.addForm = this.fb.group({ name: [''] });
-    this.editForm = this.fb.group({ name: [''] });
+    this.addForm = this.fb.group({
+      name: [''],
+      arabicName: ['']
+    });
+
+    this.editForm = this.fb.group({
+      name: [''],
+      arabicName: ['']
+    });
   }
 
   // 🔥 GET ALL
@@ -66,18 +73,18 @@ export class CategoriesPage implements OnInit {
   }
 
   // ICON
-  getCategoryIcon(name: string): string {
-    switch (name.toLowerCase()) {
-      case 'pizza':
-        return '🍕';
-      case 'grill':
-        return '🥩';
-      case 'salads':
-        return '🥗';
-      default:
-        return '🍽️';
-    }
-  }
+  // getCategoryIcon(name: string): string {
+  //   switch (name.toLowerCase()) {
+  //     case 'pizza':
+  //       return '🍕';
+  //     case 'grill':
+  //       return '🥩';
+  //     case 'salads':
+  //       return '🥗';
+  //     default:
+  //       return '🍽️';
+  //   }
+  // }
 
   // CLASS
   getActiveClass(category: Category): string {
@@ -92,6 +99,7 @@ export class CategoriesPage implements OnInit {
   onEdit(category: Category): void {
     this.selectedCategory = category;
     this.editForm.patchValue({ name: category.name });
+    this.editForm.patchValue({ Arabicname: category.arabicName });
     this.showEditModal = true;
     document.body.style.overflow = 'hidden';
   }
