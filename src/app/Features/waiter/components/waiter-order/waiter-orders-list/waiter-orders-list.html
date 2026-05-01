@@ -11,52 +11,46 @@
 
   @for (order of orders; track order.id) {
 
-    <div
-      class="table-row"
-      [ngClass]="getRowClass(order.status)"
-      (click)="onOrderClick(order.id)">
+  <div class="table-row" [ngClass]="getRowClass(order.status)" (click)="onOrderClick(order.id)">
 
-      <div>#{{ order.id }}</div>
+    <div class="order-id">#{{ order.id }}</div>
 
-      <div>
-        <span class="table-badge">
-          {{ order.tableNumber || ('WAITER.ORDERS.LIST.NA' | translate) }}
-        </span>
-      </div>
+    <div>
+      <span class="table-badge">
+        {{ order.tableNumber || ('WAITER.ORDERS.LIST.NA' | translate) }}
+      </span>
+    </div>
 
-      <div>
-        {{ 'WAITER.ORDERS.LIST.ITEMS_COUNT' | translate:{ count: order.itemsCount } }}
-      </div>
+    <div>
+      {{ 'WAITER.ORDERS.LIST.ITEMS_COUNT' | translate:{ count: order.itemsCount } }}
+    </div>
 
-      <div>
-        <span class="status" [class]="order.status">
-          {{ ('WAITER.ORDERS.FILTERS.STATUS.' + order.status?.toUpperCase()) | translate }}
-        </span>
-      </div>
+    <div>
+      <!-- 🔴 IMPORTANT FIX: lowercase -->
+      <span class="status-badge" [ngClass]="'status-' + order.status?.toLowerCase()">
+        {{ ('WAITER.ORDERS.FILTERS.STATUS.' + order.status?.toUpperCase()) | translate }}
+      </span>
+    </div>
 
-      <div>
-        {{ order.totalAmount }} {{ 'WAITER.ORDERS.LIST.CURRENCY' | translate }}
-      </div>
+    <div>
+      {{ order.totalAmount }} {{ 'WAITER.ORDERS.LIST.CURRENCY' | translate }}
+    </div>
 
-      <div class="actions">
+    <div class="actions">
 
-        <button
-          class="view-btn"
-          (click)="onViewClick(order.id, $event)">
-          {{ 'WAITER.ORDERS.LIST.BUTTONS.VIEW' | translate }}
-        </button>
+      <button class="view-btn" (click)="onViewClick(order.id, $event)">
+        {{ 'WAITER.ORDERS.LIST.BUTTONS.VIEW' | translate }}
+      </button>
 
-        @if (isReceived(order.status)) {
-          <button
-            class="add-btn"
-            (click)="onAddItem(order.id, $event)">
-            {{ 'WAITER.ORDERS.LIST.BUTTONS.ADD_ITEM' | translate }}
-          </button>
-        }
-
-      </div>
+      @if (isReceived(order.status)) {
+      <button class="add-btn" (click)="onAddItem(order.id, $event)">
+        {{ 'WAITER.ORDERS.LIST.BUTTONS.ADD_ITEM' | translate }}
+      </button>
+      }
 
     </div>
+
+  </div>
 
   }
 

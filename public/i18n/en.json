@@ -904,7 +904,8 @@
           "PREPARING": "Preparing",
           "READY": "Ready",
           "DELIVERED": "Delivered",
-          "CANCELLED": "Cancelled"
+          "CANCELLED": "Cancelled",
+          "AWAITINGPAYMENT": "Awaiting Payment"
         },
         "TYPE": {
           "ALL": "All Types",

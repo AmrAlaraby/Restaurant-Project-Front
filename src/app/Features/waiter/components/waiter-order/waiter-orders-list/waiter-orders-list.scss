@@ -1,150 +1,145 @@
+/* ================= CONTAINER ================= */
 .table-container {
-  background: #fff;
-  border-radius: 16px;
+  background: var(--clr-surface);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--clr-border);
+  box-shadow: var(--shadow-sm);
+
+  .dark & {
+    background: var(--clr-surface);
+  }
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 .table-header {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1.5fr;
-  padding: 16px 18px;
-  align-items: center;
+  padding: var(--space-md) var(--space-lg);
 
-  background: #f3eee9;
-  color: #a08f86;
+  background: var(--clr-cream);
+  color: var(--clr-text-hint);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
-/* ROW */
+/* ================= ROW ================= */
 .table-row {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1.5fr;
-  padding: 16px 18px;
-  align-items: center;
+  padding: var(--space-md) var(--space-lg);
 
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-  transition: all 0.15s ease;
-  cursor: pointer;
-  background: #fff;
+  border-top: 1px solid var(--clr-border);
+  background: var(--clr-surface);
+  transition: var(--transition-fast);
 }
 
 .table-row:hover {
-  background: #faf6f4;
+  background: var(--clr-cream-alt);
 }
 
-/* ORDER ID */
-.table-row div:first-child {
-  font-weight: 600;
-  color: #2d0a08;
-}
-
-/* TABLE BADGE */
+/* ================= TABLE BADGE ================= */
 .table-badge {
-  background: rgba(39, 174, 96, 0.12);
-  color: #1e8449;
-  padding: 4px 10px;
-  border-radius: 999px;
+  background: var(--clr-success-bg);
+  color: var(--clr-success);
+  padding-inline: var(--space-sm);
+  padding-block: 4px;
+  border-radius: var(--radius-full);
   font-size: 11px;
   font-weight: 600;
 }
 
-/* STATUS BASE */
-.status {
-  padding: 4px 10px;
-  border-radius: 999px;
+/* ================= STATUS BADGE ================= */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding-inline: var(--space-sm);
+  padding-block: 4px;
+
+  border-radius: var(--radius-full);
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-}
-
-/* STATUS COLORS */
-.status.received {
-  background: #fdecea;
-  color: #d32f2f;
-}
-
-.status.preparing {
-  background: #fff3e0;
-  color: #f57c00;
-}
-
-.status.ready {
-  background: #e8f5e9;
-  color: #388e3c;
-}
-
-.status.delivered {
-  background: #e3f2fd;
-  color: #1976d2;
-}
-
-.status.cancelled {
-  background: #eeeeee;
-  color: #616161;
-}
-
-/* TOTAL */
-.table-row div:nth-child(5) {
   font-weight: 600;
-  color: #2d0a08;
+
+  border: 1.5px solid;
+  background: transparent;
+  /* 🔴 مهم */
 }
 
-/* ACTIONS */
+/* 🔴 RECEIVED */
+.status-received {
+  color: var(--clr-danger);
+  border-color: var(--clr-danger);
+}
+
+/* 🟠 AWAITING PAYMENT */
+.status-awaitingpayment {
+  color: var(--clr-accent);
+  border-color: var(--clr-accent);
+}
+
+/* 🟡 PREPARING */
+.status-preparing {
+  color: var(--clr-warning-text);
+  border-color: var(--clr-warning-text);
+}
+
+/* 🟢 READY */
+.status-ready {
+  color: var(--clr-success);
+  border-color: var(--clr-success);
+}
+
+/* 🔵 DELIVERED */
+.status-delivered {
+  color: var(--clr-info);
+  border-color: var(--clr-info);
+}
+
+/* ⚪ CANCELLED */
+.status-cancelled {
+  color: var(--clr-text-hint);
+  border-color: var(--clr-border-strong);
+}
+
+/* ================= BUTTONS ================= */
 .actions {
   display: flex;
-  gap: 8px;
+  gap: var(--space-sm);
 }
 
-/* VIEW BUTTON */
 .view-btn {
   background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--clr-border);
   padding: 5px 12px;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   font-size: 11px;
   cursor: pointer;
-  color: #2d0a08;
-  transition: all 0.15s ease;
+  color: var(--clr-text-primary);
 }
 
 .view-btn:hover {
-  border-color: #c0392b;
-  color: #c0392b;
-  background: rgba(192, 57, 43, 0.05);
+  border-color: var(--clr-primary);
+  color: var(--clr-primary);
+  background: var(--clr-primary-tint);
 }
 
-/* ADD BUTTON */
 .add-btn {
-  background: #c0392b;
-  color: #fff;
+  background: var(--clr-primary);
+  color: var(--clr-on-primary);
   border: none;
   padding: 5px 12px;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   font-size: 11px;
   cursor: pointer;
-  transition: all 0.15s ease;
 }
 
 .add-btn:hover {
-  background: #96281b;
+  background: var(--clr-primary-hover);
 }
-
-/* ROW STATES */
-.row-delivered {
-  background: #f4fbf5;
-}
-
-.row-cancelled {
-  background: #fdf3f3;
-}
-
-.row-preparing {
-  background: #fff9ed;
+// رقم الأوردر — أحمر زي الكاشير
+.order-id {
+  color: var(--clr-primary);
+  font-weight: 700;
 }
