@@ -1,21 +1,16 @@
 <div class="types">
-
-  <button
-    [class.active]="type === 'DineIn'"
-    (click)="select('DineIn')">
-    {{ 'CASHIER.CREATE_ORDER.TYPE.DineIn' | translate }}
+  <button class="type-btn" [class.active]="type === 'DineIn'" (click)="select('DineIn')">
+    <span class="type-icon">🍽️</span>
+    <span class="type-label">{{ 'CASHIER.CREATE_ORDER.TYPE.DineIn' | translate }}</span>
   </button>
 
-  <button
-    [class.active]="type === 'PickUp'"
-    (click)="select('PickUp')">
-    {{ 'CASHIER.CREATE_ORDER.TYPE.Pickup' | translate }}
+  <button class="type-btn" [class.active]="type === 'PickUp'" (click)="select('PickUp')">
+    <span class="type-icon">🥡</span>
+    <span class="type-label">{{ 'CASHIER.CREATE_ORDER.TYPE.Pickup' | translate }}</span>
   </button>
 
-  <button
-    [class.active]="type === 'Delivery'"
-    (click)="select('Delivery')">
-    {{ 'CASHIER.CREATE_ORDER.TYPE.Delivery' | translate }}
+  <button class="type-btn" [class.active]="type === 'Delivery'" (click)="select('Delivery')">
+    <span class="type-icon">🛵</span>
+    <span class="type-label">{{ 'CASHIER.CREATE_ORDER.TYPE.Delivery' | translate }}</span>
   </button>
-
 </div>
