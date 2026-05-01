@@ -1,40 +1,53 @@
 <div class="layout">
-
   <!-- SIDEBAR -->
-  <app-sidebar [sections]="chefSidebarData" [class.open]="isOpen" prefix="chief" [isOpen]="isOpen"
-    [AvatarLetters]="AvatarLetters" [UserName]="UserName" [UserRole]="UserRole" (close)="closeSidebar()">
+  <app-sidebar
+    [sections]="chefSidebarData"
+    [class.open]="isOpen"
+    prefix="chief"
+    [isOpen]="isOpen"
+    [AvatarLetters]="AvatarLetters"
+    [UserName]="UserName"
+    [UserRole]="UserRole"
+    (close)="closeSidebar()"
+  >
   </app-sidebar>
 
   <!-- CONTENT -->
   <div class="app-shell">
-
     <!-- TOPBAR -->
     <header class="topbar">
-
-      <button class="hamburger" (click)="openSidebar()">
-        ☰
+      <button class="hamburger" (click)="openSidebar()" aria-label="Toggle sidebar">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
       </button>
 
-      <div class="title">
-        {{topbarTitle | translate}}
-      </div>
+      <h1 class="title">
+        {{ topbarTitle | translate }}
+      </h1>
 
       <div class="topbar-right">
         <app-lang-switch></app-lang-switch>
         <app-notification-bell [notifications]="notifications"></app-notification-bell>
 
         <div class="avatar">
-          {{AvatarLetters}}
+          {{ AvatarLetters }}
         </div>
       </div>
-
     </header>
 
-    <!-- PAGE -->
+    <!-- PAGE CONTENT -->
     <main class="main-content">
       <router-outlet></router-outlet>
     </main>
-
   </div>
-
 </div>
