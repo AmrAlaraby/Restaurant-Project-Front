@@ -1,39 +1,42 @@
-:host {
-  --red: #C0392B;
-  --red-dark: #96281B;
-  --gray-600: #9B4437;
-  --black: #2D0A08;
-  --cream: #FDF5F5;
-
-  --radius: 12px;
-  --radius-sm: 8px;
-  --shadow: 0 1px 4px rgba(45, 10, 8, 0.06);
-  --shadow-btn: 0 2px 8px rgba(192, 57, 43, 0.25);
-  --transition: 0.2s ease;
-}
+// ─── Users Page ───────────────────────────────────────────────────────────────
+// Tokens only, no hardcoded hex.
+// Dark mode via .dark class. Logical properties — RTL-safe.
+// ─────────────────────────────────────────────────────────────────────────────
 
 :host {
   display: block;
-  background: var(--cream);
+  background: var(--clr-bg);
   min-height: 100vh;
-  padding: 24px;
-  font-family: inherit;
-}
+  padding-block: var(--space-lg);
+  padding-inline: var(--space-lg);
+  font-family: var(--font-body);
 
-/* Breadcrumb */
-.breadcrumb {
-  font-size: 13px;
-  color: var(--gray-600);
-  margin-bottom: 20px;
-
-  span {
-    color: var(--black);
-    opacity: 0.4;
-    margin: 0 6px;
+  @media (max-width: 768px) {
+    padding-block: var(--space-md);
+    padding-inline: var(--space-md);
   }
 }
 
-/* Pagination override — ensure it fits theme */
+// ─── Breadcrumb ───────────────────────────────────────────────────────────────
+.breadcrumb {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--clr-text-secondary);
+  margin-block-end: var(--space-lg);
+  letter-spacing: 0.01em;
+
+  .dark & { color: var(--clr-text-secondary); }
+
+  span {
+    color: var(--clr-text-hint);
+    opacity: 0.6;
+    margin-inline: var(--space-xs);
+  }
+}
+
+// ─── Pagination ───────────────────────────────────────────────────────────────
 app-pagination {
-  margin-top: 20px;
+  display: block;
+  margin-block-start: var(--space-lg);
 }

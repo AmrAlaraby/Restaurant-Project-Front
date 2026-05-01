@@ -1,49 +1,89 @@
-:host {
-  --red: #C0392B;
-  --red-dark: #96281B;
-  --gray-600: #9B4437;
-  --black: #2D0A08;
-  --cream: #FDF5F5;
-}
+// ─── Users Header ─────────────────────────────────────────────────────────────
+// Tokens only, no hardcoded hex.
+// Dark mode via .dark class. Logical properties — RTL-safe.
+// ─────────────────────────────────────────────────────────────────────────────
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  gap: var(--space-md);
+  margin-block-end: var(--space-lg);
+  flex-wrap: wrap;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
   .left {
     h2 {
       margin: 0;
-      color: var(--black);
-      font-size: 22px;
-      font-weight: 500;
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--clr-text-primary);
+      letter-spacing: -0.01em;
+
+      .dark & { color: var(--clr-text-primary); }
     }
 
     p {
       margin: 4px 0 0;
-      color: var(--gray-600);
-      font-size: 13px;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: var(--clr-text-secondary);
+
+      .dark & { color: var(--clr-text-secondary); }
     }
   }
 }
 
+// ─── Add Button ───────────────────────────────────────────────────────────────
 .btn-add {
-  background: var(--red);
-  color: white;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s;
-  font-size: 14px;
-  font-weight: 500;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
-  box-shadow: 0 2px 8px rgba(192, 57, 43, 0.25);
+  gap: var(--space-xs);
+  background: var(--clr-primary);
+  color: var(--clr-on-primary);
+  border: none;
+  padding-block: var(--space-sm);
+  padding-inline: var(--space-md);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-red);
+  transition:
+    background var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
 
   &:hover {
-    background: var(--red-dark);
+    background: var(--clr-primary-hover);
+    box-shadow: 0 6px 20px rgba(183, 28, 28, 0.32);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-red);
+  }
+
+  .dark & {
+    background: var(--clr-primary);
+    color: var(--clr-on-primary);
+    box-shadow: var(--shadow-red);
+
+    &:hover {
+      background: var(--clr-primary-hover);
+      box-shadow: 0 6px 22px rgba(229, 57, 53, 0.42);
+    }
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
+    justify-content: center;
   }
 }

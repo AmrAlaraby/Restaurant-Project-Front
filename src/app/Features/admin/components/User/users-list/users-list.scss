@@ -1,23 +1,225 @@
-:host {
-  --red: #C0392B;
-  --red-dark: #96281B;
-  --gray-600: #9B4437;
-  --black: #2D0A08;
-  --cream: #FDF5F5;
-}
+// ─── User Card ────────────────────────────────────────────────────────────────
+// Tokens only, no hardcoded hex.
+// Dark mode via .dark class. Logical properties — RTL-safe.
+// ─────────────────────────────────────────────────────────────────────────────
 
-.list {
+.user-card {
   display: flex;
-  flex-direction: column;
-  background: #ffffff;
-  border-radius: 12px;
-  border: 0.5px solid #f0d8d6;
-  overflow: hidden;
+  align-items: center;
+  gap: var(--space-md);
+  background: var(--clr-surface);
+  padding-block: var(--space-md);
+  padding-inline: var(--space-lg);
+  border-block-end: 1px solid var(--clr-primary-tint);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  &:hover {
+    background: var(--clr-primary-tint);
+
+    .avatar {
+      transform: scale(1.06);
+      box-shadow: 0 4px 12px rgba(171, 22, 22, 0.22);
+    }
+  }
+
+  &:last-child {
+    border-block-end: none;
+  }
+
+  .dark & {
+    background: var(--clr-surface);
+    border-block-end-color: var(--clr-border);
+
+    &:hover {
+      background: var(--clr-surface-warm);
+    }
+  }
 }
 
-.empty {
-  text-align: center;
-  padding: 40px 20px;
-  color: var(--gray-600);
-  font-size: 14px;
+// ─── Avatar ───────────────────────────────────────────────────────────────────
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-full);
+  background-color: var(--clr-primary);
+  color: #ffffff !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  border: none;
+  line-height: 1;
+  transition: background-color var(--transition-fast);
+
+  .dark & {
+    background-color: var(--clr-primary);
+    color: #ffffff;
+  }
+}
+
+// ─── Info ─────────────────────────────────────────────────────────────────────
+.info {
+  flex: 1;
+  min-width: 0;
+
+  h4 {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--clr-text-primary);
+
+    .dark & { color: var(--clr-text-primary); }
+  }
+
+  p {
+    margin: 3px 0 0;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--clr-text-secondary);
+
+    .dark & { color: var(--clr-text-secondary); }
+  }
+
+  .email {
+    color: var(--clr-primary);
+
+    .dark & { color: var(--clr-primary-hover); }
+  }
+}
+
+// ─── Role Badge ───────────────────────────────────────────────────────────────
+.role {
+  padding-block: 4px;
+  padding-inline: var(--space-sm);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--clr-danger-bg);
+  color: var(--clr-danger-text);
+  border: 1px solid var(--clr-primary-tint);
+  white-space: nowrap;
+
+  .dark & {
+    background: var(--clr-danger-bg);
+    color: var(--clr-danger-text);
+    border-color: var(--clr-primary-tint);
+  }
+}
+
+// ─── Actions ──────────────────────────────────────────────────────────────────
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+
+// ─── Outline Button ───────────────────────────────────────────────────────────
+.btn-outline {
+  border: 1px solid var(--clr-border-strong);
+  background: transparent;
+  padding-block: 5px;
+  padding-inline: var(--space-md);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--clr-text-secondary);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+
+  &:hover {
+    background: var(--clr-primary-tint);
+    border-color: var(--clr-primary-muted);
+    color: var(--clr-primary);
+  }
+
+  .dark & {
+    border-color: var(--clr-border);
+    color: var(--clr-text-secondary);
+
+    &:hover {
+      background: var(--clr-primary-tint);
+      border-color: var(--clr-primary-muted);
+      color: var(--clr-primary-hover);
+    }
+  }
+}
+
+// ─── Status Toggle ────────────────────────────────────────────────────────────
+.status-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  cursor: pointer;
+}
+
+// ─── Switch ───────────────────────────────────────────────────────────────────
+.switch {
+  width: 42px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  background: var(--clr-gray-300);
+  position: relative;
+  transition: background var(--transition-fast);
+  flex-shrink: 0;
+
+  .circle {
+    width: 18px;
+    height: 18px;
+    background: var(--clr-surface);
+    border-radius: var(--radius-full);
+    position: absolute;
+    inset-block-start: 2px;
+    inset-inline-start: 2px;
+    transition: inset-inline-start var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+  }
+
+  &.active {
+    background: var(--clr-primary);
+
+    .circle {
+      inset-inline-start: 22px;
+    }
+
+    .dark & { background: var(--clr-primary); }
+  }
+
+  &.inactive {
+    background: var(--clr-gray-300);
+
+    .circle { inset-inline-start: 2px; }
+
+    .dark & { background: var(--clr-gray-700); }
+  }
+
+  .dark & {
+    background: var(--clr-gray-700);
+
+    .circle { background: var(--clr-gray-300); }
+  }
+}
+
+// ─── Toggle Label ─────────────────────────────────────────────────────────────
+.label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--clr-text-secondary);
+
+  .dark & { color: var(--clr-text-secondary); }
 }
