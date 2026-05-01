@@ -1,5 +1,22 @@
 {
   "CUSTOMER": {
+    "PROFILE": {
+      "TITLE": "ملفي الشخصي",
+      "LOADING": "جاري التحميل...",
+      "PERSONAL_INFO": "المعلومات الشخصية",
+      "FULL_NAME": "الاسم الكامل",
+      "EMAIL": "البريد الإلكتروني",
+      "USERNAME": "اسم المستخدم (اختياري)",
+      "NEW_PASSWORD": "كلمة مرور جديدة (اختياري)",
+      "CONFIRM_PASSWORD": "تأكيد كلمة المرور",
+      "NAME_REQUIRED": "الاسم مطلوب",
+      "EMAIL_REQUIRED": "يجب إدخال بريد إلكتروني صحيح",
+      "MIN_PASSWORD": "الحد الأدنى 6 أحرف",
+      "PASSWORD_MISMATCH": "كلمات المرور غير متطابقة",
+      "SAVE": "حفظ التغييرات",
+      "LOGOUT": "تسجيل الخروج",
+      "SAVED_SUCCESS": "تم حفظ التغييرات بنجاح!"
+    },
     "NUTRITION": {
       "KCAL": "سعرة",
       "CALCULATE": "احسب تغذية طلبك",

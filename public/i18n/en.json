@@ -1,5 +1,22 @@
 {
   "CUSTOMER": {
+    "PROFILE": {
+      "TITLE": "My Profile",
+      "LOADING": "Loading...",
+      "PERSONAL_INFO": "Personal Info",
+      "FULL_NAME": "Full Name",
+      "EMAIL": "Email",
+      "USERNAME": "Username (optional)",
+      "NEW_PASSWORD": "New Password (optional)",
+      "CONFIRM_PASSWORD": "Confirm Password",
+      "NAME_REQUIRED": "Name is required",
+      "EMAIL_REQUIRED": "Valid email is required",
+      "MIN_PASSWORD": "Minimum 6 characters",
+      "PASSWORD_MISMATCH": "Passwords do not match",
+      "SAVE": "Save Changes",
+      "LOGOUT": "Logout",
+      "SAVED_SUCCESS": "Changes saved successfully!"
+    },
     "NUTRITION": {
       "KCAL": "kcal",
       "CALCULATE": "Calculate Nutrition",
