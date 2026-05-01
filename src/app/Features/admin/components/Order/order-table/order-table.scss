@@ -1,124 +1,276 @@
-:host {
-  --red: #C0392B;
-  --red-dark: #96281B;
-  --gray-100: #FFF5F5;
-  --gray-200: rgba(192, 57, 43, 0.13);
-  --gray-600: #9B4437;
-  --black: #2D0A08;
-  --radius: 14px;
-}
-
+// ─── Table Wrap ───────────────────────────────────────────────────────────────
 .table-wrap {
-  background: #FFFFFF;
-  border-radius: var(--radius);
-  border: 1px solid var(--gray-200);
-  box-shadow: 0 2px 8px rgba(192, 57, 43, 0.08);
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
   overflow: hidden;
 }
 
+// ─── Table ────────────────────────────────────────────────────────────────────
 table {
   width: 100%;
   border-collapse: collapse;
+  font-family: var(--font-body);
 }
 
+// ─── Head (RED THEME) ─────────────────────────────────────────────────────────
 thead {
-  background: #FFF5F5;
-  border-bottom: 1px solid var(--gray-200);
+  background: linear-gradient(135deg, #c0392b, #a93226);
 }
 
 th {
-  padding: 12px 14px;
-  font-size: .75rem;
-  font-weight: 500;
-  color: #9B4437;
+  padding: 16px 18px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  text-align: left;
 }
 
+// ─── Body ─────────────────────────────────────────────────────────────────────
 td {
-  padding: 14px;
-  font-size: .85rem;
-  color: #2D0A08;
+  padding: 16px 18px;
+  font-size: 13px;
+  color: #2d0a08;
 }
 
+// ─── Rows ─────────────────────────────────────────────────────────────────────
 tbody tr {
-  border-bottom: 1px solid var(--gray-200);
-  transition: .2s;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.15s ease;
+  cursor: pointer;
+  background: #fff;
 
   &:last-child {
     border-bottom: none;
   }
 
   &:hover {
-    background: #FFF5F5;
+    background: #faf6f4;
   }
 }
 
-/* ── TYPE & STATUS BADGES — pill / oval pastel style ── */
+// ─── Order ID (Pro Pill + Interactive) ────────────────────────────────────────
+tbody tr td:first-child {
+  font-weight: 700;
 
-.type-badge,
-.status-badge {
-  display: inline-block;
-  padding: 5px 14px;
-  border-radius: 999px;       // full pill
-  font-size: .7rem;
-  font-weight: 600;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-  border: 1.5px solid transparent;
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 5px 12px;
+    border-radius: 999px;
+
+    background: rgba(192, 57, 43, 0.1);
+    color: #c0392b;
+    font-size: 12px;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  span::before {
+    content: "#";
+    font-size: 11px;
+    opacity: 0.7;
+  }
 }
 
-/* ── Type badges ── */
+tbody tr td:first-child span:hover {
+  background: #c0392b;
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(192, 57, 43, 0.25);
+}
+
+tbody tr td:first-child span:active {
+  transform: scale(0.95);
+}
+
+// ─── Badges Base ──────────────────────────────────────────────────────────────
+.type-badge,
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+// ─── Type Badges ──────────────────────────────────────────────────────────────
 .t-dinein {
-  background: #EAF0FF;
-  color: #5B7FD4;
-  border-color: #C5D4F7;
+  background: rgba(39, 174, 96, 0.12);
+  color: #1e8449;
 }
 
 .t-delivery {
-  background: #E6F7EE;
-  color: #3DAB6E;
-  border-color: #B6E8CE;
+  background: rgba(52, 152, 219, 0.12);
+  color: #1976d2;
 }
 
 .t-pickup {
-  background: #F4EEFF;
-  color: #9B6DD6;
-  border-color: #DEC8F5;
+  background: rgba(192, 57, 43, 0.12);
+  color: #c0392b;
 }
 
-/* ── Status badges ── */
-.st-preparing,
-.s-preparing {
-  background: #FFF5E0;
-  color: #D4900A;
-  border-color: #F5DCA0;
-}
-
-.st-ready,
-.s-ready {
-  background: #E6F7EE;
-  color: #3DAB6E;
-  border-color: #B6E8CE;
-}
-
-.st-delivered,
-.s-delivered {
-  background: #E4F3FF;
-  color: #4A9FD4;
-  border-color: #B8DCEF;
-}
-
-.st-cancelled,
-.s-cancelled {
-  background: #F5F5F5;
-  color: #999999;
-  border-color: #DEDEDE;
-}
-
-.st-received,
+// ─── Status Badges ────────────────────────────────────────────────────────────
 .s-received {
-  background: #FFF0F5;
-  color: #D46A8A;
-  border-color: #F5C0D0;
+  background: #fdecea;
+  color: #d32f2f;
+}
+
+.s-preparing {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.s-ready {
+  background: #e8f5e9;
+  color: #388e3c;
+}
+
+.s-delivered {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.s-cancelled {
+  background: #eeeeee;
+  color: #616161;
+}
+
+// ─── Row States ───────────────────────────────────────────────────────────────
+.row-delivered {
+  background: #f4fbf5;
+}
+
+.row-cancelled {
+  background: #fdf3f3;
+}
+
+.row-preparing {
+  background: #fff9ed;
+}
+
+// ─── Actions ─────────────────────────────────────────────────────────────────
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+// ─── Buttons Base ─────────────────────────────────────────────────────────────
+.view-btn,
+.add-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+// ─── Icons ───────────────────────────────────────────────────────────────────
+.view-btn::before {
+  content: "👁";
+  font-size: 12px;
+}
+
+.add-btn::before {
+  content: "+";
+  font-size: 13px;
+  font-weight: bold;
+}
+
+// ─── View Button ─────────────────────────────────────────────────────────────
+.view-btn {
+  background: transparent;
+  border: 1px solid rgba(192, 57, 43, 0.4);
+  color: #c0392b;
+}
+
+.view-btn:hover {
+  border-color: #c0392b;
+  background: rgba(192, 57, 43, 0.08);
+  color: #a93226;
+}
+
+// ─── Add Button ──────────────────────────────────────────────────────────────
+.add-btn {
+  background: #c0392b;
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 10px rgba(192, 57, 43, 0.25);
+}
+
+.add-btn:hover {
+  background: #a93226;
+  box-shadow: 0 6px 14px rgba(192, 57, 43, 0.35);
+}
+
+// ─── Click Effect ─────────────────────────────────────────────────────────────
+.view-btn:active,
+.add-btn:active {
+  transform: scale(0.95);
+}
+
+// ─── Ripple Effect ───────────────────────────────────────────────────────────
+.view-btn::after,
+.add-btn::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.view-btn:active::after,
+.add-btn:active::after {
+  width: 120%;
+  height: 120%;
+  opacity: 1;
+  transform: scale(1);
+  transition: all 0.4s ease;
+}
+
+// ─── Toast (Copied) ──────────────────────────────────────────────────────────
+.copy-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  background: #2d0a08;
+  color: #fff;
+
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 12px;
+
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+
+.copy-toast.show {
+  opacity: 1;
+  transform: translateY(0);
 }
