@@ -5,12 +5,15 @@ import { SuggestResultDTO } from '../../../../../Core/Models/AiModels/suggest-re
 import { IngredientInterface } from '../../../../../Core/Models/MenuItemModels/ingredient-interface';
 import { AiSuggestService } from '../../../../../Core/Services/Ai-Service/ai-suggest';
 import { IngredientsService } from '../../../../../Core/Services/Ingredients-Service/ingredients-Service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Subject, takeUntil } from 'rxjs';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
 
 @Component({
   selector: 'app-ai-suggest',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslatePipe],
   templateUrl: './ai-suggest.html',
   styleUrls: ['./ai-suggest.scss'],
 })
@@ -44,11 +47,27 @@ export class AiSuggestComponent implements OnInit {
   constructor(
     private aiSuggestService: AiSuggestService,
     private ingredientsService: IngredientsService,
+    private localizationService: LocalizationService,
   ) {}
 
   ngOnInit(): void {
     this.loadIngredients();
+    this.getCurrentLanguage();
   }
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
+    
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 
   loadIngredients(): void {
     this.ingredientsLoading.set(true);
@@ -126,5 +145,12 @@ export class AiSuggestComponent implements OnInit {
 
   getScorePercent(score: number): number {
     return Math.round(score * 100);
+  }
+
+  getIngredientName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.arabicName || item.name;
+    }
+    return item.name;
   }
 }
