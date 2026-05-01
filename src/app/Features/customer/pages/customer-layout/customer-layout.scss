@@ -131,6 +131,16 @@ $nav-h: 70px;
   margin-left: auto;
 }
 
+// AVATAR + DROPDOWN
+.avatar-wrapper {
+  position: relative;
+
+  &.open .nav-avatar {
+    outline: 2px solid rgba($red, 0.3);
+    outline-offset: 2px;
+  }
+}
+
 .nav-avatar {
   width: 38px;
   height: 38px;
@@ -144,7 +154,8 @@ $nav-h: 70px;
   font-size: 14px;
   cursor: pointer;
   flex-shrink: 0;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, outline 0.15s;
+  user-select: none;
 
   &:hover {
     opacity: 0.85;
@@ -155,6 +166,121 @@ $nav-h: 70px;
     height: 46px;
     font-size: 16px;
   }
+}
+
+.avatar-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 220px;
+  background: $white;
+  border: 1px solid $border;
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  z-index: 2000;
+  overflow: hidden;
+  animation: dropIn 0.15s ease;
+
+  @keyframes dropIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+.avatar-dropdown-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: #fafafa;
+  border-bottom: 1px solid $border;
+}
+
+.dropdown-avatar-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: $red;
+  color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.dropdown-username {
+  font-size: 13px;
+  font-weight: 600;
+  color: $dark;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-role {
+  font-size: 11px;
+  color: $text2;
+  margin-top: 1px;
+}
+
+.avatar-dropdown-body {
+  padding: 6px 0;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: $text;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  transition: background 0.15s, color 0.15s;
+  font-family: inherit;
+
+  &:hover {
+    background: #f5f5f5;
+    color: $dark;
+
+    .dropdown-item-icon {
+      color: $dark;
+    }
+  }
+
+  &.danger {
+    color: $red;
+
+    .dropdown-item-icon {
+      color: $red;
+    }
+
+    &:hover {
+      background: rgba($red, 0.06);
+      color: darken($red, 8%);
+    }
+  }
+}
+
+.dropdown-item-icon {
+  display: flex;
+  align-items: center;
+  color: $text2;
+  transition: color 0.15s;
+  flex-shrink: 0;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: $border;
+  margin: 4px 0;
 }
 
 // HAMBURGER
@@ -291,6 +417,12 @@ $nav-h: 70px;
   color: $text2;
   text-decoration: none;
   transition: all 0.2s;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
 
   .nav-link-icon {
     display: flex;
@@ -317,6 +449,25 @@ $nav-h: 70px;
       opacity: 1;
     }
   }
+
+  &.danger-link {
+    color: $red;
+
+    .nav-link-icon {
+      opacity: 1;
+      color: $red;
+    }
+
+    &:hover {
+      background: rgba($red, 0.06);
+    }
+  }
+}
+
+.drawer-divider {
+  height: 1px;
+  background: $border;
+  margin: 8px 0;
 }
 
 .drawer-footer-actions {
@@ -344,50 +495,6 @@ $nav-h: 70px;
   color: #aaa;
 }
 
-// TOP BAR
-.footer-topbar {
-  background: $dark2;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 12px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.footer-topbar-badge {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  background: rgba($red, 0.12);
-  border: 1px solid rgba($red, 0.2);
-  border-radius: 20px;
-  padding: 4px 12px;
-  font-size: 11px;
-  font-weight: 700;
-  color: $red;
-  flex-shrink: 0;
-}
-
-.topbar-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: $red;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
-.footer-topbar-text {
-  font-size: 12px;
-  color: #555;
-}
-
-// MAIN GRID
 .footer-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -397,7 +504,6 @@ $nav-h: 70px;
   gap: 48px;
 }
 
-// BRAND COLUMN
 .footer-logo {
   display: flex;
   align-items: center;
@@ -445,7 +551,6 @@ $nav-h: 70px;
   }
 }
 
-// APP BUTTONS
 .footer-app-btns {
   display: flex;
   gap: 8px;
@@ -487,7 +592,6 @@ $nav-h: 70px;
   }
 }
 
-// LINK COLUMNS
 .footer-heading {
   font-size: 11px;
   font-weight: 700;
@@ -547,7 +651,6 @@ $nav-h: 70px;
   }
 }
 
-// NEWSLETTER
 .footer-newsletter-box {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.07);
@@ -616,50 +719,6 @@ $nav-h: 70px;
   }
 }
 
-// STATS BAR
-.footer-stats {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 24px 40px;
-  max-width: 1400px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.footer-stat {
-  padding: 0 32px;
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-
-  &:first-child {
-    padding-left: 0;
-  }
-
-  &:last-child {
-    border-right: none;
-  }
-}
-
-.stat-num {
-  font-size: 24px;
-  font-weight: 800;
-  color: $white;
-
-  em {
-    font-style: normal;
-    color: $red;
-  }
-}
-
-.stat-label {
-  font-size: 11px;
-  color: #555;
-}
-
-// BOTTOM BAR
 .footer-bottom {
   padding: 18px 40px;
   max-width: 1400px;
@@ -668,6 +727,7 @@ $nav-h: 70px;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .footer-bottom-logo {
@@ -719,12 +779,11 @@ $nav-h: 70px;
   .nav-actions {
     app-lang-switch,
     app-notification-bell,
-    app-cart-icon,
     app-branch-selector {
       display: none;
     }
 
-    .nav-avatar {
+    .avatar-wrapper {
       display: flex;
     }
   }
@@ -739,29 +798,6 @@ $nav-h: 70px;
 
   .footer-brand {
     grid-column: 1 / -1;
-  }
-
-  .footer-stats {
-    padding: 20px 24px;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-
-  .footer-stat {
-    padding: 0;
-    border-right: none;
-
-    &:nth-child(odd) {
-      border-right: 1px solid rgba(255, 255, 255, 0.05);
-      padding-right: 20px;
-    }
-  }
-
-  .footer-topbar {
-    padding: 12px 24px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
   }
 
   .footer-bottom {
