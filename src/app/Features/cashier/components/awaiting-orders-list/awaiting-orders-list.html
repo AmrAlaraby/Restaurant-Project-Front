@@ -1,20 +1,20 @@
 <div class="orders-list">
-  <div
-    class="order-card"
-    *ngFor="let order of orders"
-    [ngClass]="getCardClass(order)"
-  >
+  <div class="order-card" *ngFor="let order of orders" [ngClass]="getCardClass(order)">
     <!-- Left: icon + info -->
     <div class="order-left">
       <span class="order-type-icon">{{ getTypeIcon(order) }}</span>
 
       <div class="order-info">
         <div class="order-title">
-          {{ 'CASHIER.DASHBOARD.AWAITING_PAYMENTS.CARD.TITLE' | translate:{
-            id: order.id,
-            type: getTypeLabel(order),
-            user: order.userName
-          } }}
+          {{
+            'CASHIER.DASHBOARD.AWAITING_PAYMENTS.CARD.TITLE'
+              | translate
+                : {
+                    id: order.id,
+                    type: getTypeLabel(order),
+                    user: order.userName,
+                  }
+          }}
         </div>
 
         <div class="order-items">
@@ -23,9 +23,7 @@
             <span *ngIf="!last"> · </span>
           </span>
 
-          <span *ngIf="order.extraLabel" class="extra-label">
-            · {{ order.extraLabel }}
-          </span>
+          <span *ngIf="order.extraLabel" class="extra-label"> · {{ order.extraLabel }} </span>
         </div>
       </div>
     </div>
@@ -33,14 +31,13 @@
     <!-- Right: amount + action -->
     <div class="order-right">
       <div class="order-amount">
-        {{ 'CASHIER.DASHBOARD.AWAITING_PAYMENTS.CARD.AMOUNT' | translate:{ amount: order.totalAmount } }}
+        {{
+          'CASHIER.DASHBOARD.AWAITING_PAYMENTS.CARD.AMOUNT'
+            | translate: { amount: order.totalAmount }
+        }}
       </div>
 
-      <button
-        class="action-btn"
-        [ngClass]="getActionClass(order)"
-        (click)="onAction(order)"
-      >
+      <button class="action-btn" [ngClass]="getActionClass(order)" (click)="onAction(order)">
         {{ getActionLabel(order) | translate }}
       </button>
     </div>
