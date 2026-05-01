@@ -20,6 +20,7 @@ import { DeleteAddressDto } from '../../../../../Core/Models/AddressModels/delet
 import { UpdateAddressDto } from '../../../../../Core/Models/AddressModels/update-address-dto';
 import { AddressDto } from '../../../../../Core/Models/AuthModels/address-dto';
 import { AddressService } from '../../../../../Core/Services/Address-Service/address';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 
@@ -31,7 +32,7 @@ type ModalMode = 'add' | 'edit' | null;
 @Component({
   selector: 'app-saved-addresses',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule,TranslatePipe],
   templateUrl: './saved-addresses.html',
   styleUrls: ['./saved-addresses.scss'],
 })
