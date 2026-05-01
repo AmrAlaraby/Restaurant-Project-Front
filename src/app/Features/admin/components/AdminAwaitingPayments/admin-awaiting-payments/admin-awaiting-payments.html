@@ -1,0 +1,53 @@
+<div class="awaiting-payments">
+
+  <!-- Branch Filter + Search Bar -->
+  <div class="filters-row">
+
+    <!-- Branch Dropdown -->
+    <select
+      class="branch-select"
+      [(ngModel)]="selectedBranchId"
+      (change)="onBranchChange()"
+    >
+      <option [ngValue]="null">
+        {{ 'ADMIN.PAYMENT.AWAITING_PAYMENTS.FILTERS.ALL_BRANCHES' | translate }}
+      </option>
+      <option *ngFor="let branch of branches" [ngValue]="branch.id">
+        {{ branch.name }}
+      </option>
+    </select>
+
+    <!-- Search Input -->
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      [placeholder]="'CASHIER.PAYMENT.AWAITING_PAYMENTS.SEARCH.PLACEHOLDER' | translate"
+      class="search-input"
+    />
+
+    <button class="load-btn" (click)="loadOrders()">
+      {{ 'CASHIER.PAYMENT.AWAITING_PAYMENTS.SEARCH.BUTTON_LOAD' | translate }}
+    </button>
+
+  </div>
+
+  <!-- Order Chips -->
+  <div class="order-chips">
+    <button
+      *ngFor="let order of filteredOrders"
+      class="chip"
+      [class.active]="selectedOrderId === order.id"
+      (click)="select(order.id)"
+    >
+      {{ getOrderLabel(order) | translate }} · #{{ order.id }}
+    </button>
+  </div>
+
+</div>
+
+<app-pagination
+  [pageIndex]="pageIndex"
+  [pageSize]="pageSize"
+  [totalCount]="totalCount"
+  (pageChanged)="onPageChanged($event)">
+</app-pagination>

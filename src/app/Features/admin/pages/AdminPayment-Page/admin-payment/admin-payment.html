@@ -1,0 +1,50 @@
+<div class="payment-page">
+
+  <h1 class="page-title">
+    {{ 'ADMIN.PAYMENT.TITLE' | translate }}
+  </h1>
+
+  <!-- ── TOP SECTION: Find Order + Bill + Terminal ── -->
+  <div class="payment-layout">
+
+    <!-- LEFT COLUMN -->
+    <div class="left-col">
+
+      <!-- Find Order -->
+      <div class="card">
+        <div class="card-label">
+          {{ 'CASHIER.PAYMENT.SECTIONS.FIND_ORDER' | translate }}
+        </div>
+        <app-admin-awaiting-payments
+          (onSelect)="onOrderSelected($event)">
+        </app-admin-awaiting-payments>
+      </div>
+
+      <!-- Bill Preview -->
+      <div class="card">
+        <div class="card-label">
+          {{ 'CASHIER.PAYMENT.SECTIONS.BILL_PREVIEW' | translate }}
+        </div>
+        <app-bill-preview
+          [orderId]="selectedOrderId">
+        </app-bill-preview>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN: Payment Terminal -->
+    <div class="right-col">
+      <app-payment-terminal
+        [orderId]="selectedOrderId"
+        (paymentConfirmed)="onPaymentConfirmed()">
+      </app-payment-terminal>
+    </div>
+
+  </div>
+
+  <!-- ── BOTTOM SECTION: Recent Transactions ── -->
+  <div class="transactions-section">
+    <app-recent-transactions></app-recent-transactions>
+  </div>
+
+</div>

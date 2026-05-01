@@ -106,6 +106,13 @@ export const routes: Routes = [
             (m) => m.RecentTransactionsComponent,
           ),
       },
+      {
+        path: 'payments',
+        loadComponent: () =>
+          import('./Features/admin/pages/AdminPayment-Page/admin-payment/admin-payment').then(
+            (m) => m.AdminPayment,
+          ),
+      }
     ],
   },
 
@@ -225,12 +232,12 @@ export const routes: Routes = [
           ),
       },
       {
-      path: 'payment-success',
-      loadComponent: () =>
-        import('./Features/cashier/components/Payment-Success/payment-success/payment-success').then(
-          (m) => m.PaymentSuccess,
-        ),
-    },
+        path: 'payment-success',
+        loadComponent: () =>
+          import('./Features/cashier/components/Payment-Success/payment-success/payment-success').then(
+            (m) => m.PaymentSuccess,
+          ),
+      },
       //Areej 501 - 550
       //Arwa 551 - 600
       //mahmoud 601 - 650
