@@ -1,70 +1,203 @@
+/* ═══════════════════════════════════════════════════════════
+   MENU ITEMS FILTERS — SCSS
+   Styled to match table-filter pill-bar pattern
+   Dark mode via .dark class only · No hardcoded hex
+═══════════════════════════════════════════════════════════ */
+
+/* ── FILTER CONTAINER ───────────────────────────────────── */
 .filters-wrapper {
-    background: var(--white);
-    padding: 16px;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    border: 1px solid var(--gray-200);
-    margin-bottom: 24px;
+  background: var(--clr-surface);
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-sm);
+  margin-block-end: var(--space-lg);
+
+  .dark & {
+    background: var(--clr-surface);
+    border-color: var(--clr-border);
+    box-shadow: var(--shadow-sm);
+  }
 }
 
-/* LABEL */
-.form-label {
-    font-weight: 600;
-    font-size: 13px;
-    color: var(--gray-600);
-    margin-bottom: 4px;
+/* ── DIVIDER ────────────────────────────────────────────── */
+.f-divider {
+  width: 1px;
+  height: 26px;
+  background: var(--clr-border);
+  flex-shrink: 0;
+
+  .dark & {
+    background: var(--clr-border);
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
-/* INPUT + SELECT */
-.form-control,
-.form-select {
-    height: 44px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--gray-200);
-    font-size: 14px;
-    transition: var(--transition);
+/* ── SEARCH ─────────────────────────────────────────────── */
+.search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+
+  @media (max-width: 768px) {
+    min-width: 100%;
+    order: -1;
+  }
+}
+
+.search-icon {
+  position: absolute;
+  inset-inline-start: var(--space-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--clr-text-hint);
+  pointer-events: none;
+
+  .dark & {
+    color: var(--clr-text-hint);
+  }
+}
+
+.search-wrap input {
+  width: 100%;
+  padding-block: 10px;
+  padding-inline: calc(var(--space-sm) + 22px) var(--space-sm);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--clr-border);
+  background: var(--clr-surface-alt);
+  color: var(--clr-text-primary);
+  outline: none;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  &::placeholder {
+    color: var(--clr-text-hint);
+  }
+
+  &:hover {
+    border-color: var(--clr-cream-dark);
+  }
+
+  &:focus {
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--clr-primary) 12%, transparent);
+  }
+
+  .dark & {
+    background: var(--clr-surface-alt);
+    border-color: var(--clr-border);
+    color: var(--clr-text-primary);
+
+    &:hover { border-color: var(--clr-cream-dark); }
+    &:focus { border-color: var(--clr-primary); }
+  }
+}
+
+/* ── SELECT WRAP ────────────────────────────────────────── */
+.select-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-width: 150px;
+
+  @media (max-width: 768px) {
+    flex: 1;
+    min-width: calc(50% - var(--space-sm));
+  }
+}
+
+.select-arrow {
+  position: absolute;
+  inset-inline-end: var(--space-sm);
+  pointer-events: none;
+  color: var(--clr-text-hint);
+
+  .dark & {
+    color: var(--clr-text-hint);
+  }
+}
+
+.filters-wrapper select {
+  width: 100%;
+  padding-block: 10px;
+  padding-inline: var(--space-sm) calc(var(--space-sm) + 18px);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--clr-border);
+  background: var(--clr-surface-alt);
+  color: var(--clr-text-primary);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+
+  &:hover {
+    border-color: var(--clr-cream-dark);
+    transform: translateY(-1px);
+  }
+
+  &:focus {
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--clr-primary) 12%, transparent);
+  }
+
+  .dark & {
+    background: var(--clr-surface-alt);
+    border-color: var(--clr-border);
+    color: var(--clr-text-primary);
+  }
+}
+
+/* ── RESET BUTTON ───────────────────────────────────────── */
+.reset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 10px var(--space-md);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--clr-border);
+  background: var(--clr-surface-alt);
+  color: var(--clr-primary);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+  white-space: nowrap;
+
+  &:hover {
+    background: var(--clr-danger-bg);
+    border-color: var(--clr-primary);
+    transform: translateY(-1px);
+  }
+
+  .dark & {
+    background: var(--clr-surface-alt);
+    border-color: var(--clr-border);
+    color: var(--clr-primary-light);
 
     &:hover {
-        border-color: var(--gray-400);
+      background: var(--clr-danger-bg);
+      border-color: var(--clr-primary-light);
     }
-
-    &:focus {
-        border-color: var(--red);
-        box-shadow: 0 0 0 3px rgba(196, 30, 30, 0.1);
-    }
-}
-
-/* 🔥 RESET BUTTON */
-.btn-reset {
-    height: 44px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--red-light);
-    background: var(--red-light);
-    color: var(--red);
-    font-weight: 600;
-    font-size: 14px;
-    transition: var(--transition);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* HOVER */
-.btn-reset:hover {
-    background: var(--red);
-    color: var(--white);
-    border-color: var(--red);
-    box-shadow: var(--shadow-btn);
-}
-
-/* CLICK */
-.btn-reset:active {
-    transform: scale(0.97);
-}
-
-/* optional spacing fix */
-.row.g-3>* {
-    display: flex;
-    flex-direction: column;
+  }
 }
