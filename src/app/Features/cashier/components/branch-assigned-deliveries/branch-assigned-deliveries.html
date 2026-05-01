@@ -7,23 +7,24 @@
 
 <!-- List View -->
 <div class="bad-page" *ngIf="selectedDeliveryId === null">
-
   <!-- Header -->
   <div class="bad-header">
     <div class="bad-header-left">
-
       <div class="bad-title">
         {{ 'CASHIER.DELIVERIES.HEADER.TITLE' | translate }}
       </div>
 
       <div class="bad-sub" *ngIf="!loading">
-        {{ 'CASHIER.DELIVERIES.HEADER.SUBTITLE' | translate:{ branch: getBranchName(), count: totalCount, plural: totalCount !== 1 ? 's' : '' } }}
+        {{
+          'CASHIER.DELIVERIES.HEADER.SUBTITLE'
+            | translate
+              : { branch: getBranchName(), count: totalCount, plural: totalCount !== 1 ? 's' : '' }
+        }}
       </div>
 
       <button class="bad-back-btn bad-back-spaced" (click)="goBack()">
         {{ 'CASHIER.DELIVERIES.HEADER.BACK_BUTTON' | translate }}
       </button>
-
     </div>
 
     <!-- Filters -->
@@ -38,10 +39,18 @@
 
       <select class="bad-filter-select" [(ngModel)]="filterStatus" (change)="applyFilter()">
         <option value="">{{ 'CASHIER.DELIVERIES.FILTERS.STATUS_ALL' | translate }}</option>
-        <option value="Assigned">{{ 'CASHIER.DELIVERIES.FILTERS.STATUS_ASSIGNED' | translate }}</option>
-        <option value="PickedUp">{{ 'CASHIER.DELIVERIES.FILTERS.STATUS_PICKED_UP' | translate }}</option>
-        <option value="OnTheWay">{{ 'CASHIER.DELIVERIES.FILTERS.STATUS_ON_THE_WAY' | translate }}</option>
-        <option value="Delivered">{{ 'CASHIER.DELIVERIES.FILTERS.STATUS_DELIVERED' | translate }}</option>
+        <option value="Assigned">
+          {{ 'CASHIER.DELIVERIES.FILTERS.STATUS_ASSIGNED' | translate }}
+        </option>
+        <option value="PickedUp">
+          {{ 'CASHIER.DELIVERIES.FILTERS.STATUS_PICKED_UP' | translate }}
+        </option>
+        <option value="OnTheWay">
+          {{ 'CASHIER.DELIVERIES.FILTERS.STATUS_ON_THE_WAY' | translate }}
+        </option>
+        <option value="Delivered">
+          {{ 'CASHIER.DELIVERIES.FILTERS.STATUS_DELIVERED' | translate }}
+        </option>
       </select>
     </div>
   </div>
@@ -65,21 +74,14 @@
 
   <!-- List -->
   <div class="bad-list" *ngIf="!loading && deliveries.length > 0">
-
-    <div class="bad-delivery-row"
-         *ngFor="let d of deliveries"
-         (click)="openDetails(d.id)">
-
+    <div class="bad-delivery-row" *ngFor="let d of deliveries" (click)="openDetails(d.id)">
       <!-- Left -->
       <div class="bad-row-left">
-
         <div class="bad-row-id">
-          {{ 'CASHIER.DELIVERIES.ROW.ORDER' | translate:{ id: d.id } }}
+          {{ 'CASHIER.DELIVERIES.ROW.ORDER' | translate: { id: d.id } }}
         </div>
 
-        <div class="bad-row-order">
-          Order #{{ d.order?.id }}
-        </div>
+        <div class="bad-row-order">Order #{{ d.order?.id }}</div>
 
         <div class="bad-row-addr">
           <span class="bad-pin"></span>
@@ -87,26 +89,22 @@
           {{ d.deliveryAddress?.street }},
           {{ d.deliveryAddress?.city }}
         </div>
-
       </div>
 
       <!-- Steps (kept logic unchanged) -->
 
       <!-- Right -->
       <div class="bad-row-right">
-
         <div class="bad-driver">
           🧑‍✈️ <b>{{ d.driverName || ('CASHIER.DELIVERIES.ROW.UNASSIGNED' | translate) }}</b>
         </div>
 
         <div class="bad-amount">
-          {{ 'CASHIER.DELIVERIES.ROW.AMOUNT' | translate:{ amount: d.order?.totalAmount } }}
+          {{ 'CASHIER.DELIVERIES.ROW.AMOUNT' | translate: { amount: d.order?.totalAmount } }}
         </div>
-
       </div>
 
       <div class="bad-row-arrow">›</div>
-
     </div>
   </div>
 
@@ -118,5 +116,4 @@
     [totalCount]="totalCount"
     (pageChanged)="onPageChanged($event)"
   ></app-pagination>
-
 </div>
