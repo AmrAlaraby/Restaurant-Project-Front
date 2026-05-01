@@ -1,70 +1,77 @@
 <div class="addresses">
-
-  <h4>{{ 'CASHIER.CREATE_ORDER.ADDRESS.TITLE' | translate }}</h4>
+  <h4 class="addresses-title">{{ 'CASHIER.CREATE_ORDER.ADDRESS.TITLE' | translate }}</h4>
 
   <!-- LIST -->
   <div class="list">
-
     <div
       class="card"
       *ngFor="let a of addresses"
       [class.active]="a === selected"
-      (click)="selectAddress(a)">
+      (click)="selectAddress(a)"
+    >
+      <div class="card-check">✓</div>
 
-      <div class="line">
-        <b>#{{ a.buildingNumber }}</b>
-        <span>{{ a.street }}</span>
+      <div class="card-body">
+        <div class="line">
+          <b class="building-num">#{{ a.buildingNumber }}</b>
+          <span class="street">{{ a.street }}</span>
+        </div>
+
+        <div class="line">
+          <small class="city">{{ a.city }}</small>
+        </div>
+
+        <div class="line" *ngIf="a.note">
+          <small class="note">{{ a.note }}</small>
+        </div>
       </div>
-
-      <div class="line">
-        <small>{{ a.city }}</small>
-      </div>
-
-      <div class="line" *ngIf="a.note">
-        <small>{{ a.note }}</small>
-      </div>
-
     </div>
-
   </div>
 
   <!-- ADD BTN -->
   <button class="add-btn" (click)="openForm()">
-    {{ 'CASHIER.CREATE_ORDER.ADDRESS.ADD' | translate }}
+    + {{ 'CASHIER.CREATE_ORDER.ADDRESS.ADD' | translate }}
   </button>
 
   <!-- FORM -->
   <div *ngIf="showForm" class="form">
-
     <input
       type="number"
+      class="form-input"
       [placeholder]="'CASHIER.CREATE_ORDER.ADDRESS.FORM.BUILDING_NUMBER' | translate"
-      [(ngModel)]="address.buildingNumber" />
+      [(ngModel)]="address.buildingNumber"
+    />
 
     <input
       type="text"
+      class="form-input"
       [placeholder]="'CASHIER.CREATE_ORDER.ADDRESS.FORM.STREET' | translate"
-      [(ngModel)]="address.street" />
+      [(ngModel)]="address.street"
+    />
 
     <input
       type="text"
+      class="form-input"
       [placeholder]="'CASHIER.CREATE_ORDER.ADDRESS.FORM.CITY' | translate"
-      [(ngModel)]="address.city" />
+      [(ngModel)]="address.city"
+    />
 
     <input
       type="text"
+      class="form-input"
       [placeholder]="'CASHIER.CREATE_ORDER.ADDRESS.FORM.NOTE' | translate"
-      [(ngModel)]="address.note" />
+      [(ngModel)]="address.note"
+    />
 
     <input
       type="text"
+      class="form-input"
       [placeholder]="'CASHIER.CREATE_ORDER.ADDRESS.FORM.SPECIAL_MARK' | translate"
-      [(ngModel)]="address.specialMark" />
+      [(ngModel)]="address.specialMark"
+    />
 
     <button class="save-btn" (click)="save()">
       {{ 'CASHIER.CREATE_ORDER.ADDRESS.FORM.SAVE' | translate }}
     </button>
-
   </div>
-
 </div>
