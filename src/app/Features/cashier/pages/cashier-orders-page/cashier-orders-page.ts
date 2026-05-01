@@ -11,12 +11,13 @@ import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service
 import { SignalRService } from '../../../../Core/Services/SignalR-Service/SignalrService';
 import { DeliveryService } from '../../../../Core/Services/Delivery-Service/delivery-service';
 import { TranslatePipe } from '@ngx-translate/core';
+import { OrderDetails } from "../../../admin/components/Order/order-details/order-details";
 
 
 @Component({
   selector: 'app-cashier-orders-page',
   standalone: true,
-  imports: [CommonModule, WaiterOrderFilters, Pagination, CashierOrdersList,TranslatePipe],
+  imports: [CommonModule, WaiterOrderFilters, Pagination, CashierOrdersList, TranslatePipe, OrderDetails],
   templateUrl: './cashier-orders-page.html',
   styleUrls: ['./cashier-orders-page.scss'],
 })
@@ -94,7 +95,7 @@ export class CashierOrdersPage implements OnInit {
                 if (delivery) {
                   order.deliveryStatus = delivery.deliveryStatus;
                   console.log(order);
-                  
+
                 }
               },
             });
