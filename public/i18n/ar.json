@@ -1,5 +1,58 @@
 {
   "CUSTOMER": {
+    "ORDERS": {
+      "TABLE": {
+      "HEADER": {
+        "ORDER": "الطلب",
+        "ITEMS": "العناصر",
+        "TYPE": "النوع",
+        "DATE": "التاريخ",
+        "TOTAL": "الإجمالي",
+        "STATUS": "الحالة"
+      },
+
+      "EGP": "جنيه",
+
+      "ITEM_COUNT": "{{count}} عنصر",
+      "ITEMS_COUNT": "{{count}} عناصر",
+
+      "REORDER": "إعادة الطلب"
+    },
+      "ACTIVE_CARD": {
+      "ITEMS_COUNT": "{{count}} عنصر",
+      "TRACK": "اضغط لتتبع الطلب مباشرة →",
+
+      "STATUS": {
+        "Received": "تم الاستلام",
+        "Preparing": "قيد التحضير",
+        "Ready": "جاهز",
+        "OnTheWay": "في الطريق 🚗",
+        "Delivered": "تم التوصيل",
+        "Cancelled": "تم الإلغاء",
+        "AwaitingPayment": "في انتظار الدفع"
+      },
+
+      "STEPS": {
+        "Received": "تم الاستلام",
+        "Preparing": "قيد التحضير",
+        "Ready": "جاهز",
+        "OnTheWay": "في الطريق",
+        "Delivered": "تم التوصيل"
+      }
+
+    },
+    "NO_ORDERS": "لا توجد طلبات بعد",
+    "ORDER_TYPE": {
+      "Delivery": "توصيل",
+      "Pickup": "استلام",
+      "DineIn": "داخل المطعم"
+    },
+     "HEADER": {
+      "TITLE": "طلباتي",
+      "SUBTITLE": "طلباتك الأخيرة"
+    },
+    "LOADING": "جاري تحميل طلباتك..."
+  },
     "MENU": {
     "SEARCH": "ابحث عن الطعام...",
 

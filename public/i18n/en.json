@@ -1,5 +1,57 @@
 {
   "CUSTOMER": {
+    "ORDERS": {
+      "TABLE": {
+      "HEADER": {
+        "ORDER": "Order",
+        "ITEMS": "Items",
+        "TYPE": "Type",
+        "DATE": "Date",
+        "TOTAL": "Total",
+        "STATUS": "Status"
+      },
+
+      "EGP": "EGP",
+
+      "ITEM_COUNT": "{{count}} item",
+      "ITEMS_COUNT": "{{count}} items",
+
+      "REORDER": "Reorder"
+    },
+       "ACTIVE_CARD": {
+      "ITEMS_COUNT": "{{count}} items",
+      "TRACK": "Tap to track in real time →",
+
+      "STATUS": {
+        "Received": "Received",
+        "Preparing": "Preparing",
+        "Ready": "Ready",
+        "OnTheWay": "On The Way 🚗",
+        "Delivered": "Delivered",
+        "Cancelled": "Cancelled",
+        "AwaitingPayment": "Awaiting Payment"
+      },
+
+      "STEPS": {
+        "Received": "Received",
+        "Preparing": "Preparing",
+        "Ready": "Ready",
+        "OnTheWay": "On The Way",
+        "Delivered": "Delivered"
+      }
+    },
+    "NO_ORDERS": "You have no orders yet. Start exploring our menu and place your first order!",
+    "ORDER_TYPE": {
+"Delivery": "Delivery",
+"Pickup": "Pickup",
+"DineIn": "Dine In"
+    },
+      "HEADER": {
+      "TITLE": "My Orders",
+      "SUBTITLE": "Your recent orders"
+    },
+    "LOADING": "Loading your orders..."
+  },
     "MENU": {
     "SEARCH": "Search food...",
 

@@ -7,10 +7,19 @@ import { OrdersHeader } from "../../components/my-orders/orders-header/orders-he
 import { ActiveOrderCard } from "../../components/my-orders/active-order-card/active-order-card";
 import { OrdersTable } from "../../components/my-orders/orders-table/orders-table";
 import { OrdersEmptyState } from "../../components/my-orders/orders-empty-state/orders-empty-state";
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-my-orders-page',
-  imports: [FormsModule, CommonModule, OrdersHeader, ActiveOrderCard, OrdersTable, OrdersEmptyState],
+  imports: [
+    FormsModule, 
+    CommonModule, 
+    OrdersHeader, 
+    ActiveOrderCard, 
+    OrdersTable, 
+    OrdersEmptyState,
+    TranslatePipe
+  ],
   templateUrl: './my-orders-page.html',
   styleUrl: './my-orders-page.scss',
 })

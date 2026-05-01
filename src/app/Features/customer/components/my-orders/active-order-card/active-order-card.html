@@ -1,37 +1,50 @@
 <div class="active-card">
+
   <div class="active-card-header">
     <div>
-      <div class="active-order-id">#{{ order().id.toString().padStart(4, '0') }}</div>
-      <div class="active-order-meta">
-        {{ order().orderItems?.length ?? 0 }} items · {{ order().orderType }}
+
+      <div class="active-order-id">
+        #{{ order().id.toString().padStart(4, '0') }}
       </div>
+
+      <div class="active-order-meta">
+      {{ 'CUSTOMER.ORDERS.ACTIVE_CARD.ITEMS_COUNT' | translate:{ count: (order().orderItems?.length ?? 0) } }}
+    · {{ ('CUSTOMER.ORDERS.ORDER_TYPE.' + order().orderType) | translate }}
+</div>
 
       <!-- Items preview -->
       <div class="items-preview">
         @for (item of order().orderItems?.slice(0, 3); track $index; let last = $last) {
           <span>
-            {{ item.menuItemName }} ×{{ item.quantity }}
+            {{ getItemName(item) }} ×{{ item.quantity }}
             @if (!last) { <span> · </span> }
           </span>
         }
       </div>
+
     </div>
 
+    <!-- Status -->
     <span class="status-badge" [ngClass]="getStatusBadgeClass(order().status)">
-      {{ order().status === 'OnTheWay' ? 'ON THE WAY 🚗' : order().status | uppercase }}
-    </span>
+  {{ ('CUSTOMER.ORDERS.ACTIVE_CARD.STATUS.' + order().status) | translate }}
+</span>
+
   </div>
 
-  <!-- Progress Steps -->
+  <!-- Steps -->
   <div class="steps-wrap">
+
     @for (step of steps; track $index; let i = $index; let last = $last) {
+
       <div class="step">
+
         <div class="step-circle"
           [ngClass]="{
             'done':     i < getStepIndex(order().status),
             'active':   i === getStepIndex(order().status),
             'inactive': i > getStepIndex(order().status)
           }">
+
           @if (i < getStepIndex(order().status)) {
             <span>✓</span>
           } @else if (i === getStepIndex(order().status)) {
@@ -39,8 +52,13 @@
           } @else {
             <span>📍</span>
           }
+
         </div>
-        <div class="step-label">{{ step }}</div>
+
+        <div class="step-label">
+  {{ ('CUSTOMER.ORDERS.ACTIVE_CARD.STEPS.' + step) | translate }}
+</div>
+
       </div>
 
       @if (!last) {
@@ -48,13 +66,16 @@
           [ngClass]="{'done': i < getStepIndex(order().status)}">
         </div>
       }
+
     }
+
   </div>
 
-  <!-- Track button -->
+  <!-- Track -->
   @if (order().orderType === 'Delivery') {
     <a class="track-link" (click)="onTrack()">
-      Tap to track in real time →
-    </a>
+  {{ 'CUSTOMER.ORDERS.ACTIVE_CARD.TRACK' | translate }}
+</a>
   }
+
 </div>
