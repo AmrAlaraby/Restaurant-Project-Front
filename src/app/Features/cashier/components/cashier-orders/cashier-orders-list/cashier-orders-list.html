@@ -1,5 +1,4 @@
 <div class="table-container">
-
   <div class="table-header">
     <div>{{ 'CASHIER.ORDERS.LIST.HEADER.ORDER' | translate }}</div>
     <div>{{ 'CASHIER.ORDERS.LIST.HEADER.TYPE' | translate }}</div>
@@ -12,69 +11,68 @@
   </div>
 
   @for (order of orders; track order.id) {
+    <div class="table-row" (click)="onOrderClick(order.id)">
+      <!-- ORDER -->
+      <div class="cell-order">#{{ order.id }}</div>
 
-  <div class="table-row" (click)="onOrderClick(order.id)">
+      <!-- TYPE -->
+      <div>
+        {{ 'CASHIER.ORDERS.TYPE.' + order.orderType | translate }}
+      </div>
 
-    <!-- ORDER -->
-    <div>#{{ order.id }}</div>
+      <!-- WAITER -->
+      <div>{{ order.userName }}</div>
 
-    <!-- TYPE -->
-    <div>
-      {{ ('CASHIER.ORDERS.TYPE.' + order.orderType) | translate }}
+      <!-- ITEMS -->
+      <div class="cell-items">{{ order.itemsCount }}</div>
+
+      <!-- STATUS -->
+      <div>
+        <span class="badge status" [ngClass]="order.status">
+          {{ 'CASHIER.ORDERS.STATUS.' + order.status | translate }}
+        </span>
+      </div>
+
+      <!-- PAYMENT STATUS -->
+      <div>
+        <span class="badge payment" [ngClass]="order.paymentStatus">
+          {{ 'CASHIER.ORDERS.PAYMENT_STATUS.' + order.paymentStatus | translate }}
+        </span>
+      </div>
+
+      <!-- PAYMENT METHOD -->
+      <div>
+        <span class="badge method">
+          {{
+            order.paymentMethod
+              ? ('CASHIER.ORDERS.PAYMENT_METHOD.' + order.paymentMethod | translate)
+              : '-'
+          }}
+        </span>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="actions">
+        @if (
+          isPending(order.paymentStatus) &&
+          order.status !== 'Cancelled' &&
+          order.status !== 'Delivered'
+        ) {
+          <button class="pay-btn" (click)="onPay(order.id, $event)">
+            {{ 'CASHIER.ORDERS.ACTIONS.PAY' | translate }}
+          </button>
+        }
+
+        @if (
+          isDelivery(order.orderType) &&
+          order.deliveryStatus == 'UnAssigned' &&
+          order.status !== 'Delivered'
+        ) {
+          <button class="assign-btn" (click)="onAssign(order.id, $event)">
+            {{ 'CASHIER.ORDERS.ACTIONS.ASSIGN' | translate }}
+          </button>
+        }
+      </div>
     </div>
-
-    <!-- WAITER -->
-    <div>{{ order.userName }}</div>
-
-    <!-- ITEMS -->
-    <div>{{ order.itemsCount }}</div>
-
-    <!-- STATUS -->
-    <div>
-      <span class="badge status" [ngClass]="order.status">
-        {{ ('CASHIER.ORDERS.STATUS.' + order.status) | translate }}
-      </span>
-    </div>
-
-    <!-- PAYMENT STATUS -->
-    <div>
-      <span class="badge payment" [ngClass]="order.paymentStatus">
-        {{ ('CASHIER.ORDERS.PAYMENT_STATUS.' + order.paymentStatus) | translate }}
-      </span>
-    </div>
-
-    <!-- PAYMENT METHOD -->
-    <div>
-      <span class="badge method">
-        {{ order.paymentMethod 
-            ? (('CASHIER.ORDERS.PAYMENT_METHOD.' + order.paymentMethod) | translate)
-            : '-' }}
-      </span>
-    </div>
-
-    <!-- ACTIONS -->
-    <div class="actions">
-
-      @if (isPending(order.paymentStatus) 
-          && order.status !== 'Cancelled' 
-          && order.status !== 'Delivered') {
-        <button class="pay-btn" (click)="onPay(order.id, $event)">
-          {{ 'CASHIER.ORDERS.ACTIONS.PAY' | translate }}
-        </button>
-      }
-
-      @if (isDelivery(order.orderType) 
-          && order.deliveryStatus == 'UnAssigned' 
-          && order.status !== 'Delivered') {
-        <button class="assign-btn" (click)="onAssign(order.id, $event)">
-          {{ 'CASHIER.ORDERS.ACTIONS.ASSIGN' | translate }}
-        </button>
-      }
-
-    </div>
-
-  </div>
-
   }
-
 </div>

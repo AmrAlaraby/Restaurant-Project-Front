@@ -1,127 +1,377 @@
+// ─────────────────────────────────────────────
+// cashier-orders-list.component.scss
+// Brand: deep crimson · warm gold · cream surfaces
+// Dark mode: .dark class on parent element only
+// ─────────────────────────────────────────────
+
+/* ── Container ───────────────────────────────── */
 .table-container {
-    background: #fff;
-    border-radius: 12px;
-    border: 1px solid #eee;
-    overflow: hidden;
-    margin: 0;
+  background: var(--clr-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--clr-border);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-body);
+
+  .dark & {
+    background: var(--clr-surface-alt);
+    border-color: var(--clr-border);
+    box-shadow: var(--shadow-sm);
+  }
 }
 
+/* ── Shared grid layout ──────────────────────── */
 .table-header,
 .table-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1.2fr 0.8fr 1fr 1fr 1fr 1.5fr;
-    padding: 14px 16px;
-    align-items: center;
-}
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr 0.8fr 1fr 1fr 1fr 1.5fr;
+  padding-block: 13px;
+  padding-inline: var(--space-md);
+  align-items: center;
+  gap: var(--space-xs);
 
-.table-header {
-    background: #f8f8f8;
-    font-size: 13px;
-    font-weight: 600;
-    color: #888;
-}
-
-.table-row {
-    border-top: 1px solid #eee;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.table-row:hover {
-    background: #fafafa;
-}
-
-/* BADGES */
-
-.badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 999px;
+  @media (max-width: 1024px) {
+    grid-template-columns: 0.8fr 0.8fr 1fr 0.5fr 1fr 1fr 1fr 1.2fr;
     font-size: 12px;
-    font-weight: 500;
-    text-transform: capitalize;
+  }
+
+  @media (max-width: 768px) {
+    // Stack to card layout on small screens
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+    padding-block: var(--space-md);
+  }
 }
 
-/* STATUS */
+/* ── Header ──────────────────────────────────── */
+.table-header {
+  background: var(--clr-cream-mid);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--clr-text-secondary);
+  border-block-end: 2px solid var(--clr-border);
 
+  .dark & {
+    background: var(--clr-cream-mid);
+    color: var(--clr-text-secondary);
+    border-block-end-color: var(--clr-border);
+  }
+
+  // Hide header on mobile (cards are self-labelled)
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+/* ── Row ─────────────────────────────────────── */
+.table-row {
+  border-block-start: 1px solid var(--clr-border);
+  cursor: pointer;
+  color: var(--clr-text-primary);
+  font-size: 13px;
+  transition:
+    background var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  .dark & {
+    border-block-start-color: var(--clr-border);
+    color: var(--clr-text-primary);
+  }
+
+  &:hover {
+    background: var(--clr-surface-alt);
+    box-shadow: inset 3px 0 0 var(--clr-primary);
+
+    .dark & {
+      background: var(--clr-cream-mid);
+      box-shadow: inset 3px 0 0 var(--clr-primary-light);
+    }
+  }
+
+  &:first-of-type {
+    border-block-start: none;
+  }
+}
+
+/* ── Cell helpers ────────────────────────────── */
+.cell-order {
+  font-weight: 700;
+  color: var(--clr-primary);
+
+  .dark & {
+    color: var(--clr-primary-light);
+  }
+}
+
+.cell-items {
+  color: var(--clr-text-secondary);
+  font-weight: 600;
+
+  .dark & {
+    color: var(--clr-text-secondary);
+  }
+}
+
+/* ── Badges (shared base) ────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding-block: 3px;
+  padding-inline: var(--space-sm);
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: capitalize;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+/* ── Status badges ───────────────────────────── */
 .status.Received {
-    background: #fdeaea;
-    color: #e53935;
+  background: var(--clr-danger-bg);
+  color: var(--clr-danger);
+  border-color: var(--clr-primary-light);
+
+  .dark & {
+    background: var(--clr-danger-bg);
+    color: var(--clr-primary-light);
+    border-color: var(--clr-primary);
+  }
 }
 
 .status.Preparing {
-    background: #fff4e5;
-    color: #ff9800;
+  background: var(--clr-warning-bg);
+  color: var(--clr-warning);
+  border-color: var(--clr-warning);
+
+  .dark & {
+    background: var(--clr-warning-bg);
+    color: var(--clr-warning);
+    border-color: var(--clr-warning);
+  }
 }
 
 .status.Ready {
-    background: #e8f5e9;
-    color: #2e7d32;
+  background: var(--clr-success-bg);
+  color: var(--clr-success);
+  border-color: var(--clr-success);
+
+  .dark & {
+    background: var(--clr-success-bg);
+    color: var(--clr-success);
+    border-color: var(--clr-success);
+  }
 }
 
 .status.Delivered {
-    background: #e3f2fd;
-    color: #1976d2;
+  background: var(--clr-info-bg);
+  color: var(--clr-info);
+  border-color: var(--clr-info);
+
+  .dark & {
+    background: var(--clr-info-bg);
+    color: #63b3ed;
+    border-color: var(--clr-info);
+  }
 }
 
 .status.Cancelled {
-    background: #eeeeee;
-    color: #616161;
+  background: var(--clr-cream-mid);
+  color: var(--clr-text-hint);
+  border-color: var(--clr-cream-dark);
+
+  .dark & {
+    background: var(--clr-cream-mid);
+    color: var(--clr-text-hint);
+    border-color: var(--clr-cream-dark);
+  }
 }
 
-/* PAYMENT */
 .status.AwaitingPayment {
-    background: #ede7f6;
-    color: #5e35b1;
+  background: var(--clr-cream-mid);
+  color: var(--clr-accent-dark);
+  border-color: var(--clr-accent);
+
+  .dark & {
+    background: var(--clr-cream-mid);
+    color: var(--clr-accent-light);
+    border-color: var(--clr-accent);
+  }
 }
+
+/* ── Payment status badges ───────────────────── */
 .payment.Pending {
-    background: #fff3cd;
-    color: #856404;
+  background: var(--clr-warning-bg);
+  color: var(--clr-warning);
+  border-color: var(--clr-warning);
+
+  .dark & {
+    background: var(--clr-warning-bg);
+    color: var(--clr-warning);
+    border-color: var(--clr-warning);
+  }
 }
 
 .payment.Paid {
-    background: #d4edda;
-    color: #155724;
+  background: var(--clr-success-bg);
+  color: var(--clr-success);
+  border-color: var(--clr-success);
+
+  .dark & {
+    background: var(--clr-success-bg);
+    color: var(--clr-success);
+    border-color: var(--clr-success);
+  }
 }
 
 .payment.Failed {
-    background: #f8d7da;
-    color: #721c24;
+  background: var(--clr-danger-bg);
+  color: var(--clr-danger);
+  border-color: var(--clr-primary-light);
+
+  .dark & {
+    background: var(--clr-danger-bg);
+    color: var(--clr-primary-light);
+    border-color: var(--clr-primary);
+  }
 }
 
 .payment.Refunded {
-    background: #e2e3e5;
-    color: #383d41;
+  background: var(--clr-cream-mid);
+  color: var(--clr-text-secondary);
+  border-color: var(--clr-cream-dark);
+
+  .dark & {
+    background: var(--clr-cream-mid);
+    color: var(--clr-text-secondary);
+    border-color: var(--clr-cream-dark);
+  }
 }
 
-/* METHOD */
-
+/* ── Payment method badge ────────────────────── */
 .method {
-    background: #f1f3f5;
-    color: #495057;
+  background: var(--clr-cream-mid);
+  color: var(--clr-text-secondary);
+  border-color: var(--clr-cream-dark);
+
+  .dark & {
+    background: var(--clr-cream-mid);
+    color: var(--clr-text-secondary);
+    border-color: var(--clr-cream-dark);
+  }
 }
 
-/* ACTIONS */
-
+/* ── Actions ─────────────────────────────────── */
 .actions {
-    display: flex;
-    gap: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  align-items: center;
+}
+
+.pay-btn,
+.assign-btn {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  padding-block: 5px;
+  padding-inline: var(--space-sm);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition:
+    background var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+
+  &:hover {
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
 }
 
 .pay-btn {
-    background: #4caf50;
-    color: white;
-    border: none;
-    padding: 4px 10px;
-    border-radius: 6px;
-    cursor: pointer;
+  background: var(--clr-success);
+  color: var(--clr-text-on-primary);
+
+  .dark & {
+    background: var(--clr-success);
+    color: var(--clr-text-on-primary);
+  }
+
+  &:hover {
+    background: #1e8449;
+
+    .dark & {
+      background: #1e8449;
+    }
+  }
 }
 
 .assign-btn {
-    background: #ff9800;
-    color: white;
+  background: var(--clr-accent);
+  color: var(--clr-text-on-accent);
+
+  .dark & {
+    background: var(--clr-accent);
+    color: var(--clr-text-on-accent);
+  }
+
+  &:hover {
+    background: var(--clr-accent-light);
+
+    .dark & {
+      background: var(--clr-accent-light);
+    }
+  }
+}
+
+/* ── Mobile card view ────────────────────────── */
+@media (max-width: 768px) {
+  .table-row {
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-md);
+    margin-block-end: var(--space-sm);
+    margin-inline: var(--space-md);
+
+    .dark & {
+      border-color: var(--clr-border);
+    }
+
+    &:hover {
+      box-shadow: var(--shadow-md);
+      box-shadow: inset 0 0 0 0; // reset inset on mobile
+      background: var(--clr-surface-alt);
+
+      .dark & {
+        background: var(--clr-cream-mid);
+      }
+    }
+  }
+
+  .table-container {
+    background: transparent;
     border: none;
-    padding: 4px 10px;
-    border-radius: 6px;
-    cursor: pointer;
+    box-shadow: none;
+    padding-block: var(--space-sm);
+
+    .dark & {
+      background: transparent;
+      border-color: transparent;
+      box-shadow: none;
+    }
+  }
 }
