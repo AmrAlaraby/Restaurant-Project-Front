@@ -12,7 +12,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class WaiterTableList {
 
   @Input() table!: TableInterface;
-
+  @Input() isHome: boolean = false;
   @Output() toggle = new EventEmitter<number>();
   @Output() openOrder = new EventEmitter<number>();
 

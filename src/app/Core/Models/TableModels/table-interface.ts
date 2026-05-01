@@ -5,5 +5,6 @@ export interface TableInterface {
   capacity: number;
   isOccupied: boolean;
   branchId: number;
+  hasActiveOrder?: boolean;
 }
 

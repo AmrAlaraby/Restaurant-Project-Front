@@ -13,6 +13,7 @@ import { TableSearch } from '../../components/tabble-waiter/table-search/table-s
 import { TranslatePipe } from '@ngx-translate/core';
 import { LocalizationService } from '../../../../Core/Services/Localization-Service/localization-service';
 import { Subject, takeUntil } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-table-waiter',
@@ -57,8 +58,26 @@ export class TableWaiter implements OnInit {
 
   constructor(
         private localizationService: LocalizationService,
+    private route: ActivatedRoute,
+    private router: Router 
       ) {}
 
+
+  handleHighlightFromHome() {
+    this.route.queryParams.subscribe(params => {
+      const tableId = params['highlight'];
+
+      if (!tableId) return;
+
+      setTimeout(() => {
+        this.onOpenOrder(+tableId);
+
+   
+        history.replaceState({}, '', this.router.url.split('?')[0]);
+
+      }, 300);
+    });
+  }
  ngOnInit(): void {
   this.authService.getCurrentUser().subscribe({
     next: (user) => {
@@ -71,9 +90,11 @@ export class TableWaiter implements OnInit {
           this.branchNames.branchName = branch?.name ?? '';
       this.branchNames.branchArabicName = branch?.arabicName ?? '';
         }
+        
       });
 
       this.loadTables();
+      this.handleHighlightFromHome();
     },
     error: (err) => console.error(err)
   });
@@ -97,8 +118,24 @@ CurrentLanguage: string = 'en';
       search: this.search,
     }).subscribe({
       next: (res) => {
-        this.tables = res.data;
-        this.totalCount = res.count;
+
+        
+        this.tableOrdersService.getAllTableOrders().subscribe({
+          next: (orders) => {
+
+            
+            this.tables = res.data.map(t => ({
+              ...t,
+              hasActiveOrder: orders.some(
+                o => o.tableId === t.id && !o.completedAt
+              )
+            }));
+
+            this.totalCount = res.count;
+          },
+          error: (err) => console.error(err)
+        });
+
       },
       error: (err) => console.error(err)
     });

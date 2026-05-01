@@ -44,7 +44,8 @@
       </button>
     </div>
 
-    <app-tables-grid [tables]="displayedTables"></app-tables-grid>
+  <app-tables-grid [tables]="displayedTables" [isHome]="true" (openOrder)="onOpenOrder($event)">
+  </app-tables-grid>
   </section>
 
   <!-- ── Active Orders ─────────────────────────────────── -->
@@ -61,6 +62,8 @@
 <app-pagination [pageIndex]="pageIndex" [pageSize]="pageSize" [totalCount]="totalCount"
   (pageChanged)="onPageChanged($event)">
 </app-pagination>
+
+
 
 
 </div>

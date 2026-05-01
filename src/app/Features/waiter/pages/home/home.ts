@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -18,6 +18,8 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
 import { LocalizationService } from '../../../../Core/Services/Localization-Service/localization-service';
 import { Pagination } from "../../../../Shared/Components/pagination/pagination";
+import { TableOrdersService } from '../../../../Core/Services/Table-Order-Service/table-orders.service';
+import { OrderDetails } from "../../../admin/components/Order/order-details/order-details";
 
 @Component({
   selector: 'app-home',
@@ -29,7 +31,8 @@ import { Pagination } from "../../../../Shared/Components/pagination/pagination"
     ActiveOrders,
     ReadyAlertComponent,
     TranslatePipe,
-    Pagination
+    Pagination,
+    OrderDetails
 ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
@@ -46,7 +49,7 @@ export class HomeComponent implements OnInit {
   tables:          TableInterface[] = [];
   displayedTables: TableInterface[] = [];
   occupiedCount  = 0;
-  tablesServed   = 0;                  // عدد الطاولات اللي اتخدمت اليوم
+  tablesServed   = 0;                 
 
   // ── orders ─────────────────────────────────────────────
   activeOrders:     any[] = [];
@@ -54,7 +57,8 @@ export class HomeComponent implements OnInit {
   myOrdersTotal     = 0;
 
   // ── ready alert ────────────────────────────────────────
-  readyOrders: any[] = [];             // الأوردرات اللي status = Ready
+  readyOrders: any[] = [];             
+
 
   constructor(
     private tableService:  TableService,
@@ -63,8 +67,8 @@ export class HomeComponent implements OnInit {
     private ordersService: OrdersService,
     private router:        Router,
     private localizationService: LocalizationService,
+      
   ) {}
-
   ngOnInit(): void {
     this.loadCurrentUser();
     this.getCurrentLanguage();
@@ -186,4 +190,22 @@ export class HomeComponent implements OnInit {
     }
     return item.branchName;
   }
+
+
+
+  onOpenOrder(tableId: number) {
+    const table = this.displayedTables.find(t => t.id === tableId);
+
+    if (!table) return;
+
+    if (table.isOccupied) {
+      this.router.navigate(['/waiter/tables'], {
+        queryParams: { highlight: tableId }
+      });
+    } else {
+      this.router.navigate(['/waiter/place-order', tableId]);
+    }
+  }
+
+
 }
