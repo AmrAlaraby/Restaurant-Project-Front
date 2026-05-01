@@ -51,6 +51,7 @@ export class Login {
     this.authService.login(data).subscribe({
       next: (res) => {
         this.isSubmitting = false;
+        debugger;
         switch (res.data?.roleId?.toLowerCase()) {
           case 'admin': // Admin
             this.router.navigate(['/admin/dashboard']);
@@ -73,7 +74,7 @@ export class Login {
           default:
             this.router.navigate(['/']);
         }
-        this.router.navigate(['/']);
+        // this.router.navigate(['/']);
         console.log('done');
         console.log(res);
       },

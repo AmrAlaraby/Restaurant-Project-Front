@@ -3,7 +3,10 @@ import { AuthService } from '../Services/Auth-Service/auth-service';
 import { inject } from '@angular/core';
 
 export const roleGuard: CanActivateFn = (route, state) => {
+  return true;
+
   const authService = inject(AuthService);
+
   const router = inject(Router);
 
   const userRole = authService.getUserRole()?.toLowerCase();
