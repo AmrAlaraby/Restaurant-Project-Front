@@ -1,5 +1,4 @@
 <div class="page">
-
   <h1 class="page-title">
     {{ 'CASHIER.PROFILE.PAGE.TITLE' | translate }}
   </h1>
@@ -11,12 +10,9 @@
   }
 
   @if (!loading() && user()) {
-
     <div class="grid">
-
       <!-- LEFT -->
       <div class="col-left">
-
         <div class="card profile-card">
           <div class="avatar">{{ getInitials(user()!.name) }}</div>
 
@@ -25,31 +21,28 @@
           <p class="role">
             {{ user()!.role }}
           </p>
-
         </div>
-
       </div>
 
       <!-- RIGHT -->
       <div class="col-right">
-
         <div class="card form-card">
-
           <h3 class="section-title">
             {{ 'CASHIER.PROFILE.SECTION.PERSONAL_INFO' | translate }}
           </h3>
 
           <form [formGroup]="form" (ngSubmit)="onSave()">
-
             <!-- FULL NAME -->
             <div class="field">
               <label>
                 {{ 'CASHIER.PROFILE.FIELDS.FULL_NAME.LABEL' | translate }}
               </label>
 
-              <input formControlName="name"
-                     type="text"
-                     [placeholder]="'CASHIER.PROFILE.FIELDS.FULL_NAME.PLACEHOLDER' | translate" />
+              <input
+                formControlName="name"
+                type="text"
+                [placeholder]="'CASHIER.PROFILE.FIELDS.FULL_NAME.PLACEHOLDER' | translate"
+              />
 
               @if (form.get('name')?.invalid && form.get('name')?.touched) {
                 <span class="field-error">
@@ -64,9 +57,11 @@
                 {{ 'CASHIER.PROFILE.FIELDS.EMAIL.LABEL' | translate }}
               </label>
 
-              <input formControlName="email"
-                     type="email"
-                     [placeholder]="'CASHIER.PROFILE.FIELDS.EMAIL.PLACEHOLDER' | translate" />
+              <input
+                formControlName="email"
+                type="email"
+                [placeholder]="'CASHIER.PROFILE.FIELDS.EMAIL.PLACEHOLDER' | translate"
+              />
 
               @if (form.get('email')?.invalid && form.get('email')?.touched) {
                 <span class="field-error">
@@ -81,9 +76,11 @@
                 {{ 'CASHIER.PROFILE.FIELDS.USERNAME.LABEL' | translate }}
               </label>
 
-              <input formControlName="userName"
-                     type="text"
-                     [placeholder]="'CASHIER.PROFILE.FIELDS.USERNAME.PLACEHOLDER' | translate" />
+              <input
+                formControlName="userName"
+                type="text"
+                [placeholder]="'CASHIER.PROFILE.FIELDS.USERNAME.PLACEHOLDER' | translate"
+              />
             </div>
 
             <!-- NEW PASSWORD -->
@@ -92,9 +89,11 @@
                 {{ 'CASHIER.PROFILE.FIELDS.NEW_PASSWORD.LABEL' | translate }}
               </label>
 
-              <input formControlName="newPassword"
-                     type="password"
-                     [placeholder]="'CASHIER.PROFILE.FIELDS.NEW_PASSWORD.PLACEHOLDER' | translate" />
+              <input
+                formControlName="newPassword"
+                type="password"
+                [placeholder]="'CASHIER.PROFILE.FIELDS.NEW_PASSWORD.PLACEHOLDER' | translate"
+              />
 
               @if (form.get('newPassword')?.errors?.['minlength']) {
                 <span class="field-error">
@@ -109,9 +108,11 @@
                 {{ 'CASHIER.PROFILE.FIELDS.CONFIRM_PASSWORD.LABEL' | translate }}
               </label>
 
-              <input formControlName="confirmPassword"
-                     type="password"
-                     [placeholder]="'CASHIER.PROFILE.FIELDS.CONFIRM_PASSWORD.PLACEHOLDER' | translate" />
+              <input
+                formControlName="confirmPassword"
+                type="password"
+                [placeholder]="'CASHIER.PROFILE.FIELDS.CONFIRM_PASSWORD.PLACEHOLDER' | translate"
+              />
 
               @if (form.errors?.['passwordMismatch'] && form.get('confirmPassword')?.touched) {
                 <span class="field-error">
@@ -134,26 +135,17 @@
             }
 
             <!-- SAVE -->
-            <button type="submit"
-                    class="btn-save"
-                    [disabled]="form.invalid">
-
+            <button type="submit" class="btn-save" [disabled]="form.invalid">
               {{ 'CASHIER.PROFILE.BUTTONS.SAVE' | translate }}
-
             </button>
-
           </form>
 
           <!-- LOGOUT -->
           <button class="btn-logout" (click)="onLogout()">
             {{ 'CASHIER.PROFILE.BUTTONS.LOGOUT' | translate }}
           </button>
-
         </div>
-
       </div>
-
     </div>
   }
-
 </div>
