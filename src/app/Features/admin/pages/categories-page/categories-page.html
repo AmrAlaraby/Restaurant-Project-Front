@@ -1,103 +1,207 @@
-<!-- 🔥 MODAL (لا يظهر أثناء loading) -->
-<!-- MODAL فوق كل حاجة -->
+<!-- ── ADD MODAL ── -->
 <div class="modal-backdrop" *ngIf="showAddModal">
   <div class="custom-category-modal">
-    <h3>Add Category</h3>
+
+    <div class="modal-header">
+      <div class="modal-icon add-icon">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+          <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <h3 class="modal-title">Add Category</h3>
+        <p class="modal-sub">Enter a name for the new category</p>
+      </div>
+    </div>
+
     <form [formGroup]="addForm" (ngSubmit)="submitAdd()">
-      <input type="text" formControlName="name" placeholder="Category name" />
+      <div class="field-group">
+        <label class="field-label">Category Name</label>
+        <input
+          class="field-input"
+          type="text"
+          formControlName="name"
+          placeholder="e.g. Appetizers, Desserts…"
+        />
+      </div>
+
+      <div class="modal-divider"></div>
+
       <div class="modal-actions">
-        <button type="submit">Add</button>
-        <button type="button" (click)="closeAddModal()">Cancel</button>
+        <button type="button" class="btn-discard" (click)="closeAddModal()">Cancel</button>
+        <button type="submit" class="btn-save">Add Category</button>
       </div>
     </form>
+
   </div>
 </div>
 
-<!-- DELETE MODAL -->
+<!-- ── DELETE MODAL ── -->
 <div class="modal-backdrop" *ngIf="showDeleteModal">
   <div class="custom-category-modal">
-    <h3>Delete Category</h3>
-    <p style="color: #a0a0b0; margin-top: 8px; font-size: 14px">
-      Are you sure you want to delete this category? This action cannot be undone.
-    </p>
-    <div class="modal-actions">
-      <button type="button" (click)="closeDeleteModal()">Cancel</button>
-      <button type="button" class="confirm-delete-btn" (click)="confirmDelete()">Delete</button>
+
+    <div class="modal-header">
+      <div class="modal-icon danger-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M4 6h16M8 6V4h8v2M10 11v5M14 11v5M5 6l1 14h12L19 6"
+            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <h3 class="modal-title">Delete Category</h3>
+        <p class="modal-sub">This action cannot be undone.</p>
+      </div>
     </div>
+
+    <p class="modal-body-text">
+      Are you sure you want to delete this category? All associated data may be affected.
+    </p>
+
+    <div class="modal-divider"></div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn-discard" (click)="closeDeleteModal()">Cancel</button>
+      <button type="button" class="btn-danger" (click)="confirmDelete()">Delete</button>
+    </div>
+
   </div>
 </div>
 
-<!-- EDIT MODAL -->
+<!-- ── EDIT MODAL ── -->
 <div class="modal-backdrop" *ngIf="showEditModal">
   <div class="custom-category-modal">
-    <h3>Edit Category</h3>
+
+    <div class="modal-header">
+      <div class="modal-icon edit-icon">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+          <path d="M13.5 3.5l3 3L7 16H4v-3L13.5 3.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <h3 class="modal-title">Edit Category</h3>
+        <p class="modal-sub">Update the category name below</p>
+      </div>
+    </div>
+
     <form [formGroup]="editForm" (ngSubmit)="submitEdit()">
-      <input type="text" formControlName="name" placeholder="Category name" />
+      <div class="field-group">
+        <label class="field-label">Category Name</label>
+        <input
+          class="field-input"
+          type="text"
+          formControlName="name"
+          placeholder="Category name"
+        />
+      </div>
+
+      <div class="modal-divider"></div>
+
       <div class="modal-actions">
-        <button type="button" (click)="closeEditModal()">Cancel</button>
-        <button type="submit">Save</button>
+        <button type="button" class="btn-discard" (click)="closeEditModal()">Cancel</button>
+        <button type="submit" class="btn-save">Save Changes</button>
       </div>
     </form>
+
   </div>
 </div>
 
+<!-- ── PAGE ── -->
 <div class="page">
-  <div class="breadcrumb">Home / <span>Categories</span></div>
 
-  <!-- HEADER -->
-  <div class="header">
-    <h1 class="title">Menu Categories</h1>
-    <button class="add-btn" type="button" (click)="openAddModal()">+ Add Category</button>
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb">
+    Home / <span>Categories</span>
+  </nav>
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="page-header__title">
+      <p class="page-eyebrow">Management</p>
+      <h1 class="page-title">Menu Categories</h1>
+    </div>
+    <button class="btn-add" type="button" (click)="openAddModal()">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+        <path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      Add Category
+    </button>
   </div>
 
-  <!-- 🔥 SUCCESS / ERROR -->
-  <div *ngIf="successMessage" class="success-msg">
+  <!-- Success / Error alerts -->
+  <div *ngIf="successMessage" class="alert alert-success">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+      <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
     {{ successMessage }}
   </div>
 
-  <div *ngIf="errorMessage" class="error-msg">
+  <div *ngIf="errorMessage" class="alert alert-error">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 8v4m0 4h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
     {{ errorMessage }}
   </div>
 
-  <!-- 🔥 Loading -->
-  <div *ngIf="loading" class="loading">Loading categories...</div>
+  <!-- Loading -->
+  <div *ngIf="loading" class="state-box loading-box">
+    <p>Loading categories…</p>
+  </div>
 
-  <!-- 🔥 Error from API -->
-  <div *ngIf="error && !loading" class="error">
+  <!-- API Error -->
+  <div *ngIf="error && !loading" class="alert alert-error">
     {{ error }}
   </div>
 
-  <!-- 🔥 Empty State -->
-  <div *ngIf="!loading && !error && categories.length === 0" class="empty">No categories found</div>
+  <!-- Empty State -->
+  <div *ngIf="!loading && !error && categories.length === 0" class="state-box empty-box">
+    <div class="empty-icon">
+      <svg width="28" height="28" viewBox="0 0 48 48" fill="none">
+        <path d="M16 20h16M16 28h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <p>No categories found</p>
+    <span>Add your first category to get started.</span>
+  </div>
 
-  <!-- 🔥 TABLE -->
-  <div class="table-card" *ngIf="!loading && !error && categories.length > 0">
+  <!-- Table -->
+  <div class="table-wrapper" *ngIf="!loading && !error && categories.length > 0">
+
     <div class="table-head">
-      <span>CATEGORY</span>
-      <span>ITEMS</span>
-      <span>ACTIONS</span>
+      <span>Category</span>
+      <span>Items</span>
+      <span class="col-actions">Actions</span>
     </div>
 
     <div class="table-row" *ngFor="let cat of categories">
-      <!-- CATEGORY -->
+
       <div class="cat-name">
-        <span class="cat-icon">
-          {{ getCategoryIcon(cat.name) }}
-        </span>
+        <span class="cat-icon">{{ getCategoryIcon(cat.name) }}</span>
         {{ cat.name }}
       </div>
 
-      <!-- ITEMS -->
       <div class="items-count">
-        {{ cat.menuItemsCount }}
+        <span class="count-badge">{{ cat.menuItemsCount }}</span>
       </div>
 
-      <!-- ACTIONS -->
       <div class="actions">
-        <button class="edit-btn me-4" (click)="onEdit(cat)">Edit</button>
+        <button class="btn-edit" (click)="onEdit(cat)">
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none">
+            <path d="M13.5 3.5l3 3L7 16H4v-3L13.5 3.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+          Edit
+        </button>
 
-        <button class="delete-btn" (click)="onDelete(cat.id)">Delete</button>
+        <button class="btn-delete" (click)="onDelete(cat.id)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+            <path d="M4 6h16M8 6V4h8v2M5 6l1 14h12L19 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Delete
+        </button>
       </div>
+
     </div>
+
   </div>
+
 </div>
