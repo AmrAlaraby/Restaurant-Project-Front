@@ -231,6 +231,13 @@ export const routes: Routes = [
             (m) => m.CashierDashboard,
           ),
       },
+        {
+        path: 'payment-success',
+        loadComponent: () =>
+          import('./Features/cashier/components/Payment-Success/payment-success/payment-success').then(
+            (m) => m.PaymentSuccess,
+          ),
+      },
       //Areej 501 - 550
       //Arwa 551 - 600
       //mahmoud 601 - 650
@@ -400,13 +407,7 @@ export const routes: Routes = [
             (m) => m.OrderSuccess,
           ),
       },
-      {
-        path: 'payment-success',
-        loadComponent: () =>
-          import('./Features/customer/pages/Payment-Success/payment-success/payment-success').then(
-            (m) => m.PaymentSuccess,
-          ),
-      },
+
       //Areej
       //Arwa
 
