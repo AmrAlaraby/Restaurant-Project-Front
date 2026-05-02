@@ -166,7 +166,7 @@
   <!-- Header -->
   <div class="header">
     <div class="page-header">
-      <h2 class="page-title">Menu Categories</h2>
+      <h2 class="page-title">{{ 'ADMIN.CATEGORIES.TITLE' | translate }}</h2>
     </div>
 
     <div class="actions-header">
@@ -174,11 +174,11 @@
         <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
           <path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
-        Add Category
+        {{ 'ADMIN.CATEGORIES.BUTTONS.ADD' | translate }}
       </button>
 
       <div class="count" *ngIf="!loading">
-        {{ categories.length }} Items
+        {{ categories.length }} {{ 'ADMIN.CATEGORIES.ITEMS' | translate }}
       </div>
     </div>
   </div>
@@ -227,9 +227,9 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Category</th>
-          <th>Items</th>
-          <th class="actions">Actions</th>
+          <th>{{ 'ADMIN.CATEGORIES.TABLE.CATEGORY' | translate }}</th>
+          <th>{{ 'ADMIN.CATEGORIES.TABLE.ITEMS' | translate }}</th>
+          <th class="actions">{{ 'ADMIN.CATEGORIES.TABLE.ACTIONS' | translate }}</th>
         </tr>
       </thead>
 
@@ -239,7 +239,7 @@
 
           <td class="name">
             <span class="avatar">{{ cat.name[0] }}</span>
-            {{ cat.name }}
+            {{ getCategoryName(cat) }}
           </td>
 
           <td>
@@ -251,14 +251,14 @@
               <svg width="13" height="13" viewBox="0 0 20 20" fill="none">
                 <path d="M13.5 3.5l3 3L7 16H4v-3L13.5 3.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
               </svg>
-              Edit
+              {{ 'ADMIN.CATEGORIES.BUTTONS.EDIT' | translate }}
             </button>
 
             <button class="btn-delete" (click)="onDelete(cat.id)">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
                 <path d="M4 6h16M8 6V4h8v2M5 6l1 14h12L19 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              Delete
+              {{ 'ADMIN.CATEGORIES.BUTTONS.DELETE' | translate }}
             </button>
           </td>
         </tr>

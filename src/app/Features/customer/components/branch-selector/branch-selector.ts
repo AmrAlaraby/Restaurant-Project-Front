@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { BranchDto } from '../../../../Core/Models/BranchModels/Branch-dto';
 import { BranchStateService } from '../../../../Core/Services/Branch-Service/branch-state-service';
+import { LocalizationService } from '../../../../Core/Services/Localization-Service/localization-service';
 
 @Component({
   selector: 'app-branch-selector',
@@ -18,12 +19,28 @@ export class BranchSelector {
 
   isOpen = false;
 
-  constructor(private branchState: BranchStateService) { }
+  constructor(private localizationService: LocalizationService,private branchState: BranchStateService) { }
 
   ngOnInit() {
     this.branches$ = this.branchState.branches$;
     this.selected$ = this.branchState.selectedBranch$;
+    this.getCurrentLanguage();
   }
+
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
+    
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 
   toggle() {
     this.isOpen = !this.isOpen;
@@ -34,5 +51,11 @@ export class BranchSelector {
     this.isOpen = false;
 
   
+  }
+  getItemName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.arabicName || item.name;
+    }
+    return item.name;
   }
 }

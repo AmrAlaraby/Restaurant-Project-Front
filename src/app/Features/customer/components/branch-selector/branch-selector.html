@@ -4,7 +4,7 @@
     <div class="selected" (click)="toggle()">
 
         @if (selected$ | async; as branch) {
-        {{ branch.name }}
+        {{ getItemName(branch) }}
         } @else {
         Select Branch
         }
@@ -22,7 +22,7 @@
         @for (b of branches; track b.id) {
 
         <div class="item" (click)="select(b)">
-            <div class="name">{{ b.name }}</div>
+            <div class="name">{{ getItemName(b) }}</div>
             <div class="phone">{{ b.phone }}</div>
         </div>
 
