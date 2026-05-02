@@ -528,8 +528,28 @@
   },
 
   "ADMIN": {
+    "MENU_FILTER": {
+      "SEARCH": "ابحث في عناصر القائمة...",
+      "ALL_CATEGORIES": "كل الفئات",
+      "ALL_BRANCHES": "كل الفروع",
+      "ALL_STATUS": "كل الحالات",
+      "AVAILABLE": "متاح",
+      "UNAVAILABLE": "غير متاح",
+      "DEFAULT_SORT": "الترتيب الافتراضي",
+      "PRICE_ASC": "السعر تصاعدي",
+      "PRICE_DESC": "السعر تنازلي",
+      "RESET": "إعادة ضبط"
+    },
     "MENU_ITEMS": {
+      "TOTAL": "إجمالي العناصر",
+    "AVAILABLE": "متاح",
+    "UNAVAILABLE": "غير متاح",
       "CARD": {
+         "VIEW": "عرض",
+      "EDIT": "تعديل",
+      "DELETE": "حذف",
+      "ENABLE": "تفعيل",
+      "DISABLE": "إيقاف",
         "AVAILABLE": "متاح",
         "UNAVAILABLE": "غير متاح",
         "CURRENCY": "جنيه",

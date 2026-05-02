@@ -526,8 +526,28 @@
   },
 
   "ADMIN": {
+    "MENU_FILTER": {
+      "SEARCH": "Search menu items...",
+      "ALL_CATEGORIES": "All Categories",
+      "ALL_BRANCHES": "All Branches",
+      "ALL_STATUS": "All Status",
+      "AVAILABLE": "Available",
+      "UNAVAILABLE": "Unavailable",
+      "DEFAULT_SORT": "Default Sort",
+      "PRICE_ASC": "Price Asc",
+      "PRICE_DESC": "Price Desc",
+      "RESET": "Reset"
+    },
     "MENU_ITEMS": {
+      "TOTAL": "Total Items",
+    "AVAILABLE": "Available",
+    "UNAVAILABLE": "Unavailable",
       "CARD": {
+        "VIEW": "View",
+      "EDIT": "Edit",
+      "DELETE": "Delete",
+      "ENABLE": "Enable",
+      "DISABLE": "Disable",
         "AVAILABLE": "Available",
         "UNAVAILABLE": "Unavailable",
         "CURRENCY": "EGP",
