@@ -1,0 +1,52 @@
+<div class="not-found">
+
+  <!-- Ambient background blobs -->
+  <div class="blob blob--1" aria-hidden="true"></div>
+  <div class="blob blob--2" aria-hidden="true"></div>
+
+  <!-- Big 404 watermark -->
+  <div class="watermark" aria-hidden="true">404</div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <div class="icon-wrap" aria-hidden="true">
+      <svg width="52" height="52" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"
+              stroke="currentColor" stroke-width="1.4"/>
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"
+              stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="12" cy="17" r="1" fill="currentColor"/>
+      </svg>
+    </div>
+
+    <h1 class="title">
+      <span class="title__num">404</span>
+      <span class="title__divider" aria-hidden="true"></span>
+      <span class="title__text">{{ 'SHARED.NOT_FOUND.TITLE' | translate }}</span>
+    </h1>
+
+    <p class="description">
+      {{ 'SHARED.NOT_FOUND.DESCRIPTION' | translate }}
+    </p>
+
+    <div class="actions">
+      <a class="btn btn--primary" routerLink="/">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M3 12L12 3l9 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 21V12h6v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        {{ 'SHARED.NOT_FOUND.GO_HOME' | translate }}
+      </a>
+
+      <button class="btn btn--ghost" (click)="goBack()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M19 12H5M5 12l7-7M5 12l7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        {{ 'SHARED.NOT_FOUND.GO_BACK' | translate }}
+      </button>
+    </div>
+
+  </div>
+
+</div>

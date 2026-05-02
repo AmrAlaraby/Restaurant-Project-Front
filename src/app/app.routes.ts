@@ -3,6 +3,7 @@ import { OwnDeliveries } from './Features/driver/components/own-deliveries/own-d
 import { DeliveryDetails } from './Features/driver/components/delivery-details/delivery-details';
 import { WaiterLayout } from './Features/waiter/pages/waiter-layout/waiter-layout';
 import { roleGuard } from './Core/guards/role-guard';
+import { NotFoundComponent } from './Shared/Components/not-found.component/not-found.component';
 
 export const routes: Routes = [
   {
@@ -402,6 +403,8 @@ export const routes: Routes = [
           ),
       },
 
+ 
+
       //Areej
       //Arwa
 
@@ -458,5 +461,11 @@ export const routes: Routes = [
             (m) => m.PaymentSuccess,
           ),
       },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./Shared/Components/not-found.component/not-found.component')
+        .then(m => m.NotFoundComponent)
+  }
 ];
 

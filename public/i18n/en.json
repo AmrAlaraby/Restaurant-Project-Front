@@ -1602,7 +1602,7 @@
   "LAYOUT": {
       "TOPBAR": {
         "TITLE": {
-          "HOME": "Dashboard",
+          "HOME": "Home",
           "ORDERS": "Order Management",
           "KITCHEN": "Kitchen Display",
           "TABLES": "Table Management",
