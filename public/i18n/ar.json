@@ -133,6 +133,21 @@
     }
   },
   "CUSTOMER": {
+
+    "NAV": {
+      "SECTION_ACCOUNT": "الحساب",
+      "PROFILE": "حسابي",
+      "MY_ORDERS": "طلباتي",
+      "ADDRESSES": "العناوين",
+      "SETTINGS": "الإعدادات",
+      "LOGOUT": "تسجيل الخروج"
+    },
+    "SIDEBAR": {
+      "DISCOVER": "استكشف",
+      "HOME": "الرئيسية",
+      "AI_SUGGESTIONS": "اقتراحات ذكية",
+      "BROWSE_MENU": "تصفح القائمة"
+    },
     "ADDRESSES": {
       "PLACEHOLDERS": {
         "BUILDING": "مثال: 15",
@@ -184,6 +199,9 @@
       "SAVED_SUCCESS": "تم حفظ التغييرات بنجاح!"
     },
     "NUTRITION": {
+      "DAILY_VALUES_TITLE": "% من القيم اليومية الموصى بها",
+      "PER_UNIT": "لكل وحدة",
+      "DAILY_CALORIES_P": "% من السعرات اليومية",
       "KCAL": "سعرة",
       "CALCULATE": "احسب تغذية طلبك",
       "TITLE": "تحليل التغذية",

@@ -131,6 +131,50 @@
     }
   },
   "CUSTOMER": {
+     "FOOTER": {
+    "DESC": "Fastest delivery & easy pickup. Fresh, hot food brought right to your door — every time.",
+
+    "COMPANY": "Company",
+    "OUR_STORY": "Our Story",
+    "TEAM": "Team",
+    "CAREERS": "Careers",
+    "BLOG": "Blog",
+    "CONTACT": "Contact",
+
+    "QUICK_LINKS": "Quick Links",
+    "BROWSE_MENU": "Browse Menu",
+    "HOME": "Home",
+    "MY_ORDERS": "My Orders",
+    "PROFILE": "Profile",
+
+    "NEWSLETTER": "Newsletter",
+    "STAY_LOOP": "Stay in the loop",
+    "NEWS_TEXT": "Get exclusive deals and new menu alerts straight to your inbox.",
+    "EMAIL_PLACEHOLDER": "your@email.com",
+    "SUBSCRIBE": "Subscribe",
+
+    "COPY": "© 2025 RMS Platform. All rights reserved.",
+    "PRIVACY": "Privacy",
+    "TERMS": "Terms",
+    "COOKIES": "Cookies",
+
+    "APP_DOWNLOAD": "Download on the",
+    "APP_GET": "Get it on"
+  },
+    "NAV": {
+      "SECTION_ACCOUNT": "Account",
+      "PROFILE": "My Profile",
+      "MY_ORDERS": "My Orders",
+      "ADDRESSES": "Addresses",
+      "SETTINGS": "Settings",
+      "LOGOUT": "Log Out"
+    },
+    "SIDEBAR": {
+      "DISCOVER": "Discover",
+      "HOME": "Home",
+      "AI_SUGGESTIONS": "AI Suggestions",
+      "BROWSE_MENU": "Browse Menu"
+    },
     "ADDRESSES": {
       "PLACEHOLDERS": {
         "BUILDING": "e.g. 15",
@@ -181,6 +225,9 @@
       "SAVED_SUCCESS": "Changes saved successfully!"
     },
     "NUTRITION": {
+      "DAILY_VALUES_TITLE": "% of Daily Recommended Values",
+      "PER_UNIT": "Per unit",
+    "DAILY_CALORIES_P": "% of daily calories",
       "KCAL": "kcal",
       "CALCULATE": "Calculate Nutrition",
       "TITLE": "Nutrition Analysis",

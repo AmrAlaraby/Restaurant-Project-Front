@@ -44,7 +44,7 @@
         <div class="error-state">
           <span class="error-icon">⚠️</span>
           <p class="error-text">
-            {{ 'CUSTOMER.NUTRITION.ERROR' | translate }}
+            {{ 'CUSTOMER.NUTRITION.ERROR' | translate }}{{errorMsg}}
           </p>
           <button class="btn-retry" (click)="retry()">
             {{ 'CUSTOMER.NUTRITION.TRY_AGAIN' | translate }}
@@ -93,6 +93,28 @@
                   </span>
                 </div>
               </div>
+              <p class="per-unit-note">
+  <strong>{{ 'CUSTOMER.NUTRITION.PER_UNIT' | translate }}:</strong>
+  {{ item.perItem.calories | number:'1.0-0' }} {{ 'CUSTOMER.NUTRITION.KCAL' | translate }} ·
+  {{ item.perItem.protein | number:'1.1-1' }}g {{ 'CUSTOMER.NUTRITION.PROTEIN' | translate }} ·
+  {{ item.perItem.carbs | number:'1.1-1' }}g {{ 'CUSTOMER.NUTRITION.CARBS' | translate }}
+</p>
+
+<div class="progress-section">
+  <div class="progress-label">
+    <span>{{ 'CUSTOMER.NUTRITION.DAILY_CALORIES_P' | translate }}</span>
+    <span>
+      <strong>{{ calorieProgress(item) | number:'1.0-0' }}</strong> %
+    </span>
+  </div>
+
+  <div class="progress-track">
+    <div
+      class="progress-fill calories-fill"
+      [style.width.%]="calorieProgress(item)">
+    </div>
+  </div>
+</div>
             </div>
           }
         </div>
@@ -122,6 +144,8 @@
               </span>
             </div>
 
+            <div class="total-divider"></div>
+
             <div class="total-item">
               <span class="total-value carbs-color">
                 {{ r.orderTotals.carbs | number: '1.1-1' }}g
@@ -131,6 +155,55 @@
               </span>
             </div>
           </div>
+          <!-- Daily values -->
+                    <div class="daily-values">
+  <p class="daily-title">
+    {{ 'CUSTOMER.NUTRITION.DAILY_VALUES_TITLE' | translate }}
+  </p>
+
+  <div class="dv-row">
+    <span class="dv-label">
+      {{ 'CUSTOMER.NUTRITION.CALORIES' | translate }}
+    </span>
+    <div class="progress-track">
+      <div class="progress-fill calories-fill"
+           [style.width.%]="getCaloriesDV(r)">
+      </div>
+    </div>
+    <span class="dv-pct">
+      {{ (r.orderTotals.calories / 2000 * 100) | number:'1.0-0' }}%
+    </span>
+  </div>
+
+  <div class="dv-row">
+    <span class="dv-label">
+      {{ 'CUSTOMER.NUTRITION.PROTEIN' | translate }}
+    </span>
+    <div class="progress-track">
+      <div class="progress-fill protein-fill"
+           [style.width.%]="getProteinDV(r)">
+      </div>
+    </div>
+    <span class="dv-pct">
+      {{ (r.orderTotals.protein / 50 * 100) | number:'1.0-0' }}%
+    </span>
+  </div>
+
+  <div class="dv-row">
+    <span class="dv-label">
+      {{ 'CUSTOMER.NUTRITION.CARBS' | translate }}
+    </span>
+    <div class="progress-track">
+      <div class="progress-fill carbs-fill"
+           [style.width.%]="getCarbsDV(r)">
+      </div>
+    </div>
+    <span class="dv-pct">
+      {{ (r.orderTotals.carbs / 300 * 100) | number:'1.0-0' }}%
+    </span>
+  </div>
+
+</div>
         </div>
 
         <p class="disclaimer">
