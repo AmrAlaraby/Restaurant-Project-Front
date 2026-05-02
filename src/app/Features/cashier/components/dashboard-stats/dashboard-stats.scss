@@ -101,7 +101,7 @@
 // green  — success / positive metric
 .green {
   border-top-color: var(--clr-success);
-  background: var(--clr-success-bg);
+  background: var(--clr-bg);
 
   .dark & {
     background: var(--clr-success-bg);
@@ -132,7 +132,7 @@
 // red  — primary / brand metric (uses crimson)
 .red {
   border-top-color: var(--clr-primary);
-  background: var(--clr-danger-bg);
+  background: var(--clr-bg);
 
   .dark & {
     background: var(--clr-danger-bg);
@@ -163,7 +163,7 @@
 // green2  — neutral/cream surface with green border (e.g. count that is good but neutral)
 .green2 {
   border-top-color: var(--clr-success);
-  background: var(--clr-cream);
+  background: var(--clr-bg);
 
   .dark & {
     background: var(--clr-cream);
@@ -194,7 +194,7 @@
 // red2  — warm-gold accent (warnings / attention metrics)
 .red2 {
   border-top-color: var(--clr-accent);
-  background: var(--clr-warning-bg);
+  background: var(--clr-bg);
 
   .dark & {
     background: var(--clr-warning-bg);

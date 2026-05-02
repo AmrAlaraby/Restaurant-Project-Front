@@ -1,4 +1,5 @@
 <div class="bac-wrap">
+
   <!-- Assigned Deliveries Tab -->
   <app-branch-assigned-deliveries
     *ngIf="viewAssigned"
@@ -7,13 +8,13 @@
 
   <!-- Assign Page -->
   <div class="bac-page" *ngIf="!viewAssigned">
+
     <!-- Header -->
     <div class="bac-header">
       <div class="bac-header-left">
-        <div class="bac-title">
+        <!-- <div class="bac-title">
           {{ 'CASHIER.DELIVERIES.TITLE' | translate }}
-        </div>
-
+        </div> -->
         <div class="bac-sub" *ngIf="!loading">
           {{ 'CASHIER.DELIVERIES.SUBTITLE' | translate }}
           &middot;
@@ -22,22 +23,29 @@
           </span>
         </div>
       </div>
+    </div>
 
+    <!-- Actions pill-bar -->
+    <div class="bac-actions">
       <button class="bac-link-btn" (click)="viewAssigned = true">
         {{ 'CASHIER.DELIVERIES.BUTTON_VIEW_DISPATCHED' | translate }}
       </button>
-    </div>
 
-    <!-- Order ID Filter -->
-    <div class="bac-search-wrap">
-      <input
-        class="bac-search-input"
-        type="number"
-        [placeholder]="'CASHIER.DELIVERIES.PLACEHOLDER_SEARCH' | translate"
-        [(ngModel)]="filterOrderId"
-        (ngModelChange)="applyOrderFilter()"
-      />
-      <span class="bac-search-icon">🔍</span>
+      <div class="bac-actions-divider"></div>
+
+      <div class="bac-search-wrap">
+        <svg class="bac-search-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input
+          class="bac-search-input"
+          type="number"
+          [placeholder]="'CASHIER.DELIVERIES.PLACEHOLDER_SEARCH' | translate"
+          [(ngModel)]="filterOrderId"
+          (ngModelChange)="applyOrderFilter()"
+        />
+      </div>
     </div>
 
     <!-- Loading -->
@@ -48,26 +56,17 @@
 
     <!-- Empty State -->
     <div *ngIf="!loading && filteredOrders.length === 0" class="bac-empty">
-      <div class="bac-empty-icon">
-        {{ filterOrderId ? '🔍' : '🎉' }}
-      </div>
-
+      <div class="bac-empty-icon">{{ filterOrderId ? '🔍' : '🎉' }}</div>
       <div class="bac-empty-title">
-        {{
-          filterOrderId
+        {{ filterOrderId
             ? ('CASHIER.DELIVERIES.EMPTY_TITLE_NO_ORDER' | translate)
-            : ('CASHIER.DELIVERIES.EMPTY_TITLE_ALL' | translate)
-        }}
+            : ('CASHIER.DELIVERIES.EMPTY_TITLE_ALL' | translate) }}
       </div>
-
       <div class="bac-empty-sub">
-        {{
-          filterOrderId
+        {{ filterOrderId
             ? ('CASHIER.DELIVERIES.EMPTY_SUB_NO_ORDER' | translate)
-            : ('CASHIER.DELIVERIES.EMPTY_SUB_ALL' | translate)
-        }}
+            : ('CASHIER.DELIVERIES.EMPTY_SUB_ALL' | translate) }}
       </div>
-
       <button *ngIf="!filterOrderId" class="bac-link-btn mt-12" (click)="viewAssigned = true">
         {{ 'CASHIER.DELIVERIES.BUTTON_VIEW_DISPATCHED' | translate }}
       </button>
@@ -76,6 +75,7 @@
     <!-- Orders List -->
     <div class="bac-list" *ngIf="!loading && filteredOrders.length > 0">
       <div class="bac-order-card" *ngFor="let order of filteredOrders">
+
         <!-- Card Top -->
         <div class="bac-card-top">
           <div class="bac-order-info">
@@ -85,7 +85,6 @@
                 — {{ order.userName || ('CASHIER.DELIVERIES.CUSTOMER' | translate) }}
               </span>
             </div>
-
             <div class="bac-order-meta">
               <span class="bac-pin"></span>
               {{ confirmedAddresses[order.deliveryId] }}
@@ -95,7 +94,6 @@
               </span>
             </div>
           </div>
-
           <span class="bac-status-badge badge-ready">
             {{ 'CASHIER.DELIVERIES.STATUS_READY' | translate }}
           </span>
@@ -107,15 +105,13 @@
             <div class="bac-field-label">
               {{ 'CASHIER.DELIVERIES.FIELD_ASSIGN_DRIVER' | translate }}
             </div>
-
             <select class="bac-select" [(ngModel)]="selectedDrivers[order.deliveryId]">
               <option value="">
                 {{ 'CASHIER.DELIVERIES.OPTION_SELECT_DRIVER' | translate }}
               </option>
-
               <option *ngFor="let driver of drivers" [value]="driver.driverId">
                 {{ driver.name }}
-                <ng-container *ngIf="driver.status === 'Online'"> · Online </ng-container>
+                <ng-container *ngIf="driver.status === 'Online'"> · Online</ng-container>
               </option>
             </select>
           </div>
@@ -124,7 +120,6 @@
             <div class="bac-field-label">
               {{ 'CASHIER.DELIVERIES.FIELD_CONFIRM_ADDRESS' | translate }}
             </div>
-
             <input
               class="bac-input"
               type="text"
@@ -141,15 +136,16 @@
             [disabled]="!selectedDrivers[order.deliveryId] || dispatching[order.deliveryId]"
           >
             <span *ngIf="!dispatching[order.deliveryId]">
-              🚀 {{ 'CASHIER.DELIVERIES.BUTTON_DISPATCH' | translate }}
+               {{ 'CASHIER.DELIVERIES.BUTTON_DISPATCH' | translate }}
             </span>
-
             <span *ngIf="dispatching[order.deliveryId]">
               {{ 'CASHIER.DELIVERIES.BUTTON_DISPATCHING' | translate }}
             </span>
           </button>
         </div>
+
       </div>
     </div>
   </div>
+
 </div>

@@ -1,22 +1,24 @@
 <div class="page">
 
   <div class="header">
-    <div>
-      <h2>{{ 'WAITER.ORDERS.TITLE' | translate }}</h2>
-      <p class="sub">
+    <!-- <div>
+      <h2>{{ 'WAITER.ORDERS.TITLE' | translate }}</h2> -->
+      <!-- <p class="sub">
         {{ 'WAITER.ORDERS.SUBTITLE' | translate }}
-      </p>
-    </div>
+      </p> -->
+    <!-- </div> -->
+
+  </div>
+  <div class="controls-row">
+    <app-waiter-order-filters
+      [hideTypeFilter]="true"
+      (filtersChanged)="onFiltersChanged($event)">
+    </app-waiter-order-filters>
 
     <button class="new-order-btn" (click)="goToNewOrder()">
       {{ 'WAITER.ORDERS.BUTTON_NEW_ORDER' | translate }}
     </button>
   </div>
-
-  <app-waiter-order-filters
-    [hideTypeFilter]="true"
-    (filtersChanged)="onFiltersChanged($event)">
-  </app-waiter-order-filters>
 
   <app-waiter-orders-list
     [orders]="orders"
