@@ -1403,6 +1403,32 @@
   },
 
   "DRIVER": {
+    "NAV": {
+      "HOME": "الرئيسية",
+      "DASHBOARD": "لوحة التحكم",
+      "ORDERS": "إدارة الطلبات",
+      "KITCHEN": "شاشة المطبخ",
+      "TABLES": "إدارة الطاولات",
+      "DELIVERIES": "التوصيلات",
+      "PAYMENTS": "المدفوعات",
+      "MENU": "المنيو",
+      "STOCK": "المخزون",
+      "CATEGORIES": "التصنيفات",
+      "USERS": "المستخدمين",
+      "BRANCHES": "الفروع",
+      "REPORTS": "التقارير",
+      "SETTINGS": "الإعدادات",
+      "DEFAULT": "السائق"
+    },
+
+    "SIDEBAR": {
+      "DELIVERIES": "التوصيلات",
+      "HOME": "الرئيسية",
+      "ACTIVE_DELIVERY": "توصيل نشط",
+      "HISTORY": "السجل",
+      "ACCOUNT": "الحساب",
+      "PROFILE": "ملفي الشخصي"
+    },
     "DELIVERY_DETAILS": {
       "CURRENCY": "ج.م",
       "NA": "—",

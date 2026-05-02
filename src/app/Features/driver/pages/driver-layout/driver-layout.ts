@@ -8,6 +8,7 @@ import { ToastService } from '../../../../Core/Services/Toast-Service/toast-serv
 import { NotificationBell } from '../../../../Shared/Components/notification-bell/notification-bell';
 import { Sidebar } from '../../../../Shared/Components/sidebar/sidebar';
 import { LangSwitchComponent } from "../../../../Shared/Components/lang-switch/lang-switch";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-driver-layout',
@@ -22,37 +23,37 @@ export class DriverLayout {
   UserRole: string = '';
 
   pageTitles: any = {
-    home: "Home",
-    dashboard: 'Dashboard',
-    orders: 'Order Management',
-    kitchen: 'Kitchen Display',
-    tables: 'Table Management',
-    deliveries: 'Deliveries',
-    payments: 'Payments',
-    menu: 'Menu Items',
-    stock: 'Stock',
-    categories: 'Categories',
-    users: 'Users',
-    branches: 'Branches',
-    reports: 'Reports',
-    settings: 'Settings',
-  };
+  home: 'DRIVER.NAV.HOME',
+  dashboard: 'DRIVER.NAV.DASHBOARD',
+  orders: 'DRIVER.NAV.ORDERS',
+  kitchen: 'DRIVER.NAV.KITCHEN',
+  tables: 'DRIVER.NAV.TABLES',
+  deliveries: 'DRIVER.NAV.DELIVERIES',
+  payments: 'DRIVER.NAV.PAYMENTS',
+  menu: 'DRIVER.NAV.MENU',
+  stock: 'DRIVER.NAV.STOCK',
+  categories: 'DRIVER.NAV.CATEGORIES',
+  users: 'DRIVER.NAV.USERS',
+  branches: 'DRIVER.NAV.BRANCHES',
+  reports: 'DRIVER.NAV.REPORTS',
+  settings: 'DRIVER.NAV.SETTINGS',
+};
 
   topbarTitle = '';
 
   sidebarData = [
     {
-      title: 'Deliveries',
+      title: 'DRIVER.SIDEBAR.DELIVERIES',
       links: [
          {
-          title: 'Home',
+          title: 'DRIVER.SIDEBAR.HOME',
           route: 'home',
           icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
                   <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z"/>
                 </svg>`,
         },
          {
-          title: 'Active Delivery',
+          title: 'DRIVER.SIDEBAR.ACTIVE_DELIVERY',
           route: 'deliveries',
           icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="1.6"
@@ -76,7 +77,7 @@ export class DriverLayout {
                 </svg>`,
         },
          {
-          title: 'History',
+          title: 'DRIVER.SIDEBAR.HISTORY',
           route: 'delivery-history',
           icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="1.6"
@@ -96,10 +97,10 @@ export class DriverLayout {
       ],
     },
     {
-      title: 'Account',
+      title: 'DRIVER.SIDEBAR.ACCOUNT',
       links: [
         {
-          title: 'My Profile',
+          title: 'DRIVER.SIDEBAR.PROFILE',
           route: 'profile',
           icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                   <!-- Circle -->
@@ -123,11 +124,18 @@ export class DriverLayout {
     private notificationService: NotificationService,
     private signalR: SignalRService,
     private toast: ToastService,
+    private translate: TranslateService
   ) {
-    this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe(() => {
-      const url = this.router.url.split('/').pop() || '';
-      this.topbarTitle = this.pageTitles[url] || 'driver';
+    this.router.events
+  .pipe(filter((e) => e instanceof NavigationEnd))
+  .subscribe(() => {
+    const url = this.router.url.split('/').pop() || '';
+    const key = this.pageTitles[url] || 'DRIVER.NAV.DEFAULT';
+
+    this.translate.get(key).subscribe((res) => {
+      this.topbarTitle = res;
     });
+  });
   }
   ngOnInit(): void {
     this.GetCurrentUser();

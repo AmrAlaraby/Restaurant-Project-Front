@@ -1407,6 +1407,32 @@
   },
 
   "DRIVER": {
+    "NAV": {
+      "HOME": "Home",
+      "DASHBOARD": "Dashboard",
+      "ORDERS": "Order Management",
+      "KITCHEN": "Kitchen Display",
+      "TABLES": "Table Management",
+      "DELIVERIES": "Deliveries",
+      "PAYMENTS": "Payments",
+      "MENU": "Menu Items",
+      "STOCK": "Stock",
+      "CATEGORIES": "Categories",
+      "USERS": "Users",
+      "BRANCHES": "Branches",
+      "REPORTS": "Reports",
+      "SETTINGS": "Settings",
+      "DEFAULT": "Driver"
+    },
+
+    "SIDEBAR": {
+      "DELIVERIES": "Deliveries",
+      "HOME": "Home",
+      "ACTIVE_DELIVERY": "Active Delivery",
+      "HISTORY": "History",
+      "ACCOUNT": "Account",
+      "PROFILE": "My Profile"
+    },
     "DELIVERY_DETAILS": {
       "CURRENCY": "EGP",
       "NA": "—",
