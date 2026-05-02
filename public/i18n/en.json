@@ -1407,6 +1407,8 @@
 
   "DRIVER": {
     "DELIVERY_DETAILS": {
+      "CURRENCY": "EGP",
+      "NA": "—",
       "LOADING": "Loading...",
       "ORDER": "Order",
       "INFO": "Delivery Info",

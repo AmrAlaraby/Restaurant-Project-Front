@@ -8,6 +8,8 @@ import { Delivery } from '../../../../../Core/Models/DeliveryModels/delivery';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 import { OrdersService } from '../../../../../Core/Services/Orders-Service/orders-service';
+import { Subject, takeUntil } from 'rxjs';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
 @Component({
   selector: 'app-delivery-details',
@@ -34,7 +36,7 @@ export class DeliveryDetails {
     'OnTheWay': 'Delivered',
   };
 
-  steps = ['Assigned', 'Picked Up', 'On the Way', 'Delivered'];
+  steps = ['Assigned', 'PICKED_UP', 'ON_THE_WAY', 'Delivered'];
 
   private statusToIndex: Record<string, number> = {
     'Assigned': 0,
@@ -60,6 +62,7 @@ export class DeliveryDetails {
   }
 
   constructor(
+    private localizationService: LocalizationService,
     private route: ActivatedRoute,
     private service: DeliveryService,
     private ordersService: OrdersService,
@@ -77,6 +80,8 @@ export class DeliveryDetails {
 
     this.service.getById(id).subscribe({
       next: (res) => {
+        console.log(res);
+        
         this.delivery = res;
         this.loading = false;
       },
@@ -85,7 +90,22 @@ export class DeliveryDetails {
         this.toast.error('Failed to load delivery details');
       }
     });
+    this.getCurrentLanguage();
   }
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
+    
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 
   nextStatus(): string | null {
     return this.delivery ? (this.statusFlow[this.delivery.deliveryStatus] ?? null) : null;
@@ -138,5 +158,20 @@ export class DeliveryDetails {
 
   goBack() {
     this.router.navigate(['/admin/deliveries']);
+  }
+
+  getItemName(item: any): string {
+    // console.log(item)
+    if (this.CurrentLanguage === 'ar') {
+      return item.menuItemArabicName || item.menuItemName;
+    }
+    return item.menuItemName;
+  }
+  getBranchName(item: any): string {
+    // console.log(item)
+    if (this.CurrentLanguage === 'ar') {
+      return item.branchArabicName || item.branchName;
+    }
+    return item.branchName;
   }
 }

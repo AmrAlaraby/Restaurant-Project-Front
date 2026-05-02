@@ -1403,6 +1403,8 @@
 
   "DRIVER": {
     "DELIVERY_DETAILS": {
+      "CURRENCY": "ج.م",
+      "NA": "—",
       "LOADING": "جاري التحميل...",
       "ORDER": "طلب",
       "INFO": "بيانات التوصيل",
