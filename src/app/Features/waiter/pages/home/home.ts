@@ -143,7 +143,7 @@ export class HomeComponent implements OnInit {
     }).subscribe(res => {
 
       const allOrders = res.data ?? [];
-
+      
       this.activeOrders = allOrders.filter(
         (o: any) =>
           o.status === 'Received' ||
