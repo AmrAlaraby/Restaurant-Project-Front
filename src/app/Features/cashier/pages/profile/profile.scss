@@ -6,7 +6,7 @@
 // ─────────────────────────────────────────────
 
 .page {
-  background: var(--clr-cream);
+  background: var(--clr-bg);
   min-height: 100vh;
   padding: var(--space-xl) var(--space-lg);
   font-family: var(--font-body);
@@ -190,46 +190,80 @@
     }
   }
 
-  input {
-    background: var(--clr-cream-mid);
-    border: 1.5px solid transparent;
-    border-radius: var(--radius-md);
-    padding: 0.7rem var(--space-md);
-    font-family: var(--font-body);
-    font-size: 0.9rem;
+input {
+  width: 100%;
+  background: var(--clr-surface-warm);
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem var(--space-md);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--clr-text-primary);
+  outline: none;
+
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+
+  /* Placeholder */
+  &::placeholder {
+    color: var(--clr-text-hint);
+    transition: color var(--transition-fast);
+  }
+
+  /* Hover = subtle lift */
+  &:hover {
+    border-color: var(--clr-border-strong);
+    background: var(--clr-surface);
+  }
+
+  /* Focus = strong brand feedback */
+  &:focus {
+    background: var(--clr-surface);
+    border-color: var(--clr-accent);
+    box-shadow:
+      0 0 0 3px rgba(230, 81, 0, 0.15),
+      0 2px 6px rgba(0, 0, 0, 0.05);
+    transform: translateY(-1px);
+
+    &::placeholder {
+      color: transparent;
+    }
+  }
+
+  /* Disabled (optional but pro) */
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  /* Dark Mode */
+  .dark & {
+    background: var(--clr-surface);
+    border-color: var(--clr-border);
     color: var(--clr-text-primary);
-    outline: none;
-    transition:
-      background var(--transition-fast),
-      border-color var(--transition-fast),
-      box-shadow var(--transition-fast);
 
     &::placeholder {
       color: var(--clr-text-hint);
     }
 
-    &:focus {
-      background: var(--clr-cream);
-      border-color: var(--clr-accent);
-      box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.18);
+    &:hover {
+      background: var(--clr-surface-raised);
+      border-color: var(--clr-border-strong);
     }
 
-    .dark & {
-      background: var(--clr-cream-dark);
-      color: var(--clr-text-primary);
-      border-color: transparent;
-
-      &::placeholder {
-        color: var(--clr-text-hint);
-      }
-
-      &:focus {
-        background: var(--clr-cream-mid);
-        border-color: var(--clr-accent);
-        box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.12);
-      }
+    &:focus {
+      background: var(--clr-surface-raised);
+      border-color: var(--clr-accent);
+      box-shadow:
+        0 0 0 3px rgba(229, 57, 53, 0.18),
+        0 4px 12px rgba(0, 0, 0, 0.4);
+      transform: translateY(-1px);
     }
   }
+}
 }
 
 // ── Validation & Messages ─────────────────────
