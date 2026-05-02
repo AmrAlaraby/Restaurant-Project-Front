@@ -14,7 +14,7 @@
 
 /* ── PAGE CONTAINER ─────────────────────────────────────── */
 .page {
-  background: var(--clr-surface-alt);
+  background: var(--clr-bg);
   min-height: 100vh;
   padding: var(--space-xl);
   font-family: var(--font-body);
@@ -31,6 +31,7 @@
     gap: var(--space-md);
   }
 }
+
 
 /* ── BREADCRUMB ─────────────────────────────────────────── */
 .breadcrumb {
