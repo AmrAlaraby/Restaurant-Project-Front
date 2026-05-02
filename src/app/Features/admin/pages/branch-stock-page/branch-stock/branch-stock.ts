@@ -8,11 +8,14 @@ import { Pagination } from '../../../../../Shared/Components/pagination/paginati
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../../../Core/Services/Auth-Service/auth-service';
 import { SignalRService } from '../../../../../Core/Services/SignalR-Service/SignalrService';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Subject, takeUntil } from 'rxjs';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
 @Component({
   selector: 'app-branch-stock',
   standalone: true,
-  imports: [CommonModule, FormsModule, BranchSelectorComponent, Pagination],
+  imports: [CommonModule, FormsModule, BranchSelectorComponent, Pagination, TranslatePipe],
   templateUrl: './branch-stock.html',
   styleUrl: './branch-stock.scss'
 })
@@ -35,13 +38,30 @@ export class BranchStockComponent implements OnInit {
 
   constructor(private service: BranchStockService,
               private authService: AuthService,
-              private SignalRService: SignalRService
+              private SignalRService: SignalRService,
+              private localizationService: LocalizationService,
   ) {}
 
   ngOnInit(): void {
     this.loadData();
-    this.listenToUpdates()
+    this.listenToUpdates();
+    this.getCurrentLanguage();
   }
+
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
+    
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 
   loadData() {
     this.loading = true;
@@ -118,5 +138,18 @@ viewDetails(id: number) {
   closeModal() {
     this.showModal = false;
     this.selectedStock = undefined;
+  }
+  getIngredientName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.ingredientArabicName || item.ingredientName;
+    }
+    return item.ingredientName;
+  }
+  getBranchName(item: any): string {
+   
+    if (this.CurrentLanguage === 'ar') {
+      return item.branchArabicName || item.branchName;
+    }
+    return item.branchName;
   }
 }

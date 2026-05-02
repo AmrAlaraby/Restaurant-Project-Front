@@ -1,8 +1,8 @@
 <div class="branch-selector">
   <select (change)="selectBranch($any($event.target).value)">
-    <option value="">All Branches</option>
+    <option value="">{{ 'ADMIN.PAYMENT.TRANSACTIONS.BRANCHES.ALL' | translate }}</option>
     <option *ngFor="let branch of branches" [value]="branch.id">
-      {{ branch.name }}
+      {{ getBranchName(branch) }}
     </option>
   </select>
 </div>

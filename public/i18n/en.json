@@ -526,6 +526,37 @@
   },
 
   "ADMIN": {
+    "STOCK_MANAGEMENT": {
+      "TITLE": "Stock Management",
+      "LOADING": "Loading...",
+      "EMPTY": "No data found",
+
+      "TABLE": {
+        "INGREDIENT": "INGREDIENT",
+        "AVAILABLE_QTY": "AVAILABLE QTY",
+        "ACTIONS": "ACTIONS"
+      },
+
+      "BUTTONS": {
+        "VIEW": "View",
+        "CANCEL": "Cancel",
+        "SAVE": "Save Changes"
+      },
+
+      "PAGINATION": {
+        "SHOWING": "Showing",
+        "OF": "of",
+        "ITEMS": "items"
+      },
+
+      "MODAL": {
+        "TITLE": "Stock Details",
+        "BRANCH": "Branch",
+        "INGREDIENT": "Ingredient",
+        "AVAILABLE_QTY": "Available Qty",
+        "LOW_THRESHOLD": "Low Threshold"
+      }
+    },
     "PAYMENT":{
       "TRANSACTIONS": {
         "TITLE": "Recent Transactions",

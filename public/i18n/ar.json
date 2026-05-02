@@ -527,6 +527,37 @@
     }
   },
   "ADMIN": {
+    "STOCK_MANAGEMENT": {
+      "TITLE": "إدارة المخزون",
+      "LOADING": "جارٍ التحميل...",
+      "EMPTY": "لا توجد بيانات",
+
+      "TABLE": {
+        "INGREDIENT": "المكون",
+        "AVAILABLE_QTY": "الكمية المتاحة",
+        "ACTIONS": "الإجراءات"
+      },
+
+      "BUTTONS": {
+        "VIEW": "عرض",
+        "CANCEL": "إلغاء",
+        "SAVE": "حفظ التغييرات"
+      },
+
+      "PAGINATION": {
+        "SHOWING": "عرض",
+        "OF": "من",
+        "ITEMS": "عنصر"
+      },
+
+      "MODAL": {
+        "TITLE": "تفاصيل المخزون",
+        "BRANCH": "الفرع",
+        "INGREDIENT": "المكون",
+        "AVAILABLE_QTY": "الكمية المتاحة",
+        "LOW_THRESHOLD": "حد التنبيه المنخفض"
+      }
+    },
     "PAYMENT":{
       "TRANSACTIONS": {
         "TITLE": "آخر المعاملات",
