@@ -1,0 +1,326 @@
+/* ═══════════════════════════════════════════════════════════
+   NOT-FOUND PAGE — SCSS
+   Design System: warm red-and-gold brand
+   Dark mode via .dark class only · No hardcoded hex values
+═══════════════════════════════════════════════════════════ */
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── PAGE SHELL ──────────────────────────────────────────── */
+.not-found {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--clr-surface-alt);
+  overflow: hidden;
+  padding-inline: var(--space-lg);
+  padding-block: var(--space-xl);
+
+  .dark & {
+    background: var(--clr-surface-alt);
+  }
+}
+
+/* ── AMBIENT BLOBS ───────────────────────────────────────── */
+.blob {
+  position: absolute;
+  border-radius: var(--radius-full);
+  filter: blur(90px);
+  pointer-events: none;
+  opacity: 0.18;
+
+  .dark & {
+    opacity: 0.12;
+  }
+
+  &--1 {
+    width: 520px;
+    height: 520px;
+    background: var(--clr-primary);
+    top: -160px;
+    inset-inline-end: -120px;
+    animation: drift 12s ease-in-out infinite alternate;
+
+    .dark & {
+      background: var(--clr-primary-dark);
+    }
+  }
+
+  &--2 {
+    width: 380px;
+    height: 380px;
+    background: var(--clr-accent);
+    bottom: -100px;
+    inset-inline-start: -80px;
+    animation: drift 16s ease-in-out infinite alternate-reverse;
+
+    .dark & {
+      background: var(--clr-accent-dark);
+    }
+  }
+}
+
+/* ── 404 WATERMARK ───────────────────────────────────────── */
+.watermark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: clamp(160px, 28vw, 340px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--clr-cream-dark);
+  opacity: 0.35;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+
+  .dark & {
+    color: var(--clr-cream-mid);
+    opacity: 0.12;
+  }
+}
+
+/* ── CONTENT CARD ────────────────────────────────────────── */
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-lg);
+  background: var(--clr-surface);
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-xl);
+  padding-block: var(--space-xl);
+  padding-inline: clamp(var(--space-lg), 6vw, 64px);
+  max-width: 520px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  animation: card-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  .dark & {
+    background: var(--clr-surface);
+    border-color: var(--clr-border);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+/* ── ICON ────────────────────────────────────────────────── */
+.icon-wrap {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  background: var(--clr-danger-bg);
+  border: 2px solid var(--clr-primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-primary);
+  animation: icon-pulse 3s ease-in-out infinite;
+  flex-shrink: 0;
+
+  .dark & {
+    background: var(--clr-danger-bg);
+    border-color: var(--clr-primary);
+    color: var(--clr-primary-light);
+  }
+}
+
+/* ── TITLE ───────────────────────────────────────────────── */
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin: 0;
+
+  &__num {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 900;
+    color: var(--clr-primary);
+    letter-spacing: -0.03em;
+    line-height: 1;
+
+    .dark & {
+      color: var(--clr-primary-light);
+    }
+  }
+
+  &__divider {
+    display: block;
+    width: 2px;
+    height: 2.5rem;
+    background: var(--clr-border);
+    border-radius: var(--radius-full);
+    flex-shrink: 0;
+
+    .dark & {
+      background: var(--clr-border);
+    }
+
+    @media (max-width: 400px) {
+      display: none;
+    }
+  }
+
+  &__text {
+    font-family: var(--font-heading);
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 700;
+    color: var(--clr-text-primary);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+
+    .dark & {
+      color: var(--clr-text-primary);
+    }
+  }
+}
+
+/* ── DESCRIPTION ─────────────────────────────────────────── */
+.description {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--clr-text-secondary);
+  line-height: 1.6;
+  max-width: 360px;
+  margin: 0;
+
+  .dark & {
+    color: var(--clr-text-secondary);
+  }
+}
+
+/* ── ACTIONS ─────────────────────────────────────────────── */
+.actions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ── BUTTONS ─────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding-block: 10px;
+  padding-inline: var(--space-lg);
+  border-radius: var(--radius-md);
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  /* Primary — deep red */
+  &--primary {
+    background: var(--clr-primary);
+    color: var(--clr-text-on-primary);
+    box-shadow: var(--shadow-sm);
+
+    &:hover {
+      background: var(--clr-primary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .dark & {
+      background: var(--clr-primary);
+      color: var(--clr-text-on-primary);
+
+      &:hover {
+        background: var(--clr-primary-dark);
+      }
+    }
+  }
+
+  /* Ghost — outlined */
+  &--ghost {
+    background: transparent;
+    color: var(--clr-text-secondary);
+    border: 1.5px solid var(--clr-border);
+
+    &:hover {
+      background: var(--clr-cream-mid);
+      border-color: var(--clr-cream-dark);
+      color: var(--clr-text-primary);
+    }
+
+    .dark & {
+      color: var(--clr-text-secondary);
+      border-color: var(--clr-border);
+
+      &:hover {
+        background: var(--clr-cream-mid);
+        color: var(--clr-text-primary);
+      }
+    }
+  }
+}
+
+/* ── ANIMATIONS ──────────────────────────────────────────── */
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(30px, 20px) scale(1.08); }
+}
+
+@keyframes icon-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--clr-primary) 30%, transparent); }
+  50%       { box-shadow: 0 0 0 10px color-mix(in srgb, var(--clr-primary) 0%, transparent); }
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .content {
+    gap: var(--space-md);
+  }
+
+  .icon-wrap {
+    width: 64px;
+    height: 64px;
+  }
+
+  .actions {
+    flex-direction: column;
+    width: 100%;
+
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}

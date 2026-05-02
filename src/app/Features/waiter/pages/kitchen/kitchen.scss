@@ -15,7 +15,7 @@ $red: #e05c5c;
 // ─── Page Layout ─────────────────────────────────────────────────
 .kitchen-page {
   min-height: 100vh;
-  background-color: $bg-page;
+  background-color: var(--clr-bg);
   padding: 32px 40px;
   font-family: 'Segoe UI', system-ui, sans-serif;
 }
