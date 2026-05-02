@@ -3,11 +3,14 @@ import { FormsModule } from '@angular/forms';
 import { User } from '../../../../../Core/Models/UserModels/user';
 import { BranchDto } from '../../../../../Core/Models/BranchModels/Branch-dto';
 import { UsersService } from '../../../../../Core/Services/User-Service/users-service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Subject, takeUntil } from 'rxjs';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
 @Component({
   selector: 'edit-user',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,TranslatePipe],
   templateUrl: './edit-user.html',
   styleUrls: ['./edit-user.scss'],
 })
@@ -31,7 +34,7 @@ export class EditUserComponent implements OnInit {
   isSubmitting = false;
   errorMessage = '';
 
-  constructor(private usersService: UsersService) {}
+  constructor(private localizationService: LocalizationService,private usersService: UsersService) {}
 
   ngOnInit() {
     // نسخ بيانات الـ user الحالي في الفورم
@@ -52,7 +55,24 @@ export class EditUserComponent implements OnInit {
       next: (branches) => (this.branches = branches),
       error: (err) => console.error('Failed to load branches', err),
     });
+
+    this.getCurrentLanguage();
   }
+
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
+    
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 
   onSave() {
     if (!this.editedUser.name || !this.editedUser.email || !this.editedUser.roleId) {
@@ -79,5 +99,12 @@ export class EditUserComponent implements OnInit {
 
   onClose() {
     this.close.emit();
+  }
+
+  getItemName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.arabicName || item.name;
+    }
+    return item.name;
   }
 }

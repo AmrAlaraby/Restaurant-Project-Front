@@ -527,6 +527,52 @@
 
   "ADMIN": {
     "USERS": {
+      "ADD": {
+        "TITLE": "Add New User",
+
+        "FIELDS": {
+          "NAME": "FULL NAME",
+          "EMAIL": "EMAIL",
+          "ROLE": "ROLE",
+          "BRANCH": "BRANCH"
+        },
+
+        "PLACEHOLDERS": {
+          "NAME": "Ahmed Hassan",
+          "EMAIL": "ahmed@rms.com",
+          "ROLE": "Select role",
+          "NO_BRANCH": "No Branch"
+        },
+
+        "BUTTONS": {
+          "CANCEL": "Cancel",
+          "CREATE": "Create User",
+          "SAVING": "Saving..."
+        }
+      },
+      "EDIT": {
+        "TITLE": "Edit User",
+
+        "FIELDS": {
+          "NAME": "FULL NAME",
+          "EMAIL": "EMAIL",
+          "ROLE": "ROLE",
+          "BRANCH": "BRANCH"
+        },
+
+        "PLACEHOLDERS": {
+          "NAME": "Enter name",
+          "EMAIL": "Enter email",
+          "ROLE": "Select role",
+          "NO_BRANCH": "No Branch"
+        },
+
+        "BUTTONS": {
+          "CANCEL": "Cancel",
+          "SAVE": "Save Changes",
+          "SAVING": "Saving..."
+        }
+      },
       "DETAILS": {
         "TITLE": "User Details",
         "LOADING": "Loading...",
