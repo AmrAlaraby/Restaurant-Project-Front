@@ -1,4 +1,135 @@
 {
+  "ORDER_SUCCESS": {
+  "TITLE": "Order Placed Successfully!",
+  "SUBTITLE": "Your order has been sent to the kitchen and is being prepared.",
+  "BUTTON": "Back to Home"
+},
+  "AUTH": {
+    "OTP": {
+    "TITLE": "Verify Your Code",
+    "SUBTITLE": "Enter the 6-digit code sent to your email",
+    "VERIFY": "Verify Code",
+    "VERIFYING": "Verifying..."
+  },
+    "RESET": {
+    "TITLE": "Reset Password",
+    "SUBTITLE": "Create a new strong password for your account",
+    "NEW_PASSWORD": "New Password",
+    "CONFIRM_PASSWORD": "Confirm Password",
+    "PLACEHOLDER_PASSWORD": "Enter new password",
+    "PLACEHOLDER_CONFIRM": "Confirm password",
+    "STRENGTH": "{{value}}% strong",
+    "BUTTON": "Reset Password",
+    "PROCESSING": "Processing...",
+    "BACK": "Back to login"
+  },
+    "REGISTER": {
+      "TITLE": "Create Account 🎉",
+      "SUBTITLE": "Fill in the details below to get started",
+
+      "SOCIAL": {
+        "GOOGLE": "Continue with Google",
+        "FACEBOOK": "Continue with Facebook",
+        "DIVIDER": "or sign up with email"
+      },
+
+      "NAME": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "John Doe",
+        "REQUIRED": "Name is required",
+        "MAX": "Name must be less than 100 characters"
+      },
+
+      "EMAIL": {
+        "LABEL": "Email",
+        "PLACEHOLDER": "john@example.com",
+        "REQUIRED": "Email is required",
+        "INVALID": "Invalid email format"
+      },
+
+      "PASSWORD": {
+        "LABEL": "Password",
+        "PLACEHOLDER": "Create password",
+        "REQUIRED": "Password is required",
+        "MIN": "Minimum 6 characters"
+      },
+
+      "CONFIRM": {
+        "LABEL": "Confirm Password",
+        "PLACEHOLDER": "Confirm password",
+        "REQUIRED": "Confirm password is required",
+        "MISMATCH": "Passwords do not match"
+      },
+
+      "SUBMIT": {
+        "DEFAULT": "Create My Account",
+        "LOADING": "Creating account..."
+      },
+
+      "LOGIN": {
+        "TEXT": "Already have an account?",
+        "LINK": "Sign in here"
+      }
+    },
+    "LOGIN": {
+      "TITLE": "Welcome Back! 👋",
+      "SUBTITLE": "Sign in to your account",
+
+      "SOCIAL": {
+        "GOOGLE": "Continue with Google",
+        "FACEBOOK": "Continue with Facebook",
+        "DIVIDER": "or sign in with email"
+      },
+
+      "EMAIL": {
+        "LABEL": "Email Address",
+        "PLACEHOLDER": "Enter your email",
+        "REQUIRED": "Email is required",
+        "INVALID": "Invalid email format"
+      },
+
+      "PASSWORD": {
+        "LABEL": "Password",
+        "PLACEHOLDER": "Enter your password",
+        "FORGOT": "Forgot password?",
+        "REQUIRED": "Password is required",
+        "MIN": "Password must be at least 6 characters"
+      },
+
+      "SUBMIT": {
+        "DEFAULT": "Sign In",
+        "LOADING": "Loading..."
+      },
+
+      "REGISTER": {
+        "TEXT": "New here?",
+        "LINK": "Create account"
+      }
+    },
+    "FORGOT_PASSWORD": {
+      "TITLE": "Forgot Password 🔐",
+      "SUBTITLE": "Enter your email to receive a reset code",
+      "EMAIL_PLACEHOLDER": "Enter your email",
+      "SEND": "Send Code",
+      "SENDING": "Sending..."
+    },
+    "CALLBACK": {
+      "TITLE": "Signing you in",
+      "SUBTITLE": "Please wait while we securely log you into your account",
+      "STEPS": {
+        "AUTHENTICATING": "Authenticating",
+        "VERIFYING": "Verifying account",
+        "REDIRECTING": "Redirecting"
+      }
+    },
+    "HERO": {
+      "BADGE": "Fresh & Fast",
+      "TITLE_LINE1": "Order Your",
+      "TITLE_HIGHLIGHT": "Favorites",
+      "TITLE_LINE2": "in Minutes.",
+      "DESCRIPTION": "Thousands of delicious meals delivered straight to your door."
+    }
+  },
   "CUSTOMER": {
     "ADDRESSES": {
       "PLACEHOLDERS": {

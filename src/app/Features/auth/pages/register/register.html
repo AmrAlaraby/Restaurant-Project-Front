@@ -1,132 +1,183 @@
+<div class="auth-card">
 
-    <div class="auth-card">
+  <!-- Header -->
+  <div class="auth-card-header">
+    <h2 class="form-title">
+      {{ 'AUTH.REGISTER.TITLE' | translate }}
+    </h2>
 
-      <div class="auth-card-header">
-        <h2 class="form-title">Create Account 🎉</h2>
-        <p class="form-subtitle">Fill in the details below to get started</p>
-      </div>
+    <p class="form-subtitle">
+      {{ 'AUTH.REGISTER.SUBTITLE' | translate }}
+    </p>
+  </div>
 
-       <!-- Social Login -->
-        <div class="social-row">
-          <button class="social-btn" (click)="loginWithGoogle()">
-            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#EA4335" d="M5.26 9.77A7.23 7.23 0 0 1 12 4.8c1.73 0 3.3.63 4.52 1.66l3.37-3.37A11.99 11.99 0 0 0 12 .8C7.31.8 3.25 3.71 1.28 7.82l3.98 1.95Z"/><path fill="#34A853" d="M16.04 18.01A7.21 7.21 0 0 1 12 19.2c-3.02 0-5.61-1.85-6.74-4.51L1.27 16.6A11.99 11.99 0 0 0 12 23.2c3.1 0 6.07-1.14 8.3-3.2l-4.26-2Z"/><path fill="#FBBC05" d="M19.2 12c0-.72-.1-1.42-.27-2.08H12v3.93h4.04a3.85 3.85 0 0 1-1.66 2.55l4.26 2A11.94 11.94 0 0 0 19.2 12Z"/><path fill="#4285F4" d="M12 23.2c3.1 0 6.07-1.14 8.3-3.2l-4.26-2A7.21 7.21 0 0 1 12 19.2c-3.02 0-5.61-1.85-6.74-4.51L1.27 16.6A11.99 11.99 0 0 0 12 23.2Z"/></svg>
-            Continue with Google
-          </button>
-          <button class="social-btn" (click)="loginWithFacebook()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07Z"/></svg>
-            Continue with Facebook
-          </button>
+  <!-- Social -->
+  <div class="social-row">
+    <button class="social-btn" (click)="loginWithGoogle()">
+      <svg width="18" height="18" viewBox="0 0 24 24">
+        <path fill="#EA4335" d="M5.26 9.77A7.23 7.23 0 0 1 12 4.8c1.73 0 3.3.63 4.52 1.66l3.37-3.37A11.99 11.99 0 0 0 12 .8C7.31.8 3.25 3.71 1.28 7.82l3.98 1.95Z"/>
+        <path fill="#34A853" d="M16.04 18.01A7.21 7.21 0 0 1 12 19.2c-3.02 0-5.61-1.85-6.74-4.51L1.27 16.6A11.99 11.99 0 0 0 12 23.2c3.1 0 6.07-1.14 8.3-3.2l-4.26-2Z"/>
+        <path fill="#FBBC05" d="M19.2 12c0-.72-.1-1.42-.27-2.08H12v3.93h4.04a3.85 3.85 0 0 1-1.66 2.55l4.26 2A11.94 11.94 0 0 0 19.2 12Z"/>
+        <path fill="#4285F4" d="M12 23.2c3.1 0 6.07-1.14 8.3-3.2l-4.26-2A7.21 7.21 0 0 1 12 19.2c-3.02 0-5.61-1.85-6.74-4.51L1.27 16.6A11.99 11.99 0 0 0 12 23.2Z"/>
+      </svg>
+      {{ 'AUTH.REGISTER.SOCIAL.GOOGLE' | translate }}
+    </button>
+
+    <button class="social-btn" (click)="loginWithFacebook()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2">
+        <path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07Z"/>
+      </svg>
+      {{ 'AUTH.REGISTER.SOCIAL.FACEBOOK' | translate }}
+    </button>
+  </div>
+
+  <div class="divider">
+    <span>{{ 'AUTH.REGISTER.SOCIAL.DIVIDER' | translate }}</span>
+  </div>
+
+  <!-- Form -->
+  <form [formGroup]="registerForm" (ngSubmit)="submit()" novalidate>
+
+    <!-- Name -->
+    <div class="form-group">
+      <label class="form-label">
+        {{ 'AUTH.REGISTER.NAME.LABEL' | translate }}
+      </label>
+
+      <input
+        type="text"
+        class="form-input"
+        formControlName="name"
+        [placeholder]="'AUTH.REGISTER.NAME.PLACEHOLDER' | translate"
+        [class.invalid]="registerForm.get('name')?.touched && registerForm.get('name')?.invalid"
+      />
+
+      @if(registerForm.get('name')?.touched && registerForm.get('name')?.errors?.['required']){
+        <div class="field-error">
+          {{ 'AUTH.REGISTER.NAME.REQUIRED' | translate }}
         </div>
+      }
 
-        <div class="divider"><span>or sign up with email</span></div>
-
-
-      <form [formGroup]="registerForm" (ngSubmit)="submit()" novalidate>
-
-        <!-- Name -->
-        <div class="form-group">
-          <label class="form-label">Name</label>
-          <input
-            type="text"
-            class="form-input"
-            formControlName="name"
-            placeholder="John Doe"
-            [class.invalid]="registerForm.get('name')?.touched && registerForm.get('name')?.invalid"
-          />
-
-          @if(registerForm.get('name')?.touched && registerForm.get('name')?.errors?.['required']){
-            <div class="field-error">Name is required</div>
-          }
-
-          @if(registerForm.get('name')?.touched && registerForm.get('name')?.errors?.['maxlength']){
-            <div class="field-error">Name must be less than 100 characters</div>
-          }
+      @if(registerForm.get('name')?.touched && registerForm.get('name')?.errors?.['maxlength']){
+        <div class="field-error">
+          {{ 'AUTH.REGISTER.NAME.MAX' | translate }}
         </div>
-
-        <!-- Email -->
-        <div class="form-group">
-          <label class="form-label">Email</label>
-          <input
-            type="email"
-            class="form-input"
-            formControlName="email"
-            placeholder="john@example.com"
-            [class.invalid]="registerForm.get('email')?.touched && registerForm.get('email')?.invalid"
-          />
-
-          @if(registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['required']){
-            <div class="field-error">Email is required</div>
-          }
-
-          @if(registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['email']){
-            <div class="field-error">Invalid email format</div>
-          }
-        </div>
-
-        <!-- Password -->
-        <div class="form-group">
-          <label class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-input"
-            formControlName="password"
-            placeholder="Create password"
-            [class.invalid]="registerForm.get('password')?.touched && registerForm.get('password')?.invalid"
-          />
-
-          @if(registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['required']){
-            <div class="field-error">Password is required</div>
-          }
-
-          @if(registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['minlength']){
-            <div class="field-error">Minimum 6 characters</div>
-          }
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="form-group">
-          <label class="form-label">Confirm Password</label>
-          <input
-            type="password"
-            class="form-input"
-            formControlName="confirmPassword"
-            placeholder="Confirm password"
-            [class.invalid]="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid"
-          />
-
-          @if(registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.errors?.['required']){
-            <div class="field-error">Confirm password is required</div>
-          }
-
-          @if(registerForm.errors?.['passwordMismatch'] && registerForm.get('confirmPassword')?.touched){
-            <div class="field-error">Passwords do not match</div>
-          }
-        </div>
-
-        <!-- Server Error -->
-        @if(serverError()){
-          <div class="server-error">
-            {{ serverError() }}
-          </div>
-        }
-
-        <button
-          type="submit"
-          class="btn-submit"
-          [disabled]="isSubmitting() || registerForm.invalid"
-        >
-          @if(isSubmitting()){
-            <span>Creating account...</span>
-          } @else {
-            <span>Create My Account</span>
-          }
-        </button>
-
-      </form>
-
-      <p class="register-prompt">
-        Already have an account?
-        <a routerLink="/auth/login">Sign in here</a>
-      </p>
-
+      }
     </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label class="form-label">
+        {{ 'AUTH.REGISTER.EMAIL.LABEL' | translate }}
+      </label>
+
+      <input
+        type="email"
+        class="form-input"
+        formControlName="email"
+        [placeholder]="'AUTH.REGISTER.EMAIL.PLACEHOLDER' | translate"
+        [class.invalid]="registerForm.get('email')?.touched && registerForm.get('email')?.invalid"
+      />
+
+      @if(registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['required']){
+        <div class="field-error">
+          {{ 'AUTH.REGISTER.EMAIL.REQUIRED' | translate }}
+        </div>
+      }
+
+      @if(registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['email']){
+        <div class="field-error">
+          {{ 'AUTH.REGISTER.EMAIL.INVALID' | translate }}
+        </div>
+      }
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      <label class="form-label">
+        {{ 'AUTH.REGISTER.PASSWORD.LABEL' | translate }}
+      </label>
+
+      <input
+        type="password"
+        class="form-input"
+        formControlName="password"
+        [placeholder]="'AUTH.REGISTER.PASSWORD.PLACEHOLDER' | translate"
+        [class.invalid]="registerForm.get('password')?.touched && registerForm.get('password')?.invalid"
+      />
+
+      @if(registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['required']){
+        <div class="field-error">
+          {{ 'AUTH.REGISTER.PASSWORD.REQUIRED' | translate }}
+        </div>
+      }
+
+      @if(registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['minlength']){
+        <div class="field-error">
+          {{ 'AUTH.REGISTER.PASSWORD.MIN' | translate }}
+        </div>
+      }
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="form-group">
+      <label class="form-label">
+        {{ 'AUTH.REGISTER.CONFIRM.LABEL' | translate }}
+      </label>
+
+      <input
+        type="password"
+        class="form-input"
+        formControlName="confirmPassword"
+        [placeholder]="'AUTH.REGISTER.CONFIRM.PLACEHOLDER' | translate"
+        [class.invalid]="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid"
+      />
+
+      @if(registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.errors?.['required']){
+        <div class="field-error">
+          {{ 'AUTH.REGISTER.CONFIRM.REQUIRED' | translate }}
+        </div>
+      }
+
+      @if(registerForm.errors?.['passwordMismatch'] && registerForm.get('confirmPassword')?.touched){
+        <div class="field-error">
+          {{ 'AUTH.REGISTER.CONFIRM.MISMATCH' | translate }}
+        </div>
+      }
+    </div>
+
+    <!-- Server -->
+    @if(serverError()){
+      <div class="server-error">
+        {{ serverError() }}
+      </div>
+    }
+
+    <!-- Submit -->
+    <button
+      type="submit"
+      class="btn-submit"
+      [disabled]="isSubmitting() || registerForm.invalid"
+    >
+      @if(isSubmitting()){
+        <span>
+          {{ 'AUTH.REGISTER.SUBMIT.LOADING' | translate }}
+        </span>
+      } @else {
+        <span>
+          {{ 'AUTH.REGISTER.SUBMIT.DEFAULT' | translate }}
+        </span>
+      }
+    </button>
+
+  </form>
+
+  <!-- Login redirect -->
+  <p class="register-prompt">
+    {{ 'AUTH.REGISTER.LOGIN.TEXT' | translate }}
+    <a routerLink="/auth/login">
+      {{ 'AUTH.REGISTER.LOGIN.LINK' | translate }}
+    </a>
+  </p>
+
+</div>

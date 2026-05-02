@@ -2,8 +2,13 @@
 
   <div class="otp-card">
 
-    <h2 class="otp-title">Verify Your Code 🔐</h2>
-    <p class="otp-subtitle">Enter the 6-digit code sent to your email</p>
+    <h2 class="otp-title">
+      {{ 'AUTH.OTP.TITLE' | translate }} 🔐
+    </h2>
+
+    <p class="otp-subtitle">
+      {{ 'AUTH.OTP.SUBTITLE' | translate }}
+    </p>
 
     <div class="otp-inputs">
       <input maxlength="1" [(ngModel)]="otp[0]" (input)="move($event, 0)" />
@@ -16,9 +21,9 @@
 
     <button class="otp-btn" (click)="verifyCode()" [disabled]="loading">
       @if(!loading){
-        Verify Code
+        {{ 'AUTH.OTP.VERIFY' | translate }}
       } @else {
-        Verifying...
+        {{ 'AUTH.OTP.VERIFYING' | translate }}
       }
     </button>
 

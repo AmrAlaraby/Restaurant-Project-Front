@@ -4,10 +4,11 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { RegisterationRequestInterface } from '../../../../Core/Models/AuthModels/registeration-request-interface';
 import { environment } from '../../../../../environments/environment';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink,TranslatePipe],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })

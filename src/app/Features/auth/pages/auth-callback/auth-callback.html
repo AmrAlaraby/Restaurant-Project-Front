@@ -6,27 +6,37 @@
     <div class="loader"></div>
 
     <!-- Title -->
-    <h2>Signing you in</h2>
+    <h2>
+      {{ 'AUTH.CALLBACK.TITLE' | translate }}
+    </h2>
 
     <!-- Subtitle -->
-    <p>Please wait while we securely log you into your account</p>
+    <p>
+      {{ 'AUTH.CALLBACK.SUBTITLE' | translate }}
+    </p>
 
     <!-- Steps -->
     <div class="steps">
 
       <div class="step active">
         <span class="dot"></span>
-        <span>Authenticating</span>
+        <span>
+          {{ 'AUTH.CALLBACK.STEPS.AUTHENTICATING' | translate }}
+        </span>
       </div>
 
       <div class="step">
         <span class="dot"></span>
-        <span>Verifying account</span>
+        <span>
+          {{ 'AUTH.CALLBACK.STEPS.VERIFYING' | translate }}
+        </span>
       </div>
 
       <div class="step">
         <span class="dot"></span>
-        <span>Redirecting</span>
+        <span>
+          {{ 'AUTH.CALLBACK.STEPS.REDIRECTING' | translate }}
+        </span>
       </div>
 
     </div>

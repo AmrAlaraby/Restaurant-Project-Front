@@ -3,13 +3,21 @@
   <!-- Left Panel -->
   <div class="auth-hero">
     <div class="hero-content">
-      <div class="hero-badge">🍔 Fresh & Fast</div>
+
+      <div class="hero-badge">
+        🍔 {{ 'AUTH.HERO.BADGE' | translate }}
+      </div>
+
       <h1 class="hero-title">
-        Order Your<br><span>Favorites</span><br>in Minutes.
+        {{ 'AUTH.HERO.TITLE_LINE1' | translate }}<br>
+        <span>{{ 'AUTH.HERO.TITLE_HIGHLIGHT' | translate }}</span><br>
+        {{ 'AUTH.HERO.TITLE_LINE2' | translate }}
       </h1>
+
       <p class="hero-desc">
-        Thousands of delicious meals delivered straight to your door.
+        {{ 'AUTH.HERO.DESCRIPTION' | translate }}
       </p>
+
     </div>
   </div>
 
@@ -19,3 +27,5 @@
   </div>
 
 </div>
+
+<app-lang-switch></app-lang-switch>

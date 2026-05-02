@@ -1,55 +1,29 @@
-<!-- <div class="success-page">
-
-    <div class="success-card">
-
-        <div class="check-wrapper">
-            <svg class="check-ring" viewBox="0 0 120 120">
-                <circle class="ring-bg" cx="60" cy="60" r="54" />
-                <circle class="ring-fill" cx="60" cy="60" r="54" />
-            </svg>
-            <svg class="check-icon" viewBox="0 0 52 52">
-                <polyline class="check-mark" points="14,27 24,38 38,16" />
-            </svg>
-        </div>
-
-        <h1 class="success-title">
-            {{ 'ORDER_SUCCESS.TITLE' | translate }}
-        </h1>
-
-        <p class="success-subtitle">
-            {{ 'ORDER_SUCCESS.SUBTITLE' | translate }}
-        </p>
-
-        <button class="back-btn" (click)="goToMenu()">
-            {{ 'ORDER_SUCCESS.BUTTON' | translate }}
-        </button>
-
-    </div>
-
-</div> -->
-
 <div class="success-page">
 
-    <div class="success-card">
+  <div class="success-card">
 
-        <div class="check-wrapper">
-            <svg class="check-ring" viewBox="0 0 120 120">
-                <circle class="ring-bg" cx="60" cy="60" r="54" />
-                <circle class="ring-fill" cx="60" cy="60" r="54" />
-            </svg>
-            <svg class="check-icon" viewBox="0 0 52 52">
-                <polyline class="check-mark" points="14,27 24,38 38,16" />
-            </svg>
-        </div>
-
-        <h1 class="success-title">Order Placed Successfully!</h1>
-
-        <p class="success-subtitle">Your order has been sent to the kitchen and is being prepared.</p>
-
-        <button class="back-btn" (click)="goToHome()">
-            Back to Home
-        </button>
-
+    <div class="check-wrapper">
+      <svg class="check-ring" viewBox="0 0 120 120">
+        <circle class="ring-bg" cx="60" cy="60" r="54" />
+        <circle class="ring-fill" cx="60" cy="60" r="54" />
+      </svg>
+      <svg class="check-icon" viewBox="0 0 52 52">
+        <polyline class="check-mark" points="14,27 24,38 38,16" />
+      </svg>
     </div>
+
+    <h1 class="success-title">
+      {{ 'ORDER_SUCCESS.TITLE' | translate }}
+    </h1>
+
+    <p class="success-subtitle">
+      {{ 'ORDER_SUCCESS.SUBTITLE' | translate }}
+    </p>
+
+    <button class="back-btn" (click)="goToHome()">
+      {{ 'ORDER_SUCCESS.BUTTON' | translate }}
+    </button>
+
+  </div>
 
 </div>

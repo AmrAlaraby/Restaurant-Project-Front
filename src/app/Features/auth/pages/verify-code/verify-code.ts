@@ -3,10 +3,11 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-verify-code',
-  imports: [FormsModule],
+  imports: [FormsModule, TranslatePipe],
   templateUrl: './verify-code.html',
   styleUrl: './verify-code.scss',
 })

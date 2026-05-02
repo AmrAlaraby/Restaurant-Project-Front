@@ -1,121 +1,151 @@
+<div class="auth-card">
 
-    <div class="auth-card">
-      <div class="auth-card-header">
-        <h2 class="form-title">Welcome Back! 👋</h2>
-        <p class="form-subtitle">Sign in to your account</p>
+  <!-- Header -->
+  <div class="auth-card-header">
+    <h2 class="form-title">
+      {{ 'AUTH.LOGIN.TITLE' | translate }}
+    </h2>
+
+    <p class="form-subtitle">
+      {{ 'AUTH.LOGIN.SUBTITLE' | translate }}
+    </p>
+  </div>
+
+  <!-- Social Login -->
+  <div class="social-row">
+    <button class="social-btn" (click)="loginWithGoogle()">
+      <svg width="18" height="18" viewBox="0 0 24 24">
+        <path fill="#EA4335" d="M5.26 9.77A7.23 7.23 0 0 1 12 4.8c1.73 0 3.3.63 4.52 1.66l3.37-3.37A11.99 11.99 0 0 0 12 .8C7.31.8 3.25 3.71 1.28 7.82l3.98 1.95Z"/>
+        <path fill="#34A853" d="M16.04 18.01A7.21 7.21 0 0 1 12 19.2c-3.02 0-5.61-1.85-6.74-4.51L1.27 16.6A11.99 11.99 0 0 0 12 23.2c3.1 0 6.07-1.14 8.3-3.2l-4.26-2Z"/>
+        <path fill="#FBBC05" d="M19.2 12c0-.72-.1-1.42-.27-2.08H12v3.93h4.04a3.85 3.85 0 0 1-1.66 2.55l4.26 2A11.94 11.94 0 0 0 19.2 12Z"/>
+        <path fill="#4285F4" d="M12 23.2c3.1 0 6.07-1.14 8.3-3.2l-4.26-2A7.21 7.21 0 0 1 12 19.2c-3.02 0-5.61-1.85-6.74-4.51L1.27 16.6A11.99 11.99 0 0 0 12 23.2Z"/>
+      </svg>
+      {{ 'AUTH.LOGIN.SOCIAL.GOOGLE' | translate }}
+    </button>
+
+    <button class="social-btn" (click)="loginWithFacebook()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2">
+        <path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07Z"/>
+      </svg>
+      {{ 'AUTH.LOGIN.SOCIAL.FACEBOOK' | translate }}
+    </button>
+  </div>
+
+  <div class="divider">
+    <span>{{ 'AUTH.LOGIN.SOCIAL.DIVIDER' | translate }}</span>
+  </div>
+
+  <!-- Form -->
+  <form [formGroup]="loginForm" (ngSubmit)="submit()">
+
+    <!-- Email -->
+    <div class="form-group">
+      <label class="form-label">
+        {{ 'AUTH.LOGIN.EMAIL.LABEL' | translate }}
+      </label>
+
+      <div class="input-wrapper">
+        <input
+          type="email"
+          formControlName="email"
+          class="form-input"
+          [placeholder]="'AUTH.LOGIN.EMAIL.PLACEHOLDER' | translate"
+          [class.is-invalid]="f['email'].touched && f['email'].invalid"
+          [class.is-valid]="f['email'].touched && f['email'].valid"
+        />
       </div>
 
-       <!-- Social Login -->
-        <div class="social-row">
-          <button class="social-btn" (click)="loginWithGoogle()">
-            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#EA4335" d="M5.26 9.77A7.23 7.23 0 0 1 12 4.8c1.73 0 3.3.63 4.52 1.66l3.37-3.37A11.99 11.99 0 0 0 12 .8C7.31.8 3.25 3.71 1.28 7.82l3.98 1.95Z"/><path fill="#34A853" d="M16.04 18.01A7.21 7.21 0 0 1 12 19.2c-3.02 0-5.61-1.85-6.74-4.51L1.27 16.6A11.99 11.99 0 0 0 12 23.2c3.1 0 6.07-1.14 8.3-3.2l-4.26-2Z"/><path fill="#FBBC05" d="M19.2 12c0-.72-.1-1.42-.27-2.08H12v3.93h4.04a3.85 3.85 0 0 1-1.66 2.55l4.26 2A11.94 11.94 0 0 0 19.2 12Z"/><path fill="#4285F4" d="M12 23.2c3.1 0 6.07-1.14 8.3-3.2l-4.26-2A7.21 7.21 0 0 1 12 19.2c-3.02 0-5.61-1.85-6.74-4.51L1.27 16.6A11.99 11.99 0 0 0 12 23.2Z"/></svg>
-            Continue with Google
-          </button>
-          <button class="social-btn" (click)="loginWithFacebook()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07Z"/></svg>
-            Continue with Facebook
-          </button>
+      @if(f['email'].touched && f['email'].errors?.['required']){
+        <div class="field-error visible">
+          {{ 'AUTH.LOGIN.EMAIL.REQUIRED' | translate }}
         </div>
+      }
 
-        <div class="divider"><span>or sign in with email</span></div>
-
-
-      <form [formGroup]="loginForm" (ngSubmit)="submit()">
-
-        <!-- Email -->
-        <div class="form-group">
-          <label class="form-label">Email Address</label>
-
-          <div class="input-wrapper">
-            <input
-              type="email"
-              formControlName="email"
-              class="form-input"
-              placeholder="Enter your email"
-              [class.is-invalid]="f['email'].touched && f['email'].invalid"
-              [class.is-valid]="f['email'].touched && f['email'].valid"
-            />
-          </div>
-
-          @if(f['email'].touched && f['email'].errors?.['required']){
-            <div class="field-error visible">
-              Email is required
-            </div>
-          }
-
-          @if(f['email'].touched && f['email'].errors?.['email']){
-            <div class="field-error visible">
-              Invalid email format
-            </div>
-          }
+      @if(f['email'].touched && f['email'].errors?.['email']){
+        <div class="field-error visible">
+          {{ 'AUTH.LOGIN.EMAIL.INVALID' | translate }}
         </div>
+      }
+    </div>
 
-        <!-- Password -->
-        <div class="form-group">
-          <label class="form-label">
-            Password
-            <a
-  [routerLink]="['/auth/forgot-password']"
-  [queryParams]="{ email: f['email'].value }"
-  class="forgot-link"
->forgot password</a>
-          </label>
+    <!-- Password -->
+    <div class="form-group">
+      <label class="form-label">
+        {{ 'AUTH.LOGIN.PASSWORD.LABEL' | translate }}
 
-          <div class="input-wrapper">
-            <input
-              [type]="showPassword ? 'text' : 'password'"
-              formControlName="password"
-              class="form-input"
-              placeholder="Enter your password"
-              [class.is-invalid]="f['password'].touched && f['password'].invalid"
-              [class.is-valid]="f['password'].touched && f['password'].valid"
-            />
+        <a
+          [routerLink]="['/auth/forgot-password']"
+          [queryParams]="{ email: f['email'].value }"
+          class="forgot-link"
+        >
+          {{ 'AUTH.LOGIN.PASSWORD.FORGOT' | translate }}
+        </a>
+      </label>
 
-            <button
-              type="button"
-              class="toggle-pass"
-              (click)="togglePassword()"
-            >
-              👁
-            </button>
-          </div>
-
-          @if(f['password'].touched && f['password'].errors?.['required']){
-            <div class="field-error visible">
-              Password is required
-            </div>
-          }
-
-          @if(f['password'].touched && f['password'].errors?.['minlength']){
-            <div class="field-error visible">
-              Password must be at least 6 characters
-            </div>
-          }
-        </div>
-
-        <!-- Server Error -->
-        @if(serverError){
-          <div class="server-error">
-            {{ serverError }}
-          </div>
-        }
+      <div class="input-wrapper">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          formControlName="password"
+          class="form-input"
+          [placeholder]="'AUTH.LOGIN.PASSWORD.PLACEHOLDER' | translate"
+          [class.is-invalid]="f['password'].touched && f['password'].invalid"
+          [class.is-valid]="f['password'].touched && f['password'].valid"
+        />
 
         <button
-          type="submit"
-          class="btn-submit"
-          [disabled]="isSubmitting"
+          type="button"
+          class="toggle-pass"
+          (click)="togglePassword()"
         >
-          @if(!isSubmitting){
-            <span class="btn-text">Sign In</span>
-          } @else {
-            <span class="btn-loader">Loading...</span>
-          }
+          👁
         </button>
+      </div>
 
-      </form>
+      @if(f['password'].touched && f['password'].errors?.['required']){
+        <div class="field-error visible">
+          {{ 'AUTH.LOGIN.PASSWORD.REQUIRED' | translate }}
+        </div>
+      }
 
-      <p class="register-prompt">
-        New here?
-        <a routerLink="/auth/register">Create account</a>
-      </p>
+      @if(f['password'].touched && f['password'].errors?.['minlength']){
+        <div class="field-error visible">
+          {{ 'AUTH.LOGIN.PASSWORD.MIN' | translate }}
+        </div>
+      }
     </div>
+
+    <!-- Server Error -->
+    @if(serverError){
+      <div class="server-error">
+        {{ serverError }}
+      </div>
+    }
+
+    <!-- Submit -->
+    <button
+      type="submit"
+      class="btn-submit"
+      [disabled]="isSubmitting"
+    >
+      @if(!isSubmitting){
+        <span class="btn-text">
+          {{ 'AUTH.LOGIN.SUBMIT.DEFAULT' | translate }}
+        </span>
+      } @else {
+        <span class="btn-loader">
+          {{ 'AUTH.LOGIN.SUBMIT.LOADING' | translate }}
+        </span>
+      }
+    </button>
+
+  </form>
+
+  <!-- Register -->
+  <p class="register-prompt">
+    {{ 'AUTH.LOGIN.REGISTER.TEXT' | translate }}
+    <a routerLink="/auth/register">
+      {{ 'AUTH.LOGIN.REGISTER.LINK' | translate }}
+    </a>
+  </p>
+
+</div>
