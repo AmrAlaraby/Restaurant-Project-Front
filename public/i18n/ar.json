@@ -1,4 +1,137 @@
 {
+  "ORDER_SUCCESS": {
+  "TITLE": "تم إرسال الطلب بنجاح!",
+  "SUBTITLE": "تم إرسال طلبك إلى المطبخ وجاري تحضيره الآن.",
+  "BUTTON": "العودة للرئيسية"
+},
+  "AUTH": {
+    "OTP": {
+    "TITLE": "تحقق من الكود",
+    "SUBTITLE": "أدخل الكود المكون من 6 أرقام المرسل إلى بريدك الإلكتروني",
+    "VERIFY": "تأكيد الكود",
+    "VERIFYING": "جاري التحقق..."
+  },
+    "RESET": {
+    "TITLE": "إعادة تعيين كلمة المرور",
+    "SUBTITLE": "أنشئ كلمة مرور قوية جديدة لحسابك",
+    "NEW_PASSWORD": "كلمة المرور الجديدة",
+    "CONFIRM_PASSWORD": "تأكيد كلمة المرور",
+    "PLACEHOLDER_PASSWORD": "أدخل كلمة المرور الجديدة",
+    "PLACEHOLDER_CONFIRM": "أكد كلمة المرور",
+    "STRENGTH": "قوة {{value}}%",
+    "BUTTON": "إعادة تعيين كلمة المرور",
+    "PROCESSING": "جاري المعالجة...",
+    "BACK": "العودة لتسجيل الدخول"
+  }
+,
+    "REGISTER": {
+      "TITLE": "إنشاء حساب 🎉",
+      "SUBTITLE": "أدخل بياناتك للبدء",
+
+      "SOCIAL": {
+        "GOOGLE": "المتابعة باستخدام جوجل",
+        "FACEBOOK": "المتابعة باستخدام فيسبوك",
+        "DIVIDER": "أو سجل باستخدام البريد الإلكتروني"
+      },
+
+      "NAME": {
+        "LABEL": "الاسم",
+        "PLACEHOLDER": "محمد أحمد",
+        "REQUIRED": "الاسم مطلوب",
+        "MAX": "يجب ألا يتجاوز الاسم 100 حرف"
+      },
+
+      "EMAIL": {
+        "LABEL": "البريد الإلكتروني",
+        "PLACEHOLDER": "example@email.com",
+        "REQUIRED": "البريد الإلكتروني مطلوب",
+        "INVALID": "صيغة البريد الإلكتروني غير صحيحة"
+      },
+
+      "PASSWORD": {
+        "LABEL": "كلمة المرور",
+        "PLACEHOLDER": "أنشئ كلمة مرور",
+        "REQUIRED": "كلمة المرور مطلوبة",
+        "MIN": "يجب أن تكون 6 أحرف على الأقل"
+      },
+
+      "CONFIRM": {
+        "LABEL": "تأكيد كلمة المرور",
+        "PLACEHOLDER": "أعد إدخال كلمة المرور",
+        "REQUIRED": "تأكيد كلمة المرور مطلوب",
+        "MISMATCH": "كلمتا المرور غير متطابقتين"
+      },
+
+      "SUBMIT": {
+        "DEFAULT": "إنشاء الحساب",
+        "LOADING": "جاري إنشاء الحساب..."
+      },
+
+      "LOGIN": {
+        "TEXT": "لديك حساب بالفعل؟",
+        "LINK": "تسجيل الدخول"
+      }
+    },
+    "LOGIN": {
+      "TITLE": "مرحباً بعودتك 👋",
+      "SUBTITLE": "قم بتسجيل الدخول إلى حسابك",
+
+      "SOCIAL": {
+        "GOOGLE": "المتابعة باستخدام جوجل",
+        "FACEBOOK": "المتابعة باستخدام فيسبوك",
+        "DIVIDER": "أو سجل باستخدام البريد الإلكتروني"
+      },
+
+      "EMAIL": {
+        "LABEL": "البريد الإلكتروني",
+        "PLACEHOLDER": "أدخل بريدك الإلكتروني",
+        "REQUIRED": "البريد الإلكتروني مطلوب",
+        "INVALID": "صيغة البريد الإلكتروني غير صحيحة"
+      },
+
+      "PASSWORD": {
+        "LABEL": "كلمة المرور",
+        "PLACEHOLDER": "أدخل كلمة المرور",
+        "FORGOT": "نسيت كلمة المرور؟",
+        "REQUIRED": "كلمة المرور مطلوبة",
+        "MIN": "يجب أن تكون كلمة المرور 6 أحرف على الأقل"
+      },
+
+      "SUBMIT": {
+        "DEFAULT": "تسجيل الدخول",
+        "LOADING": "جاري التحميل..."
+      },
+
+      "REGISTER": {
+        "TEXT": "جديد هنا؟",
+        "LINK": "إنشاء حساب"
+      }
+    },
+    "FORGOT_PASSWORD": {
+      "TITLE": "نسيت كلمة المرور 🔐",
+      "SUBTITLE": "أدخل بريدك الإلكتروني لاستلام كود إعادة التعيين",
+      "EMAIL_PLACEHOLDER": "أدخل بريدك الإلكتروني",
+      "SEND": "إرسال الكود",
+      "SENDING": "جاري الإرسال..."
+    },
+    "CALLBACK": {
+      "TITLE": "جاري تسجيل الدخول",
+      "SUBTITLE": "يرجى الانتظار بينما نقوم بتسجيل دخولك بشكل آمن",
+      "STEPS": {
+        "AUTHENTICATING": "جاري التحقق من الهوية",
+        "VERIFYING": "جاري التحقق من الحساب",
+        "REDIRECTING": "جاري التحويل"
+      }
+    }
+,
+    "HERO": {
+      "BADGE": "طازج وسريع",
+      "TITLE_LINE1": "اطلب",
+      "TITLE_HIGHLIGHT": "وجباتك المفضلة",
+      "TITLE_LINE2": "في دقائق.",
+      "DESCRIPTION": "آلاف الوجبات اللذيذة تصلك حتى باب منزلك."
+    }
+  },
   "CUSTOMER": {
     "ADDRESSES": {
       "PLACEHOLDERS": {
@@ -393,10 +526,286 @@
       "NONOTIFICATION": "لا توجد إشعارات"
     }
   },
-
   "ADMIN": {
+     "USERS": {
+      "ADD": {
+        "TITLE": "إضافة مستخدم جديد",
+
+        "FIELDS": {
+          "NAME": "الاسم بالكامل",
+          "EMAIL": "البريد الإلكتروني",
+          "ROLE": "الدور",
+          "BRANCH": "الفرع"
+        },
+
+        "PLACEHOLDERS": {
+          "NAME": "أحمد حسن",
+          "EMAIL": "ahmed@rms.com",
+          "ROLE": "اختر الدور",
+          "NO_BRANCH": "بدون فرع"
+        },
+
+        "BUTTONS": {
+          "CANCEL": "إلغاء",
+          "CREATE": "إنشاء مستخدم",
+          "SAVING": "جارٍ الحفظ..."
+        }
+      },
+      "EDIT": {
+        "TITLE": "تعديل المستخدم",
+
+        "FIELDS": {
+          "NAME": "الاسم بالكامل",
+          "EMAIL": "البريد الإلكتروني",
+          "ROLE": "الدور",
+          "BRANCH": "الفرع"
+        },
+
+        "PLACEHOLDERS": {
+          "NAME": "أدخل الاسم",
+          "EMAIL": "أدخل البريد الإلكتروني",
+          "ROLE": "اختر الدور",
+          "NO_BRANCH": "بدون فرع"
+        },
+
+        "BUTTONS": {
+          "CANCEL": "إلغاء",
+          "SAVE": "حفظ التغييرات",
+          "SAVING": "جارٍ الحفظ..."
+        }
+      },
+      "DETAILS": {
+        "TITLE": "تفاصيل المستخدم",
+        "LOADING": "جارٍ التحميل...",
+
+        "STATUS": {
+          "ACTIVE": "نشط",
+          "INACTIVE": "غير نشط"
+        },
+
+        "INFO": {
+          "EMAIL": "البريد الإلكتروني",
+          "BRANCH": "الفرع",
+          "JOINED": "تاريخ الانضمام",
+          "ROLE": "الدور"
+        },
+
+        "SECTIONS": {
+          "ORDERS": "الطلبات",
+          "DELIVERIES": "التوصيلات"
+        },
+
+        "ORDERS": {
+          "TYPE": "النوع",
+          "STATUS": "الحالة",
+          "AMOUNT": "المبلغ",
+          "DATE": "التاريخ"
+        },
+
+        "DELIVERIES": {
+          "STATUS": "الحالة",
+          "ADDRESS": "العنوان",
+          "CASH": "المبلغ المحصل",
+          "DATE": "تاريخ التوصيل"
+        }
+      },
+      "NOT_FOUND":"لم يتم العثور على مستخدمين.",
+      "ACTIVE":"مفعل",
+      "IN_ACTIVE":"غير مفعل",
+      "ALL_BRANCHES":"كل الفروع",
+      "TITLE": "الموظفين والمستخدمين",
+      "SUBTITLE": "إدارة الحسابات والصلاحيات",
+
+      "BUTTONS": {
+        "ADD": "+ إضافة مستخدم"
+      }
+    },
+    "INGREDIENTS": {
+      "TITLE": "المكونات",
+      "LOADING": "جارٍ تحميل المكونات...",
+      "EMPTY": "لا توجد مكونات 🍃",
+      "ITEMS": "عنصر",
+
+      "TABLE": {
+        "NAME": "الاسم",
+        "UNIT": "الوحدة",
+        "ACTIONS": "الإجراءات"
+      },
+
+      "BUTTONS": {
+        "ADD": "إضافة عنصر",
+        "DELETE": "حذف",
+        "CANCEL": "إلغاء",
+        "SAVE": "حفظ"
+      },
+
+      "MODAL": {
+        "TITLE": "إضافة مكون جديد",
+        "FIELDS": {
+          "NAME": "الاسم",
+          "ARABIC_NAME": "الاسم بالعربية",
+          "UNIT": "الوحدة"
+        }
+      }
+    },
+    "CATEGORIES": {
+      "MODAL": {
+
+        "ADD": {
+          "TITLE": "إضافة تصنيف",
+          "SUBTITLE": "أدخل اسم التصنيف الجديد"
+        },
+
+        "EDIT": {
+          "TITLE": "تعديل التصنيف",
+          "SUBTITLE": "قم بتحديث اسم التصنيف"
+        },
+
+        "DELETE": {
+          "TITLE": "حذف التصنيف",
+          "SUBTITLE": "لا يمكن التراجع عن هذا الإجراء.",
+          "MESSAGE": "هل أنت متأكد أنك تريد حذف هذا التصنيف؟ قد تتأثر جميع البيانات المرتبطة به."
+        },
+
+        "FIELDS": {
+          "NAME": "اسم التصنيف",
+          "ARABIC_NAME": "الاسم بالعربية"
+        },
+
+        "PLACEHOLDERS": {
+          "ARABIC_NAME": "مثال: مقبلات، حلويات…",
+          "NAME": "مثال: Appetizers, Desserts…"
+        },
+
+        "BUTTONS": {
+          "CANCEL": "إلغاء",
+          "ADD": "إضافة",
+          "SAVE": "حفظ التغييرات",
+          "DELETE": "حذف"
+        }
+      },
+      "TITLE": "تصنيفات القائمة",
+      "LOADING": "جارٍ تحميل التصنيفات…",
+
+      "EMPTY": {
+        "TITLE": "لا توجد تصنيفات",
+        "SUBTITLE": "أضف أول تصنيف للبدء."
+      },
+
+      "TABLE": {
+        "CATEGORY": "التصنيف",
+        "ITEMS": "العناصر",
+        "ACTIONS": "الإجراءات"
+      },
+
+      "BUTTONS": {
+        "ADD": "إضافة تصنيف",
+        "EDIT": "تعديل",
+        "DELETE": "حذف"
+      }
+    },
+    "STOCK_MANAGEMENT": {
+      "TITLE": "إدارة المخزون",
+      "LOADING": "جارٍ التحميل...",
+      "EMPTY": "لا توجد بيانات",
+
+      "TABLE": {
+        "INGREDIENT": "المكون",
+        "AVAILABLE_QTY": "الكمية المتاحة",
+        "ACTIONS": "الإجراءات"
+      },
+
+      "BUTTONS": {
+        "VIEW": "عرض",
+        "CANCEL": "إلغاء",
+        "SAVE": "حفظ التغييرات"
+      },
+
+      "PAGINATION": {
+        "SHOWING": "عرض",
+        "OF": "من",
+        "ITEMS": "عنصر"
+      },
+
+      "MODAL": {
+        "TITLE": "تفاصيل المخزون",
+        "BRANCH": "الفرع",
+        "INGREDIENT": "المكون",
+        "AVAILABLE_QTY": "الكمية المتاحة",
+        "LOW_THRESHOLD": "حد التنبيه المنخفض"
+      }
+    },
+    "PAYMENT":{
+      "TRANSACTIONS": {
+        "TITLE": "آخر المعاملات",
+        "TOTAL_SUFFIX": "إجمالي",
+
+        "BRANCHES": {
+          "ALL": "كل الفروع"
+        },
+
+        "FILTERS": {
+          "ORDER_ID_PLACEHOLDER": "رقم الطلب...",
+          "METHOD_ALL": "كل طرق الدفع",
+          "STATUS_ALL": "كل الحالات"
+        },
+
+        "METHODS": {
+          "CASH": "نقدي",
+          "CARD": "بطاقة",
+          "INSTA_PAY": "إنستا باي",
+          "WALLET": "محفظة"
+        },
+
+        "STATUS": {
+          "PAID": "مدفوع",
+          "PENDING": "قيد الانتظار",
+          "REFUNDED": "مسترجع",
+          "FAILED": "فاشل"
+        },
+
+        "TABLE": {
+          "ORDER": "الطلب",
+          "METHOD": "الطريقة",
+          "STATUS": "الحالة",
+          "AMOUNT": "المبلغ"
+        },
+
+        "EMPTY": "لا توجد معاملات",
+
+        "ERROR": {
+          "RETRY": "إعادة المحاولة"
+        }
+      },
+      "TITLE":"منصه الحسابات",
+      "AWAITING_PAYMENTS":{
+        "FILTERS":{
+          "ALL_BRANCHES":"كل الفروع"
+        }
+      }
+    },
+    "MENU_FILTER": {
+      "SEARCH": "ابحث في عناصر القائمة...",
+      "ALL_CATEGORIES": "كل الفئات",
+      "ALL_BRANCHES": "كل الفروع",
+      "ALL_STATUS": "كل الحالات",
+      "AVAILABLE": "متاح",
+      "UNAVAILABLE": "غير متاح",
+      "DEFAULT_SORT": "الترتيب الافتراضي",
+      "PRICE_ASC": "السعر تصاعدي",
+      "PRICE_DESC": "السعر تنازلي",
+      "RESET": "إعادة ضبط"
+    },
     "MENU_ITEMS": {
+      "TOTAL": "إجمالي العناصر",
+    "AVAILABLE": "متاح",
+    "UNAVAILABLE": "غير متاح",
       "CARD": {
+         "VIEW": "عرض",
+      "EDIT": "تعديل",
+      "DELETE": "حذف",
+      "ENABLE": "تفعيل",
+      "DISABLE": "إيقاف",
         "AVAILABLE": "متاح",
         "UNAVAILABLE": "غير متاح",
         "CURRENCY": "جنيه",
@@ -616,6 +1025,38 @@
     },
 
     "BRANCHES": {
+      "TITLE": "إدارة الفروع",
+
+      "SEARCH": {
+        "PLACEHOLDER": "ابحث عن الفروع بالاسم..."
+      },
+
+      "RESULTS": {
+        "SINGLE": "فرع",
+        "PLURAL": "فروع",
+        "FOR": "لـ"
+      },
+
+      "STATUS": {
+        "ACTIVE": "نشط",
+        "INACTIVE": "غير نشط"
+      },
+
+      "STATS": {
+        "TABLES": "طاولات",
+        "STAFF": "طاقم العمل"
+      },
+
+      "EMPTY": {
+        "TITLE": "لا توجد فروع"
+      },
+
+      "BUTTONS": {
+        "ADD": "إضافة فرع",
+        "ADD_NEW": "إضافة فرع جديد",
+        "MANAGE": "إدارة الفرع",
+        "RETRY": "إعادة المحاولة"
+      },
       "BACK": "الفروع",
       "NEW_BRANCH": "فرع جديد",
       "CANCEL": "إلغاء",
@@ -962,6 +1403,8 @@
 
   "DRIVER": {
     "DELIVERY_DETAILS": {
+      "CURRENCY": "ج.م",
+      "NA": "—",
       "LOADING": "جاري التحميل...",
       "ORDER": "طلب",
       "INFO": "بيانات التوصيل",

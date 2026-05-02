@@ -15,9 +15,9 @@
   <!-- Branches -->
   <div class="branches">
     <select [(ngModel)]="selectedBranchId" (ngModelChange)="selectBranch($event)">
-      <option [ngValue]="null">All Branches</option>
+      <option [ngValue]="null">{{ 'ADMIN.USERS.ALL_BRANCHES' | translate }}</option>
       @for (branch of branches; track branch.id) {
-        <option [ngValue]="branch.id">{{ branch.name }}</option>
+        <option [ngValue]="branch.id">{{ getItemName(branch) }}</option>
       }
     </select>
   </div>
@@ -28,14 +28,14 @@
       (click)="selectStatus(true)"
       [class.active]="isActive"
     >
-      Active
+      {{ 'ADMIN.USERS.ACTIVE' | translate }}
     </button>
 
     <button
       (click)="selectStatus(false)"
       [class.active]="!isActive"
     >
-      Inactive
+      {{ 'ADMIN.USERS.IN_ACTIVE' | translate }}
     </button>
   </div>
 

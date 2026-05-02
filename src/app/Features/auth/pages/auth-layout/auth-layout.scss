@@ -33,15 +33,15 @@
   padding: 0;
 }
 
-html,
-body {
-  height: 100%;
-  font-family: var(--font);
-  background: var(--cream);
-  color: var(--black);
-  font-size: 15px;
-  line-height: 1.6;
-}
+// html,
+// body {
+//   // height: 100%;
+//   // font-family: var(--font);
+//   // background: var(--cream);
+//   // color: var(--black);
+//   // font-size: 15px;
+//   // line-height: 1.6;
+// }
 
 /* ===== NAVBAR ===== */
 .auth-navbar {
@@ -776,3 +776,4 @@ label {
   opacity: 0.6;
   cursor: not-allowed;
 }
+

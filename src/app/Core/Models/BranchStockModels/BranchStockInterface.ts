@@ -2,6 +2,7 @@ export interface BranchStockInterface {
   id: number;
   branchId: number;
   branchName?: string;
+  branchArabicName?: string;
   ingredientId: number;
   ingredientName?: string;
   ingredientArabicName?: string;

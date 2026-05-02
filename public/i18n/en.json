@@ -1,4 +1,135 @@
 {
+  "ORDER_SUCCESS": {
+  "TITLE": "Order Placed Successfully!",
+  "SUBTITLE": "Your order has been sent to the kitchen and is being prepared.",
+  "BUTTON": "Back to Home"
+},
+  "AUTH": {
+    "OTP": {
+    "TITLE": "Verify Your Code",
+    "SUBTITLE": "Enter the 6-digit code sent to your email",
+    "VERIFY": "Verify Code",
+    "VERIFYING": "Verifying..."
+  },
+    "RESET": {
+    "TITLE": "Reset Password",
+    "SUBTITLE": "Create a new strong password for your account",
+    "NEW_PASSWORD": "New Password",
+    "CONFIRM_PASSWORD": "Confirm Password",
+    "PLACEHOLDER_PASSWORD": "Enter new password",
+    "PLACEHOLDER_CONFIRM": "Confirm password",
+    "STRENGTH": "{{value}}% strong",
+    "BUTTON": "Reset Password",
+    "PROCESSING": "Processing...",
+    "BACK": "Back to login"
+  },
+    "REGISTER": {
+      "TITLE": "Create Account 🎉",
+      "SUBTITLE": "Fill in the details below to get started",
+
+      "SOCIAL": {
+        "GOOGLE": "Continue with Google",
+        "FACEBOOK": "Continue with Facebook",
+        "DIVIDER": "or sign up with email"
+      },
+
+      "NAME": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "John Doe",
+        "REQUIRED": "Name is required",
+        "MAX": "Name must be less than 100 characters"
+      },
+
+      "EMAIL": {
+        "LABEL": "Email",
+        "PLACEHOLDER": "john@example.com",
+        "REQUIRED": "Email is required",
+        "INVALID": "Invalid email format"
+      },
+
+      "PASSWORD": {
+        "LABEL": "Password",
+        "PLACEHOLDER": "Create password",
+        "REQUIRED": "Password is required",
+        "MIN": "Minimum 6 characters"
+      },
+
+      "CONFIRM": {
+        "LABEL": "Confirm Password",
+        "PLACEHOLDER": "Confirm password",
+        "REQUIRED": "Confirm password is required",
+        "MISMATCH": "Passwords do not match"
+      },
+
+      "SUBMIT": {
+        "DEFAULT": "Create My Account",
+        "LOADING": "Creating account..."
+      },
+
+      "LOGIN": {
+        "TEXT": "Already have an account?",
+        "LINK": "Sign in here"
+      }
+    },
+    "LOGIN": {
+      "TITLE": "Welcome Back! 👋",
+      "SUBTITLE": "Sign in to your account",
+
+      "SOCIAL": {
+        "GOOGLE": "Continue with Google",
+        "FACEBOOK": "Continue with Facebook",
+        "DIVIDER": "or sign in with email"
+      },
+
+      "EMAIL": {
+        "LABEL": "Email Address",
+        "PLACEHOLDER": "Enter your email",
+        "REQUIRED": "Email is required",
+        "INVALID": "Invalid email format"
+      },
+
+      "PASSWORD": {
+        "LABEL": "Password",
+        "PLACEHOLDER": "Enter your password",
+        "FORGOT": "Forgot password?",
+        "REQUIRED": "Password is required",
+        "MIN": "Password must be at least 6 characters"
+      },
+
+      "SUBMIT": {
+        "DEFAULT": "Sign In",
+        "LOADING": "Loading..."
+      },
+
+      "REGISTER": {
+        "TEXT": "New here?",
+        "LINK": "Create account"
+      }
+    },
+    "FORGOT_PASSWORD": {
+      "TITLE": "Forgot Password 🔐",
+      "SUBTITLE": "Enter your email to receive a reset code",
+      "EMAIL_PLACEHOLDER": "Enter your email",
+      "SEND": "Send Code",
+      "SENDING": "Sending..."
+    },
+    "CALLBACK": {
+      "TITLE": "Signing you in",
+      "SUBTITLE": "Please wait while we securely log you into your account",
+      "STEPS": {
+        "AUTHENTICATING": "Authenticating",
+        "VERIFYING": "Verifying account",
+        "REDIRECTING": "Redirecting"
+      }
+    },
+    "HERO": {
+      "BADGE": "Fresh & Fast",
+      "TITLE_LINE1": "Order Your",
+      "TITLE_HIGHLIGHT": "Favorites",
+      "TITLE_LINE2": "in Minutes.",
+      "DESCRIPTION": "Thousands of delicious meals delivered straight to your door."
+    }
+  },
   "CUSTOMER": {
     "ADDRESSES": {
       "PLACEHOLDERS": {
@@ -395,8 +526,286 @@
   },
 
   "ADMIN": {
+    
+    "USERS": {
+      "ADD": {
+        "TITLE": "Add New User",
+
+        "FIELDS": {
+          "NAME": "FULL NAME",
+          "EMAIL": "EMAIL",
+          "ROLE": "ROLE",
+          "BRANCH": "BRANCH"
+        },
+
+        "PLACEHOLDERS": {
+          "NAME": "Ahmed Hassan",
+          "EMAIL": "ahmed@rms.com",
+          "ROLE": "Select role",
+          "NO_BRANCH": "No Branch"
+        },
+
+        "BUTTONS": {
+          "CANCEL": "Cancel",
+          "CREATE": "Create User",
+          "SAVING": "Saving..."
+        }
+      },
+      "EDIT": {
+        "TITLE": "Edit User",
+
+        "FIELDS": {
+          "NAME": "FULL NAME",
+          "EMAIL": "EMAIL",
+          "ROLE": "ROLE",
+          "BRANCH": "BRANCH"
+        },
+
+        "PLACEHOLDERS": {
+          "NAME": "Enter name",
+          "EMAIL": "Enter email",
+          "ROLE": "Select role",
+          "NO_BRANCH": "No Branch"
+        },
+
+        "BUTTONS": {
+          "CANCEL": "Cancel",
+          "SAVE": "Save Changes",
+          "SAVING": "Saving..."
+        }
+      },
+      "DETAILS": {
+        "TITLE": "User Details",
+        "LOADING": "Loading...",
+
+        "STATUS": {
+          "ACTIVE": "Active",
+          "INACTIVE": "Inactive"
+        },
+
+        "INFO": {
+          "EMAIL": "EMAIL",
+          "BRANCH": "BRANCH",
+          "JOINED": "JOINED",
+          "ROLE": "ROLE"
+        },
+
+        "SECTIONS": {
+          "ORDERS": "Orders",
+          "DELIVERIES": "Deliveries"
+        },
+
+        "ORDERS": {
+          "TYPE": "Type",
+          "STATUS": "Status",
+          "AMOUNT": "Amount",
+          "DATE": "Date"
+        },
+
+        "DELIVERIES": {
+          "STATUS": "Status",
+          "ADDRESS": "Address",
+          "CASH": "Cash Collected",
+          "DATE": "Delivered At"
+        }
+      },
+      "NOT_FOUND":"No users found",
+      "ACTIVE":"Active",
+      "IN_ACTIVE":"Inactive",
+      "ALL_BRANCHES":"All Branches",
+      "TITLE": "Staff & Users",
+      "SUBTITLE": "Manage accounts and permissions",
+
+      "BUTTONS": {
+        "ADD": "+ Add User"
+      }
+    },
+    "INGREDIENTS": {
+      "TITLE": "Ingredients",
+      "LOADING": "Loading ingredients...",
+      "EMPTY": "No ingredients found 🍃",
+      "ITEMS": "Items",
+
+      "TABLE": {
+        "NAME": "Name",
+        "UNIT": "Unit",
+        "ACTIONS": "Actions"
+      },
+
+      "BUTTONS": {
+        "ADD": "Add Item",
+        "DELETE": "Delete",
+        "CANCEL": "Cancel",
+        "SAVE": "Save"
+      },
+
+      "MODAL": {
+        "TITLE": "Add New Ingredient",
+        "FIELDS": {
+          "NAME": "Name",
+          "ARABIC_NAME": "Arabic Name",
+          "UNIT": "Unit"
+        }
+      }
+    },
+    "CATEGORIES": {
+      "MODAL": {
+  
+          "ADD": {
+            "TITLE": "Add Category",
+            "SUBTITLE": "Enter a name for the new category"
+          },
+  
+          "EDIT": {
+            "TITLE": "Edit Category",
+            "SUBTITLE": "Update the category name below"
+          },
+  
+          "DELETE": {
+            "TITLE": "Delete Category",
+            "SUBTITLE": "This action cannot be undone.",
+            "MESSAGE": "Are you sure you want to delete this category? All associated data may be affected."
+          },
+  
+          "FIELDS": {
+            "NAME": "Category Name",
+            "ARABIC_NAME": "Arabic Name"
+          },
+  
+          "PLACEHOLDERS": {
+            "NAME": "e.g. Appetizers, Desserts…",
+            "ARABIC_NAME": "e.g. مقبلات، حلويات…"
+          },
+  
+          "BUTTONS": {
+            "CANCEL": "Cancel",
+            "ADD": "Add Category",
+            "SAVE": "Save Changes",
+            "DELETE": "Delete"
+          }
+        },
+      "TITLE": "Menu Categories",
+      "LOADING": "Loading categories…",
+
+      "EMPTY": {
+        "TITLE": "No categories found",
+        "SUBTITLE": "Add your first category to get started."
+      },
+
+      "TABLE": {
+        "CATEGORY": "Category",
+        "ITEMS": "Items",
+        "ACTIONS": "Actions"
+      },
+
+      "BUTTONS": {
+        "ADD": "Add Category",
+        "EDIT": "Edit",
+        "DELETE": "Delete"
+      }
+    },
+    "STOCK_MANAGEMENT": {
+      "TITLE": "Stock Management",
+      "LOADING": "Loading...",
+      "EMPTY": "No data found",
+
+      "TABLE": {
+        "INGREDIENT": "INGREDIENT",
+        "AVAILABLE_QTY": "AVAILABLE QTY",
+        "ACTIONS": "ACTIONS"
+      },
+
+      "BUTTONS": {
+        "VIEW": "View",
+        "CANCEL": "Cancel",
+        "SAVE": "Save Changes"
+      },
+
+      "PAGINATION": {
+        "SHOWING": "Showing",
+        "OF": "of",
+        "ITEMS": "items"
+      },
+
+      "MODAL": {
+        "TITLE": "Stock Details",
+        "BRANCH": "Branch",
+        "INGREDIENT": "Ingredient",
+        "AVAILABLE_QTY": "Available Qty",
+        "LOW_THRESHOLD": "Low Threshold"
+      }
+    },
+    "PAYMENT":{
+      "TRANSACTIONS": {
+        "TITLE": "Recent Transactions",
+        "TOTAL_SUFFIX": "total",
+
+        "BRANCHES": {
+          "ALL": "All Branches"
+        },
+
+        "FILTERS": {
+          "ORDER_ID_PLACEHOLDER": "Order ID...",
+          "METHOD_ALL": "All Methods",
+          "STATUS_ALL": "All Statuses"
+        },
+
+        "METHODS": {
+          "CASH": "Cash",
+          "CARD": "Card",
+          "INSTA_PAY": "InstaPay",
+          "WALLET": "Wallet"
+        },
+
+        "STATUS": {
+          "PAID": "Paid",
+          "PENDING": "Pending",
+          "REFUNDED": "Refunded",
+          "FAILED": "Failed"
+        },
+
+        "TABLE": {
+          "ORDER": "ORDER",
+          "METHOD": "METHOD",
+          "STATUS": "STATUS",
+          "AMOUNT": "AMOUNT"
+        },
+
+        "EMPTY": "No transactions found",
+
+        "ERROR": {
+          "RETRY": "Retry"
+        }
+      },
+      "TITLE":"Payment Terminal",
+      "AWAITING_PAYMENTS":{
+        "FILTERS":{
+          "ALL_BRANCHES":"All Branches"
+        }
+      }
+    },
+    "MENU_FILTER": {
+      "SEARCH": "Search menu items...",
+      "ALL_CATEGORIES": "All Categories",
+      "ALL_BRANCHES": "All Branches",
+      "ALL_STATUS": "All Status",
+      "AVAILABLE": "Available",
+      "UNAVAILABLE": "Unavailable",
+      "DEFAULT_SORT": "Default Sort",
+      "PRICE_ASC": "Price Asc",
+      "PRICE_DESC": "Price Desc",
+      "RESET": "Reset"
+    },
     "MENU_ITEMS": {
+      "TOTAL": "Total Items",
+    "AVAILABLE": "Available",
+    "UNAVAILABLE": "Unavailable",
       "CARD": {
+        "VIEW": "View",
+      "EDIT": "Edit",
+      "DELETE": "Delete",
+      "ENABLE": "Enable",
+      "DISABLE": "Disable",
         "AVAILABLE": "Available",
         "UNAVAILABLE": "Unavailable",
         "CURRENCY": "EGP",
@@ -618,6 +1027,38 @@
   },
 
     "BRANCHES": {
+      "TITLE": "Branch Management",
+
+      "SEARCH": {
+        "PLACEHOLDER": "Search branches by name..."
+      },
+
+      "RESULTS": {
+        "SINGLE": "branch",
+        "PLURAL": "branches",
+        "FOR": "for"
+      },
+
+      "STATUS": {
+        "ACTIVE": "ACTIVE",
+        "INACTIVE": "INACTIVE"
+      },
+
+      "STATS": {
+        "TABLES": "Tables",
+        "STAFF": "Staff"
+      },
+
+      "EMPTY": {
+        "TITLE": "No branches found"
+      },
+
+      "BUTTONS": {
+        "ADD": "Add Branch",
+        "ADD_NEW": "Add New Branch",
+        "MANAGE": "Manage Branch",
+        "RETRY": "Try Again"
+      },
       "BACK": "Branches",
       "NEW_BRANCH": "New Branch",
       "CANCEL": "Cancel",
@@ -966,6 +1407,8 @@
 
   "DRIVER": {
     "DELIVERY_DETAILS": {
+      "CURRENCY": "EGP",
+      "NA": "—",
       "LOADING": "Loading...",
       "ORDER": "Order",
       "INFO": "Delivery Info",

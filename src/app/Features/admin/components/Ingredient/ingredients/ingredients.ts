@@ -5,11 +5,14 @@ import { Pagination } from '../../../../../Shared/Components/pagination/paginati
 import { IngredientInterface } from '../../../../../Core/Models/MenuItemModels/ingredient-interface';
 import { IngredientsService } from '../../../../../Core/Services/Ingredients-Service/ingredients-Service';
 import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Subject, takeUntil } from 'rxjs';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
 @Component({
   selector: 'app-ingredients',
   standalone: true,
-  imports: [CommonModule, Pagination, FormsModule],
+  imports: [CommonModule, Pagination, FormsModule, TranslatePipe],
   templateUrl: './ingredients.html',
   styleUrls: ['./ingredients.scss'],
 })
@@ -31,12 +34,29 @@ export class IngredientsComponent implements OnInit {
   };
 
   constructor(private ingredientService: IngredientsService,
-    private toast: ToastService
+    private toast: ToastService,
+    private localizationService: LocalizationService,
   ) {}
 
   ngOnInit(): void {
     this.loadData();
+    this.getCurrentLanguage();
   }
+
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
+    
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 
 
 loadData() {
@@ -91,5 +111,11 @@ onPageChange(page: number) {
       }
     });
 
+  }
+  getItemName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.arabicName || item.name;
+    }
+    return item.name;
   }
 }

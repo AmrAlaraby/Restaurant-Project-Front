@@ -3,7 +3,9 @@
 
     <!-- Loading -->
     @if (isLoading) {
-      <div class="loading">Loading...</div>
+      <div class="loading">
+        {{ 'ADMIN.USERS.DETAILS.LOADING' | translate }}
+      </div>
     }
 
     <!-- Error -->
@@ -15,64 +17,87 @@
 
       <!-- Header -->
       <div class="modal-header">
-        <h3>User Details</h3>
+        <h3>{{ 'ADMIN.USERS.DETAILS.TITLE' | translate }}</h3>
         <button class="btn-close" (click)="onClose()">×</button>
       </div>
 
       <!-- Profile -->
       <div class="profile-section">
         <div class="avatar">{{ initials }}</div>
+
         <div class="profile-info">
           <h4>{{ userDetails.name }}</h4>
           <span class="username">&#64;{{ userDetails.userName }}</span>
           <span class="role-badge">{{ userDetails.roleId }}</span>
         </div>
-        <div class="status-badge" [class.active]="!userDetails.isDeleted" [class.inactive]="userDetails.isDeleted">
-          {{ userDetails.isDeleted ? 'Inactive' : 'Active' }}
+
+        <div class="status-badge"
+             [class.active]="!userDetails.isDeleted"
+             [class.inactive]="userDetails.isDeleted">
+
+          {{ userDetails.isDeleted
+            ? ('ADMIN.USERS.DETAILS.STATUS.INACTIVE' | translate)
+            : ('ADMIN.USERS.DETAILS.STATUS.ACTIVE' | translate)
+          }}
+
         </div>
       </div>
 
       <!-- Info Grid -->
       <div class="info-grid">
+
         <div class="info-item">
-          <span class="label">EMAIL</span>
+          <span class="label">{{ 'ADMIN.USERS.DETAILS.INFO.EMAIL' | translate }}</span>
           <span class="value">{{ userDetails.email }}</span>
         </div>
+
         <div class="info-item">
-          <span class="label">BRANCH</span>
-          <span class="value">{{ userDetails.branchName ?? '—' }}</span>
+          <span class="label">{{ 'ADMIN.USERS.DETAILS.INFO.BRANCH' | translate }}</span>
+          <span class="value">{{ userDetails.branchName }}</span>
         </div>
+
         <div class="info-item">
-          <span class="label">JOINED</span>
+          <span class="label">{{ 'ADMIN.USERS.DETAILS.INFO.JOINED' | translate }}</span>
           <span class="value">{{ userDetails.createdAt | date: 'mediumDate' }}</span>
         </div>
+
         <div class="info-item">
-          <span class="label">ROLE</span>
+          <span class="label">{{ 'ADMIN.USERS.DETAILS.INFO.ROLE' | translate }}</span>
           <span class="value">{{ userDetails.roleId }}</span>
         </div>
+
       </div>
 
       <!-- Orders -->
       @if (userDetails.orders.length) {
         <div class="section">
-          <h5>Orders <span class="count">{{ userDetails.orders.length }}</span></h5>
+          <h5>
+            {{ 'ADMIN.USERS.DETAILS.SECTIONS.ORDERS' | translate }}
+            <span class="count">{{ userDetails.orders.length }}</span>
+          </h5>
+
           <div class="table-wrapper">
             <table>
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Type</th>
-                  <th>Status</th>
-                  <th>Amount</th>
-                  <th>Date</th>
+                  <th>{{ 'ADMIN.USERS.DETAILS.ORDERS.TYPE' | translate }}</th>
+                  <th>{{ 'ADMIN.USERS.DETAILS.ORDERS.STATUS' | translate }}</th>
+                  <th>{{ 'ADMIN.USERS.DETAILS.ORDERS.AMOUNT' | translate }}</th>
+                  <th>{{ 'ADMIN.USERS.DETAILS.ORDERS.DATE' | translate }}</th>
                 </tr>
               </thead>
+
               <tbody>
                 @for (order of userDetails.orders; track order.id) {
                   <tr>
                     <td>{{ order.id }}</td>
-                    <td>{{ order.orderType }}</td>
-                    <td><span class="status-pill" [class]="order.status.toLowerCase()">{{ order.status }}</span></td>
+                    <td>{{ "ADMIN.ORDERS.FILTERS."+order.orderType.toUpperCase() | translate }}</td>
+                    <td>
+                      <span class="status-pill" [class]="order.status.toLowerCase()">
+                        {{ "ADMIN.ORDERS.FILTERS."+order.status.toUpperCase() | translate }}
+                      </span>
+                    </td>
                     <td>{{ order.totalAmount }} EGP</td>
                     <td>{{ order.createdAt | date: 'shortDate' }}</td>
                   </tr>
@@ -86,23 +111,32 @@
       <!-- Deliveries -->
       @if (userDetails.deliveries.length) {
         <div class="section">
-          <h5>Deliveries <span class="count">{{ userDetails.deliveries.length }}</span></h5>
+          <h5>
+            {{ 'ADMIN.USERS.DETAILS.SECTIONS.DELIVERIES' | translate }}
+            <span class="count">{{ userDetails.deliveries.length }}</span>
+          </h5>
+
           <div class="table-wrapper">
             <table>
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Status</th>
-                  <th>Address</th>
-                  <th>Cash Collected</th>
-                  <th>Delivered At</th>
+                  <th>{{ 'ADMIN.USERS.DETAILS.DELIVERIES.STATUS' | translate }}</th>
+                  <th>{{ 'ADMIN.USERS.DETAILS.DELIVERIES.ADDRESS' | translate }}</th>
+                  <th>{{ 'ADMIN.USERS.DETAILS.DELIVERIES.CASH' | translate }}</th>
+                  <th>{{ 'ADMIN.USERS.DETAILS.DELIVERIES.DATE' | translate }}</th>
                 </tr>
               </thead>
+
               <tbody>
                 @for (delivery of userDetails.deliveries; track delivery.id) {
                   <tr>
                     <td>{{ delivery.id }}</td>
-                    <td><span class="status-pill" [class]="delivery.deliveryStatus.toLowerCase()">{{ delivery.deliveryStatus }}</span></td>
+                    <td>
+                      <span class="status-pill" [class]="delivery.deliveryStatus.toLowerCase()">
+                        {{ "ADMIN.STATUS."+delivery.deliveryStatus.toUpperCase() | translate }}
+                      </span>
+                    </td>
                     <td>{{ delivery.deliveryAddress.street }}, {{ delivery.deliveryAddress.city }}</td>
                     <td>{{ delivery.cashCollected ?? '—' }}</td>
                     <td>{{ delivery.deliveredAt | date: 'shortDate' }}</td>

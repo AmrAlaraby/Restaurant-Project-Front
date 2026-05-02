@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-auth-callback',
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: './auth-callback.html',
   styleUrl: './auth-callback.scss',
 })

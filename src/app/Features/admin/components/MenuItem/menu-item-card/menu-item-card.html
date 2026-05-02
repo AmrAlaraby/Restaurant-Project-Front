@@ -42,19 +42,34 @@
     @if (showAdminActions) {
       <div class="actions">
 
-        <!-- ROW 1: VIEW + EDIT -->
-        <div class="actions-row">
-          <button class="btn-action view" (click)="onView()">View</button>
-          <button class="btn-action edit" (click)="onEdit()">Edit</button>
-        </div>
+  <!-- ROW 1 -->
+  <div class="actions-row">
+    <button class="btn-action view" (click)="onView()">
+       {{ 'ADMIN.MENU_ITEMS.CARD.VIEW' | translate }}
+    </button>
 
-        <!-- ROW 2: TOGGLE + DELETE -->
-        <div class="actions-row">
-          <button class="btn-action toggle" (click)="onToggleAvailability()">Toggle</button>
-          <button class="btn-action delete" (click)="onDelete()">Delete</button>
-        </div>
+    <button class="btn-action edit" (click)="onEdit()">
+       {{ 'ADMIN.MENU_ITEMS.CARD.EDIT' | translate }}
+    </button>
+  </div>
 
-      </div>
+  <!-- ROW 2 -->
+  <div class="actions-row">
+    <button class="btn-action toggle" (click)="onToggleAvailability()">
+      
+      {{
+        item.isAvailable
+          ? ('ADMIN.MENU_ITEMS.CARD.DISABLE' | translate)
+          : ('ADMIN.MENU_ITEMS.CARD.ENABLE' | translate)
+      }}
+    </button>
+
+    <button class="btn-action delete" (click)="onDelete()">
+       {{ 'ADMIN.MENU_ITEMS.CARD.DELETE' | translate }}
+    </button>
+  </div>
+
+</div>
     }
 
   </div>

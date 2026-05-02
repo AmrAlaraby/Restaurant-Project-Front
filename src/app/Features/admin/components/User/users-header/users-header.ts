@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'users-header',
   standalone: true,
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: './users-header.html',
   styleUrls: ['./users-header.scss'],
 })

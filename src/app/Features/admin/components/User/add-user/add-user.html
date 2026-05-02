@@ -4,7 +4,7 @@
 
     <!-- Header -->
     <div class="modal-header">
-      <h3>Add New User</h3>
+      <h3>{{ 'ADMIN.USERS.ADD.TITLE' | translate }}</h3>
       <button class="btn-close" (click)="onClose()">×</button>
     </div>
 
@@ -14,19 +14,19 @@
       <div class="form-row">
         <!-- Name -->
         <div class="form-group">
-          <label>FULL NAME</label>
+          <label>{{ 'ADMIN.USERS.ADD.FIELDS.NAME' | translate }}</label>
           <input
             type="text"
-            placeholder="Ahmed Hassan"
+            [placeholder]="'ADMIN.USERS.ADD.PLACEHOLDERS.NAME' | translate"
             [(ngModel)]="user.name" />
         </div>
 
         <!-- Email -->
         <div class="form-group">
-          <label>EMAIL</label>
+          <label>{{ 'ADMIN.USERS.ADD.FIELDS.EMAIL' | translate }}</label>
           <input
             type="email"
-            placeholder="ahmed@rms.com"
+            [placeholder]="'ADMIN.USERS.ADD.PLACEHOLDERS.EMAIL' | translate"
             [(ngModel)]="user.email" />
         </div>
       </div>
@@ -34,9 +34,11 @@
       <div class="form-row">
         <!-- Role -->
         <div class="form-group">
-          <label>ROLE</label>
+          <label>{{ 'ADMIN.USERS.ADD.FIELDS.ROLE' | translate }}</label>
           <select [(ngModel)]="user.roleId">
-            <option value="" disabled>Select role</option>
+            <option value="" disabled>
+              {{ 'ADMIN.USERS.ADD.PLACEHOLDERS.ROLE' | translate }}
+            </option>
             @for (role of roles; track role) {
               <option [ngValue]="role">{{ role }}</option>
             }
@@ -45,11 +47,13 @@
 
         <!-- Branch -->
         <div class="form-group">
-          <label>BRANCH</label>
+          <label>{{ 'ADMIN.USERS.ADD.FIELDS.BRANCH' | translate }}</label>
           <select [(ngModel)]="user.branchId">
-            <option [ngValue]="undefined">No Branch</option>
+            <option [ngValue]="undefined">
+              {{ 'ADMIN.USERS.ADD.PLACEHOLDERS.NO_BRANCH' | translate }}
+            </option>
             @for (branch of branches; track branch.id) {
-              <option [ngValue]="branch.id">{{ branch.name }}</option>
+              <option [ngValue]="branch.id">{{ getItemName(branch) }}</option>
             }
           </select>
         </div>
@@ -64,9 +68,15 @@
 
     <!-- Footer -->
     <div class="modal-footer">
-      <button class="btn-cancel" (click)="onClose()">Cancel</button>
+      <button class="btn-cancel" (click)="onClose()">
+        {{ 'ADMIN.USERS.ADD.BUTTONS.CANCEL' | translate }}
+      </button>
+
       <button class="btn-save" (click)="onSave()" [disabled]="isSubmitting">
-        {{ isSubmitting ? 'Saving...' : 'Create User' }}
+        {{ isSubmitting
+          ? ('ADMIN.USERS.ADD.BUTTONS.SAVING' | translate)
+          : ('ADMIN.USERS.ADD.BUTTONS.CREATE' | translate)
+        }}
       </button>
     </div>
 

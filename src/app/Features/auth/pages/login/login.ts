@@ -4,10 +4,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { Router, RouterLink } from '@angular/router';
 import { environment } from '../../../../../environments/environment.development';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, TranslatePipe],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })

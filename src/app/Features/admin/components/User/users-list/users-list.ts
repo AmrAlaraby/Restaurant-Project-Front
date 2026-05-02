@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { UserCard } from '../user-card/user-card';
 import { User } from '../../../../../Core/Models/UserModels/user';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'users-list',
   standalone: true,
-  imports: [UserCard],
+  imports: [UserCard, TranslatePipe],
   templateUrl: './users-list.html',
   styleUrls: ['./users-list.scss'],
 })

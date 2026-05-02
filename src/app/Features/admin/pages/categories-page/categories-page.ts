@@ -4,11 +4,14 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
 import { CategoryService } from '../../../../Core/Services/Categories-Service/categories-service';
 import { Category } from '../../../../Core/Models/CategoryModels/Category ';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Subject, takeUntil } from 'rxjs';
+import { LocalizationService } from '../../../../Core/Services/Localization-Service/localization-service';
 
 @Component({
   selector: 'app-categories-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './categories-page.html',
   styleUrl: './categories-page.scss',
   encapsulation: ViewEncapsulation.None,
@@ -35,12 +38,29 @@ export class CategoriesPage implements OnInit {
     private categoryService: CategoryService,
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
+    private localizationService: LocalizationService,
   ) {}
 
   ngOnInit(): void {
     this.initForm();
     this.loadCategories();
+    this.getCurrentLanguage();
   }
+
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
+    
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 
   // ✅ INIT FORM (FIX)
   private initForm(): void {
@@ -97,6 +117,8 @@ export class CategoriesPage implements OnInit {
 
   // EDIT
   onEdit(category: Category): void {
+    console.log(category)
+
     this.selectedCategory = category;
     this.editForm.patchValue({ name: category.name });
     this.editForm.patchValue({ Arabicname: category.arabicName });
@@ -105,6 +127,7 @@ export class CategoriesPage implements OnInit {
   }
 
   submitEdit(): void {
+    
     if (this.editForm.invalid || !this.selectedCategory) return;
 
     this.categoryService.update(this.selectedCategory.id, this.editForm.value).subscribe({
@@ -184,5 +207,12 @@ export class CategoriesPage implements OnInit {
   closeAddModal(): void {
     this.showAddModal = false;
     document.body.style.overflow = '';
+  }
+
+  getCategoryName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.arabicName || item.name;
+    }
+    return item.name;
   }
 }

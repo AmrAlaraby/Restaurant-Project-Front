@@ -2,33 +2,33 @@
 
   <!-- Header -->
   <div class="header">
-      <div class="page-header">
-      
-        <!-- <h1 class="page-title">Stock Management</h1> -->
+    <div class="page-header">
 
-        <h2 class=".page-title">Ingredients</h2>
-      </div>
-   
+      <h2 class=".page-title">
+        {{ 'ADMIN.INGREDIENTS.TITLE' | translate }}
+      </h2>
+
+    </div>
 
     <div class="actions-header">
       <button type="button" class="btn add" (click)="openModal()">
-        + Add Item
+        {{ 'ADMIN.INGREDIENTS.BUTTONS.ADD' | translate }}
       </button>
 
       <div class="count" *ngIf="!loading">
-        {{ totalCount }} Items
+        {{ totalCount }} {{ 'ADMIN.INGREDIENTS.ITEMS' | translate }}
       </div>
     </div>
   </div>
 
   <!-- Loading -->
   <div *ngIf="loading" class="loading">
-    <p>Loading ingredients...</p>
+    <p>{{ 'ADMIN.INGREDIENTS.LOADING' | translate }}</p>
   </div>
 
   <!-- Empty -->
   <div *ngIf="!loading && ingredients.length == 0" class="empty">
-    <p>No ingredients found 🍃</p>
+    <p>{{ 'ADMIN.INGREDIENTS.EMPTY' | translate }}</p>
   </div>
 
   <!-- Table -->
@@ -37,9 +37,9 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Name</th>
-          <th>Unit</th>
-          <th class="actions">Actions</th>
+          <th>{{ 'ADMIN.INGREDIENTS.TABLE.NAME' | translate }}</th>
+          <th>{{ 'ADMIN.INGREDIENTS.TABLE.UNIT' | translate }}</th>
+          <th class="actions">{{ 'ADMIN.INGREDIENTS.TABLE.ACTIONS' | translate }}</th>
         </tr>
       </thead>
 
@@ -48,8 +48,8 @@
           <td>{{ (pageIndex - 1) * pageSize + i + 1 }}</td>
 
           <td class="name">
-            <span class="avatar">{{ item.name[0] }}</span>
-            {{ item.name }}
+            <!-- <span class="avatar">{{ item.name[0] }}</span> -->
+            {{ getItemName(item) }}
           </td>
 
           <td>
@@ -58,7 +58,7 @@
 
           <td class="actions">
             <button class="btn delete" (click)="delete(item.id)">
-              Delete
+              {{ 'ADMIN.INGREDIENTS.BUTTONS.DELETE' | translate }}
             </button>
           </td>
         </tr>
@@ -81,12 +81,12 @@
 <div class="modal-backdrop" *ngIf="showModal">
   <div class="modal-ingredient">
 
-    <h3>Add New Ingredient</h3>
+    <h3>{{ 'ADMIN.INGREDIENTS.MODAL.TITLE' | translate }}</h3>
 
     <form (ngSubmit)="addIngredient()">
 
       <div class="form-group">
-        <label>Name</label>
+        <label>{{ 'ADMIN.INGREDIENTS.MODAL.FIELDS.NAME' | translate }}</label>
         <input
           type="text"
           [(ngModel)]="newIngredient.name"
@@ -96,7 +96,7 @@
       </div>
 
       <div class="form-group">
-        <label>Arabic Name</label>
+        <label>{{ 'ADMIN.INGREDIENTS.MODAL.FIELDS.ARABIC_NAME' | translate }}</label>
         <input
           type="text"
           [(ngModel)]="newIngredient.arabicName"
@@ -106,7 +106,7 @@
       </div>
 
       <div class="form-group">
-        <label>Unit</label>
+        <label>{{ 'ADMIN.INGREDIENTS.MODAL.FIELDS.UNIT' | translate }}</label>
         <input
           type="text"
           [(ngModel)]="newIngredient.unit"
@@ -117,11 +117,11 @@
 
       <div class="modal-actions">
         <button type="button" class="btn cancel" (click)="closeModal()">
-          Cancel
+          {{ 'ADMIN.INGREDIENTS.BUTTONS.CANCEL' | translate }}
         </button>
 
         <button type="submit" class="btn save">
-          Save
+          {{ 'ADMIN.INGREDIENTS.BUTTONS.SAVE' | translate }}
         </button>
       </div>
 

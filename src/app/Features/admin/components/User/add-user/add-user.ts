@@ -3,11 +3,14 @@ import { FormsModule } from '@angular/forms';
 import { AddUser } from '../../../../../Core/Models/UserModels/add-user';
 import { BranchDto } from '../../../../../Core/Models/BranchModels/Branch-dto';
 import { UsersService } from '../../../../../Core/Services/User-Service/users-service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Subject, takeUntil } from 'rxjs';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
 @Component({
   selector: 'add-user',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,TranslatePipe],
   templateUrl: './add-user.html',
   styleUrls: ['./add-user.scss'],
 })
@@ -28,7 +31,7 @@ export class AddUserComponent implements OnInit {
   isSubmitting = false;
   errorMessage = '';
 
-  constructor(private usersService: UsersService) {}
+  constructor(private localizationService: LocalizationService,private usersService: UsersService) {}
 
   ngOnInit() {
     this.usersService.getRoles().subscribe({
@@ -40,7 +43,24 @@ export class AddUserComponent implements OnInit {
       next: (branches) => (this.branches = branches),
       error: (err) => console.error('Failed to load branches', err),
     });
+
+    this.getCurrentLanguage();
   }
+
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
+    
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 
   onSave() {
     if (!this.user.name || !this.user.email || !this.user.roleId) {
@@ -67,5 +87,12 @@ export class AddUserComponent implements OnInit {
 
   onClose() {
     this.close.emit();
+  }
+
+  getItemName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.arabicName || item.name;
+    }
+    return item.name;
   }
 }

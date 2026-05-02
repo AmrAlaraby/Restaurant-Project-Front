@@ -12,7 +12,7 @@
     <p>
       <span class="email">{{ user.email }}</span>
       @if (user.branchName) {
-        <span> • {{ user.branchName }}</span>
+        <span> • {{ getbranchName(user) }}</span>
       }
     </p>
   </div>
@@ -24,7 +24,7 @@
 
   <!-- Actions -->
   <div class="actions" (click)="$event.stopPropagation()">
-    <button class="btn-outline" (click)="onEdit()">Edit</button>
+    <button class="btn-outline" (click)="onEdit()">{{'ADMIN.USERS.EDIT.TITLE' | translate}}</button>
 
     <div class="status-toggle" (click)="onToggle()">
       <div class="switch" [class.active]="!user.isDeleted" [class.inactive]="user.isDeleted">
@@ -32,7 +32,7 @@
       </div>
 
       <span class="label">
-        {{ user.isDeleted ? 'Inactive' : 'Active' }}
+        {{ user.isDeleted ? ('ADMIN.USERS.DETAILS.STATUS.INACTIVE' | translate) : ('ADMIN.USERS.DETAILS.STATUS.ACTIVE' | translate) }}
       </span>
     </div>
   </div>

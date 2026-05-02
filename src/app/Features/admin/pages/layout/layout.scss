@@ -39,11 +39,11 @@ app-sidebar {
     top: 0;
     height: 100%;
     z-index: 1000;
-    transform: translateX(-100%);
+    transform: translateX(-1000%);
 
-    [dir='rtl'] & {
-      transform: translateX(100%);
-    }
+    :host-context([dir='rtl']) & {
+  transform: translateX(100%);
+}
   }
 
   &.open {

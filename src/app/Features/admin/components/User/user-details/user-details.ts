@@ -3,11 +3,14 @@ import { DatePipe } from '@angular/common';
 
 import { UsersService } from '../../../../../Core/Services/User-Service/users-service';
 import { UserDetails } from '../../../../../Core/Models/UserModels/user-details';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Subject, takeUntil } from 'rxjs';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
 @Component({
   selector: 'user-details',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, TranslatePipe],
   templateUrl: './user-details.html',
   styleUrls: ['./user-details.scss'],
 })
@@ -19,7 +22,7 @@ export class UserDetailsComponent implements OnInit {
   isLoading = true;
   errorMessage = '';
 
-  constructor(private usersService: UsersService) {}
+  constructor(private localizationService: LocalizationService,private usersService: UsersService) {}
 
   ngOnInit() {
     this.usersService.getUserDetails(this.userId).subscribe({
@@ -33,7 +36,23 @@ export class UserDetailsComponent implements OnInit {
         console.error(err);
       },
     });
+    this.getCurrentLanguage();
   }
+
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
+    
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 
   get initials(): string {
     if (!this.userDetails?.name) return '';
@@ -46,5 +65,12 @@ export class UserDetailsComponent implements OnInit {
 
   onClose() {
     this.close.emit();
+  }
+
+   getItemName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.arabicName || item.name;
+    }
+    return item.name;
   }
 }
