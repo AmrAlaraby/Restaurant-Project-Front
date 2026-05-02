@@ -7,11 +7,14 @@ import { GetBranch } from '../../../../../Core/Models/BranchModels/get-branch';
 import { BranchService } from '../../../../../Core/Services/Branch-Service/branch-service';
 import { Pagination } from '../../../../../Shared/Components/pagination/pagination';
 import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Subject, takeUntil } from 'rxjs';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
 @Component({
   selector: 'app-branch-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, Pagination],
+  imports: [CommonModule, RouterModule, FormsModule, Pagination, TranslatePipe],
   templateUrl: './branch-list.html',
   styleUrls: ['./branch-list.scss'],
 })
@@ -36,8 +39,13 @@ export class BranchListComponent implements OnInit, OnChanges {
     pageSize: 5,
   };
 
+  constructor(
+        private localizationService: LocalizationService,
+      ) {}
+
   ngOnInit(): void {
     this.loadBranches();
+    this.getCurrentLanguage();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -45,6 +53,21 @@ export class BranchListComponent implements OnInit, OnChanges {
       this.loadBranches();
     }
   }
+
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
+    
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 
   onSearchChange(): void {
     clearTimeout(this.searchTimeout);
@@ -86,5 +109,12 @@ export class BranchListComponent implements OnInit, OnChanges {
 
   getAddress(branch: GetBranch): string {
     return `${branch.buildingNumber} ${branch.street}, ${branch.city}`;
+  }
+
+  getItemName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.arabicName || item.name;
+    }
+    return item.name;
   }
 }

@@ -1025,6 +1025,38 @@
     },
 
     "BRANCHES": {
+      "TITLE": "إدارة الفروع",
+
+      "SEARCH": {
+        "PLACEHOLDER": "ابحث عن الفروع بالاسم..."
+      },
+
+      "RESULTS": {
+        "SINGLE": "فرع",
+        "PLURAL": "فروع",
+        "FOR": "لـ"
+      },
+
+      "STATUS": {
+        "ACTIVE": "نشط",
+        "INACTIVE": "غير نشط"
+      },
+
+      "STATS": {
+        "TABLES": "طاولات",
+        "STAFF": "طاقم العمل"
+      },
+
+      "EMPTY": {
+        "TITLE": "لا توجد فروع"
+      },
+
+      "BUTTONS": {
+        "ADD": "إضافة فرع",
+        "ADD_NEW": "إضافة فرع جديد",
+        "MANAGE": "إدارة الفرع",
+        "RETRY": "إعادة المحاولة"
+      },
       "BACK": "الفروع",
       "NEW_BRANCH": "فرع جديد",
       "CANCEL": "إلغاء",

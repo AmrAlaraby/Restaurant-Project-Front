@@ -2,9 +2,9 @@
 
   <!-- Header -->
   <div class="page-header">
-    <h1 class="page-title">Branch Management</h1>
+    <h1 class="page-title">{{ 'ADMIN.BRANCHES.TITLE' | translate }}</h1>
     <button class="btn-add" (click)="openCreate()">
-      <span>+</span> Add Branch
+      <span>+</span> {{ 'ADMIN.BRANCHES.BUTTONS.ADD' | translate }}
     </button>
   </div>
 
@@ -14,7 +14,7 @@
     <input
       class="search-input"
       type="text"
-      placeholder="Search branches by name..."
+      [placeholder]="'ADMIN.BRANCHES.SEARCH.PLACEHOLDER' | translate"
       [(ngModel)]="searchTerm"
       (ngModelChange)="onSearchChange()"
     />
@@ -27,8 +27,14 @@
 
   <!-- Results Hint -->
   <p class="results-hint" *ngIf="!isLoading() && !error()">
-    {{ totalCount() }} {{ totalCount() === 1 ? 'branch' : 'branches' }}
-    <span *ngIf="searchTerm"> for "{{ searchTerm }}"</span>
+    {{ totalCount() }}
+    {{ totalCount() === 1
+        ? ('ADMIN.BRANCHES.RESULTS.SINGLE' | translate)
+        : ('ADMIN.BRANCHES.RESULTS.PLURAL' | translate)
+    }}
+    <span *ngIf="searchTerm">
+      {{ 'ADMIN.BRANCHES.RESULTS.FOR' | translate }} "{{ searchTerm }}"
+    </span>
   </p>
 
   <!-- Loading -->
@@ -39,7 +45,9 @@
   <!-- Error -->
   <div class="error-state" *ngIf="error() && !isLoading()">
     <p>{{ error() }}</p>
-    <button class="btn-retry" (click)="loadBranches()">Try Again</button>
+    <button class="btn-retry" (click)="loadBranches()">
+      {{ 'ADMIN.BRANCHES.BUTTONS.RETRY' | translate }}
+    </button>
   </div>
 
   <!-- Branch Cards Grid -->
@@ -52,9 +60,14 @@
     >
       <!-- Card Header -->
       <div class="card-header">
-        <h2 class="branch-name">{{ branch.name }}</h2>
-        <span class="status-badge" [class.active]="branch.isActive" [class.inactive]="!branch.isActive">
-          {{ branch.isActive ? 'ACTIVE' : 'INACTIVE' }}
+        <h2 class="branch-name">{{ getItemName(branch) }}</h2>
+        <span class="status-badge"
+              [class.active]="branch.isActive"
+              [class.inactive]="!branch.isActive">
+          {{ branch.isActive
+            ? ('ADMIN.BRANCHES.STATUS.ACTIVE' | translate)
+            : ('ADMIN.BRANCHES.STATUS.INACTIVE' | translate)
+          }}
         </span>
       </div>
 
@@ -84,17 +97,17 @@
       <div class="stats-row">
         <div class="stat-box">
           <span class="stat-number">{{ branch.tablesCount }}</span>
-          <span class="stat-label">Tables</span>
+          <span class="stat-label">{{ 'ADMIN.BRANCHES.STATS.TABLES' | translate }}</span>
         </div>
         <div class="stat-box">
           <span class="stat-number">{{ branch.usersCount }}</span>
-          <span class="stat-label">Staff</span>
+          <span class="stat-label">{{ 'ADMIN.BRANCHES.STATS.STAFF' | translate }}</span>
         </div>
       </div>
 
       <!-- Action -->
       <button class="btn-manage" (click)="selectBranch(branch.id)">
-        Manage Branch
+        {{ 'ADMIN.BRANCHES.BUTTONS.MANAGE' | translate }}
       </button>
 
     </div>
@@ -103,7 +116,7 @@
     <div class="branch-card add-card" (click)="openCreate()">
       <div class="add-card-inner">
         <span class="add-icon">+</span>
-        <span class="add-label">Add New Branch</span>
+        <span class="add-label">{{ 'ADMIN.BRANCHES.BUTTONS.ADD_NEW' | translate }}</span>
       </div>
     </div>
 
@@ -111,8 +124,15 @@
 
   <!-- Empty State -->
   <div class="empty-state" *ngIf="!isLoading() && !error() && branches().length === 0">
-    <p>No branches found<span *ngIf="searchTerm"> for "{{ searchTerm }}"</span>.</p>
-    <button class="btn-add" *ngIf="!searchTerm" (click)="openCreate()">+ Add Branch</button>
+    <p>
+      {{ 'ADMIN.BRANCHES.EMPTY.TITLE' | translate }}
+      <span *ngIf="searchTerm">
+        {{ 'ADMIN.BRANCHES.RESULTS.FOR' | translate }} "{{ searchTerm }}"
+      </span>.
+    </p>
+    <button class="btn-add" *ngIf="!searchTerm" (click)="openCreate()">
+      + {{ 'ADMIN.BRANCHES.BUTTONS.ADD' | translate }}
+    </button>
   </div>
 
   <!-- Pagination -->

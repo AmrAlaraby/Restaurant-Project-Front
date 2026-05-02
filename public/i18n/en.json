@@ -526,6 +526,7 @@
   },
 
   "ADMIN": {
+    
     "USERS": {
       "ADD": {
         "TITLE": "Add New User",
@@ -1026,6 +1027,38 @@
   },
 
     "BRANCHES": {
+      "TITLE": "Branch Management",
+
+      "SEARCH": {
+        "PLACEHOLDER": "Search branches by name..."
+      },
+
+      "RESULTS": {
+        "SINGLE": "branch",
+        "PLURAL": "branches",
+        "FOR": "for"
+      },
+
+      "STATUS": {
+        "ACTIVE": "ACTIVE",
+        "INACTIVE": "INACTIVE"
+      },
+
+      "STATS": {
+        "TABLES": "Tables",
+        "STAFF": "Staff"
+      },
+
+      "EMPTY": {
+        "TITLE": "No branches found"
+      },
+
+      "BUTTONS": {
+        "ADD": "Add Branch",
+        "ADD_NEW": "Add New Branch",
+        "MANAGE": "Manage Branch",
+        "RETRY": "Try Again"
+      },
       "BACK": "Branches",
       "NEW_BRANCH": "New Branch",
       "CANCEL": "Cancel",
