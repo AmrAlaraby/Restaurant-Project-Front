@@ -124,20 +124,24 @@
 <!-- ── PAGE ── -->
 <div class="page">
 
-  <!-- Breadcrumb -->
-
-
   <!-- Header -->
-  <div class="page-header">
-    <div class="page-header__title">
-      <h1 class="page-title">Menu Categories</h1>
+  <div class="header">
+    <div class="page-header">
+      <h2 class="page-title">Menu Categories</h2>
     </div>
-    <button class="btn-add" type="button" (click)="openAddModal()">
-      <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-        <path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-      Add Category
-    </button>
+
+    <div class="actions-header">
+      <button class="btn-add" type="button" (click)="openAddModal()">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+          <path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        Add Category
+      </button>
+
+      <div class="count" *ngIf="!loading">
+        {{ categories.length }} Items
+      </div>
+    </div>
   </div>
 
   <!-- Success / Error alerts -->
@@ -157,7 +161,7 @@
   </div>
 
   <!-- Loading -->
-  <div *ngIf="loading" class="state-box loading-box">
+  <div *ngIf="loading" class="loading">
     <p>Loading categories…</p>
   </div>
 
@@ -167,54 +171,53 @@
   </div>
 
   <!-- Empty State -->
-  <div *ngIf="!loading && !error && categories.length === 0" class="state-box empty-box">
-    <div class="empty-icon">
-      <svg width="28" height="28" viewBox="0 0 48 48" fill="none">
-        <path d="M16 20h16M16 28h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-    </div>
-    <p>No categories found</p>
-    <span>Add your first category to get started.</span>
+  <div *ngIf="!loading && !error && categories.length === 0" class="empty">
+    <p>No categories found 🍽️</p>
   </div>
 
   <!-- Table -->
   <div class="table-wrapper" *ngIf="!loading && !error && categories.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Category</th>
+          <th>Items</th>
+          <th class="actions">Actions</th>
+        </tr>
+      </thead>
 
-    <div class="table-head">
-      <span>Category</span>
-      <span>Items</span>
-      <span class="col-actions">Actions</span>
-    </div>
+      <tbody>
+        <tr *ngFor="let cat of categories; let i = index">
+          <td>{{ i + 1 }}</td>
 
-    <div class="table-row" *ngFor="let cat of categories">
+          <td class="name">
+            <span class="avatar">{{ cat.name[0] }}</span>
+            {{ cat.name }}
+          </td>
 
-      <div class="cat-name">
-        <!-- <span class="cat-icon">{{ getCategoryIcon(cat.name) }}</span> -->
-        {{ cat.name }}
-      </div>
+          <td>
+            <span class="badge">{{ cat.menuItemsCount }}</span>
+          </td>
 
-      <div class="items-count">
-        <span class="count-badge">{{ cat.menuItemsCount }}</span>
-      </div>
+          <td class="actions">
+            <button class="btn-edit" (click)="onEdit(cat)">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none">
+                <path d="M13.5 3.5l3 3L7 16H4v-3L13.5 3.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              </svg>
+              Edit
+            </button>
 
-      <div class="actions">
-        <button class="btn-edit" (click)="onEdit(cat)">
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none">
-            <path d="M13.5 3.5l3 3L7 16H4v-3L13.5 3.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-          </svg>
-          Edit
-        </button>
-
-        <button class="btn-delete" (click)="onDelete(cat.id)">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
-            <path d="M4 6h16M8 6V4h8v2M5 6l1 14h12L19 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Delete
-        </button>
-      </div>
-
-    </div>
-
+            <button class="btn-delete" (click)="onDelete(cat.id)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                <path d="M4 6h16M8 6V4h8v2M5 6l1 14h12L19 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
 </div>
