@@ -9,10 +9,11 @@ import { LangSwitchComponent } from '../../../../Shared/Components/lang-switch/l
 import { BranchStateService } from '../../../../Core/Services/Branch-Service/branch-state-service';
 import { BranchSelector } from '../../components/branch-selector/branch-selector';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { CartIcon } from "../../components/cart-icon/cart-icon";
 
 @Component({
   selector: 'app-customer-layout',
-  imports: [RouterOutlet, RouterModule, NotificationBell, BranchSelector, LangSwitchComponent],
+  imports: [RouterOutlet, RouterModule, NotificationBell, BranchSelector, LangSwitchComponent, CartIcon],
   templateUrl: './customer-layout.html',
   styleUrl: './customer-layout.scss',
 })
