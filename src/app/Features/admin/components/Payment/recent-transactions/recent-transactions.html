@@ -3,8 +3,10 @@
   <!-- ── HEADER ── -->
   <div class="widget-header">
     <div class="header-left">
-      <h2 class="widget-title">Recent Transactions</h2>
-      <span class="tx-count">{{ totalCount() }} total</span>
+      <h2 class="widget-title">{{ 'ADMIN.PAYMENT.TRANSACTIONS.TITLE' | translate }}</h2>
+      <span class="tx-count">
+        {{ totalCount() }} {{ 'ADMIN.PAYMENT.TRANSACTIONS.TOTAL_SUFFIX' | translate }}
+      </span>
     </div>
 
     <!-- Branch dropdown -->
@@ -14,9 +16,9 @@
         <polyline points="9 22 9 12 15 12 15 22"/>
       </svg>
       <select class="filter-select" (change)="onBranchChange($event)">
-        <option value="">All Branches</option>
+        <option value="">{{ 'ADMIN.PAYMENT.TRANSACTIONS.BRANCHES.ALL' | translate }}</option>
         @for (b of branches(); track b.id) {
-          <option [value]="b.id">{{ b.name }}</option>
+          <option [value]="b.id">{{ getBranchName(b) }}</option>
         }
       </select>
       <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -36,7 +38,7 @@
       <input
         type="number"
         class="filter-input"
-        placeholder="Order ID..."
+        [placeholder]="'ADMIN.PAYMENT.TRANSACTIONS.FILTERS.ORDER_ID_PLACEHOLDER' | translate"
         [value]="orderIdFilter() ?? ''"
         (input)="onOrderIdChange($event)"
       />
@@ -45,11 +47,11 @@
     <!-- Method -->
     <div class="select-wrap">
       <select class="filter-select" (change)="onMethodChange($event)">
-        <option value="">All Methods</option>
-        <option value="Cash">Cash</option>
-        <option value="Card">Card</option>
-        <option value="InstaPay">InstaPay</option>
-        <option value="Wallet">Wallet</option>
+        <option value="">{{ 'ADMIN.PAYMENT.TRANSACTIONS.FILTERS.METHOD_ALL' | translate }}</option>
+        <option value="Cash">{{ 'ADMIN.PAYMENT.TRANSACTIONS.METHODS.CASH' | translate }}</option>
+        <option value="Card">{{ 'ADMIN.PAYMENT.TRANSACTIONS.METHODS.CARD' | translate }}</option>
+        <option value="InstaPay">{{ 'ADMIN.PAYMENT.TRANSACTIONS.METHODS.INSTA_PAY' | translate }}</option>
+        <option value="Wallet">{{ 'ADMIN.PAYMENT.TRANSACTIONS.METHODS.WALLET' | translate }}</option>
       </select>
       <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <polyline points="6 9 12 15 18 9"/>
@@ -59,11 +61,11 @@
     <!-- Status -->
     <div class="select-wrap">
       <select class="filter-select" (change)="onStatusChange($event)">
-        <option value="">All Statuses</option>
-        <option value="Paid">Paid</option>
-        <option value="Pending">Pending</option>
-        <option value="Refunded">Refunded</option>
-        <option value="Failed">Failed</option>
+        <option value="">{{ 'ADMIN.PAYMENT.TRANSACTIONS.FILTERS.STATUS_ALL' | translate }}</option>
+        <option value="Paid">{{ 'ADMIN.PAYMENT.TRANSACTIONS.STATUS.PAID' | translate }}</option>
+        <option value="Pending">{{ 'ADMIN.PAYMENT.TRANSACTIONS.STATUS.PENDING' | translate }}</option>
+        <option value="Refunded">{{ 'ADMIN.PAYMENT.TRANSACTIONS.STATUS.REFUNDED' | translate }}</option>
+        <option value="Failed">{{ 'ADMIN.PAYMENT.TRANSACTIONS.STATUS.FAILED' | translate }}</option>
       </select>
       <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <polyline points="6 9 12 15 18 9"/>
@@ -87,16 +89,18 @@
           <line x1="12" y1="16" x2="12.01" y2="16"/>
         </svg>
         <span>{{ error() }}</span>
-        <button class="retry-btn" (click)="load()">Retry</button>
+        <button class="retry-btn" (click)="load()">
+          {{ 'ADMIN.PAYMENT.TRANSACTIONS.ERROR.RETRY' | translate }}
+        </button>
       </div>
     } @else {
       <table class="tx-table">
         <thead>
           <tr>
-            <th>ORDER</th>
-            <th>METHOD</th>
-            <th>STATUS</th>
-            <th>AMOUNT</th>
+            <th>{{ 'ADMIN.PAYMENT.TRANSACTIONS.TABLE.ORDER' | translate }}</th>
+            <th>{{ 'ADMIN.PAYMENT.TRANSACTIONS.TABLE.METHOD' | translate }}</th>
+            <th>{{ 'ADMIN.PAYMENT.TRANSACTIONS.TABLE.STATUS' | translate }}</th>
+            <th>{{ 'ADMIN.PAYMENT.TRANSACTIONS.TABLE.AMOUNT' | translate }}</th>
           </tr>
         </thead>
         <tbody>
@@ -111,7 +115,7 @@
               </td>
               <td class="status-cell">
                 <span [ngClass]="statusClass(tx.paymentStatus)">
-                  {{ tx.paymentStatus | uppercase }}
+                  {{ ('ADMIN.PAYMENT.TRANSACTIONS.STATUS.' + tx.paymentStatus | uppercase) | translate }}
                 </span>
               </td>
               <td class="amount-cell" [class.negative]="isRefunded(tx.paymentStatus)">
@@ -120,7 +124,9 @@
             </tr>
           } @empty {
             <tr>
-              <td colspan="4" class="empty-state">No transactions found</td>
+              <td colspan="4" class="empty-state">
+                {{ 'ADMIN.PAYMENT.TRANSACTIONS.EMPTY' | translate }}
+              </td>
             </tr>
           }
         </tbody>

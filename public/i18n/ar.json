@@ -526,8 +526,56 @@
       "NONOTIFICATION": "لا توجد إشعارات"
     }
   },
-
   "ADMIN": {
+    "PAYMENT":{
+      "TRANSACTIONS": {
+        "TITLE": "آخر المعاملات",
+        "TOTAL_SUFFIX": "إجمالي",
+
+        "BRANCHES": {
+          "ALL": "كل الفروع"
+        },
+
+        "FILTERS": {
+          "ORDER_ID_PLACEHOLDER": "رقم الطلب...",
+          "METHOD_ALL": "كل طرق الدفع",
+          "STATUS_ALL": "كل الحالات"
+        },
+
+        "METHODS": {
+          "CASH": "نقدي",
+          "CARD": "بطاقة",
+          "INSTA_PAY": "إنستا باي",
+          "WALLET": "محفظة"
+        },
+
+        "STATUS": {
+          "PAID": "مدفوع",
+          "PENDING": "قيد الانتظار",
+          "REFUNDED": "مسترجع",
+          "FAILED": "فاشل"
+        },
+
+        "TABLE": {
+          "ORDER": "الطلب",
+          "METHOD": "الطريقة",
+          "STATUS": "الحالة",
+          "AMOUNT": "المبلغ"
+        },
+
+        "EMPTY": "لا توجد معاملات",
+
+        "ERROR": {
+          "RETRY": "إعادة المحاولة"
+        }
+      },
+      "TITLE":"منصه الحسابات",
+      "AWAITING_PAYMENTS":{
+        "FILTERS":{
+          "ALL_BRANCHES":"كل الفروع"
+        }
+      }
+    },
     "MENU_FILTER": {
       "SEARCH": "ابحث في عناصر القائمة...",
       "ALL_CATEGORIES": "كل الفئات",

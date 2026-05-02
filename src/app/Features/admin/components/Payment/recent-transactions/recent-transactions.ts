@@ -1,24 +1,27 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule, DecimalPipe, UpperCasePipe } from '@angular/common';
-import { finalize, Subject, debounceTime, distinctUntilChanged } from 'rxjs';
+import { finalize, Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 import { Branch } from '../../../../../Core/Models/BranchModels/branch-interface';
 import { PaymentDto } from '../../../../../Core/Models/PaymentModels/payment-dto';
 import { PaymentQueryParams } from '../../../../../Core/Models/PaymentModels/payment-query-params';
 import { BranchService } from '../../../../../Core/Services/Branch-Service/branch-service';
 import { PaymentService } from '../../../../../Core/Services/Payment-Service/payment-service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
 
 
 @Component({
   selector: 'app-recent-transactions',
   standalone: true,
-  imports: [CommonModule, DecimalPipe, UpperCasePipe],
+  imports: [CommonModule, DecimalPipe, UpperCasePipe, TranslatePipe],
   templateUrl: './recent-transactions.html',
   styleUrls: ['./recent-transactions.scss'],
 })
 export class RecentTransactionsComponent implements OnInit {
   private paymentService = inject(PaymentService);
   private branchService  = inject(BranchService);
+  private localizationService = inject(LocalizationService)
 
   private orderIdDebounce$ = new Subject<number | null>();
 
@@ -45,7 +48,23 @@ export class RecentTransactionsComponent implements OnInit {
 
     this.loadBranches();
     this.load();
+    this.getCurrentLanguage();
   }
+
+  CurrentLanguage: string = 'en';
+    
+      private destroy$ = new Subject<void>();
+      getCurrentLanguage(): void {
+        this.CurrentLanguage = this.localizationService.getCurrentLang();
+        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+          this.CurrentLanguage = lang;
+        });
+      }
+    
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 
   loadBranches(): void {
     this.branchService.getBranches().subscribe({
@@ -120,5 +139,12 @@ export class RecentTransactionsComponent implements OnInit {
 
   isRefunded(status: string): boolean {
     return status?.toLowerCase() === 'refunded';
+  }
+
+  getBranchName(item: any): string {
+    if (this.CurrentLanguage === 'ar') {
+      return item.arabicName || item.name;
+    }
+    return item.name;
   }
 }

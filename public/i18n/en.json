@@ -526,6 +526,55 @@
   },
 
   "ADMIN": {
+    "PAYMENT":{
+      "TRANSACTIONS": {
+        "TITLE": "Recent Transactions",
+        "TOTAL_SUFFIX": "total",
+
+        "BRANCHES": {
+          "ALL": "All Branches"
+        },
+
+        "FILTERS": {
+          "ORDER_ID_PLACEHOLDER": "Order ID...",
+          "METHOD_ALL": "All Methods",
+          "STATUS_ALL": "All Statuses"
+        },
+
+        "METHODS": {
+          "CASH": "Cash",
+          "CARD": "Card",
+          "INSTA_PAY": "InstaPay",
+          "WALLET": "Wallet"
+        },
+
+        "STATUS": {
+          "PAID": "Paid",
+          "PENDING": "Pending",
+          "REFUNDED": "Refunded",
+          "FAILED": "Failed"
+        },
+
+        "TABLE": {
+          "ORDER": "ORDER",
+          "METHOD": "METHOD",
+          "STATUS": "STATUS",
+          "AMOUNT": "AMOUNT"
+        },
+
+        "EMPTY": "No transactions found",
+
+        "ERROR": {
+          "RETRY": "Retry"
+        }
+      },
+      "TITLE":"Payment Terminal",
+      "AWAITING_PAYMENTS":{
+        "FILTERS":{
+          "ALL_BRANCHES":"All Branches"
+        }
+      }
+    },
     "MENU_FILTER": {
       "SEARCH": "Search menu items...",
       "ALL_CATEGORIES": "All Categories",
