@@ -526,6 +526,53 @@
   },
 
   "ADMIN": {
+    "USERS": {
+      "DETAILS": {
+        "TITLE": "User Details",
+        "LOADING": "Loading...",
+
+        "STATUS": {
+          "ACTIVE": "Active",
+          "INACTIVE": "Inactive"
+        },
+
+        "INFO": {
+          "EMAIL": "EMAIL",
+          "BRANCH": "BRANCH",
+          "JOINED": "JOINED",
+          "ROLE": "ROLE"
+        },
+
+        "SECTIONS": {
+          "ORDERS": "Orders",
+          "DELIVERIES": "Deliveries"
+        },
+
+        "ORDERS": {
+          "TYPE": "Type",
+          "STATUS": "Status",
+          "AMOUNT": "Amount",
+          "DATE": "Date"
+        },
+
+        "DELIVERIES": {
+          "STATUS": "Status",
+          "ADDRESS": "Address",
+          "CASH": "Cash Collected",
+          "DATE": "Delivered At"
+        }
+      },
+      "NOT_FOUND":"No users found",
+      "ACTIVE":"Active",
+      "IN_ACTIVE":"Inactive",
+      "ALL_BRANCHES":"All Branches",
+      "TITLE": "Staff & Users",
+      "SUBTITLE": "Manage accounts and permissions",
+
+      "BUTTONS": {
+        "ADD": "+ Add User"
+      }
+    },
     "INGREDIENTS": {
       "TITLE": "Ingredients",
       "LOADING": "Loading ingredients...",
