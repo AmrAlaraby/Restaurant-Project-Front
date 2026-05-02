@@ -8,35 +8,51 @@
           <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
         </svg>
       </div>
+
       <div>
-        <h3 class="modal-title">Add Category</h3>
-        <p class="modal-sub">Enter a name for the new category</p>
+        <h3 class="modal-title">
+          {{ 'ADMIN.CATEGORIES.MODAL.ADD.TITLE' | translate }}
+        </h3>
+        <p class="modal-sub">
+          {{ 'ADMIN.CATEGORIES.MODAL.ADD.SUBTITLE' | translate }}
+        </p>
       </div>
     </div>
 
     <form [formGroup]="addForm" (ngSubmit)="submitAdd()">
       <div class="field-group">
-        <label class="field-label">Category Name</label>
+
+        <label class="field-label">
+          {{ 'ADMIN.CATEGORIES.MODAL.FIELDS.NAME' | translate }}
+        </label>
         <input
           class="field-input"
           type="text"
           formControlName="name"
-          placeholder="e.g. Appetizers, Desserts…"
+          [placeholder]="'ADMIN.CATEGORIES.MODAL.PLACEHOLDERS.NAME' | translate"
         />
-        <label class="field-label">Arabic Name</label>
+
+        <label class="field-label">
+          {{ 'ADMIN.CATEGORIES.MODAL.FIELDS.ARABIC_NAME' | translate }}
+        </label>
         <input
           class="field-input"
           type="text"
           formControlName="arabicName"
-          placeholder="e.g. Appetizers, Desserts…"
+          [placeholder]="'ADMIN.CATEGORIES.MODAL.PLACEHOLDERS.ARABIC_NAME' | translate"
         />
+
       </div>
 
       <div class="modal-divider"></div>
 
       <div class="modal-actions">
-        <button type="button" class="btn-discard" (click)="closeAddModal()">Cancel</button>
-        <button type="submit" class="btn-save">Add Category</button>
+        <button type="button" class="btn-discard" (click)="closeAddModal()">
+          {{ 'ADMIN.CATEGORIES.MODAL.BUTTONS.CANCEL' | translate }}
+        </button>
+        <button type="submit" class="btn-save">
+          {{ 'ADMIN.CATEGORIES.MODAL.BUTTONS.ADD' | translate }}
+        </button>
       </div>
     </form>
 
@@ -54,21 +70,30 @@
             stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
+
       <div>
-        <h3 class="modal-title">Delete Category</h3>
-        <p class="modal-sub">This action cannot be undone.</p>
+        <h3 class="modal-title">
+          {{ 'ADMIN.CATEGORIES.MODAL.DELETE.TITLE' | translate }}
+        </h3>
+        <p class="modal-sub">
+          {{ 'ADMIN.CATEGORIES.MODAL.DELETE.SUBTITLE' | translate }}
+        </p>
       </div>
     </div>
 
     <p class="modal-body-text">
-      Are you sure you want to delete this category? All associated data may be affected.
+      {{ 'ADMIN.CATEGORIES.MODAL.DELETE.MESSAGE' | translate }}
     </p>
 
     <div class="modal-divider"></div>
 
     <div class="modal-actions">
-      <button type="button" class="btn-discard" (click)="closeDeleteModal()">Cancel</button>
-      <button type="button" class="btn-danger" (click)="confirmDelete()">Delete</button>
+      <button type="button" class="btn-discard" (click)="closeDeleteModal()">
+        {{ 'ADMIN.CATEGORIES.MODAL.BUTTONS.CANCEL' | translate }}
+      </button>
+      <button type="button" class="btn-danger" (click)="confirmDelete()">
+        {{ 'ADMIN.CATEGORIES.MODAL.BUTTONS.DELETE' | translate }}
+      </button>
     </div>
 
   </div>
@@ -84,37 +109,51 @@
           <path d="M13.5 3.5l3 3L7 16H4v-3L13.5 3.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
         </svg>
       </div>
+
       <div>
-        <h3 class="modal-title">Edit Category</h3>
-        <p class="modal-sub">Update the category name below</p>
+        <h3 class="modal-title">
+          {{ 'ADMIN.CATEGORIES.MODAL.EDIT.TITLE' | translate }}
+        </h3>
+        <p class="modal-sub">
+          {{ 'ADMIN.CATEGORIES.MODAL.EDIT.SUBTITLE' | translate }}
+        </p>
       </div>
     </div>
 
     <form [formGroup]="editForm" (ngSubmit)="submitEdit()">
       <div class="field-group">
-        <label class="field-label">Name</label>
+
+        <label class="field-label">
+          {{ 'ADMIN.CATEGORIES.MODAL.FIELDS.NAME' | translate }}
+        </label>
         <input
           class="field-input"
           type="text"
           formControlName="name"
-          placeholder="Category name"
+          [placeholder]="'ADMIN.CATEGORIES.MODAL.PLACEHOLDERS.NAME' | translate"
         />
 
-        <label class="field-label">Arabic Name</label>
+        <label class="field-label">
+          {{ 'ADMIN.CATEGORIES.MODAL.FIELDS.ARABIC_NAME' | translate }}
+        </label>
         <input
           class="field-input"
           type="text"
           formControlName="arabicName"
-          placeholder="Arabic name"
+          [placeholder]="'ADMIN.CATEGORIES.MODAL.PLACEHOLDERS.ARABIC_NAME' | translate"
         />
-        
+
       </div>
 
       <div class="modal-divider"></div>
 
       <div class="modal-actions">
-        <button type="button" class="btn-discard" (click)="closeEditModal()">Cancel</button>
-        <button type="submit" class="btn-save">Save Changes</button>
+        <button type="button" class="btn-discard" (click)="closeEditModal()">
+          {{ 'ADMIN.CATEGORIES.MODAL.BUTTONS.CANCEL' | translate }}
+        </button>
+        <button type="submit" class="btn-save">
+          {{ 'ADMIN.CATEGORIES.MODAL.BUTTONS.SAVE' | translate }}
+        </button>
       </div>
     </form>
 
@@ -124,19 +163,19 @@
 <!-- ── PAGE ── -->
 <div class="page">
 
-  <!-- Breadcrumb -->
-
-
   <!-- Header -->
   <div class="page-header">
     <div class="page-header__title">
-      <h1 class="page-title">Menu Categories</h1>
+      <h1 class="page-title">
+        {{ 'ADMIN.CATEGORIES.TITLE' | translate }}
+      </h1>
     </div>
+
     <button class="btn-add" type="button" (click)="openAddModal()">
       <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
         <path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
-      Add Category
+      {{ 'ADMIN.CATEGORIES.BUTTONS.ADD' | translate }}
     </button>
   </div>
 
@@ -158,7 +197,7 @@
 
   <!-- Loading -->
   <div *ngIf="loading" class="state-box loading-box">
-    <p>Loading categories…</p>
+    <p>{{ 'ADMIN.CATEGORIES.LOADING' | translate }}</p>
   </div>
 
   <!-- API Error -->
@@ -173,24 +212,24 @@
         <path d="M16 20h16M16 28h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
     </div>
-    <p>No categories found</p>
-    <span>Add your first category to get started.</span>
+
+    <p>{{ 'ADMIN.CATEGORIES.EMPTY.TITLE' | translate }}</p>
+    <span>{{ 'ADMIN.CATEGORIES.EMPTY.SUBTITLE' | translate }}</span>
   </div>
 
   <!-- Table -->
   <div class="table-wrapper" *ngIf="!loading && !error && categories.length > 0">
 
     <div class="table-head">
-      <span>Category</span>
-      <span>Items</span>
-      <span class="col-actions">Actions</span>
+      <span>{{ 'ADMIN.CATEGORIES.TABLE.CATEGORY' | translate }}</span>
+      <span>{{ 'ADMIN.CATEGORIES.TABLE.ITEMS' | translate }}</span>
+      <span class="col-actions">{{ 'ADMIN.CATEGORIES.TABLE.ACTIONS' | translate }}</span>
     </div>
 
     <div class="table-row" *ngFor="let cat of categories">
 
       <div class="cat-name">
-        <!-- <span class="cat-icon">{{ getCategoryIcon(cat.name) }}</span> -->
-        {{ cat.name }}
+        {{ getCategoryName(cat) }}
       </div>
 
       <div class="items-count">
@@ -202,14 +241,14 @@
           <svg width="13" height="13" viewBox="0 0 20 20" fill="none">
             <path d="M13.5 3.5l3 3L7 16H4v-3L13.5 3.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
           </svg>
-          Edit
+          {{ 'ADMIN.CATEGORIES.BUTTONS.EDIT' | translate }}
         </button>
 
         <button class="btn-delete" (click)="onDelete(cat.id)">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
             <path d="M4 6h16M8 6V4h8v2M5 6l1 14h12L19 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          Delete
+          {{ 'ADMIN.CATEGORIES.BUTTONS.DELETE' | translate }}
         </button>
       </div>
 

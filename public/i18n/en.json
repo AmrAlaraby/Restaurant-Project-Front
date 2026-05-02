@@ -526,6 +526,62 @@
   },
 
   "ADMIN": {
+    "CATEGORIES": {
+      "MODAL": {
+  
+          "ADD": {
+            "TITLE": "Add Category",
+            "SUBTITLE": "Enter a name for the new category"
+          },
+  
+          "EDIT": {
+            "TITLE": "Edit Category",
+            "SUBTITLE": "Update the category name below"
+          },
+  
+          "DELETE": {
+            "TITLE": "Delete Category",
+            "SUBTITLE": "This action cannot be undone.",
+            "MESSAGE": "Are you sure you want to delete this category? All associated data may be affected."
+          },
+  
+          "FIELDS": {
+            "NAME": "Category Name",
+            "ARABIC_NAME": "Arabic Name"
+          },
+  
+          "PLACEHOLDERS": {
+            "NAME": "e.g. Appetizers, Desserts…",
+            "ARABIC_NAME": "e.g. مقبلات، حلويات…"
+          },
+  
+          "BUTTONS": {
+            "CANCEL": "Cancel",
+            "ADD": "Add Category",
+            "SAVE": "Save Changes",
+            "DELETE": "Delete"
+          }
+        },
+      "TITLE": "Menu Categories",
+      "LOADING": "Loading categories…",
+
+      "EMPTY": {
+        "TITLE": "No categories found",
+        "SUBTITLE": "Add your first category to get started."
+      },
+
+      "TABLE": {
+        "CATEGORY": "Category",
+        "ITEMS": "Items",
+        "ACTIONS": "Actions"
+      },
+
+      "BUTTONS": {
+        "ADD": "Add Category",
+        "EDIT": "Edit",
+        "DELETE": "Delete"
+      }
+    },
     "STOCK_MANAGEMENT": {
       "TITLE": "Stock Management",
       "LOADING": "Loading...",
