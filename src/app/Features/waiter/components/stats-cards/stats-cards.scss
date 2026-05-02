@@ -1,40 +1,228 @@
+/* ═══════════════════════════════════════════════════════════
+   STATS CARDS — Shared SCSS
+   Used by: dashboard-stats & stats-cards components
+   Design System: warm red-and-gold brand
+   Dark mode via .dark class only · No hardcoded hex values
+═══════════════════════════════════════════════════════════ */
+
+/* ── GRID ────────────────────────────────────────────────── */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-md);
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-sm);
+  }
 }
 
+/* ── CARD BASE ───────────────────────────────────────────── */
 .stat-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 24px 20px;
+  position: relative;
+  background: var(--clr-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-md);
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  border: 1.5px solid transparent;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-  transition: transform 0.2s;
+  gap: var(--space-sm);
+  border: 1px solid var(--clr-border);
+  border-top: 3px solid transparent;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition:
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal);
 
-  &:hover { transform: translateY(-2px); }
+  .dark & {
+    background: var(--clr-surface-alt);
+    border-color: var(--clr-border);
+    box-shadow: var(--shadow-sm);
+  }
 
-  &.border-red    { border-color: #f5c6c0; }
-  &.border-orange { border-color: #fcd9a0; }
-  &.border-green  { border-color: #a7f3d0; }
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+
+    .dark & {
+      box-shadow: var(--shadow-md);
+    }
+  }
 }
 
+/* ── INDICATOR STRIPE ────────────────────────────────────── */
+.stat-card__indicator {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 4px;
+  background: transparent;
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  transition: background var(--transition-fast);
+}
+
+/* ── BODY ────────────────────────────────────────────────── */
+.stat-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding-inline-start: var(--space-xs);
+}
+
+/* ── VALUE ───────────────────────────────────────────────── */
 .stat-value {
-  font-size: 30px;
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 4vw, 32px);
   font-weight: 800;
   letter-spacing: -0.5px;
-  font-family: 'DM Mono', monospace;
+  color: var(--clr-text-primary);
+  line-height: 1;
 
-  &.red    { color: #c0392b; }
-  &.orange { color: #d97706; }
-  &.green  { color: #16a34a; }
+  .dark & {
+    color: var(--clr-text-primary);
+  }
 }
 
+/* ── LABEL ───────────────────────────────────────────────── */
 .stat-label {
-  font-size: 13px;
-  color: #999;
-  font-weight: 500;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--clr-text-hint);
+
+  .dark & {
+    color: var(--clr-text-hint);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ACCENT VARIANTS
+   Apply as a class directly on .stat-card
+   e.g. <div class="stat-card red">
+═══════════════════════════════════════════════════════════ */
+
+/* ── RED — primary / brand metric (deep crimson) ─────────── */
+.stat-card.red {
+  border-top-color: var(--clr-primary);
+  background: var(--clr-bg);
+
+  .dark & {
+    background: var(--clr-danger-bg);
+    border-top-color: var(--clr-primary);
+  }
+
+  .stat-card__indicator {
+    background: var(--clr-primary);
+  }
+
+  .stat-value {
+    color: var(--clr-primary);
+
+    .dark & {
+      color: var(--clr-primary-light);
+    }
+  }
+
+  .stat-label {
+    color: var(--clr-text-secondary);
+
+    .dark & {
+      color: var(--clr-text-secondary);
+    }
+  }
+}
+
+/* ── RED2 — warm gold / attention metric ─────────────────── */
+.stat-card.red2 {
+  border-top-color: var(--clr-accent);
+  background: var(--clr-bg);
+
+  .dark & {
+    background: var(--clr-warning-bg);
+    border-top-color: var(--clr-accent);
+  }
+
+  .stat-card__indicator {
+    background: var(--clr-accent);
+  }
+
+  .stat-value {
+    color: var(--clr-primary);
+
+    .dark & {
+      color: var(--clr-accent-light);
+    }
+  }
+
+  .stat-label {
+    color: var(--clr-text-secondary);
+
+    .dark & {
+      color: var(--clr-text-secondary);
+    }
+  }
+}
+
+/* ── GREEN — success / positive metric ───────────────────── */
+.stat-card.green {
+  border-top-color: var(--clr-success);
+  background: var(--clr-bg);
+
+  .dark & {
+    background: var(--clr-success-bg);
+    border-top-color: var(--clr-success);
+  }
+
+  .stat-card__indicator {
+    background: var(--clr-success);
+  }
+
+  .stat-value {
+    color: var(--clr-success);
+
+    .dark & {
+      color: var(--clr-success);
+    }
+  }
+
+  .stat-label {
+    color: var(--clr-text-secondary);
+
+    .dark & {
+      color: var(--clr-text-secondary);
+    }
+  }
+}
+
+/* ── GREEN2 — neutral cream surface with green border ────── */
+.stat-card.green2 {
+  border-top-color: var(--clr-success);
+  background: var(--clr-bg);
+
+  .dark & {
+    background: var(--clr-cream);
+    border-top-color: var(--clr-success);
+  }
+
+  .stat-card__indicator {
+    background: var(--clr-success);
+  }
+
+  .stat-value {
+    color: var(--clr-text-primary);
+
+    .dark & {
+      color: var(--clr-text-primary);
+    }
+  }
+
+  .stat-label {
+    color: var(--clr-text-hint);
+
+    .dark & {
+      color: var(--clr-text-hint);
+    }
+  }
 }
