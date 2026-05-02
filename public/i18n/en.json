@@ -526,6 +526,34 @@
   },
 
   "ADMIN": {
+    "INGREDIENTS": {
+      "TITLE": "Ingredients",
+      "LOADING": "Loading ingredients...",
+      "EMPTY": "No ingredients found 🍃",
+      "ITEMS": "Items",
+
+      "TABLE": {
+        "NAME": "Name",
+        "UNIT": "Unit",
+        "ACTIONS": "Actions"
+      },
+
+      "BUTTONS": {
+        "ADD": "Add Item",
+        "DELETE": "Delete",
+        "CANCEL": "Cancel",
+        "SAVE": "Save"
+      },
+
+      "MODAL": {
+        "TITLE": "Add New Ingredient",
+        "FIELDS": {
+          "NAME": "Name",
+          "ARABIC_NAME": "Arabic Name",
+          "UNIT": "Unit"
+        }
+      }
+    },
     "CATEGORIES": {
       "MODAL": {
   

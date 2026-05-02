@@ -527,7 +527,34 @@
     }
   },
   "ADMIN": {
-    
+    "INGREDIENTS": {
+      "TITLE": "المكونات",
+      "LOADING": "جارٍ تحميل المكونات...",
+      "EMPTY": "لا توجد مكونات 🍃",
+      "ITEMS": "عنصر",
+
+      "TABLE": {
+        "NAME": "الاسم",
+        "UNIT": "الوحدة",
+        "ACTIONS": "الإجراءات"
+      },
+
+      "BUTTONS": {
+        "ADD": "إضافة عنصر",
+        "DELETE": "حذف",
+        "CANCEL": "إلغاء",
+        "SAVE": "حفظ"
+      },
+
+      "MODAL": {
+        "TITLE": "إضافة مكون جديد",
+        "FIELDS": {
+          "NAME": "الاسم",
+          "ARABIC_NAME": "الاسم بالعربية",
+          "UNIT": "الوحدة"
+        }
+      }
+    },
     "CATEGORIES": {
       "MODAL": {
 
