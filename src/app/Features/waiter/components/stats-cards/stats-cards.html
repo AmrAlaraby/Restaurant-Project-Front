@@ -1,32 +1,34 @@
 <div class="stats-grid">
 
-  <div class="stat-card border-red">
-    <div class="stat-value red">{{ tablesServed }}</div>
-    <div class="stat-label">
-      {{ 'WAITER.HOME.STATS.TABLES_SERVED' | translate }}
+  <div class="stat-card red">
+    <div class="stat-card__indicator" aria-hidden="true"></div>
+    <div class="stat-card__body">
+      <div class="stat-value">{{ tablesServed }}</div>
+      <div class="stat-label">{{ 'WAITER.HOME.STATS.TABLES_SERVED' | translate }}</div>
     </div>
   </div>
 
-  <div class="stat-card border-orange">
-    <div class="stat-value orange">{{ activeOrders }}</div>
-    <div class="stat-label">
-      {{ 'WAITER.HOME.STATS.ORDERS_ACTIVE' | translate }}
+  <div class="stat-card red2">
+    <div class="stat-card__indicator" aria-hidden="true"></div>
+    <div class="stat-card__body">
+      <div class="stat-value">{{ activeOrders }}</div>
+      <div class="stat-label">{{ 'WAITER.HOME.STATS.ORDERS_ACTIVE' | translate }}</div>
     </div>
   </div>
 
-  <div class="stat-card border-red">
-    <div class="stat-value red">{{ occupiedTables }}</div>
-    <div class="stat-label">
-      {{ 'WAITER.HOME.STATS.OCCUPIED_TABLES' | translate }}
+  <div class="stat-card red">
+    <div class="stat-card__indicator" aria-hidden="true"></div>
+    <div class="stat-card__body">
+      <div class="stat-value">{{ occupiedTables }}</div>
+      <div class="stat-label">{{ 'WAITER.HOME.STATS.OCCUPIED_TABLES' | translate }}</div>
     </div>
   </div>
 
-  <div class="stat-card border-green">
-    <div class="stat-value green">
-      EGP {{ myOrdersTotal | number }}
-    </div>
-    <div class="stat-label">
-      {{ 'WAITER.HOME.STATS.MY_ORDERS_TOTAL' | translate }}
+  <div class="stat-card green">
+    <div class="stat-card__indicator" aria-hidden="true"></div>
+    <div class="stat-card__body">
+      <div class="stat-value">EGP {{ myOrdersTotal | number }}</div>
+      <div class="stat-label">{{ 'WAITER.HOME.STATS.MY_ORDERS_TOTAL' | translate }}</div>
     </div>
   </div>
 
