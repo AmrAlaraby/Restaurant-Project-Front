@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CategoryList } from '../../components/Home/category-list/category-list';
 import { PopularItems } from '../../components/Home/popular-items/popular-items';
 import { Router } from '@angular/router';
@@ -16,7 +16,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   private router = inject(Router);
   private ordersService = inject(OrdersService);
   private authService = inject(AuthService);
@@ -24,16 +24,40 @@ export class HomePage implements OnInit {
 
   ActiveOrders: OrderDetailsInterface[] = [];
 
+  // ── Slideshow ──────────────────────────────────────────────
+  slideImages: string[] = [
+    '/images/b2.jpg',
+    '/images/Pizza.jpg',
+    '/images/Pasta.jpg',
+  ];
+  currentSlideIndex = 0;
+  private slideTimer: ReturnType<typeof setInterval> | null = null;
+  // ──────────────────────────────────────────────────────────
+
   ngOnInit(): void {
     this.loadOrders();
     this.listenToOrderUpdates();
+    this.startSlideshow();
   }
 
-  goToBrowse() {
+  ngOnDestroy(): void {
+    if (this.slideTimer) {
+      clearInterval(this.slideTimer);
+    }
+  }
+
+  private startSlideshow(): void {
+    this.slideTimer = setInterval(() => {
+      this.currentSlideIndex =
+        (this.currentSlideIndex + 1) % this.slideImages.length;
+    }, 4000);
+  }
+
+  goToBrowse(): void {
     this.router.navigate(['/customer/browse-menu']);
   }
 
-  loadOrders() {
+  loadOrders(): void {
     const params = { pageNumber: 1, pageSize: 10, OrderType: 'Delivery' };
     this.ordersService.getMyActiveOrders(params).subscribe({
       next: (res) => {
@@ -42,11 +66,11 @@ export class HomePage implements OnInit {
     });
   }
 
-  onTrackDelivery(orderId: number) {
+  onTrackDelivery(orderId: number): void {
     this.router.navigate(['/customer/track-delivery', orderId]);
   }
 
-  listenToOrderUpdates() {
+  listenToOrderUpdates(): void {
     const token = this.authService.getAccessToken();
     this.signalR.startRestaurantUpdatesConnection(token ?? '');
 

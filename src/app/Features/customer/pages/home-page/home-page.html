@@ -1,33 +1,50 @@
 <div class="home-page">
   <!-- ===================== HERO ===================== -->
-  <section class="hero">
-    <div class="hero-image">
-      <div class="hero-img-placeholder">
-        <img src="/images/Burger.jpg" alt="Burger" />
-      </div>
-    </div>
-    <div class="hero-container">
-      <div class="hero-content">
-        <div class="hero-badge">
-          {{ 'CUSTOMER.HOME.HERO.BADGE' | translate }}
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-image">
+    <div class="hero-slides">
+      @for (img of slideImages; track img; let i = $index) {
+        <div class="slide" [class.active]="i === currentSlideIndex">
+          <img [src]="img" alt="Food slide {{ i + 1 }}" />
         </div>
-        <h1 class="hero-title">
-          {{ 'CUSTOMER.HOME.HERO.TITLE' | translate }}
-          <span class="hero-highlight">
-            {{ 'CUSTOMER.HOME.HERO.HIGHLIGHT' | translate }}
+      }
+    </div>
+  </div>
+
+  <div class="hero-container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        {{ 'CUSTOMER.HOME.HERO.BADGE' | translate }}
+      </div>
+      <h1 class="hero-title">
+        {{ 'CUSTOMER.HOME.HERO.TITLE' | translate }}
+        <span class="hero-highlight">
+          {{ 'CUSTOMER.HOME.HERO.HIGHLIGHT' | translate }}
+        </span>
+      </h1>
+      <p class="hero-desc">
+        {{ 'CUSTOMER.HOME.HERO.DESCRIPTION' | translate }}
+      </p>
+      <div class="hero-actions">
+        <button class="btn-hero-primary" (click)="goToBrowse()">
+          {{ 'CUSTOMER.HOME.HERO.BUTTON_VIEW_MENU' | translate }}
+        </button>
+      </div>
+
+      <!-- Dots indicator -->
+      <div class="slide-dots">
+        @for (img of slideImages; track img; let i = $index) {
+          <span
+            class="dot"
+            [class.active]="i === currentSlideIndex"
+            (click)="currentSlideIndex = i">
           </span>
-        </h1>
-        <p class="hero-desc">
-          {{ 'CUSTOMER.HOME.HERO.DESCRIPTION' | translate }}
-        </p>
-        <div class="hero-actions">
-          <button class="btn-hero-primary" (click)="goToBrowse()">
-            {{ 'CUSTOMER.HOME.HERO.BUTTON_VIEW_MENU' | translate }}
-          </button>
-        </div>
+        }
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- ===================== ACTIVE ORDERS ===================== -->
   <div class="active">
@@ -185,7 +202,7 @@
         </div>
 
         <div class="how-img">
-          <img src="/images/Burger3.jpg" alt="Burger" />
+          <img src="/images/Burger3.jpg" alt="Food" />
         </div>
       </div>
     </div>
