@@ -13,7 +13,8 @@
   height: 100vh;
   width: 100%;
   background: var(--clr-surface);
-  overflow: hidden;
+  // overflow: hidden;
+  overflow: visible;
 
   .dark & {
     background: var(--clr-surface);
@@ -99,7 +100,8 @@ app-sidebar {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  // overflow: hidden;
+  overflow: visible;
   background: var(--clr-surface);
 
   .dark & {
@@ -334,7 +336,10 @@ app-sidebar {
 
 .main-content {
   flex: 1;
-  overflow: hidden;
+      // flex: 1;
+    overflow: visible;
+    animation: _ngcontent-ng-c2384937393_as-fade-in 0.3s ease both;
+  // overflow: hidden;
   display: flex;
   flex-direction: column;
   background: var(--clr-surface);
