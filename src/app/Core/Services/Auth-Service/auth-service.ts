@@ -97,9 +97,12 @@ export class AuthService {
   getAccessToken(): string | null {
     return localStorage.getItem('accessToken');
   }
+  getRoleId(): string | null {
+    return localStorage.getItem('roleId');
+  }
 
   isLoggedIn(): boolean {
-    return !!this.getAccessToken();
+    return !!this.getRoleId();
   }
 
   isTokenExpired(): boolean {

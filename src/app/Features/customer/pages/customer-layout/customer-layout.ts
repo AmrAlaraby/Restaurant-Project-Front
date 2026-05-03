@@ -23,6 +23,8 @@ export class CustomerLayout implements OnInit {
   isScrolled = false;
   avatarOpen = false;
 
+  isLoggedIn:boolean =false
+
   UserName = '';
   AvatarLetters = '';
   UserRole = '';
@@ -83,6 +85,8 @@ export class CustomerLayout implements OnInit {
       this.notifications.unshift(data);
       this.toast.show(data.title, 'notification');
     });
+
+    this.isLoggedIn = this.authService.isLoggedIn()
   }
 
   sanitize(icon: string): SafeHtml {

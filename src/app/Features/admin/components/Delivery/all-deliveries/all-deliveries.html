@@ -22,7 +22,7 @@
         {{ 'ADMIN.DELIVERIES.FILTERS.ALL_STATUS' | translate }}
       </option>
       <option *ngFor="let s of statuses" [ngValue]="s">
-        {{ s | translate }}
+        {{ 'ADMIN.STATUS.'+s.toUpperCase() | translate }}
       </option>
     </select>
   </div>
