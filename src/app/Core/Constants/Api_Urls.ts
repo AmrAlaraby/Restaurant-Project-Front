@@ -163,7 +163,7 @@ export const Order = {
 
 export const signalRUrl = {
   notifications: `${HupUrl}/notifications`,
-  restaurantUpdates: `${HupUrl}/hubs/restaurant`,
+  restaurantUpdates: `${HupUrl}/restaurant`,
 };
 export const Notification = {
   getMyNotifications: `${apiUrl}/notifications`,
