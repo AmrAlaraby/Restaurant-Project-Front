@@ -480,7 +480,14 @@
       "Preparing": "Preparing",
       "Ready": "Ready",
       "Completed": "Completed",
-      "Cancelled": "Cancelled"
+      "Cancelled": "Cancelled",
+      "AWAITINGPAYMENT": "Awaiting Payment",
+      "PENDING": "Pending",
+      "CONFIRMED": "Confirmed",
+      "PREPAIRING": "Preparing",
+      "READY": "Ready",
+      "COMPLETED": "Completed",
+      "CANCELLED": "Cancelled"
     },
     "DELIVERY_STATUS": {
       "Assigned": "Assigned",
