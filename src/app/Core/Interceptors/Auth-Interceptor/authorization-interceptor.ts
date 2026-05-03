@@ -2,6 +2,7 @@ import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, switchMap, throwError, BehaviorSubject, filter, take } from 'rxjs';
 import { AuthService } from '../../Services/Auth-Service/auth-service';
+import { LocalizationService } from '../../Services/Localization-Service/localization-service';
 
 let isRefreshing = false;
 const refreshTokenSubject = new BehaviorSubject<string | null>(null);
@@ -10,6 +11,16 @@ export const authorizationInterceptor: HttpInterceptorFn = (req, next) => {
 
   const authService = inject(AuthService);
   const token = authService.getAccessToken();
+  const localizationService = inject(LocalizationService);
+const lang = localizationService.getCurrentLang();
+const acceptLang = lang === 'ar' ? 'ar-EG' : 'en-US';
+
+req = req.clone({
+  withCredentials: true,
+  setHeaders: {
+    'Accept-Language': acceptLang
+  }
+});
 
   // ✅ مهم جدًا: خلي كل request يبعت cookies
   req = req.clone({
