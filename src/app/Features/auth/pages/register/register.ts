@@ -67,7 +67,7 @@ export class Register {
       },
       error: (err) => {
         this.isSubmitting.set(false);
-        this.serverError.set(err.error.detail || 'Registration failed');
+        this.serverError.set(err.error.detail || err.error || 'Registration failed');
         console.log(err);
 
       }

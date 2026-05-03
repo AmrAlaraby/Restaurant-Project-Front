@@ -83,7 +83,7 @@ export class Login {
         this.isSubmitting = false;
         console.log(err);
         
-        this.serverError = err.error || 'Login failed';
+        this.serverError = err.error.detail || err.error || 'Login failed';
       },
     });
   }
