@@ -1,3 +1,4 @@
+import { BasketService } from './../../../../Core/Services/Basket-Service/baskets-service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -20,14 +21,17 @@ export class PaymentSuccess implements OnInit, OnDestroy {
 
 
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private BasketService: BasketService
+  ) {}
 
   ngOnInit(): void {
     setTimeout(() => (this.showContent = true), 100);
     setTimeout(() => (this.showCheckmark = true), 400);
     setTimeout(() => (this.showDetails = true), 900);
     setTimeout(() => (this.showButton = true), 1300);
-
+    this.BasketService.clearBasket();
     this.countdownInterval = setInterval(() => {
       this.countdown--;
       if (this.countdown === 0) {
