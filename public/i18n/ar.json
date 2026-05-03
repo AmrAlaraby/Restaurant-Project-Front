@@ -449,10 +449,16 @@
     "ORDER_STATUS": {
       "RECEIVED": "تم الاستلام",
         "PREPARING": "قيد التحضير",
-        "READY": "جاهز",
+        "Ready": "جاهز",
         "DELIVERED": "تم التوصيل",
-        "CANCELLED": "ملغي",
-        "AWAITINGPAYMENT": "في انتظار الدفع"
+        "Cancelled": "ملغي",
+        "AWAITINGPAYMENT": "في انتظار الدفع",
+      "PENDING": "Pending",
+      "CONFIRMED": "Confirmed",
+      "PREPAIRING": "Preparing",
+      "READY": "Ready",
+      "COMPLETED": "Completed",
+      "CANCELLED": "Cancelled"
     },
     "DELIVERY_STATUS": {
       "ASSIGNED": "تم التعيين",
