@@ -92,10 +92,11 @@ export class Login {
   }
 
   loginWithGoogle() {
-    window.location.href = environment.apiUrl + '/Auth/external-login?provider=Google';
+    window.location.href =  'https://justice-restaurant.runasp.net/api/Auth/external-login?provider=Google';
+    // environment.apiUrl + 
   }
 
   loginWithFacebook() {
-    window.location.href = environment.apiUrl + '/Auth/external-login?provider=Facebook';
+    window.location.href = 'https://justice-restaurant.runasp.net/api/Auth/external-login?provider=Facebook';
   }
 }

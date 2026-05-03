@@ -14,6 +14,7 @@ export class AuthCallback {
 
   ngOnInit() {
     // هنا cookies already set من الباك
+    
     setTimeout(() => {
       this.router.navigate(['/']);
     }, 1000);
