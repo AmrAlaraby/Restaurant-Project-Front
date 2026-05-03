@@ -13,36 +13,39 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrls: ['./customer-menu-item-card.scss'],
 })
 export class CustomerMenuItemCard {
-
   @Input() item!: MenuItemInterface;
 
-  constructor(private localizationService: LocalizationService,private basketService: BasketService) { }
+  constructor(
+    private localizationService: LocalizationService,
+    private basketService: BasketService,
+  ) {}
 
-    ngOnInit(): void {
-      this.getCurrentLanguage();
-    }
-    CurrentLanguage: string = 'en';
-    
-      private destroy$ = new Subject<void>();
-      getCurrentLanguage(): void {
-        this.CurrentLanguage = this.localizationService.getCurrentLang();
-        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
-          this.CurrentLanguage = lang;
-        });
-      }
-    
-      ngOnDestroy(): void {
-        this.destroy$.next();
-        this.destroy$.complete();
-      }
+  ngOnInit(): void {
+    this.getCurrentLanguage();
+  }
+  CurrentLanguage: string = 'en';
+
+  private destroy$ = new Subject<void>();
+  getCurrentLanguage(): void {
+    this.CurrentLanguage = this.localizationService.getCurrentLang();
+    this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+      this.CurrentLanguage = lang;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   addToCart(item: MenuItemInterface) {
     this.basketService.addItem({
       id: item.id,
       name: item.name,
+      arabicName: item.arabicName ? item.arabicName : item.name,
       pictureUrl: item.imageUrl,
       price: item.price,
-      quantity: 1
+      quantity: 1,
     });
   }
 
