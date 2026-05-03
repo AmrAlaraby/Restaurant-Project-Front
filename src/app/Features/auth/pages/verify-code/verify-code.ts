@@ -51,7 +51,7 @@ export class VerifyCode {
       },
       error: (err) => {
         this.loading = false;
-        this.error = err?.error || 'Invalid or expired code';
+        this.error = err.error.detail || 'Invalid or expired code';
         console.error('Error verifying code:', err);
       }
     });

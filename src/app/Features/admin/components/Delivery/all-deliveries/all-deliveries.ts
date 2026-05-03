@@ -41,10 +41,10 @@ export class AllDeliveries {
 
   branches: any[] = [];
   statuses: string[] = [
-    'ADMIN.STATUS.ASSIGNED',
-    'ADMIN.STATUS.PICKED_UP',
-    'ADMIN.STATUS.ON_THE_WAY',
-    'ADMIN.STATUS.DELIVERED',
+    'Assigned',
+    'PickedUp',
+    'OnTheWay',
+    'Delivered',
   ];
 
   statusToIndex: Record<string, number> = {
@@ -54,7 +54,7 @@ export class AllDeliveries {
     'Delivered': 3,
   };
 
-  stepKeys = ['ADMIN.STATUS.ASSIGNED', 'ADMIN.STATUS.PICKED_UP', 'ADMIN.STATUS.ON_THE_WAY', 'ADMIN.STATUS.DELIVERED'];
+  stepKeys = ['Assigned', 'PickedUp', 'OnTheWay', 'Delivered'];
 
   constructor(
     private service: DeliveryService,

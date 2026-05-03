@@ -39,6 +39,7 @@
         <app-cart-icon></app-cart-icon>
 
         <!-- AVATAR DROPDOWN -->
+         @if (isLoggedIn) {
         <div class="avatar-wrapper" [class.open]="avatarOpen" (clickOutside)="avatarOpen = false">
           <div class="nav-avatar" (click)="avatarOpen = !avatarOpen">{{ AvatarLetters }}</div>
 
@@ -102,7 +103,7 @@
                   {{ 'CUSTOMER.NAV.MY_ORDERS' | translate }}
                 </a>
 
-                <a
+                <!-- <a
                   class="dropdown-item"
                   [routerLink]="['/', prefix, 'saved-addresses']"
                   (click)="avatarOpen = false"
@@ -123,11 +124,11 @@
                     </svg>
                   </span>
                   {{ 'CUSTOMER.NAV.ADDRESSES' | translate }}
-                </a>
+                </a> -->
 
                 <div class="dropdown-divider"></div>
 
-                <a
+                <!-- <a
                   class="dropdown-item"
                   [routerLink]="['/', prefix, 'settings']"
                   (click)="avatarOpen = false"
@@ -150,7 +151,7 @@
                     </svg>
                   </span>
                   {{ 'CUSTOMER.NAV.SETTINGS' | translate }}
-                </a>
+                </a> -->
 
                 <div class="dropdown-divider"></div>
 
@@ -177,6 +178,15 @@
             </div>
           }
         </div>
+      }@else {
+        <a
+                  class="dropdown-item"
+                  [routerLink]="['/auth/login']"
+                  (click)="avatarOpen = false"
+                >
+                  {{ 'CUSTOMER.NAV.LOGIN' | translate }}
+                </a>
+      }
       </div>
 
       <!-- HAMBURGER -->
@@ -238,7 +248,8 @@
       }
 
       <!-- Account -->
-      <div class="drawer-section-label">
+       @if (isLoggedIn)
+      {<div class="drawer-section-label">
         {{ 'CUSTOMER.NAV.SECTION_ACCOUNT' | translate }}
       </div>
 
@@ -292,7 +303,7 @@
         <span>{{ 'CUSTOMER.NAV.MY_ORDERS' | translate }}</span>
       </a>
 
-      <a
+      <!-- <a
         class="drawer-link"
         [routerLink]="['/', prefix, 'saved-addresses']"
         routerLinkActive="active"
@@ -314,7 +325,7 @@
           </svg>
         </span>
         <span>{{ 'CUSTOMER.NAV.ADDRESSES' | translate }}</span>
-      </a>
+      </a> -->
 
       <div class="drawer-divider"></div>
 
@@ -336,7 +347,16 @@
           </svg>
         </span>
         <span>{{ 'CUSTOMER.NAV.LOGOUT' | translate }}</span>
-      </button>
+      </button>}
+      @else {
+        <a
+                  class="dropdown-item"
+                  [routerLink]="['/auth/login']"
+                  (click)="avatarOpen = false"
+                >
+                  {{ 'CUSTOMER.NAV.LOGIN' | translate }}
+                </a>
+      }
     </nav>
 
     <div class="drawer-footer-actions">

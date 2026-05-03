@@ -54,9 +54,10 @@ export class BranchSelectorComponent implements OnInit {
     this.branchChanged.emit(id);
   }
   getBranchName(item: any): string {
+    
     if (this.CurrentLanguage === 'ar') {
-      return item.arabicName || item.branchName;
+      return item.arabicName || item.name;
     }
-    return item.branchName;
+    return item.name;
   }
 }

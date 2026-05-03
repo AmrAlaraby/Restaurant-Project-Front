@@ -162,6 +162,7 @@
     "APP_GET": "Get it on"
   },
     "NAV": {
+      "LOGIN":"login",
       "SECTION_ACCOUNT": "Account",
       "PROFILE": "My Profile",
       "MY_ORDERS": "My Orders",
@@ -503,8 +504,8 @@
       },
       "HERO": {
         "BADGE": "Fastest Delivery & Easy Pickup",
-        "TITLE": "Justice",
-        "HIGHLIGHT": "Burger",
+        "TITLE": "Just",
+        "HIGHLIGHT": "Food",
         "DESCRIPTION": "Good food always brought right to you. We deliver your orders quickly and make your meal exciting.",
         "BUTTON_VIEW_MENU": "View Our Menu"
       },
@@ -970,8 +971,11 @@
     },
     "STATUS": {
       "ASSIGNED": "Assigned",
+      "UNASSIGNED": "Un Assigned",
       "PICKED_UP": "Picked Up",
       "ON_THE_WAY": "On the Way",
+      "PICKEDUP": "Picked Up",
+      "ONTHEWAY": "On the Way",
       "DELIVERED": "Delivered"
     },
 
@@ -1481,6 +1485,7 @@
       "PROFILE": "My Profile"
     },
     "DELIVERY_DETAILS": {
+      "COLLECTED":"Collected",
       "CURRENCY": "EGP",
       "NA": "—",
       "LOADING": "Loading...",

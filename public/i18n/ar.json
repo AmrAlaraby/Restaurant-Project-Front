@@ -135,6 +135,7 @@
   "CUSTOMER": {
 
     "NAV": {
+      "LOGIN":"تسجيل الدخول",
       "SECTION_ACCOUNT": "الحساب",
       "PROFILE": "حسابي",
       "MY_ORDERS": "طلباتي",
@@ -476,8 +477,8 @@
       },
       "HERO": {
         "BADGE": "أسرع توصيل واستلام بسهولة",
-        "TITLE": "جاستس",
-        "HIGHLIGHT": "برجر",
+        "TITLE": "چاست",
+        "HIGHLIGHT": "فود",
         "DESCRIPTION": "أكل طازج دايمًا لحد عندك. بنوصل طلبك بسرعة ونخلي تجربتك ممتعة.",
         "BUTTON_VIEW_MENU": "عرض المنيو"
       },
@@ -943,6 +944,8 @@
       "UNASSIGNED": "لم يتم التعيين",
       "PICKED_UP": "تم الاستلام",
       "ON_THE_WAY": "في الطريق",
+      "PICKEDUP": "تم الاستلام",
+      "ONTHEWAY": "في الطريق",
       "DELIVERED": "تم التسليم"
     },
     "BRANCH_DELETE": {
@@ -1448,6 +1451,7 @@
       "PROFILE": "ملفي الشخصي"
     },
     "DELIVERY_DETAILS": {
+      "COLLECTED":"تم تحصيل",
       "CURRENCY": "ج.م",
       "NA": "—",
       "LOADING": "جاري التحميل...",

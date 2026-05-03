@@ -85,7 +85,7 @@ export class OrderDetails implements OnInit {
         },
         error: (err) => {
           console.error('❌ Load order error:', err);
-          this.error = err.error ||'Failed to load order details. Please try again later.';
+          this.error = err.error.detail ||'Failed to load order details. Please try again later.';
         }
       });
   }
@@ -158,7 +158,7 @@ export class OrderDetails implements OnInit {
         },
         error: (err) => {
           console.error('❌ Add items error:', err);
-          this.error = err.error || 'Failed to add items. Please try again.';
+          this.error = err.error.detail || 'Failed to add items. Please try again.';
         }
       });
   }
@@ -179,7 +179,7 @@ export class OrderDetails implements OnInit {
         },
         error: (err) => {
           console.error('❌ Remove error:', err);
-          this.error = err.error || 'Failed to remove item. Please try again.';
+          this.error = err.error.detail || 'Failed to remove item. Please try again.';
         }
       });
   }
@@ -200,7 +200,7 @@ export class OrderDetails implements OnInit {
         },
         error: (err) => {
           console.error('❌ Cancel error:', err);
-          this.error = err.error || 'Failed to cancel order. Please try again.';
+          this.error = err.error.detail || 'Failed to cancel order. Please try again.';
         }
       });
   }
@@ -226,7 +226,7 @@ export class OrderDetails implements OnInit {
       },
       error: (err) => {
         console.error('❌ Status update error:', err);
-        this.error = err.error || 'Failed to update status';
+        this.error = err.error.detail || 'Failed to update status';
       }
     });
 }

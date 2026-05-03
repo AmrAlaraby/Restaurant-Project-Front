@@ -61,13 +61,13 @@ export class Register {
     this.authService.register(data).subscribe({
       next: (res) => {
         this.isSubmitting.set(false);
-        this.router.navigate(['/']);
+        this.router.navigate(['/auth/login']);
         console.log(res);
 
       },
       error: (err) => {
         this.isSubmitting.set(false);
-        this.serverError.set(err?.error || 'Registration failed');
+        this.serverError.set(err.error.detail || 'Registration failed');
         console.log(err);
 
       }

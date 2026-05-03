@@ -103,7 +103,7 @@ export class ResetPassword {
       },
       error: (err) => {
         this.loading = false;
-        this.error = err?.error || 'Reset password failed';
+        this.error = err.error.detail || 'Reset password failed';
         console.error('Error resetting password:', err);
       }
     });
