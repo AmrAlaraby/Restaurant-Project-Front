@@ -23,7 +23,7 @@ export class PaymentSuccess implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private BasketService: BasketService
+    // private BasketService: BasketService
   ) {}
 
   ngOnInit(): void {
@@ -31,7 +31,7 @@ export class PaymentSuccess implements OnInit, OnDestroy {
     setTimeout(() => (this.showCheckmark = true), 400);
     setTimeout(() => (this.showDetails = true), 900);
     setTimeout(() => (this.showButton = true), 1300);
-    this.BasketService.clearBasket();
+    // this.BasketService.clearBasket();
     this.countdownInterval = setInterval(() => {
       this.countdown--;
       if (this.countdown === 0) {
