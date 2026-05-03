@@ -493,7 +493,11 @@
       "Assigned": "Assigned",
       "PickedUp": "Picked Up",
       "OnTheWay": "On the Way",
-      "Delivered": "Delivered"
+      "Delivered": "Delivered",
+      "ASSIGNED": "Assigned",
+      "PICKUP": "Picked Up",
+      "ONTHEWAY": "On the Way",
+      "DELIVERED": "Delivered"
     },
     "HOME": {
       "CART_BAR": {
@@ -1534,6 +1538,9 @@
       "PickedUp": "Picked Up",
       "OnTheWay": "On the Way",
       "Delivered": "Delivered",
+
+      "PICKEDUP": "Picked Up",
+      "ONTHEWAY": "On the Way",
 
       "ASSIGNED": "Assigned",
       "PICKED_UP": "Picked Up",
