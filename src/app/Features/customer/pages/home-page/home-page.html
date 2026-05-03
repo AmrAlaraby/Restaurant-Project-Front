@@ -49,6 +49,7 @@
   <!-- ===================== ACTIVE ORDERS ===================== -->
   <div class="active">
     @for (item of ActiveOrders; track item.id) {
+      @if (item.delivery?.driverName) {
     <div class="active-order-banner" (click)="onTrackDelivery(item.id)">
       <div class="active-order-icon">🚴</div>
       <div class="active-order-info">
@@ -70,7 +71,7 @@
       <div class="active-order-track">
         {{ 'CUSTOMER.HOME.ACTIVE.TRACK' | translate }} <span>→</span>
       </div>
-    </div>
+    </div>}
     }
   </div>
 

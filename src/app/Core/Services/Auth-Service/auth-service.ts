@@ -105,6 +105,13 @@ export class AuthService {
     return !!this.getRoleId();
   }
 
+  // isLoggedIn(): any {
+  // return this.http.get(Auth.currentUser, { withCredentials: true }).pipe(
+  //   map(() => true),
+  //   catchError(() => of(false))
+  // );
+  // }
+
   isTokenExpired(): boolean {
     const expiresAt = localStorage.getItem('expiresAt');
     if (!expiresAt) return true;
