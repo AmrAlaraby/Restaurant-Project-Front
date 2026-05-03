@@ -39,7 +39,7 @@ constructor(
       },
       error: (err) => {
         this.isSubmitting = false;
-        this.message = err.error.detail || 'Error sending code';
+        this.message = err.error.detail || err.error || 'Error sending code';
         console.error('Error sending reset code:', err);
       }
     });
