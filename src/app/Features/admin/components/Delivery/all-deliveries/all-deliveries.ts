@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 import { Delivery } from '../../../../../Core/Models/DeliveryModels/delivery';
 import { DeliveryService } from '../../../../../Core/Services/Delivery-Service/delivery-service';
-import { Pagination } from "../../../../../Shared/Components/pagination/pagination";
+import { Pagination } from '../../../../../Shared/Components/pagination/pagination';
 import { Branch } from '../../../../../Core/Constants/Api_Urls';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../../../Core/Services/Auth-Service/auth-service';
@@ -23,7 +23,6 @@ import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-s
   styleUrls: ['./all-deliveries.scss'],
 })
 export class AllDeliveries {
-
   deliveries: Delivery[] = [];
 
   pageIndex = 1;
@@ -36,22 +35,17 @@ export class AllDeliveries {
     branchId: null,
     status: null,
     date: null,
-    orderId: null
+    orderId: null,
   };
 
   branches: any[] = [];
-  statuses: string[] = [
-    'Assigned',
-    'PickedUp',
-    'OnTheWay',
-    'Delivered',
-  ];
+  statuses: string[] = ['Assigned', 'PickedUp', 'OnTheWay', 'Delivered'];
 
   statusToIndex: Record<string, number> = {
-    'Assigned': 0,
-    'PickedUp': 1,
-    'OnTheWay': 2,
-    'Delivered': 3,
+    Assigned: 0,
+    PickedUp: 1,
+    OnTheWay: 2,
+    Delivered: 3,
   };
 
   stepKeys = ['Assigned', 'PickedUp', 'OnTheWay', 'Delivered'];
@@ -63,7 +57,7 @@ export class AllDeliveries {
     private authService: AuthService,
     private SignalRService: SignalRService,
     private localizationService: LocalizationService,
-    private toast: ToastService
+    private toast: ToastService,
   ) {}
 
   ngOnInit() {
@@ -79,28 +73,25 @@ export class AllDeliveries {
 
   getCurrentLanguage(): void {
     this.CurrentLanguage = this.localizationService.getCurrentLang();
-    this.localizationService.currentLang$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(lang => {
-        this.CurrentLanguage = lang;
-      });
+    this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+      this.CurrentLanguage = lang;
+    });
   }
 
   load() {
     this.loading = true;
 
-    this.service.getAll(this.pageIndex, this.pageSize, this.filters)
-      .subscribe({
-        next: res => {
-          this.deliveries = res.data;
-          this.totalCount = res.count;
-          this.loading = false;
-        },
-        error: () => {
-          this.loading = false;
-          this.toast.error('Failed to load deliveries');
-        }
-      });
+    this.service.getAll(this.pageIndex, this.pageSize, this.filters).subscribe({
+      next: (res) => {
+        this.deliveries = res.data;
+        this.totalCount = res.count;
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+        this.toast.error('Failed to load deliveries');
+      },
+    });
   }
 
   ngOnDestroy(): void {
@@ -110,15 +101,15 @@ export class AllDeliveries {
 
   listenToUpdates(): void {
     let token = this.authService.getAccessToken();
-    this.SignalRService.startRestaurantUpdatesConnection(token ?? "");
-    this.SignalRService.onRestaurantUpdate("OrderAssignedToDriver", (data: Delivery) => {
-      let index = this.deliveries.findIndex(d => d.id === data.id);
+    this.SignalRService.startRestaurantUpdatesConnection(token ?? '');
+    this.SignalRService.onRestaurantUpdate('OrderAssignedToDriver', (data: Delivery) => {
+      let index = this.deliveries.findIndex((d) => d.id === data.id);
       if (index !== -1 && index) {
         this.deliveries[index] = data;
       }
     });
-    this.SignalRService.onRestaurantUpdate("deliveryUpdated", (data: Delivery) => {
-      let index = this.deliveries.findIndex(d => d.id === data.id);
+    this.SignalRService.onRestaurantUpdate('deliveryUpdated', (data: Delivery) => {
+      let index = this.deliveries.findIndex((d) => d.id === data.id);
       if (index !== -1 && index) {
         this.deliveries[index] = data;
       }
@@ -131,13 +122,12 @@ export class AllDeliveries {
   }
 
   loadBranches() {
-    this.http.get<any[]>(Branch.getAll)
-      .subscribe({
-        next: res => {
-          this.branches = res;
-        },
-        error: () => this.toast.error('Failed to load branches')
-      });
+    this.http.get<any[]>(Branch.getAll).subscribe({
+      next: (res) => {
+        this.branches = res;
+      },
+      error: () => this.toast.error('Failed to load branches'),
+    });
   }
 
   applyFilters() {

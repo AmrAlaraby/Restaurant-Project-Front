@@ -6,7 +6,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-forgot-password',
-  imports: [ReactiveFormsModule,TranslatePipe],
+  imports: [ReactiveFormsModule, TranslatePipe],
   templateUrl: './forgot-password.html',
   styleUrl: './forgot-password.scss',
 })
@@ -14,18 +14,14 @@ export class ForgotPassword {
   isSubmitting = false;
   message: string | null = null;
 
-form!: FormGroup;
+  form!: FormGroup;
 
-
-
-
-constructor(
-  private fb: FormBuilder,
-  private auth: AuthService,
-  private router: Router,
-  private route: ActivatedRoute   
-  
-) {}
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {}
 
   submit() {
     if (this.form.invalid) return;
@@ -41,22 +37,21 @@ constructor(
         this.isSubmitting = false;
         this.message = err.error.detail || err.error || 'Error sending code';
         console.error('Error sending reset code:', err);
-      }
+      },
     });
   }
 
   ngOnInit(): void {
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+    });
 
-  this.form = this.fb.group({
-    email: ['', [Validators.required, Validators.email]]
-  });
-
-  this.route.queryParams.subscribe(params => {
-    if (params['email']) {
-      this.form.patchValue({
-        email: params['email']
-      });
-    }
-  });
-}
+    this.route.queryParams.subscribe((params) => {
+      if (params['email']) {
+        this.form.patchValue({
+          email: params['email'],
+        });
+      }
+    });
+  }
 }

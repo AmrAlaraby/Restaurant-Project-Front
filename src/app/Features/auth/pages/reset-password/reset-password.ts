@@ -21,16 +21,16 @@ export class ResetPassword {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
     this.form = this.fb.group({
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
     });
 
-    this.form.get('password')?.valueChanges.subscribe(val => {
+    this.form.get('password')?.valueChanges.subscribe((val) => {
       this.checkStrength(val);
     });
   }
@@ -84,7 +84,7 @@ export class ResetPassword {
     const payload = {
       resetSessionToken: token,
       newPassword: password,
-      confirmPassword: confirmPassword
+      confirmPassword: confirmPassword,
     };
 
     this.auth.resetPassword(payload).subscribe({
@@ -105,7 +105,7 @@ export class ResetPassword {
         this.loading = false;
         this.error = err.error.detail || err.error || 'Reset password failed';
         console.error('Error resetting password:', err);
-      }
+      },
     });
   }
 }

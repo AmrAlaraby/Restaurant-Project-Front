@@ -82,7 +82,7 @@ export class Login {
       error: (err) => {
         this.isSubmitting = false;
         console.log(err);
-        
+
         this.serverError = err.error.detail || err.error || 'Login failed';
       },
     });
@@ -92,11 +92,13 @@ export class Login {
   }
 
   loginWithGoogle() {
-    window.location.href =  'https://justice-restaurant.runasp.net/api/Auth/external-login?provider=Google';
-    // environment.apiUrl + 
+    window.location.href =
+      'https://justice-restaurant.runasp.net/api/Auth/external-login?provider=Google';
+    // environment.apiUrl +
   }
 
   loginWithFacebook() {
-    window.location.href = 'https://justice-restaurant.runasp.net/api/Auth/external-login?provider=Facebook';
+    window.location.href =
+      'https://justice-restaurant.runasp.net/api/Auth/external-login?provider=Facebook';
   }
 }
