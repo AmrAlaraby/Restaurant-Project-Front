@@ -1,5 +1,4 @@
 <div class="delivery-page">
-
   <!-- Page Header -->
   <div class="page-header">
     <div>
@@ -18,7 +17,6 @@
 
   <!-- Stats Row -->
   <div class="stats-row" *ngIf="activeTab !== 'assign'">
-
     <div class="stat-card">
       <div class="stat-label">
         {{ 'ADMIN.DELIVERY.STATS.TOTAL_ORDERS' | translate }}
@@ -46,23 +44,17 @@
       </div>
       <div class="stat-val">{{ delivered }}</div>
     </div>
-
   </div>
 
   <!-- Tabs -->
   <div class="tabs">
-    <button 
-      class="tab-btn"
-      [class.active]="activeTab === 'all'"
-      (click)="setTab('all')"
-    >
+    <button class="tab-btn" [class.active]="activeTab === 'all'" (click)="setTab('all')">
       {{ 'ADMIN.DELIVERY.TABS.ALL' | translate }}
     </button>
   </div>
 
   <!-- Content -->
   <div class="tab-content">
-
     <div *ngIf="activeTab === 'all'">
       <app-all-deliveries></app-all-deliveries>
     </div>
@@ -74,7 +66,5 @@
     <div *ngIf="activeTab === 'own'">
       <app-own-deliveries></app-own-deliveries>
     </div>
-
   </div>
-
 </div>

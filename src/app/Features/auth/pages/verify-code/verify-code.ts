@@ -18,7 +18,7 @@ export class VerifyCode {
 
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
   ) {}
 
   // 🟢 جمع الكود
@@ -32,10 +32,10 @@ export class VerifyCode {
 
     const code = this.getCode();
 
-    if (this.otp.some(x => x === '')) {
-  this.error = 'Please enter full 6-digit code';
-  return;
-}
+    if (this.otp.some((x) => x === '')) {
+      this.error = 'Please enter full 6-digit code';
+      return;
+    }
 
     this.loading = true;
 
@@ -53,7 +53,7 @@ export class VerifyCode {
         this.loading = false;
         this.error = err.error.detail || err.error || 'Invalid or expired code';
         console.error('Error verifying code:', err);
-      }
+      },
     });
   }
 

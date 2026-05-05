@@ -9,12 +9,20 @@ import { LangSwitchComponent } from '../../../../Shared/Components/lang-switch/l
 import { BranchStateService } from '../../../../Core/Services/Branch-Service/branch-state-service';
 import { BranchSelector } from '../../components/branch-selector/branch-selector';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { CartIcon } from "../../components/cart-icon/cart-icon";
+import { CartIcon } from '../../components/cart-icon/cart-icon';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-customer-layout',
-  imports: [RouterOutlet, RouterModule, NotificationBell, BranchSelector, LangSwitchComponent, CartIcon, TranslatePipe],
+  imports: [
+    RouterOutlet,
+    RouterModule,
+    NotificationBell,
+    BranchSelector,
+    LangSwitchComponent,
+    CartIcon,
+    TranslatePipe,
+  ],
   templateUrl: './customer-layout.html',
   styleUrl: './customer-layout.scss',
 })
@@ -23,7 +31,7 @@ export class CustomerLayout implements OnInit {
   isScrolled = false;
   avatarOpen = false;
 
-  isLoggedIn:boolean =false
+  isLoggedIn: boolean = false;
 
   UserName = '';
   AvatarLetters = '';
@@ -70,7 +78,7 @@ export class CustomerLayout implements OnInit {
     private signalR: SignalRService,
     private toast: ToastService,
     private branchState: BranchStateService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
   ) {}
 
   ngOnInit(): void {
@@ -86,7 +94,7 @@ export class CustomerLayout implements OnInit {
       this.toast.show(data.title, 'notification');
     });
 
-    this.isLoggedIn = this.authService.isLoggedIn()
+    this.isLoggedIn = this.authService.isLoggedIn();
   }
 
   sanitize(icon: string): SafeHtml {

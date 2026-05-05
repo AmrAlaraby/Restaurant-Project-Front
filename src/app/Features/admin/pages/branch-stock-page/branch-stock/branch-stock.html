@@ -1,5 +1,4 @@
 <div class="page">
-
   <!-- Breadcrumb -->
   <!-- <div class="breadcrumb">Home / <span>Stock Management</span></div> -->
 
@@ -12,9 +11,7 @@
     </div>
 
     <div class="header-right">
-      <app-branch-selector
-        (branchChanged)="onBranchChange($event)">
-      </app-branch-selector>
+      <app-branch-selector (branchChanged)="onBranchChange($event)"> </app-branch-selector>
     </div>
   </div>
 
@@ -26,7 +23,6 @@
 
   <!-- Table -->
   <div class="table-card" *ngIf="!loading && filteredStocks.length > 0">
-
     <table>
       <thead>
         <tr>
@@ -70,17 +66,15 @@
       [pageIndex]="pageIndex"
       [pageSize]="pageSize"
       [totalCount]="totalCount"
-      (pageChanged)="onPageChange($event)">
+      (pageChanged)="onPageChange($event)"
+    >
     </app-pagination>
   </div>
-
 </div>
 
 <!-- ═════════════ MODAL ═════════════ -->
 <div class="modal-overlay" *ngIf="showModal">
-
   <div class="modal-content" (click)="$event.stopPropagation()">
-
     <!-- Header -->
     <div class="modal-header">
       <h3>{{ 'ADMIN.STOCK_MANAGEMENT.MODAL.TITLE' | translate }}</h3>
@@ -89,7 +83,6 @@
 
     <!-- Body -->
     <div class="modal-body" *ngIf="selectedStock">
-
       <div class="modal-row">
         <span>{{ 'ADMIN.STOCK_MANAGEMENT.MODAL.BRANCH' | translate }}</span>
         <strong>{{ getBranchName(selectedStock) }}</strong>
@@ -102,14 +95,13 @@
 
       <div class="modal-row">
         <span>{{ 'ADMIN.STOCK_MANAGEMENT.MODAL.AVAILABLE_QTY' | translate }}</span>
-        <input type="number" [(ngModel)]="editData.quantityAvailable" min="0"/>
+        <input type="number" [(ngModel)]="editData.quantityAvailable" min="0" />
       </div>
 
       <div class="modal-row">
         <span>{{ 'ADMIN.STOCK_MANAGEMENT.MODAL.LOW_THRESHOLD' | translate }}</span>
-        <input type="number" [(ngModel)]="editData.lowThreshold" min="0"/>
+        <input type="number" [(ngModel)]="editData.lowThreshold" min="0" />
       </div>
-
     </div>
 
     <!-- Footer -->
@@ -121,7 +113,5 @@
         {{ 'ADMIN.STOCK_MANAGEMENT.BUTTONS.SAVE' | translate }}
       </button>
     </div>
-
   </div>
-
 </div>

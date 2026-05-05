@@ -1,5 +1,11 @@
 import { Component, signal } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../Core/Services/Auth-Service/auth-service';
 import { RegisterationRequestInterface } from '../../../../Core/Models/AuthModels/registeration-request-interface';
@@ -8,7 +14,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, RouterLink,TranslatePipe],
+  imports: [ReactiveFormsModule, RouterLink, TranslatePipe],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
@@ -20,16 +26,19 @@ export class Register {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
-    this.registerForm = this.fb.group({
-  name: ['', [Validators.required, Validators.maxLength(100)]],
-  email: ['', [Validators.required, Validators.email]],
-  password: ['', [Validators.required, Validators.minLength(6)]],
-  confirmPassword: ['', Validators.required]
-}, { validators: this.passwordMatchValidator });
+    this.registerForm = this.fb.group(
+      {
+        name: ['', [Validators.required, Validators.maxLength(100)]],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required],
+      },
+      { validators: this.passwordMatchValidator },
+    );
   }
 
   submit(): void {
@@ -53,7 +62,7 @@ export class Register {
       name: this.registerForm.get('name')?.value!,
       email: this.registerForm.get('email')?.value!,
       password: password,
-      role: 'Customer'
+      role: 'Customer',
     };
 
     this.isSubmitting.set(true);
@@ -63,32 +72,27 @@ export class Register {
         this.isSubmitting.set(false);
         this.router.navigate(['/auth/login']);
         console.log(res);
-
       },
       error: (err) => {
         this.isSubmitting.set(false);
         this.serverError.set(err.error.detail || err.error || 'Registration failed');
         console.log(err);
-
-      }
+      },
     });
   }
 
   passwordMatchValidator(form: AbstractControl) {
-  const password = form.get('password')?.value;
-  const confirm = form.get('confirmPassword')?.value;
+    const password = form.get('password')?.value;
+    const confirm = form.get('confirmPassword')?.value;
 
-  return password === confirm ? null : { passwordMismatch: true };
-}
+    return password === confirm ? null : { passwordMismatch: true };
+  }
 
-loginWithGoogle() {
-  window.location.href =
-    environment.apiUrl + '/Auth/external-login?provider=Google';
-}
+  loginWithGoogle() {
+    window.location.href = environment.apiUrl + '/Auth/external-login?provider=Google';
+  }
 
-loginWithFacebook() {
-  window.location.href =
-    environment.apiUrl + '/Auth/external-login?provider=Facebook';
-}
-
+  loginWithFacebook() {
+    window.location.href = environment.apiUrl + '/Auth/external-login?provider=Facebook';
+  }
 }

@@ -1,10 +1,7 @@
 <!-- FILTERS -->
 <div class="filters-bar">
-
   <div class="filter-item">
-    <select class="filter-select"
-            [(ngModel)]="filters.branchId"
-            (change)="applyFilters()">
+    <select class="filter-select" [(ngModel)]="filters.branchId" (change)="applyFilters()">
       <option [ngValue]="null">
         {{ 'ADMIN.DELIVERIES.FILTERS.ALL_BRANCHES' | translate }}
       </option>
@@ -15,31 +12,28 @@
   </div>
 
   <div class="filter-item">
-    <select class="filter-select"
-            [(ngModel)]="filters.status"
-            (change)="applyFilters()">
+    <select class="filter-select" [(ngModel)]="filters.status" (change)="applyFilters()">
       <option [ngValue]="null">
         {{ 'ADMIN.DELIVERIES.FILTERS.ALL_STATUS' | translate }}
       </option>
       <option *ngFor="let s of statuses" [ngValue]="s">
-        {{ 'ADMIN.STATUS.'+s.toUpperCase() | translate }}
+        {{ 'ADMIN.STATUS.' + s.toUpperCase() | translate }}
       </option>
     </select>
   </div>
 
   <div class="filter-item">
-    <input type="number"
-           class="filter-input"
-           [placeholder]="'ADMIN.DELIVERIES.FILTERS.ORDER_ID' | translate"
-           [(ngModel)]="filters.orderId"
-           (keyup.enter)="applyFilters()" />
+    <input
+      type="number"
+      class="filter-input"
+      [placeholder]="'ADMIN.DELIVERIES.FILTERS.ORDER_ID' | translate"
+      [(ngModel)]="filters.orderId"
+      (keyup.enter)="applyFilters()"
+    />
   </div>
 
   <div class="filter-item">
-    <input type="date"
-           class="filter-input"
-           [(ngModel)]="filters.date"
-           (change)="applyFilters()" />
+    <input type="date" class="filter-input" [(ngModel)]="filters.date" (change)="applyFilters()" />
   </div>
 </div>
 
@@ -51,11 +45,7 @@
 
 <!-- Cards -->
 <div class="deliveries-list" *ngIf="!loading">
-
-  <div class="delivery-row"
-       *ngFor="let d of deliveries"
-       (click)="openDetails(d.id)">
-
+  <div class="delivery-row" *ngFor="let d of deliveries" (click)="openDetails(d.id)">
     <div class="row-id">#D-{{ d.id }}</div>
 
     <div class="row-main">
@@ -77,9 +67,11 @@
           </div>
           <div class="step-label">{{ stepKey | translate }}</div>
         </div>
-        <div class="step-connector"
-             *ngIf="i < stepKeys.length - 1"
-             [ngClass]="{'done': statusToIndex[d.deliveryStatus] > i}"></div>
+        <div
+          class="step-connector"
+          *ngIf="i < stepKeys.length - 1"
+          [ngClass]="{ done: statusToIndex[d.deliveryStatus] > i }"
+        ></div>
       </ng-container>
     </div>
 
@@ -89,9 +81,8 @@
         <b>{{ d.driverName || ('ADMIN.DELIVERIES.NOT_ASSIGNED' | translate) }}</b>
       </div>
 
-      <span class="status-badge"
-            [ngClass]="'badge-' + d.deliveryStatus.toLowerCase()">
-        {{ "ADMIN.STATUS." + d.deliveryStatus.toUpperCase() | translate }}
+      <span class="status-badge" [ngClass]="'badge-' + d.deliveryStatus.toLowerCase()">
+        {{ 'ADMIN.STATUS.' + d.deliveryStatus.toUpperCase() | translate }}
       </span>
 
       <div class="row-price">
@@ -103,7 +94,6 @@
         <b>{{ 'ADMIN.DELIVERIES.CURRENCY' | translate }} {{ d.cashCollected }}</b>
       </div>
     </div>
-
   </div>
 
   <div *ngIf="deliveries.length === 0" class="empty-state">
@@ -116,5 +106,6 @@
   [pageIndex]="pageIndex"
   [pageSize]="pageSize"
   [totalCount]="totalCount"
-  (pageChanged)="onPageChanged($event)">
+  (pageChanged)="onPageChanged($event)"
+>
 </app-pagination>
