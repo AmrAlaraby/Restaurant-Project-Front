@@ -9,14 +9,11 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './auth-callback.scss',
 })
 export class AuthCallback {
-  
   constructor(private router: Router) {}
 
   ngOnInit() {
-    // هنا cookies already set من الباك
-    
     setTimeout(() => {
       this.router.navigate(['/']);
-    }, 1000);
+    }, 3000);
   }
 }
