@@ -1,23 +1,19 @@
 <div class="auth-wrapper">
-
   <!-- Left Panel -->
   <div class="auth-hero">
     <div class="hero-content">
-
-      <div class="hero-badge">
-        🍔 {{ 'AUTH.HERO.BADGE' | translate }}
-      </div>
+      <div class="hero-badge">🍔 {{ 'AUTH.HERO.BADGE' | translate }}</div>
 
       <h1 class="hero-title">
-        {{ 'AUTH.HERO.TITLE_LINE1' | translate }}<br>
-        <span>{{ 'AUTH.HERO.TITLE_HIGHLIGHT' | translate }}</span><br>
+        {{ 'AUTH.HERO.TITLE_LINE1' | translate }}<br />
+        <span>{{ 'AUTH.HERO.TITLE_HIGHLIGHT' | translate }}</span
+        ><br />
         {{ 'AUTH.HERO.TITLE_LINE2' | translate }}
       </h1>
 
       <p class="hero-desc">
         {{ 'AUTH.HERO.DESCRIPTION' | translate }}
       </p>
-
     </div>
   </div>
 
@@ -25,10 +21,6 @@
   <div class="auth-form-panel">
     <router-outlet></router-outlet>
   </div>
-
 </div>
 
-<app-lang-switch style="  position: fixed;
-  top: 12px;
-  right: 12px;
-  z-index: 1000;"></app-lang-switch>
+<app-lang-switch style="position: fixed; top: 12px; right: 12px; z-index: 1000"></app-lang-switch>

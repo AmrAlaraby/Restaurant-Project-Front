@@ -1,10 +1,6 @@
 <div class="otp-wrapper">
-
   <div class="otp-card">
-
-    <h2 class="otp-title">
-      {{ 'AUTH.OTP.TITLE' | translate }} 🔐
-    </h2>
+    <h2 class="otp-title">{{ 'AUTH.OTP.TITLE' | translate }} 🔐</h2>
 
     <p class="otp-subtitle">
       {{ 'AUTH.OTP.SUBTITLE' | translate }}
@@ -20,17 +16,15 @@
     </div>
 
     <button class="otp-btn" (click)="verifyCode()" [disabled]="loading">
-      @if(!loading){
+      @if (!loading) {
         {{ 'AUTH.OTP.VERIFY' | translate }}
       } @else {
         {{ 'AUTH.OTP.VERIFYING' | translate }}
       }
     </button>
 
-    @if(error){
+    @if (error) {
       <div class="otp-error">{{ error }}</div>
     }
-
   </div>
-
 </div>
