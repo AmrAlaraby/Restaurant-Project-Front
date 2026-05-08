@@ -7,10 +7,15 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 @keyframes f-fade-up {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
 
 // ─── Filters Bar ─────────────────────────────────────────────────────────────
 
@@ -19,9 +24,8 @@
   gap: var(--space-sm);
   margin-block-end: var(--space-lg);
   flex-wrap: wrap;
-  animation: f-fade-up .3s ease both;
+  animation: f-fade-up 0.3s ease both;
 }
-
 
 // ─── Select ───────────────────────────────────────────────────────────────────
 
@@ -38,7 +42,7 @@ select {
   color: var(--clr-text-primary);
   font-family: var(--font-body);
   font-size: 12.5px;
-  letter-spacing: -.01em;
+  letter-spacing: -0.01em;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
@@ -59,15 +63,17 @@ select {
   &:hover {
     border-color: var(--clr-cream-dark);
 
-    .dark & { border-color: var(--clr-cream-dark); }
+    .dark & {
+      border-color: var(--clr-cream-dark);
+    }
   }
 
   &:focus {
     border-color: var(--clr-primary);
-    box-shadow: 0 0 0 3px rgba(192, 57, 43, .1);
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.1);
 
     .dark & {
-      box-shadow: 0 0 0 3px rgba(192, 57, 43, .22);
+      box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.22);
     }
   }
 }

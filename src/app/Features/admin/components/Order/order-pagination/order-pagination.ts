@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-order-pagination',
@@ -6,7 +14,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
   templateUrl: './order-pagination.html',
   styleUrl: './order-pagination.scss',
 })
-export class OrderPagination implements OnChanges{
+export class OrderPagination implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['total'] || changes['pageSize']) {
       this.showNext = this.pageIndex < this.totalPages;
@@ -17,28 +25,26 @@ export class OrderPagination implements OnChanges{
   @Input() total = 0;
   @Input() pageSize = 10;
   @Input() pageIndex = 1;
-   get totalPages() {
+  get totalPages() {
     return Math.ceil(this.total / this.pageSize);
   }
 
   @Output() pageChange = new EventEmitter<number>();
 
-
   showNext = true;
   showPrev = false;
-  
 
   next() {
     if (this.pageIndex < this.totalPages) {
-    this.pageIndex++;
-    this.pageChange.emit(this.pageIndex);
-    if (this.pageIndex >= this.totalPages) {
-      this.showNext = false;    
+      this.pageIndex++;
+      this.pageChange.emit(this.pageIndex);
+      if (this.pageIndex >= this.totalPages) {
+        this.showNext = false;
+      }
+      if (this.pageIndex > 1) {
+        this.showPrev = true;
+      }
     }
-    if (this.pageIndex > 1) {
-      this.showPrev = true;    
-    }
-  }
   }
 
   prev() {
@@ -46,10 +52,10 @@ export class OrderPagination implements OnChanges{
       this.pageIndex--;
       this.pageChange.emit(this.pageIndex);
       if (this.pageIndex <= 1) {
-        this.showPrev = false;    
+        this.showPrev = false;
       }
       if (this.pageIndex < this.totalPages) {
-        this.showNext = true;    
+        this.showNext = true;
       }
     }
   }

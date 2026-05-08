@@ -5,8 +5,14 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 @keyframes ps-fade-up {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -21,7 +27,9 @@
   -webkit-font-smoothing: antialiased;
   transition: background-color var(--transition-normal);
 
-  .dark & { background-color: var(--clr-bg); }
+  .dark & {
+    background-color: var(--clr-bg);
+  }
 
   @media (max-width: 768px) {
     padding-block: var(--space-md) var(--space-xl);
@@ -39,7 +47,9 @@
   letter-spacing: 0.01em;
   animation: ps-fade-up 0.3s ease both;
 
-  .dark & { color: var(--clr-text-hint); }
+  .dark & {
+    color: var(--clr-text-hint);
+  }
 }
 
 // ─── Page Header ──────────────────────────────────────────────────────────────
@@ -59,11 +69,8 @@
   }
 }
 
-
-
 // ─── Page Title ───────────────────────────────────────────────────────────────
 .page-title {
-
   h1 {
     margin: 0;
     font-family: var(--font-heading);
@@ -72,9 +79,13 @@
     letter-spacing: -0.03em;
     color: var(--clr-text-primary);
 
-    .dark & { color: var(--clr-text-primary); }
+    .dark & {
+      color: var(--clr-text-primary);
+    }
 
-    @media (max-width: 768px) { font-size: 1.4rem; }
+    @media (max-width: 768px) {
+      font-size: 1.4rem;
+    }
   }
 }
 

@@ -8,16 +8,15 @@ import { TableService } from '../../../../../Core/Services/Table-Service/table-s
 import { TranslatePipe } from '@ngx-translate/core';
 import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
-
 @Component({
   selector: 'app-order-modal',
   standalone: true,
-  imports: [ReactiveFormsModule,TranslatePipe],
+  imports: [ReactiveFormsModule, TranslatePipe],
   templateUrl: './order-modal.html',
   styleUrl: './order-modal.scss',
 })
 export class OrderModal implements OnInit {
-  @Input() branches : BranchDto[] = [];
+  @Input() branches: BranchDto[] = [];
   @Output() close = new EventEmitter();
 
   form!: FormGroup;
@@ -26,15 +25,14 @@ export class OrderModal implements OnInit {
 
   tables = signal<any[]>([]);
   menuItems = signal<any[]>([]);
-  error:string|null =null;
-
+  error: string | null = null;
 
   constructor(
     private fb: FormBuilder,
     private ordersService: OrdersService,
     private tableService: TableService,
     private menuService: MenuItemsService,
-    private localizationService:LocalizationService
+    private localizationService: LocalizationService,
   ) {}
 
   ngOnInit() {
@@ -44,25 +42,24 @@ export class OrderModal implements OnInit {
     this.getCurrentLanguage();
 
     this.form.valueChanges.subscribe(() => {
-    this.calculateTotal();
-  });
+      this.calculateTotal();
+    });
   }
 
   getCurrentLanguage(): void {
     this.CurrentLanguage = this.localizationService.getCurrentLang();
-    this.localizationService.currentLang$
-    .subscribe(lang => {
+    this.localizationService.currentLang$.subscribe((lang) => {
       this.CurrentLanguage = lang;
     });
   }
 
-total = 0;
+  total = 0;
 
-calculateTotal() {
-  this.total = this.items.controls.reduce((sum: number, item: any) => {
-    return sum + (item.value.quantity * item.value.unitPrice);
-  }, 0);
-}
+  calculateTotal() {
+    this.total = this.items.controls.reduce((sum: number, item: any) => {
+      return sum + item.value.quantity * item.value.unitPrice;
+    }, 0);
+  }
 
   initForm() {
     this.form = this.fb.group({
@@ -77,10 +74,10 @@ calculateTotal() {
         street: [],
         city: [],
         note: [],
-        specialMark: []
+        specialMark: [],
       }),
 
-      items: this.fb.array([])
+      items: this.fb.array([]),
     });
   }
 
@@ -89,33 +86,34 @@ calculateTotal() {
   }
 
   addItem() {
-    this.items.push(this.fb.group({
-      menuItemId: ['', Validators.required],
-      quantity: [1, Validators.required],
-      unitPrice: [0]
-    }));
+    this.items.push(
+      this.fb.group({
+        menuItemId: ['', Validators.required],
+        quantity: [1, Validators.required],
+        unitPrice: [0],
+      }),
+    );
   }
 
   removeItem(i: number) {
     this.items.removeAt(i);
   }
 
-onMenuChange(i: number) {
+  onMenuChange(i: number) {
+    console.log('🔄 MENU CHANGED INDEX:', i);
 
-  console.log('🔄 MENU CHANGED INDEX:', i);
+    const itemId = this.items.at(i).value.menuItemId;
 
-  const itemId = this.items.at(i).value.menuItemId;
+    const selected = this.menuItems().find((m) => m.id == itemId);
 
-  const selected = this.menuItems().find(m => m.id == itemId);
+    console.log('🎯 SELECTED ITEM:', selected);
 
-  console.log('🎯 SELECTED ITEM:', selected);
-
-  if (selected) {
-    this.items.at(i).patchValue({
-      unitPrice: selected.price
-    });
+    if (selected) {
+      this.items.at(i).patchValue({
+        unitPrice: selected.price,
+      });
+    }
   }
-}
 
   onTypeChange() {
     const type = this.form.value.orderType;
@@ -125,58 +123,56 @@ onMenuChange(i: number) {
     }
   }
 
- loadTables() {
-  const branchId = this.form.value.branchId;
+  loadTables() {
+    const branchId = this.form.value.branchId;
 
-  const params = {
-    pageIndex: 1,
-    pageSize: 10,
-    branchId: branchId,
-    isOccupied: false
-  };
+    const params = {
+      pageIndex: 1,
+      pageSize: 10,
+      branchId: branchId,
+      isOccupied: false,
+    };
 
-  this.tableService.getTables(params)
-    .subscribe((res) => {
-      this.tables.set(res.data); 
+    this.tableService.getTables(params).subscribe((res) => {
+      this.tables.set(res.data);
     });
-}
+  }
 
   loadMenu() {
-    this.menuService.getAll({ pageIndex: 1, pageSize: 1000 })
-      .subscribe(res => this.menuItems.set(res.data));
+    this.menuService
+      .getAll({ pageIndex: 1, pageSize: 1000 })
+      .subscribe((res) => this.menuItems.set(res.data));
   }
 
   submit() {
+    console.log('🔥 FORM VALUE:', this.form.value);
 
-  console.log('🔥 FORM VALUE:', this.form.value);
+    if (this.form.invalid) {
+      console.log('❌ FORM INVALID');
+      this.form.markAllAsTouched();
+      this.error = 'Please fill in all required fields and ensure the form is valid.';
+      return;
+    }
 
-  if (this.form.invalid) {
-    console.log('❌ FORM INVALID');
-    this.form.markAllAsTouched();
-    this.error = 'Please fill in all required fields and ensure the form is valid.';
-    return;
-  }
+    const raw = this.form.value;
 
-  const raw = this.form.value;
+    const dto: CreateOrderInterface = {
+      userId: raw.customerId,
+      branchId: raw.branchId,
+      orderType: raw.orderType,
+      paymentMethod: raw.paymentMethod,
+      items: raw.items,
+      tableId: raw.tableId,
+    };
 
-  const dto: CreateOrderInterface = {
-    userId: raw.customerId,
-    branchId: raw.branchId,
-    orderType: raw.orderType,
-    paymentMethod: raw.paymentMethod,
-    items: raw.items,
-    tableId: raw.tableId
-  };
+    // 🧠 include address ONLY if Delivery
+    if (raw.orderType === 'Delivery') {
+      dto.deliveryAddress = raw.deliveryAddress;
+    }
 
-  // 🧠 include address ONLY if Delivery
-  if (raw.orderType === 'Delivery') {
-    dto.deliveryAddress = raw.deliveryAddress;
-  }
+    console.log('🚀 DTO SENT:', dto);
 
-  console.log('🚀 DTO SENT:', dto);
-
-  this.ordersService.createOrder(dto)
-    .subscribe({
+    this.ordersService.createOrder(dto).subscribe({
       next: (res) => {
         console.log('✅ ORDER CREATED:', res);
         this.close.emit();
@@ -185,19 +181,19 @@ onMenuChange(i: number) {
       error: (err) => {
         console.error('❌ API ERROR:', err);
         this.error = err.error || 'An error occurred while creating the order.';
-      }
+      },
     });
-}
+  }
 
   getBranchName(item: any): string {
     if (this.CurrentLanguage === 'ar') {
-     return item.arabicName || item.name;
+      return item.arabicName || item.name;
     }
     return item.name;
   }
   getMenuItemName(item: any): string {
     if (this.CurrentLanguage === 'ar') {
-     return item.arabicName || item.name;
+      return item.arabicName || item.name;
     }
     return item.name;
   }

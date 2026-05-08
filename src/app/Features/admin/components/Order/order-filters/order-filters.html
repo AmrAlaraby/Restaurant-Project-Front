@@ -1,50 +1,46 @@
- <div class="filters">
+<div class="filters">
+  <select (change)="emit()" [(ngModel)]="filters.Ordertype">
+    <option selected value="">
+      {{ 'ADMIN.ORDERS.FILTERS.ALL_TYPES' | translate }}
+    </option>
+    <option value="DineIn">
+      {{ 'ADMIN.ORDERS.FILTERS.DINEIN' | translate }}
+    </option>
+    <option value="PickUp">
+      {{ 'ADMIN.ORDERS.FILTERS.PICKUP' | translate }}
+    </option>
+    <option value="Delivery">
+      {{ 'ADMIN.ORDERS.FILTERS.DELIVERY' | translate }}
+    </option>
+  </select>
 
-    <select (change)="emit()"
-            [(ngModel)]="filters.Ordertype">
-      <option selected value="">
-        {{ 'ADMIN.ORDERS.FILTERS.ALL_TYPES' | translate }}
-      </option>
-      <option value="DineIn">
-        {{ 'ADMIN.ORDERS.FILTERS.DINEIN' | translate }}
-      </option>
-      <option value="PickUp">
-        {{ 'ADMIN.ORDERS.FILTERS.PICKUP' | translate }}
-      </option>
-      <option value="Delivery">
-        {{ 'ADMIN.ORDERS.FILTERS.DELIVERY' | translate }}
-      </option>
-    </select>
+  <select (change)="emit()" [(ngModel)]="filters.status">
+    <option value="">
+      {{ 'ADMIN.ORDERS.FILTERS.ALL_STATUS' | translate }}
+    </option>
+    <option value="Received">
+      {{ 'ADMIN.ORDERS.FILTERS.RECEIVED' | translate }}
+    </option>
+    <option value="Preparing">
+      {{ 'ADMIN.ORDERS.FILTERS.PREPARING' | translate }}
+    </option>
+    <option value="Ready">
+      {{ 'ADMIN.ORDERS.FILTERS.READY' | translate }}
+    </option>
+    <option value="Delivered">
+      {{ 'ADMIN.ORDERS.FILTERS.DELIVERED' | translate }}
+    </option>
+    <option value="Cancelled">
+      {{ 'ADMIN.ORDERS.FILTERS.CANCELLED' | translate }}
+    </option>
+  </select>
 
-<select (change)="emit()" [(ngModel)]="filters.status">
-  <option value="">
-    {{ 'ADMIN.ORDERS.FILTERS.ALL_STATUS' | translate }}
-  </option>
-  <option value="Received">
-    {{ 'ADMIN.ORDERS.FILTERS.RECEIVED' | translate }}
-  </option>
-  <option value="Preparing">
-    {{ 'ADMIN.ORDERS.FILTERS.PREPARING' | translate }}
-  </option>
-  <option value="Ready">
-    {{ 'ADMIN.ORDERS.FILTERS.READY' | translate }}
-  </option>
-  <option value="Delivered">
-    {{ 'ADMIN.ORDERS.FILTERS.DELIVERED' | translate }}
-  </option>
-  <option value="Cancelled">
-    {{ 'ADMIN.ORDERS.FILTERS.CANCELLED' | translate }}
-  </option>
-</select>
-
-    <select (change)="emit()"
-            [(ngModel)]="filters.branchId">
-      <option selected value="">
-        {{ 'ADMIN.ORDERS.FILTERS.ALL_BRANCHES' | translate }}
-      </option>
-      @for (Branch of branches; track $index) {
-        <option value="{{Branch.id}}">{{getBranchName(Branch)}}</option>
-      }
-    </select>
-
-  </div>
+  <select (change)="emit()" [(ngModel)]="filters.branchId">
+    <option selected value="">
+      {{ 'ADMIN.ORDERS.FILTERS.ALL_BRANCHES' | translate }}
+    </option>
+    @for (Branch of branches; track $index) {
+      <option value="{{ Branch.id }}">{{ getBranchName(Branch) }}</option>
+    }
+  </select>
+</div>
