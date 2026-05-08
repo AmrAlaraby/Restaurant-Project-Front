@@ -10,21 +10,21 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './order-stats.scss',
 })
 export class OrderStats {
- @Input() orders: OrderInterface[] = [];
+  @Input() orders: OrderInterface[] = [];
 
   get total() {
     return this.orders.length;
   }
 
   get delivered() {
-    return this.orders.filter(o => o.status === 'Delivered').length;
+    return this.orders.filter((o) => o.status === 'Delivered').length;
   }
 
   get preparing() {
-    return this.orders.filter(o => o.status === 'Preparing').length;
+    return this.orders.filter((o) => o.status === 'Preparing').length;
   }
 
   get cancelled() {
-    return this.orders.filter(o => o.status === 'Cancelled').length;
+    return this.orders.filter((o) => o.status === 'Cancelled').length;
   }
 }

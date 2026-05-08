@@ -1,12 +1,22 @@
 // ─── Animations ───────────────────────────────────────────────────────────────
 @keyframes modal-fade {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes modal-scale-in {
-  from { transform: scale(0.95); opacity: 0; }
-  to   { transform: scale(1);   opacity: 1; }
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 // ─── Overlay ──────────────────────────────────────────────────────────────────
@@ -46,8 +56,12 @@
     scrollbar-color: var(--clr-primary) transparent;
   }
 
-  &::-webkit-scrollbar { width: 3px; }
-  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
   &::-webkit-scrollbar-thumb {
     background: transparent;
     border-radius: var(--radius-full);
@@ -90,12 +104,16 @@
     margin: 0;
     letter-spacing: -0.01em;
 
-    .dark & { color: var(--clr-text-primary); }
+    .dark & {
+      color: var(--clr-text-primary);
+    }
 
     span {
       color: var(--clr-primary);
 
-      .dark & { color: var(--clr-primary-light); }
+      .dark & {
+        color: var(--clr-primary-light);
+      }
     }
   }
 }
@@ -143,7 +161,9 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
 
-    .dark & { color: var(--clr-text-secondary); }
+    .dark & {
+      color: var(--clr-text-secondary);
+    }
   }
 }
 
@@ -166,7 +186,9 @@ select {
     box-shadow var(--transition-fast),
     background var(--transition-fast);
 
-  &::placeholder { color: var(--clr-text-hint); }
+  &::placeholder {
+    color: var(--clr-text-hint);
+  }
 
   &:hover:not(:focus) {
     border-color: var(--clr-accent);
@@ -183,9 +205,13 @@ select {
     border-color: var(--clr-border);
     color: var(--clr-text-primary);
 
-    &::placeholder { color: var(--clr-text-hint); }
+    &::placeholder {
+      color: var(--clr-text-hint);
+    }
 
-    &:hover:not(:focus) { border-color: var(--clr-accent-dark); }
+    &:hover:not(:focus) {
+      border-color: var(--clr-accent-dark);
+    }
 
     &:focus {
       border-color: var(--clr-primary-light);
@@ -239,7 +265,9 @@ select {
   align-items: center;
   margin-block-end: var(--space-sm);
 
-  select { flex: 2; }
+  select {
+    flex: 2;
+  }
 
   input {
     width: 70px;
@@ -256,7 +284,9 @@ select {
   color: var(--clr-primary);
   flex-shrink: 0;
 
-  .dark & { color: var(--clr-primary-light); }
+  .dark & {
+    color: var(--clr-primary-light);
+  }
 }
 
 // ─── Add Item Button ──────────────────────────────────────────────────────────

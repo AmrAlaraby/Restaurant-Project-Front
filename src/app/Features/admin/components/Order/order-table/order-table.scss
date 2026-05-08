@@ -73,7 +73,7 @@ tbody tr td:first-child {
   }
 
   span::before {
-    content: "#";
+    content: '#';
     font-size: 11px;
     opacity: 0.7;
   }
@@ -184,12 +184,12 @@ tbody tr td:first-child span:active {
 
 // ─── Icons ───────────────────────────────────────────────────────────────────
 .view-btn::before {
-  content: "👁";
+  content: '👁';
   font-size: 12px;
 }
 
 .add-btn::before {
-  content: "+";
+  content: '+';
   font-size: 13px;
   font-weight: bold;
 }
@@ -229,7 +229,7 @@ tbody tr td:first-child span:active {
 // ─── Ripple Effect ───────────────────────────────────────────────────────────
 .view-btn::after,
 .add-btn::after {
-  content: "";
+  content: '';
   position: absolute;
   width: 0;
   height: 0;

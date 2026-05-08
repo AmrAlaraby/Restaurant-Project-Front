@@ -4,34 +4,31 @@ import { BranchDto } from '../../../../../Core/Models/BranchModels/Branch-dto';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LocalizationService } from '../../../../../Core/Services/Localization-Service/localization-service';
 
-
 @Component({
   selector: 'app-order-filters',
-  imports: [FormsModule,TranslatePipe],
+  imports: [FormsModule, TranslatePipe],
   templateUrl: './order-filters.html',
   styleUrl: './order-filters.scss',
 })
 export class OrderFilters implements OnInit {
   CurrentLanguage: string = 'en';
-  constructor(private localizationService:LocalizationService) {}
+  constructor(private localizationService: LocalizationService) {}
   ngOnInit(): void {
     this.getCurrentLanguage();
-    
   }
   getCurrentLanguage(): void {
     this.CurrentLanguage = this.localizationService.getCurrentLang();
-    this.localizationService.currentLang$
-    .subscribe(lang => {
+    this.localizationService.currentLang$.subscribe((lang) => {
       this.CurrentLanguage = lang;
     });
   }
-  @Input() branches : BranchDto[] = [];
+  @Input() branches: BranchDto[] = [];
   @Output() filterChange = new EventEmitter();
 
   filters: any = {
     Ordertype: '',
     status: '',
-    branchId: ''
+    branchId: '',
   };
 
   emit() {
@@ -39,7 +36,7 @@ export class OrderFilters implements OnInit {
   }
   getBranchName(item: any): string {
     if (this.CurrentLanguage === 'ar') {
-     return item.arabicName || item.name;
+      return item.arabicName || item.name;
     }
     return item.name;
   }

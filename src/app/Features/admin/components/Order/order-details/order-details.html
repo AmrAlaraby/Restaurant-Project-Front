@@ -1,14 +1,12 @@
 <div class="overlay" *ngIf="order">
-
   <div class="panel">
-
     <!-- HEADER -->
     <div class="header">
       <div>
-        <h2>{{ 'ADMIN.ORDERS.DETAILS.ORDER' | translate }} #{{order.id}}</h2>
+        <h2>{{ 'ADMIN.ORDERS.DETAILS.ORDER' | translate }} #{{ order.id }}</h2>
 
         <span class="status" [class]="order.status">
-          {{order.status}}
+          {{ order.status }}
         </span>
       </div>
 
@@ -17,167 +15,115 @@
 
     <!-- INFO -->
     <div class="info">
-      <div>{{ 'ADMIN.ORDERS.DETAILS.CUSTOMER' | translate }}: {{order.userName}}</div>
-      <div>{{ 'ADMIN.ORDERS.DETAILS.TYPE' | translate }}: {{order.orderType}}</div>
-      <div>{{ 'ADMIN.ORDERS.DETAILS.TOTAL' | translate }}: {{order.totalAmount}} EGP</div>
+      <div>{{ 'ADMIN.ORDERS.DETAILS.CUSTOMER' | translate }}: {{ order.userName }}</div>
+      <div>{{ 'ADMIN.ORDERS.DETAILS.TYPE' | translate }}: {{ order.orderType }}</div>
+      <div>{{ 'ADMIN.ORDERS.DETAILS.TOTAL' | translate }}: {{ order.totalAmount }} EGP</div>
     </div>
 
     <!-- ========================= -->
     <!-- EXISTING ITEMS -->
     <!-- ========================= -->
     <div class="items">
-
       <div class="item" *ngFor="let item of order.orderItems">
-
         <div class="left">
-          <div class="name">{{getOrdertemName(item)}}</div>
-          <div class="qty">{{ 'ADMIN.ORDERS.DETAILS.QTY' | translate }}: {{item.quantity}}</div>
+          <div class="name">{{ getOrdertemName(item) }}</div>
+          <div class="qty">{{ 'ADMIN.ORDERS.DETAILS.QTY' | translate }}: {{ item.quantity }}</div>
         </div>
 
-        <div class="price">
-          {{item.unitPrice * item.quantity}} EGP
-        </div>
+        <div class="price">{{ item.unitPrice * item.quantity }} EGP</div>
 
-        <button
-          class="remove-btn"
-          *ngIf="isReceived()"
-          (click)="removeItem(item.orderItemId)">
+        <button class="remove-btn" *ngIf="isReceived()" (click)="removeItem(item.orderItemId)">
           ✕
         </button>
-
       </div>
-
     </div>
 
     <!-- ========================= -->
     <!-- ADD ITEMS -->
     <!-- ========================= -->
     <div class="add-section" *ngIf="isReceived()">
-
       <h3>
         {{ 'ADMIN.ORDERS.DETAILS.ADD_ITEMS' | translate }}
       </h3>
 
       <form [formGroup]="form">
-
         <div class="items" formArrayName="items">
-
           @for (item of items.controls; track $index; let i = $index) {
-
             <div class="item-row" [formGroupName]="i">
-
               <select formControlName="menuItemId" (change)="onMenuChange(i)">
-
                 <option value="">
                   {{ 'ADMIN.ORDERS.DETAILS.SELECT_ITEM' | translate }}
                 </option>
 
                 @for (m of availableMenuItems; track m.id) {
-                  <option [value]="m.id">
-                    {{getMenuItemName(m)}} - {{m.price}} EGP
-                  </option>
+                  <option [value]="m.id">{{ getMenuItemName(m) }} - {{ m.price }} EGP</option>
                 }
-
               </select>
 
-              <input type="number" formControlName="quantity">
+              <input type="number" formControlName="quantity" />
 
-              <span class="price">
-                {{item.value.quantity * item.value.unitPrice}} EGP
-              </span>
-
+              <span class="price"> {{ item.value.quantity * item.value.unitPrice }} EGP </span>
             </div>
-
           }
-
         </div>
-
       </form>
 
-      <button
-        class="add-btn"
-        *ngIf="availableMenuItems.length > 0"
-        (click)="addItem()">
-
+      <button class="add-btn" *ngIf="availableMenuItems.length > 0" (click)="addItem()">
         {{ 'ADMIN.ORDERS.MODAL.ADD_ITEM' | translate }}
       </button>
-
-  
 
       <button class="save-btn" (click)="saveNewItems()">
         {{ 'ADMIN.ORDERS.DETAILS.SAVE' | translate }}
       </button>
-
     </div>
 
     <!-- ACTIONS -->
     <div class="actions">
-
-          <!-- error -->
+      <!-- error -->
       @if (error) {
         <div class="alert alert-danger mt-3">
           {{ error }}
         </div>
       }
 
-      
       <!-- ========================= -->
-<!-- UPDATE STATUS -->
-<!-- ========================= -->
-<div class="status-actions">
+      <!-- UPDATE STATUS -->
+      <!-- ========================= -->
+      <div class="status-actions">
+        <h3>
+          {{ 'ADMIN.ORDERS.DETAILS.UPDATE_STATUS' | translate }}
+        </h3>
 
-  <h3>
-    {{ 'ADMIN.ORDERS.DETAILS.UPDATE_STATUS' | translate }}
-  </h3>
+        <div class="status-buttons">
+          <button [class.active]="order.status === 'Received'" (click)="updateStatus('Received')">
+            {{ 'ADMIN.ORDERS.FILTERS.RECEIVED' | translate }}
+          </button>
 
-  <div class="status-buttons">
+          <button [class.active]="order.status === 'Preparing'" (click)="updateStatus('Preparing')">
+            {{ 'ADMIN.ORDERS.FILTERS.PREPARING' | translate }}
+          </button>
 
-    <button
-      [class.active]="order.status === 'Received'"
-      (click)="updateStatus('Received')">
-      {{ 'ADMIN.ORDERS.FILTERS.RECEIVED' | translate }}
-    </button>
+          <button [class.active]="order.status === 'Ready'" (click)="updateStatus('Ready')">
+            {{ 'ADMIN.ORDERS.FILTERS.READY' | translate }}
+          </button>
 
-    <button
-      [class.active]="order.status === 'Preparing'"
-      (click)="updateStatus('Preparing')">
-      {{ 'ADMIN.ORDERS.FILTERS.PREPARING' | translate }}
-    </button>
+          <button [class.active]="order.status === 'Delivered'" (click)="updateStatus('Delivered')">
+            {{ 'ADMIN.ORDERS.FILTERS.DELIVERED' | translate }}
+          </button>
 
-    <button
-      [class.active]="order.status === 'Ready'"
-      (click)="updateStatus('Ready')">
-      {{ 'ADMIN.ORDERS.FILTERS.READY' | translate }}
-    </button>
+          <button
+            class="cancel"
+            [class.active]="order.status === 'Cancelled'"
+            (click)="updateStatus('Cancelled')"
+          >
+            {{ 'ADMIN.ORDERS.FILTERS.CANCELLED' | translate }}
+          </button>
+        </div>
+      </div>
 
-    <button
-      [class.active]="order.status === 'Delivered'"
-      (click)="updateStatus('Delivered')">
-      {{ 'ADMIN.ORDERS.FILTERS.DELIVERED' | translate }}
-    </button>
-
-    <button
-      class="cancel"
-      [class.active]="order.status === 'Cancelled'"
-      (click)="updateStatus('Cancelled')">
-      {{ 'ADMIN.ORDERS.FILTERS.CANCELLED' | translate }}
-    </button>
-
-  </div>
-
-</div>
-
-
-      <button
-        class="cancel-btn"
-        *ngIf="isReceived()"
-        (click)="cancelOrder()">
-
+      <button class="cancel-btn" *ngIf="isReceived()" (click)="cancelOrder()">
         {{ 'ADMIN.ORDERS.DETAILS.CANCEL_ORDER' | translate }}
       </button>
-
     </div>
-
   </div>
-
 </div>

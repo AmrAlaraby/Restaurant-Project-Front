@@ -1,47 +1,55 @@
 <table>
-    <thead>
-      <tr>
-        <th>
-          {{ 'ADMIN.ORDERS.TABLE.ID' | translate }}
-        </th>
-        <th>
-          {{ 'ADMIN.ORDERS.TABLE.CUSTOMER' | translate }}
-        </th>
-        <th>
-          {{ 'ADMIN.ORDERS.TABLE.TYPE' | translate }}
-        </th>
-        <th>
-          {{ 'ADMIN.ORDERS.TABLE.STATUS' | translate }}
-        </th>
-        <th>
-          {{ 'ADMIN.ORDERS.TABLE.TOTAL' | translate }}
-        </th>
-      </tr>
-    </thead>
+  <thead>
+    <tr>
+      <th>
+        {{ 'ADMIN.ORDERS.TABLE.ID' | translate }}
+      </th>
+      <th>
+        {{ 'ADMIN.ORDERS.TABLE.CUSTOMER' | translate }}
+      </th>
+      <th>
+        {{ 'ADMIN.ORDERS.TABLE.TYPE' | translate }}
+      </th>
+      <th>
+        {{ 'ADMIN.ORDERS.TABLE.STATUS' | translate }}
+      </th>
+      <th>
+        {{ 'ADMIN.ORDERS.TABLE.TOTAL' | translate }}
+      </th>
+    </tr>
+  </thead>
 
-    <tbody>
-        @for (order of orders; track $index) {
+  <tbody>
+    @for (order of orders; track $index) {
       <tr (click)="onView(order.id)" class="clickable">
-        <td>{{order.id}}</td>
-        <td>{{order.userName}}</td>
+        <td>{{ order.id }}</td>
+        <td>{{ order.userName }}</td>
         <td>
-          <span class="type-badge" [ngClass]="{
-            't-dinein':   order.orderType === 'DineIn',
-            't-delivery': order.orderType === 'Delivery',
-            't-pickup':   order.orderType === 'PickUp'
-          }">{{ ('ADMIN.ORDERS.FILTERS.' + order.orderType.toUpperCase()) | translate }}</span>
+          <span
+            class="type-badge"
+            [ngClass]="{
+              't-dinein': order.orderType === 'DineIn',
+              't-delivery': order.orderType === 'Delivery',
+              't-pickup': order.orderType === 'PickUp',
+            }"
+            >{{ 'ADMIN.ORDERS.FILTERS.' + order.orderType.toUpperCase() | translate }}</span
+          >
         </td>
         <td>
-          <span class="status-badge" [ngClass]="{
-            'st-received':  order.status === 'Received',
-            'st-preparing': order.status === 'Preparing',
-            'st-ready':     order.status === 'Ready',
-            'st-delivered': order.status === 'Delivered',
-            'st-cancelled': order.status === 'Cancelled'
-          }">{{ ('ADMIN.ORDERS.FILTERS.' + order.status.toUpperCase()) | translate }}</span>
+          <span
+            class="status-badge"
+            [ngClass]="{
+              'st-received': order.status === 'Received',
+              'st-preparing': order.status === 'Preparing',
+              'st-ready': order.status === 'Ready',
+              'st-delivered': order.status === 'Delivered',
+              'st-cancelled': order.status === 'Cancelled',
+            }"
+            >{{ 'ADMIN.ORDERS.FILTERS.' + order.status.toUpperCase() | translate }}</span
+          >
         </td>
-        <td>{{order.totalAmount}}</td>
+        <td>{{ order.totalAmount }}</td>
       </tr>
     }
-    </tbody>
-  </table>
+  </tbody>
+</table>

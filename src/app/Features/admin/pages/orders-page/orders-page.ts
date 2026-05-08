@@ -3,7 +3,7 @@ import { OrderInterface } from '../../../../Core/Models/OrderModels/order-interf
 import { OrdersService } from '../../../../Core/Services/Orders-Service/orders-service';
 import { KitchenService } from '../../../../Core/Services/Kitchen-Service/kitchen-service';
 import { BranchDto } from '../../../../Core/Models/BranchModels/Branch-dto';
-import { Pagination } from "../../../../Shared/Components/pagination/pagination";
+import { Pagination } from '../../../../Shared/Components/pagination/pagination';
 import { OrderDetails } from '../../components/Order/order-details/order-details';
 import { OrderFilters } from '../../components/Order/order-filters/order-filters';
 import { OrderModal } from '../../components/Order/order-modal/order-modal';
@@ -15,12 +15,19 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-orders-page',
-  imports: [OrderStats, OrderFilters, OrderTable, OrderModal, OrderDetails, Pagination, TranslatePipe],
+  imports: [
+    OrderStats,
+    OrderFilters,
+    OrderTable,
+    OrderModal,
+    OrderDetails,
+    Pagination,
+    TranslatePipe,
+  ],
   templateUrl: './orders-page.html',
   styleUrl: './orders-page.scss',
 })
 export class OrdersPage implements OnInit {
-
   orders: OrderInterface[] = [];
   totalCount = 0;
 
@@ -29,14 +36,15 @@ export class OrdersPage implements OnInit {
     pageSize: 10,
     Ordertype: '',
     status: '',
-    branchId: ''
+    branchId: '',
   };
   selectedOrderId: number | null = null;
   showDetailsModal = false;
   showModal = false;
   branches: BranchDto[] = [];
 
-  constructor(private ordersService: OrdersService,
+  constructor(
+    private ordersService: OrdersService,
     private KitchenService: KitchenService,
     private authService: AuthService,
     private signalR: SignalRService,
@@ -46,53 +54,51 @@ export class OrdersPage implements OnInit {
     this.loadOrders();
     this.listenToOrderUpdates();
   }
-  
 
   loadOrders() {
-    this.ordersService.getAllOrders(this.filters).subscribe(res => {
+    this.ordersService.getAllOrders(this.filters).subscribe((res) => {
       this.orders = res.data;
       this.totalCount = res.count;
     });
-    this.KitchenService.getBranches().subscribe(res => {
+    this.KitchenService.getBranches().subscribe((res) => {
       this.branches = res;
     });
   }
 
   listenToOrderUpdates() {
-          let token = this.authService.getAccessToken();
-    this.signalR.startRestaurantUpdatesConnection(token??"");
+    let token = this.authService.getAccessToken();
+    this.signalR.startRestaurantUpdatesConnection(token ?? '');
 
-    
-    this.signalR.onRestaurantUpdate("OrderCreated",(data) => {  
-      if(this.filters.pageIndex === 1 && (!this.filters.Ordertype || this.filters.Ordertype === data.orderType))
-        { 
+    this.signalR.onRestaurantUpdate('OrderCreated', (data) => {
+      if (
+        this.filters.pageIndex === 1 &&
+        (!this.filters.Ordertype || this.filters.Ordertype === data.orderType)
+      ) {
         this.orders.unshift(data);
-        //remove last item if exceeds page size        
-        if(this.orders.length > this.filters.pageSize){
-          this.orders.pop();}
-    
+        //remove last item if exceeds page size
+        if (this.orders.length > this.filters.pageSize) {
+          this.orders.pop();
         }
+      }
       this.totalCount++;
     });
-    
-    this.signalR.onRestaurantUpdate("OrderUpdated",(data) => {   
-      let index = this.orders.findIndex(o => o.id === data.id);
-      if(index !== -1 && index){
+
+    this.signalR.onRestaurantUpdate('OrderUpdated', (data) => {
+      let index = this.orders.findIndex((o) => o.id === data.id);
+      if (index !== -1 && index) {
         this.orders[index] = data;
       }
     });
-    this.signalR.onRestaurantUpdate("OrderCancelled",(data) => {   
-      let index = this.orders.findIndex(o => o.id === data.id);
-      if(index !== -1 && index){
+    this.signalR.onRestaurantUpdate('OrderCancelled', (data) => {
+      let index = this.orders.findIndex((o) => o.id === data.id);
+      if (index !== -1 && index) {
         this.orders[index] = data;
       }
     });
-}
-
-
+  }
 
   openModal() {
-    console.log("clicked");
+    console.log('clicked');
 
     this.showModal = true;
   }
@@ -113,7 +119,7 @@ export class OrdersPage implements OnInit {
     this.loadOrders();
   }
 
-    openOrder(id: number) {
+  openOrder(id: number) {
     this.selectedOrderId = id;
     this.showDetailsModal = true;
   }
@@ -123,5 +129,4 @@ export class OrdersPage implements OnInit {
     this.selectedOrderId = null;
     this.loadOrders();
   }
-
 }
