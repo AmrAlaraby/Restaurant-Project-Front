@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class LocalizationService {
   constructor(private translate: TranslateService) {}
 
-  currentLang$ = new BehaviorSubject<string>('en');
+  currentLang$ = new BehaviorSubject<string>('ar');
 
 
   init() {
