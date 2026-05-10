@@ -522,9 +522,15 @@
 }
 
 @keyframes free-glow {
-  0%   { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.32); }
-  65%  { box-shadow: 0 0 0 8px rgba(46, 125, 50, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.32);
+  }
+  65% {
+    box-shadow: 0 0 0 8px rgba(46, 125, 50, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(46, 125, 50, 0);
+  }
 }
 
 // ── FREE table (default) ──────────────────────────────────────────────────────
@@ -920,8 +926,12 @@
 }
 
 @keyframes shimmer {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 .skeleton-header,
@@ -962,8 +972,12 @@
 }
 
 .skeleton-card {
-  &.tall { height: 200px; }
-  &.wide { height: 300px; }
+  &.tall {
+    height: 200px;
+  }
+  &.wide {
+    height: 300px;
+  }
 }
 
 // ─── Error ────────────────────────────────────────────────────────────────────

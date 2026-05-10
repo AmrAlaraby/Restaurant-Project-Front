@@ -9,7 +9,14 @@ import { BranchCreateComponent } from '../../components/Branch/branch-create/bra
 @Component({
   selector: 'app-branch-page',
   standalone: true,
-  imports: [CommonModule, RouterModule, BranchListComponent, BranchDetailsComponent, BranchEditComponent, BranchCreateComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    BranchListComponent,
+    BranchDetailsComponent,
+    BranchEditComponent,
+    BranchCreateComponent,
+  ],
   templateUrl: './branch-page.html',
   styleUrls: ['./branch-page.scss'],
 })
@@ -40,7 +47,7 @@ export class BranchPageComponent {
 
   onBranchSaved(): void {
     this.activeView.set('details');
-    this.refreshTrigger.update(v => v + 1); // ← refresh الليست
+    this.refreshTrigger.update((v) => v + 1); // ← refresh الليست
   }
 
   onCreateRequested(): void {
@@ -54,12 +61,12 @@ export class BranchPageComponent {
 
   onBranchCreated(): void {
     this.activeView.set(null);
-    this.refreshTrigger.update(v => v + 1);
+    this.refreshTrigger.update((v) => v + 1);
   }
 
   onBranchDeleted(): void {
     this.selectedBranchId.set(null);
     this.activeView.set(null);
-    this.refreshTrigger.update(v => v + 1);
+    this.refreshTrigger.update((v) => v + 1);
   }
 }

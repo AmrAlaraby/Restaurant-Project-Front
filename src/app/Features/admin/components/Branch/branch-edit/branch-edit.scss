@@ -480,8 +480,12 @@
 
 // ─── Skeleton ─────────────────────────────────────────────────────────────────
 @keyframes shimmer {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 .loading-state {
@@ -524,7 +528,9 @@
 }
 
 .skeleton-card {
-  &.wide { height: 400px; }
+  &.wide {
+    height: 400px;
+  }
 }
 
 // ─── Error ────────────────────────────────────────────────────────────────────

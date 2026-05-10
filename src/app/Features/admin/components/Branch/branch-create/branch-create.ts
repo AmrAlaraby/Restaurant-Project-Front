@@ -8,14 +8,14 @@ import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-s
 @Component({
   selector: 'app-branch-create',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,TranslatePipe],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './branch-create.html',
   styleUrls: ['./branch-create.scss'],
 })
 export class BranchCreateComponent {
   private branchService = inject(BranchService);
   private fb = inject(FormBuilder);
-   private toast         = inject(ToastService);
+  private toast = inject(ToastService);
 
   @Output() closed = new EventEmitter<void>();
   @Output() created = new EventEmitter<void>();
@@ -24,13 +24,13 @@ export class BranchCreateComponent {
   saveError = signal<string | null>(null);
 
   form: FormGroup = this.fb.group({
-    name:           ['', [Validators.required]],
-    phone:          ['', [Validators.required]],
+    name: ['', [Validators.required]],
+    phone: ['', [Validators.required]],
     buildingNumber: [null, [Validators.required]],
-    street:         ['', [Validators.required]],
-    city:           ['', [Validators.required]],
-    specialMark:    [null],
-    note:           [null],
+    street: ['', [Validators.required]],
+    city: ['', [Validators.required]],
+    specialMark: [null],
+    note: [null],
   });
 
   submit(): void {
@@ -45,13 +45,13 @@ export class BranchCreateComponent {
     this.branchService.create(this.form.value).subscribe({
       next: () => {
         this.isSaving.set(false);
-         this.toast.success('Branch created successfully!');
+        this.toast.success('Branch created successfully!');
         this.created.emit();
         this.closed.emit();
       },
       error: () => {
         this.saveError.set('Failed to create branch. Please try again.');
-        this.toast.error('Failed to create branch. Please try again.'); 
+        this.toast.error('Failed to create branch. Please try again.');
         this.isSaving.set(false);
       },
     });

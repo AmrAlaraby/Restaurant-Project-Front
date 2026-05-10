@@ -18,14 +18,14 @@ import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-s
 @Component({
   selector: 'app-branch-edit',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,TranslatePipe],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './branch-edit.html',
   styleUrls: ['./branch-edit.scss'],
 })
 export class BranchEditComponent implements OnInit, OnChanges {
   private branchService = inject(BranchService);
   private fb = inject(FormBuilder);
-  private toast         = inject(ToastService);
+  private toast = inject(ToastService);
 
   @Input({ required: true }) branchId!: number;
   @Output() closed = new EventEmitter<void>();
@@ -56,20 +56,20 @@ export class BranchEditComponent implements OnInit, OnChanges {
     this.branchService.getById(this.branchId).subscribe({
       next: (branch) => {
         this.form = this.fb.group({
-          name:           [branch.name,           [Validators.required]],
-          phone:          [branch.phone,          [Validators.required]],
-          isActive:       [branch.isActive],
+          name: [branch.name, [Validators.required]],
+          phone: [branch.phone, [Validators.required]],
+          isActive: [branch.isActive],
           buildingNumber: [branch.buildingNumber, [Validators.required]],
-          street:         [branch.street,         [Validators.required]],
-          city:           [branch.city,           [Validators.required]],
-          specialMark:    [branch.specialMark ?? null],
-          note:           [branch.note ?? null],
+          street: [branch.street, [Validators.required]],
+          city: [branch.city, [Validators.required]],
+          specialMark: [branch.specialMark ?? null],
+          note: [branch.note ?? null],
         });
         this.isLoading.set(false);
       },
       error: () => {
         this.error.set('Failed to load branch data. Please try again.');
-         this.toast.error('Failed to load branch data. Please try again.');
+        this.toast.error('Failed to load branch data. Please try again.');
         this.isLoading.set(false);
       },
     });
@@ -88,12 +88,12 @@ export class BranchEditComponent implements OnInit, OnChanges {
       next: () => {
         this.isSaving.set(false);
         this.saved.emit(); // ← بس saved، من غير closed
-         this.toast.success('Branch updated successfully!');
+        this.toast.success('Branch updated successfully!');
       },
       error: () => {
         this.saveError.set('Failed to save changes. Please try again.');
         this.isSaving.set(false);
-         this.toast.error('Failed to save changes. Please try again.');
+        this.toast.error('Failed to save changes. Please try again.');
       },
     });
   }

@@ -1,4 +1,15 @@
-import { Component, inject, OnInit, OnChanges, SimpleChanges, signal, computed, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  signal,
+  computed,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { BranchStock } from '../../../../../Core/Models/BranchModels/branch-stock';
@@ -8,17 +19,16 @@ import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-service';
 
-
 @Component({
   selector: 'app-branch-details',
   standalone: true,
-  imports: [CommonModule, RouterModule, ConfirmDeleteComponent,TranslatePipe],
+  imports: [CommonModule, RouterModule, ConfirmDeleteComponent, TranslatePipe],
   templateUrl: './branch-details.html',
   styleUrls: ['./branch-details.scss'],
 })
 export class BranchDetailsComponent implements OnInit, OnChanges {
   private branchService = inject(BranchService);
-   private toast         = inject(ToastService);
+  private toast = inject(ToastService);
 
   @Input({ required: true }) branchId!: number;
   @Output() closed = new EventEmitter<void>();
@@ -31,9 +41,7 @@ export class BranchDetailsComponent implements OnInit, OnChanges {
   activeTab = signal<'tables' | 'staff' | 'stock'>('tables');
   showDeleteConfirm = signal(false);
 
-  occupiedTables = computed(() =>
-    this.branch()?.tables.filter((t) => t.isOccupied).length ?? 0
-  );
+  occupiedTables = computed(() => this.branch()?.tables.filter((t) => t.isOccupied).length ?? 0);
 
   ngOnInit(): void {
     this.loadBranch();
@@ -59,7 +67,7 @@ export class BranchDetailsComponent implements OnInit, OnChanges {
       },
       error: () => {
         this.error.set('Failed to load branch details. Please try again.');
-         this.toast.error('Failed to load branch details. Please try again.');
+        this.toast.error('Failed to load branch details. Please try again.');
         this.isLoading.set(false);
       },
     });
@@ -82,12 +90,12 @@ export class BranchDetailsComponent implements OnInit, OnChanges {
     if (!b) return;
     this.branchService.toggleStatus(b.id).subscribe({
       next: () => {
-        this.toast.success('Branch status updated!'); 
+        this.toast.success('Branch status updated!');
         this.loadBranch();
       },
-     error: () => {
-        this.error.set('Failed to toggle branch status.'); 
-        this.toast.error('Failed to toggle branch status.'); 
+      error: () => {
+        this.error.set('Failed to toggle branch status.');
+        this.toast.error('Failed to toggle branch status.');
       },
     });
   }

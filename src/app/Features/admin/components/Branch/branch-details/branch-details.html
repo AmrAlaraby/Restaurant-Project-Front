@@ -1,9 +1,7 @@
 <div class="branch-details-page" *ngIf="!isLoading() && !error() && branch()">
-
   <!-- Header -->
   <div class="page-header">
     <div class="header-left">
-
       <button class="btn-back" (click)="close()">
         <span>←</span>
         {{ 'ADMIN.BRANCH_DETAILS.BACK' | translate }}
@@ -12,23 +10,24 @@
       <div class="title-block">
         <h1 class="page-title">{{ branch()!.name }}</h1>
 
-        <span class="status-badge"
-              [class.active]="branch()!.isActive"
-              [class.inactive]="!branch()!.isActive">
-
-          {{ branch()!.isActive
+        <span
+          class="status-badge"
+          [class.active]="branch()!.isActive"
+          [class.inactive]="!branch()!.isActive"
+        >
+          {{
+            branch()!.isActive
               ? ('ADMIN.BRANCH_DETAILS.ACTIVE' | translate)
               : ('ADMIN.BRANCH_DETAILS.INACTIVE' | translate)
           }}
         </span>
-
       </div>
     </div>
 
     <div class="header-actions">
-
       <button class="btn-toggle" (click)="toggleStatus()">
-        {{ branch()!.isActive
+        {{
+          branch()!.isActive
             ? ('ADMIN.BRANCH_DETAILS.DEACTIVATE' | translate)
             : ('ADMIN.BRANCH_DETAILS.ACTIVATE' | translate)
         }}
@@ -41,13 +40,11 @@
       <button class="btn-delete" (click)="openDeleteConfirm()">
         🗑️ {{ 'ADMIN.BRANCH_DETAILS.DELETE' | translate }}
       </button>
-
     </div>
   </div>
 
   <!-- Top Row -->
   <div class="top-row">
-
     <!-- Branch Info -->
     <div class="info-card">
       <h3 class="card-title">
@@ -57,7 +54,6 @@
       <hr class="divider" />
 
       <div class="info-list">
-
         <div class="info-row">
           <span class="info-icon">📍</span>
           <div>
@@ -97,13 +93,11 @@
             <span class="info-value">{{ branch()!.note }}</span>
           </div>
         </div>
-
       </div>
     </div>
 
     <!-- Stats -->
     <div class="stats-card">
-
       <h3 class="card-title">
         {{ 'ADMIN.BRANCH_DETAILS.QUICK_STATS' | translate }}
       </h3>
@@ -111,7 +105,6 @@
       <hr class="divider" />
 
       <div class="stats-grid">
-
         <div class="stat-box">
           <span class="stat-number">{{ branch()!.tablesCount }}</span>
           <span class="stat-label">
@@ -139,79 +132,50 @@
             {{ 'ADMIN.BRANCH_DETAILS.OCCUPIED' | translate }}
           </span>
         </div>
-
       </div>
     </div>
-
   </div>
 
   <!-- Tabs -->
   <div class="tabs-bar">
-
-    <button class="tab-btn"
-            [class.active]="activeTab() === 'tables'"
-            (click)="setTab('tables')">
-
-      🪑 {{ 'ADMIN.BRANCH_DETAILS.TABS.TABLES' | translate }}
-      ({{ branch()!.tables.length }})
+    <button class="tab-btn" [class.active]="activeTab() === 'tables'" (click)="setTab('tables')">
+      🪑 {{ 'ADMIN.BRANCH_DETAILS.TABS.TABLES' | translate }} ({{ branch()!.tables.length }})
     </button>
 
-    <button class="tab-btn"
-            [class.active]="activeTab() === 'staff'"
-            (click)="setTab('staff')">
-
-      👥 {{ 'ADMIN.BRANCH_DETAILS.TABS.STAFF' | translate }}
-      ({{ branch()!.users.length }})
+    <button class="tab-btn" [class.active]="activeTab() === 'staff'" (click)="setTab('staff')">
+      👥 {{ 'ADMIN.BRANCH_DETAILS.TABS.STAFF' | translate }} ({{ branch()!.users.length }})
     </button>
 
-    <button class="tab-btn"
-            [class.active]="activeTab() === 'stock'"
-            (click)="setTab('stock')">
-
-      📦 {{ 'ADMIN.BRANCH_DETAILS.TABS.STOCK' | translate }}
-      ({{ branch()!.branchStocks.length }})
+    <button class="tab-btn" [class.active]="activeTab() === 'stock'" (click)="setTab('stock')">
+      📦 {{ 'ADMIN.BRANCH_DETAILS.TABS.STOCK' | translate }} ({{ branch()!.branchStocks.length }})
     </button>
-
   </div>
 
   <!-- Tables -->
   <div class="tab-content" *ngIf="activeTab() === 'tables'">
-
     <div class="tables-grid">
-
-      <div class="table-card"
-           *ngFor="let t of branch()!.tables"
-           [class.occupied]="t.isOccupied">
-
+      <div class="table-card" *ngFor="let t of branch()!.tables" [class.occupied]="t.isOccupied">
         <div class="table-number">{{ t.tableNumber }}</div>
 
         <div class="table-meta">
-
           <span class="capacity-badge">👤 {{ t.capacity }}</span>
 
-          <span class="occupation-badge"
-                [class.occupied]="t.isOccupied">
-
-            {{ t.isOccupied
+          <span class="occupation-badge" [class.occupied]="t.isOccupied">
+            {{
+              t.isOccupied
                 ? ('ADMIN.BRANCH_DETAILS.TABLE.OCCUPIED' | translate)
                 : ('ADMIN.BRANCH_DETAILS.TABLE.FREE' | translate)
             }}
-
           </span>
-
         </div>
       </div>
-
     </div>
   </div>
 
   <!-- Staff -->
   <div class="tab-content" *ngIf="activeTab() === 'staff'">
-
     <div class="staff-list">
-
       <div class="staff-row" *ngFor="let u of branch()!.users">
-
         <div class="staff-avatar">{{ getInitials(u.name) }}</div>
 
         <div class="staff-info">
@@ -219,57 +183,41 @@
           <span class="staff-email">{{ u.email }}</span>
         </div>
 
-        <span class="role-badge"
-              [class]="'role-' + u.role.toLowerCase()">
+        <span class="role-badge" [class]="'role-' + u.role.toLowerCase()">
           {{ u.role }}
         </span>
-
       </div>
-
     </div>
   </div>
 
   <!-- Stock -->
   <div class="tab-content" *ngIf="activeTab() === 'stock'">
-
     <div class="stock-list">
-
-      <div class="stock-row"
-           *ngFor="let s of branch()!.branchStocks"
-           [class.low]="isLowStock(s)">
-
+      <div class="stock-row" *ngFor="let s of branch()!.branchStocks" [class.low]="isLowStock(s)">
         <div class="stock-info">
-
           <span class="ingredient-name">
-            {{ s.ingredientName ?? ('Ingredient #' + s.ingredientId) }}
+            {{ s.ingredientName ?? 'Ingredient #' + s.ingredientId }}
           </span>
 
           <span class="stock-warning" *ngIf="isLowStock(s)">
             ⚠️ {{ 'ADMIN.BRANCH_DETAILS.STOCK.LOW' | translate }}
           </span>
-
         </div>
 
         <div class="stock-bar-wrap">
-
           <div class="stock-bar">
-            <div class="stock-fill"
-                 [style.width.%]="getStockPercent(s)"
-                 [class.low]="isLowStock(s)">
-            </div>
+            <div
+              class="stock-fill"
+              [style.width.%]="getStockPercent(s)"
+              [class.low]="isLowStock(s)"
+            ></div>
           </div>
 
-          <span class="stock-qty">
-            {{ s.quantityAvailable }} / {{ s.lowThreshold }} min
-          </span>
-
+          <span class="stock-qty"> {{ s.quantityAvailable }} / {{ s.lowThreshold }} min </span>
         </div>
-
       </div>
-
     </div>
   </div>
-
 </div>
 
 <!-- Loading -->
@@ -284,13 +232,11 @@
 
 <!-- Error -->
 <div class="error-state" *ngIf="error() && !isLoading()">
-
   <p>{{ error() }}</p>
 
   <button class="btn-retry" (click)="loadBranch()">
     {{ 'ADMIN.BRANCH_DETAILS.ERROR.RETRY' | translate }}
   </button>
-
 </div>
 
 <!-- Delete -->

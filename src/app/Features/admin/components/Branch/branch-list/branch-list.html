@@ -1,5 +1,4 @@
 <div class="branch-page">
-
   <!-- Header -->
   <div class="page-header">
     <h1 class="page-title">{{ 'ADMIN.BRANCHES.TITLE' | translate }}</h1>
@@ -18,17 +17,16 @@
       [(ngModel)]="searchTerm"
       (ngModelChange)="onSearchChange()"
     />
-    <button
-      class="btn-clear"
-      *ngIf="searchTerm"
-      (click)="searchTerm = ''; onSearchChange()"
-    >✕</button>
+    <button class="btn-clear" *ngIf="searchTerm" (click)="searchTerm = ''; onSearchChange()">
+      ✕
+    </button>
   </div>
 
   <!-- Results Hint -->
   <p class="results-hint" *ngIf="!isLoading() && !error()">
     {{ totalCount() }}
-    {{ totalCount() === 1
+    {{
+      totalCount() === 1
         ? ('ADMIN.BRANCHES.RESULTS.SINGLE' | translate)
         : ('ADMIN.BRANCHES.RESULTS.PLURAL' | translate)
     }}
@@ -39,7 +37,7 @@
 
   <!-- Loading -->
   <div class="loading-grid" *ngIf="isLoading()">
-    <div class="skeleton-card" *ngFor="let i of [1,2,3]"></div>
+    <div class="skeleton-card" *ngFor="let i of [1, 2, 3]"></div>
   </div>
 
   <!-- Error -->
@@ -52,7 +50,6 @@
 
   <!-- Branch Cards Grid -->
   <div class="branches-grid" *ngIf="!isLoading() && !error()">
-
     <div
       class="branch-card"
       *ngFor="let branch of branches()"
@@ -61,12 +58,15 @@
       <!-- Card Header -->
       <div class="card-header">
         <h2 class="branch-name">{{ getItemName(branch) }}</h2>
-        <span class="status-badge"
-              [class.active]="branch.isActive"
-              [class.inactive]="!branch.isActive">
-          {{ branch.isActive
-            ? ('ADMIN.BRANCHES.STATUS.ACTIVE' | translate)
-            : ('ADMIN.BRANCHES.STATUS.INACTIVE' | translate)
+        <span
+          class="status-badge"
+          [class.active]="branch.isActive"
+          [class.inactive]="!branch.isActive"
+        >
+          {{
+            branch.isActive
+              ? ('ADMIN.BRANCHES.STATUS.ACTIVE' | translate)
+              : ('ADMIN.BRANCHES.STATUS.INACTIVE' | translate)
           }}
         </span>
       </div>
@@ -109,7 +109,6 @@
       <button class="btn-manage" (click)="selectBranch(branch.id)">
         {{ 'ADMIN.BRANCHES.BUTTONS.MANAGE' | translate }}
       </button>
-
     </div>
 
     <!-- Add New Branch Card -->
@@ -119,7 +118,6 @@
         <span class="add-label">{{ 'ADMIN.BRANCHES.BUTTONS.ADD_NEW' | translate }}</span>
       </div>
     </div>
-
   </div>
 
   <!-- Empty State -->
@@ -127,8 +125,8 @@
     <p>
       {{ 'ADMIN.BRANCHES.EMPTY.TITLE' | translate }}
       <span *ngIf="searchTerm">
-        {{ 'ADMIN.BRANCHES.RESULTS.FOR' | translate }} "{{ searchTerm }}"
-      </span>.
+        {{ 'ADMIN.BRANCHES.RESULTS.FOR' | translate }} "{{ searchTerm }}" </span
+      >.
     </p>
     <button class="btn-add" *ngIf="!searchTerm" (click)="openCreate()">
       + {{ 'ADMIN.BRANCHES.BUTTONS.ADD' | translate }}
@@ -143,5 +141,4 @@
     [totalCount]="totalCount()"
     (pageChanged)="onPageChanged($event)"
   />
-
 </div>
