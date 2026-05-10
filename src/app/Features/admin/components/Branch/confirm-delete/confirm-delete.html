@@ -1,6 +1,5 @@
 <div class="confirm-overlay" (click)="onOverlayClick($event)">
   <div class="confirm-card">
-
     <div class="confirm-icon">🗑️</div>
 
     <h2 class="confirm-title">
@@ -9,7 +8,8 @@
 
     <p class="confirm-message">
       {{ 'ADMIN.BRANCH_DELETE.MESSAGE_PART_1' | translate }}
-      <strong>{{ branchName }}</strong>?
+      <strong>{{ branchName }}</strong
+      >?
       <br />
       {{ 'ADMIN.BRANCH_DELETE.MESSAGE_PART_2' | translate }}
       <span class="danger-text">⚠️</span>
@@ -32,6 +32,5 @@
     <div class="delete-error" *ngIf="deleteError()">
       ⚠️ {{ 'ADMIN.BRANCH_DELETE.ERROR' | translate }}
     </div>
-
   </div>
 </div>

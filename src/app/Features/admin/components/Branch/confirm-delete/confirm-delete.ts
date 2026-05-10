@@ -1,11 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  signal,
-  inject,
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BranchService } from '../../../../../Core/Services/Branch-Service/branch-service';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -14,13 +7,13 @@ import { ToastService } from '../../../../../Core/Services/Toast-Service/toast-s
 @Component({
   selector: 'app-confirm-delete',
   standalone: true,
-  imports: [CommonModule,TranslatePipe],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './confirm-delete.html',
   styleUrls: ['./confirm-delete.scss'],
 })
 export class ConfirmDeleteComponent {
   private branchService = inject(BranchService);
-  private toast         = inject(ToastService);
+  private toast = inject(ToastService);
 
   @Input({ required: true }) branchId!: number;
   @Input({ required: true }) branchName!: string;

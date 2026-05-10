@@ -1,4 +1,14 @@
-import { Component, inject, OnInit, OnChanges, SimpleChanges, signal, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  signal,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -20,7 +30,7 @@ import { LocalizationService } from '../../../../../Core/Services/Localization-S
 })
 export class BranchListComponent implements OnInit, OnChanges {
   private branchService = inject(BranchService);
- private toast         = inject(ToastService);
+  private toast = inject(ToastService);
   @Input() selectedBranchId: number | null = null;
   @Input() refreshTrigger: number = 0;
   @Output() branchSelected = new EventEmitter<number>();
@@ -39,9 +49,7 @@ export class BranchListComponent implements OnInit, OnChanges {
     pageSize: 5,
   };
 
-  constructor(
-        private localizationService: LocalizationService,
-      ) {}
+  constructor(private localizationService: LocalizationService) {}
 
   ngOnInit(): void {
     this.loadBranches();
@@ -55,19 +63,19 @@ export class BranchListComponent implements OnInit, OnChanges {
   }
 
   CurrentLanguage: string = 'en';
-    
-      private destroy$ = new Subject<void>();
-      getCurrentLanguage(): void {
-        this.CurrentLanguage = this.localizationService.getCurrentLang();
-        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
-          this.CurrentLanguage = lang;
-        });
-      }
-    
-      ngOnDestroy(): void {
-        this.destroy$.next();
-        this.destroy$.complete();
-      }
+
+  private destroy$ = new Subject<void>();
+  getCurrentLanguage(): void {
+    this.CurrentLanguage = this.localizationService.getCurrentLang();
+    this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+      this.CurrentLanguage = lang;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   onSearchChange(): void {
     clearTimeout(this.searchTimeout);

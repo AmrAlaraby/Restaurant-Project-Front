@@ -1,8 +1,6 @@
 <div class="branch-create-page">
-
   <!-- Header -->
   <div class="page-header">
-
     <div class="header-left">
       <button class="btn-back" (click)="close()">
         <span class="btn-back__arrow">←</span>
@@ -15,7 +13,6 @@
     </div>
 
     <div class="header-actions">
-
       <button class="btn-cancel" (click)="close()">
         {{ 'ADMIN.BRANCHES.CANCEL' | translate }}
       </button>
@@ -27,34 +24,30 @@
             : ('ADMIN.BRANCHES.CREATE' | translate)
         }}
       </button>
-
     </div>
-
   </div>
 
   <!-- Form -->
   <div class="form-card" [formGroup]="form">
-
     <!-- Basic Info -->
     <div class="section">
-
-      <h3 class="section-title">
-        📋 {{ 'ADMIN.BRANCHES.BASIC_INFO' | translate }}
-      </h3>
+      <h3 class="section-title">📋 {{ 'ADMIN.BRANCHES.BASIC_INFO' | translate }}</h3>
 
       <hr class="divider" />
 
       <div class="form-grid">
-
         <div class="field-group full-width">
           <label class="field-label">
             {{ 'ADMIN.BRANCHES.NAME' | translate }}
             <span class="required">*</span>
           </label>
 
-          <input class="field-input" type="text"
-                 formControlName="name"
-                 [placeholder]="'ADMIN.BRANCHES.NAME_PLACEHOLDER' | translate" />
+          <input
+            class="field-input"
+            type="text"
+            formControlName="name"
+            [placeholder]="'ADMIN.BRANCHES.NAME_PLACEHOLDER' | translate"
+          />
 
           <span class="field-error" *ngIf="isInvalid('name')">
             {{ 'ADMIN.BRANCHES.ERROR_NAME' | translate }}
@@ -67,9 +60,12 @@
             <span class="required">*</span>
           </label>
 
-          <input class="field-input" type="text"
-                 formControlName="phone"
-                 [placeholder]="'ADMIN.BRANCHES.PHONE_PLACEHOLDER' | translate" />
+          <input
+            class="field-input"
+            type="text"
+            formControlName="phone"
+            [placeholder]="'ADMIN.BRANCHES.PHONE_PLACEHOLDER' | translate"
+          />
 
           <span class="field-error" *ngIf="isInvalid('phone')">
             {{ 'ADMIN.BRANCHES.ERROR_PHONE' | translate }}
@@ -82,9 +78,12 @@
             <span class="optional">{{ 'ADMIN.BRANCHES.OPTIONAL' | translate }}</span>
           </label>
 
-          <input class="field-input" type="text"
-                 formControlName="specialMark"
-                 [placeholder]="'ADMIN.BRANCHES.MARK_PLACEHOLDER' | translate" />
+          <input
+            class="field-input"
+            type="text"
+            formControlName="specialMark"
+            [placeholder]="'ADMIN.BRANCHES.MARK_PLACEHOLDER' | translate"
+          />
         </div>
 
         <div class="field-group full-width">
@@ -93,36 +92,36 @@
             <span class="optional">{{ 'ADMIN.BRANCHES.OPTIONAL' | translate }}</span>
           </label>
 
-          <textarea class="field-input field-textarea"
-                    formControlName="note"
-                    rows="3"
-                    [placeholder]="'ADMIN.BRANCHES.NOTE_PLACEHOLDER' | translate">
+          <textarea
+            class="field-input field-textarea"
+            formControlName="note"
+            rows="3"
+            [placeholder]="'ADMIN.BRANCHES.NOTE_PLACEHOLDER' | translate"
+          >
           </textarea>
         </div>
-
       </div>
     </div>
 
     <!-- Address -->
     <div class="section">
-
-      <h3 class="section-title">
-        📍 {{ 'ADMIN.BRANCHES.ADDRESS' | translate }}
-      </h3>
+      <h3 class="section-title">📍 {{ 'ADMIN.BRANCHES.ADDRESS' | translate }}</h3>
 
       <hr class="divider" />
 
       <div class="form-grid">
-
         <div class="field-group">
           <label class="field-label">
             {{ 'ADMIN.BRANCHES.BUILDING' | translate }}
             <span class="required">*</span>
           </label>
 
-          <input class="field-input" type="number"
-                 formControlName="buildingNumber"
-                 [placeholder]="'ADMIN.BRANCHES.BUILDING_PLACEHOLDER' | translate" />
+          <input
+            class="field-input"
+            type="number"
+            formControlName="buildingNumber"
+            [placeholder]="'ADMIN.BRANCHES.BUILDING_PLACEHOLDER' | translate"
+          />
 
           <span class="field-error" *ngIf="isInvalid('buildingNumber')">
             {{ 'ADMIN.BRANCHES.ERROR_BUILDING' | translate }}
@@ -135,9 +134,12 @@
             <span class="required">*</span>
           </label>
 
-          <input class="field-input" type="text"
-                 formControlName="street"
-                 [placeholder]="'ADMIN.BRANCHES.STREET_PLACEHOLDER' | translate" />
+          <input
+            class="field-input"
+            type="text"
+            formControlName="street"
+            [placeholder]="'ADMIN.BRANCHES.STREET_PLACEHOLDER' | translate"
+          />
 
           <span class="field-error" *ngIf="isInvalid('street')">
             {{ 'ADMIN.BRANCHES.ERROR_STREET' | translate }}
@@ -150,23 +152,21 @@
             <span class="required">*</span>
           </label>
 
-          <input class="field-input" type="text"
-                 formControlName="city"
-                 [placeholder]="'ADMIN.BRANCHES.CITY_PLACEHOLDER' | translate" />
+          <input
+            class="field-input"
+            type="text"
+            formControlName="city"
+            [placeholder]="'ADMIN.BRANCHES.CITY_PLACEHOLDER' | translate"
+          />
 
           <span class="field-error" *ngIf="isInvalid('city')">
             {{ 'ADMIN.BRANCHES.ERROR_CITY' | translate }}
           </span>
         </div>
-
       </div>
     </div>
-
   </div>
 
   <!-- Save Error -->
-  <div class="save-error" *ngIf="saveError()">
-    ⚠️ {{ saveError() }}
-  </div>
-
+  <div class="save-error" *ngIf="saveError()">⚠️ {{ saveError() }}</div>
 </div>

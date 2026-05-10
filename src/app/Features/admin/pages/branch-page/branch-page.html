@@ -1,5 +1,4 @@
 <div class="branch-page-layout" [class.has-details]="showPanel()">
-
   <!-- List Panel -->
   <div class="list-panel">
     <app-branch-list
@@ -31,10 +30,6 @@
 
   <!-- Create Panel -->
   <div class="details-panel" *ngIf="showPanel() && activeView() === 'create'">
-    <app-branch-create
-      (closed)="onCloseCreate()"
-      (created)="onBranchCreated()"
-    />
+    <app-branch-create (closed)="onCloseCreate()" (created)="onBranchCreated()" />
   </div>
-
 </div>
