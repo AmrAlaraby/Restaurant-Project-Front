@@ -16,33 +16,31 @@ import { LocalizationService } from '../../../../../Core/Services/Localization-S
   standalone: true,
   imports: [CommonModule, FormsModule, TranslatePipe],
   templateUrl: './delivery-details.html',
-  styleUrls: ['./delivery-details.scss']
+  styleUrls: ['./delivery-details.scss'],
 })
 export class DeliveryDetails {
-
   delivery?: Delivery;
   loading = false;
 
-
   updateModel = {
-    cashCollected: undefined as number | undefined
+    cashCollected: undefined as number | undefined,
   };
 
   cashError = '';
 
   private statusFlow: Record<string, string> = {
-    'Assigned': 'PickedUp',
-    'PickedUp': 'OnTheWay',
-    'OnTheWay': 'Delivered',
+    Assigned: 'PickedUp',
+    PickedUp: 'OnTheWay',
+    OnTheWay: 'Delivered',
   };
 
   steps = ['Assigned', 'PICKED_UP', 'ON_THE_WAY', 'Delivered'];
 
   private statusToIndex: Record<string, number> = {
-    'Assigned': 0,
-    'PickedUp': 1,
-    'OnTheWay': 2,
-    'Delivered': 3,
+    Assigned: 0,
+    PickedUp: 1,
+    OnTheWay: 2,
+    Delivered: 3,
   };
 
   get currentStepIndex(): number {
@@ -67,7 +65,7 @@ export class DeliveryDetails {
     private service: DeliveryService,
     private ordersService: OrdersService,
     private router: Router,
-    private toast: ToastService
+    private toast: ToastService,
   ) {}
 
   ngOnInit() {
@@ -81,80 +79,80 @@ export class DeliveryDetails {
     this.service.getById(id).subscribe({
       next: (res) => {
         console.log(res);
-        
+
         this.delivery = res;
         this.loading = false;
       },
       error: () => {
         this.loading = false;
         this.toast.error('Failed to load delivery details');
-      }
+      },
     });
     this.getCurrentLanguage();
   }
   CurrentLanguage: string = 'en';
-    
-      private destroy$ = new Subject<void>();
-      getCurrentLanguage(): void {
-        this.CurrentLanguage = this.localizationService.getCurrentLang();
-        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
-          this.CurrentLanguage = lang;
-        });
-      }
-    
-      ngOnDestroy(): void {
-        this.destroy$.next();
-        this.destroy$.complete();
-      }
+
+  private destroy$ = new Subject<void>();
+  getCurrentLanguage(): void {
+    this.CurrentLanguage = this.localizationService.getCurrentLang();
+    this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+      this.CurrentLanguage = lang;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   nextStatus(): string | null {
     return this.delivery ? (this.statusFlow[this.delivery.deliveryStatus] ?? null) : null;
   }
 
- updateStatus() {
-  if (!this.delivery) return;
+  updateStatus() {
+    if (!this.delivery) return;
 
-  const next = this.nextStatus();
-  if (!next) return;
+    const next = this.nextStatus();
+    if (!next) return;
 
-  if (next === 'Delivered') {
-    const cash = this.updateModel.cashCollected ?? 0;
-    if (cash < this.delivery.order.totalAmount) {
-      this.toast.error(`Min amount is EGP ${this.delivery.order.totalAmount}`);
-      this.cashError = `Min amount is EGP ${this.delivery.order.totalAmount}`;
-      return;
-    }
-  }
-
-  this.cashError = '';
-
-  const body: any = { status: next };
-  if (next === 'Delivered') {
-    body.cashCollected = this.updateModel.cashCollected;
-  }
-
-  this.service.updateStatus(this.delivery.id, body).subscribe({
-    next: (res) => {
-      this.delivery = res;
-      this.updateModel.cashCollected = undefined;
-      this.toast.success(`Status updated to ${next}`);
-
-      if (next === 'Delivered') {
-        this.ordersService.markAsPaid(res.order.id).subscribe({
-          next: () => this.toast.success('Order marked as paid'),
-          error: (err) => {
-            const message = err.error?.detail || 'Failed to mark order as paid';
-            this.toast.error(message);
-          }
-        });
+    if (next === 'Delivered') {
+      const cash = this.updateModel.cashCollected ?? 0;
+      if (cash < this.delivery.order.totalAmount) {
+        this.toast.error(`Min amount is EGP ${this.delivery.order.totalAmount}`);
+        this.cashError = `Min amount is EGP ${this.delivery.order.totalAmount}`;
+        return;
       }
-    },
-    error: (err) => {
-      const message = err.error?.detail || 'Failed to update status';
-      this.toast.error(message);
     }
-  });
-}
+
+    this.cashError = '';
+
+    const body: any = { status: next };
+    if (next === 'Delivered') {
+      body.cashCollected = this.updateModel.cashCollected;
+    }
+
+    this.service.updateStatus(this.delivery.id, body).subscribe({
+      next: (res) => {
+        this.delivery = res;
+        this.updateModel.cashCollected = undefined;
+        this.toast.success(`Status updated to ${next}`);
+
+        if (next === 'Delivered') {
+          this.ordersService.markAsPaid(res.order.id).subscribe({
+            next: () => this.toast.success('Order marked as paid'),
+            error: (err) => {
+              const message = err.error?.detail || 'Failed to mark order as paid';
+              this.toast.error(message);
+            },
+          });
+        }
+      },
+      error: (err) => {
+        const message = err.error?.detail || 'Failed to update status';
+        this.toast.error(message);
+      },
+    });
+  }
 
   goBack() {
     this.router.navigate(['/admin/deliveries']);

@@ -1,5 +1,4 @@
 <div class="own-deliveries-wrap">
-
   <div *ngIf="loading" class="loading-wrap">
     <div class="spinner"></div>
     <span>{{ 'DRIVER.DELIVERIES.LOADING' | translate }}</span>
@@ -10,7 +9,6 @@
   </div>
 
   <div class="delivery-card" *ngFor="let d of deliveries">
-
     <div class="card-top">
       <div class="card-left">
         <div class="delivery-id">#D-{{ d.id }}</div>
@@ -31,13 +29,12 @@
           'badge-delivered': d.deliveryStatus === 'Delivered',
         }"
       >
-        {{ ('DRIVER.STATUS.' + d.deliveryStatus) | translate }}
+        {{ 'DRIVER.STATUS.' + d.deliveryStatus | translate }}
       </span>
     </div>
 
     <!-- Steps -->
     <div class="steps-wrap">
-
       <!-- Assigned -->
       <div class="step">
         <div class="step-circle done">✓</div>
@@ -46,14 +43,15 @@
         </div>
       </div>
 
-      <div class="step-connector"
+      <div
+        class="step-connector"
         [ngClass]="{
           done:
             d.deliveryStatus === 'PickedUp' ||
             d.deliveryStatus === 'OnTheWay' ||
             d.deliveryStatus === 'Delivered',
-        }">
-      </div>
+        }"
+      ></div>
 
       <!-- Picked Up -->
       <div class="step">
@@ -80,9 +78,10 @@
         </div>
       </div>
 
-      <div class="step-connector"
-        [ngClass]="{ done: d.deliveryStatus === 'OnTheWay' || d.deliveryStatus === 'Delivered' }">
-      </div>
+      <div
+        class="step-connector"
+        [ngClass]="{ done: d.deliveryStatus === 'OnTheWay' || d.deliveryStatus === 'Delivered' }"
+      ></div>
 
       <!-- On The Way -->
       <div class="step">
@@ -118,12 +117,10 @@
           {{ 'DRIVER.STATUS.Delivered' | translate }}
         </div>
       </div>
-
     </div>
 
     <!-- Body -->
     <div class="card-body">
-
       <!-- Address -->
       <div class="section">
         <div class="section-title">
@@ -157,12 +154,10 @@
           </span>
         </div>
       </div>
-
     </div>
 
     <!-- Footer -->
     <div class="card-footer">
-
       <span>
         {{ 'DRIVER.DELIVERY_DETAILS.TOTAL' | translate }}:
         <b class="red">
@@ -172,16 +167,12 @@
 
       <span *ngIf="d.cashCollected !== null">
         💵 {{ 'DRIVER.DELIVERY_DETAILS.COLLECTED' | translate }}:
-        <b>
-          {{ 'DRIVER.DELIVERY_DETAILS.CURRENCY' | translate }} {{ d.cashCollected }}
-        </b>
+        <b> {{ 'DRIVER.DELIVERY_DETAILS.CURRENCY' | translate }} {{ d.cashCollected }} </b>
       </span>
 
       <span>
         {{ d.createdAt | date: 'dd/MM/yyyy hh:mm a' }}
       </span>
-
     </div>
-
   </div>
 </div>

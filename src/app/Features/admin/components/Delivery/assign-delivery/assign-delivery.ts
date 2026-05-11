@@ -30,7 +30,7 @@ export class AssignDelivery implements OnInit {
   constructor(
     private deliveryService: DeliveryService,
     private localizationService: LocalizationService,
-     private toast: ToastService 
+    private toast: ToastService,
   ) {}
 
   ngOnInit(): void {
@@ -53,15 +53,13 @@ export class AssignDelivery implements OnInit {
     this.destroy$.complete();
   }
 
-
-
   loadBranches() {
     this.deliveryService.getBranches().subscribe({
       next: (res) => {
         this.branches = res;
         console.log('Branches:', this.branches);
       },
-     error: () => this.toast.error('Failed to load branches'),
+      error: () => this.toast.error('Failed to load branches'),
     });
   }
 
@@ -134,7 +132,7 @@ export class AssignDelivery implements OnInit {
 
     this.deliveryService.assignDelivery(dto).subscribe({
       next: () => {
-         this.toast.success('Assigned successfully!');
+        this.toast.success('Assigned successfully!');
         this.assigning = false;
 
         this.deliveries = this.deliveries.filter(
@@ -153,7 +151,7 @@ export class AssignDelivery implements OnInit {
     });
   }
 
-    getBranchName(item: any): string {
+  getBranchName(item: any): string {
     if (this.CurrentLanguage === 'ar') {
       return item.arabicName || item.name;
     }

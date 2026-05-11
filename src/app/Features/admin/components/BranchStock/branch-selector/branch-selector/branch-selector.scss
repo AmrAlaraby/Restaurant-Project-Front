@@ -25,7 +25,9 @@
     min-width: 190px;
     width: 100%;
     appearance: none;
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    transition:
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
 
     .dark & {
       background-color: var(--clr-surface);

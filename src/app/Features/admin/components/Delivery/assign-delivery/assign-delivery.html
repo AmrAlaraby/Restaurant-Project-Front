@@ -9,16 +9,17 @@
   </div>
 
   <div class="assign-form">
-
     <!-- Branch -->
     <div class="form-group">
       <label class="form-label">
         {{ 'ADMIN.ASSIGN_DELIVERY.BRANCH' | translate }}
       </label>
       <div class="select-wrap">
-        <select class="form-select-styled"
-                [(ngModel)]="selectedBranch"
-                (ngModelChange)="onBranchChange($event)">
+        <select
+          class="form-select-styled"
+          [(ngModel)]="selectedBranch"
+          (ngModelChange)="onBranchChange($event)"
+        >
           <option [ngValue]="null">
             {{ 'ADMIN.ASSIGN_DELIVERY.SELECT_BRANCH' | translate }}
           </option>
@@ -28,9 +29,13 @@
         </select>
         <span class="select-chevron" aria-hidden="true">
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
-            <path d="M1 1l4 4 4-4" stroke="currentColor"
-                  stroke-width="1.5" stroke-linecap="round"
-                  stroke-linejoin="round"/>
+            <path
+              d="M1 1l4 4 4-4"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </span>
       </div>
@@ -46,9 +51,11 @@
         {{ 'ADMIN.ASSIGN_DELIVERY.LOADING_DELIVERIES' | translate }}
       </div>
       <div class="select-wrap" *ngIf="!loadingDeliveries">
-        <select class="form-select-styled"
-                [(ngModel)]="selectedDelivery"
-                (ngModelChange)="onDeliveryChange($event)">
+        <select
+          class="form-select-styled"
+          [(ngModel)]="selectedDelivery"
+          (ngModelChange)="onDeliveryChange($event)"
+        >
           <option [ngValue]="null">
             {{ 'ADMIN.ASSIGN_DELIVERY.SELECT_DELIVERY' | translate }}
           </option>
@@ -58,14 +65,17 @@
         </select>
         <span class="select-chevron" aria-hidden="true">
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
-            <path d="M1 1l4 4 4-4" stroke="currentColor"
-                  stroke-width="1.5" stroke-linecap="round"
-                  stroke-linejoin="round"/>
+            <path
+              d="M1 1l4 4 4-4"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </span>
       </div>
-      <div *ngIf="!loadingDeliveries && deliveries.length === 0"
-           class="empty-msg">
+      <div *ngIf="!loadingDeliveries && deliveries.length === 0" class="empty-msg">
         {{ 'ADMIN.ASSIGN_DELIVERY.NO_DELIVERIES' | translate }}
       </div>
     </div>
@@ -80,8 +90,7 @@
         {{ 'ADMIN.ASSIGN_DELIVERY.LOADING_DRIVERS' | translate }}
       </div>
       <div class="select-wrap" *ngIf="!loadingDrivers">
-        <select class="form-select-styled"
-                [(ngModel)]="selectedDriverId">
+        <select class="form-select-styled" [(ngModel)]="selectedDriverId">
           <option value="">
             {{ 'ADMIN.ASSIGN_DELIVERY.SELECT_DRIVER' | translate }}
           </option>
@@ -91,29 +100,29 @@
         </select>
         <span class="select-chevron" aria-hidden="true">
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
-            <path d="M1 1l4 4 4-4" stroke="currentColor"
-                  stroke-width="1.5" stroke-linecap="round"
-                  stroke-linejoin="round"/>
+            <path
+              d="M1 1l4 4 4-4"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </span>
       </div>
-      <div *ngIf="!loadingDrivers && drivers.length === 0"
-           class="empty-msg">
+      <div *ngIf="!loadingDrivers && drivers.length === 0" class="empty-msg">
         {{ 'ADMIN.ASSIGN_DELIVERY.NO_DRIVERS' | translate }}
       </div>
     </div>
 
     <!-- Button -->
-    <button class="assign-btn"
-            (click)="assign()"
-            [disabled]="!selectedDriverId || assigning">
+    <button class="assign-btn" (click)="assign()" [disabled]="!selectedDriverId || assigning">
       <span class="btn-spinner" *ngIf="assigning"></span>
       {{
         assigning
           ? ('ADMIN.ASSIGN_DELIVERY.ASSIGNING' | translate)
-          : ('ADMIN.ASSIGN_DELIVERY.ASSIGN'    | translate)
+          : ('ADMIN.ASSIGN_DELIVERY.ASSIGN' | translate)
       }}
     </button>
-
   </div>
 </div>
