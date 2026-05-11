@@ -12,7 +12,9 @@
 
 // ─── Loading ──────────────────────────────────────────────────────────────────
 @keyframes dl-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .loading-wrap {
@@ -25,7 +27,9 @@
   font-size: 0.875rem;
   color: var(--clr-text-hint);
 
-  .dark & { color: var(--clr-text-hint); }
+  .dark & {
+    color: var(--clr-text-hint);
+  }
 }
 
 .spinner {
@@ -59,7 +63,9 @@
   padding-block-end: var(--space-md);
   border-block-end: 1px solid var(--clr-border);
 
-  .dark & { border-block-end-color: var(--clr-border); }
+  .dark & {
+    border-block-end-color: var(--clr-border);
+  }
 }
 
 .details-title {
@@ -70,7 +76,9 @@
   margin-block-end: 4px;
   letter-spacing: -0.01em;
 
-  .dark & { color: var(--clr-text-primary); }
+  .dark & {
+    color: var(--clr-text-primary);
+  }
 }
 
 .details-sub {
@@ -78,7 +86,9 @@
   font-size: 0.8rem;
   color: var(--clr-text-hint);
 
-  .dark & { color: var(--clr-text-hint); }
+  .dark & {
+    color: var(--clr-text-hint);
+  }
 }
 
 // ─── Status Badge ─────────────────────────────────────────────────────────────
@@ -98,28 +108,40 @@
     background: var(--clr-danger-bg);
     color: var(--clr-danger-text);
 
-    .dark & { background: var(--clr-danger-bg); color: var(--clr-danger-text); }
+    .dark & {
+      background: var(--clr-danger-bg);
+      color: var(--clr-danger-text);
+    }
   }
 
   &.badge-pickedup {
     background: var(--clr-info-bg);
     color: var(--clr-info-text);
 
-    .dark & { background: var(--clr-info-bg); color: var(--clr-info-text); }
+    .dark & {
+      background: var(--clr-info-bg);
+      color: var(--clr-info-text);
+    }
   }
 
   &.badge-onway {
     background: var(--clr-warning-bg);
     color: var(--clr-warning-text);
 
-    .dark & { background: var(--clr-warning-bg); color: var(--clr-warning-text); }
+    .dark & {
+      background: var(--clr-warning-bg);
+      color: var(--clr-warning-text);
+    }
   }
 
   &.badge-delivered {
     background: var(--clr-success-bg);
     color: var(--clr-success-text);
 
-    .dark & { background: var(--clr-success-bg); color: var(--clr-success-text); }
+    .dark & {
+      background: var(--clr-success-bg);
+      color: var(--clr-success-text);
+    }
   }
 }
 
@@ -223,7 +245,9 @@
   text-transform: uppercase;
   letter-spacing: 0.04em;
 
-  .dark & { color: var(--clr-text-hint); }
+  .dark & {
+    color: var(--clr-text-hint);
+  }
 }
 
 .step-connector {
@@ -235,12 +259,16 @@
   border-radius: var(--radius-full);
   transition: background var(--transition-fast);
 
-  .dark & { background: var(--clr-border); }
+  .dark & {
+    background: var(--clr-border);
+  }
 
   &.done {
     background: var(--clr-primary);
 
-    .dark & { background: var(--clr-primary); }
+    .dark & {
+      background: var(--clr-primary);
+    }
   }
 }
 
@@ -250,8 +278,12 @@
   grid-template-columns: 1fr 1fr 1fr;
   gap: var(--space-md);
 
-  @media (max-width: 900px) { grid-template-columns: 1fr 1fr; }
-  @media (max-width: 600px) { grid-template-columns: 1fr; }
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 // ─── Cards ────────────────────────────────────────────────────────────────────
@@ -283,7 +315,9 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
 
-  .dark & { color: var(--clr-primary-hover); }
+  .dark & {
+    color: var(--clr-primary-hover);
+  }
 }
 
 // ─── Info Row ─────────────────────────────────────────────────────────────────
@@ -297,13 +331,17 @@
   font-size: 0.8rem;
   gap: var(--space-sm);
 
-  &:last-child { border-block-end: none; }
+  &:last-child {
+    border-block-end: none;
+  }
 
   span {
     color: var(--clr-text-hint);
     flex-shrink: 0;
 
-    .dark & { color: var(--clr-text-hint); }
+    .dark & {
+      color: var(--clr-text-hint);
+    }
   }
 
   b {
@@ -311,17 +349,23 @@
     font-weight: 600;
     text-align: end;
 
-    .dark & { color: var(--clr-text-primary); }
+    .dark & {
+      color: var(--clr-text-primary);
+    }
   }
 
   .red {
     color: var(--clr-primary);
     font-weight: 700;
 
-    .dark & { color: var(--clr-primary-hover); }
+    .dark & {
+      color: var(--clr-primary-hover);
+    }
   }
 
-  .dark & { border-block-end-color: var(--clr-border); }
+  .dark & {
+    border-block-end-color: var(--clr-border);
+  }
 }
 
 .phone-link {
@@ -332,9 +376,13 @@
   text-decoration: none;
   transition: opacity var(--transition-fast);
 
-  &:hover { opacity: 0.7; }
+  &:hover {
+    opacity: 0.7;
+  }
 
-  .dark & { color: var(--clr-primary-hover); }
+  .dark & {
+    color: var(--clr-primary-hover);
+  }
 }
 
 // ─── Items ────────────────────────────────────────────────────────────────────
@@ -347,29 +395,39 @@
   font-family: var(--font-body);
   font-size: 0.8rem;
 
-  &:last-child { border-block-end: none; }
+  &:last-child {
+    border-block-end: none;
+  }
 
-  .dark & { border-block-end-color: var(--clr-border); }
+  .dark & {
+    border-block-end-color: var(--clr-border);
+  }
 }
 
 .item-name {
   flex: 1;
   color: var(--clr-text-primary);
 
-  .dark & { color: var(--clr-text-primary); }
+  .dark & {
+    color: var(--clr-text-primary);
+  }
 }
 
 .item-qty {
   color: var(--clr-text-hint);
 
-  .dark & { color: var(--clr-text-hint); }
+  .dark & {
+    color: var(--clr-text-hint);
+  }
 }
 
 .item-price {
   font-weight: 700;
   color: var(--clr-primary);
 
-  .dark & { color: var(--clr-primary-hover); }
+  .dark & {
+    color: var(--clr-primary-hover);
+  }
 }
 
 // ─── Update Card ──────────────────────────────────────────────────────────────
@@ -396,7 +454,9 @@
     border-color var(--transition-fast),
     box-shadow var(--transition-fast);
 
-  &::placeholder { color: var(--clr-text-hint); }
+  &::placeholder {
+    color: var(--clr-text-hint);
+  }
 
   &:focus {
     border-color: var(--clr-primary);
@@ -409,7 +469,9 @@
     border-color: var(--clr-border);
     color: var(--clr-text-primary);
 
-    &::placeholder { color: var(--clr-text-hint); }
+    &::placeholder {
+      color: var(--clr-text-hint);
+    }
 
     &:focus {
       border-color: var(--clr-primary);
@@ -425,7 +487,9 @@
   font-weight: 600;
   color: var(--clr-danger-text);
 
-  .dark & { color: var(--clr-danger-text); }
+  .dark & {
+    color: var(--clr-danger-text);
+  }
 }
 
 .update-btn {

@@ -9,7 +9,7 @@ import { LocalizationService } from '../../../../../Core/Services/Localization-S
 @Component({
   selector: 'app-own-deliveries',
   standalone: true,
-  imports: [CommonModule,TranslatePipe],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './own-deliveries.html',
   styleUrls: ['./own-deliveries.scss'],
 })
@@ -17,7 +17,8 @@ export class OwnDeliveries implements OnInit {
   deliveries: any[] = [];
   loading = false;
 
-  constructor(private deliveryService: DeliveryService,
+  constructor(
+    private deliveryService: DeliveryService,
     private toast: ToastService,
     private localizationService: LocalizationService,
   ) {}
@@ -28,19 +29,19 @@ export class OwnDeliveries implements OnInit {
   }
 
   CurrentLanguage: string = 'en';
-    
-      private destroy$ = new Subject<void>();
-      getCurrentLanguage(): void {
-        this.CurrentLanguage = this.localizationService.getCurrentLang();
-        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
-          this.CurrentLanguage = lang;
-        });
-      }
-    
-      ngOnDestroy(): void {
-        this.destroy$.next();
-        this.destroy$.complete();
-      }
+
+  private destroy$ = new Subject<void>();
+  getCurrentLanguage(): void {
+    this.CurrentLanguage = this.localizationService.getCurrentLang();
+    this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+      this.CurrentLanguage = lang;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   loadOwnDeliveries() {
     this.loading = true;
@@ -51,10 +52,9 @@ export class OwnDeliveries implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-         this.toast.error('Failed to load own deliveries');
+        this.toast.error('Failed to load own deliveries');
         console.error(err);
         this.loading = false;
-       
       },
     });
   }

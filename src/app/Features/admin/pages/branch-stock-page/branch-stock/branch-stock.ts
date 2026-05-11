@@ -17,10 +17,9 @@ import { LocalizationService } from '../../../../../Core/Services/Localization-S
   standalone: true,
   imports: [CommonModule, FormsModule, BranchSelectorComponent, Pagination, TranslatePipe],
   templateUrl: './branch-stock.html',
-  styleUrl: './branch-stock.scss'
+  styleUrl: './branch-stock.scss',
 })
 export class BranchStockComponent implements OnInit {
-
   stocks: BranchStockInterface[] = [];
   filteredStocks: BranchStockInterface[] = [];
 
@@ -33,13 +32,14 @@ export class BranchStockComponent implements OnInit {
   showModal = false;
   editData = {
     quantityAvailable: 0,
-    lowThreshold: 0
+    lowThreshold: 0,
   };
 
-  constructor(private service: BranchStockService,
-              private authService: AuthService,
-              private SignalRService: SignalRService,
-              private localizationService: LocalizationService,
+  constructor(
+    private service: BranchStockService,
+    private authService: AuthService,
+    private SignalRService: SignalRService,
+    private localizationService: LocalizationService,
   ) {}
 
   ngOnInit(): void {
@@ -49,19 +49,19 @@ export class BranchStockComponent implements OnInit {
   }
 
   CurrentLanguage: string = 'en';
-    
-      private destroy$ = new Subject<void>();
-      getCurrentLanguage(): void {
-        this.CurrentLanguage = this.localizationService.getCurrentLang();
-        this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
-          this.CurrentLanguage = lang;
-        });
-      }
-    
-      ngOnDestroy(): void {
-        this.destroy$.next();
-        this.destroy$.complete();
-      }
+
+  private destroy$ = new Subject<void>();
+  getCurrentLanguage(): void {
+    this.CurrentLanguage = this.localizationService.getCurrentLang();
+    this.localizationService.currentLang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+      this.CurrentLanguage = lang;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   loadData() {
     this.loading = true;
@@ -72,24 +72,22 @@ export class BranchStockComponent implements OnInit {
         this.applyPagination();
         this.loading = false;
       },
-      error: () => this.loading = false
+      error: () => (this.loading = false),
     });
   }
 
-  
   listenToUpdates(): void {
-      // let token = this.authService.getAccessToken();
-      let token =""
-      this.SignalRService.startRestaurantUpdatesConnection(token??"");
-      this.SignalRService.onRestaurantUpdate("BranchStockUpdated",(data :BranchStockInterface) => {
-        debugger
-        let index = this.filteredStocks.findIndex(d => d.id === data.id);
-        if(index !== -1 && index!==null){
-          this.filteredStocks[index] = data;
-        }     
-      });
-    }
-
+    // let token = this.authService.getAccessToken();
+    let token = '';
+    this.SignalRService.startRestaurantUpdatesConnection(token ?? '');
+    this.SignalRService.onRestaurantUpdate('BranchStockUpdated', (data: BranchStockInterface) => {
+      debugger;
+      let index = this.filteredStocks.findIndex((d) => d.id === data.id);
+      if (index !== -1 && index !== null) {
+        this.filteredStocks[index] = data;
+      }
+    });
+  }
 
   applyPagination() {
     const start = (this.pageIndex - 1) * this.pageSize;
@@ -110,18 +108,18 @@ export class BranchStockComponent implements OnInit {
   get totalCount() {
     return this.stocks.length;
   }
-viewDetails(id: number) {
+  viewDetails(id: number) {
     this.service.getById(id).subscribe({
       next: (res) => {
         this.selectedStock = res;
 
         this.editData = {
           quantityAvailable: res.quantityAvailable,
-          lowThreshold: res.lowThreshold
+          lowThreshold: res.lowThreshold,
         };
 
         this.showModal = true;
-      }
+      },
     });
   }
   saveChanges() {
@@ -130,9 +128,9 @@ viewDetails(id: number) {
     this.service.update(this.selectedStock.id, this.editData).subscribe({
       next: () => {
         this.closeModal();
-        this.loadData(); 
+        this.loadData();
       },
-      error: (err) => console.error(err)
+      error: (err) => console.error(err),
     });
   }
   closeModal() {
@@ -146,7 +144,6 @@ viewDetails(id: number) {
     return item.ingredientName;
   }
   getBranchName(item: any): string {
-   
     if (this.CurrentLanguage === 'ar') {
       return item.branchArabicName || item.branchName;
     }

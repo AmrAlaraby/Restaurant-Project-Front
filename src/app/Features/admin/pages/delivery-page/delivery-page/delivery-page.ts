@@ -31,10 +31,10 @@ export class DeliveryPage implements OnInit {
     this.deliveryService.getAll(1, 100).subscribe({
       next: (res) => {
         this.totalOrders = res.count;
-        this.onTheWay  = res.data.filter((d: any) => d.deliveryStatus === 'OnTheWay').length;
-        this.pickedUp  = res.data.filter((d: any) => d.deliveryStatus === 'PickedUp').length;
+        this.onTheWay = res.data.filter((d: any) => d.deliveryStatus === 'OnTheWay').length;
+        this.pickedUp = res.data.filter((d: any) => d.deliveryStatus === 'PickedUp').length;
         this.delivered = res.data.filter((d: any) => d.deliveryStatus === 'Delivered').length;
-      }
+      },
     });
   }
 

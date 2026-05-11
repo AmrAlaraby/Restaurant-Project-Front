@@ -4,7 +4,6 @@
 </div>
 
 <div *ngIf="delivery" class="details-wrap">
-
   <!-- Header -->
   <div class="details-header">
     <div>
@@ -16,15 +15,17 @@
       </div>
     </div>
 
-    <span class="status-badge"
+    <span
+      class="status-badge"
       [ngClass]="{
-        'badge-assigned':  delivery.deliveryStatus === 'Assigned',
-        'badge-pickedup':  delivery.deliveryStatus === 'PickedUp',
-        'badge-onway':     delivery.deliveryStatus === 'OnTheWay',
-        'badge-delivered': delivery.deliveryStatus === 'Delivered'
-      }">
-  {{ ('DRIVER.STATUS.' + delivery.deliveryStatus.toUpperCase()) | translate }}
-</span>
+        'badge-assigned': delivery.deliveryStatus === 'Assigned',
+        'badge-pickedup': delivery.deliveryStatus === 'PickedUp',
+        'badge-onway': delivery.deliveryStatus === 'OnTheWay',
+        'badge-delivered': delivery.deliveryStatus === 'Delivered',
+      }"
+    >
+      {{ 'DRIVER.STATUS.' + delivery.deliveryStatus.toUpperCase() | translate }}
+    </span>
   </div>
 
   <!-- Progress Steps -->
@@ -35,17 +36,18 @@
           {{ getStepIcon(i) }}
         </div>
         <div class="step-label">
-  {{ ('DRIVER.STATUS.' + step) | translate }}
-</div>
+          {{ 'DRIVER.STATUS.' + step | translate }}
+        </div>
       </div>
-      <div class="step-connector"
-           *ngIf="i < steps.length - 1"
-           [ngClass]="{'done': currentStepIndex > i}"></div>
+      <div
+        class="step-connector"
+        *ngIf="i < steps.length - 1"
+        [ngClass]="{ done: currentStepIndex > i }"
+      ></div>
     </ng-container>
   </div>
 
   <div class="details-grid">
-
     <!-- Info -->
     <div class="info-card">
       <div class="card-title">
@@ -54,22 +56,20 @@
       <div class="info-row">
         <span>{{ 'DRIVER.DELIVERY_DETAILS.TOTAL' | translate }}</span>
         <b class="red">
-  {{ 'DRIVER.DELIVERY_DETAILS.CURRENCY' | translate }} {{ delivery.order.totalAmount }}
-</b>
+          {{ 'DRIVER.DELIVERY_DETAILS.CURRENCY' | translate }} {{ delivery.order.totalAmount }}
+        </b>
       </div>
       <div class="info-row">
         <span>{{ 'DRIVER.DELIVERY_DETAILS.CREATED' | translate }}</span>
-        <b>{{ delivery.createdAt | date:'dd/MM/yyyy hh:mm a' }}</b>
+        <b>{{ delivery.createdAt | date: 'dd/MM/yyyy hh:mm a' }}</b>
       </div>
       <div class="info-row" *ngIf="delivery.deliveredAt">
         <span>{{ 'DRIVER.DELIVERY_DETAILS.DELIVERED_AT' | translate }}</span>
-        <b>{{ delivery.deliveredAt | date:'dd/MM/yyyy hh:mm a' }}</b>
+        <b>{{ delivery.deliveredAt | date: 'dd/MM/yyyy hh:mm a' }}</b>
       </div>
       <div class="info-row" *ngIf="delivery.cashCollected !== null">
         <span>{{ 'DRIVER.DELIVERY_DETAILS.CASH_COLLECTED' | translate }}</span>
-        <b>
-  {{ 'DRIVER.DELIVERY_DETAILS.CURRENCY' | translate }} {{ delivery.cashCollected }}
-</b>
+        <b> {{ 'DRIVER.DELIVERY_DETAILS.CURRENCY' | translate }} {{ delivery.cashCollected }} </b>
       </div>
     </div>
 
@@ -90,9 +90,11 @@
       </div>
       <div class="info-row">
         <span>{{ 'DRIVER.DELIVERY_DETAILS.CUSTOMER' | translate }}</span>
-        <b><b>
-  {{ delivery.customerName || ('DRIVER.DELIVERY_DETAILS.NA' | translate) }}
-</b></b>
+        <b
+          ><b>
+            {{ delivery.customerName || ('DRIVER.DELIVERY_DETAILS.NA' | translate) }}
+          </b></b
+        >
       </div>
       <div class="info-row" *ngIf="delivery.customerPhoneNumber">
         <span>{{ 'DRIVER.DELIVERY_DETAILS.CUSTOMER_PHONE' | translate }}</span>
@@ -124,7 +126,6 @@
         <b>{{ delivery.deliveryAddress.specialMark }}</b>
       </div>
     </div>
-
   </div>
 
   <!-- Items -->
@@ -136,8 +137,8 @@
       <span class="item-name">{{ getItemName(item) }}</span>
       <span class="item-qty">x{{ item.quantity }}</span>
       <span class="item-price">
-  {{ 'DRIVER.DELIVERY_DETAILS.CURRENCY' | translate }} {{ item.total }}
-</span>
+        {{ 'DRIVER.DELIVERY_DETAILS.CURRENCY' | translate }} {{ item.total }}
+      </span>
     </div>
   </div>
 
@@ -147,23 +148,24 @@
       {{ 'DRIVER.DELIVERY_DETAILS.UPDATE_STATUS' | translate }}
     </div>
     <div *ngIf="nextStatus() === 'Delivered'" class="cash-wrap">
-      <input type="number"
-             class="form-input-styled"
-             [placeholder]="'DRIVER.DELIVERY_DETAILS.CASH_PLACEHOLDER' | translate"
-             [(ngModel)]="updateModel.cashCollected" />
+      <input
+        type="number"
+        class="form-input-styled"
+        [placeholder]="'DRIVER.DELIVERY_DETAILS.CASH_PLACEHOLDER' | translate"
+        [(ngModel)]="updateModel.cashCollected"
+      />
       <span *ngIf="cashError" class="cash-error">{{ cashError }}</span>
     </div>
     <button class="update-btn" (click)="updateStatus()">
       {{ 'DRIVER.DELIVERY_DETAILS.MOVE_TO' | translate }}
       <button class="update-btn" (click)="updateStatus()">
-  {{ 'DRIVER.DELIVERY_DETAILS.MOVE_TO' | translate }}
-  <b>{{ ('DRIVER.STATUS.' + nextStatus()?.toUpperCase()) | translate }}</b>
-</button>
+        {{ 'DRIVER.DELIVERY_DETAILS.MOVE_TO' | translate }}
+        <b>{{ 'DRIVER.STATUS.' + nextStatus()?.toUpperCase() | translate }}</b>
+      </button>
     </button>
   </div>
 
   <button class="back-btn" (click)="goBack()">
     {{ 'DRIVER.DELIVERY_DETAILS.BACK' | translate }}
   </button>
-
 </div>

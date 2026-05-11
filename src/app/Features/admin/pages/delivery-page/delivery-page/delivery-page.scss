@@ -1,4 +1,4 @@
-$red: #CC2929;
+$red: #cc2929;
 $white: #fff;
 $border: #e8e8e8;
 $text: #1a1a1a;
@@ -39,10 +39,12 @@ $muted: #999;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
+  transition:
+    background 0.2s,
+    transform 0.15s;
 
   &:hover {
-    background: darken(#CC2929, 8%);
+    background: darken(#cc2929, 8%);
     transform: translateY(-1px);
   }
 }
@@ -111,7 +113,9 @@ $muted: #999;
     margin-bottom: -2px;
     transition: all 0.2s;
 
-    &:hover { color: $text; }
+    &:hover {
+      color: $text;
+    }
 
     &.active {
       color: $red;
